@@ -1,0 +1,1259 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4E3BD6911DB0097400541900 /* BrickKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E3BD6851DB0095000541900 /* BrickKit.framework */; };
+		4E3BD6921DB0097400541900 /* BrickKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4E3BD6851DB0095000541900 /* BrickKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4E3BD72E1DB0101400541900 /* BrickKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E3BD6891DB0095000541900 /* BrickKit.framework */; };
+		4E3BD72F1DB0101400541900 /* BrickKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4E3BD6891DB0095000541900 /* BrickKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4E3BD7BC1DB1316400541900 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD74A1DB1316400541900 /* AppDelegate.swift */; };
+		4E3BD7BD1DB1316400541900 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD74A1DB1316400541900 /* AppDelegate.swift */; };
+		4E3BD7C61DB1316400541900 /* DailySalesBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7531DB1316400541900 /* DailySalesBrick.swift */; };
+		4E3BD7C71DB1316400541900 /* DailySalesBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7531DB1316400541900 /* DailySalesBrick.swift */; };
+		4E3BD7C81DB1316400541900 /* HeaderAndFooterBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7541DB1316400541900 /* HeaderAndFooterBrick.swift */; };
+		4E3BD7C91DB1316400541900 /* HeaderAndFooterBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7541DB1316400541900 /* HeaderAndFooterBrick.swift */; };
+		4E3BD7D81DB1316400541900 /* PostBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD75D1DB1316400541900 /* PostBrick.swift */; };
+		4E3BD7D91DB1316400541900 /* PostBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD75D1DB1316400541900 /* PostBrick.swift */; };
+		4E3BD7DA1DB1316400541900 /* ProfileHeaderBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD75E1DB1316400541900 /* ProfileHeaderBrick.swift */; };
+		4E3BD7DB1DB1316400541900 /* ProfileHeaderBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD75E1DB1316400541900 /* ProfileHeaderBrick.swift */; };
+		4E3BD7DC1DB1316400541900 /* ProfileImageBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD75F1DB1316400541900 /* ProfileImageBrick.swift */; };
+		4E3BD7DD1DB1316400541900 /* ProfileImageBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD75F1DB1316400541900 /* ProfileImageBrick.swift */; };
+		4E3BD7DE1DB1316400541900 /* SegmentHeaderBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7601DB1316400541900 /* SegmentHeaderBrick.swift */; };
+		4E3BD7DF1DB1316400541900 /* SegmentHeaderBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7601DB1316400541900 /* SegmentHeaderBrick.swift */; };
+		4E3BD7EE1DB1316400541900 /* WhoToFollowBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7691DB1316400541900 /* WhoToFollowBrick.swift */; };
+		4E3BD7EF1DB1316400541900 /* WhoToFollowBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7691DB1316400541900 /* WhoToFollowBrick.swift */; };
+		4E3BD7F81DB1316400541900 /* TwoLabelBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7711DB1316400541900 /* TwoLabelBrick.swift */; };
+		4E3BD7F91DB1316400541900 /* TwoLabelBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7711DB1316400541900 /* TwoLabelBrick.swift */; };
+		4E3BD7FA1DB1316400541900 /* StepperBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7731DB1316400541900 /* StepperBrick.swift */; };
+		4E3BD7FE1DB1316400541900 /* BaseBrickController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7761DB1316400541900 /* BaseBrickController.swift */; };
+		4E3BD7FF1DB1316400541900 /* BaseBrickController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7761DB1316400541900 /* BaseBrickController.swift */; };
+		4E3BD8001DB1316400541900 /* BaseRepeatBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7771DB1316400541900 /* BaseRepeatBrickViewController.swift */; };
+		4E3BD8011DB1316400541900 /* BaseRepeatBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7771DB1316400541900 /* BaseRepeatBrickViewController.swift */; };
+		4E3BD8021DB1316400541900 /* BaseSectionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7781DB1316400541900 /* BaseSectionBrickViewController.swift */; };
+		4E3BD8031DB1316400541900 /* BaseSectionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7781DB1316400541900 /* BaseSectionBrickViewController.swift */; };
+		4E3BD8041DB1316400541900 /* HorizontalScrollSectionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD77A1DB1316400541900 /* HorizontalScrollSectionBrickViewController.swift */; };
+		4E3BD8051DB1316400541900 /* HorizontalScrollSectionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD77A1DB1316400541900 /* HorizontalScrollSectionBrickViewController.swift */; };
+		4E3BD8061DB1316400541900 /* RepeatCollectionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD77B1DB1316400541900 /* RepeatCollectionBrickViewController.swift */; };
+		4E3BD8071DB1316400541900 /* RepeatCollectionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD77B1DB1316400541900 /* RepeatCollectionBrickViewController.swift */; };
+		4E3BD8081DB1316400541900 /* SimpleCollectionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD77C1DB1316400541900 /* SimpleCollectionBrickViewController.swift */; };
+		4E3BD8091DB1316400541900 /* SimpleCollectionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD77C1DB1316400541900 /* SimpleCollectionBrickViewController.swift */; };
+		4E3BD8121DB1316400541900 /* BlockHorizontalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7841DB1316400541900 /* BlockHorizontalViewController.swift */; };
+		4E3BD8131DB1316400541900 /* BlockHorizontalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7841DB1316400541900 /* BlockHorizontalViewController.swift */; };
+		4E3BD8141DB1316400541900 /* HorizontalSnapToPointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7851DB1316400541900 /* HorizontalSnapToPointViewController.swift */; };
+		4E3BD8151DB1316400541900 /* HorizontalSnapToPointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7851DB1316400541900 /* HorizontalSnapToPointViewController.swift */; };
+		4E3BD8161DB1316400541900 /* SimpleHorizontalScrollBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7861DB1316400541900 /* SimpleHorizontalScrollBrickViewController.swift */; };
+		4E3BD8171DB1316400541900 /* SimpleHorizontalScrollBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7861DB1316400541900 /* SimpleHorizontalScrollBrickViewController.swift */; };
+		4E3BD8181DB1316400541900 /* ImageURLBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7881DB1316400541900 /* ImageURLBrickViewController.swift */; };
+		4E3BD8191DB1316400541900 /* ImageURLBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7881DB1316400541900 /* ImageURLBrickViewController.swift */; };
+		4E3BD81A1DB1316400541900 /* AdvancedRepeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD78A1DB1316400541900 /* AdvancedRepeatViewController.swift */; };
+		4E3BD81B1DB1316400541900 /* AdvancedRepeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD78A1DB1316400541900 /* AdvancedRepeatViewController.swift */; };
+		4E3BD81C1DB1316400541900 /* BasicInteractiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD78B1DB1316400541900 /* BasicInteractiveViewController.swift */; };
+		4E3BD81E1DB1316400541900 /* BrickCollectionInteractiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD78C1DB1316400541900 /* BrickCollectionInteractiveViewController.swift */; };
+		4E3BD81F1DB1316400541900 /* BrickCollectionInteractiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD78C1DB1316400541900 /* BrickCollectionInteractiveViewController.swift */; };
+		4E3BD8201DB1316400541900 /* ChangeNibBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD78D1DB1316400541900 /* ChangeNibBrickViewController.swift */; };
+		4E3BD8211DB1316400541900 /* ChangeNibBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD78D1DB1316400541900 /* ChangeNibBrickViewController.swift */; };
+		4E3BD8221DB1316400541900 /* DynamicContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD78E1DB1316400541900 /* DynamicContentViewController.swift */; };
+		4E3BD8231DB1316400541900 /* DynamicContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD78E1DB1316400541900 /* DynamicContentViewController.swift */; };
+		4E3BD8241DB1316400541900 /* HideBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD78F1DB1316400541900 /* HideBrickViewController.swift */; };
+		4E3BD8251DB1316400541900 /* HideBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD78F1DB1316400541900 /* HideBrickViewController.swift */; };
+		4E3BD8261DB1316400541900 /* HideSectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7901DB1316400541900 /* HideSectionsViewController.swift */; };
+		4E3BD8271DB1316400541900 /* HideSectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7901DB1316400541900 /* HideSectionsViewController.swift */; };
+		4E3BD8281DB1316400541900 /* InsertBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7911DB1316400541900 /* InsertBrickViewController.swift */; };
+		4E3BD8291DB1316400541900 /* InsertBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7911DB1316400541900 /* InsertBrickViewController.swift */; };
+		4E3BD82A1DB1316400541900 /* InvalidateHeightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7921DB1316400541900 /* InvalidateHeightViewController.swift */; };
+		4E3BD82B1DB1316400541900 /* InvalidateHeightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7921DB1316400541900 /* InvalidateHeightViewController.swift */; };
+		4E3BD82C1DB1316400541900 /* SizeClassBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD7951DB1316400541900 /* SizeClassBrick.xib */; };
+		4E3BD82E1DB1316400541900 /* TestBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD7961DB1316400541900 /* TestBrick.xib */; };
+		4E3BD8301DB1316400541900 /* OffsetBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7971DB1316400541900 /* OffsetBrickViewController.swift */; };
+		4E3BD8311DB1316400541900 /* OffsetBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7971DB1316400541900 /* OffsetBrickViewController.swift */; };
+		4E3BD8321DB1316400541900 /* PopoverBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7981DB1316400541900 /* PopoverBrickViewController.swift */; };
+		4E3BD8341DB1316400541900 /* SizeClassBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7991DB1316400541900 /* SizeClassBrick.swift */; };
+		4E3BD8351DB1316400541900 /* SizeClassBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7991DB1316400541900 /* SizeClassBrick.swift */; };
+		4E3BD8361DB1316400541900 /* SizeClassesBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD79A1DB1316400541900 /* SizeClassesBrickViewController.swift */; };
+		4E3BD8371DB1316400541900 /* SizeClassesBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD79A1DB1316400541900 /* SizeClassesBrickViewController.swift */; };
+		4E3BD8381DB1316400541900 /* TestBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD79B1DB1316400541900 /* TestBrick.swift */; };
+		4E3BD8391DB1316400541900 /* TestBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD79B1DB1316400541900 /* TestBrick.swift */; };
+		4E3BD83D1DB1316400541900 /* TestBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD79E1DB1316400541900 /* TestBrick.xib */; };
+		4E3BD83E1DB1316400541900 /* BaseScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A01DB1316400541900 /* BaseScrollingViewController.swift */; };
+		4E3BD83F1DB1316400541900 /* BaseScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A01DB1316400541900 /* BaseScrollingViewController.swift */; };
+		4E3BD8401DB1316400541900 /* CardScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A11DB1316400541900 /* CardScrollingViewController.swift */; };
+		4E3BD8411DB1316400541900 /* CardScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A11DB1316400541900 /* CardScrollingViewController.swift */; };
+		4E3BD8421DB1316400541900 /* SpotlightScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A21DB1316400541900 /* SpotlightScrollingViewController.swift */; };
+		4E3BD8431DB1316400541900 /* SpotlightScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A21DB1316400541900 /* SpotlightScrollingViewController.swift */; };
+		4E3BD8441DB1316400541900 /* MultiDimensionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A41DB1316400541900 /* MultiDimensionBrickViewController.swift */; };
+		4E3BD8451DB1316400541900 /* MultiDimensionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A41DB1316400541900 /* MultiDimensionBrickViewController.swift */; };
+		4E3BD8461DB1316400541900 /* MultiSectionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A51DB1316400541900 /* MultiSectionBrickViewController.swift */; };
+		4E3BD8471DB1316400541900 /* MultiSectionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A51DB1316400541900 /* MultiSectionBrickViewController.swift */; };
+		4E3BD8481DB1316400541900 /* SimpleBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A61DB1316400541900 /* SimpleBrickViewController.swift */; };
+		4E3BD8491DB1316400541900 /* SimpleBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A61DB1316400541900 /* SimpleBrickViewController.swift */; };
+		4E3BD84A1DB1316400541900 /* SimpleRepeatBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A71DB1316400541900 /* SimpleRepeatBrickViewController.swift */; };
+		4E3BD84B1DB1316400541900 /* SimpleRepeatBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A71DB1316400541900 /* SimpleRepeatBrickViewController.swift */; };
+		4E3BD84C1DB1316400541900 /* SimpleRepeatFixedHeightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A81DB1316400541900 /* SimpleRepeatFixedHeightViewController.swift */; };
+		4E3BD84D1DB1316400541900 /* SimpleRepeatFixedHeightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A81DB1316400541900 /* SimpleRepeatFixedHeightViewController.swift */; };
+		4E3BD84E1DB1316400541900 /* SimpleRepeatFixedWidthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A91DB1316400541900 /* SimpleRepeatFixedWidthViewController.swift */; };
+		4E3BD84F1DB1316400541900 /* SimpleRepeatFixedWidthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A91DB1316400541900 /* SimpleRepeatFixedWidthViewController.swift */; };
+		4E3BD8501DB1316400541900 /* SimpleRepeatHeightRatioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7AA1DB1316400541900 /* SimpleRepeatHeightRatioViewController.swift */; };
+		4E3BD8511DB1316400541900 /* SimpleRepeatHeightRatioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7AA1DB1316400541900 /* SimpleRepeatHeightRatioViewController.swift */; };
+		4E3BD8521DB1316400541900 /* BasicStickingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7AC1DB1316400541900 /* BasicStickingViewController.swift */; };
+		4E3BD8531DB1316400541900 /* BasicStickingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7AC1DB1316400541900 /* BasicStickingViewController.swift */; };
+		4E3BD8541DB1316400541900 /* OnScrollDownStickingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7AD1DB1316400541900 /* OnScrollDownStickingViewController.swift */; };
+		4E3BD8551DB1316400541900 /* OnScrollDownStickingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7AD1DB1316400541900 /* OnScrollDownStickingViewController.swift */; };
+		4E3BD8561DB1316400541900 /* SectionStickingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7AE1DB1316400541900 /* SectionStickingViewController.swift */; };
+		4E3BD8571DB1316400541900 /* SectionStickingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7AE1DB1316400541900 /* SectionStickingViewController.swift */; };
+		4E3BD8581DB1316400541900 /* StackedStickingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7AF1DB1316400541900 /* StackedStickingViewController.swift */; };
+		4E3BD8591DB1316400541900 /* StackedStickingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7AF1DB1316400541900 /* StackedStickingViewController.swift */; };
+		4E3BD85A1DB1316400541900 /* StackingFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7B01DB1316400541900 /* StackingFooterViewController.swift */; };
+		4E3BD85B1DB1316400541900 /* StackingFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7B01DB1316400541900 /* StackingFooterViewController.swift */; };
+		4E3BD85C1DB1316400541900 /* StickingFooterBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7B11DB1316400541900 /* StickingFooterBaseViewController.swift */; };
+		4E3BD85D1DB1316400541900 /* StickingFooterBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7B11DB1316400541900 /* StickingFooterBaseViewController.swift */; };
+		4E3BD85E1DB1316400541900 /* StickingFooterSectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7B21DB1316400541900 /* StickingFooterSectionsViewController.swift */; };
+		4E3BD85F1DB1316400541900 /* StickingFooterSectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7B21DB1316400541900 /* StickingFooterSectionsViewController.swift */; };
+		4E3BD8601DB1316400541900 /* StickingSectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7B31DB1316400541900 /* StickingSectionsViewController.swift */; };
+		4E3BD8611DB1316400541900 /* StickingSectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7B31DB1316400541900 /* StickingSectionsViewController.swift */; };
+		4E3BD8621DB1316400541900 /* MockTwitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7B51DB1316400541900 /* MockTwitterViewController.swift */; };
+		4E3BD8631DB1316400541900 /* MockTwitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7B51DB1316400541900 /* MockTwitterViewController.swift */; };
+		4E3BD8681DB1316400541900 /* NavigationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7B91DB1316400541900 /* NavigationDataSource.swift */; };
+		4E3BD8691DB1316400541900 /* NavigationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7B91DB1316400541900 /* NavigationDataSource.swift */; };
+		4E3BD86A1DB1316400541900 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7BA1DB1316400541900 /* Theme.swift */; };
+		4E3BD86B1DB1316400541900 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7BA1DB1316400541900 /* Theme.swift */; };
+		4E3BD86C1DB1316400541900 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7BB1DB1316400541900 /* ViewController.swift */; };
+		4E3BD86D1DB1316400541900 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7BB1DB1316400541900 /* ViewController.swift */; };
+		4E3BD88D1DB131FA00541900 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD86F1DB131FA00541900 /* Assets.xcassets */; };
+		4E3BD8AA1DB131FA00541900 /* CustomLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8841DB131FA00541900 /* CustomLabel.xib */; };
+		4E3BD8AC1DB131FA00541900 /* TwoLabelBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8851DB131FA00541900 /* TwoLabelBrick.xib */; };
+		4E3BD8AF1DB131FA00541900 /* CustomLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8871DB131FA00541900 /* CustomLabel.xib */; };
+		4E3BD8B11DB131FA00541900 /* TwoLabelBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8881DB131FA00541900 /* TwoLabelBrick.xib */; };
+		4E3BD8B21DB131FA00541900 /* StepperBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD88B1DB131FA00541900 /* StepperBrick.xib */; };
+		4E3BD8B41DB1321100541900 /* DailySalesBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD87B1DB131FA00541900 /* DailySalesBrick.xib */; };
+		4E3BD8B51DB1321100541900 /* HeaderAndFooterBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD87C1DB131FA00541900 /* HeaderAndFooterBrick.xib */; };
+		4E3BD8B61DB1321100541900 /* PostBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD87D1DB131FA00541900 /* PostBrick.xib */; };
+		4E3BD8B71DB1321100541900 /* ProfileHeaderBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD87E1DB131FA00541900 /* ProfileHeaderBrick.xib */; };
+		4E3BD8B81DB1321100541900 /* ProfileImageBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD87F1DB131FA00541900 /* ProfileImageBrick.xib */; };
+		4E3BD8B91DB1321100541900 /* SegmentHeaderBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8801DB131FA00541900 /* SegmentHeaderBrick.xib */; };
+		4E3BD8BA1DB1321100541900 /* WhoToFollowBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8811DB131FA00541900 /* WhoToFollowBrick.xib */; };
+		4E3BD8BB1DB1321B00541900 /* DailySalesBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8731DB131FA00541900 /* DailySalesBrick.xib */; };
+		4E3BD8BC1DB1321B00541900 /* HeaderAndFooterBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8741DB131FA00541900 /* HeaderAndFooterBrick.xib */; };
+		4E3BD8BD1DB1321B00541900 /* PostBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8751DB131FA00541900 /* PostBrick.xib */; };
+		4E3BD8BE1DB1321B00541900 /* ProfileHeaderBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8761DB131FA00541900 /* ProfileHeaderBrick.xib */; };
+		4E3BD8BF1DB1321B00541900 /* ProfileImageBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8771DB131FA00541900 /* ProfileImageBrick.xib */; };
+		4E3BD8C01DB1321B00541900 /* SegmentHeaderBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8781DB131FA00541900 /* SegmentHeaderBrick.xib */; };
+		4E3BD8C11DB1321B00541900 /* WhoToFollowBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8791DB131FA00541900 /* WhoToFollowBrick.xib */; };
+		4E3BD8C81DB1334100541900 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8C41DB1334100541900 /* LaunchScreen.storyboard */; };
+		4E3BD8CA1DB1334100541900 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8C51DB1334100541900 /* Main.storyboard */; };
+		4E3BD8CD1DB1334100541900 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8C71DB1334100541900 /* Main.storyboard */; };
+		4E3BD8CE1DB133BA00541900 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD86F1DB131FA00541900 /* Assets.xcassets */; };
+		4E3BD8D31DB1373C00541900 /* HorizontalCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD8D21DB1373C00541900 /* HorizontalCollectionViewController.swift */; };
+		4E3BD8D41DB1373C00541900 /* HorizontalCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD8D21DB1373C00541900 /* HorizontalCollectionViewController.swift */; };
+		4E3BD8D61DB1374800541900 /* ImageViewBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD8D51DB1374800541900 /* ImageViewBrickViewController.swift */; };
+		4E3BD8D71DB1374800541900 /* ImageViewBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD8D51DB1374800541900 /* ImageViewBrickViewController.swift */; };
+		4E3BD8E71DB51E1200541900 /* BrickIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD8E61DB51E1200541900 /* BrickIdentifiers.swift */; };
+		4E3BD8E81DB51E1200541900 /* BrickIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD8E61DB51E1200541900 /* BrickIdentifiers.swift */; };
+		4E3BD8EC1DB521C200541900 /* CoverFlowViewScrollingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD8EB1DB521C200541900 /* CoverFlowViewScrollingController.swift */; };
+		4E3BD8ED1DB521C200541900 /* CoverFlowViewScrollingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD8EB1DB521C200541900 /* CoverFlowViewScrollingController.swift */; };
+		4E8E10F41DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8E10F31DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift */; };
+		4E8E10F51DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8E10F31DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift */; };
+		9327D03E1DB94A9500D65BCB /* NibLessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327D03D1DB94A9500D65BCB /* NibLessViewController.swift */; };
+		9327D03F1DB94A9500D65BCB /* NibLessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327D03D1DB94A9500D65BCB /* NibLessViewController.swift */; };
+		9327D0431DB94AB300D65BCB /* NiblessBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327D0421DB94AB300D65BCB /* NiblessBrick.swift */; };
+		9327D0441DB94AB300D65BCB /* NiblessBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327D0421DB94AB300D65BCB /* NiblessBrick.swift */; };
+		935D48901DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D488F1DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift */; };
+		935D48911DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D488F1DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift */; };
+		935D489B1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D489A1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift */; };
+		935D489C1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D489A1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift */; };
+		93EAFE2D1DB57D680036331C /* NavigationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EAFE291DB57D680036331C /* NavigationDetailViewController.swift */; };
+		93EAFE2E1DB57D680036331C /* NavigationMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EAFE2A1DB57D680036331C /* NavigationMasterViewController.swift */; };
+		93EAFE2F1DB57D680036331C /* NavigationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EAFE2B1DB57D680036331C /* NavigationTransition.swift */; };
+		93EAFE301DB57D680036331C /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EAFE2C1DB57D680036331C /* NavigationViewController.swift */; };
+		93EAFE311DB57D6B0036331C /* NavigationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EAFE291DB57D680036331C /* NavigationDetailViewController.swift */; };
+		93EAFE321DB57D6B0036331C /* NavigationMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EAFE2A1DB57D680036331C /* NavigationMasterViewController.swift */; };
+		93EAFE331DB57D6B0036331C /* NavigationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EAFE2B1DB57D680036331C /* NavigationTransition.swift */; };
+		93EAFE341DB57D6B0036331C /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EAFE2C1DB57D680036331C /* NavigationViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4E3BD6841DB0095000541900 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4E3BD67D1DB0094F00541900 /* BrickKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 93D9EB931DA4051B00D8C87A;
+			remoteInfo = "BrickKit-iOS";
+		};
+		4E3BD6861DB0095000541900 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4E3BD67D1DB0094F00541900 /* BrickKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 93D9EB9C1DA4051B00D8C87A;
+			remoteInfo = "BrickKitTests-iOS";
+		};
+		4E3BD6881DB0095000541900 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4E3BD67D1DB0094F00541900 /* BrickKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4E9A25031DABEB3400D7EA99;
+			remoteInfo = "BrickKit-tvOS";
+		};
+		4E3BD68A1DB0095000541900 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4E3BD67D1DB0094F00541900 /* BrickKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4E9A250B1DABEB3400D7EA99;
+			remoteInfo = "BrickKit-tvOSTests";
+		};
+		4E3BD6931DB0097400541900 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4E3BD67D1DB0094F00541900 /* BrickKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 93D9EB921DA4051B00D8C87A;
+			remoteInfo = "BrickKit-iOS";
+		};
+		4E3BD7301DB0101400541900 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4E3BD67D1DB0094F00541900 /* BrickKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4E9A25021DABEB3400D7EA99;
+			remoteInfo = "BrickKit-tvOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4E3BD6951DB0097400541900 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4E3BD6921DB0097400541900 /* BrickKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E3BD7321DB0101400541900 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4E3BD72F1DB0101400541900 /* BrickKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		4E3BD5C71DB008CD00541900 /* BrickApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrickApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E3BD67D1DB0094F00541900 /* BrickKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BrickKit.xcodeproj; path = ../BrickKit.xcodeproj; sourceTree = "<group>"; };
+		4E3BD6D51DB00F9F00541900 /* BrickApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrickApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E3BD74A1DB1316400541900 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4E3BD7531DB1316400541900 /* DailySalesBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailySalesBrick.swift; sourceTree = "<group>"; };
+		4E3BD7541DB1316400541900 /* HeaderAndFooterBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderAndFooterBrick.swift; sourceTree = "<group>"; };
+		4E3BD75D1DB1316400541900 /* PostBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostBrick.swift; sourceTree = "<group>"; };
+		4E3BD75E1DB1316400541900 /* ProfileHeaderBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeaderBrick.swift; sourceTree = "<group>"; };
+		4E3BD75F1DB1316400541900 /* ProfileImageBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageBrick.swift; sourceTree = "<group>"; };
+		4E3BD7601DB1316400541900 /* SegmentHeaderBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentHeaderBrick.swift; sourceTree = "<group>"; };
+		4E3BD7691DB1316400541900 /* WhoToFollowBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoToFollowBrick.swift; sourceTree = "<group>"; };
+		4E3BD7711DB1316400541900 /* TwoLabelBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoLabelBrick.swift; sourceTree = "<group>"; };
+		4E3BD7731DB1316400541900 /* StepperBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperBrick.swift; sourceTree = "<group>"; };
+		4E3BD7761DB1316400541900 /* BaseBrickController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseBrickController.swift; sourceTree = "<group>"; };
+		4E3BD7771DB1316400541900 /* BaseRepeatBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRepeatBrickViewController.swift; sourceTree = "<group>"; };
+		4E3BD7781DB1316400541900 /* BaseSectionBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSectionBrickViewController.swift; sourceTree = "<group>"; };
+		4E3BD77A1DB1316400541900 /* HorizontalScrollSectionBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalScrollSectionBrickViewController.swift; sourceTree = "<group>"; };
+		4E3BD77B1DB1316400541900 /* RepeatCollectionBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepeatCollectionBrickViewController.swift; sourceTree = "<group>"; };
+		4E3BD77C1DB1316400541900 /* SimpleCollectionBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleCollectionBrickViewController.swift; sourceTree = "<group>"; };
+		4E3BD7841DB1316400541900 /* BlockHorizontalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockHorizontalViewController.swift; sourceTree = "<group>"; };
+		4E3BD7851DB1316400541900 /* HorizontalSnapToPointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalSnapToPointViewController.swift; sourceTree = "<group>"; };
+		4E3BD7861DB1316400541900 /* SimpleHorizontalScrollBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleHorizontalScrollBrickViewController.swift; sourceTree = "<group>"; };
+		4E3BD7881DB1316400541900 /* ImageURLBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageURLBrickViewController.swift; sourceTree = "<group>"; };
+		4E3BD78A1DB1316400541900 /* AdvancedRepeatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdvancedRepeatViewController.swift; sourceTree = "<group>"; };
+		4E3BD78B1DB1316400541900 /* BasicInteractiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicInteractiveViewController.swift; sourceTree = "<group>"; };
+		4E3BD78C1DB1316400541900 /* BrickCollectionInteractiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickCollectionInteractiveViewController.swift; sourceTree = "<group>"; };
+		4E3BD78D1DB1316400541900 /* ChangeNibBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeNibBrickViewController.swift; sourceTree = "<group>"; };
+		4E3BD78E1DB1316400541900 /* DynamicContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicContentViewController.swift; sourceTree = "<group>"; };
+		4E3BD78F1DB1316400541900 /* HideBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HideBrickViewController.swift; sourceTree = "<group>"; };
+		4E3BD7901DB1316400541900 /* HideSectionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HideSectionsViewController.swift; sourceTree = "<group>"; };
+		4E3BD7911DB1316400541900 /* InsertBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsertBrickViewController.swift; sourceTree = "<group>"; };
+		4E3BD7921DB1316400541900 /* InvalidateHeightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvalidateHeightViewController.swift; sourceTree = "<group>"; };
+		4E3BD7951DB1316400541900 /* SizeClassBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SizeClassBrick.xib; sourceTree = "<group>"; };
+		4E3BD7961DB1316400541900 /* TestBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestBrick.xib; sourceTree = "<group>"; };
+		4E3BD7971DB1316400541900 /* OffsetBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffsetBrickViewController.swift; sourceTree = "<group>"; };
+		4E3BD7981DB1316400541900 /* PopoverBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverBrickViewController.swift; sourceTree = "<group>"; };
+		4E3BD7991DB1316400541900 /* SizeClassBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeClassBrick.swift; sourceTree = "<group>"; };
+		4E3BD79A1DB1316400541900 /* SizeClassesBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeClassesBrickViewController.swift; sourceTree = "<group>"; };
+		4E3BD79B1DB1316400541900 /* TestBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestBrick.swift; sourceTree = "<group>"; };
+		4E3BD79D1DB1316400541900 /* SizeClassBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SizeClassBrick.xib; sourceTree = "<group>"; };
+		4E3BD79E1DB1316400541900 /* TestBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestBrick.xib; sourceTree = "<group>"; };
+		4E3BD7A01DB1316400541900 /* BaseScrollingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseScrollingViewController.swift; sourceTree = "<group>"; };
+		4E3BD7A11DB1316400541900 /* CardScrollingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardScrollingViewController.swift; sourceTree = "<group>"; };
+		4E3BD7A21DB1316400541900 /* SpotlightScrollingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightScrollingViewController.swift; sourceTree = "<group>"; };
+		4E3BD7A41DB1316400541900 /* MultiDimensionBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiDimensionBrickViewController.swift; sourceTree = "<group>"; };
+		4E3BD7A51DB1316400541900 /* MultiSectionBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiSectionBrickViewController.swift; sourceTree = "<group>"; };
+		4E3BD7A61DB1316400541900 /* SimpleBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleBrickViewController.swift; sourceTree = "<group>"; };
+		4E3BD7A71DB1316400541900 /* SimpleRepeatBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleRepeatBrickViewController.swift; sourceTree = "<group>"; };
+		4E3BD7A81DB1316400541900 /* SimpleRepeatFixedHeightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleRepeatFixedHeightViewController.swift; sourceTree = "<group>"; };
+		4E3BD7A91DB1316400541900 /* SimpleRepeatFixedWidthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleRepeatFixedWidthViewController.swift; sourceTree = "<group>"; };
+		4E3BD7AA1DB1316400541900 /* SimpleRepeatHeightRatioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleRepeatHeightRatioViewController.swift; sourceTree = "<group>"; };
+		4E3BD7AC1DB1316400541900 /* BasicStickingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicStickingViewController.swift; sourceTree = "<group>"; };
+		4E3BD7AD1DB1316400541900 /* OnScrollDownStickingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnScrollDownStickingViewController.swift; sourceTree = "<group>"; };
+		4E3BD7AE1DB1316400541900 /* SectionStickingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionStickingViewController.swift; sourceTree = "<group>"; };
+		4E3BD7AF1DB1316400541900 /* StackedStickingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackedStickingViewController.swift; sourceTree = "<group>"; };
+		4E3BD7B01DB1316400541900 /* StackingFooterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackingFooterViewController.swift; sourceTree = "<group>"; };
+		4E3BD7B11DB1316400541900 /* StickingFooterBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickingFooterBaseViewController.swift; sourceTree = "<group>"; };
+		4E3BD7B21DB1316400541900 /* StickingFooterSectionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickingFooterSectionsViewController.swift; sourceTree = "<group>"; };
+		4E3BD7B31DB1316400541900 /* StickingSectionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickingSectionsViewController.swift; sourceTree = "<group>"; };
+		4E3BD7B51DB1316400541900 /* MockTwitterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTwitterViewController.swift; sourceTree = "<group>"; };
+		4E3BD7B61DB1316400541900 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E3BD7B91DB1316400541900 /* NavigationDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationDataSource.swift; sourceTree = "<group>"; };
+		4E3BD7BA1DB1316400541900 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		4E3BD7BB1DB1316400541900 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4E3BD86F1DB131FA00541900 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4E3BD8731DB131FA00541900 /* DailySalesBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DailySalesBrick.xib; sourceTree = "<group>"; };
+		4E3BD8741DB131FA00541900 /* HeaderAndFooterBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderAndFooterBrick.xib; sourceTree = "<group>"; };
+		4E3BD8751DB131FA00541900 /* PostBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostBrick.xib; sourceTree = "<group>"; };
+		4E3BD8761DB131FA00541900 /* ProfileHeaderBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileHeaderBrick.xib; sourceTree = "<group>"; };
+		4E3BD8771DB131FA00541900 /* ProfileImageBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileImageBrick.xib; sourceTree = "<group>"; };
+		4E3BD8781DB131FA00541900 /* SegmentHeaderBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentHeaderBrick.xib; sourceTree = "<group>"; };
+		4E3BD8791DB131FA00541900 /* WhoToFollowBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WhoToFollowBrick.xib; sourceTree = "<group>"; };
+		4E3BD87B1DB131FA00541900 /* DailySalesBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DailySalesBrick.xib; sourceTree = "<group>"; };
+		4E3BD87C1DB131FA00541900 /* HeaderAndFooterBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderAndFooterBrick.xib; sourceTree = "<group>"; };
+		4E3BD87D1DB131FA00541900 /* PostBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PostBrick.xib; sourceTree = "<group>"; };
+		4E3BD87E1DB131FA00541900 /* ProfileHeaderBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileHeaderBrick.xib; sourceTree = "<group>"; };
+		4E3BD87F1DB131FA00541900 /* ProfileImageBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileImageBrick.xib; sourceTree = "<group>"; };
+		4E3BD8801DB131FA00541900 /* SegmentHeaderBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentHeaderBrick.xib; sourceTree = "<group>"; };
+		4E3BD8811DB131FA00541900 /* WhoToFollowBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WhoToFollowBrick.xib; sourceTree = "<group>"; };
+		4E3BD8841DB131FA00541900 /* CustomLabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomLabel.xib; sourceTree = "<group>"; };
+		4E3BD8851DB131FA00541900 /* TwoLabelBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoLabelBrick.xib; sourceTree = "<group>"; };
+		4E3BD8871DB131FA00541900 /* CustomLabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomLabel.xib; sourceTree = "<group>"; };
+		4E3BD8881DB131FA00541900 /* TwoLabelBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoLabelBrick.xib; sourceTree = "<group>"; };
+		4E3BD88B1DB131FA00541900 /* StepperBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepperBrick.xib; sourceTree = "<group>"; };
+		4E3BD8C41DB1334100541900 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4E3BD8C51DB1334100541900 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		4E3BD8C71DB1334100541900 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		4E3BD8D21DB1373C00541900 /* HorizontalCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionViewController.swift; sourceTree = "<group>"; };
+		4E3BD8D51DB1374800541900 /* ImageViewBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewBrickViewController.swift; sourceTree = "<group>"; };
+		4E3BD8E61DB51E1200541900 /* BrickIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickIdentifiers.swift; sourceTree = "<group>"; };
+		4E3BD8EB1DB521C200541900 /* CoverFlowViewScrollingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverFlowViewScrollingController.swift; sourceTree = "<group>"; };
+		4E8E10F31DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbeddedSpotlightSnapScrollingViewController.swift; sourceTree = "<group>"; };
+		9327D03D1DB94A9500D65BCB /* NibLessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLessViewController.swift; sourceTree = "<group>"; };
+		9327D0421DB94AB300D65BCB /* NiblessBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NiblessBrick.swift; sourceTree = "<group>"; };
+		935D488F1DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesInCollectionBrickViewController.swift; sourceTree = "<group>"; };
+		935D489A1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesInCollectionBrickHorizontalViewController.swift; sourceTree = "<group>"; };
+		93EAFE291DB57D680036331C /* NavigationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationDetailViewController.swift; sourceTree = "<group>"; };
+		93EAFE2A1DB57D680036331C /* NavigationMasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationMasterViewController.swift; sourceTree = "<group>"; };
+		93EAFE2B1DB57D680036331C /* NavigationTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationTransition.swift; sourceTree = "<group>"; };
+		93EAFE2C1DB57D680036331C /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4E3BD5C41DB008CD00541900 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E3BD6911DB0097400541900 /* BrickKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E3BD6D21DB00F9F00541900 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E3BD72E1DB0101400541900 /* BrickKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4E3BD5BE1DB008CD00541900 = {
+			isa = PBXGroup;
+			children = (
+				4E3BD86E1DB131FA00541900 /* Resources */,
+				4E3BD7491DB1316400541900 /* Source */,
+				4E3BD5C81DB008CD00541900 /* Products */,
+				4E3BD67D1DB0094F00541900 /* BrickKit.xcodeproj */,
+			);
+			sourceTree = "<group>";
+		};
+		4E3BD5C81DB008CD00541900 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD5C71DB008CD00541900 /* BrickApp.app */,
+				4E3BD6D51DB00F9F00541900 /* BrickApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4E3BD67E1DB0094F00541900 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD6851DB0095000541900 /* BrickKit.framework */,
+				4E3BD6871DB0095000541900 /* BrickKitTests-iOS.xctest */,
+				4E3BD6891DB0095000541900 /* BrickKit.framework */,
+				4E3BD68B1DB0095000541900 /* BrickKit-tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4E3BD7491DB1316400541900 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD8E61DB51E1200541900 /* BrickIdentifiers.swift */,
+				4E3BD74A1DB1316400541900 /* AppDelegate.swift */,
+				4E3BD7511DB1316400541900 /* Bricks */,
+				4E3BD7751DB1316400541900 /* Examples */,
+				4E3BD7B61DB1316400541900 /* Info.plist */,
+				4E3BD7B71DB1316400541900 /* Navigation */,
+				4E3BD7BA1DB1316400541900 /* Theme.swift */,
+				4E3BD7BB1DB1316400541900 /* ViewController.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		4E3BD7511DB1316400541900 /* Bricks */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD7521DB1316400541900 /* Custom */,
+				4E3BD76A1DB1316400541900 /* Label */,
+				4E3BD7721DB1316400541900 /* Stepper */,
+			);
+			path = Bricks;
+			sourceTree = "<group>";
+		};
+		4E3BD7521DB1316400541900 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD7531DB1316400541900 /* DailySalesBrick.swift */,
+				4E3BD7541DB1316400541900 /* HeaderAndFooterBrick.swift */,
+				4E3BD75D1DB1316400541900 /* PostBrick.swift */,
+				4E3BD75E1DB1316400541900 /* ProfileHeaderBrick.swift */,
+				4E3BD75F1DB1316400541900 /* ProfileImageBrick.swift */,
+				4E3BD7601DB1316400541900 /* SegmentHeaderBrick.swift */,
+				4E3BD7691DB1316400541900 /* WhoToFollowBrick.swift */,
+				9327D0421DB94AB300D65BCB /* NiblessBrick.swift */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		4E3BD76A1DB1316400541900 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD7711DB1316400541900 /* TwoLabelBrick.swift */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
+		4E3BD7721DB1316400541900 /* Stepper */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD7731DB1316400541900 /* StepperBrick.swift */,
+			);
+			path = Stepper;
+			sourceTree = "<group>";
+		};
+		4E3BD7751DB1316400541900 /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD7761DB1316400541900 /* BaseBrickController.swift */,
+				4E3BD7771DB1316400541900 /* BaseRepeatBrickViewController.swift */,
+				4E3BD7781DB1316400541900 /* BaseSectionBrickViewController.swift */,
+				4E3BD7791DB1316400541900 /* Collections */,
+				4E3BD7831DB1316400541900 /* HorizontalScroll */,
+				4E3BD7871DB1316400541900 /* Images */,
+				4E3BD7891DB1316400541900 /* Interactive */,
+				4E3BD7931DB1316400541900 /* Layout */,
+				4E3BD79F1DB1316400541900 /* Scrolling */,
+				4E3BD7A31DB1316400541900 /* Simple */,
+				4E3BD7AB1DB1316400541900 /* Sticking */,
+				4E3BD7B41DB1316400541900 /* Twitter */,
+			);
+			path = Examples;
+			sourceTree = "<group>";
+		};
+		4E3BD7791DB1316400541900 /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD77A1DB1316400541900 /* HorizontalScrollSectionBrickViewController.swift */,
+				4E3BD77B1DB1316400541900 /* RepeatCollectionBrickViewController.swift */,
+				4E3BD77C1DB1316400541900 /* SimpleCollectionBrickViewController.swift */,
+			);
+			path = Collections;
+			sourceTree = "<group>";
+		};
+		4E3BD7831DB1316400541900 /* HorizontalScroll */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD7841DB1316400541900 /* BlockHorizontalViewController.swift */,
+				4E3BD7851DB1316400541900 /* HorizontalSnapToPointViewController.swift */,
+				4E3BD7861DB1316400541900 /* SimpleHorizontalScrollBrickViewController.swift */,
+				4E3BD8D21DB1373C00541900 /* HorizontalCollectionViewController.swift */,
+			);
+			path = HorizontalScroll;
+			sourceTree = "<group>";
+		};
+		4E3BD7871DB1316400541900 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD8D51DB1374800541900 /* ImageViewBrickViewController.swift */,
+				4E3BD7881DB1316400541900 /* ImageURLBrickViewController.swift */,
+				935D488F1DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift */,
+				935D489A1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		4E3BD7891DB1316400541900 /* Interactive */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD78A1DB1316400541900 /* AdvancedRepeatViewController.swift */,
+				4E3BD78B1DB1316400541900 /* BasicInteractiveViewController.swift */,
+				4E3BD78C1DB1316400541900 /* BrickCollectionInteractiveViewController.swift */,
+				4E3BD78D1DB1316400541900 /* ChangeNibBrickViewController.swift */,
+				4E3BD78E1DB1316400541900 /* DynamicContentViewController.swift */,
+				4E3BD78F1DB1316400541900 /* HideBrickViewController.swift */,
+				4E3BD7901DB1316400541900 /* HideSectionsViewController.swift */,
+				4E3BD7911DB1316400541900 /* InsertBrickViewController.swift */,
+				4E3BD7921DB1316400541900 /* InvalidateHeightViewController.swift */,
+			);
+			path = Interactive;
+			sourceTree = "<group>";
+		};
+		4E3BD7931DB1316400541900 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD79C1DB1316400541900 /* tvOS */,
+				4E3BD7941DB1316400541900 /* iOS */,
+				4E3BD7971DB1316400541900 /* OffsetBrickViewController.swift */,
+				4E3BD7981DB1316400541900 /* PopoverBrickViewController.swift */,
+				4E3BD7991DB1316400541900 /* SizeClassBrick.swift */,
+				4E3BD79A1DB1316400541900 /* SizeClassesBrickViewController.swift */,
+				4E3BD79B1DB1316400541900 /* TestBrick.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		4E3BD7941DB1316400541900 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD7951DB1316400541900 /* SizeClassBrick.xib */,
+				4E3BD7961DB1316400541900 /* TestBrick.xib */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		4E3BD79C1DB1316400541900 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD79D1DB1316400541900 /* SizeClassBrick.xib */,
+				4E3BD79E1DB1316400541900 /* TestBrick.xib */,
+			);
+			path = tvOS;
+			sourceTree = "<group>";
+		};
+		4E3BD79F1DB1316400541900 /* Scrolling */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD8EB1DB521C200541900 /* CoverFlowViewScrollingController.swift */,
+				4E3BD7A01DB1316400541900 /* BaseScrollingViewController.swift */,
+				4E3BD7A11DB1316400541900 /* CardScrollingViewController.swift */,
+				4E8E10F31DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift */,
+				4E3BD7A21DB1316400541900 /* SpotlightScrollingViewController.swift */,
+			);
+			path = Scrolling;
+			sourceTree = "<group>";
+		};
+		4E3BD7A31DB1316400541900 /* Simple */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD7A41DB1316400541900 /* MultiDimensionBrickViewController.swift */,
+				4E3BD7A51DB1316400541900 /* MultiSectionBrickViewController.swift */,
+				4E3BD7A61DB1316400541900 /* SimpleBrickViewController.swift */,
+				4E3BD7A71DB1316400541900 /* SimpleRepeatBrickViewController.swift */,
+				4E3BD7A81DB1316400541900 /* SimpleRepeatFixedHeightViewController.swift */,
+				4E3BD7A91DB1316400541900 /* SimpleRepeatFixedWidthViewController.swift */,
+				4E3BD7AA1DB1316400541900 /* SimpleRepeatHeightRatioViewController.swift */,
+				9327D03D1DB94A9500D65BCB /* NibLessViewController.swift */,
+			);
+			path = Simple;
+			sourceTree = "<group>";
+		};
+		4E3BD7AB1DB1316400541900 /* Sticking */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD7AC1DB1316400541900 /* BasicStickingViewController.swift */,
+				4E3BD7AD1DB1316400541900 /* OnScrollDownStickingViewController.swift */,
+				4E3BD7AE1DB1316400541900 /* SectionStickingViewController.swift */,
+				4E3BD7AF1DB1316400541900 /* StackedStickingViewController.swift */,
+				4E3BD7B01DB1316400541900 /* StackingFooterViewController.swift */,
+				4E3BD7B11DB1316400541900 /* StickingFooterBaseViewController.swift */,
+				4E3BD7B21DB1316400541900 /* StickingFooterSectionsViewController.swift */,
+				4E3BD7B31DB1316400541900 /* StickingSectionsViewController.swift */,
+			);
+			path = Sticking;
+			sourceTree = "<group>";
+		};
+		4E3BD7B41DB1316400541900 /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD7B51DB1316400541900 /* MockTwitterViewController.swift */,
+			);
+			path = Twitter;
+			sourceTree = "<group>";
+		};
+		4E3BD7B71DB1316400541900 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				93EAFE291DB57D680036331C /* NavigationDetailViewController.swift */,
+				93EAFE2A1DB57D680036331C /* NavigationMasterViewController.swift */,
+				93EAFE2B1DB57D680036331C /* NavigationTransition.swift */,
+				93EAFE2C1DB57D680036331C /* NavigationViewController.swift */,
+				4E3BD7B91DB1316400541900 /* NavigationDataSource.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		4E3BD86E1DB131FA00541900 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD86F1DB131FA00541900 /* Assets.xcassets */,
+				4E3BD8C21DB1334100541900 /* Storyboards */,
+				4E3BD8701DB131FA00541900 /* Bricks */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4E3BD8701DB131FA00541900 /* Bricks */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD8711DB131FA00541900 /* Custom */,
+				4E3BD8821DB131FA00541900 /* Label */,
+				4E3BD8891DB131FA00541900 /* Stepper */,
+			);
+			path = Bricks;
+			sourceTree = "<group>";
+		};
+		4E3BD8711DB131FA00541900 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD8721DB131FA00541900 /* iOS */,
+				4E3BD87A1DB131FA00541900 /* tvOS */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		4E3BD8721DB131FA00541900 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD8731DB131FA00541900 /* DailySalesBrick.xib */,
+				4E3BD8741DB131FA00541900 /* HeaderAndFooterBrick.xib */,
+				4E3BD8751DB131FA00541900 /* PostBrick.xib */,
+				4E3BD8761DB131FA00541900 /* ProfileHeaderBrick.xib */,
+				4E3BD8771DB131FA00541900 /* ProfileImageBrick.xib */,
+				4E3BD8781DB131FA00541900 /* SegmentHeaderBrick.xib */,
+				4E3BD8791DB131FA00541900 /* WhoToFollowBrick.xib */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		4E3BD87A1DB131FA00541900 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD87B1DB131FA00541900 /* DailySalesBrick.xib */,
+				4E3BD87C1DB131FA00541900 /* HeaderAndFooterBrick.xib */,
+				4E3BD87D1DB131FA00541900 /* PostBrick.xib */,
+				4E3BD87E1DB131FA00541900 /* ProfileHeaderBrick.xib */,
+				4E3BD87F1DB131FA00541900 /* ProfileImageBrick.xib */,
+				4E3BD8801DB131FA00541900 /* SegmentHeaderBrick.xib */,
+				4E3BD8811DB131FA00541900 /* WhoToFollowBrick.xib */,
+			);
+			path = tvOS;
+			sourceTree = "<group>";
+		};
+		4E3BD8821DB131FA00541900 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD8831DB131FA00541900 /* iOS */,
+				4E3BD8861DB131FA00541900 /* tvOS */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
+		4E3BD8831DB131FA00541900 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD8841DB131FA00541900 /* CustomLabel.xib */,
+				4E3BD8851DB131FA00541900 /* TwoLabelBrick.xib */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		4E3BD8861DB131FA00541900 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD8871DB131FA00541900 /* CustomLabel.xib */,
+				4E3BD8881DB131FA00541900 /* TwoLabelBrick.xib */,
+			);
+			path = tvOS;
+			sourceTree = "<group>";
+		};
+		4E3BD8891DB131FA00541900 /* Stepper */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD88A1DB131FA00541900 /* iOS */,
+			);
+			path = Stepper;
+			sourceTree = "<group>";
+		};
+		4E3BD88A1DB131FA00541900 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD88B1DB131FA00541900 /* StepperBrick.xib */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		4E3BD8C21DB1334100541900 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD8C31DB1334100541900 /* iOS */,
+				4E3BD8C61DB1334100541900 /* tvOS */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		4E3BD8C31DB1334100541900 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD8C41DB1334100541900 /* LaunchScreen.storyboard */,
+				4E3BD8C51DB1334100541900 /* Main.storyboard */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		4E3BD8C61DB1334100541900 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				4E3BD8C71DB1334100541900 /* Main.storyboard */,
+			);
+			path = tvOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4E3BD5C61DB008CD00541900 /* BrickApp-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4E3BD5D91DB008CD00541900 /* Build configuration list for PBXNativeTarget "BrickApp-iOS" */;
+			buildPhases = (
+				4E3BD5C31DB008CD00541900 /* Sources */,
+				4E3BD5C41DB008CD00541900 /* Frameworks */,
+				4E3BD5C51DB008CD00541900 /* Resources */,
+				4E3BD6951DB0097400541900 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4E3BD6941DB0097400541900 /* PBXTargetDependency */,
+			);
+			name = "BrickApp-iOS";
+			productName = "BrickKit-Example";
+			productReference = 4E3BD5C71DB008CD00541900 /* BrickApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4E3BD6D41DB00F9F00541900 /* BrickApp-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4E3BD6E11DB00FA000541900 /* Build configuration list for PBXNativeTarget "BrickApp-tvOS" */;
+			buildPhases = (
+				4E3BD6D11DB00F9F00541900 /* Sources */,
+				4E3BD6D21DB00F9F00541900 /* Frameworks */,
+				4E3BD6D31DB00F9F00541900 /* Resources */,
+				4E3BD7321DB0101400541900 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4E3BD7311DB0101400541900 /* PBXTargetDependency */,
+			);
+			name = "BrickApp-tvOS";
+			productName = "BrickApp-tvOS";
+			productReference = 4E3BD6D51DB00F9F00541900 /* BrickApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4E3BD5BF1DB008CD00541900 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "Wayfair LLC";
+				TargetAttributes = {
+					4E3BD5C61DB008CD00541900 = {
+						CreatedOnToolsVersion = 8.0;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
+					};
+					4E3BD6D41DB00F9F00541900 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 4E3BD5C21DB008CD00541900 /* Build configuration list for PBXProject "BrickKit-Example" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4E3BD5BE1DB008CD00541900;
+			productRefGroup = 4E3BD5C81DB008CD00541900 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4E3BD67E1DB0094F00541900 /* Products */;
+					ProjectRef = 4E3BD67D1DB0094F00541900 /* BrickKit.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				4E3BD5C61DB008CD00541900 /* BrickApp-iOS */,
+				4E3BD6D41DB00F9F00541900 /* BrickApp-tvOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4E3BD6851DB0095000541900 /* BrickKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BrickKit.framework;
+			remoteRef = 4E3BD6841DB0095000541900 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4E3BD6871DB0095000541900 /* BrickKitTests-iOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "BrickKitTests-iOS.xctest";
+			remoteRef = 4E3BD6861DB0095000541900 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4E3BD6891DB0095000541900 /* BrickKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = BrickKit.framework;
+			remoteRef = 4E3BD6881DB0095000541900 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4E3BD68B1DB0095000541900 /* BrickKit-tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "BrickKit-tvOSTests.xctest";
+			remoteRef = 4E3BD68A1DB0095000541900 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4E3BD5C51DB008CD00541900 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E3BD8C01DB1321B00541900 /* SegmentHeaderBrick.xib in Resources */,
+				4E3BD8BE1DB1321B00541900 /* ProfileHeaderBrick.xib in Resources */,
+				4E3BD8AC1DB131FA00541900 /* TwoLabelBrick.xib in Resources */,
+				4E3BD8C11DB1321B00541900 /* WhoToFollowBrick.xib in Resources */,
+				4E3BD8BF1DB1321B00541900 /* ProfileImageBrick.xib in Resources */,
+				4E3BD82C1DB1316400541900 /* SizeClassBrick.xib in Resources */,
+				4E3BD8CA1DB1334100541900 /* Main.storyboard in Resources */,
+				4E3BD8AA1DB131FA00541900 /* CustomLabel.xib in Resources */,
+				4E3BD82E1DB1316400541900 /* TestBrick.xib in Resources */,
+				4E3BD8B21DB131FA00541900 /* StepperBrick.xib in Resources */,
+				4E3BD8BD1DB1321B00541900 /* PostBrick.xib in Resources */,
+				4E3BD8C81DB1334100541900 /* LaunchScreen.storyboard in Resources */,
+				4E3BD8BC1DB1321B00541900 /* HeaderAndFooterBrick.xib in Resources */,
+				4E3BD8CE1DB133BA00541900 /* Assets.xcassets in Resources */,
+				4E3BD8BB1DB1321B00541900 /* DailySalesBrick.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E3BD6D31DB00F9F00541900 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E3BD83D1DB1316400541900 /* TestBrick.xib in Resources */,
+				4E3BD8B11DB131FA00541900 /* TwoLabelBrick.xib in Resources */,
+				4E3BD8B61DB1321100541900 /* PostBrick.xib in Resources */,
+				4E3BD8AF1DB131FA00541900 /* CustomLabel.xib in Resources */,
+				4E3BD8BA1DB1321100541900 /* WhoToFollowBrick.xib in Resources */,
+				4E3BD88D1DB131FA00541900 /* Assets.xcassets in Resources */,
+				4E3BD8CD1DB1334100541900 /* Main.storyboard in Resources */,
+				4E3BD8B91DB1321100541900 /* SegmentHeaderBrick.xib in Resources */,
+				4E3BD8B81DB1321100541900 /* ProfileImageBrick.xib in Resources */,
+				4E3BD8B41DB1321100541900 /* DailySalesBrick.xib in Resources */,
+				4E3BD8B71DB1321100541900 /* ProfileHeaderBrick.xib in Resources */,
+				4E3BD8B51DB1321100541900 /* HeaderAndFooterBrick.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4E3BD5C31DB008CD00541900 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				935D489B1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift in Sources */,
+				4E3BD8001DB1316400541900 /* BaseRepeatBrickViewController.swift in Sources */,
+				4E3BD85C1DB1316400541900 /* StickingFooterBaseViewController.swift in Sources */,
+				4E3BD84E1DB1316400541900 /* SimpleRepeatFixedWidthViewController.swift in Sources */,
+				4E3BD7EE1DB1316400541900 /* WhoToFollowBrick.swift in Sources */,
+				4E3BD7C61DB1316400541900 /* DailySalesBrick.swift in Sources */,
+				4E3BD8041DB1316400541900 /* HorizontalScrollSectionBrickViewController.swift in Sources */,
+				4E3BD8461DB1316400541900 /* MultiSectionBrickViewController.swift in Sources */,
+				4E3BD8081DB1316400541900 /* SimpleCollectionBrickViewController.swift in Sources */,
+				4E3BD8501DB1316400541900 /* SimpleRepeatHeightRatioViewController.swift in Sources */,
+				4E3BD8401DB1316400541900 /* CardScrollingViewController.swift in Sources */,
+				4E3BD8121DB1316400541900 /* BlockHorizontalViewController.swift in Sources */,
+				4E3BD85E1DB1316400541900 /* StickingFooterSectionsViewController.swift in Sources */,
+				4E3BD8061DB1316400541900 /* RepeatCollectionBrickViewController.swift in Sources */,
+				4E3BD8021DB1316400541900 /* BaseSectionBrickViewController.swift in Sources */,
+				4E3BD8301DB1316400541900 /* OffsetBrickViewController.swift in Sources */,
+				4E3BD8161DB1316400541900 /* SimpleHorizontalScrollBrickViewController.swift in Sources */,
+				4E3BD84C1DB1316400541900 /* SimpleRepeatFixedHeightViewController.swift in Sources */,
+				4E3BD8601DB1316400541900 /* StickingSectionsViewController.swift in Sources */,
+				4E3BD8581DB1316400541900 /* StackedStickingViewController.swift in Sources */,
+				4E3BD85A1DB1316400541900 /* StackingFooterViewController.swift in Sources */,
+				4E3BD83E1DB1316400541900 /* BaseScrollingViewController.swift in Sources */,
+				4E3BD8521DB1316400541900 /* BasicStickingViewController.swift in Sources */,
+				4E3BD8541DB1316400541900 /* OnScrollDownStickingViewController.swift in Sources */,
+				4E3BD81E1DB1316400541900 /* BrickCollectionInteractiveViewController.swift in Sources */,
+				4E3BD7C81DB1316400541900 /* HeaderAndFooterBrick.swift in Sources */,
+				4E3BD84A1DB1316400541900 /* SimpleRepeatBrickViewController.swift in Sources */,
+				4E3BD81C1DB1316400541900 /* BasicInteractiveViewController.swift in Sources */,
+				4E3BD82A1DB1316400541900 /* InvalidateHeightViewController.swift in Sources */,
+				4E3BD8421DB1316400541900 /* SpotlightScrollingViewController.swift in Sources */,
+				4E3BD7F81DB1316400541900 /* TwoLabelBrick.swift in Sources */,
+				9327D0431DB94AB300D65BCB /* NiblessBrick.swift in Sources */,
+				4E3BD81A1DB1316400541900 /* AdvancedRepeatViewController.swift in Sources */,
+				4E3BD8681DB1316400541900 /* NavigationDataSource.swift in Sources */,
+				4E3BD8481DB1316400541900 /* SimpleBrickViewController.swift in Sources */,
+				93EAFE2D1DB57D680036331C /* NavigationDetailViewController.swift in Sources */,
+				4E3BD7DA1DB1316400541900 /* ProfileHeaderBrick.swift in Sources */,
+				4E3BD8201DB1316400541900 /* ChangeNibBrickViewController.swift in Sources */,
+				4E3BD8561DB1316400541900 /* SectionStickingViewController.swift in Sources */,
+				4E3BD8381DB1316400541900 /* TestBrick.swift in Sources */,
+				93EAFE2E1DB57D680036331C /* NavigationMasterViewController.swift in Sources */,
+				4E3BD8E71DB51E1200541900 /* BrickIdentifiers.swift in Sources */,
+				9327D03E1DB94A9500D65BCB /* NibLessViewController.swift in Sources */,
+				4E3BD7FA1DB1316400541900 /* StepperBrick.swift in Sources */,
+				4E8E10F41DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift in Sources */,
+				4E3BD7BC1DB1316400541900 /* AppDelegate.swift in Sources */,
+				935D48901DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift in Sources */,
+				4E3BD8441DB1316400541900 /* MultiDimensionBrickViewController.swift in Sources */,
+				4E3BD7DE1DB1316400541900 /* SegmentHeaderBrick.swift in Sources */,
+				4E3BD8261DB1316400541900 /* HideSectionsViewController.swift in Sources */,
+				4E3BD8241DB1316400541900 /* HideBrickViewController.swift in Sources */,
+				4E3BD8621DB1316400541900 /* MockTwitterViewController.swift in Sources */,
+				93EAFE2F1DB57D680036331C /* NavigationTransition.swift in Sources */,
+				4E3BD7D81DB1316400541900 /* PostBrick.swift in Sources */,
+				4E3BD8281DB1316400541900 /* InsertBrickViewController.swift in Sources */,
+				4E3BD8361DB1316400541900 /* SizeClassesBrickViewController.swift in Sources */,
+				4E3BD8321DB1316400541900 /* PopoverBrickViewController.swift in Sources */,
+				93EAFE301DB57D680036331C /* NavigationViewController.swift in Sources */,
+				4E3BD8141DB1316400541900 /* HorizontalSnapToPointViewController.swift in Sources */,
+				4E3BD8181DB1316400541900 /* ImageURLBrickViewController.swift in Sources */,
+				4E3BD8EC1DB521C200541900 /* CoverFlowViewScrollingController.swift in Sources */,
+				4E3BD7FE1DB1316400541900 /* BaseBrickController.swift in Sources */,
+				4E3BD8D31DB1373C00541900 /* HorizontalCollectionViewController.swift in Sources */,
+				4E3BD8D61DB1374800541900 /* ImageViewBrickViewController.swift in Sources */,
+				4E3BD86C1DB1316400541900 /* ViewController.swift in Sources */,
+				4E3BD7DC1DB1316400541900 /* ProfileImageBrick.swift in Sources */,
+				4E3BD86A1DB1316400541900 /* Theme.swift in Sources */,
+				4E3BD8221DB1316400541900 /* DynamicContentViewController.swift in Sources */,
+				4E3BD8341DB1316400541900 /* SizeClassBrick.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E3BD6D11DB00F9F00541900 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E3BD8ED1DB521C200541900 /* CoverFlowViewScrollingController.swift in Sources */,
+				4E3BD8011DB1316400541900 /* BaseRepeatBrickViewController.swift in Sources */,
+				4E3BD85D1DB1316400541900 /* StickingFooterBaseViewController.swift in Sources */,
+				4E3BD84F1DB1316400541900 /* SimpleRepeatFixedWidthViewController.swift in Sources */,
+				4E3BD7EF1DB1316400541900 /* WhoToFollowBrick.swift in Sources */,
+				4E3BD7C71DB1316400541900 /* DailySalesBrick.swift in Sources */,
+				4E3BD8051DB1316400541900 /* HorizontalScrollSectionBrickViewController.swift in Sources */,
+				4E3BD8471DB1316400541900 /* MultiSectionBrickViewController.swift in Sources */,
+				4E3BD8091DB1316400541900 /* SimpleCollectionBrickViewController.swift in Sources */,
+				4E3BD8511DB1316400541900 /* SimpleRepeatHeightRatioViewController.swift in Sources */,
+				93EAFE341DB57D6B0036331C /* NavigationViewController.swift in Sources */,
+				4E3BD8411DB1316400541900 /* CardScrollingViewController.swift in Sources */,
+				4E3BD8131DB1316400541900 /* BlockHorizontalViewController.swift in Sources */,
+				4E3BD85F1DB1316400541900 /* StickingFooterSectionsViewController.swift in Sources */,
+				4E3BD8071DB1316400541900 /* RepeatCollectionBrickViewController.swift in Sources */,
+				93EAFE331DB57D6B0036331C /* NavigationTransition.swift in Sources */,
+				9327D0441DB94AB300D65BCB /* NiblessBrick.swift in Sources */,
+				93EAFE321DB57D6B0036331C /* NavigationMasterViewController.swift in Sources */,
+				4E3BD8031DB1316400541900 /* BaseSectionBrickViewController.swift in Sources */,
+				4E3BD8311DB1316400541900 /* OffsetBrickViewController.swift in Sources */,
+				4E3BD8D71DB1374800541900 /* ImageViewBrickViewController.swift in Sources */,
+				4E3BD8171DB1316400541900 /* SimpleHorizontalScrollBrickViewController.swift in Sources */,
+				4E3BD84D1DB1316400541900 /* SimpleRepeatFixedHeightViewController.swift in Sources */,
+				9327D03F1DB94A9500D65BCB /* NibLessViewController.swift in Sources */,
+				4E3BD8611DB1316400541900 /* StickingSectionsViewController.swift in Sources */,
+				4E3BD8591DB1316400541900 /* StackedStickingViewController.swift in Sources */,
+				4E3BD85B1DB1316400541900 /* StackingFooterViewController.swift in Sources */,
+				935D48911DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift in Sources */,
+				4E3BD83F1DB1316400541900 /* BaseScrollingViewController.swift in Sources */,
+				4E3BD8531DB1316400541900 /* BasicStickingViewController.swift in Sources */,
+				4E3BD8551DB1316400541900 /* OnScrollDownStickingViewController.swift in Sources */,
+				4E3BD8E81DB51E1200541900 /* BrickIdentifiers.swift in Sources */,
+				4E3BD81F1DB1316400541900 /* BrickCollectionInteractiveViewController.swift in Sources */,
+				4E3BD7C91DB1316400541900 /* HeaderAndFooterBrick.swift in Sources */,
+				4E3BD84B1DB1316400541900 /* SimpleRepeatBrickViewController.swift in Sources */,
+				4E3BD82B1DB1316400541900 /* InvalidateHeightViewController.swift in Sources */,
+				4E3BD8431DB1316400541900 /* SpotlightScrollingViewController.swift in Sources */,
+				4E3BD7F91DB1316400541900 /* TwoLabelBrick.swift in Sources */,
+				4E3BD81B1DB1316400541900 /* AdvancedRepeatViewController.swift in Sources */,
+				93EAFE311DB57D6B0036331C /* NavigationDetailViewController.swift in Sources */,
+				4E3BD8D41DB1373C00541900 /* HorizontalCollectionViewController.swift in Sources */,
+				4E3BD8691DB1316400541900 /* NavigationDataSource.swift in Sources */,
+				4E3BD8491DB1316400541900 /* SimpleBrickViewController.swift in Sources */,
+				4E3BD7DB1DB1316400541900 /* ProfileHeaderBrick.swift in Sources */,
+				4E3BD8211DB1316400541900 /* ChangeNibBrickViewController.swift in Sources */,
+				4E3BD8571DB1316400541900 /* SectionStickingViewController.swift in Sources */,
+				4E3BD8391DB1316400541900 /* TestBrick.swift in Sources */,
+				4E3BD7BD1DB1316400541900 /* AppDelegate.swift in Sources */,
+				4E3BD8451DB1316400541900 /* MultiDimensionBrickViewController.swift in Sources */,
+				4E3BD7DF1DB1316400541900 /* SegmentHeaderBrick.swift in Sources */,
+				4E3BD8271DB1316400541900 /* HideSectionsViewController.swift in Sources */,
+				4E3BD8251DB1316400541900 /* HideBrickViewController.swift in Sources */,
+				4E3BD8631DB1316400541900 /* MockTwitterViewController.swift in Sources */,
+				4E3BD7D91DB1316400541900 /* PostBrick.swift in Sources */,
+				4E3BD8291DB1316400541900 /* InsertBrickViewController.swift in Sources */,
+				4E3BD8371DB1316400541900 /* SizeClassesBrickViewController.swift in Sources */,
+				4E3BD8151DB1316400541900 /* HorizontalSnapToPointViewController.swift in Sources */,
+				4E3BD8191DB1316400541900 /* ImageURLBrickViewController.swift in Sources */,
+				4E8E10F51DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift in Sources */,
+				4E3BD7FF1DB1316400541900 /* BaseBrickController.swift in Sources */,
+				4E3BD86D1DB1316400541900 /* ViewController.swift in Sources */,
+				4E3BD7DD1DB1316400541900 /* ProfileImageBrick.swift in Sources */,
+				4E3BD86B1DB1316400541900 /* Theme.swift in Sources */,
+				935D489C1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift in Sources */,
+				4E3BD8231DB1316400541900 /* DynamicContentViewController.swift in Sources */,
+				4E3BD8351DB1316400541900 /* SizeClassBrick.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4E3BD6941DB0097400541900 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "BrickKit-iOS";
+			targetProxy = 4E3BD6931DB0097400541900 /* PBXContainerItemProxy */;
+		};
+		4E3BD7311DB0101400541900 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "BrickKit-tvOS";
+			targetProxy = 4E3BD7301DB0101400541900 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		4E3BD5D71DB008CD00541900 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4E3BD5D81DB008CD00541900 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4E3BD5DA1DB008CD00541900 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wafair.BrickKit-Example";
+				PRODUCT_NAME = BrickApp;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4E3BD5DB1DB008CD00541900 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wafair.BrickKit-Example";
+				PRODUCT_NAME = BrickApp;
+			};
+			name = Release;
+		};
+		4E3BD6E21DB00FA000541900 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wafair.BrickApp-tvOS";
+				PRODUCT_NAME = BrickApp;
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		4E3BD6E31DB00FA000541900 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wafair.BrickApp-tvOS";
+				PRODUCT_NAME = BrickApp;
+				SDKROOT = appletvos;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4E3BD5C21DB008CD00541900 /* Build configuration list for PBXProject "BrickKit-Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E3BD5D71DB008CD00541900 /* Debug */,
+				4E3BD5D81DB008CD00541900 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4E3BD5D91DB008CD00541900 /* Build configuration list for PBXNativeTarget "BrickApp-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E3BD5DA1DB008CD00541900 /* Debug */,
+				4E3BD5DB1DB008CD00541900 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4E3BD6E11DB00FA000541900 /* Build configuration list for PBXNativeTarget "BrickApp-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E3BD6E21DB00FA000541900 /* Debug */,
+				4E3BD6E31DB00FA000541900 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4E3BD5BF1DB008CD00541900 /* Project object */;
+}

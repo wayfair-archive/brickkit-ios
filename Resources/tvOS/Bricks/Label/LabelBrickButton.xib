@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="LabelBrickCell" customModule="BrickKit">
+            <rect key="frame" x="0.0" y="0.0" width="327" height="48"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="327" height="48"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5nb-19-iIH">
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNw-DJ-n0f">
+                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                        <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="buttonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="trO-f6-gAh"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="5nb-19-iIH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="DVN-pA-Xbo"/>
+                <constraint firstItem="bNw-DJ-n0f" firstAttribute="bottom" secondItem="5nb-19-iIH" secondAttribute="bottom" id="UYi-1s-g9z"/>
+                <constraint firstItem="bNw-DJ-n0f" firstAttribute="top" secondItem="5nb-19-iIH" secondAttribute="top" id="WFU-9t-nEC"/>
+                <constraint firstAttribute="trailing" secondItem="bNw-DJ-n0f" secondAttribute="trailing" id="cbf-sQ-5YV"/>
+                <constraint firstAttribute="bottom" secondItem="5nb-19-iIH" secondAttribute="bottom" id="mzW-Qs-sNz"/>
+                <constraint firstItem="bNw-DJ-n0f" firstAttribute="leading" secondItem="5nb-19-iIH" secondAttribute="trailing" id="p2R-15-5GO"/>
+                <constraint firstItem="5nb-19-iIH" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="s6o-Au-cPm"/>
+            </constraints>
+            <size key="customSize" width="356" height="141.5"/>
+            <connections>
+                <outlet property="bottomSpaceConstraint" destination="mzW-Qs-sNz" id="Yca-eQ-1Zg"/>
+                <outlet property="button" destination="bNw-DJ-n0f" id="wZL-uF-nQP"/>
+                <outlet property="label" destination="5nb-19-iIH" id="uP7-7a-dgC"/>
+                <outlet property="leftSpaceConstraint" destination="DVN-pA-Xbo" id="eNQ-Ra-Gvg"/>
+                <outlet property="rightSpaceConstraint" destination="cbf-sQ-5YV" id="7Vh-jF-7Bk"/>
+                <outlet property="topSpaceConstraint" destination="s6o-Au-cPm" id="440-F3-AMZ"/>
+            </connections>
+            <point key="canvasLocation" x="439.5" y="323"/>
+        </collectionViewCell>
+    </objects>
+</document>

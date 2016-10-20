@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ProfileHeaderBrickCell" customModule="BrickApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="155"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="155"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Cst-y5-QV1">
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="OVa-2g-fGo">
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wayfair" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="381-BJ-nL2">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="Njm-Ax-0Dd"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@wayfair" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZV-r0-vgb">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="H02-G4-0v6"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="gG6-dr-YDH"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                    </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Xq-6T-KcH">
+                        <string key="text">A Zillion tweets about everything home. Support hours are from 9am-5pm EST 7 days a week! For help outside of these hours, comtact service@wayfair.com</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="b8z-gT-R2Z">
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3,309 FOLLOWING" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9AZ-8G-6yg">
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="33.6K FOLLOWERS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Crj-JX-axo">
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="2Xq-6T-KcH" secondAttribute="trailing" constant="8" id="2XI-hi-nRa"/>
+                <constraint firstItem="2Xq-6T-KcH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="2Z2-45-aNB"/>
+                <constraint firstAttribute="trailing" secondItem="b8z-gT-R2Z" secondAttribute="trailing" constant="8" id="NLZ-77-23Q"/>
+                <constraint firstItem="Cst-y5-QV1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="VAG-7d-hXL"/>
+                <constraint firstItem="b8z-gT-R2Z" firstAttribute="top" secondItem="2Xq-6T-KcH" secondAttribute="bottom" constant="8" id="b2O-8V-Jfw"/>
+                <constraint firstItem="2Xq-6T-KcH" firstAttribute="top" secondItem="Cst-y5-QV1" secondAttribute="bottom" constant="8" id="kRR-bV-ZuH"/>
+                <constraint firstAttribute="bottom" secondItem="b8z-gT-R2Z" secondAttribute="bottom" constant="8" id="lXX-GY-FWq"/>
+                <constraint firstItem="b8z-gT-R2Z" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="no1-IQ-Goi"/>
+                <constraint firstItem="Cst-y5-QV1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="v6B-PA-PCR"/>
+            </constraints>
+            <size key="customSize" width="320" height="178.5"/>
+            <connections>
+                <outlet property="descriptionLabel" destination="2Xq-6T-KcH" id="TTh-tO-qXq"/>
+                <outlet property="followersLabel" destination="Crj-JX-axo" id="pN4-TS-Px9"/>
+                <outlet property="followingLabel" destination="9AZ-8G-6yg" id="4yw-Vs-WFu"/>
+                <outlet property="handleLabel" destination="HZV-r0-vgb" id="HUc-50-qev"/>
+                <outlet property="nameLabel" destination="381-BJ-nL2" id="GUh-jK-mC3"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="-60.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

@@ -1,0 +1,1574 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4E387C561DAEAB350087820E /* BrickAppearBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9B4D11DAD686E00927BE6 /* BrickAppearBehavior.swift */; };
+		4E387C571DAEAB380087820E /* BrickAppearBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9B4D31DAD690400927BE6 /* BrickAppearBehaviorTests.swift */; };
+		4E3BD8E21DB5190100541900 /* DummyFocusableBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD8E01DB5190100541900 /* DummyFocusableBrick.swift */; };
+		4E3BD8E41DB51A9700541900 /* DummyFocusableBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8E31DB51A9700541900 /* DummyFocusableBrick.xib */; };
+		4E9A250C1DABEB3400D7EA99 /* BrickKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E9A25031DABEB3400D7EA99 /* BrickKit.framework */; };
+		4E9A251A1DABEB5200D7EA99 /* BrickKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 93D9EBBD1DA4057000D8C87A /* BrickKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4E9A251C1DABEB6000D7EA99 /* BrickLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBAF1DA4057000D8C87A /* BrickLayoutBehavior.swift */; };
+		4E9A251D1DABEB6000D7EA99 /* CardLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB01DA4057000D8C87A /* CardLayoutBehavior.swift */; };
+		4E9A251E1DABEB6000D7EA99 /* CoverFlowLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB11DA4057000D8C87A /* CoverFlowLayoutBehavior.swift */; };
+		4E9A25201DABEB6000D7EA99 /* MaxZIndexLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB41DA4057000D8C87A /* MaxZIndexLayoutBehavior.swift */; };
+		4E9A25211DABEB6000D7EA99 /* MinimumStickyLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB51DA4057000D8C87A /* MinimumStickyLayoutBehavior.swift */; };
+		4E9A25221DABEB6000D7EA99 /* OffsetLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB61DA4057000D8C87A /* OffsetLayoutBehavior.swift */; };
+		4E9A25231DABEB6000D7EA99 /* OnScrollDownStickyLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB71DA4057000D8C87A /* OnScrollDownStickyLayoutBehavior.swift */; };
+		4E9A25241DABEB6000D7EA99 /* SetZIndexLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB81DA4057000D8C87A /* SetZIndexLayoutBehavior.swift */; };
+		4E9A25251DABEB6000D7EA99 /* SnapToPointLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB91DA4057000D8C87A /* SnapToPointLayoutBehavior.swift */; };
+		4E9A25261DABEB6000D7EA99 /* SpotlightLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBBA1DA4057000D8C87A /* SpotlightLayoutBehavior.swift */; };
+		4E9A25271DABEB6000D7EA99 /* StickyFooterLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBBB1DA4057000D8C87A /* StickyFooterLayoutBehavior.swift */; };
+		4E9A25281DABEB6000D7EA99 /* StickyLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBBC1DA4057000D8C87A /* StickyLayoutBehavior.swift */; };
+		4E9A25291DABEB6500D7EA99 /* ButtonBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93739BB41DA454AB00DD4B81 /* ButtonBrick.swift */; };
+		4E9A252A1DABEB6900D7EA99 /* CollectionBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93739BAE1DA454AB00DD4B81 /* CollectionBrick.swift */; };
+		4E9A252B1DABEB6F00D7EA99 /* ImageBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93739BB21DA454AB00DD4B81 /* ImageBrick.swift */; };
+		4E9A252C1DABEB7700D7EA99 /* LabelBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93739BB01DA454AB00DD4B81 /* LabelBrick.swift */; };
+		4E9A252D1DABEB8200D7EA99 /* BrickCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBCE1DA4057000D8C87A /* BrickCell.swift */; };
+		4E9A252E1DABEB8200D7EA99 /* BrickSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBCF1DA4057000D8C87A /* BrickSectionCell.swift */; };
+		4E9A252F1DABEB8200D7EA99 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBD21DA4057000D8C87A /* ImageDownloader.swift */; };
+		4E9A25301DABEB8800D7EA99 /* BrickFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBD51DA4057000D8C87A /* BrickFlowLayout.swift */; };
+		4E9A25311DABEB8800D7EA99 /* BrickLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBD61DA4057000D8C87A /* BrickLayout.swift */; };
+		4E9A25321DABEB8800D7EA99 /* BrickLayoutInvalidationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBD71DA4057000D8C87A /* BrickLayoutInvalidationContext.swift */; };
+		4E9A25331DABEB8800D7EA99 /* BrickLayoutSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBD81DA4057000D8C87A /* BrickLayoutSection.swift */; };
+		4E9A25341DABEB8800D7EA99 /* BrickZones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBD91DA4057000D8C87A /* BrickZones.swift */; };
+		4E9A25351DABEB8D00D7EA99 /* BrickCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBDB1DA4057000D8C87A /* BrickCollectionViewDataSource.swift */; };
+		4E9A25361DABEB8D00D7EA99 /* BrickDimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBDC1DA4057000D8C87A /* BrickDimension.swift */; };
+		4E9A25371DABEB8D00D7EA99 /* BrickModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBDD1DA4057000D8C87A /* BrickModels.swift */; };
+		4E9A25381DABEB8D00D7EA99 /* BrickProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBDE1DA4057000D8C87A /* BrickProtocols.swift */; };
+		4E9A25391DABEB8D00D7EA99 /* BrickSectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBDF1DA4057000D8C87A /* BrickSectionDataSource.swift */; };
+		4E9A253A1DABEB8D00D7EA99 /* CollectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9350F0D51DA82A430051235F /* CollectionInfo.swift */; };
+		4E9A253B1DABEB9300D7EA99 /* BrickExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBE11DA4057000D8C87A /* BrickExtensions.swift */; };
+		4E9A253C1DABEB9300D7EA99 /* BrickUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBE21DA4057000D8C87A /* BrickUtils.swift */; };
+		4E9A253D1DABEB9300D7EA99 /* FatalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBE31DA4057000D8C87A /* FatalError.swift */; };
+		4E9A253E1DABEB9800D7EA99 /* BrickCollectionView+BrickLayoutDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBE51DA4057000D8C87A /* BrickCollectionView+BrickLayoutDataSource.swift */; };
+		4E9A253F1DABEB9800D7EA99 /* BrickCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBE61DA4057000D8C87A /* BrickCollectionView.swift */; };
+		4E9A25401DABEB9800D7EA99 /* BrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBE71DA4057000D8C87A /* BrickViewController.swift */; };
+		4E9A25421DABECDA00D7EA99 /* BrickKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC251DA4057900D8C87A /* BrickKitTests.swift */; };
+		4E9A25431DABECDF00D7EA99 /* SetZIndexBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930054011DA7242800239A13 /* SetZIndexBehaviorTests.swift */; };
+		4E9A25441DABECDF00D7EA99 /* CardLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC1A1DA4057900D8C87A /* CardLayoutBehaviorTests.swift */; };
+		4E9A25451DABECDF00D7EA99 /* HideLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC1C1DA4057900D8C87A /* HideLayoutBehaviorTests.swift */; };
+		4E9A25461DABECDF00D7EA99 /* MaxZIndexBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC1D1DA4057900D8C87A /* MaxZIndexBehaviorTests.swift */; };
+		4E9A25471DABECDF00D7EA99 /* MinimumStickyLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC1E1DA4057900D8C87A /* MinimumStickyLayoutBehaviorTests.swift */; };
+		4E9A25481DABECDF00D7EA99 /* OffsetLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC1F1DA4057900D8C87A /* OffsetLayoutBehaviorTests.swift */; };
+		4E9A25491DABECDF00D7EA99 /* OnScrollDownStickyLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC201DA4057900D8C87A /* OnScrollDownStickyLayoutBehaviorTests.swift */; };
+		4E9A254A1DABECDF00D7EA99 /* SnapToPointLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC211DA4057900D8C87A /* SnapToPointLayoutBehaviorTests.swift */; };
+		4E9A254B1DABECDF00D7EA99 /* SpotlightLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC221DA4057900D8C87A /* SpotlightLayoutBehaviorTests.swift */; };
+		4E9A254C1DABECDF00D7EA99 /* StickyFooterLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC231DA4057900D8C87A /* StickyFooterLayoutBehaviorTests.swift */; };
+		4E9A254D1DABECDF00D7EA99 /* StickyLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC241DA4057900D8C87A /* StickyLayoutBehaviorTests.swift */; };
+		4E9A254E1DABECE300D7EA99 /* CollectionBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E7F9861DA5A22B000BE1AE /* CollectionBrickTests.swift */; };
+		4E9A254F1DABECE300D7EA99 /* LabelBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC271DA4057900D8C87A /* LabelBrickTests.swift */; };
+		4E9A25501DABECE300D7EA99 /* ImageBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93902D3A1DA4728C00BC3BA1 /* ImageBrickTests.swift */; };
+		4E9A25511DABECE300D7EA99 /* ButtonBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9303A6D41DA6E00100502803 /* ButtonBrickTests.swift */; };
+		4E9A25521DABECF000D7EA99 /* InteractiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC371DA4057900D8C87A /* InteractiveTests.swift */; };
+		4E9A25531DABECF500D7EA99 /* AlignRowHeightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC391DA4057900D8C87A /* AlignRowHeightTests.swift */; };
+		4E9A25541DABECF500D7EA99 /* BrickAttributesZoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC3A1DA4057900D8C87A /* BrickAttributesZoneTests.swift */; };
+		4E9A25551DABECF500D7EA99 /* BrickFlowLayoutBaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC3B1DA4057900D8C87A /* BrickFlowLayoutBaseTests.swift */; };
+		4E9A25561DABECF500D7EA99 /* BrickFlowLayoutEdgeInsetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC3C1DA4057900D8C87A /* BrickFlowLayoutEdgeInsetsTests.swift */; };
+		4E9A25571DABECF500D7EA99 /* BrickFlowLayoutSectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC3D1DA4057900D8C87A /* BrickFlowLayoutSectionTests.swift */; };
+		4E9A25581DABECF500D7EA99 /* BrickFlowLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC3E1DA4057900D8C87A /* BrickFlowLayoutTests.swift */; };
+		4E9A25591DABECF500D7EA99 /* BrickFlowLayoutZIndexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC3F1DA4057900D8C87A /* BrickFlowLayoutZIndexTests.swift */; };
+		4E9A255A1DABECF500D7EA99 /* BrickInvalidationContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC401DA4057900D8C87A /* BrickInvalidationContextTests.swift */; };
+		4E9A255B1DABECF500D7EA99 /* BrickLayoutSectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC411DA4057900D8C87A /* BrickLayoutSectionTests.swift */; };
+		4E9A255C1DABECF500D7EA99 /* BrickSelfsizingFlowLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC421DA4057900D8C87A /* BrickSelfsizingFlowLayoutTests.swift */; };
+		4E9A255D1DABECFB00D7EA99 /* BrickCollectionViewDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC441DA4057900D8C87A /* BrickCollectionViewDataSourceTests.swift */; };
+		4E9A255E1DABECFB00D7EA99 /* BrickDimensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC451DA4057900D8C87A /* BrickDimensionTests.swift */; };
+		4E9A255F1DABECFB00D7EA99 /* BrickModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC461DA4057900D8C87A /* BrickModelsTests.swift */; };
+		4E9A25601DABECFB00D7EA99 /* BrickSectionDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC471DA4057900D8C87A /* BrickSectionDataSourceTests.swift */; };
+		4E9A25611DABECFF00D7EA99 /* Behaviors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC491DA4057900D8C87A /* Behaviors.swift */; };
+		4E9A25621DABECFF00D7EA99 /* BrickExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC4A1DA4057900D8C87A /* BrickExtensionsTests.swift */; };
+		4E9A25631DABECFF00D7EA99 /* BrickUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC4B1DA4057900D8C87A /* BrickUtilsTests.swift */; };
+		4E9A25641DABECFF00D7EA99 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC4C1DA4057900D8C87A /* CollectionViewDataSource.swift */; };
+		4E9A25651DABECFF00D7EA99 /* DataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC4D1DA4057900D8C87A /* DataSources.swift */; };
+		4E9A25661DABECFF00D7EA99 /* FatalErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9372C5061DA40735007D7EA1 /* FatalErrorTests.swift */; };
+		4E9A25671DABECFF00D7EA99 /* XCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC4E1DA4057900D8C87A /* XCTests.swift */; };
+		4E9A25681DABED0600D7EA99 /* BrickCollectionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC501DA4057900D8C87A /* BrickCollectionViewTests.swift */; };
+		4E9A25691DABED0600D7EA99 /* BrickViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC511DA4057900D8C87A /* BrickViewControllerTests.swift */; };
+		4E9A256A1DABED0600D7EA99 /* TestBrickViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93D9EC521DA4057900D8C87A /* TestBrickViewController.storyboard */; };
+		4E9A256B1DABED0600D7EA99 /* TestBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC531DA4057900D8C87A /* TestBrickViewController.swift */; };
+		4E9A256C1DABED0600D7EA99 /* TestBrickViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93D9EC541DA4057900D8C87A /* TestBrickViewController.xib */; };
+		4E9A257E1DAC0EAB00D7EA99 /* BrickKit.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25701DAC0EAB00D7EA99 /* BrickKit.xcassets */; };
+		4E9A257F1DAC0EAB00D7EA99 /* ButtonBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25731DAC0EAB00D7EA99 /* ButtonBrick.xib */; };
+		4E9A25801DAC0EAB00D7EA99 /* ButtonBrickWithChevron.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25741DAC0EAB00D7EA99 /* ButtonBrickWithChevron.xib */; };
+		4E9A25811DAC0EAB00D7EA99 /* CollectionBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25761DAC0EAB00D7EA99 /* CollectionBrick.xib */; };
+		4E9A25821DAC0EAB00D7EA99 /* ImageBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25781DAC0EAB00D7EA99 /* ImageBrick.xib */; };
+		4E9A25831DAC0EAB00D7EA99 /* LabelBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A257A1DAC0EAB00D7EA99 /* LabelBrick.xib */; };
+		4E9A25841DAC0EAB00D7EA99 /* LabelBrickButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A257B1DAC0EAB00D7EA99 /* LabelBrickButton.xib */; };
+		4E9A25851DAC0EAB00D7EA99 /* LabelBrickChevron.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A257C1DAC0EAB00D7EA99 /* LabelBrickChevron.xib */; };
+		4E9A25861DAC0EAB00D7EA99 /* LabelBrickImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A257D1DAC0EAB00D7EA99 /* LabelBrickImage.xib */; };
+		4E9A25AC1DAC216A00D7EA99 /* BrickKit.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A259E1DAC216A00D7EA99 /* BrickKit.xcassets */; };
+		4E9A25B61DAC21C200D7EA99 /* ButtonBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25B51DAC21C200D7EA99 /* ButtonBrick.xib */; };
+		4E9A25B81DAC222D00D7EA99 /* ButtonBrickWithChevron.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25B71DAC222D00D7EA99 /* ButtonBrickWithChevron.xib */; };
+		4E9A25BA1DAC22E300D7EA99 /* CollectionBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25B91DAC22E300D7EA99 /* CollectionBrick.xib */; };
+		4E9A25BC1DAC252200D7EA99 /* ImageBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25BB1DAC252200D7EA99 /* ImageBrick.xib */; };
+		4E9A25BE1DAC26F000D7EA99 /* LabelBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25BD1DAC26F000D7EA99 /* LabelBrick.xib */; };
+		4E9A25C01DAC27CE00D7EA99 /* LabelBrickButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25BF1DAC27CE00D7EA99 /* LabelBrickButton.xib */; };
+		4E9A25C21DAC28D000D7EA99 /* LabelBrickChevron.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25C11DAC28D000D7EA99 /* LabelBrickChevron.xib */; };
+		4E9A25C41DAC298300D7EA99 /* LabelBrickImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25C31DAC298300D7EA99 /* LabelBrickImage.xib */; };
+		4E9A25E01DAC2AF400D7EA99 /* AsynchronousResizableBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC291DA4057900D8C87A /* AsynchronousResizableBrick.swift */; };
+		4E9A25E11DAC2AF400D7EA99 /* AsynchronousResizableCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC2B1DA4057900D8C87A /* AsynchronousResizableCellTests.swift */; };
+		4E9A25E21DAC2AF400D7EA99 /* DummyBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC2C1DA4057900D8C87A /* DummyBrick.swift */; };
+		4E9A25E31DAC2AF400D7EA99 /* DummyBrickWithoutNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC301DA4057900D8C87A /* DummyBrickWithoutNib.swift */; };
+		4E9A25E41DAC2AF400D7EA99 /* ImageDownloaderBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC311DA4057900D8C87A /* ImageDownloaderBrick.swift */; };
+		4E9A25E51DAC2AF400D7EA99 /* ImageDownloaderCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC331DA4057900D8C87A /* ImageDownloaderCellTests.swift */; };
+		4E9A25E61DAC2AF400D7EA99 /* BaseBrickCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930054041DA7D8A000239A13 /* BaseBrickCellTests.swift */; };
+		4E9A25FC1DAC312F00D7EA99 /* ImageDownloaderBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25F01DAC2E3600D7EA99 /* ImageDownloaderBrick.xib */; };
+		4E9A25FD1DAC312F00D7EA99 /* AsynchronousResizableBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25E71DAC2B0A00D7EA99 /* AsynchronousResizableBrick.xib */; };
+		4E9A25FE1DAC312F00D7EA99 /* DummyBrick100.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25EA1DAC2C0000D7EA99 /* DummyBrick100.xib */; };
+		4E9A25FF1DAC312F00D7EA99 /* DummyBrick150.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25EC1DAC2CDB00D7EA99 /* DummyBrick150.xib */; };
+		4E9A26011DAC312F00D7EA99 /* DummyBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25EE1DAC2D7500D7EA99 /* DummyBrick.xib */; };
+		4E9A26021DAC31A300D7EA99 /* image0.png in Resources */ = {isa = PBXBuildFile; fileRef = 93902D381DA4726900BC3BA1 /* image0.png */; };
+		4E9A26051DAD323400D7EA99 /* LabelWithEdgeInsets.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25F21DAC2E8D00D7EA99 /* LabelWithEdgeInsets.xib */; };
+		4E9A260C1DAD33F800D7EA99 /* AsynchronousResizableBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25C71DAC2ADF00D7EA99 /* AsynchronousResizableBrick.xib */; };
+		4E9A260D1DAD33F800D7EA99 /* DummyBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25C81DAC2ADF00D7EA99 /* DummyBrick.xib */; };
+		4E9A260E1DAD33F800D7EA99 /* DummyBrick100.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25C91DAC2ADF00D7EA99 /* DummyBrick100.xib */; };
+		4E9A260F1DAD33F800D7EA99 /* DummyBrick150.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25CA1DAC2ADF00D7EA99 /* DummyBrick150.xib */; };
+		4E9A26101DAD33F800D7EA99 /* ImageDownloaderBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25CB1DAC2ADF00D7EA99 /* ImageDownloaderBrick.xib */; };
+		4E9A26111DAD33F800D7EA99 /* LabelWithEdgeInsets.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25CC1DAC2ADF00D7EA99 /* LabelWithEdgeInsets.xib */; };
+		930054031DA724AD00239A13 /* SetZIndexBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930054011DA7242800239A13 /* SetZIndexBehaviorTests.swift */; };
+		930054051DA7D8A000239A13 /* BaseBrickCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930054041DA7D8A000239A13 /* BaseBrickCellTests.swift */; };
+		9303A6D51DA6E00100502803 /* ButtonBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9303A6D41DA6E00100502803 /* ButtonBrickTests.swift */; };
+		9350F0D61DA82A430051235F /* CollectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9350F0D51DA82A430051235F /* CollectionInfo.swift */; };
+		9361309B1DB83CB7008FFFEF /* CustomBrickCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D48D51DB806990091AA39 /* CustomBrickCollectionView.swift */; };
+		9361309C1DB83CB8008FFFEF /* CustomBrickCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D48D51DB806990091AA39 /* CustomBrickCollectionView.swift */; };
+		9372C5081DA4073D007D7EA1 /* FatalErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9372C5061DA40735007D7EA1 /* FatalErrorTests.swift */; };
+		93739BB51DA454AB00DD4B81 /* CollectionBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93739BAE1DA454AB00DD4B81 /* CollectionBrick.swift */; };
+		93739BB61DA454AB00DD4B81 /* LabelBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93739BB01DA454AB00DD4B81 /* LabelBrick.swift */; };
+		93739BB71DA454AB00DD4B81 /* ImageBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93739BB21DA454AB00DD4B81 /* ImageBrick.swift */; };
+		93739BB81DA454AB00DD4B81 /* ButtonBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93739BB41DA454AB00DD4B81 /* ButtonBrick.swift */; };
+		93902D391DA4726900BC3BA1 /* image0.png in Resources */ = {isa = PBXBuildFile; fileRef = 93902D381DA4726900BC3BA1 /* image0.png */; };
+		93902D3B1DA4728C00BC3BA1 /* ImageBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93902D3A1DA4728C00BC3BA1 /* ImageBrickTests.swift */; };
+		93D9EB9D1DA4051B00D8C87A /* BrickKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D9EB931DA4051B00D8C87A /* BrickKit.framework */; };
+		93D9EBE81DA4057000D8C87A /* BrickLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBAF1DA4057000D8C87A /* BrickLayoutBehavior.swift */; };
+		93D9EBE91DA4057000D8C87A /* CardLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB01DA4057000D8C87A /* CardLayoutBehavior.swift */; };
+		93D9EBEA1DA4057000D8C87A /* CoverFlowLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB11DA4057000D8C87A /* CoverFlowLayoutBehavior.swift */; };
+		93D9EBED1DA4057000D8C87A /* MaxZIndexLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB41DA4057000D8C87A /* MaxZIndexLayoutBehavior.swift */; };
+		93D9EBEE1DA4057000D8C87A /* MinimumStickyLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB51DA4057000D8C87A /* MinimumStickyLayoutBehavior.swift */; };
+		93D9EBEF1DA4057000D8C87A /* OffsetLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB61DA4057000D8C87A /* OffsetLayoutBehavior.swift */; };
+		93D9EBF01DA4057000D8C87A /* OnScrollDownStickyLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB71DA4057000D8C87A /* OnScrollDownStickyLayoutBehavior.swift */; };
+		93D9EBF11DA4057000D8C87A /* SetZIndexLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB81DA4057000D8C87A /* SetZIndexLayoutBehavior.swift */; };
+		93D9EBF21DA4057000D8C87A /* SnapToPointLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB91DA4057000D8C87A /* SnapToPointLayoutBehavior.swift */; };
+		93D9EBF31DA4057000D8C87A /* SpotlightLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBBA1DA4057000D8C87A /* SpotlightLayoutBehavior.swift */; };
+		93D9EBF41DA4057000D8C87A /* StickyFooterLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBBB1DA4057000D8C87A /* StickyFooterLayoutBehavior.swift */; };
+		93D9EBF51DA4057000D8C87A /* StickyLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBBC1DA4057000D8C87A /* StickyLayoutBehavior.swift */; };
+		93D9EBF61DA4057000D8C87A /* BrickKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 93D9EBBD1DA4057000D8C87A /* BrickKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		93D9EC021DA4057000D8C87A /* BrickCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBCE1DA4057000D8C87A /* BrickCell.swift */; };
+		93D9EC031DA4057000D8C87A /* BrickSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBCF1DA4057000D8C87A /* BrickSectionCell.swift */; };
+		93D9EC061DA4057000D8C87A /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBD21DA4057000D8C87A /* ImageDownloader.swift */; };
+		93D9EC081DA4057000D8C87A /* BrickFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBD51DA4057000D8C87A /* BrickFlowLayout.swift */; };
+		93D9EC091DA4057000D8C87A /* BrickLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBD61DA4057000D8C87A /* BrickLayout.swift */; };
+		93D9EC0A1DA4057000D8C87A /* BrickLayoutInvalidationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBD71DA4057000D8C87A /* BrickLayoutInvalidationContext.swift */; };
+		93D9EC0B1DA4057000D8C87A /* BrickLayoutSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBD81DA4057000D8C87A /* BrickLayoutSection.swift */; };
+		93D9EC0C1DA4057000D8C87A /* BrickZones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBD91DA4057000D8C87A /* BrickZones.swift */; };
+		93D9EC0D1DA4057000D8C87A /* BrickCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBDB1DA4057000D8C87A /* BrickCollectionViewDataSource.swift */; };
+		93D9EC0E1DA4057000D8C87A /* BrickDimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBDC1DA4057000D8C87A /* BrickDimension.swift */; };
+		93D9EC0F1DA4057000D8C87A /* BrickModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBDD1DA4057000D8C87A /* BrickModels.swift */; };
+		93D9EC101DA4057000D8C87A /* BrickProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBDE1DA4057000D8C87A /* BrickProtocols.swift */; };
+		93D9EC111DA4057000D8C87A /* BrickSectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBDF1DA4057000D8C87A /* BrickSectionDataSource.swift */; };
+		93D9EC121DA4057000D8C87A /* BrickExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBE11DA4057000D8C87A /* BrickExtensions.swift */; };
+		93D9EC131DA4057000D8C87A /* BrickUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBE21DA4057000D8C87A /* BrickUtils.swift */; };
+		93D9EC141DA4057000D8C87A /* FatalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBE31DA4057000D8C87A /* FatalError.swift */; };
+		93D9EC151DA4057000D8C87A /* BrickCollectionView+BrickLayoutDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBE51DA4057000D8C87A /* BrickCollectionView+BrickLayoutDataSource.swift */; };
+		93D9EC161DA4057000D8C87A /* BrickCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBE61DA4057000D8C87A /* BrickCollectionView.swift */; };
+		93D9EC171DA4057000D8C87A /* BrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBE71DA4057000D8C87A /* BrickViewController.swift */; };
+		93D9EC551DA4057900D8C87A /* CardLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC1A1DA4057900D8C87A /* CardLayoutBehaviorTests.swift */; };
+		93D9EC571DA4057900D8C87A /* HideLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC1C1DA4057900D8C87A /* HideLayoutBehaviorTests.swift */; };
+		93D9EC581DA4057900D8C87A /* MaxZIndexBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC1D1DA4057900D8C87A /* MaxZIndexBehaviorTests.swift */; };
+		93D9EC591DA4057900D8C87A /* MinimumStickyLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC1E1DA4057900D8C87A /* MinimumStickyLayoutBehaviorTests.swift */; };
+		93D9EC5A1DA4057900D8C87A /* OffsetLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC1F1DA4057900D8C87A /* OffsetLayoutBehaviorTests.swift */; };
+		93D9EC5B1DA4057900D8C87A /* OnScrollDownStickyLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC201DA4057900D8C87A /* OnScrollDownStickyLayoutBehaviorTests.swift */; };
+		93D9EC5C1DA4057900D8C87A /* SnapToPointLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC211DA4057900D8C87A /* SnapToPointLayoutBehaviorTests.swift */; };
+		93D9EC5D1DA4057900D8C87A /* SpotlightLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC221DA4057900D8C87A /* SpotlightLayoutBehaviorTests.swift */; };
+		93D9EC5E1DA4057900D8C87A /* StickyFooterLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC231DA4057900D8C87A /* StickyFooterLayoutBehaviorTests.swift */; };
+		93D9EC5F1DA4057900D8C87A /* StickyLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC241DA4057900D8C87A /* StickyLayoutBehaviorTests.swift */; };
+		93D9EC601DA4057900D8C87A /* BrickKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC251DA4057900D8C87A /* BrickKitTests.swift */; };
+		93D9EC611DA4057900D8C87A /* LabelBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC271DA4057900D8C87A /* LabelBrickTests.swift */; };
+		93D9EC621DA4057900D8C87A /* AsynchronousResizableBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC291DA4057900D8C87A /* AsynchronousResizableBrick.swift */; };
+		93D9EC641DA4057900D8C87A /* AsynchronousResizableCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC2B1DA4057900D8C87A /* AsynchronousResizableCellTests.swift */; };
+		93D9EC651DA4057900D8C87A /* DummyBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC2C1DA4057900D8C87A /* DummyBrick.swift */; };
+		93D9EC691DA4057900D8C87A /* DummyBrickWithoutNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC301DA4057900D8C87A /* DummyBrickWithoutNib.swift */; };
+		93D9EC6A1DA4057900D8C87A /* ImageDownloaderBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC311DA4057900D8C87A /* ImageDownloaderBrick.swift */; };
+		93D9EC6C1DA4057900D8C87A /* ImageDownloaderCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC331DA4057900D8C87A /* ImageDownloaderCellTests.swift */; };
+		93D9EC6F1DA4057900D8C87A /* InteractiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC371DA4057900D8C87A /* InteractiveTests.swift */; };
+		93D9EC701DA4057900D8C87A /* AlignRowHeightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC391DA4057900D8C87A /* AlignRowHeightTests.swift */; };
+		93D9EC711DA4057900D8C87A /* BrickAttributesZoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC3A1DA4057900D8C87A /* BrickAttributesZoneTests.swift */; };
+		93D9EC721DA4057900D8C87A /* BrickFlowLayoutBaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC3B1DA4057900D8C87A /* BrickFlowLayoutBaseTests.swift */; };
+		93D9EC731DA4057900D8C87A /* BrickFlowLayoutEdgeInsetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC3C1DA4057900D8C87A /* BrickFlowLayoutEdgeInsetsTests.swift */; };
+		93D9EC741DA4057900D8C87A /* BrickFlowLayoutSectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC3D1DA4057900D8C87A /* BrickFlowLayoutSectionTests.swift */; };
+		93D9EC751DA4057900D8C87A /* BrickFlowLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC3E1DA4057900D8C87A /* BrickFlowLayoutTests.swift */; };
+		93D9EC761DA4057900D8C87A /* BrickFlowLayoutZIndexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC3F1DA4057900D8C87A /* BrickFlowLayoutZIndexTests.swift */; };
+		93D9EC771DA4057900D8C87A /* BrickInvalidationContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC401DA4057900D8C87A /* BrickInvalidationContextTests.swift */; };
+		93D9EC781DA4057900D8C87A /* BrickLayoutSectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC411DA4057900D8C87A /* BrickLayoutSectionTests.swift */; };
+		93D9EC791DA4057900D8C87A /* BrickSelfsizingFlowLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC421DA4057900D8C87A /* BrickSelfsizingFlowLayoutTests.swift */; };
+		93D9EC7A1DA4057900D8C87A /* BrickCollectionViewDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC441DA4057900D8C87A /* BrickCollectionViewDataSourceTests.swift */; };
+		93D9EC7B1DA4057900D8C87A /* BrickDimensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC451DA4057900D8C87A /* BrickDimensionTests.swift */; };
+		93D9EC7C1DA4057900D8C87A /* BrickModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC461DA4057900D8C87A /* BrickModelsTests.swift */; };
+		93D9EC7D1DA4057900D8C87A /* BrickSectionDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC471DA4057900D8C87A /* BrickSectionDataSourceTests.swift */; };
+		93D9EC7E1DA4057900D8C87A /* Behaviors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC491DA4057900D8C87A /* Behaviors.swift */; };
+		93D9EC7F1DA4057900D8C87A /* BrickExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC4A1DA4057900D8C87A /* BrickExtensionsTests.swift */; };
+		93D9EC801DA4057900D8C87A /* BrickUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC4B1DA4057900D8C87A /* BrickUtilsTests.swift */; };
+		93D9EC811DA4057900D8C87A /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC4C1DA4057900D8C87A /* CollectionViewDataSource.swift */; };
+		93D9EC821DA4057900D8C87A /* DataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC4D1DA4057900D8C87A /* DataSources.swift */; };
+		93D9EC831DA4057900D8C87A /* XCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC4E1DA4057900D8C87A /* XCTests.swift */; };
+		93D9EC841DA4057900D8C87A /* BrickCollectionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC501DA4057900D8C87A /* BrickCollectionViewTests.swift */; };
+		93D9EC851DA4057900D8C87A /* BrickViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC511DA4057900D8C87A /* BrickViewControllerTests.swift */; };
+		93D9EC861DA4057900D8C87A /* TestBrickViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93D9EC521DA4057900D8C87A /* TestBrickViewController.storyboard */; };
+		93D9EC871DA4057900D8C87A /* TestBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC531DA4057900D8C87A /* TestBrickViewController.swift */; };
+		93D9EC881DA4057900D8C87A /* TestBrickViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93D9EC541DA4057900D8C87A /* TestBrickViewController.xib */; };
+		93E435EE1DB6CB51007C159B /* CoverFlowLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8FFEA1DAD3F4A00A913E9 /* CoverFlowLayoutBehaviorTests.swift */; };
+		93E7F9881DA5A230000BE1AE /* CollectionBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E7F9861DA5A22B000BE1AE /* CollectionBrickTests.swift */; };
+		93F9B4D21DAD686E00927BE6 /* BrickAppearBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9B4D11DAD686E00927BE6 /* BrickAppearBehavior.swift */; };
+		93F9B4D41DAD690400927BE6 /* BrickAppearBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9B4D31DAD690400927BE6 /* BrickAppearBehaviorTests.swift */; };
+		B8B8FFEB1DAD3F4A00A913E9 /* CoverFlowLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8FFEA1DAD3F4A00A913E9 /* CoverFlowLayoutBehaviorTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4E9A250D1DABEB3400D7EA99 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93D9EB8A1DA4051B00D8C87A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4E9A25021DABEB3400D7EA99;
+			remoteInfo = "Brickkit-tvOS";
+		};
+		93D9EB9E1DA4051B00D8C87A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93D9EB8A1DA4051B00D8C87A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 93D9EB921DA4051B00D8C87A;
+			remoteInfo = BrickKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4E3BD8E01DB5190100541900 /* DummyFocusableBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyFocusableBrick.swift; sourceTree = "<group>"; };
+		4E3BD8E31DB51A9700541900 /* DummyFocusableBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DummyFocusableBrick.xib; sourceTree = "<group>"; };
+		4E9A25031DABEB3400D7EA99 /* BrickKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BrickKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E9A250B1DABEB3400D7EA99 /* BrickKit-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BrickKit-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E9A25701DAC0EAB00D7EA99 /* BrickKit.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = BrickKit.xcassets; sourceTree = "<group>"; };
+		4E9A25731DAC0EAB00D7EA99 /* ButtonBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonBrick.xib; sourceTree = "<group>"; };
+		4E9A25741DAC0EAB00D7EA99 /* ButtonBrickWithChevron.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonBrickWithChevron.xib; sourceTree = "<group>"; };
+		4E9A25761DAC0EAB00D7EA99 /* CollectionBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionBrick.xib; sourceTree = "<group>"; };
+		4E9A25781DAC0EAB00D7EA99 /* ImageBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageBrick.xib; sourceTree = "<group>"; };
+		4E9A257A1DAC0EAB00D7EA99 /* LabelBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBrick.xib; sourceTree = "<group>"; };
+		4E9A257B1DAC0EAB00D7EA99 /* LabelBrickButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBrickButton.xib; sourceTree = "<group>"; };
+		4E9A257C1DAC0EAB00D7EA99 /* LabelBrickChevron.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBrickChevron.xib; sourceTree = "<group>"; };
+		4E9A257D1DAC0EAB00D7EA99 /* LabelBrickImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBrickImage.xib; sourceTree = "<group>"; };
+		4E9A259E1DAC216A00D7EA99 /* BrickKit.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = BrickKit.xcassets; sourceTree = "<group>"; };
+		4E9A25B51DAC21C200D7EA99 /* ButtonBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonBrick.xib; sourceTree = "<group>"; };
+		4E9A25B71DAC222D00D7EA99 /* ButtonBrickWithChevron.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonBrickWithChevron.xib; sourceTree = "<group>"; };
+		4E9A25B91DAC22E300D7EA99 /* CollectionBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionBrick.xib; sourceTree = "<group>"; };
+		4E9A25BB1DAC252200D7EA99 /* ImageBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageBrick.xib; sourceTree = "<group>"; };
+		4E9A25BD1DAC26F000D7EA99 /* LabelBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBrick.xib; sourceTree = "<group>"; };
+		4E9A25BF1DAC27CE00D7EA99 /* LabelBrickButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBrickButton.xib; sourceTree = "<group>"; };
+		4E9A25C11DAC28D000D7EA99 /* LabelBrickChevron.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBrickChevron.xib; sourceTree = "<group>"; };
+		4E9A25C31DAC298300D7EA99 /* LabelBrickImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBrickImage.xib; sourceTree = "<group>"; };
+		4E9A25C71DAC2ADF00D7EA99 /* AsynchronousResizableBrick.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AsynchronousResizableBrick.xib; sourceTree = "<group>"; };
+		4E9A25C81DAC2ADF00D7EA99 /* DummyBrick.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DummyBrick.xib; sourceTree = "<group>"; };
+		4E9A25C91DAC2ADF00D7EA99 /* DummyBrick100.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DummyBrick100.xib; sourceTree = "<group>"; };
+		4E9A25CA1DAC2ADF00D7EA99 /* DummyBrick150.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DummyBrick150.xib; sourceTree = "<group>"; };
+		4E9A25CB1DAC2ADF00D7EA99 /* ImageDownloaderBrick.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageDownloaderBrick.xib; sourceTree = "<group>"; };
+		4E9A25CC1DAC2ADF00D7EA99 /* LabelWithEdgeInsets.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LabelWithEdgeInsets.xib; sourceTree = "<group>"; };
+		4E9A25E71DAC2B0A00D7EA99 /* AsynchronousResizableBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AsynchronousResizableBrick.xib; sourceTree = "<group>"; };
+		4E9A25EA1DAC2C0000D7EA99 /* DummyBrick100.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DummyBrick100.xib; sourceTree = "<group>"; };
+		4E9A25EC1DAC2CDB00D7EA99 /* DummyBrick150.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DummyBrick150.xib; sourceTree = "<group>"; };
+		4E9A25EE1DAC2D7500D7EA99 /* DummyBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DummyBrick.xib; sourceTree = "<group>"; };
+		4E9A25F01DAC2E3600D7EA99 /* ImageDownloaderBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageDownloaderBrick.xib; sourceTree = "<group>"; };
+		4E9A25F21DAC2E8D00D7EA99 /* LabelWithEdgeInsets.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelWithEdgeInsets.xib; sourceTree = "<group>"; };
+		930054011DA7242800239A13 /* SetZIndexBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetZIndexBehaviorTests.swift; sourceTree = "<group>"; };
+		930054041DA7D8A000239A13 /* BaseBrickCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseBrickCellTests.swift; sourceTree = "<group>"; };
+		9303A6D41DA6E00100502803 /* ButtonBrickTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonBrickTests.swift; sourceTree = "<group>"; };
+		9350F0D51DA82A430051235F /* CollectionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionInfo.swift; sourceTree = "<group>"; };
+		935D48D51DB806990091AA39 /* CustomBrickCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBrickCollectionView.swift; sourceTree = "<group>"; };
+		9372C5061DA40735007D7EA1 /* FatalErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FatalErrorTests.swift; sourceTree = "<group>"; };
+		93739BAE1DA454AB00DD4B81 /* CollectionBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionBrick.swift; sourceTree = "<group>"; };
+		93739BB01DA454AB00DD4B81 /* LabelBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelBrick.swift; sourceTree = "<group>"; };
+		93739BB21DA454AB00DD4B81 /* ImageBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBrick.swift; sourceTree = "<group>"; };
+		93739BB41DA454AB00DD4B81 /* ButtonBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonBrick.swift; sourceTree = "<group>"; };
+		93902D381DA4726900BC3BA1 /* image0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image0.png; sourceTree = "<group>"; };
+		93902D3A1DA4728C00BC3BA1 /* ImageBrickTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBrickTests.swift; sourceTree = "<group>"; };
+		93D9EB931DA4051B00D8C87A /* BrickKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BrickKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		93D9EB9C1DA4051B00D8C87A /* BrickKitTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BrickKitTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		93D9EBAF1DA4057000D8C87A /* BrickLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickLayoutBehavior.swift; sourceTree = "<group>"; };
+		93D9EBB01DA4057000D8C87A /* CardLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardLayoutBehavior.swift; sourceTree = "<group>"; };
+		93D9EBB11DA4057000D8C87A /* CoverFlowLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverFlowLayoutBehavior.swift; sourceTree = "<group>"; };
+		93D9EBB41DA4057000D8C87A /* MaxZIndexLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxZIndexLayoutBehavior.swift; sourceTree = "<group>"; };
+		93D9EBB51DA4057000D8C87A /* MinimumStickyLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimumStickyLayoutBehavior.swift; sourceTree = "<group>"; };
+		93D9EBB61DA4057000D8C87A /* OffsetLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffsetLayoutBehavior.swift; sourceTree = "<group>"; };
+		93D9EBB71DA4057000D8C87A /* OnScrollDownStickyLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnScrollDownStickyLayoutBehavior.swift; sourceTree = "<group>"; };
+		93D9EBB81DA4057000D8C87A /* SetZIndexLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetZIndexLayoutBehavior.swift; sourceTree = "<group>"; };
+		93D9EBB91DA4057000D8C87A /* SnapToPointLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapToPointLayoutBehavior.swift; sourceTree = "<group>"; };
+		93D9EBBA1DA4057000D8C87A /* SpotlightLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightLayoutBehavior.swift; sourceTree = "<group>"; };
+		93D9EBBB1DA4057000D8C87A /* StickyFooterLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickyFooterLayoutBehavior.swift; sourceTree = "<group>"; };
+		93D9EBBC1DA4057000D8C87A /* StickyLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickyLayoutBehavior.swift; sourceTree = "<group>"; };
+		93D9EBBD1DA4057000D8C87A /* BrickKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrickKit.h; sourceTree = "<group>"; };
+		93D9EBCE1DA4057000D8C87A /* BrickCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickCell.swift; sourceTree = "<group>"; };
+		93D9EBCF1DA4057000D8C87A /* BrickSectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickSectionCell.swift; sourceTree = "<group>"; };
+		93D9EBD21DA4057000D8C87A /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
+		93D9EBD31DA4057000D8C87A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93D9EBD51DA4057000D8C87A /* BrickFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickFlowLayout.swift; sourceTree = "<group>"; };
+		93D9EBD61DA4057000D8C87A /* BrickLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickLayout.swift; sourceTree = "<group>"; };
+		93D9EBD71DA4057000D8C87A /* BrickLayoutInvalidationContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickLayoutInvalidationContext.swift; sourceTree = "<group>"; };
+		93D9EBD81DA4057000D8C87A /* BrickLayoutSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickLayoutSection.swift; sourceTree = "<group>"; };
+		93D9EBD91DA4057000D8C87A /* BrickZones.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickZones.swift; sourceTree = "<group>"; };
+		93D9EBDB1DA4057000D8C87A /* BrickCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickCollectionViewDataSource.swift; sourceTree = "<group>"; };
+		93D9EBDC1DA4057000D8C87A /* BrickDimension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickDimension.swift; sourceTree = "<group>"; };
+		93D9EBDD1DA4057000D8C87A /* BrickModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickModels.swift; sourceTree = "<group>"; };
+		93D9EBDE1DA4057000D8C87A /* BrickProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickProtocols.swift; sourceTree = "<group>"; };
+		93D9EBDF1DA4057000D8C87A /* BrickSectionDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickSectionDataSource.swift; sourceTree = "<group>"; };
+		93D9EBE11DA4057000D8C87A /* BrickExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickExtensions.swift; sourceTree = "<group>"; };
+		93D9EBE21DA4057000D8C87A /* BrickUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickUtils.swift; sourceTree = "<group>"; };
+		93D9EBE31DA4057000D8C87A /* FatalError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FatalError.swift; sourceTree = "<group>"; };
+		93D9EBE51DA4057000D8C87A /* BrickCollectionView+BrickLayoutDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BrickCollectionView+BrickLayoutDataSource.swift"; sourceTree = "<group>"; };
+		93D9EBE61DA4057000D8C87A /* BrickCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickCollectionView.swift; sourceTree = "<group>"; };
+		93D9EBE71DA4057000D8C87A /* BrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickViewController.swift; sourceTree = "<group>"; };
+		93D9EC1A1DA4057900D8C87A /* CardLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardLayoutBehaviorTests.swift; sourceTree = "<group>"; };
+		93D9EC1C1DA4057900D8C87A /* HideLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HideLayoutBehaviorTests.swift; sourceTree = "<group>"; };
+		93D9EC1D1DA4057900D8C87A /* MaxZIndexBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxZIndexBehaviorTests.swift; sourceTree = "<group>"; };
+		93D9EC1E1DA4057900D8C87A /* MinimumStickyLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimumStickyLayoutBehaviorTests.swift; sourceTree = "<group>"; };
+		93D9EC1F1DA4057900D8C87A /* OffsetLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffsetLayoutBehaviorTests.swift; sourceTree = "<group>"; };
+		93D9EC201DA4057900D8C87A /* OnScrollDownStickyLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnScrollDownStickyLayoutBehaviorTests.swift; sourceTree = "<group>"; };
+		93D9EC211DA4057900D8C87A /* SnapToPointLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapToPointLayoutBehaviorTests.swift; sourceTree = "<group>"; };
+		93D9EC221DA4057900D8C87A /* SpotlightLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightLayoutBehaviorTests.swift; sourceTree = "<group>"; };
+		93D9EC231DA4057900D8C87A /* StickyFooterLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickyFooterLayoutBehaviorTests.swift; sourceTree = "<group>"; };
+		93D9EC241DA4057900D8C87A /* StickyLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickyLayoutBehaviorTests.swift; sourceTree = "<group>"; };
+		93D9EC251DA4057900D8C87A /* BrickKitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickKitTests.swift; sourceTree = "<group>"; };
+		93D9EC271DA4057900D8C87A /* LabelBrickTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelBrickTests.swift; sourceTree = "<group>"; };
+		93D9EC291DA4057900D8C87A /* AsynchronousResizableBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousResizableBrick.swift; sourceTree = "<group>"; };
+		93D9EC2B1DA4057900D8C87A /* AsynchronousResizableCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsynchronousResizableCellTests.swift; sourceTree = "<group>"; };
+		93D9EC2C1DA4057900D8C87A /* DummyBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyBrick.swift; sourceTree = "<group>"; };
+		93D9EC301DA4057900D8C87A /* DummyBrickWithoutNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyBrickWithoutNib.swift; sourceTree = "<group>"; };
+		93D9EC311DA4057900D8C87A /* ImageDownloaderBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloaderBrick.swift; sourceTree = "<group>"; };
+		93D9EC331DA4057900D8C87A /* ImageDownloaderCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloaderCellTests.swift; sourceTree = "<group>"; };
+		93D9EC351DA4057900D8C87A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93D9EC371DA4057900D8C87A /* InteractiveTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractiveTests.swift; sourceTree = "<group>"; };
+		93D9EC391DA4057900D8C87A /* AlignRowHeightTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlignRowHeightTests.swift; sourceTree = "<group>"; };
+		93D9EC3A1DA4057900D8C87A /* BrickAttributesZoneTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickAttributesZoneTests.swift; sourceTree = "<group>"; };
+		93D9EC3B1DA4057900D8C87A /* BrickFlowLayoutBaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickFlowLayoutBaseTests.swift; sourceTree = "<group>"; };
+		93D9EC3C1DA4057900D8C87A /* BrickFlowLayoutEdgeInsetsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickFlowLayoutEdgeInsetsTests.swift; sourceTree = "<group>"; };
+		93D9EC3D1DA4057900D8C87A /* BrickFlowLayoutSectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickFlowLayoutSectionTests.swift; sourceTree = "<group>"; };
+		93D9EC3E1DA4057900D8C87A /* BrickFlowLayoutTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickFlowLayoutTests.swift; sourceTree = "<group>"; };
+		93D9EC3F1DA4057900D8C87A /* BrickFlowLayoutZIndexTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickFlowLayoutZIndexTests.swift; sourceTree = "<group>"; };
+		93D9EC401DA4057900D8C87A /* BrickInvalidationContextTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickInvalidationContextTests.swift; sourceTree = "<group>"; };
+		93D9EC411DA4057900D8C87A /* BrickLayoutSectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickLayoutSectionTests.swift; sourceTree = "<group>"; };
+		93D9EC421DA4057900D8C87A /* BrickSelfsizingFlowLayoutTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickSelfsizingFlowLayoutTests.swift; sourceTree = "<group>"; };
+		93D9EC441DA4057900D8C87A /* BrickCollectionViewDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickCollectionViewDataSourceTests.swift; sourceTree = "<group>"; };
+		93D9EC451DA4057900D8C87A /* BrickDimensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickDimensionTests.swift; sourceTree = "<group>"; };
+		93D9EC461DA4057900D8C87A /* BrickModelsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickModelsTests.swift; sourceTree = "<group>"; };
+		93D9EC471DA4057900D8C87A /* BrickSectionDataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickSectionDataSourceTests.swift; sourceTree = "<group>"; };
+		93D9EC491DA4057900D8C87A /* Behaviors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Behaviors.swift; sourceTree = "<group>"; };
+		93D9EC4A1DA4057900D8C87A /* BrickExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickExtensionsTests.swift; sourceTree = "<group>"; };
+		93D9EC4B1DA4057900D8C87A /* BrickUtilsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickUtilsTests.swift; sourceTree = "<group>"; };
+		93D9EC4C1DA4057900D8C87A /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
+		93D9EC4D1DA4057900D8C87A /* DataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSources.swift; sourceTree = "<group>"; };
+		93D9EC4E1DA4057900D8C87A /* XCTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTests.swift; sourceTree = "<group>"; };
+		93D9EC501DA4057900D8C87A /* BrickCollectionViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickCollectionViewTests.swift; sourceTree = "<group>"; };
+		93D9EC511DA4057900D8C87A /* BrickViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickViewControllerTests.swift; sourceTree = "<group>"; };
+		93D9EC521DA4057900D8C87A /* TestBrickViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TestBrickViewController.storyboard; sourceTree = "<group>"; };
+		93D9EC531DA4057900D8C87A /* TestBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestBrickViewController.swift; sourceTree = "<group>"; };
+		93D9EC541DA4057900D8C87A /* TestBrickViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestBrickViewController.xib; sourceTree = "<group>"; };
+		93E7F9861DA5A22B000BE1AE /* CollectionBrickTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionBrickTests.swift; sourceTree = "<group>"; };
+		93F9B4D11DAD686E00927BE6 /* BrickAppearBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickAppearBehavior.swift; sourceTree = "<group>"; };
+		93F9B4D31DAD690400927BE6 /* BrickAppearBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickAppearBehaviorTests.swift; sourceTree = "<group>"; };
+		B8B8FFEA1DAD3F4A00A913E9 /* CoverFlowLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverFlowLayoutBehaviorTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4E9A24FF1DABEB3400D7EA99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E9A25081DABEB3400D7EA99 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E9A250C1DABEB3400D7EA99 /* BrickKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93D9EB8F1DA4051B00D8C87A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93D9EB991DA4051B00D8C87A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93D9EB9D1DA4051B00D8C87A /* BrickKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4E9A256F1DAC0EAB00D7EA99 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				4E9A25701DAC0EAB00D7EA99 /* BrickKit.xcassets */,
+				4E9A25711DAC0EAB00D7EA99 /* Bricks */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		4E9A25711DAC0EAB00D7EA99 /* Bricks */ = {
+			isa = PBXGroup;
+			children = (
+				4E9A25721DAC0EAB00D7EA99 /* Button */,
+				4E9A25751DAC0EAB00D7EA99 /* Collection */,
+				4E9A25771DAC0EAB00D7EA99 /* Image */,
+				4E9A25791DAC0EAB00D7EA99 /* Label */,
+			);
+			path = Bricks;
+			sourceTree = "<group>";
+		};
+		4E9A25721DAC0EAB00D7EA99 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				4E9A25731DAC0EAB00D7EA99 /* ButtonBrick.xib */,
+				4E9A25741DAC0EAB00D7EA99 /* ButtonBrickWithChevron.xib */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		4E9A25751DAC0EAB00D7EA99 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				4E9A25761DAC0EAB00D7EA99 /* CollectionBrick.xib */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		4E9A25771DAC0EAB00D7EA99 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				4E9A25781DAC0EAB00D7EA99 /* ImageBrick.xib */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		4E9A25791DAC0EAB00D7EA99 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				4E9A257A1DAC0EAB00D7EA99 /* LabelBrick.xib */,
+				4E9A257B1DAC0EAB00D7EA99 /* LabelBrickButton.xib */,
+				4E9A257C1DAC0EAB00D7EA99 /* LabelBrickChevron.xib */,
+				4E9A257D1DAC0EAB00D7EA99 /* LabelBrickImage.xib */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
+		4E9A259D1DAC216A00D7EA99 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				4E9A259E1DAC216A00D7EA99 /* BrickKit.xcassets */,
+				4E9A259F1DAC216A00D7EA99 /* Bricks */,
+			);
+			path = tvOS;
+			sourceTree = "<group>";
+		};
+		4E9A259F1DAC216A00D7EA99 /* Bricks */ = {
+			isa = PBXGroup;
+			children = (
+				4E9A25A01DAC216A00D7EA99 /* Button */,
+				4E9A25A31DAC216A00D7EA99 /* Collection */,
+				4E9A25A51DAC216A00D7EA99 /* Image */,
+				4E9A25A71DAC216A00D7EA99 /* Label */,
+			);
+			path = Bricks;
+			sourceTree = "<group>";
+		};
+		4E9A25A01DAC216A00D7EA99 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				4E9A25B51DAC21C200D7EA99 /* ButtonBrick.xib */,
+				4E9A25B71DAC222D00D7EA99 /* ButtonBrickWithChevron.xib */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		4E9A25A31DAC216A00D7EA99 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				4E9A25B91DAC22E300D7EA99 /* CollectionBrick.xib */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		4E9A25A51DAC216A00D7EA99 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				4E9A25BB1DAC252200D7EA99 /* ImageBrick.xib */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		4E9A25A71DAC216A00D7EA99 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				4E9A25BD1DAC26F000D7EA99 /* LabelBrick.xib */,
+				4E9A25BF1DAC27CE00D7EA99 /* LabelBrickButton.xib */,
+				4E9A25C11DAC28D000D7EA99 /* LabelBrickChevron.xib */,
+				4E9A25C31DAC298300D7EA99 /* LabelBrickImage.xib */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
+		4E9A25C51DAC2ADF00D7EA99 /* nibs */ = {
+			isa = PBXGroup;
+			children = (
+				4E9A25C61DAC2ADF00D7EA99 /* iOS */,
+				4E9A25CD1DAC2ADF00D7EA99 /* tvOS */,
+			);
+			path = nibs;
+			sourceTree = "<group>";
+		};
+		4E9A25C61DAC2ADF00D7EA99 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				4E9A25C71DAC2ADF00D7EA99 /* AsynchronousResizableBrick.xib */,
+				4E9A25C81DAC2ADF00D7EA99 /* DummyBrick.xib */,
+				4E9A25C91DAC2ADF00D7EA99 /* DummyBrick100.xib */,
+				4E9A25CA1DAC2ADF00D7EA99 /* DummyBrick150.xib */,
+				4E9A25CB1DAC2ADF00D7EA99 /* ImageDownloaderBrick.xib */,
+				4E9A25CC1DAC2ADF00D7EA99 /* LabelWithEdgeInsets.xib */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		4E9A25CD1DAC2ADF00D7EA99 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				4E9A25F01DAC2E3600D7EA99 /* ImageDownloaderBrick.xib */,
+				4E9A25E71DAC2B0A00D7EA99 /* AsynchronousResizableBrick.xib */,
+				4E9A25EA1DAC2C0000D7EA99 /* DummyBrick100.xib */,
+				4E9A25EC1DAC2CDB00D7EA99 /* DummyBrick150.xib */,
+				4E9A25F21DAC2E8D00D7EA99 /* LabelWithEdgeInsets.xib */,
+				4E3BD8E31DB51A9700541900 /* DummyFocusableBrick.xib */,
+				4E9A25EE1DAC2D7500D7EA99 /* DummyBrick.xib */,
+			);
+			path = tvOS;
+			sourceTree = "<group>";
+		};
+		93739B951DA4548F00DD4B81 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4E9A259D1DAC216A00D7EA99 /* tvOS */,
+				4E9A256F1DAC0EAB00D7EA99 /* iOS */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		93739BAD1DA454AB00DD4B81 /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				93739BAE1DA454AB00DD4B81 /* CollectionBrick.swift */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		93739BAF1DA454AB00DD4B81 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				93739BB01DA454AB00DD4B81 /* LabelBrick.swift */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
+		93739BB11DA454AB00DD4B81 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				93739BB21DA454AB00DD4B81 /* ImageBrick.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		93739BB31DA454AB00DD4B81 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				93739BB41DA454AB00DD4B81 /* ButtonBrick.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		93D9EB891DA4051B00D8C87A = {
+			isa = PBXGroup;
+			children = (
+				93D9EB941DA4051B00D8C87A /* Products */,
+				93739B951DA4548F00DD4B81 /* Resources */,
+				93D9EBAD1DA4057000D8C87A /* Source */,
+				93D9EC181DA4057900D8C87A /* Tests */,
+			);
+			sourceTree = "<group>";
+		};
+		93D9EB941DA4051B00D8C87A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				93D9EB931DA4051B00D8C87A /* BrickKit.framework */,
+				93D9EB9C1DA4051B00D8C87A /* BrickKitTests-iOS.xctest */,
+				4E9A25031DABEB3400D7EA99 /* BrickKit.framework */,
+				4E9A250B1DABEB3400D7EA99 /* BrickKit-tvOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		93D9EBAD1DA4057000D8C87A /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				93D9EBBD1DA4057000D8C87A /* BrickKit.h */,
+				93D9EBD31DA4057000D8C87A /* Info.plist */,
+				93D9EBAE1DA4057000D8C87A /* Behaviors */,
+				93D9EBBF1DA4057000D8C87A /* Bricks */,
+				93D9EBCD1DA4057000D8C87A /* Cells */,
+				93D9EBD41DA4057000D8C87A /* Layout */,
+				93D9EBDA1DA4057000D8C87A /* Models */,
+				93D9EBE01DA4057000D8C87A /* Utils */,
+				93D9EBE41DA4057000D8C87A /* ViewControllers */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		93D9EBAE1DA4057000D8C87A /* Behaviors */ = {
+			isa = PBXGroup;
+			children = (
+				93D9EBAF1DA4057000D8C87A /* BrickLayoutBehavior.swift */,
+				93D9EBB01DA4057000D8C87A /* CardLayoutBehavior.swift */,
+				93D9EBB11DA4057000D8C87A /* CoverFlowLayoutBehavior.swift */,
+				93D9EBB41DA4057000D8C87A /* MaxZIndexLayoutBehavior.swift */,
+				93D9EBB51DA4057000D8C87A /* MinimumStickyLayoutBehavior.swift */,
+				93D9EBB61DA4057000D8C87A /* OffsetLayoutBehavior.swift */,
+				93D9EBB71DA4057000D8C87A /* OnScrollDownStickyLayoutBehavior.swift */,
+				93D9EBB81DA4057000D8C87A /* SetZIndexLayoutBehavior.swift */,
+				93D9EBB91DA4057000D8C87A /* SnapToPointLayoutBehavior.swift */,
+				93D9EBBA1DA4057000D8C87A /* SpotlightLayoutBehavior.swift */,
+				93D9EBBB1DA4057000D8C87A /* StickyFooterLayoutBehavior.swift */,
+				93D9EBBC1DA4057000D8C87A /* StickyLayoutBehavior.swift */,
+			);
+			path = Behaviors;
+			sourceTree = "<group>";
+		};
+		93D9EBBF1DA4057000D8C87A /* Bricks */ = {
+			isa = PBXGroup;
+			children = (
+				93739BB31DA454AB00DD4B81 /* Button */,
+				93739BAD1DA454AB00DD4B81 /* Collection */,
+				93739BB11DA454AB00DD4B81 /* Image */,
+				93739BAF1DA454AB00DD4B81 /* Label */,
+			);
+			path = Bricks;
+			sourceTree = "<group>";
+		};
+		93D9EBCD1DA4057000D8C87A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				93D9EBCE1DA4057000D8C87A /* BrickCell.swift */,
+				93D9EBCF1DA4057000D8C87A /* BrickSectionCell.swift */,
+				93D9EBD21DA4057000D8C87A /* ImageDownloader.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		93D9EBD41DA4057000D8C87A /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				93D9EBD51DA4057000D8C87A /* BrickFlowLayout.swift */,
+				93D9EBD61DA4057000D8C87A /* BrickLayout.swift */,
+				93D9EBD71DA4057000D8C87A /* BrickLayoutInvalidationContext.swift */,
+				93D9EBD81DA4057000D8C87A /* BrickLayoutSection.swift */,
+				93D9EBD91DA4057000D8C87A /* BrickZones.swift */,
+				93F9B4D11DAD686E00927BE6 /* BrickAppearBehavior.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		93D9EBDA1DA4057000D8C87A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				93D9EBDB1DA4057000D8C87A /* BrickCollectionViewDataSource.swift */,
+				93D9EBDC1DA4057000D8C87A /* BrickDimension.swift */,
+				93D9EBDD1DA4057000D8C87A /* BrickModels.swift */,
+				93D9EBDE1DA4057000D8C87A /* BrickProtocols.swift */,
+				93D9EBDF1DA4057000D8C87A /* BrickSectionDataSource.swift */,
+				9350F0D51DA82A430051235F /* CollectionInfo.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		93D9EBE01DA4057000D8C87A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				93D9EBE11DA4057000D8C87A /* BrickExtensions.swift */,
+				93D9EBE21DA4057000D8C87A /* BrickUtils.swift */,
+				93D9EBE31DA4057000D8C87A /* FatalError.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		93D9EBE41DA4057000D8C87A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				93D9EBE51DA4057000D8C87A /* BrickCollectionView+BrickLayoutDataSource.swift */,
+				93D9EBE61DA4057000D8C87A /* BrickCollectionView.swift */,
+				93D9EBE71DA4057000D8C87A /* BrickViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		93D9EC181DA4057900D8C87A /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				93D9EC351DA4057900D8C87A /* Info.plist */,
+				93D9EC251DA4057900D8C87A /* BrickKitTests.swift */,
+				93D9EC191DA4057900D8C87A /* Behaviors */,
+				93D9EC261DA4057900D8C87A /* Bricks */,
+				93D9EC281DA4057900D8C87A /* Cells */,
+				93D9EC361DA4057900D8C87A /* Interactive */,
+				93D9EC381DA4057900D8C87A /* Layout */,
+				93D9EC431DA4057900D8C87A /* Models */,
+				93D9EC481DA4057900D8C87A /* Utils */,
+				93D9EC4F1DA4057900D8C87A /* ViewControllers */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		93D9EC191DA4057900D8C87A /* Behaviors */ = {
+			isa = PBXGroup;
+			children = (
+				930054011DA7242800239A13 /* SetZIndexBehaviorTests.swift */,
+				93D9EC1A1DA4057900D8C87A /* CardLayoutBehaviorTests.swift */,
+				93D9EC1C1DA4057900D8C87A /* HideLayoutBehaviorTests.swift */,
+				93D9EC1D1DA4057900D8C87A /* MaxZIndexBehaviorTests.swift */,
+				93D9EC1E1DA4057900D8C87A /* MinimumStickyLayoutBehaviorTests.swift */,
+				93D9EC1F1DA4057900D8C87A /* OffsetLayoutBehaviorTests.swift */,
+				93D9EC201DA4057900D8C87A /* OnScrollDownStickyLayoutBehaviorTests.swift */,
+				93D9EC211DA4057900D8C87A /* SnapToPointLayoutBehaviorTests.swift */,
+				93D9EC221DA4057900D8C87A /* SpotlightLayoutBehaviorTests.swift */,
+				93D9EC231DA4057900D8C87A /* StickyFooterLayoutBehaviorTests.swift */,
+				93D9EC241DA4057900D8C87A /* StickyLayoutBehaviorTests.swift */,
+				B8B8FFEA1DAD3F4A00A913E9 /* CoverFlowLayoutBehaviorTests.swift */,
+			);
+			path = Behaviors;
+			sourceTree = "<group>";
+		};
+		93D9EC261DA4057900D8C87A /* Bricks */ = {
+			isa = PBXGroup;
+			children = (
+				93E7F9861DA5A22B000BE1AE /* CollectionBrickTests.swift */,
+				93D9EC271DA4057900D8C87A /* LabelBrickTests.swift */,
+				93902D3A1DA4728C00BC3BA1 /* ImageBrickTests.swift */,
+				9303A6D41DA6E00100502803 /* ButtonBrickTests.swift */,
+			);
+			path = Bricks;
+			sourceTree = "<group>";
+		};
+		93D9EC281DA4057900D8C87A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4E9A25C51DAC2ADF00D7EA99 /* nibs */,
+				93D9EC291DA4057900D8C87A /* AsynchronousResizableBrick.swift */,
+				93D9EC2B1DA4057900D8C87A /* AsynchronousResizableCellTests.swift */,
+				93D9EC2C1DA4057900D8C87A /* DummyBrick.swift */,
+				4E3BD8E01DB5190100541900 /* DummyFocusableBrick.swift */,
+				93D9EC301DA4057900D8C87A /* DummyBrickWithoutNib.swift */,
+				93D9EC311DA4057900D8C87A /* ImageDownloaderBrick.swift */,
+				93D9EC331DA4057900D8C87A /* ImageDownloaderCellTests.swift */,
+				930054041DA7D8A000239A13 /* BaseBrickCellTests.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		93D9EC361DA4057900D8C87A /* Interactive */ = {
+			isa = PBXGroup;
+			children = (
+				93D9EC371DA4057900D8C87A /* InteractiveTests.swift */,
+			);
+			path = Interactive;
+			sourceTree = "<group>";
+		};
+		93D9EC381DA4057900D8C87A /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				93D9EC391DA4057900D8C87A /* AlignRowHeightTests.swift */,
+				93D9EC3A1DA4057900D8C87A /* BrickAttributesZoneTests.swift */,
+				93D9EC3B1DA4057900D8C87A /* BrickFlowLayoutBaseTests.swift */,
+				93D9EC3C1DA4057900D8C87A /* BrickFlowLayoutEdgeInsetsTests.swift */,
+				93D9EC3D1DA4057900D8C87A /* BrickFlowLayoutSectionTests.swift */,
+				93D9EC3E1DA4057900D8C87A /* BrickFlowLayoutTests.swift */,
+				93D9EC3F1DA4057900D8C87A /* BrickFlowLayoutZIndexTests.swift */,
+				93D9EC401DA4057900D8C87A /* BrickInvalidationContextTests.swift */,
+				93D9EC411DA4057900D8C87A /* BrickLayoutSectionTests.swift */,
+				93D9EC421DA4057900D8C87A /* BrickSelfsizingFlowLayoutTests.swift */,
+				93F9B4D31DAD690400927BE6 /* BrickAppearBehaviorTests.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		93D9EC431DA4057900D8C87A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				93D9EC441DA4057900D8C87A /* BrickCollectionViewDataSourceTests.swift */,
+				93D9EC451DA4057900D8C87A /* BrickDimensionTests.swift */,
+				93D9EC461DA4057900D8C87A /* BrickModelsTests.swift */,
+				93D9EC471DA4057900D8C87A /* BrickSectionDataSourceTests.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		93D9EC481DA4057900D8C87A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				93D9EC491DA4057900D8C87A /* Behaviors.swift */,
+				93D9EC4A1DA4057900D8C87A /* BrickExtensionsTests.swift */,
+				93D9EC4B1DA4057900D8C87A /* BrickUtilsTests.swift */,
+				93D9EC4C1DA4057900D8C87A /* CollectionViewDataSource.swift */,
+				93D9EC4D1DA4057900D8C87A /* DataSources.swift */,
+				9372C5061DA40735007D7EA1 /* FatalErrorTests.swift */,
+				93D9EC4E1DA4057900D8C87A /* XCTests.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		93D9EC4F1DA4057900D8C87A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				93902D381DA4726900BC3BA1 /* image0.png */,
+				93D9EC501DA4057900D8C87A /* BrickCollectionViewTests.swift */,
+				93D9EC511DA4057900D8C87A /* BrickViewControllerTests.swift */,
+				93D9EC521DA4057900D8C87A /* TestBrickViewController.storyboard */,
+				93D9EC531DA4057900D8C87A /* TestBrickViewController.swift */,
+				93D9EC541DA4057900D8C87A /* TestBrickViewController.xib */,
+				935D48D51DB806990091AA39 /* CustomBrickCollectionView.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		4E9A25001DABEB3400D7EA99 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E9A251A1DABEB5200D7EA99 /* BrickKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93D9EB901DA4051B00D8C87A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93D9EBF61DA4057000D8C87A /* BrickKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		4E9A25021DABEB3400D7EA99 /* BrickKit-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4E9A25141DABEB3400D7EA99 /* Build configuration list for PBXNativeTarget "BrickKit-tvOS" */;
+			buildPhases = (
+				4E9A24FE1DABEB3400D7EA99 /* Sources */,
+				4E9A24FF1DABEB3400D7EA99 /* Frameworks */,
+				4E9A25001DABEB3400D7EA99 /* Headers */,
+				4E9A25011DABEB3400D7EA99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BrickKit-tvOS";
+			productName = "Brickkit-tvOS";
+			productReference = 4E9A25031DABEB3400D7EA99 /* BrickKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4E9A250A1DABEB3400D7EA99 /* BrickKit-tvOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4E9A25171DABEB3400D7EA99 /* Build configuration list for PBXNativeTarget "BrickKit-tvOSTests" */;
+			buildPhases = (
+				4E9A25071DABEB3400D7EA99 /* Sources */,
+				4E9A25081DABEB3400D7EA99 /* Frameworks */,
+				4E9A25091DABEB3400D7EA99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4E9A250E1DABEB3400D7EA99 /* PBXTargetDependency */,
+			);
+			name = "BrickKit-tvOSTests";
+			productName = "Brickkit-tvOSTests";
+			productReference = 4E9A250B1DABEB3400D7EA99 /* BrickKit-tvOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		93D9EB921DA4051B00D8C87A /* BrickKit-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 93D9EBA71DA4051B00D8C87A /* Build configuration list for PBXNativeTarget "BrickKit-iOS" */;
+			buildPhases = (
+				93D9EB8E1DA4051B00D8C87A /* Sources */,
+				93D9EB8F1DA4051B00D8C87A /* Frameworks */,
+				93D9EB901DA4051B00D8C87A /* Headers */,
+				93D9EB911DA4051B00D8C87A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BrickKit-iOS";
+			productName = BrickKit;
+			productReference = 93D9EB931DA4051B00D8C87A /* BrickKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		93D9EB9B1DA4051B00D8C87A /* BrickKitTests-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 93D9EBAA1DA4051B00D8C87A /* Build configuration list for PBXNativeTarget "BrickKitTests-iOS" */;
+			buildPhases = (
+				93D9EB981DA4051B00D8C87A /* Sources */,
+				93D9EB991DA4051B00D8C87A /* Frameworks */,
+				93D9EB9A1DA4051B00D8C87A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				93D9EB9F1DA4051B00D8C87A /* PBXTargetDependency */,
+			);
+			name = "BrickKitTests-iOS";
+			productName = BrickKitTests;
+			productReference = 93D9EB9C1DA4051B00D8C87A /* BrickKitTests-iOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		93D9EB8A1DA4051B00D8C87A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = Wayfair;
+				TargetAttributes = {
+					4E9A25021DABEB3400D7EA99 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+					4E9A250A1DABEB3400D7EA99 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+					93D9EB921DA4051B00D8C87A = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = YB42T69E5P;
+						ProvisioningStyle = Automatic;
+					};
+					93D9EB9B1DA4051B00D8C87A = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = YB42T69E5P;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 93D9EB8D1DA4051B00D8C87A /* Build configuration list for PBXProject "BrickKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 93D9EB891DA4051B00D8C87A;
+			productRefGroup = 93D9EB941DA4051B00D8C87A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				93D9EB921DA4051B00D8C87A /* BrickKit-iOS */,
+				93D9EB9B1DA4051B00D8C87A /* BrickKitTests-iOS */,
+				4E9A25021DABEB3400D7EA99 /* BrickKit-tvOS */,
+				4E9A250A1DABEB3400D7EA99 /* BrickKit-tvOSTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4E9A25011DABEB3400D7EA99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E9A25B81DAC222D00D7EA99 /* ButtonBrickWithChevron.xib in Resources */,
+				4E9A25BE1DAC26F000D7EA99 /* LabelBrick.xib in Resources */,
+				4E9A25BA1DAC22E300D7EA99 /* CollectionBrick.xib in Resources */,
+				4E9A25AC1DAC216A00D7EA99 /* BrickKit.xcassets in Resources */,
+				4E9A25BC1DAC252200D7EA99 /* ImageBrick.xib in Resources */,
+				4E9A25C21DAC28D000D7EA99 /* LabelBrickChevron.xib in Resources */,
+				4E9A25C01DAC27CE00D7EA99 /* LabelBrickButton.xib in Resources */,
+				4E9A25C41DAC298300D7EA99 /* LabelBrickImage.xib in Resources */,
+				4E9A25B61DAC21C200D7EA99 /* ButtonBrick.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E9A25091DABEB3400D7EA99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E9A25FC1DAC312F00D7EA99 /* ImageDownloaderBrick.xib in Resources */,
+				4E3BD8E41DB51A9700541900 /* DummyFocusableBrick.xib in Resources */,
+				4E9A256C1DABED0600D7EA99 /* TestBrickViewController.xib in Resources */,
+				4E9A256A1DABED0600D7EA99 /* TestBrickViewController.storyboard in Resources */,
+				4E9A25FF1DAC312F00D7EA99 /* DummyBrick150.xib in Resources */,
+				4E9A25FD1DAC312F00D7EA99 /* AsynchronousResizableBrick.xib in Resources */,
+				4E9A26011DAC312F00D7EA99 /* DummyBrick.xib in Resources */,
+				4E9A26051DAD323400D7EA99 /* LabelWithEdgeInsets.xib in Resources */,
+				4E9A26021DAC31A300D7EA99 /* image0.png in Resources */,
+				4E9A25FE1DAC312F00D7EA99 /* DummyBrick100.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93D9EB911DA4051B00D8C87A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E9A25801DAC0EAB00D7EA99 /* ButtonBrickWithChevron.xib in Resources */,
+				4E9A257E1DAC0EAB00D7EA99 /* BrickKit.xcassets in Resources */,
+				4E9A25841DAC0EAB00D7EA99 /* LabelBrickButton.xib in Resources */,
+				4E9A25821DAC0EAB00D7EA99 /* ImageBrick.xib in Resources */,
+				4E9A257F1DAC0EAB00D7EA99 /* ButtonBrick.xib in Resources */,
+				4E9A25861DAC0EAB00D7EA99 /* LabelBrickImage.xib in Resources */,
+				4E9A25831DAC0EAB00D7EA99 /* LabelBrick.xib in Resources */,
+				4E9A25851DAC0EAB00D7EA99 /* LabelBrickChevron.xib in Resources */,
+				4E9A25811DAC0EAB00D7EA99 /* CollectionBrick.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93D9EB9A1DA4051B00D8C87A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E9A260F1DAD33F800D7EA99 /* DummyBrick150.xib in Resources */,
+				4E9A260E1DAD33F800D7EA99 /* DummyBrick100.xib in Resources */,
+				4E9A260D1DAD33F800D7EA99 /* DummyBrick.xib in Resources */,
+				93902D391DA4726900BC3BA1 /* image0.png in Resources */,
+				93D9EC861DA4057900D8C87A /* TestBrickViewController.storyboard in Resources */,
+				93D9EC881DA4057900D8C87A /* TestBrickViewController.xib in Resources */,
+				4E9A26111DAD33F800D7EA99 /* LabelWithEdgeInsets.xib in Resources */,
+				4E9A26101DAD33F800D7EA99 /* ImageDownloaderBrick.xib in Resources */,
+				4E9A260C1DAD33F800D7EA99 /* AsynchronousResizableBrick.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4E9A24FE1DABEB3400D7EA99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E9A251C1DABEB6000D7EA99 /* BrickLayoutBehavior.swift in Sources */,
+				4E9A251D1DABEB6000D7EA99 /* CardLayoutBehavior.swift in Sources */,
+				4E9A252C1DABEB7700D7EA99 /* LabelBrick.swift in Sources */,
+				4E9A252D1DABEB8200D7EA99 /* BrickCell.swift in Sources */,
+				4E9A25381DABEB8D00D7EA99 /* BrickProtocols.swift in Sources */,
+				4E9A253C1DABEB9300D7EA99 /* BrickUtils.swift in Sources */,
+				4E9A25231DABEB6000D7EA99 /* OnScrollDownStickyLayoutBehavior.swift in Sources */,
+				4E9A25251DABEB6000D7EA99 /* SnapToPointLayoutBehavior.swift in Sources */,
+				4E9A252F1DABEB8200D7EA99 /* ImageDownloader.swift in Sources */,
+				4E9A25351DABEB8D00D7EA99 /* BrickCollectionViewDataSource.swift in Sources */,
+				4E9A25201DABEB6000D7EA99 /* MaxZIndexLayoutBehavior.swift in Sources */,
+				4E9A25241DABEB6000D7EA99 /* SetZIndexLayoutBehavior.swift in Sources */,
+				4E9A253E1DABEB9800D7EA99 /* BrickCollectionView+BrickLayoutDataSource.swift in Sources */,
+				4E9A253B1DABEB9300D7EA99 /* BrickExtensions.swift in Sources */,
+				4E387C561DAEAB350087820E /* BrickAppearBehavior.swift in Sources */,
+				4E9A25331DABEB8800D7EA99 /* BrickLayoutSection.swift in Sources */,
+				4E9A25311DABEB8800D7EA99 /* BrickLayout.swift in Sources */,
+				4E9A25211DABEB6000D7EA99 /* MinimumStickyLayoutBehavior.swift in Sources */,
+				4E9A25301DABEB8800D7EA99 /* BrickFlowLayout.swift in Sources */,
+				4E9A25291DABEB6500D7EA99 /* ButtonBrick.swift in Sources */,
+				4E9A25371DABEB8D00D7EA99 /* BrickModels.swift in Sources */,
+				4E9A25321DABEB8800D7EA99 /* BrickLayoutInvalidationContext.swift in Sources */,
+				4E9A251E1DABEB6000D7EA99 /* CoverFlowLayoutBehavior.swift in Sources */,
+				4E9A252B1DABEB6F00D7EA99 /* ImageBrick.swift in Sources */,
+				4E9A253A1DABEB8D00D7EA99 /* CollectionInfo.swift in Sources */,
+				4E9A252E1DABEB8200D7EA99 /* BrickSectionCell.swift in Sources */,
+				4E9A25341DABEB8800D7EA99 /* BrickZones.swift in Sources */,
+				4E9A25281DABEB6000D7EA99 /* StickyLayoutBehavior.swift in Sources */,
+				4E9A25391DABEB8D00D7EA99 /* BrickSectionDataSource.swift in Sources */,
+				4E9A252A1DABEB6900D7EA99 /* CollectionBrick.swift in Sources */,
+				4E9A25361DABEB8D00D7EA99 /* BrickDimension.swift in Sources */,
+				4E9A25401DABEB9800D7EA99 /* BrickViewController.swift in Sources */,
+				4E9A25261DABEB6000D7EA99 /* SpotlightLayoutBehavior.swift in Sources */,
+				4E9A253D1DABEB9300D7EA99 /* FatalError.swift in Sources */,
+				4E9A25271DABEB6000D7EA99 /* StickyFooterLayoutBehavior.swift in Sources */,
+				4E9A253F1DABEB9800D7EA99 /* BrickCollectionView.swift in Sources */,
+				4E9A25221DABEB6000D7EA99 /* OffsetLayoutBehavior.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E9A25071DABEB3400D7EA99 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E9A25671DABECFF00D7EA99 /* XCTests.swift in Sources */,
+				4E9A25601DABECFB00D7EA99 /* BrickSectionDataSourceTests.swift in Sources */,
+				4E9A25431DABECDF00D7EA99 /* SetZIndexBehaviorTests.swift in Sources */,
+				4E9A25421DABECDA00D7EA99 /* BrickKitTests.swift in Sources */,
+				4E9A25491DABECDF00D7EA99 /* OnScrollDownStickyLayoutBehaviorTests.swift in Sources */,
+				4E9A25441DABECDF00D7EA99 /* CardLayoutBehaviorTests.swift in Sources */,
+				4E9A25621DABECFF00D7EA99 /* BrickExtensionsTests.swift in Sources */,
+				4E9A25E51DAC2AF400D7EA99 /* ImageDownloaderCellTests.swift in Sources */,
+				4E9A25551DABECF500D7EA99 /* BrickFlowLayoutBaseTests.swift in Sources */,
+				4E9A25521DABECF000D7EA99 /* InteractiveTests.swift in Sources */,
+				4E9A25481DABECDF00D7EA99 /* OffsetLayoutBehaviorTests.swift in Sources */,
+				4E9A255B1DABECF500D7EA99 /* BrickLayoutSectionTests.swift in Sources */,
+				4E9A25541DABECF500D7EA99 /* BrickAttributesZoneTests.swift in Sources */,
+				4E9A25661DABECFF00D7EA99 /* FatalErrorTests.swift in Sources */,
+				4E9A25471DABECDF00D7EA99 /* MinimumStickyLayoutBehaviorTests.swift in Sources */,
+				4E9A25E01DAC2AF400D7EA99 /* AsynchronousResizableBrick.swift in Sources */,
+				4E9A25561DABECF500D7EA99 /* BrickFlowLayoutEdgeInsetsTests.swift in Sources */,
+				93E435EE1DB6CB51007C159B /* CoverFlowLayoutBehaviorTests.swift in Sources */,
+				4E9A25E41DAC2AF400D7EA99 /* ImageDownloaderBrick.swift in Sources */,
+				4E9A25461DABECDF00D7EA99 /* MaxZIndexBehaviorTests.swift in Sources */,
+				4E9A25611DABECFF00D7EA99 /* Behaviors.swift in Sources */,
+				4E9A25451DABECDF00D7EA99 /* HideLayoutBehaviorTests.swift in Sources */,
+				4E3BD8E21DB5190100541900 /* DummyFocusableBrick.swift in Sources */,
+				4E9A25E31DAC2AF400D7EA99 /* DummyBrickWithoutNib.swift in Sources */,
+				4E9A25E11DAC2AF400D7EA99 /* AsynchronousResizableCellTests.swift in Sources */,
+				4E9A25681DABED0600D7EA99 /* BrickCollectionViewTests.swift in Sources */,
+				4E9A254B1DABECDF00D7EA99 /* SpotlightLayoutBehaviorTests.swift in Sources */,
+				4E9A25571DABECF500D7EA99 /* BrickFlowLayoutSectionTests.swift in Sources */,
+				4E9A255F1DABECFB00D7EA99 /* BrickModelsTests.swift in Sources */,
+				4E9A255A1DABECF500D7EA99 /* BrickInvalidationContextTests.swift in Sources */,
+				4E9A25E61DAC2AF400D7EA99 /* BaseBrickCellTests.swift in Sources */,
+				4E9A25641DABECFF00D7EA99 /* CollectionViewDataSource.swift in Sources */,
+				4E9A254E1DABECE300D7EA99 /* CollectionBrickTests.swift in Sources */,
+				4E9A25531DABECF500D7EA99 /* AlignRowHeightTests.swift in Sources */,
+				4E9A255E1DABECFB00D7EA99 /* BrickDimensionTests.swift in Sources */,
+				4E9A254F1DABECE300D7EA99 /* LabelBrickTests.swift in Sources */,
+				4E9A25511DABECE300D7EA99 /* ButtonBrickTests.swift in Sources */,
+				4E9A25631DABECFF00D7EA99 /* BrickUtilsTests.swift in Sources */,
+				4E9A25591DABECF500D7EA99 /* BrickFlowLayoutZIndexTests.swift in Sources */,
+				4E9A25581DABECF500D7EA99 /* BrickFlowLayoutTests.swift in Sources */,
+				4E9A254A1DABECDF00D7EA99 /* SnapToPointLayoutBehaviorTests.swift in Sources */,
+				4E9A254D1DABECDF00D7EA99 /* StickyLayoutBehaviorTests.swift in Sources */,
+				4E9A254C1DABECDF00D7EA99 /* StickyFooterLayoutBehaviorTests.swift in Sources */,
+				4E9A256B1DABED0600D7EA99 /* TestBrickViewController.swift in Sources */,
+				4E9A255C1DABECF500D7EA99 /* BrickSelfsizingFlowLayoutTests.swift in Sources */,
+				4E9A25501DABECE300D7EA99 /* ImageBrickTests.swift in Sources */,
+				4E387C571DAEAB380087820E /* BrickAppearBehaviorTests.swift in Sources */,
+				4E9A25651DABECFF00D7EA99 /* DataSources.swift in Sources */,
+				4E9A25691DABED0600D7EA99 /* BrickViewControllerTests.swift in Sources */,
+				4E9A25E21DAC2AF400D7EA99 /* DummyBrick.swift in Sources */,
+				4E9A255D1DABECFB00D7EA99 /* BrickCollectionViewDataSourceTests.swift in Sources */,
+				9361309C1DB83CB8008FFFEF /* CustomBrickCollectionView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93D9EB8E1DA4051B00D8C87A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93D9EBF31DA4057000D8C87A /* SpotlightLayoutBehavior.swift in Sources */,
+				93D9EC0F1DA4057000D8C87A /* BrickModels.swift in Sources */,
+				93D9EC111DA4057000D8C87A /* BrickSectionDataSource.swift in Sources */,
+				93739BB51DA454AB00DD4B81 /* CollectionBrick.swift in Sources */,
+				9350F0D61DA82A430051235F /* CollectionInfo.swift in Sources */,
+				93739BB61DA454AB00DD4B81 /* LabelBrick.swift in Sources */,
+				93D9EBF21DA4057000D8C87A /* SnapToPointLayoutBehavior.swift in Sources */,
+				93D9EC131DA4057000D8C87A /* BrickUtils.swift in Sources */,
+				93D9EC091DA4057000D8C87A /* BrickLayout.swift in Sources */,
+				93D9EC021DA4057000D8C87A /* BrickCell.swift in Sources */,
+				93739BB71DA454AB00DD4B81 /* ImageBrick.swift in Sources */,
+				93D9EBF51DA4057000D8C87A /* StickyLayoutBehavior.swift in Sources */,
+				93D9EBE81DA4057000D8C87A /* BrickLayoutBehavior.swift in Sources */,
+				93D9EC0A1DA4057000D8C87A /* BrickLayoutInvalidationContext.swift in Sources */,
+				93F9B4D21DAD686E00927BE6 /* BrickAppearBehavior.swift in Sources */,
+				93D9EBF01DA4057000D8C87A /* OnScrollDownStickyLayoutBehavior.swift in Sources */,
+				93D9EC151DA4057000D8C87A /* BrickCollectionView+BrickLayoutDataSource.swift in Sources */,
+				93D9EC121DA4057000D8C87A /* BrickExtensions.swift in Sources */,
+				93D9EBE91DA4057000D8C87A /* CardLayoutBehavior.swift in Sources */,
+				93D9EBEF1DA4057000D8C87A /* OffsetLayoutBehavior.swift in Sources */,
+				93D9EC0C1DA4057000D8C87A /* BrickZones.swift in Sources */,
+				93D9EBF41DA4057000D8C87A /* StickyFooterLayoutBehavior.swift in Sources */,
+				93D9EBF11DA4057000D8C87A /* SetZIndexLayoutBehavior.swift in Sources */,
+				93D9EC0D1DA4057000D8C87A /* BrickCollectionViewDataSource.swift in Sources */,
+				93D9EC081DA4057000D8C87A /* BrickFlowLayout.swift in Sources */,
+				93D9EC0B1DA4057000D8C87A /* BrickLayoutSection.swift in Sources */,
+				93D9EBEA1DA4057000D8C87A /* CoverFlowLayoutBehavior.swift in Sources */,
+				93D9EC101DA4057000D8C87A /* BrickProtocols.swift in Sources */,
+				93D9EC031DA4057000D8C87A /* BrickSectionCell.swift in Sources */,
+				93D9EC061DA4057000D8C87A /* ImageDownloader.swift in Sources */,
+				93D9EC0E1DA4057000D8C87A /* BrickDimension.swift in Sources */,
+				93D9EC171DA4057000D8C87A /* BrickViewController.swift in Sources */,
+				93D9EBED1DA4057000D8C87A /* MaxZIndexLayoutBehavior.swift in Sources */,
+				93D9EC141DA4057000D8C87A /* FatalError.swift in Sources */,
+				93D9EBEE1DA4057000D8C87A /* MinimumStickyLayoutBehavior.swift in Sources */,
+				93D9EC161DA4057000D8C87A /* BrickCollectionView.swift in Sources */,
+				93739BB81DA454AB00DD4B81 /* ButtonBrick.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93D9EB981DA4051B00D8C87A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93D9EC721DA4057900D8C87A /* BrickFlowLayoutBaseTests.swift in Sources */,
+				9372C5081DA4073D007D7EA1 /* FatalErrorTests.swift in Sources */,
+				93D9EC621DA4057900D8C87A /* AsynchronousResizableBrick.swift in Sources */,
+				93D9EC591DA4057900D8C87A /* MinimumStickyLayoutBehaviorTests.swift in Sources */,
+				93D9EC7F1DA4057900D8C87A /* BrickExtensionsTests.swift in Sources */,
+				93D9EC651DA4057900D8C87A /* DummyBrick.swift in Sources */,
+				93D9EC571DA4057900D8C87A /* HideLayoutBehaviorTests.swift in Sources */,
+				93D9EC5A1DA4057900D8C87A /* OffsetLayoutBehaviorTests.swift in Sources */,
+				93D9EC7C1DA4057900D8C87A /* BrickModelsTests.swift in Sources */,
+				93D9EC551DA4057900D8C87A /* CardLayoutBehaviorTests.swift in Sources */,
+				9303A6D51DA6E00100502803 /* ButtonBrickTests.swift in Sources */,
+				93D9EC821DA4057900D8C87A /* DataSources.swift in Sources */,
+				93D9EC7D1DA4057900D8C87A /* BrickSectionDataSourceTests.swift in Sources */,
+				93D9EC5D1DA4057900D8C87A /* SpotlightLayoutBehaviorTests.swift in Sources */,
+				9361309B1DB83CB7008FFFEF /* CustomBrickCollectionView.swift in Sources */,
+				93D9EC691DA4057900D8C87A /* DummyBrickWithoutNib.swift in Sources */,
+				93D9EC791DA4057900D8C87A /* BrickSelfsizingFlowLayoutTests.swift in Sources */,
+				93D9EC761DA4057900D8C87A /* BrickFlowLayoutZIndexTests.swift in Sources */,
+				930054031DA724AD00239A13 /* SetZIndexBehaviorTests.swift in Sources */,
+				93D9EC641DA4057900D8C87A /* AsynchronousResizableCellTests.swift in Sources */,
+				93D9EC5F1DA4057900D8C87A /* StickyLayoutBehaviorTests.swift in Sources */,
+				93D9EC841DA4057900D8C87A /* BrickCollectionViewTests.swift in Sources */,
+				93D9EC701DA4057900D8C87A /* AlignRowHeightTests.swift in Sources */,
+				93D9EC7E1DA4057900D8C87A /* Behaviors.swift in Sources */,
+				B8B8FFEB1DAD3F4A00A913E9 /* CoverFlowLayoutBehaviorTests.swift in Sources */,
+				93D9EC731DA4057900D8C87A /* BrickFlowLayoutEdgeInsetsTests.swift in Sources */,
+				93D9EC581DA4057900D8C87A /* MaxZIndexBehaviorTests.swift in Sources */,
+				93D9EC741DA4057900D8C87A /* BrickFlowLayoutSectionTests.swift in Sources */,
+				93D9EC6C1DA4057900D8C87A /* ImageDownloaderCellTests.swift in Sources */,
+				93D9EC7A1DA4057900D8C87A /* BrickCollectionViewDataSourceTests.swift in Sources */,
+				930054051DA7D8A000239A13 /* BaseBrickCellTests.swift in Sources */,
+				93D9EC611DA4057900D8C87A /* LabelBrickTests.swift in Sources */,
+				93D9EC7B1DA4057900D8C87A /* BrickDimensionTests.swift in Sources */,
+				93D9EC781DA4057900D8C87A /* BrickLayoutSectionTests.swift in Sources */,
+				93902D3B1DA4728C00BC3BA1 /* ImageBrickTests.swift in Sources */,
+				93D9EC851DA4057900D8C87A /* BrickViewControllerTests.swift in Sources */,
+				93D9EC871DA4057900D8C87A /* TestBrickViewController.swift in Sources */,
+				93D9EC601DA4057900D8C87A /* BrickKitTests.swift in Sources */,
+				93D9EC831DA4057900D8C87A /* XCTests.swift in Sources */,
+				93D9EC771DA4057900D8C87A /* BrickInvalidationContextTests.swift in Sources */,
+				93D9EC6A1DA4057900D8C87A /* ImageDownloaderBrick.swift in Sources */,
+				93E7F9881DA5A230000BE1AE /* CollectionBrickTests.swift in Sources */,
+				93D9EC5B1DA4057900D8C87A /* OnScrollDownStickyLayoutBehaviorTests.swift in Sources */,
+				93D9EC5C1DA4057900D8C87A /* SnapToPointLayoutBehaviorTests.swift in Sources */,
+				93D9EC6F1DA4057900D8C87A /* InteractiveTests.swift in Sources */,
+				93D9EC811DA4057900D8C87A /* CollectionViewDataSource.swift in Sources */,
+				93F9B4D41DAD690400927BE6 /* BrickAppearBehaviorTests.swift in Sources */,
+				93D9EC5E1DA4057900D8C87A /* StickyFooterLayoutBehaviorTests.swift in Sources */,
+				93D9EC801DA4057900D8C87A /* BrickUtilsTests.swift in Sources */,
+				93D9EC751DA4057900D8C87A /* BrickFlowLayoutTests.swift in Sources */,
+				93D9EC711DA4057900D8C87A /* BrickAttributesZoneTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4E9A250E1DABEB3400D7EA99 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4E9A25021DABEB3400D7EA99 /* BrickKit-tvOS */;
+			targetProxy = 4E9A250D1DABEB3400D7EA99 /* PBXContainerItemProxy */;
+		};
+		93D9EB9F1DA4051B00D8C87A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 93D9EB921DA4051B00D8C87A /* BrickKit-iOS */;
+			targetProxy = 93D9EB9E1DA4051B00D8C87A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		4E9A25151DABEB3400D7EA99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wafair.Brickkit;
+				PRODUCT_NAME = "$(PROJECT_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		4E9A25161DABEB3400D7EA99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wafair.Brickkit;
+				PRODUCT_NAME = "$(PROJECT_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		4E9A25181DABEB3400D7EA99 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wafair.BrickKit-tvOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 2.3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		4E9A25191DABEB3400D7EA99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wafair.BrickKit-tvOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 2.3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		93D9EBA51DA4051B00D8C87A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		93D9EBA61DA4051B00D8C87A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		93D9EBA81DA4051B00D8C87A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = YB42T69E5P;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wayfair.BrickKit;
+				PRODUCT_NAME = "$(PROJECT_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		93D9EBA91DA4051B00D8C87A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = YB42T69E5P;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wayfair.BrickKit;
+				PRODUCT_NAME = "$(PROJECT_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		93D9EBAB1DA4051B00D8C87A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = YB42T69E5P;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wayfair.BrickKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		93D9EBAC1DA4051B00D8C87A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = YB42T69E5P;
+				INFOPLIST_FILE = Tests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wayfair.BrickKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4E9A25141DABEB3400D7EA99 /* Build configuration list for PBXNativeTarget "BrickKit-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E9A25151DABEB3400D7EA99 /* Debug */,
+				4E9A25161DABEB3400D7EA99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4E9A25171DABEB3400D7EA99 /* Build configuration list for PBXNativeTarget "BrickKit-tvOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E9A25181DABEB3400D7EA99 /* Debug */,
+				4E9A25191DABEB3400D7EA99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		93D9EB8D1DA4051B00D8C87A /* Build configuration list for PBXProject "BrickKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93D9EBA51DA4051B00D8C87A /* Debug */,
+				93D9EBA61DA4051B00D8C87A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		93D9EBA71DA4051B00D8C87A /* Build configuration list for PBXNativeTarget "BrickKit-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93D9EBA81DA4051B00D8C87A /* Debug */,
+				93D9EBA91DA4051B00D8C87A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		93D9EBAA1DA4051B00D8C87A /* Build configuration list for PBXNativeTarget "BrickKitTests-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93D9EBAB1DA4051B00D8C87A /* Debug */,
+				93D9EBAC1DA4051B00D8C87A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 93D9EB8A1DA4051B00D8C87A /* Project object */;
+}

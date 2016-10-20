@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SizeClassBrickCell" customModule="BrickApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="500" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="500" height="100"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Ccg-EQ-5oP">
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="96E-cD-K9b">
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="96E-cD-K9b" secondAttribute="trailing" constant="20" id="BMS-Vh-dkj"/>
+                            <constraint firstAttribute="height" constant="100" id="L4V-sS-j0g"/>
+                            <constraint firstItem="96E-cD-K9b" firstAttribute="leading" secondItem="Ccg-EQ-5oP" secondAttribute="leading" constant="20" id="Nu0-dD-lLJ"/>
+                            <constraint firstItem="96E-cD-K9b" firstAttribute="top" secondItem="Ccg-EQ-5oP" secondAttribute="top" id="acE-4b-IDd"/>
+                            <constraint firstAttribute="height" constant="150" id="fIA-bp-d4M"/>
+                            <constraint firstAttribute="bottom" secondItem="96E-cD-K9b" secondAttribute="bottom" id="neZ-lH-7f9"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="L4V-sS-j0g"/>
+                                <exclude reference="fIA-bp-d4M"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="L4V-sS-j0g"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="fIA-bp-d4M"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AvO-eN-uaX">
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="Ccg-EQ-5oP" firstAttribute="trailing" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Gmh-gr-JcM"/>
+                <constraint firstItem="Ccg-EQ-5oP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="K7b-pR-XtE"/>
+                <constraint firstAttribute="bottom" secondItem="Ccg-EQ-5oP" secondAttribute="bottom" id="KVw-LO-VQ5"/>
+                <constraint firstAttribute="trailing" secondItem="AvO-eN-uaX" secondAttribute="trailing" constant="20" id="e5k-SX-N9m"/>
+                <constraint firstItem="AvO-eN-uaX" firstAttribute="centerY" secondItem="Ccg-EQ-5oP" secondAttribute="centerY" id="jhr-ZJ-677"/>
+                <constraint firstItem="AvO-eN-uaX" firstAttribute="leading" secondItem="Ccg-EQ-5oP" secondAttribute="trailing" constant="20" id="u1O-GF-0kY"/>
+                <constraint firstItem="Ccg-EQ-5oP" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="y46-zc-79g"/>
+            </constraints>
+            <size key="customSize" width="798" height="384"/>
+            <connections>
+                <outlet property="infoLabel" destination="96E-cD-K9b" id="kst-cl-GhD"/>
+                <outlet property="label" destination="AvO-eN-uaX" id="m5a-1d-ZaJ"/>
+                <outlet property="view" destination="Ccg-EQ-5oP" id="DQr-Rm-Ec8"/>
+            </connections>
+            <point key="canvasLocation" x="411.5" y="118"/>
+        </collectionViewCell>
+    </objects>
+</document>

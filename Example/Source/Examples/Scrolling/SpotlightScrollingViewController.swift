@@ -1,0 +1,30 @@
+//
+//  SpotlightScrollingViewController.swift
+//  BrickKit
+//
+//  Created by Ruben Cagnie on 6/4/16.
+//  Copyright © 2016 Wayfair LLC. All rights reserved.
+//
+
+import BrickKit
+
+class SpotlightScrollingViewController: BaseScrollingViewController {
+    override class var title: String {
+        return "Spotlight"
+    }
+    override class var subTitle: String {
+        return "Have a brick in the spotlight"
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        behavior = SpotlightLayoutBehavior(dataSource: self)
+    }
+}
+
+extension SpotlightScrollingViewController: SpotlightLayoutBehaviorDataSource {
+    func spotlightLayoutBehavior(behavior: SpotlightLayoutBehavior, smallHeightForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
+        return identifier == BrickIdentifiers.repeatLabel ? 50 : nil
+    }
+}
+

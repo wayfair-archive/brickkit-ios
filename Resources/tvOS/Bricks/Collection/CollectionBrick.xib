@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" id="62z-3R-Iwc" customClass="CollectionBrickCell" customModule="BrickKit" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="BGH-X0-0TJ" customClass="BrickCollectionView" customModule="BrickKit" customModuleProvider="target">
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xRL-ym-xW1" customClass="BrickFlowLayout" customModule="BrickKit" customModuleProvider="target">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron" translatesAutoresizingMaskIntoConstraints="NO" id="0CR-i3-cWz">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="12" id="7nP-zp-lBp"/>
+                            <constraint firstAttribute="height" constant="15" id="weo-Cv-3vW"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="0CR-i3-cWz" secondAttribute="trailing" constant="10" id="8E0-xR-xMd"/>
+                <constraint firstAttribute="trailing" secondItem="BGH-X0-0TJ" secondAttribute="trailing" id="Cqa-9h-Zlq"/>
+                <constraint firstItem="BGH-X0-0TJ" firstAttribute="leading" secondItem="62z-3R-Iwc" secondAttribute="leading" id="IHy-Ro-wke"/>
+                <constraint firstItem="BGH-X0-0TJ" firstAttribute="top" secondItem="62z-3R-Iwc" secondAttribute="top" id="Nl9-xc-NnM"/>
+                <constraint firstAttribute="bottom" secondItem="BGH-X0-0TJ" secondAttribute="bottom" id="chn-nh-bKV"/>
+                <constraint firstItem="0CR-i3-cWz" firstAttribute="centerY" secondItem="62z-3R-Iwc" secondAttribute="centerY" id="yEK-JW-XkH"/>
+            </constraints>
+            <connections>
+                <outlet property="brickCollectionView" destination="BGH-X0-0TJ" id="dpy-yI-mZH"/>
+                <outlet property="chevronImage" destination="0CR-i3-cWz" id="hBM-YM-xfy"/>
+            </connections>
+            <point key="canvasLocation" x="22" y="58"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="chevron" width="9" height="15"/>
+    </resources>
+</document>

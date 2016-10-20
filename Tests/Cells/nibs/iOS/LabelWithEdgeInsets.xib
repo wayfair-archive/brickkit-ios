@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="LabelBrickCell" customModule="BrickKit">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNP-e0-Skz">
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="zNP-e0-Skz" secondAttribute="bottom" constant="5" id="GOC-O3-QSk"/>
+                <constraint firstItem="zNP-e0-Skz" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="Qx7-XM-fDh"/>
+                <constraint firstItem="zNP-e0-Skz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="5" id="VK0-Z9-IcR"/>
+                <constraint firstAttribute="trailing" secondItem="zNP-e0-Skz" secondAttribute="trailing" constant="5" id="hCJ-Wb-wED"/>
+            </constraints>
+            <size key="customSize" width="294" height="50"/>
+            <connections>
+                <outlet property="bottomSpaceConstraint" destination="GOC-O3-QSk" id="Nnv-LQ-yiA"/>
+                <outlet property="label" destination="zNP-e0-Skz" id="f74-un-gmS"/>
+                <outlet property="leftSpaceConstraint" destination="VK0-Z9-IcR" id="x5D-tA-mRs"/>
+                <outlet property="rightSpaceConstraint" destination="hCJ-Wb-wED" id="C9D-PF-g7e"/>
+                <outlet property="topSpaceConstraint" destination="Qx7-XM-fDh" id="FML-di-Brm"/>
+            </connections>
+            <point key="canvasLocation" x="156" y="54"/>
+        </collectionViewCell>
+    </objects>
+</document>

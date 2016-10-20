@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="9Jl-Ee-z0o" customClass="LabelBrickCell" customModule="BrickKit">
+            <rect key="frame" x="0.0" y="0.0" width="599" height="80"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="599" height="80"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Du-Kd-5iK">
+                        <constraints>
+                            <constraint firstAttribute="height" secondItem="7Du-Kd-5iK" secondAttribute="width" id="4oD-gq-IMq"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nXe-mh-5vk">
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="7Du-Kd-5iK" firstAttribute="top" secondItem="nXe-mh-5vk" secondAttribute="top" id="19A-aR-Y8D"/>
+                <constraint firstAttribute="bottom" secondItem="nXe-mh-5vk" secondAttribute="bottom" id="2m4-7b-Lw2"/>
+                <constraint firstItem="7Du-Kd-5iK" firstAttribute="bottom" secondItem="nXe-mh-5vk" secondAttribute="bottom" id="6cG-lt-lfL"/>
+                <constraint firstAttribute="trailing" secondItem="nXe-mh-5vk" secondAttribute="trailing" id="Cye-Jw-zEF"/>
+                <constraint firstItem="7Du-Kd-5iK" firstAttribute="leading" secondItem="9Jl-Ee-z0o" secondAttribute="leading" id="Y5M-1D-ebF"/>
+                <constraint firstItem="nXe-mh-5vk" firstAttribute="top" secondItem="9Jl-Ee-z0o" secondAttribute="top" id="iz0-Ng-QKt"/>
+                <constraint firstItem="nXe-mh-5vk" firstAttribute="leading" secondItem="7Du-Kd-5iK" secondAttribute="trailing" constant="5" id="vhG-lN-Rds"/>
+            </constraints>
+            <connections>
+                <outlet property="bottomSpaceConstraint" destination="2m4-7b-Lw2" id="LCl-D9-Vps"/>
+                <outlet property="imageView" destination="7Du-Kd-5iK" id="nsb-xv-m6i"/>
+                <outlet property="label" destination="nXe-mh-5vk" id="Ybc-QH-AKn"/>
+                <outlet property="leftSpaceConstraint" destination="Y5M-1D-ebF" id="RgG-qv-LHT"/>
+                <outlet property="rightSpaceConstraint" destination="Cye-Jw-zEF" id="7VW-C9-611"/>
+                <outlet property="topSpaceConstraint" destination="iz0-Ng-QKt" id="ffQ-4O-In4"/>
+            </connections>
+            <point key="canvasLocation" x="137" y="558"/>
+        </collectionViewCell>
+    </objects>
+</document>

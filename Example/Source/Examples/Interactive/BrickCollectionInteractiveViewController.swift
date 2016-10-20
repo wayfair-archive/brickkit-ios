@@ -1,0 +1,212 @@
+//
+//  BrickCollectionInteractiveViewController.swift
+//  BrickApp
+//
+//  Created by Ruben Cagnie on 5/26/16.
+//  Copyright © 2016 Wayfair. All rights reserved.
+//
+
+import UIKit
+import BrickKit
+
+private let RepeatSection = "RepeatSection"
+private let Stepper = "Stepper"
+private let Section = "Section"
+
+private let FooterTitleLabel = "FooterTitleLabel"
+private let FooterSection = "FooterSection"
+
+private let RepeatTitleLabel = "RepeatTitleLabel"
+private let RepeatLabel1 = "RepeatLabel1"
+private let RepeatLabel2 = "RepeatLabel2"
+
+class BrickCollectionInteractiveViewController: BrickViewController {
+
+    override class var title: String {
+        return "CollectionBrick"
+    }
+    
+    override class var subTitle: String {
+        return "Shows how to add and remove CollectionBricks in an interactive way"
+    }
+
+    #if os(iOS)
+    var stepperModel = StepperBrickModel(count: 1)
+    #endif
+    
+    var footerModel = LabelBrickCellModel(text: "There are no values")
+
+    var repeatSection: BrickSection!
+
+    var dataSources: [BrickCollectionViewDataSource] = []
+
+    var even = true
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        let layout = self.brickCollectionView.layout
+        layout.zIndexBehavior = .BottomUp
+
+        self.registerBrickClass(LabelBrick.self)
+        self.registerBrickClass(CollectionBrick.self)
+        
+        #if os(iOS)
+        self.registerBrickClass(StepperBrick.self)
+        #endif
+        
+        self.brickCollectionView.backgroundColor = .brickBackground
+
+        repeatSection = BrickSection(RepeatSection, bricks: [
+            LabelBrick(RepeatTitleLabel, backgroundColor: .brickGray1, dataSource: self),
+            LabelBrick(RepeatLabel1, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray2, dataSource: self),
+            LabelBrick(RepeatLabel2, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray4, dataSource: self),
+            ])
+
+        let footerSection = BrickSection(FooterSection, backgroundColor: .darkGrayColor(), bricks: [
+            LabelBrick(FooterTitleLabel, backgroundColor: .brickGray1, dataSource: footerModel),
+            ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
+        #if os(iOS)
+            let section = BrickSection(Section, bricks: [
+                LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray3, dataSource: LabelBrickCellModel(text: "Tap here to change the collections".uppercaseString) { cell in
+                    cell.configure()
+                    }),
+                
+                StepperBrick(Stepper, backgroundColor: .brickGray1, dataSource: stepperModel, delegate: self),
+                
+                BrickSection(RepeatSection, bricks: [
+                    CollectionBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: self)
+                    ], inset: 5),
+                footerSection
+                ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
+        #else
+            let section = BrickSection(Section, bricks: [
+                LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray3, dataSource: LabelBrickCellModel(text: "Tap here to change the collections".uppercaseString) { cell in
+                    cell.configure()
+                    }),
+                BrickSection(RepeatSection, bricks: [
+                    CollectionBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: self)
+                    ], inset: 5),
+                footerSection
+                ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
+        #endif
+        section.repeatCountDataSource = self
+
+        let stickyBehavior = StickyFooterLayoutBehavior(dataSource: self)
+        self.layout.behaviors.insert(stickyBehavior)
+
+        updateDataSources()
+
+
+        self.setSection(section)
+        self.layout.hideBehaviorDataSource = self
+
+        updateTitle()
+
+    }
+
+    func updateDataSources() {
+        dataSources = []
+        for _ in 0..<1 {
+            let dataSource = BrickCollectionViewDataSource()
+            dataSource.setSection(repeatSection)
+            dataSources.append(dataSource)
+        }
+    }
+
+    func updateTitle() {
+        footerModel.text = "There are \(1) label(s)"
+        reloadBricksWithIdentifiers([FooterTitleLabel])
+    }
+}
+
+extension BrickCollectionInteractiveViewController {
+
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let brickInfo = brickCollectionView.brickInfo(at:indexPath)
+        if brickInfo.brick.identifier == BrickIdentifiers.titleLabel {
+            even = !even
+            UIView.performWithoutAnimation({
+                self.reloadBricksWithIdentifiers([BrickIdentifiers.repeatLabel, RepeatSection], shouldReloadCell: true)
+            })
+        }
+        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+    }
+}
+
+extension BrickCollectionInteractiveViewController: LabelBrickCellDataSource {
+    func configureLabelBrickCell(cell: LabelBrickCell) {
+        if cell.brick.identifier == RepeatTitleLabel {
+            cell.label.text = "Title \(cell.collectionIndex + 1)"
+        }
+
+        cell.label.text = "Label \(cell.collectionIndex + 1)"
+    }
+}
+
+extension BrickCollectionInteractiveViewController: BrickRepeatCountDataSource {
+    func repeatCount(for identifier: String, with collectionIndex: Int, collectionIdentifier: String) -> Int {
+        if identifier == BrickIdentifiers.repeatLabel {
+            return 1
+        } else {
+            return 1
+        }
+    }
+}
+
+#if os(iOS)
+extension BrickCollectionInteractiveViewController: StepperBrickCellDelegate {
+    func stepperBrickCellDidUpdateStepper(cell: StepperBrickCell) {
+        stepperModel.count = Int(cell.stepper.value)
+        updateTitle()
+        updateDataSources()
+        UIView.animateWithDuration(0.5, animations: {
+            self.brickCollectionView.invalidateRepeatCounts()
+            self.reloadBricksWithIdentifiers([RepeatSection, Stepper, FooterSection])
+            })
+    }
+}
+#endif
+
+extension BrickCollectionInteractiveViewController: CollectionBrickCellDataSource {
+    func configureCollectionBrickViewForBrickCollectionCell(cell: CollectionBrickCell) {
+
+        let layout = cell.brickCollectionView.layout
+        layout.hideBehaviorDataSource = self
+
+        cell.brickCollectionView.registerBrickClass(LabelBrick.self)
+        cell.brickCollectionView.registerBrickClass(CollectionBrick.self)
+        #if os(iOS)
+        cell.brickCollectionView.registerBrickClass(StepperBrick.self)
+        #endif
+    }
+
+    func dataSourceForCollectionBrickCell(cell: CollectionBrickCell) -> BrickCollectionViewDataSource {
+        return dataSources[cell.index]
+    }
+}
+
+extension BrickCollectionInteractiveViewController: HideBehaviorDataSource {
+
+    func hideBehaviorDataSource(shouldHideItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+        guard let brickCollectionView = collectionViewLayout.collectionView as? BrickCollectionView else {
+            return false
+        }
+        let brickInfo = brickCollectionView.brickInfo(at:indexPath)
+
+        if identifier == FooterTitleLabel {
+            return true
+        } else if identifier == RepeatTitleLabel && (brickInfo.collectionIndex % 2 == 0) == even {
+            return true
+        }
+
+        return false
+    }
+}
+
+extension BrickCollectionInteractiveViewController: StickyLayoutBehaviorDataSource {
+    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+        return identifier == FooterSection
+    }
+}
+

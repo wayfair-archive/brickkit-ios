@@ -1,0 +1,34 @@
+//
+//  StackedStickingViewController.swift
+//  BrickKit
+//
+//  Created by Ruben Cagnie on 6/1/16.
+//  Copyright © 2016 Wayfair LLC. All rights reserved.
+//
+
+import UIKit
+import BrickKit
+
+class StackedStickingViewController: BaseRepeatBrickViewController {
+    override class var title: String {
+        return "Stacked Headers"
+    }
+    override class var subTitle: String {
+        return "Example how headers stack while scrolling"
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        repeatLabel.width = .Ratio(ratio: 1)
+        titleLabelModel.text = "All uneven bricks should stick"
+
+        behavior = StickyLayoutBehavior(dataSource: self)
+    }
+}
+
+extension StackedStickingViewController: StickyLayoutBehaviorDataSource {
+    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+        return identifier != BrickIdentifiers.titleLabel && indexPath.row % 2 != 0
+    }
+}

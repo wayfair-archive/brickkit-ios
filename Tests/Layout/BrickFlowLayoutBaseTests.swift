@@ -1,0 +1,48 @@
+//
+//  BrickFlowLayoutBaseTests.swift
+//  BrickApp
+//
+//  Created by Ruben Cagnie on 5/23/16.
+//  Copyright © 2016 Wayfair. All rights reserved.
+//
+
+import XCTest
+@testable import BrickKit
+
+class BrickFlowLayoutBaseTests: XCTestCase {
+
+    let collectionViewFrame = CGRectMake(0, 0, 320, 480)
+
+    var layout: BrickFlowLayout!
+    var collectionView: BrickCollectionView!
+    var dataSource: UICollectionViewDataSource!
+    var brickLayoutDataSource: BrickLayoutDataSource?
+
+    override func setUp() {
+        super.setUp()
+
+        continueAfterFailure = false
+
+        layout = BrickFlowLayout()
+
+        collectionView = BrickCollectionView(frame: collectionViewFrame, collectionViewLayout: layout)
+        layout.dataSource = collectionView
+    }
+
+    override func tearDown() {
+        super.tearDown()
+
+        layout = nil
+        collectionView = nil
+    }
+
+    func setDataSources(collectionViewDataSource: UICollectionViewDataSource?, brickLayoutDataSource: BrickLayoutDataSource?) {
+        self.brickLayoutDataSource = brickLayoutDataSource
+        self.dataSource = collectionViewDataSource
+
+        layout.dataSource = brickLayoutDataSource
+        collectionView.dataSource = self.dataSource
+        collectionView.reloadData()
+        layout.calculateSectionsIfNeeded()
+    }
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="LabelBrickCell" customModule="BrickKit">
+            <rect key="frame" x="0.0" y="0.0" width="281" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="281" height="44"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jTZ-8k-35W">
+                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                        <color key="shadowColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <size key="shadowOffset" width="5" height="5"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="jTZ-8k-35W" secondAttribute="bottom" id="3z7-LU-250"/>
+                <constraint firstItem="jTZ-8k-35W" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="O45-0s-4o7"/>
+                <constraint firstAttribute="trailing" secondItem="jTZ-8k-35W" secondAttribute="trailing" id="TZa-mF-mvM"/>
+                <constraint firstItem="jTZ-8k-35W" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="The-Am-KiE"/>
+            </constraints>
+            <size key="customSize" width="281" height="44"/>
+            <connections>
+                <outlet property="bottomSpaceConstraint" destination="3z7-LU-250" id="lKK-NG-0wr"/>
+                <outlet property="label" destination="jTZ-8k-35W" id="Rw3-kC-8UX"/>
+                <outlet property="leftSpaceConstraint" destination="TZa-mF-mvM" id="WPM-bT-2dS"/>
+                <outlet property="rightSpaceConstraint" destination="The-Am-KiE" id="zfE-wO-F5I"/>
+                <outlet property="topSpaceConstraint" destination="O45-0s-4o7" id="d6c-0p-nRf"/>
+            </connections>
+            <point key="canvasLocation" x="148.5" y="99"/>
+        </collectionViewCell>
+    </objects>
+</document>

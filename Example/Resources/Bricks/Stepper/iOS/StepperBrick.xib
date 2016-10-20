@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="StepperBrickCell" customModule="BrickKit" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="OWT-m4-xk1">
+                        <connections>
+                            <action selector="stepperDidUpdate:" destination="gTV-IL-0wX" eventType="valueChanged" id="aMl-KY-DoV"/>
+                        </connections>
+                    </stepper>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ilO-TG-Nfv">
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="ilO-TG-Nfv" firstAttribute="centerY" secondItem="OWT-m4-xk1" secondAttribute="centerY" id="E1W-wu-ObI"/>
+                <constraint firstItem="ilO-TG-Nfv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="Htb-zx-oGM"/>
+                <constraint firstItem="OWT-m4-xk1" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="ZSM-lU-m5a"/>
+                <constraint firstAttribute="bottom" secondItem="OWT-m4-xk1" secondAttribute="bottom" constant="10" id="gVH-no-BjC"/>
+                <constraint firstItem="OWT-m4-xk1" firstAttribute="leading" secondItem="ilO-TG-Nfv" secondAttribute="trailing" constant="10" id="htG-3j-o8j"/>
+                <constraint firstItem="OWT-m4-xk1" firstAttribute="trailing" secondItem="gTV-IL-0wX" secondAttribute="trailing" constant="-10" id="i4f-q5-Gdt"/>
+            </constraints>
+            <connections>
+                <outlet property="label" destination="ilO-TG-Nfv" id="XY6-6W-btM"/>
+                <outlet property="stepper" destination="OWT-m4-xk1" id="ATN-7g-UTb"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>

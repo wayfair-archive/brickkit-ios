@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="TestBrickCell" customModule="BrickApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="151" height="151"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="151" height="151"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yMg-Qe-X2K">
+                        <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="yMg-Qe-X2K" secondAttribute="height" multiplier="1:1" id="Jtd-td-73b"/>
+                        </constraints>
+                        <variation key="widthClass=regular">
+                            <mask key="constraints">
+                                <include reference="Jtd-td-73b"/>
+                            </mask>
+                        </variation>
+                    </imageView>
+                </subviews>
+            </view>
+            <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="yMg-Qe-X2K" secondAttribute="trailing" id="2i4-pe-vgu"/>
+                <constraint firstAttribute="bottom" secondItem="yMg-Qe-X2K" secondAttribute="bottom" id="PHo-Jh-jyK"/>
+                <constraint firstItem="yMg-Qe-X2K" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="a8J-rz-jap"/>
+                <constraint firstItem="yMg-Qe-X2K" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="nMC-if-dXr"/>
+            </constraints>
+            <size key="customSize" width="151" height="151"/>
+            <connections>
+                <outlet property="imageView" destination="yMg-Qe-X2K" id="RYb-ev-sQR"/>
+            </connections>
+            <point key="canvasLocation" x="-176" y="-85"/>
+        </collectionViewCell>
+    </objects>
+</document>

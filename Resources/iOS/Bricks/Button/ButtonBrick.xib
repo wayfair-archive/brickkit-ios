@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ButtonBrickCell" customModule="BrickKit" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="20"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="20"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="INl-7B-MSq">
+                        <connections>
+                            <action selector="didTapButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="ezY-lL-CmA"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="INl-7B-MSq" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="K0z-Ad-HMF"/>
+                <constraint firstAttribute="trailing" secondItem="INl-7B-MSq" secondAttribute="trailing" id="WEM-7y-bms"/>
+                <constraint firstAttribute="bottom" secondItem="INl-7B-MSq" secondAttribute="bottom" id="bVp-hE-zd1"/>
+                <constraint firstItem="INl-7B-MSq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="pNg-f4-hul"/>
+            </constraints>
+            <connections>
+                <outlet property="bottomSpaceConstraint" destination="bVp-hE-zd1" id="wTP-uq-IO7"/>
+                <outlet property="button" destination="INl-7B-MSq" id="hHD-Hv-ScE"/>
+                <outlet property="leftSpaceConstraint" destination="pNg-f4-hul" id="MC5-df-puo"/>
+                <outlet property="rightSpaceConstraint" destination="WEM-7y-bms" id="quf-ZO-iFV"/>
+                <outlet property="topSpaceConstraint" destination="K0z-Ad-HMF" id="8ut-kg-D6x"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>

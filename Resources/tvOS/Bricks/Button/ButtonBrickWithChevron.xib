@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="fsj-XJ-8aE" customClass="ButtonBrickCell" customModule="BrickKit" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="101"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="101"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ERc-XK-ChC">
+                        <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                        <state key="normal" title="BUTTON"/>
+                        <connections>
+                            <action selector="didTapButton:" destination="fsj-XJ-8aE" eventType="primaryActionTriggered" id="szN-m0-cLK"/>
+                        </connections>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron" translatesAutoresizingMaskIntoConstraints="NO" id="1WC-QC-ggg">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="5Qt-FN-hru"/>
+                            <constraint firstAttribute="width" constant="14" id="thB-V4-u7C"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="ERc-XK-ChC" firstAttribute="trailing" secondItem="1WC-QC-ggg" secondAttribute="leading" id="5Sr-ls-mvj"/>
+                <constraint firstAttribute="bottom" secondItem="ERc-XK-ChC" secondAttribute="bottom" id="Uth-3h-dR4"/>
+                <constraint firstItem="ERc-XK-ChC" firstAttribute="top" secondItem="fsj-XJ-8aE" secondAttribute="top" id="WAV-5w-HRp"/>
+                <constraint firstAttribute="trailing" secondItem="1WC-QC-ggg" secondAttribute="trailing" id="cES-uZ-N1u"/>
+                <constraint firstItem="1WC-QC-ggg" firstAttribute="centerY" secondItem="fsj-XJ-8aE" secondAttribute="centerY" id="myN-yS-4YH"/>
+                <constraint firstItem="ERc-XK-ChC" firstAttribute="leading" secondItem="fsj-XJ-8aE" secondAttribute="leading" id="sU1-yq-WIh"/>
+            </constraints>
+            <size key="customSize" width="320" height="101"/>
+            <connections>
+                <outlet property="bottomSpaceConstraint" destination="Uth-3h-dR4" id="w0g-CD-F1G"/>
+                <outlet property="button" destination="ERc-XK-ChC" id="LFN-ej-p54"/>
+                <outlet property="leftSpaceConstraint" destination="sU1-yq-WIh" id="pwL-ca-odC"/>
+                <outlet property="rightImage" destination="1WC-QC-ggg" id="bdm-yV-B5a"/>
+                <outlet property="rightSpaceConstraint" destination="cES-uZ-N1u" id="p6Y-2f-qUl"/>
+                <outlet property="topSpaceConstraint" destination="WAV-5w-HRp" id="ZV3-eZ-Ipu"/>
+            </connections>
+            <point key="canvasLocation" x="206" y="185.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="chevron" width="9" height="15"/>
+    </resources>
+</document>
