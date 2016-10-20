@@ -1,0 +1,6 @@
+language: objective-c
+osx_image: xcode8
+
+script: 
+- xctool -project BrickKit.xcodeproj -scheme BrickKit -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO clean build test
+- xctool -project BrickKit.xcodeproj -scheme BrickKit-tvOS -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO clean build test
