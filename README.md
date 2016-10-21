@@ -3,7 +3,8 @@
 </p>
 
 [![Build Status](https://travis-ci.org/wayfair/brickkit-ios.svg)](https://travis-ci.org/wayfair/brickkit-ios)
-[![Build Status](https://img.shields.io/cocoapods/v/BrickKit.svg)](http://cocoapods.org/pods/BrickKit)
+[![Cocoa Pods](https://img.shields.io/cocoapods/v/BrickKit.svg)](http://cocoapods.org/pods/BrickKit)
+[![codecov.io](http://codecov.io/github/wayfair/brickkit-ios/coverage.svg)](http://codecov.io/github/wayfair/brickkit-ios)
 
 # BrickKit is a delightful layout library for iOS and tvOS.  It is written entirely in Swift!
 
