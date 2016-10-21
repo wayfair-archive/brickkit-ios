@@ -570,11 +570,11 @@ extension BrickFlowLayout: BrickLayoutInvalidationProvider {
                 shouldHide = true
             }
 
-//            if shouldHide != attributes.hidden {
+            if shouldHide != attributes.hidden {
                 section.changeVisibility(shouldHide, at: attributes.indexPath.item, updatedAttributes: { attributes, oldFrame in
                     updatedAttributes(attributes: attributes, oldFrame: oldFrame)
                 })
-//            }
+            }
 
             let type = dataSource.brickLayout(self, brickLayoutTypeForItemAtIndexPath: attributes.indexPath)
             switch type {

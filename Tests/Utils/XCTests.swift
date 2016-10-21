@@ -98,3 +98,10 @@ extension SequenceType {
         return dict
     }
 }
+
+extension XCTest {
+
+    var isRunningOnA32BitDevice: Bool {
+        return sizeof(Int) == sizeof(Int32)
+    }
+}

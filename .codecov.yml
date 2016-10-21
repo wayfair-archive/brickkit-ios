@@ -1,0 +1,6 @@
+coverage:
+
+  ignore: # files and folders for processing
+    - Example/*
+    - Tests
+

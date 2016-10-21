@@ -11,32 +11,25 @@ import Foundation
 // overrides Swift global `fatalError`
 @noreturn func fatalError(@autoclosure message: () -> String = "", file: StaticString = #file, line: UInt = #line) {
     FatalErrorUtil.fatalErrorClosure(message(), file, line)
-    unreachable()
 }
 
-// This is a `noreturn` function that pauses forever
-@noreturn func unreachable() {
-    repeat {
-        NSRunLoop.currentRunLoop().run()
-    } while (true)
+@noreturn func swiftFatalError(message: String = "", file: StaticString = #file, line: UInt = #line) {
+    Swift.fatalError(message, file: file, line: line)
 }
 
 /// Utility functions that can replace and restore the `fatalError` global function.
 struct FatalErrorUtil {
 
     // Called by the custom implementation of `fatalError`.
-    private static var fatalErrorClosure: (String, StaticString, UInt) -> () = defaultFatalErrorClosure
-
-    // backup of the original Swift `fatalError`
-    private static let defaultFatalErrorClosure = { Swift.fatalError($0, file: $1, line: $2) }
+    private static var fatalErrorClosure: @noreturn (String, StaticString, UInt) -> () = swiftFatalError
 
     /// Replace the `fatalError` global function with something else.
-    static func replaceFatalError(closure: (String, StaticString, UInt) -> ()) {
+    static func replaceFatalError(closure: @noreturn (String, StaticString, UInt) -> ()) {
         fatalErrorClosure = closure
     }
 
     /// Restore the `fatalError` global function back to the original Swift implementation
     static func restoreFatalError() {
-        fatalErrorClosure = defaultFatalErrorClosure
+        fatalErrorClosure = swiftFatalError
     }
 }

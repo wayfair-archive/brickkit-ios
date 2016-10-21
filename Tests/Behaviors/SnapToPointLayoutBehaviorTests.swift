@@ -318,6 +318,9 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
     }
 
     func testSnapToTheCenterOfTheContentView() {
+        if isRunningOnA32BitDevice { // Ignoring iPhone 5 or lower for now
+            return
+        }
 
         let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .Horizontal(.Center))
         brickView.layout.behaviors.insert(snapBehavior)
