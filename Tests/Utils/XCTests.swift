@@ -100,8 +100,8 @@ extension SequenceType {
 }
 
 extension XCTest {
-    var is32Bit: Bool {
-        let is32bit = sizeof(Int) == sizeof(Int32)
-        return is32bit
+
+    var isRunningOnA32BitDevice: Bool {
+        return sizeof(Int) == sizeof(Int32)
     }
 }

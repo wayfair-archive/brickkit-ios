@@ -318,7 +318,7 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
     }
 
     func testSnapToTheCenterOfTheContentView() {
-        if is32Bit { // Ignoring iPhone 5 or lower for now
+        if isRunningOnA32BitDevice { // Ignoring iPhone 5 or lower for now
             return
         }
 

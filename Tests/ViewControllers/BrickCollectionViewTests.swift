@@ -26,7 +26,7 @@ class BrickCollectionViewTests: XCTestCase {
     }
 
     func testDeinit() {
-        if is32Bit { // Ignoring iPhone 5 or lower for now
+        if isRunningOnA32BitDevice { // Ignoring iPhone 5 or lower for now
             return
         }
 
@@ -38,7 +38,7 @@ class BrickCollectionViewTests: XCTestCase {
     }
 
     func testDeinitWithBehaviors() {
-        if is32Bit { // Ignoring iPhone 5 or lower for now
+        if isRunningOnA32BitDevice { // Ignoring iPhone 5 or lower for now
             return
         }
 
@@ -314,7 +314,7 @@ class BrickCollectionViewTests: XCTestCase {
         brickView.layoutSubviews()
 
         var cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
-        XCTAssertEqual(cell?.frame.height ?? 0, 0)
+        XCTAssertEqual(cell?.frame.height ?? 0, 0) //iOS9 and iOS10 have different behaviors, hence this code style to support both
 
         fixed.repeatCountHash["Brick1"] = 10
         brickView.reloadBricksWithIdentifiers(["CollectionBrick"], shouldReloadCell: true)
