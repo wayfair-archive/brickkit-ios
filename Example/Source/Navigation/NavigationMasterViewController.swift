@@ -47,6 +47,9 @@ class NavigationMasterViewController: BrickViewController {
         let imageView = UIImageView(image: Constants.inAppLogo.imageWithRenderingMode(.AlwaysTemplate))
         #if os(tvOS)
             imageView.tintColor = .brickPurple3
+            
+            collectionView?.delegate = self
+            setNeedsFocusUpdate()
         #else
             imageView.tintColor = .brickGray1
         #endif
@@ -92,6 +95,22 @@ class NavigationMasterViewController: BrickViewController {
     }
 
 }
+
+#if os(tvOS)
+//MARK: - UICollectionViewDelegate
+extension NavigationMasterViewController {
+    func indexPathForPreferredFocusedViewInCollectionView(collectionView: UICollectionView) -> NSIndexPath? {
+        
+        let index = NSIndexPath(forItem: 0, inSection: 1)
+        
+        if let cell = brickCollectionView.cellForItemAtIndexPath(index) as? FocusableBrickCell {
+            cell.willFocus()
+        }
+        
+        return index
+    }
+}
+#endif
 
 // Mark: - BrickCellTapDelegate
 extension NavigationMasterViewController: BrickCellTapDelegate {

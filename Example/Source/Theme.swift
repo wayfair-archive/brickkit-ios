@@ -279,6 +279,9 @@ extension UIColor {
 
 #if os(tvOS)
 extension LabelBrickCell: FocusableBrickCell {
+    
+    public override var allowsFocus = true
+
     public func willFocus() -> Bool {
         self.contentView.layer.borderWidth = 5
         self.contentView.layer.borderColor = UIColor.brickGray2.CGColor
