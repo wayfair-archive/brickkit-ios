@@ -58,6 +58,8 @@ public class SpotlightLayoutBehavior: BrickLayoutBehavior {
                 sectionInset = inset
             }
 
+            var oldFrame = attributes.frame
+
             var originalFrameWithInsets = attributes.originalFrame
             originalFrameWithInsets.size.height = attributes.originalFrame.size.height + sectionInset
 
@@ -117,6 +119,10 @@ public class SpotlightLayoutBehavior: BrickLayoutBehavior {
 
             currentY = attributes.frame.maxY
             previousAttributeWasInSpotlight = isInSpotlight && offsetY >= 0
+
+            if attributes.frame != oldFrame {
+                attributesDidUpdate(attributes: attributes, oldFrame: oldFrame)
+            }
         }
 
         let lastAttribute = scrollAttributes.last! // We can safely unwrap, because we checked the count in the beginning of the function
