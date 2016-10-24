@@ -236,26 +236,29 @@ internal class BrickLayoutSection {
 
         startOrigin = CGPoint(x: frame.origin.x + edgeInsets.left, y: frame.origin.y + edgeInsets.top)
         maxY = frame.origin.y
-        if !create && firstIndex > 0 {
-            var lastVisibleAttribute: BrickLayoutAttributes?
-
-            for index in 1...firstIndex {
-                let lastAttribute = attributes[firstIndex - index]
-                if !lastAttribute.hidden {
-                    lastVisibleAttribute = lastAttribute
-                    break
-                }
-            }
-
+        if !create {
             let visibleAttributes = attributes.filter({ !$0.hidden })
-            if let lastAttribute = lastVisibleAttribute, let lastIndex = visibleAttributes.indexOf(lastAttribute)  {
-                maxY = BrickUtils.findRowMaxY(for: lastIndex + 1, in: visibleAttributes.map{ $0.originalFrame }) ?? frame.origin.y
+            if firstIndex > 0 {
+                var lastVisibleAttribute: BrickLayoutAttributes?
 
-                startOrigin = CGPoint(x: lastAttribute.originalFrame.maxX + inset, y: lastAttribute.originalFrame.origin.y)
+                for index in 1...firstIndex {
+                    let lastAttribute = attributes[firstIndex - index]
+                    if !lastAttribute.hidden {
+                        lastVisibleAttribute = lastAttribute
+                        break
+                    }
+                }
+
+                if let lastAttribute = lastVisibleAttribute, let lastIndex = visibleAttributes.indexOf(lastAttribute)  {
+                    maxY = BrickUtils.findRowMaxY(for: lastIndex + 1, in: visibleAttributes.map{ $0.originalFrame }) ?? frame.origin.y
+
+                    startOrigin = CGPoint(x: lastAttribute.originalFrame.maxX + inset, y: lastAttribute.originalFrame.origin.y)
+                }
+            } else if let first = visibleAttributes.first, let firstAttributesIndex = visibleAttributes.indexOf(first) where firstAttributesIndex <= firstIndex {
+                maxY = first.originalFrame.maxY
+                startOrigin = first.originalFrame.origin
             }
-            
         }
-
 
         var x: CGFloat = startOrigin.x
         var y: CGFloat = startOrigin.y
@@ -359,19 +362,35 @@ internal class BrickLayoutSection {
             updateHeightForRowsFromIndex(attributes.count - 1, maxHeight: maxHeight)
         }
 
-        var frameHeight = maxY - origin.y + edgeInsets.bottom
+        var frameHeight: CGFloat = 0
+        if let first = attributes.first {
+            frameHeight = (maxY - first.originalFrame.origin.y) + edgeInsets.bottom + edgeInsets.top
+            let originY = first.originalFrame.origin.y - edgeInsets.top
+
+            if frame.origin.y != originY {
+                let originDiff = frame.origin.y - originY
+                frame.origin.y = originY
+
+                // The origin for the frame is changed. This means that previously calculated frames need to be compensated back up
+                // Only update the attributes below the firstIndex (as the ones after are already correct)
+                for index in 0..<firstIndex {
+                    attributes[index].frame.origin.y -= originDiff
+                }
+            }
+        }
 
         if frameHeight <= edgeInsets.bottom + edgeInsets.top {
             frameHeight = 0
         }
         frame.size.height = frameHeight
 
+
         switch dataSource.scrollDirection {
         case .Vertical: frame.size.width = sectionWidth
         case .Horizontal:
             x -= inset // Take off the inset as this is added to the end
             frame.size.width = x + edgeInsets.right
-        }
+        }        
     }
 
     func updateHeightForRowsFromIndex(index: Int, maxHeight: CGFloat) {

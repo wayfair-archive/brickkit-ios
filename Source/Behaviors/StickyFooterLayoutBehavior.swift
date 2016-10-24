@@ -25,15 +25,15 @@ public class StickyFooterLayoutBehavior: StickyLayoutBehavior {
         let bottomInset = collectionViewLayout.collectionView!.contentInset.bottom
 
         if isOnFirstSection {
-            collectionViewLayout.collectionView?.scrollIndicatorInsets.bottom = attributes.frame.height  + bottomInset
-            attributes.frame.origin.y = contentBounds.maxY - attributes.frame.size.height - bottomInset
+            collectionViewLayout.collectionView?.scrollIndicatorInsets.bottom = attributes.originalFrame.height  + bottomInset
+            attributes.frame.origin.y = contentBounds.maxY - attributes.originalFrame.size.height - bottomInset
         } else {
-            let y = contentBounds.maxY - attributes.frame.size.height - bottomInset
+            let y = contentBounds.maxY - attributes.originalFrame.size.height - bottomInset
             attributes.frame.origin.y = min(y, attributes.originalFrame.origin.y)
         }
 
         if lastStickyFrame.size != CGSizeZero {
-            attributes.frame.origin.y = min(lastStickyFrame.minY - attributes.frame.height, attributes.originalFrame.origin.y)
+            attributes.frame.origin.y = min(lastStickyFrame.minY - attributes.originalFrame.height, attributes.originalFrame.origin.y)
         }
 
         return !isOnFirstSection
