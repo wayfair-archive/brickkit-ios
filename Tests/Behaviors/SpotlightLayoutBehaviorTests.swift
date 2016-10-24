@@ -306,4 +306,27 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         thirdRepeatingBrick = layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 5, inSection: 1))
         XCTAssertEqual(thirdRepeatingBrick?.frame , CGRect(x: 0, y: 390 + secondHeight, width: 320, height: 100))
     }
+
+    func testThatLastBrickIsShowing() {
+        collectionView.registerBrickClass(DummyBrick.self)
+
+        let height:CGFloat = 300
+        let section = BrickSection(bricks: [
+            DummyBrick(height: .Fixed(size: height)),
+            DummyBrick(height: .Fixed(size: height)),
+            DummyBrick(height: .Fixed(size: height)),
+            DummyBrick(height: .Fixed(size: height)),
+            DummyBrick(height: .Fixed(size: height)),
+            DummyBrick(height: .Fixed(size: height)),
+            ])
+
+        behavior = SpotlightLayoutBehavior(dataSource: FixedSpotlightLayoutBehaviorDataSource(height: 50))
+
+        layout.behaviors.insert(behavior)
+
+        collectionView.setSection(section)
+        collectionView.layoutSubviews()
+
+        XCTAssertEqual(collectionView.visibleCells().count, 6)
+    }
 }
