@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		030E25D61DBE9D2B0061CDF3 /* VideoBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 030E25D51DBE9D2B0061CDF3 /* VideoBrick.xib */; };
+		030E25DA1DBE9D470061CDF3 /* VideoBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030E25D81DBE9D470061CDF3 /* VideoBrick.swift */; };
+		030E25DB1DBE9D470061CDF3 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030E25D91DBE9D470061CDF3 /* VideoView.swift */; };
+		030E25DF1DBFA6D70061CDF3 /* VideoBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030E25DC1DBFA6380061CDF3 /* VideoBrickTests.swift */; };
+		030E25E01DBFA6D80061CDF3 /* VideoBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030E25DC1DBFA6380061CDF3 /* VideoBrickTests.swift */; };
+		030E25E11DBFD7C50061CDF3 /* VideoBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 030E25D51DBE9D2B0061CDF3 /* VideoBrick.xib */; };
 		4E387C561DAEAB350087820E /* BrickAppearBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9B4D11DAD686E00927BE6 /* BrickAppearBehavior.swift */; };
 		4E387C571DAEAB380087820E /* BrickAppearBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9B4D31DAD690400927BE6 /* BrickAppearBehaviorTests.swift */; };
 		4E3BD8E21DB5190100541900 /* DummyFocusableBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD8E01DB5190100541900 /* DummyFocusableBrick.swift */; };
@@ -245,6 +251,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		030E25D51DBE9D2B0061CDF3 /* VideoBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VideoBrick.xib; path = Resources/iOS/Bricks/Video/VideoBrick.xib; sourceTree = SOURCE_ROOT; };
+		030E25D81DBE9D470061CDF3 /* VideoBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoBrick.swift; path = Source/Bricks/Video/VideoBrick.swift; sourceTree = SOURCE_ROOT; };
+		030E25D91DBE9D470061CDF3 /* VideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoView.swift; path = Source/Bricks/Video/VideoView.swift; sourceTree = SOURCE_ROOT; };
+		030E25DC1DBFA6380061CDF3 /* VideoBrickTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoBrickTests.swift; sourceTree = "<group>"; };
 		4E3BD8E01DB5190100541900 /* DummyFocusableBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyFocusableBrick.swift; sourceTree = "<group>"; };
 		4E3BD8E31DB51A9700541900 /* DummyFocusableBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DummyFocusableBrick.xib; sourceTree = "<group>"; };
 		4E9A25031DABEB3400D7EA99 /* BrickKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BrickKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -411,6 +421,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		030E25D41DBE9CE70061CDF3 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				030E25D81DBE9D470061CDF3 /* VideoBrick.swift */,
+				030E25D91DBE9D470061CDF3 /* VideoView.swift */,
+			);
+			name = Video;
+			sourceTree = "<group>";
+		};
+		030E25D71DBE9D340061CDF3 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				030E25D51DBE9D2B0061CDF3 /* VideoBrick.xib */,
+			);
+			name = Video;
+			sourceTree = "<group>";
+		};
 		4E9A256F1DAC0EAB00D7EA99 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -423,6 +450,7 @@
 		4E9A25711DAC0EAB00D7EA99 /* Bricks */ = {
 			isa = PBXGroup;
 			children = (
+				030E25D71DBE9D340061CDF3 /* Video */,
 				4E9A25721DAC0EAB00D7EA99 /* Button */,
 				4E9A25751DAC0EAB00D7EA99 /* Collection */,
 				4E9A25771DAC0EAB00D7EA99 /* Image */,
@@ -659,6 +687,7 @@
 		93D9EBBF1DA4057000D8C87A /* Bricks */ = {
 			isa = PBXGroup;
 			children = (
+				030E25D41DBE9CE70061CDF3 /* Video */,
 				93739BB31DA454AB00DD4B81 /* Button */,
 				93739BAD1DA454AB00DD4B81 /* Collection */,
 				93739BB11DA454AB00DD4B81 /* Image */,
@@ -766,6 +795,7 @@
 				93D9EC271DA4057900D8C87A /* LabelBrickTests.swift */,
 				93902D3A1DA4728C00BC3BA1 /* ImageBrickTests.swift */,
 				9303A6D41DA6E00100502803 /* ButtonBrickTests.swift */,
+				030E25DC1DBFA6380061CDF3 /* VideoBrickTests.swift */,
 			);
 			path = Bricks;
 			sourceTree = "<group>";
@@ -1009,6 +1039,7 @@
 				4E9A25C01DAC27CE00D7EA99 /* LabelBrickButton.xib in Resources */,
 				4E9A25C41DAC298300D7EA99 /* LabelBrickImage.xib in Resources */,
 				4E9A25B61DAC21C200D7EA99 /* ButtonBrick.xib in Resources */,
+				030E25E11DBFD7C50061CDF3 /* VideoBrick.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1042,6 +1073,7 @@
 				4E9A25831DAC0EAB00D7EA99 /* LabelBrick.xib in Resources */,
 				4E9A25851DAC0EAB00D7EA99 /* LabelBrickChevron.xib in Resources */,
 				4E9A25811DAC0EAB00D7EA99 /* CollectionBrick.xib in Resources */,
+				030E25D61DBE9D2B0061CDF3 /* VideoBrick.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1156,6 +1188,7 @@
 				4E9A254D1DABECDF00D7EA99 /* StickyLayoutBehaviorTests.swift in Sources */,
 				4E9A254C1DABECDF00D7EA99 /* StickyFooterLayoutBehaviorTests.swift in Sources */,
 				4E9A256B1DABED0600D7EA99 /* TestBrickViewController.swift in Sources */,
+				030E25E01DBFA6D80061CDF3 /* VideoBrickTests.swift in Sources */,
 				4E9A255C1DABECF500D7EA99 /* BrickSelfsizingFlowLayoutTests.swift in Sources */,
 				4E9A25501DABECE300D7EA99 /* ImageBrickTests.swift in Sources */,
 				4E387C571DAEAB380087820E /* BrickAppearBehaviorTests.swift in Sources */,
@@ -1183,6 +1216,7 @@
 				93D9EC021DA4057000D8C87A /* BrickCell.swift in Sources */,
 				93739BB71DA454AB00DD4B81 /* ImageBrick.swift in Sources */,
 				93D9EBF51DA4057000D8C87A /* StickyLayoutBehavior.swift in Sources */,
+				030E25DB1DBE9D470061CDF3 /* VideoView.swift in Sources */,
 				93D9EBE81DA4057000D8C87A /* BrickLayoutBehavior.swift in Sources */,
 				93D9EC0A1DA4057000D8C87A /* BrickLayoutInvalidationContext.swift in Sources */,
 				93F9B4D21DAD686E00927BE6 /* BrickAppearBehavior.swift in Sources */,
@@ -1198,6 +1232,7 @@
 				93D9EC081DA4057000D8C87A /* BrickFlowLayout.swift in Sources */,
 				93D9EC0B1DA4057000D8C87A /* BrickLayoutSection.swift in Sources */,
 				93D9EBEA1DA4057000D8C87A /* CoverFlowLayoutBehavior.swift in Sources */,
+				030E25DA1DBE9D470061CDF3 /* VideoBrick.swift in Sources */,
 				93D9EC101DA4057000D8C87A /* BrickProtocols.swift in Sources */,
 				93D9EC031DA4057000D8C87A /* BrickSectionCell.swift in Sources */,
 				93D9EC061DA4057000D8C87A /* ImageDownloader.swift in Sources */,
@@ -1224,6 +1259,7 @@
 				93D9EC571DA4057900D8C87A /* HideLayoutBehaviorTests.swift in Sources */,
 				93D9EC5A1DA4057900D8C87A /* OffsetLayoutBehaviorTests.swift in Sources */,
 				93D9EC7C1DA4057900D8C87A /* BrickModelsTests.swift in Sources */,
+				030E25DF1DBFA6D70061CDF3 /* VideoBrickTests.swift in Sources */,
 				93D9EC551DA4057900D8C87A /* CardLayoutBehaviorTests.swift in Sources */,
 				9303A6D51DA6E00100502803 /* ButtonBrickTests.swift in Sources */,
 				93D9EC821DA4057900D8C87A /* DataSources.swift in Sources */,
