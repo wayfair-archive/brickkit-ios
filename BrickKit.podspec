@@ -8,12 +8,12 @@
 
 Pod::Spec.new do |s|
   s.name             = 'BrickKit'
-  s.version          = '0.9.0'
-  s.summary          = 'BrickKit: a smart, easy, and consistent way of making layouts in iOS.'
+  s.version          = '0.9.1'
+  s.summary          = 'BrickKit: a smart, easy, and consistent way of making layouts in iOS and tvOS.'
 
   s.description      = <<-DESC
 
-  BrickKit allows developers to create and display complex layouts in an easy, consistent way.
+  With BrickKit, you can create complex and responsive layouts in a simple way. It's easy to use and easy to extend. Create your own reusable bricks and behaviors.
 
                        DESC
 
