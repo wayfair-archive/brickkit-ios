@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'BrickKit'
-  s.version          = '0.9.0'
+  s.version          = '0.9.1'
   s.summary          = 'BrickKit: a smart, easy, and consistent way of making layouts in iOS.'
 
   s.description      = <<-DESC
