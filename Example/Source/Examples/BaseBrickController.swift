@@ -15,21 +15,22 @@ class BaseBrickController: BrickViewController {
 
     var isBehaviorEnabled = true {
         didSet {
-            updateBehavior(false)
+            updateBehavior()
+            self.brickCollectionView.invalidateBricks()
         }
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.view.backgroundColor = .brickBackground
-        updateBehavior(true)
+        updateBehavior()
 
         if self.presentingViewController != nil {
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(BaseBrickController.close))
         }
     }
 
-    func updateBehavior(onAppear: Bool) {
+    func updateBehavior() {
         guard let behavior = self.behavior else {
             return
         }
@@ -40,9 +41,6 @@ class BaseBrickController: BrickViewController {
         } else {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Enable", style: .Plain, target: self, action: selector)
             self.layout.behaviors.remove(behavior)
-        }
-        if !onAppear {
-            self.brickCollectionView.invalidateBricks()
         }
     }
 
