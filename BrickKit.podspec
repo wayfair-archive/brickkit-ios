@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
                        DESC
 
   s.homepage         = 'https://github.com/wayfair/brickkit-ios'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.license          = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
   s.author           = { 'Ruben Cagnie' => 'rcagnie@wayfair.com' }
   s.source           = { :git => 'https://github.com/wayfair/brickkit-ios.git', :tag => s.version.to_s }
 
