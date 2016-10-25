@@ -24,11 +24,11 @@ extension UIView: BrickDimensionDeviceInfo {
     }
 
     var horizontalSizeClass: UIUserInterfaceSizeClass {
-        return traitCollection.horizontalSizeClass
+        return UIScreen.mainScreen().traitCollection.horizontalSizeClass
     }
 
     var verticalSizeClass: UIUserInterfaceSizeClass {
-        return traitCollection.verticalSizeClass
+        return UIScreen.mainScreen().traitCollection.verticalSizeClass
     }
 }
 
