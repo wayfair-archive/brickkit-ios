@@ -23,7 +23,6 @@ class StickingFooterBaseViewController: BrickApp.BaseBrickController {
 
     let numberOfLabels = 50
     var repeatLabel: LabelBrick!
-    var titleLabelModel: LabelBrickCellModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,25 +33,24 @@ class StickingFooterBaseViewController: BrickApp.BaseBrickController {
 
         self.brickCollectionView.registerBrickClass(LabelBrick.self)
 
-        behavior = StickyFooterLayoutBehavior(dataSource: self)
+        let behavior = StickyFooterLayoutBehavior(dataSource: self)
+        self.brickCollectionView.layout.behaviors.insert(behavior)
 
-        repeatLabel = LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray1, dataSource: self)
-        titleLabelModel = LabelBrickCellModel(text: "HEADER")
-
-        let footerSection = BrickSection(StickySection, backgroundColor: .whiteColor(), bricks: [
-            LabelBrick(FooterTitle, backgroundColor: .lightGrayColor(), dataSource: LabelBrickCellModel(text: "Footer Title")),
-            LabelBrick("Label 1", width: .Ratio(ratio: 0.5), backgroundColor: .lightGrayColor(), dataSource: LabelBrickCellModel(text: "Footer Label 1")),
-            LabelBrick("Label 2", width: .Ratio(ratio: 0.5), backgroundColor: .lightGrayColor(), dataSource: LabelBrickCellModel(text: "Footer Label 2")),
+        let footerSection = BrickSection(StickySection, backgroundColor: UIColor.whiteColor(), bricks: [
+            LabelBrick(FooterTitle, backgroundColor: .brickGray1, dataSource: LabelBrickCellModel(text: "Footer Title")),
+            LabelBrick(width: .Ratio(ratio: 0.5), backgroundColor: .lightGrayColor(), dataSource: LabelBrickCellModel(text: "Footer Label 1")),
+            LabelBrick(width: .Ratio(ratio: 0.5), backgroundColor: .lightGrayColor(), dataSource: LabelBrickCellModel(text: "Footer Label 2")),
             ], inset: 5, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
 
-        let section = BrickSection("Test", backgroundColor: .whiteColor(), bricks: [
-            repeatLabel,
+        let section = BrickSection(backgroundColor: .whiteColor(), bricks: [
+            LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), height: .Auto(estimate: .Fixed(size: 38)), backgroundColor: .brickGray1, dataSource: self),
             footerSection
             ])
         section.repeatCountDataSource = self
 
         self.setSection(section)
     }
+
 }
 
 extension StickingFooterBaseViewController: BrickRepeatCountDataSource {

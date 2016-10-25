@@ -51,6 +51,12 @@ public class BrickLayoutAttributes: UICollectionViewLayoutAttributes {
     }
 }
 
+extension BrickLayoutAttributes {
+    public override var description: String {
+        return super.description + " originalFrame: \(originalFrame); identifier: \(identifier)"
+    }
+}
+
 public protocol BrickLayoutDataSource: class {
     func brickLayout(layout: BrickLayout, widthForItemAtIndexPath indexPath: NSIndexPath, totalWidth: CGFloat, widthRatio: CGFloat) -> CGFloat
     func brickLayout(layout: BrickLayout, estimatedHeightForItemAtIndexPath indexPath: NSIndexPath, containedInWidth width: CGFloat) -> CGFloat

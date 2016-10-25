@@ -16,6 +16,7 @@ class BaseBrickController: BrickViewController {
     var isBehaviorEnabled = true {
         didSet {
             updateBehavior()
+            self.brickCollectionView.invalidateBricks()
         }
     }
 

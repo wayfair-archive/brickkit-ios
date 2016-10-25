@@ -357,7 +357,6 @@ extension BrickFlowLayout: BrickLayoutSectionDataSource {
         case .Section(let section):
             if let brickSection = sections?[section] {
                 updateNumberOfItems(brickSection)
-                brickSection.setOrigin(origin, fromBehaviors: false, updatedAttributes: updatedAttributes)
                 if brickSection.sectionWidth != width {
                     brickSection.setSectionWidth(width, updatedAttributes: updatedAttributes)
                 } else if invalidate  {

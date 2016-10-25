@@ -217,5 +217,46 @@ class StickyFooterLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         XCTAssertEqual(secondSectionAttributes?.frame, CGRect(x: 0, y: collectionViewFrame.height - 100 + 500, width: 320, height: 100))
     }
 
+    func testThatFooterSectionDoesNotGrowTooLarge() {
+        collectionView.layout.zIndexBehavior = .BottomUp
+
+        collectionView.registerBrickClass(LabelBrick.self)
+
+        let stickyDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 50, inSection: 1)])
+        let behavior = StickyFooterLayoutBehavior(dataSource: stickyDataSource)
+        collectionView.layout.behaviors.insert(behavior)
+
+        let configureCellBlock: ConfigureLabelBlock  = { cell in
+            cell.edgeInsets.top = 10
+            cell.edgeInsets.bottom = 11
+        }
+
+        let footerSection = BrickSection(bricks: [
+            LabelBrick("A", text: "Footer Title", configureCellBlock: configureCellBlock),
+            LabelBrick("B", width: .Ratio(ratio: 0.5), text: "Footer Label 1", configureCellBlock: configureCellBlock),
+            LabelBrick("C", width: .Ratio(ratio: 0.5), text: "Footer Label 2", configureCellBlock: configureCellBlock),
+            ])
+
+        let section = BrickSection(bricks: [
+            LabelBrick("BRICK", width: .Ratio(ratio: 0.5), height: .Fixed(size: 38), text: "Brick"),
+            footerSection
+            ])
+        let repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["BRICK" : 50])
+        section.repeatCountDataSource = repeatCountDataSource
+        
+        collectionView.setSection(section)
+        collectionView.layoutSubviews()
+
+        let attributes = collectionView.collectionViewLayout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 50, inSection: 1))
+        XCTAssertEqual(attributes?.frame, CGRect(x: 0, y: 404, width: 320, height: 76))
+
+        let footerAttributes1 = collectionView.collectionViewLayout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 2))
+        XCTAssertEqual(footerAttributes1?.frame, CGRect(x: 0, y: 404, width: 320, height: 38))
+        let footerAttributes2 = collectionView.collectionViewLayout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 2))
+        XCTAssertEqual(footerAttributes2?.frame, CGRect(x: 0, y: 442, width: 160, height: 38))
+        let footerAttributes3 = collectionView.collectionViewLayout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 2, inSection: 2))
+        XCTAssertEqual(footerAttributes3?.frame, CGRect(x: 160, y: 442, width: 160, height: 38))
+    }
+
     
 }
