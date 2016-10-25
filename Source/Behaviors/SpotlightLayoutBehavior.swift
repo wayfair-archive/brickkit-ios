@@ -58,7 +58,7 @@ public class SpotlightLayoutBehavior: BrickLayoutBehavior {
                 sectionInset = inset
             }
 
-            var oldFrame = attributes.frame
+            let oldFrame = attributes.frame
 
             var originalFrameWithInsets = attributes.originalFrame
             originalFrameWithInsets.size.height = attributes.originalFrame.size.height + sectionInset
