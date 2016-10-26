@@ -22,6 +22,7 @@ class BrickDimensionTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
         resetScreen()
+        StubScreen.reset()
     }
 
     func testViewPortrait() {
@@ -192,9 +193,19 @@ extension UIScreen {
 }
 
 class StubScreen: UIScreen {
-    static var horizontalSizeClass: UIUserInterfaceSizeClass = .Unspecified
-    static var verticalSizeClass: UIUserInterfaceSizeClass = .Unspecified
-    static var bounds: CGRect = CGRect(x: 0, y: 0, width: 320, height: 480)
+    static let DefaultHorizontalSizeClass: UIUserInterfaceSizeClass = .Unspecified
+    static let DefaultVerticalSizeClass: UIUserInterfaceSizeClass = .Unspecified
+    static let ScreenDefaultBounds = CGRect(x: 0, y: 0, width: 320, height: 480)
+
+    static var horizontalSizeClass: UIUserInterfaceSizeClass = StubScreen.DefaultHorizontalSizeClass
+    static var verticalSizeClass: UIUserInterfaceSizeClass = StubScreen.DefaultVerticalSizeClass
+    static var bounds: CGRect = StubScreen.ScreenDefaultBounds
+
+    static func reset() {
+        StubScreen.horizontalSizeClass = StubScreen.DefaultHorizontalSizeClass
+        StubScreen.verticalSizeClass = StubScreen.DefaultVerticalSizeClass
+        StubScreen.bounds = StubScreen.ScreenDefaultBounds
+    }
 
     override var traitCollection: UITraitCollection {
         return StubTraitCollection()
