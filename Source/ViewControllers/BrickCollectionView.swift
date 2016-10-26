@@ -499,7 +499,9 @@ extension BrickCollectionView: UICollectionViewDataSource {
                 resizable.sizeChangedHandler = { [weak collectionView] cell in
                     let height = cell.heightForBrickView(withWidth: brickCell.frame.width)
                     if let brickCollectionView = collectionView as? BrickCollectionView, let flow = brickCollectionView.layout as? BrickFlowLayout {
-                        flow.updateHeight(indexPath, newHeight: height)
+                        brickCollectionView.performBatchUpdates({ 
+                            flow.updateHeight(indexPath, newHeight: height)
+                            }, completion: nil)
                     }
                 }
             }
