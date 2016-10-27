@@ -8,19 +8,10 @@
 
 import Foundation
 
-internal protocol BrickDimensionDeviceInfo {
-    var isPortrait: Bool { get }
-    var horizontalSizeClass: UIUserInterfaceSizeClass { get }
-    var verticalSizeClass: UIUserInterfaceSizeClass { get }
-}
-
-extension UIView: BrickDimensionDeviceInfo {
+extension UIView {
+    
     var isPortrait: Bool {
-        #if os(iOS)
-        return UIDevice.currentDevice().orientation.isPortrait
-        #else
-        return false
-        #endif
+        return UIScreen.mainScreen().bounds.width <= UIScreen.mainScreen().bounds.height
     }
 
     var horizontalSizeClass: UIUserInterfaceSizeClass {
@@ -30,6 +21,7 @@ extension UIView: BrickDimensionDeviceInfo {
     var verticalSizeClass: UIUserInterfaceSizeClass {
         return UIScreen.mainScreen().traitCollection.verticalSizeClass
     }
+    
 }
 
 public indirect enum BrickDimension {
@@ -42,42 +34,38 @@ public indirect enum BrickDimension {
     case VerticalSizeClass(regular: BrickDimension, compact: BrickDimension)
 
     public func isEstimate(in view: UIView) -> Bool {
-        return _isEstimate(in: view)
-    }
-
-    func _isEstimate(in deviceInfo: BrickDimensionDeviceInfo) -> Bool {
-        switch self.dimension(in: deviceInfo) {
+        switch self.dimension(in: view) {
         case .Auto(_): return true
         default: return false
         }
     }
 
-    func dimension(in deviceInfo: BrickDimensionDeviceInfo) -> BrickDimension {
+    func dimension(in view: UIView) -> BrickDimension {
         switch self {
         case .Orientation(let landScape, let portrait):
-            let isPortrait: Bool = deviceInfo.isPortrait
-            return (isPortrait ? portrait : landScape).dimension(in: deviceInfo)
+            let isPortrait: Bool = view.isPortrait
+            return (isPortrait ? portrait : landScape).dimension(in: view)
         case .HorizontalSizeClass(let regular, let compact):
-            let isRegular = deviceInfo.horizontalSizeClass == .Regular
-            return (isRegular ? regular : compact).dimension(in: deviceInfo)
+            let isRegular = view.horizontalSizeClass == .Regular
+            return (isRegular ? regular : compact).dimension(in: view)
         case .VerticalSizeClass(let regular, let compact):
-            let isRegular = deviceInfo.verticalSizeClass == .Regular
-            return (isRegular ? regular : compact).dimension(in: deviceInfo)
+            let isRegular = view.verticalSizeClass == .Regular
+            return (isRegular ? regular : compact).dimension(in: view)
         default: return self
         }
     }
 
-    func value(for otherDimension: CGFloat, in deviceInfo: BrickDimensionDeviceInfo) -> CGFloat {
-        let actualDimension = dimension(in: deviceInfo)
+    func value(for otherDimension: CGFloat, in view: UIView) -> CGFloat {
+        let actualDimension = dimension(in: view)
 
         switch actualDimension {
-        case .Auto(let dimension): return dimension.value(for: otherDimension, in: deviceInfo)
-        default: return BrickDimension._rawValue(for: otherDimension, in: deviceInfo, with: actualDimension)
+        case .Auto(let dimension): return dimension.value(for: otherDimension, in: view)
+        default: return BrickDimension._rawValue(for: otherDimension, in: view, with: actualDimension)
         }
     }
 
     /// Function that gets the raw value of a BrickDimension. As of right now, only Ratio and Fixed are allowed
-    static func _rawValue(for otherDimension: CGFloat, in deviceInfo: BrickDimensionDeviceInfo, with dimension: BrickDimension) -> CGFloat {
+    static func _rawValue(for otherDimension: CGFloat, in view: UIView, with dimension: BrickDimension) -> CGFloat {
         switch dimension {
         case .Ratio(let ratio): return ratio * otherDimension
         case .Fixed(let size): return size

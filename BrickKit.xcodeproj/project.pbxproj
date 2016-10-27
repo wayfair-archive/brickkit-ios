@@ -133,6 +133,8 @@
 		930054031DA724AD00239A13 /* SetZIndexBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930054011DA7242800239A13 /* SetZIndexBehaviorTests.swift */; };
 		930054051DA7D8A000239A13 /* BaseBrickCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930054041DA7D8A000239A13 /* BaseBrickCellTests.swift */; };
 		9303A6D51DA6E00100502803 /* ButtonBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9303A6D41DA6E00100502803 /* ButtonBrickTests.swift */; };
+		933FF95E1DC1207900E0B80E /* Swizzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933FF95D1DC1207900E0B80E /* Swizzle.swift */; };
+		933FF95F1DC1207900E0B80E /* Swizzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933FF95D1DC1207900E0B80E /* Swizzle.swift */; };
 		9350F0D61DA82A430051235F /* CollectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9350F0D51DA82A430051235F /* CollectionInfo.swift */; };
 		9361309B1DB83CB7008FFFEF /* CustomBrickCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D48D51DB806990091AA39 /* CustomBrickCollectionView.swift */; };
 		9361309C1DB83CB8008FFFEF /* CustomBrickCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D48D51DB806990091AA39 /* CustomBrickCollectionView.swift */; };
@@ -282,6 +284,7 @@
 		930054011DA7242800239A13 /* SetZIndexBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetZIndexBehaviorTests.swift; sourceTree = "<group>"; };
 		930054041DA7D8A000239A13 /* BaseBrickCellTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseBrickCellTests.swift; sourceTree = "<group>"; };
 		9303A6D41DA6E00100502803 /* ButtonBrickTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonBrickTests.swift; sourceTree = "<group>"; };
+		933FF95D1DC1207900E0B80E /* Swizzle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swizzle.swift; sourceTree = "<group>"; };
 		9350F0D51DA82A430051235F /* CollectionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionInfo.swift; sourceTree = "<group>"; };
 		935D48D51DB806990091AA39 /* CustomBrickCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBrickCollectionView.swift; sourceTree = "<group>"; };
 		9372C5061DA40735007D7EA1 /* FatalErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FatalErrorTests.swift; sourceTree = "<group>"; };
@@ -833,6 +836,7 @@
 				93D9EC4D1DA4057900D8C87A /* DataSources.swift */,
 				9372C5061DA40735007D7EA1 /* FatalErrorTests.swift */,
 				93D9EC4E1DA4057900D8C87A /* XCTests.swift */,
+				933FF95D1DC1207900E0B80E /* Swizzle.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1160,6 +1164,7 @@
 				4E9A25501DABECE300D7EA99 /* ImageBrickTests.swift in Sources */,
 				4E387C571DAEAB380087820E /* BrickAppearBehaviorTests.swift in Sources */,
 				4E9A25651DABECFF00D7EA99 /* DataSources.swift in Sources */,
+				933FF95F1DC1207900E0B80E /* Swizzle.swift in Sources */,
 				4E9A25691DABED0600D7EA99 /* BrickViewControllerTests.swift in Sources */,
 				4E9A25E21DAC2AF400D7EA99 /* DummyBrick.swift in Sources */,
 				4E9A255D1DABECFB00D7EA99 /* BrickCollectionViewDataSourceTests.swift in Sources */,
@@ -1239,6 +1244,7 @@
 				93D9EC841DA4057900D8C87A /* BrickCollectionViewTests.swift in Sources */,
 				93D9EC701DA4057900D8C87A /* AlignRowHeightTests.swift in Sources */,
 				93D9EC7E1DA4057900D8C87A /* Behaviors.swift in Sources */,
+				933FF95E1DC1207900E0B80E /* Swizzle.swift in Sources */,
 				B8B8FFEB1DAD3F4A00A913E9 /* CoverFlowLayoutBehaviorTests.swift in Sources */,
 				93D9EC731DA4057900D8C87A /* BrickFlowLayoutEdgeInsetsTests.swift in Sources */,
 				93D9EC581DA4057900D8C87A /* MaxZIndexBehaviorTests.swift in Sources */,

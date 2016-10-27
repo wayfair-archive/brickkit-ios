@@ -9,29 +9,41 @@
 import XCTest
 @testable import BrickKit
 
-struct TestDeviceInfo: BrickDimensionDeviceInfo {
-    var isPortrait: Bool
-    var horizontalSizeClass: UIUserInterfaceSizeClass
-    var verticalSizeClass: UIUserInterfaceSizeClass
-}
-
 class BrickDimensionTests: XCTestCase {
+    var view: UIView!
 
-    #if os(iOS)
-    func testViewAsDeviceInfo() {
-        let view = UIView()
-        XCTAssertNotNil(view.horizontalSizeClass)
-        XCTAssertNotNil(view.verticalSizeClass)
-        XCTAssertEqual(view.isPortrait, UIDevice.currentDevice().orientation.isPortrait)
+    override func setUp() {
+        super.setUp()
+
+        view = UIView()
+        swizzleScreen()
     }
-    #else
-    func testViewAsDeviceInfo() {
-        let view = UIView()
+
+    override func tearDown() {
+        super.tearDown()
+        resetScreen()
+        StubScreen.reset()
+    }
+
+    func testViewPortrait() {
+        setScreenPortrait(true)
+
         XCTAssertNotNil(view.horizontalSizeClass)
         XCTAssertNotNil(view.verticalSizeClass)
+        XCTAssertTrue(view.isPortrait)
+    }
+
+    func testViewLandscape() {
+        setScreenPortrait(false)
+
         XCTAssertFalse(view.isPortrait)
     }
-    #endif
+
+    func testViewSquare() {
+        StubScreen.bounds.size = CGSize(width: 320, height: 320)
+
+        XCTAssertTrue(view.isPortrait)
+    }
 
     func testFixed() {
         let fixed = BrickDimension.Fixed(size: 50)
@@ -68,56 +80,56 @@ class BrickDimensionTests: XCTestCase {
     }
 
     func testOrientationPortrait() {
-        let deviceInfo = TestDeviceInfo(isPortrait: true, horizontalSizeClass: .Compact, verticalSizeClass: .Compact)
+        setupScreen(isPortrait: true, horizontalSizeClass: .Compact, verticalSizeClass: .Compact)
         let orientation = BrickDimension.Orientation(landscape: BrickDimension.Fixed(size: 100), portrait: BrickDimension.Fixed(size: 50))
-        XCTAssertEqual(orientation.value(for: 1000, in: deviceInfo), 50)
-        XCTAssertEqual(orientation.dimension(in: deviceInfo), BrickDimension.Fixed(size: 50))
+        XCTAssertEqual(orientation.value(for: 1000, in: view), 50)
+        XCTAssertEqual(orientation.dimension(in: view), BrickDimension.Fixed(size: 50))
         XCTAssertEqual(orientation, BrickDimension.Orientation(landscape: BrickDimension.Fixed(size: 100), portrait: BrickDimension.Fixed(size: 50)))
     }
 
     func testOrientationLandscape() {
-        let deviceInfo = TestDeviceInfo(isPortrait: false, horizontalSizeClass: .Compact, verticalSizeClass: .Compact)
+        setupScreen(isPortrait: false, horizontalSizeClass: .Compact, verticalSizeClass: .Compact)
         let orientation = BrickDimension.Orientation(landscape: BrickDimension.Fixed(size: 100), portrait: BrickDimension.Fixed(size: 50))
-        XCTAssertEqual(orientation.value(for: 1000, in: deviceInfo), 100)
-        XCTAssertEqual(orientation.dimension(in: deviceInfo), BrickDimension.Fixed(size: 100))
+        XCTAssertEqual(orientation.value(for: 1000, in: view), 100)
+        XCTAssertEqual(orientation.dimension(in: view), BrickDimension.Fixed(size: 100))
         XCTAssertEqual(orientation, BrickDimension.Orientation(landscape: BrickDimension.Fixed(size: 100), portrait: BrickDimension.Fixed(size: 50)))
     }
 
     func testHorizontalSizeClassCompact() {
-        let deviceInfo = TestDeviceInfo(isPortrait: true, horizontalSizeClass: .Compact, verticalSizeClass: .Regular)
+        setupScreen(isPortrait: true, horizontalSizeClass: .Compact, verticalSizeClass: .Regular)
         let sizeClass = BrickDimension.HorizontalSizeClass(regular: BrickDimension.Fixed(size: 100), compact: BrickDimension.Fixed(size: 50))
-        XCTAssertEqual(sizeClass.value(for: 1000, in: deviceInfo), 50)
-        XCTAssertEqual(sizeClass.dimension(in: deviceInfo), BrickDimension.Fixed(size: 50))
+        XCTAssertEqual(sizeClass.value(for: 1000, in: view), 50)
+        XCTAssertEqual(sizeClass.dimension(in: view), BrickDimension.Fixed(size: 50))
         XCTAssertEqual(sizeClass, BrickDimension.HorizontalSizeClass(regular: BrickDimension.Fixed(size: 100), compact: BrickDimension.Fixed(size: 50)))
 
     }
 
     func testHorizontalSizeClassRegular() {
-        let deviceInfo = TestDeviceInfo(isPortrait: true, horizontalSizeClass: .Regular, verticalSizeClass: .Compact)
+        setupScreen(isPortrait: true, horizontalSizeClass: .Regular, verticalSizeClass: .Compact)
         let sizeClass = BrickDimension.HorizontalSizeClass(regular: BrickDimension.Fixed(size: 100), compact: BrickDimension.Fixed(size: 50))
-        XCTAssertEqual(sizeClass.value(for: 1000, in: deviceInfo), 100)
-        XCTAssertEqual(sizeClass.dimension(in: deviceInfo), BrickDimension.Fixed(size: 100))
+        XCTAssertEqual(sizeClass.value(for: 1000, in: view), 100)
+        XCTAssertEqual(sizeClass.dimension(in: view), BrickDimension.Fixed(size: 100))
         XCTAssertEqual(sizeClass, BrickDimension.HorizontalSizeClass(regular: BrickDimension.Fixed(size: 100), compact: BrickDimension.Fixed(size: 50)))
     }
 
     func testVerticalSizeClassCompact() {
-        let deviceInfo = TestDeviceInfo(isPortrait: true, horizontalSizeClass: .Regular, verticalSizeClass: .Compact)
+        setupScreen(isPortrait: true, horizontalSizeClass: .Regular, verticalSizeClass: .Compact)
         let sizeClass = BrickDimension.VerticalSizeClass(regular: BrickDimension.Fixed(size: 100), compact: BrickDimension.Fixed(size: 50))
-        XCTAssertEqual(sizeClass.value(for: 1000, in: deviceInfo), 50)
-        XCTAssertEqual(sizeClass.dimension(in: deviceInfo), BrickDimension.Fixed(size: 50))
+        XCTAssertEqual(sizeClass.value(for: 1000, in: view), 50)
+        XCTAssertEqual(sizeClass.dimension(in: view), BrickDimension.Fixed(size: 50))
         XCTAssertEqual(sizeClass, BrickDimension.VerticalSizeClass(regular: BrickDimension.Fixed(size: 100), compact: BrickDimension.Fixed(size: 50)))
     }
 
     func testVerticalSizeClassRegular() {
-        let deviceInfo = TestDeviceInfo(isPortrait: true, horizontalSizeClass: .Compact, verticalSizeClass: .Regular)
+        setupScreen(isPortrait: true, horizontalSizeClass: .Compact, verticalSizeClass: .Regular)
         let sizeClass = BrickDimension.VerticalSizeClass(regular: BrickDimension.Fixed(size: 100), compact: BrickDimension.Fixed(size: 50))
-        XCTAssertEqual(sizeClass.value(for: 1000, in: deviceInfo), 100)
-        XCTAssertEqual(sizeClass.dimension(in: deviceInfo), BrickDimension.Fixed(size: 100))
+        XCTAssertEqual(sizeClass.value(for: 1000, in: view), 100)
+        XCTAssertEqual(sizeClass.dimension(in: view), BrickDimension.Fixed(size: 100))
         XCTAssertEqual(sizeClass, BrickDimension.VerticalSizeClass(regular: BrickDimension.Fixed(size: 100), compact: BrickDimension.Fixed(size: 50)))
     }
 
     func testNestedPortraitCompact() {
-        let deviceInfo = TestDeviceInfo(isPortrait: true, horizontalSizeClass: .Compact, verticalSizeClass: .Regular)
+        setupScreen(isPortrait: true, horizontalSizeClass: .Compact, verticalSizeClass: .Regular)
 
         let nested = BrickDimension.Orientation(
             landscape: .Fixed(size: 50),
@@ -125,9 +137,9 @@ class BrickDimensionTests: XCTestCase {
                 regular: .Auto(estimate: .Fixed(size: 100)),
                 compact: .Auto(estimate: .Fixed(size: 50))
             ))
-        XCTAssertEqual(nested.value(for: 1000, in: deviceInfo), 50)
-        XCTAssertEqual(nested.dimension(in: deviceInfo), BrickDimension.Auto(estimate: BrickDimension.Fixed(size: 50)))
-        XCTAssertTrue(nested._isEstimate(in: deviceInfo))
+        XCTAssertEqual(nested.value(for: 1000, in: view), 50)
+        XCTAssertEqual(nested.dimension(in: view), BrickDimension.Auto(estimate: BrickDimension.Fixed(size: 50)))
+        XCTAssertTrue(nested.isEstimate(in: view))
         XCTAssertEqual(nested, BrickDimension.Orientation(
             landscape: .Fixed(size: 50),
             portrait: .HorizontalSizeClass(
@@ -144,3 +156,73 @@ class BrickDimensionTests: XCTestCase {
     }
 
 }
+
+// MARK: - Utility methods to `fake` UIScreen.mainScreen
+extension BrickDimensionTests {
+
+    /// Setup UIScreen.mainScreen to call a different method
+    func swizzleScreen() {
+        NSObject.swizzleStaticMethodSelector(#selector(UIScreen.mainScreen), withSelector: #selector(UIScreen.stubMainScreen), forClass: UIScreen.self)
+    }
+
+    /// Reset UIScreen.mainScreen to call a different method
+    func resetScreen() {
+        NSObject.swizzleStaticMethodSelector(#selector(UIScreen.stubMainScreen), withSelector: #selector(UIScreen.mainScreen), forClass: UIScreen.self)
+    }
+
+    /// Setup the UIScreen for the given test
+    func setupScreen(isPortrait isPortrait: Bool, horizontalSizeClass: UIUserInterfaceSizeClass, verticalSizeClass: UIUserInterfaceSizeClass) {
+        StubScreen.horizontalSizeClass = horizontalSizeClass
+        StubScreen.verticalSizeClass = verticalSizeClass
+        setScreenPortrait(isPortrait)
+    }
+
+    func setScreenPortrait(isPortrait: Bool) {
+        StubScreen.bounds.size = isPortrait ? CGSize(width: 320, height: 480) : CGSize(width: 480, height: 320)
+    }
+
+}
+
+
+// Mark: - Screen
+
+extension UIScreen {
+    @objc class func stubMainScreen() -> UIScreen {
+        return StubScreen()
+    }
+}
+
+class StubScreen: UIScreen {
+    static let DefaultHorizontalSizeClass: UIUserInterfaceSizeClass = .Unspecified
+    static let DefaultVerticalSizeClass: UIUserInterfaceSizeClass = .Unspecified
+    static let ScreenDefaultBounds = CGRect(x: 0, y: 0, width: 320, height: 480)
+
+    static var horizontalSizeClass: UIUserInterfaceSizeClass = StubScreen.DefaultHorizontalSizeClass
+    static var verticalSizeClass: UIUserInterfaceSizeClass = StubScreen.DefaultVerticalSizeClass
+    static var bounds: CGRect = StubScreen.ScreenDefaultBounds
+
+    static func reset() {
+        StubScreen.horizontalSizeClass = StubScreen.DefaultHorizontalSizeClass
+        StubScreen.verticalSizeClass = StubScreen.DefaultVerticalSizeClass
+        StubScreen.bounds = StubScreen.ScreenDefaultBounds
+    }
+
+    override var traitCollection: UITraitCollection {
+        return StubTraitCollection()
+    }
+
+    override var bounds: CGRect {
+        return StubScreen.bounds
+    }
+    
+}
+
+class StubTraitCollection: UITraitCollection {
+    override var horizontalSizeClass: UIUserInterfaceSizeClass {
+        return StubScreen.horizontalSizeClass
+    }
+    override var verticalSizeClass: UIUserInterfaceSizeClass {
+        return StubScreen.verticalSizeClass
+    }
+}
+
