@@ -7,6 +7,8 @@
 [![Pod Version](https://img.shields.io/cocoapods/v/BrickKit.svg)](http://cocoapods.org/pods/BrickKit)
 [![Pod Platform](https://img.shields.io/cocoapods/p/BrickKit.svg)](http://cocoapods.org/pods/BrickKit)
 [![Pod License](https://img.shields.io/cocoapods/l/BrickKit.svg)](https://github.com/wayfair/brickkit-ios/blob/master/LICENSE)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage)
+
 
 # BrickKit is a delightful layout library for iOS and tvOS.  It is written entirely in Swift!
 
