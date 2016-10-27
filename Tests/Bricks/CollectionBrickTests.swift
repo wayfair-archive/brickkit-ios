@@ -95,6 +95,14 @@ class CollectionBrickTests: XCTestCase {
         brickView.setSection(section)
         brickView.layoutSubviews()
 
+        let expectation = expectationWithDescription("Wait for batch updates")
+        brickView.performBatchUpdates({ 
+            // Run this inside a performBatchUpdates, so this is called after the sizeChangeHandler was called
+            }) { (completed) in
+                expectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(5, handler: nil)
+
         let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
         cell1?.layoutIfNeeded()
         XCTAssertEqual(cell1?.brickCollectionView.frame, CGRect(x: 0, y: 0, width: 320, height: 320 * 8))
