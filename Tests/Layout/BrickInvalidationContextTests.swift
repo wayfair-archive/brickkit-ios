@@ -909,5 +909,45 @@ class BrickInvalidationContextTests: XCTestCase {
         let context = BrickLayoutInvalidationContext(type: .UpdateVisibility)
         XCTAssertFalse(context.invalidateWithLayout(UICollectionViewFlowLayout()))
     }
+
+    func testThatInvalidateWithAlignRowHeightsReportsCorrectly() {
+        brickViewController.brickCollectionView.registerBrickClass(DummyBrick.self)
+        brickViewController.brickCollectionView.layout.alignRowHeights = true
+
+        let section = BrickSection("Test Section", bricks: [
+            DummyBrick("Brick 1", width: .Ratio(ratio: 1/2), height: .Fixed(size: 50)),
+            DummyBrick("Brick 2", width: .Ratio(ratio: 1/2), height: .Fixed(size: 50)),
+            ])
+
+        brickViewController.setSection(section)
+        brickViewController.collectionView!.layoutSubviews()
+
+        let context = BrickLayoutInvalidationContext(type: .UpdateHeight(indexPath: NSIndexPath(forItem: 1, inSection: 1), newHeight: 100))
+        brickViewController.layout.invalidateLayoutWithContext(context)
+        brickViewController.brickCollectionView.layoutIfNeeded()
+
+        let cell = brickViewController.brickCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+
+        XCTAssertEqual(cell?.frame, CGRect(x: 0, y: 0, width: width/2, height: 100))
+        XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 3)
+        XCTAssertTrue(context.invalidatedItemIndexPaths!.contains(NSIndexPath(forItem: 0, inSection: 1)))
+        XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
+
+        let expectedResult = [
+            0 : [
+                CGRect(x: 0, y: 0, width: width, height: 100),
+            ],
+            1 : [
+                CGRect(x: 0, y: 0, width: width/2, height: 100),
+                CGRect(x: width/2, y: 0, width: width/2, height: 100),
+            ]
+        ]
+
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        XCTAssertNotNil(attributes)
+        XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 100))
+    }
+
     
 }

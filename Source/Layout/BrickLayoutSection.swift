@@ -308,7 +308,7 @@ internal class BrickLayoutSection {
             if shouldBeOnNextRow {
                 if dataSource.alignRowHeights {
                     let maxHeight = maxY - y
-                    updateHeightForRowsFromIndex(index - 1, maxHeight: maxHeight)
+                    updateHeightForRowsFromIndex(index - 1, maxHeight: maxHeight, updatedAttributes: updatedAttributes)
                 }
 
                 if maxY > y  {
@@ -359,7 +359,7 @@ internal class BrickLayoutSection {
 
         if dataSource.alignRowHeights {
             let maxHeight = maxY - y
-            updateHeightForRowsFromIndex(attributes.count - 1, maxHeight: maxHeight)
+            updateHeightForRowsFromIndex(attributes.count - 1, maxHeight: maxHeight, updatedAttributes: updatedAttributes)
         }
 
         var frameHeight: CGFloat = 0
@@ -393,7 +393,7 @@ internal class BrickLayoutSection {
         }        
     }
 
-    func updateHeightForRowsFromIndex(index: Int, maxHeight: CGFloat) {
+    func updateHeightForRowsFromIndex(index: Int, maxHeight: CGFloat, updatedAttributes: OnAttributesUpdatedHandler?) {
         guard index >= 0 else {
             return
         }
@@ -403,7 +403,11 @@ internal class BrickLayoutSection {
             if attributes[currentIndex].originalFrame.origin.y != y {
                 return
             }
+            let oldFrame = attributes[currentIndex].frame
             attributes[currentIndex].frame.size.height = maxHeight
+            if attributes[currentIndex].frame != oldFrame {
+                updatedAttributes?(attributes: attributes[currentIndex], oldFrame: oldFrame)
+            }
             currentIndex -= 1
         }
     }
