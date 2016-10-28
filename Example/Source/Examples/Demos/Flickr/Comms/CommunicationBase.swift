@@ -8,18 +8,9 @@
 
 import Foundation
 
-public enum HTTPMethod : Int {
-    case GET = 1
-    case POST = 2
-    
-    func stringValue() -> String {
-        switch self {
-        case .GET:
-            return "GET"
-        case .POST:
-            return "POST"
-        }
-    }
+public enum HTTPMethod : String {
+    case GET = "GET"
+    case POST = "POST"
 }
 
 public protocol Mappable {
@@ -56,9 +47,31 @@ public class BaseRequest: Mappable {
     }
 }
 
+extension NSURL {
+    func URLByAppendingQueryParameters(parameters: [String:String]) -> NSURL? {
+        if parameters.count == 0 {
+            return self
+        }
+        
+        var urlVars = [String]()
+        
+        for (k, value) in parameters {
+            if let encodedValue = value.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) {
+                urlVars.append(k + "=" + encodedValue)
+            }
+        }
+        
+        if urlVars.isEmpty {
+            return self
+        }
+
+        return NSURL(string: "\(self.absoluteString!)\(self.query != nil ? "&" : "?")\(urlVars.joinWithSeparator("&"))")
+    }
+}
+
 public class CommunicationBase {
     
-    var serviceEndPoint : String
+    var serviceEndPoint : NSURL
     
     let queueName = "com.brickkit.communicationbase"
     
@@ -70,24 +83,12 @@ public class CommunicationBase {
     public var printParams = true
     public var printRespose = true
     
-    public class func communicationBase(withServiceEndPoint serviceEndPoint: String) -> CommunicationBase {
+    public class func communicationBase(withServiceEndPoint serviceEndPoint: NSURL) -> CommunicationBase {
         return CommunicationBase(serviceEndPoint: serviceEndPoint)
     }
     
-    public init(serviceEndPoint: String) {
+    public init(serviceEndPoint: NSURL) {
         self.serviceEndPoint = serviceEndPoint
-    }
-    
-    func buildQueryString(parameters: [String:String]) -> String {
-        var urlVars:[String] = []
-        
-        for (k, value) in parameters {
-            if let encodedValue = value.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) {
-                urlVars.append(k + "=" + encodedValue)
-            }
-        }
-        
-        return urlVars.isEmpty ? "" : "?" + urlVars.joinWithSeparator("&")
     }
 }
 
@@ -100,18 +101,18 @@ public extension CommunicationBase {
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             
-            var jsonURL = self.serviceEndPoint.stringByAppendingString("\(request.controller)/\(request.action)")
+            let jsonURL = self.serviceEndPoint.URLByAppendingPathComponent("\(request.controller)/\(request.action)")
             
-            var webRequest = NSMutableURLRequest(URL: NSURL(string: jsonURL)!)
+            var webRequest = NSMutableURLRequest(URL: jsonURL!)
             
             if request.useURLPrams {
-                jsonURL.appendContentsOf(self.buildQueryString(request.jsonValue() as! [String : String]))
-                webRequest = NSMutableURLRequest(URL: NSURL(string: jsonURL)!)
+                let newURL = jsonURL?.URLByAppendingQueryParameters(request.jsonValue() as! [String : String])
+                webRequest = NSMutableURLRequest(URL: newURL!)
             } else {
             
                 let requestData = try? NSJSONSerialization.dataWithJSONObject(request.jsonValue() as NSDictionary, options: [.PrettyPrinted])
                 webRequest.timeoutInterval = self.timeOutInterval
-                webRequest.HTTPMethod = HTTPMethod.POST.stringValue()
+                webRequest.HTTPMethod = HTTPMethod.POST.rawValue
                 
                 webRequest.setValue("\(requestData?.length ?? 0)", forHTTPHeaderField:"Content-Length")
                 
@@ -229,14 +230,14 @@ public extension CommunicationBase {
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
             
-            let jsonURL = self.serviceEndPoint.stringByAppendingString("\(request.controller)/\(request.action)")
+            let jsonURL = self.serviceEndPoint.URLByAppendingPathComponent("\(request.controller)/\(request.action)")
             
             let requestData = try? NSJSONSerialization.dataWithJSONObject(request.jsonValue() as NSDictionary, options: [.PrettyPrinted])
             
-            let webRequest = NSMutableURLRequest(URL: NSURL(string: jsonURL)!)
+            let webRequest = NSMutableURLRequest(URL: jsonURL!)
             
             webRequest.timeoutInterval = self.timeOutInterval
-            webRequest.HTTPMethod = HTTPMethod.POST.stringValue()
+            webRequest.HTTPMethod = HTTPMethod.POST.rawValue
             
             webRequest.setValue("\(requestData?.length ?? 0)", forHTTPHeaderField:"Content-Length")
             

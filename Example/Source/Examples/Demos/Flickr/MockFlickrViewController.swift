@@ -36,7 +36,7 @@ class MockFlickrViewController: BrickApp.BaseBrickController {
         self.defaultImageDownloader = BrickCollectionView.imageDownloader
         BrickCollectionView.imageDownloader = CachingImageDownloader()
         
-        let communicationBase = CommunicationBase(serviceEndPoint: "https://api.flickr.com/")
+        let communicationBase = CommunicationBase(serviceEndPoint: NSURL(string: "https://api.flickr.com/")!)
         
         let request = FlickrRecentImagesRequest()
         request.useURLPrams = true

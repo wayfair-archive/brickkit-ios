@@ -11,8 +11,8 @@
 		4E15F9251DBA570600BBD363 /* CachingImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F91E1DBA570600BBD363 /* CachingImageDownloader.swift */; };
 		4E15F9261DBA570600BBD363 /* CommunicationBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F91F1DBA570600BBD363 /* CommunicationBase.swift */; };
 		4E15F9271DBA570600BBD363 /* CommunicationBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F91F1DBA570600BBD363 /* CommunicationBase.swift */; };
-		4E15F9281DBA570600BBD363 /* ImageRequets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F9201DBA570600BBD363 /* ImageRequets.swift */; };
-		4E15F9291DBA570600BBD363 /* ImageRequets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F9201DBA570600BBD363 /* ImageRequets.swift */; };
+		4E15F9281DBA570600BBD363 /* ImageRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F9201DBA570600BBD363 /* ImageRequests.swift */; };
+		4E15F9291DBA570600BBD363 /* ImageRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F9201DBA570600BBD363 /* ImageRequests.swift */; };
 		4E15F92A1DBA570600BBD363 /* MockFlickrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F9211DBA570600BBD363 /* MockFlickrViewController.swift */; };
 		4E15F92B1DBA570600BBD363 /* MockFlickrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F9211DBA570600BBD363 /* MockFlickrViewController.swift */; };
 		4E15F92C1DBA570600BBD363 /* MockTwitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F9231DBA570600BBD363 /* MockTwitterViewController.swift */; };
@@ -256,7 +256,7 @@
 /* Begin PBXFileReference section */
 		4E15F91E1DBA570600BBD363 /* CachingImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachingImageDownloader.swift; sourceTree = "<group>"; };
 		4E15F91F1DBA570600BBD363 /* CommunicationBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunicationBase.swift; sourceTree = "<group>"; };
-		4E15F9201DBA570600BBD363 /* ImageRequets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRequets.swift; sourceTree = "<group>"; };
+		4E15F9201DBA570600BBD363 /* ImageRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRequests.swift; sourceTree = "<group>"; };
 		4E15F9211DBA570600BBD363 /* MockFlickrViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockFlickrViewController.swift; sourceTree = "<group>"; };
 		4E15F9231DBA570600BBD363 /* MockTwitterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTwitterViewController.swift; sourceTree = "<group>"; };
 		4E3BD5C71DB008CD00541900 /* BrickApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrickApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -403,7 +403,7 @@
 			children = (
 				4E15F91E1DBA570600BBD363 /* CachingImageDownloader.swift */,
 				4E15F91F1DBA570600BBD363 /* CommunicationBase.swift */,
-				4E15F9201DBA570600BBD363 /* ImageRequets.swift */,
+				4E15F9201DBA570600BBD363 /* ImageRequests.swift */,
 			);
 			path = Comms;
 			sourceTree = "<group>";
@@ -949,7 +949,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				935D489B1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift in Sources */,
-				4E15F9281DBA570600BBD363 /* ImageRequets.swift in Sources */,
+				4E15F9281DBA570600BBD363 /* ImageRequests.swift in Sources */,
 				4E3BD8001DB1316400541900 /* BaseRepeatBrickViewController.swift in Sources */,
 				4E3BD85C1DB1316400541900 /* StickingFooterBaseViewController.swift in Sources */,
 				4E3BD84E1DB1316400541900 /* SimpleRepeatFixedWidthViewController.swift in Sources */,
@@ -1042,7 +1042,7 @@
 				4E3BD8411DB1316400541900 /* CardScrollingViewController.swift in Sources */,
 				4E3BD8131DB1316400541900 /* BlockHorizontalViewController.swift in Sources */,
 				4E3BD85F1DB1316400541900 /* StickingFooterSectionsViewController.swift in Sources */,
-				4E15F9291DBA570600BBD363 /* ImageRequets.swift in Sources */,
+				4E15F9291DBA570600BBD363 /* ImageRequests.swift in Sources */,
 				4E3BD8071DB1316400541900 /* RepeatCollectionBrickViewController.swift in Sources */,
 				93EAFE331DB57D6B0036331C /* NavigationTransition.swift in Sources */,
 				9327D0441DB94AB300D65BCB /* NiblessBrick.swift in Sources */,

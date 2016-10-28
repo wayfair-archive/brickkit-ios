@@ -15,12 +15,14 @@ class DummyFocusableBrick: Brick {
 
 class DummyFocusableBrickCell: BrickCell, Bricklike {
     typealias BrickType = DummyFocusableBrick
-
+    
     var isCurrentlyFocused = false
     var shouldLoseFocus = true
     var shouldTakeFocus = true
 
     override func updateContent() {
+        self.allowsFocus = true
+    
         super.updateContent()
 
         self.contentView.layer.borderWidth = brick.border
