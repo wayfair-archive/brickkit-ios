@@ -169,7 +169,7 @@ let section = BrickSection(bricks: [
     ])
 setSection(section)
 
-```swift
+```
 
 ![horizontal](Docs/Gif/horizontal.gif)
 
