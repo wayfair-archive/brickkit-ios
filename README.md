@@ -18,7 +18,7 @@ With BrickKit, you can create complex and responsive layouts in a simple way. It
 
 ## Define your layouts using objects that describe the high-level behavior
 
-```
+```swift
 
 let section = BrickSection(bricks: [
     LabelBrick(width: .Ratio(ratio: 1), text: "BRICK 1"),
@@ -44,7 +44,7 @@ self.setSection(section)
 ## Define heights based on rules
 
 
-```
+```swift
 
 // Calculate height using auto-layout
 LabelBrick(height: .Auto(estimate: .Fixed(size: 50)), text: "BRICK"),
@@ -76,7 +76,7 @@ let height: BrickDimension =
 
 ## Complex layouts, using Sections in Sections
 
-```
+```swift
 
 let section = BrickSection(bricks: [
     LabelBrick(width: .Ratio(ratio: 0.5), text: "BRICK"),
@@ -114,7 +114,7 @@ self.setSection(section)
 
 ## Create your own reuseable Bricks!
 
-```
+```swift
 
 registerBrickClass(NiblessBrick.self)
 
@@ -134,7 +134,7 @@ setSection(section)
 
 ## Use different scroll directions within bricks
 
-```
+```swift
 self.registerBrickClass(CollectionBrick.self)
 self.registerBrickClass(LabelBrick.self)
 
@@ -169,7 +169,7 @@ let section = BrickSection(bricks: [
     ])
 setSection(section)
 
-```
+```swift
 
 ![horizontal](Docs/Gif/horizontal.gif)
 
@@ -177,7 +177,7 @@ setSection(section)
 
 Images are automatically resized based on its content
 
-```
+```swift
 
 registerBrickClass(ImageBrick.self)
 registerBrickClass(LabelBrick.self)
@@ -200,7 +200,7 @@ self.setSection(section)
 ![images](Docs/Gif/images.gif)
 
 ## Advanced Sticky
-```
+```swift
 ...
 behavior = StickyLayoutBehavior(dataSource: self)
 ...
@@ -214,7 +214,7 @@ func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStic
 
 ## Coverflow
 
-```
+```swift
 
 layout.scrollDirection = .Horizontal
 
@@ -228,7 +228,7 @@ self.brickCollectionView.layout.behaviors.insert(CoverFlowLayoutBehavior(minimum
 
 ## Appear Behavior (none, bottom, top)
 
-```
+```swift
 layout.appearBehavior = BrickAppearTopBehavior() // Insert from the top
 layout.appearBehavior = BrickAppearBottomBehavior() // Insert from the bottom
 
@@ -237,7 +237,7 @@ layout.appearBehavior = BrickAppearBottomBehavior() // Insert from the bottom
 
 ## Spotlight
 
-```
+```swift
 ...
 behavior = SpotlightLayoutBehavior(dataSource: self)
 ...
@@ -268,7 +268,7 @@ func spotlightLayoutBehavior(behavior: SpotlightLayoutBehavior, smallHeightForIt
 
 ## Installation Instructions
 Installation is simple.  You just need Cocoapods and it is a matter of adding this to your podfile:
-```
+```ruby
 pod 'BrickKit'
 ```
 
