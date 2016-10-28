@@ -102,6 +102,10 @@ public class BrickCell: BaseBrickCell {
     public private(set) var collectionIndex: Int = 0
     public private(set) var collectionIdentifier: String?
 
+    #if os(tvOS)
+    public var allowsFocus: Bool = false
+    #endif
+
     @IBOutlet weak internal var topSpaceConstraint: NSLayoutConstraint? {
         didSet { defaultTopConstraintConstant = topSpaceConstraint?.constant ?? 0 }
     }

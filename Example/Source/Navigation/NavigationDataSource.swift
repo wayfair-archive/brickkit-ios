@@ -87,7 +87,9 @@ class NavigationDataSource {
             ImagesInCollectionBrickViewController.self,
             ImagesInCollectionBrickHorizontalViewController.self
             ]),
-        NavigationItem(title: "Demo", subTitle: "Example Of Using BrickKit in Real Case", viewControllers: [MockTwitterViewController.self])
+        NavigationItem(title: "Demo", subTitle: "Example Of Using BrickKit in Real Case", viewControllers: [
+            MockTwitterViewController.self,
+            MockFlickrViewController.self])
         ]
 
 

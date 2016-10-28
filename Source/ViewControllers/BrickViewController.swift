@@ -159,8 +159,9 @@ extension BrickViewController {
     }
     
     public func collectionView(collectionView: UICollectionView, canFocusItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return brickCollectionView.cellForItemAtIndexPath(indexPath) is FocusableBrickCell
+        let cell = brickCollectionView.cellForItemAtIndexPath(indexPath) as? BrickCell
+        return cell is FocusableBrickCell && cell?.allowsFocus == true
     }
-}
+    }
 
 #endif

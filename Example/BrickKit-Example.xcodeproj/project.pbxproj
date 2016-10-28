@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E15F9241DBA570600BBD363 /* CachingImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F91E1DBA570600BBD363 /* CachingImageDownloader.swift */; };
+		4E15F9251DBA570600BBD363 /* CachingImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F91E1DBA570600BBD363 /* CachingImageDownloader.swift */; };
+		4E15F9261DBA570600BBD363 /* CommunicationBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F91F1DBA570600BBD363 /* CommunicationBase.swift */; };
+		4E15F9271DBA570600BBD363 /* CommunicationBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F91F1DBA570600BBD363 /* CommunicationBase.swift */; };
+		4E15F9281DBA570600BBD363 /* ImageRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F9201DBA570600BBD363 /* ImageRequests.swift */; };
+		4E15F9291DBA570600BBD363 /* ImageRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F9201DBA570600BBD363 /* ImageRequests.swift */; };
+		4E15F92A1DBA570600BBD363 /* MockFlickrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F9211DBA570600BBD363 /* MockFlickrViewController.swift */; };
+		4E15F92B1DBA570600BBD363 /* MockFlickrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F9211DBA570600BBD363 /* MockFlickrViewController.swift */; };
+		4E15F92C1DBA570600BBD363 /* MockTwitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F9231DBA570600BBD363 /* MockTwitterViewController.swift */; };
+		4E15F92D1DBA570600BBD363 /* MockTwitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F9231DBA570600BBD363 /* MockTwitterViewController.swift */; };
 		4E3BD6911DB0097400541900 /* BrickKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E3BD6851DB0095000541900 /* BrickKit.framework */; };
 		4E3BD6921DB0097400541900 /* BrickKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4E3BD6851DB0095000541900 /* BrickKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4E3BD72E1DB0101400541900 /* BrickKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E3BD6891DB0095000541900 /* BrickKit.framework */; };
@@ -115,8 +125,6 @@
 		4E3BD85F1DB1316400541900 /* StickingFooterSectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7B21DB1316400541900 /* StickingFooterSectionsViewController.swift */; };
 		4E3BD8601DB1316400541900 /* StickingSectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7B31DB1316400541900 /* StickingSectionsViewController.swift */; };
 		4E3BD8611DB1316400541900 /* StickingSectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7B31DB1316400541900 /* StickingSectionsViewController.swift */; };
-		4E3BD8621DB1316400541900 /* MockTwitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7B51DB1316400541900 /* MockTwitterViewController.swift */; };
-		4E3BD8631DB1316400541900 /* MockTwitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7B51DB1316400541900 /* MockTwitterViewController.swift */; };
 		4E3BD8681DB1316400541900 /* NavigationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7B91DB1316400541900 /* NavigationDataSource.swift */; };
 		4E3BD8691DB1316400541900 /* NavigationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7B91DB1316400541900 /* NavigationDataSource.swift */; };
 		4E3BD86A1DB1316400541900 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7BA1DB1316400541900 /* Theme.swift */; };
@@ -246,6 +254,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4E15F91E1DBA570600BBD363 /* CachingImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachingImageDownloader.swift; sourceTree = "<group>"; };
+		4E15F91F1DBA570600BBD363 /* CommunicationBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunicationBase.swift; sourceTree = "<group>"; };
+		4E15F9201DBA570600BBD363 /* ImageRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRequests.swift; sourceTree = "<group>"; };
+		4E15F9211DBA570600BBD363 /* MockFlickrViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockFlickrViewController.swift; sourceTree = "<group>"; };
+		4E15F9231DBA570600BBD363 /* MockTwitterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTwitterViewController.swift; sourceTree = "<group>"; };
 		4E3BD5C71DB008CD00541900 /* BrickApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrickApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E3BD67D1DB0094F00541900 /* BrickKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BrickKit.xcodeproj; path = ../BrickKit.xcodeproj; sourceTree = "<group>"; };
 		4E3BD6D51DB00F9F00541900 /* BrickApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrickApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -305,7 +318,6 @@
 		4E3BD7B11DB1316400541900 /* StickingFooterBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickingFooterBaseViewController.swift; sourceTree = "<group>"; };
 		4E3BD7B21DB1316400541900 /* StickingFooterSectionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickingFooterSectionsViewController.swift; sourceTree = "<group>"; };
 		4E3BD7B31DB1316400541900 /* StickingSectionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickingSectionsViewController.swift; sourceTree = "<group>"; };
-		4E3BD7B51DB1316400541900 /* MockTwitterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTwitterViewController.swift; sourceTree = "<group>"; };
 		4E3BD7B61DB1316400541900 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E3BD7B91DB1316400541900 /* NavigationDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationDataSource.swift; sourceTree = "<group>"; };
 		4E3BD7BA1DB1316400541900 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -368,6 +380,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E15F91B1DBA570600BBD363 /* Demos */ = {
+			isa = PBXGroup;
+			children = (
+				4E15F91C1DBA570600BBD363 /* Flickr */,
+				4E15F9221DBA570600BBD363 /* Twitter */,
+			);
+			path = Demos;
+			sourceTree = "<group>";
+		};
+		4E15F91C1DBA570600BBD363 /* Flickr */ = {
+			isa = PBXGroup;
+			children = (
+				4E15F91D1DBA570600BBD363 /* Comms */,
+				4E15F9211DBA570600BBD363 /* MockFlickrViewController.swift */,
+			);
+			path = Flickr;
+			sourceTree = "<group>";
+		};
+		4E15F91D1DBA570600BBD363 /* Comms */ = {
+			isa = PBXGroup;
+			children = (
+				4E15F91E1DBA570600BBD363 /* CachingImageDownloader.swift */,
+				4E15F91F1DBA570600BBD363 /* CommunicationBase.swift */,
+				4E15F9201DBA570600BBD363 /* ImageRequests.swift */,
+			);
+			path = Comms;
+			sourceTree = "<group>";
+		};
+		4E15F9221DBA570600BBD363 /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+				4E15F9231DBA570600BBD363 /* MockTwitterViewController.swift */,
+			);
+			path = Twitter;
+			sourceTree = "<group>";
+		};
 		4E3BD5BE1DB008CD00541900 = {
 			isa = PBXGroup;
 			children = (
@@ -468,7 +516,7 @@
 				4E3BD79F1DB1316400541900 /* Scrolling */,
 				4E3BD7A31DB1316400541900 /* Simple */,
 				4E3BD7AB1DB1316400541900 /* Sticking */,
-				4E3BD7B41DB1316400541900 /* Twitter */,
+				4E15F91B1DBA570600BBD363 /* Demos */,
 			);
 			path = Examples;
 			sourceTree = "<group>";
@@ -593,14 +641,6 @@
 				4E3BD7B31DB1316400541900 /* StickingSectionsViewController.swift */,
 			);
 			path = Sticking;
-			sourceTree = "<group>";
-		};
-		4E3BD7B41DB1316400541900 /* Twitter */ = {
-			isa = PBXGroup;
-			children = (
-				4E3BD7B51DB1316400541900 /* MockTwitterViewController.swift */,
-			);
-			path = Twitter;
 			sourceTree = "<group>";
 		};
 		4E3BD7B71DB1316400541900 /* Navigation */ = {
@@ -909,6 +949,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				935D489B1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift in Sources */,
+				4E15F9281DBA570600BBD363 /* ImageRequests.swift in Sources */,
 				4E3BD8001DB1316400541900 /* BaseRepeatBrickViewController.swift in Sources */,
 				4E3BD85C1DB1316400541900 /* StickingFooterBaseViewController.swift in Sources */,
 				4E3BD84E1DB1316400541900 /* SimpleRepeatFixedWidthViewController.swift in Sources */,
@@ -919,7 +960,9 @@
 				4E3BD8081DB1316400541900 /* SimpleCollectionBrickViewController.swift in Sources */,
 				4E3BD8501DB1316400541900 /* SimpleRepeatHeightRatioViewController.swift in Sources */,
 				4E3BD8401DB1316400541900 /* CardScrollingViewController.swift in Sources */,
+				4E15F92A1DBA570600BBD363 /* MockFlickrViewController.swift in Sources */,
 				4E3BD8121DB1316400541900 /* BlockHorizontalViewController.swift in Sources */,
+				4E15F9241DBA570600BBD363 /* CachingImageDownloader.swift in Sources */,
 				4E3BD85E1DB1316400541900 /* StickingFooterSectionsViewController.swift in Sources */,
 				4E3BD8061DB1316400541900 /* RepeatCollectionBrickViewController.swift in Sources */,
 				4E3BD8021DB1316400541900 /* BaseSectionBrickViewController.swift in Sources */,
@@ -956,10 +999,10 @@
 				4E3BD7BC1DB1316400541900 /* AppDelegate.swift in Sources */,
 				935D48901DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift in Sources */,
 				4E3BD8441DB1316400541900 /* MultiDimensionBrickViewController.swift in Sources */,
+				4E15F92C1DBA570600BBD363 /* MockTwitterViewController.swift in Sources */,
 				4E3BD7DE1DB1316400541900 /* SegmentHeaderBrick.swift in Sources */,
 				4E3BD8261DB1316400541900 /* HideSectionsViewController.swift in Sources */,
 				4E3BD8241DB1316400541900 /* HideBrickViewController.swift in Sources */,
-				4E3BD8621DB1316400541900 /* MockTwitterViewController.swift in Sources */,
 				93EAFE2F1DB57D680036331C /* NavigationTransition.swift in Sources */,
 				4E3BD7D81DB1316400541900 /* PostBrick.swift in Sources */,
 				4E3BD8281DB1316400541900 /* InsertBrickViewController.swift in Sources */,
@@ -975,6 +1018,7 @@
 				4E3BD86C1DB1316400541900 /* ViewController.swift in Sources */,
 				4E3BD7DC1DB1316400541900 /* ProfileImageBrick.swift in Sources */,
 				4E3BD86A1DB1316400541900 /* Theme.swift in Sources */,
+				4E15F9261DBA570600BBD363 /* CommunicationBase.swift in Sources */,
 				4E3BD8221DB1316400541900 /* DynamicContentViewController.swift in Sources */,
 				4E3BD8341DB1316400541900 /* SizeClassBrick.swift in Sources */,
 			);
@@ -998,11 +1042,13 @@
 				4E3BD8411DB1316400541900 /* CardScrollingViewController.swift in Sources */,
 				4E3BD8131DB1316400541900 /* BlockHorizontalViewController.swift in Sources */,
 				4E3BD85F1DB1316400541900 /* StickingFooterSectionsViewController.swift in Sources */,
+				4E15F9291DBA570600BBD363 /* ImageRequests.swift in Sources */,
 				4E3BD8071DB1316400541900 /* RepeatCollectionBrickViewController.swift in Sources */,
 				93EAFE331DB57D6B0036331C /* NavigationTransition.swift in Sources */,
 				9327D0441DB94AB300D65BCB /* NiblessBrick.swift in Sources */,
 				93EAFE321DB57D6B0036331C /* NavigationMasterViewController.swift in Sources */,
 				4E3BD8031DB1316400541900 /* BaseSectionBrickViewController.swift in Sources */,
+				4E15F9251DBA570600BBD363 /* CachingImageDownloader.swift in Sources */,
 				4E3BD8311DB1316400541900 /* OffsetBrickViewController.swift in Sources */,
 				4E3BD8D71DB1374800541900 /* ImageViewBrickViewController.swift in Sources */,
 				4E3BD8171DB1316400541900 /* SimpleHorizontalScrollBrickViewController.swift in Sources */,
@@ -1024,19 +1070,21 @@
 				4E3BD7F91DB1316400541900 /* TwoLabelBrick.swift in Sources */,
 				4E3BD81B1DB1316400541900 /* AdvancedRepeatViewController.swift in Sources */,
 				93EAFE311DB57D6B0036331C /* NavigationDetailViewController.swift in Sources */,
+				4E15F92B1DBA570600BBD363 /* MockFlickrViewController.swift in Sources */,
 				4E3BD8D41DB1373C00541900 /* HorizontalCollectionViewController.swift in Sources */,
 				4E3BD8691DB1316400541900 /* NavigationDataSource.swift in Sources */,
 				4E3BD8491DB1316400541900 /* SimpleBrickViewController.swift in Sources */,
 				4E3BD7DB1DB1316400541900 /* ProfileHeaderBrick.swift in Sources */,
 				4E3BD8211DB1316400541900 /* ChangeNibBrickViewController.swift in Sources */,
 				4E3BD8571DB1316400541900 /* SectionStickingViewController.swift in Sources */,
+				4E15F9271DBA570600BBD363 /* CommunicationBase.swift in Sources */,
 				4E3BD8391DB1316400541900 /* TestBrick.swift in Sources */,
 				4E3BD7BD1DB1316400541900 /* AppDelegate.swift in Sources */,
 				4E3BD8451DB1316400541900 /* MultiDimensionBrickViewController.swift in Sources */,
 				4E3BD7DF1DB1316400541900 /* SegmentHeaderBrick.swift in Sources */,
 				4E3BD8271DB1316400541900 /* HideSectionsViewController.swift in Sources */,
 				4E3BD8251DB1316400541900 /* HideBrickViewController.swift in Sources */,
-				4E3BD8631DB1316400541900 /* MockTwitterViewController.swift in Sources */,
+				4E15F92D1DBA570600BBD363 /* MockTwitterViewController.swift in Sources */,
 				4E3BD7D91DB1316400541900 /* PostBrick.swift in Sources */,
 				4E3BD8291DB1316400541900 /* InsertBrickViewController.swift in Sources */,
 				4E3BD8371DB1316400541900 /* SizeClassesBrickViewController.swift in Sources */,
