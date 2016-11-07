@@ -108,6 +108,36 @@ class CollectionBrickTests: XCTestCase {
         XCTAssertEqual(cell1?.brickCollectionView.frame, CGRect(x: 0, y: 0, width: 320, height: 320 * 8))
     }
 
+    func testThatCollectionBrickDoesNotSendOutUpdatesDuringLayoutSubviews() {
+        brickView.registerBrickClass(CollectionBrick.self)
+
+        let collectionSection = BrickSection("CollectionSection", bricks: [
+            LabelBrick(text: "a")
+            ])
+
+        let section = BrickSection("RootSection", bricks: [
+            CollectionBrick("Collection1", dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { cell in
+                cell.brickCollectionView.registerBrickClass(LabelBrick.self)
+            }))
+            ])
+
+        let delegate = FixedBrickLayoutDelegate()
+        brickView.layout.delegate = delegate
+        brickView.setSection(section)
+        brickView.layoutSubviews()
+
+        XCTAssertEqual(delegate.count, 1, "The delegate should have only been called 1 time for the updated height of the CollectionBrick")
+    }
+
+}
+
+class FixedBrickLayoutDelegate: BrickLayoutDelegate {
+    var count = 0
+
+    func brickLayout(layout: BrickLayout, didUpdateHeightForItemAtIndexPath indexPath: NSIndexPath) {
+        count += 1
+    }
+
 }
 
 class CollectionViewRepeatDataSource: BrickRepeatCountDataSource {

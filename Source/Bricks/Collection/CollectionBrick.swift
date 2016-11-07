@@ -84,6 +84,12 @@ public class CollectionBrickCell: BrickCell, Bricklike, AsynchronousResizableCel
 
     public var sizeChangedHandler: CellSizeChangedHandler?
 
+    /// Flag that indicates if the CollectionBrick is calculating its height
+    // This is introduced because otherwise the sizeChangedHandler might get called while calculating.
+    // The sizeChangedHandler should only be used for Asynchronous size changes
+    // https://github.com/wayfair/brickkit-ios/issues/28
+    private var isCalculatingHeight = false
+
     @IBOutlet public weak var brickCollectionView: BrickCollectionView! {
         didSet {
             self.layout = brickCollectionView.layout as? BrickFlowLayout
@@ -113,6 +119,8 @@ public class CollectionBrickCell: BrickCell, Bricklike, AsynchronousResizableCel
     }
 
     public override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        isCalculatingHeight = true
+
         brickCollectionView.frame = layoutAttributes.bounds
         self.currentPage = brick.dataSource.currentPageForCollectionBrickCell(self)
         brickCollectionView.layoutSubviews()
@@ -126,6 +134,8 @@ public class CollectionBrickCell: BrickCell, Bricklike, AsynchronousResizableCel
             }
             brickCollectionView.contentOffset.y = 0
         }
+
+        isCalculatingHeight = false
 
         return super.preferredLayoutAttributesFittingAttributes(layoutAttributes)
     }
@@ -155,6 +165,10 @@ public class CollectionBrickCell: BrickCell, Bricklike, AsynchronousResizableCel
 extension CollectionBrickCell: BrickLayoutDelegate {
 
     public func brickLayout(layout: BrickLayout, didUpdateHeightForItemAtIndexPath indexPath: NSIndexPath) {
+        guard !isCalculatingHeight else {
+            return
+        }
+
         sizeChangedHandler?(cell: self)
         brickCollectionView.layoutSubviews()
     }
