@@ -52,17 +52,11 @@ class HorizontalScrollSectionBrickViewController: BrickApp.BaseBrickController, 
 
         let section = BrickSection(backgroundColor: .whiteColor(), bricks: [
             LabelBrick(backgroundColor: .brickGray3, text: "1/4 Ratio", configureCellBlock: configureCell),
-            CollectionBrick("Collection 1", backgroundColor: .brickGray1, scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section1, configureHandler: { (brickCollectionCell) in
-                brickCollectionCell.brickCollectionView.registerBrickClass(ImageBrick.self)
-            })),
+            CollectionBrick("Collection 1", backgroundColor: .brickGray1, scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section1), brickTypes:[ImageBrick.self]),
             LabelBrick(backgroundColor: .brickGray3, text: "1/2 Ratio", configureCellBlock: configureCell),
-            CollectionBrick("Collection 2", backgroundColor: .brickGray3, scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section2, configureHandler: { (brickCollectionCell) in
-                brickCollectionCell.brickCollectionView.registerBrickClass(ImageBrick.self)
-            })),
+            CollectionBrick("Collection 2", backgroundColor: .brickGray3, scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section2), brickTypes:[ImageBrick.self]),
             LabelBrick(backgroundColor: .brickGray3, text: "100px Fixed", configureCellBlock: configureCell),
-            CollectionBrick("Collection 3", backgroundColor: .brickGray5, scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section3, configureHandler: { (brickCollectionCell) in
-                brickCollectionCell.brickCollectionView.registerBrickClass(ImageBrick.self)
-            })),
+            CollectionBrick("Collection 3", backgroundColor: .brickGray5, scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section3), brickTypes:[ImageBrick.self]),
             ])
 
         self.setSection(section)

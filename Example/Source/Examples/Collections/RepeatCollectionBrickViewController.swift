@@ -46,7 +46,7 @@ class RepeatCollectionBrickViewController: BrickApp.BaseBrickController, BrickRe
         self.registerBrickClass(CollectionBrick.self)
 
         let section = BrickSection(bricks: [
-            CollectionBrick(RepeatCollectionBrickViewController.Identifiers.collectionBrick, dataSource: self)
+            CollectionBrick(RepeatCollectionBrickViewController.Identifiers.collectionBrick, dataSource: self, brickTypes: [LabelBrick.self, ImageBrick.self])
             ], inset: 20)
         section.repeatCountDataSource = self
 
@@ -67,13 +67,12 @@ class RepeatCollectionBrickViewController: BrickApp.BaseBrickController, BrickRe
 
 extension RepeatCollectionBrickViewController: CollectionBrickCellDataSource {
 
-    func configureCollectionBrickViewForBrickCollectionCell(brickCollectionCell: CollectionBrickCell) {
-        brickCollectionCell.brickCollectionView.registerBrickClass(LabelBrick.self)
-        brickCollectionCell.brickCollectionView.registerBrickClass(ImageBrick.self)
-    }
-
     func sectionForCollectionBrickCell(cell: CollectionBrickCell) -> BrickSection {
         return collectionSection
+    }
+    
+    func registerBricks(for cell: CollectionBrickCell) {
+        cell.brickCollectionView.registerNib(LabelBrickNibs.Image, forBrickWithIdentifier: RepeatCollectionBrickViewController.Identifiers.subTitleLabel)
     }
     
 }
@@ -99,7 +98,13 @@ extension RepeatCollectionBrickViewController: LabelBrickCellDataSource {
         } else if identifier == RepeatCollectionBrickViewController.Identifiers.subTitleLabel {
             cell.label.text = "SubTitle \(collectionIndex)".uppercaseString
         }
-
+        
+        cell.imageView?.translatesAutoresizingMaskIntoConstraints = true
+        cell.imageView?.frame = CGRect(origin: cell.imageView?.frame.origin ?? CGPoint.zero, size: CGSize(width: 30, height: 30))
+        cell.imageView?.clipsToBounds = true
+        cell.imageView?.contentMode = .ScaleAspectFit
+        cell.imageView?.image = UIImage(named: "wayfair")
+        
     }
 }
 

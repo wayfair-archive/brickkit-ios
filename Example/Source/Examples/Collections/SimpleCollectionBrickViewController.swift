@@ -39,11 +39,8 @@ class SimpleCollectionBrickViewController: BrickApp.BaseBrickController {
         ])
 
         let section = BrickSection(bricks: [
-            CollectionBrick(backgroundColor: .brickSection, dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { (brickCollectionCell) in
-                brickCollectionCell.brickCollectionView.registerBrickClass(LabelBrick.self)
-                brickCollectionCell.brickCollectionView.registerBrickClass(ImageBrick.self)
-            })),
-            CollectionBrick(backgroundColor: .brickSection, dataSource: self),
+            CollectionBrick(backgroundColor: .brickSection, dataSource: CollectionBrickCellModel(section: collectionSection), brickTypes: [LabelBrick.self, ImageBrick.self]),
+            CollectionBrick(backgroundColor: .brickSection, dataSource: self, brickTypes: [LabelBrick.self, ImageBrick.self]),
             ], inset: 50)
 
         self.setSection(section)
@@ -53,11 +50,6 @@ class SimpleCollectionBrickViewController: BrickApp.BaseBrickController {
 }
 
 extension SimpleCollectionBrickViewController: CollectionBrickCellDataSource {
-
-    func configureCollectionBrickViewForBrickCollectionCell(brickCollectionCell: CollectionBrickCell) {
-        brickCollectionCell.brickCollectionView.registerBrickClass(LabelBrick.self)
-        brickCollectionCell.brickCollectionView.registerBrickClass(ImageBrick.self)
-    }
 
     func sectionForCollectionBrickCell(cell: CollectionBrickCell) -> BrickSection {
         let collectionSection = BrickSection(bricks: [

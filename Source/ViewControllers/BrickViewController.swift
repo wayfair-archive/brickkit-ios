@@ -162,6 +162,6 @@ extension BrickViewController {
         let cell = brickCollectionView.cellForItemAtIndexPath(indexPath) as? BrickCell
         return cell is FocusableBrickCell && cell?.allowsFocus == true
     }
-    }
+}
 
 #endif

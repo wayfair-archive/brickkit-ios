@@ -175,10 +175,7 @@ class AsynchronousResizableCellTests: XCTestCase {
             ])
 
         let section = BrickSection(bricks: [
-            CollectionBrick(dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { (cell) in
-                cell.brickCollectionView.registerBrickClass(AsynchronousResizableBrick.self)
-            }))
-            ])
+            CollectionBrick(dataSource: CollectionBrickCellModel(section: collectionSection), brickTypes: [AsynchronousResizableBrick.self])])
 
 
         brickView.setSection(section)

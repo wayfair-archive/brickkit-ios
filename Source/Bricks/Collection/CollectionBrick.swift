@@ -9,6 +9,7 @@
 import UIKit
 
 public typealias ConfigureCollectionBrickBlock = ((cell: CollectionBrickCell) -> Void)
+public typealias RegisterBricksCollectionBrickBlock = ((cell: CollectionBrickCell) -> Void)
 
 // MARK: - Brick
 
@@ -16,10 +17,14 @@ public class CollectionBrick: Brick {
     let dataSource: CollectionBrickCellDataSource
     let scrollDirection: UICollectionViewScrollDirection
     var shouldCalculateFullHeight: Bool = true // This flag indicates that the collection brick is small enough to calculate its whole height directly
-
-    public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, scrollDirection: UICollectionViewScrollDirection = .Vertical, dataSource: CollectionBrickCellDataSource) {
+    var brickTypes: [Brick.Type]
+    
+    public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, scrollDirection: UICollectionViewScrollDirection = .Vertical, dataSource: CollectionBrickCellDataSource, brickTypes: [Brick.Type] = []) {
         self.dataSource = dataSource
         self.scrollDirection = scrollDirection
+        
+        self.brickTypes = brickTypes
+        
         super.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView)
     }
 }
@@ -28,8 +33,11 @@ public class CollectionBrick: Brick {
 
 /// An object that adopts the `CollectionBrickCellDataSource` protocol is responsible for providing the data required by a `CollectionBrick`.
 public protocol CollectionBrickCellDataSource {
-    func configureCollectionBrickViewForBrickCollectionCell(cell: CollectionBrickCell)
-    func dataSourceForCollectionBrickCell(cell: CollectionBrickCell) -> BrickCollectionViewDataSource
+   
+    func configure(for cell: CollectionBrickCell)
+    
+    func registerBricks(for cell: CollectionBrickCell)
+    func dataSourceForCollectionBrickCell(cell: CollectionBrickCell) -> BrickCollectionViewDataSource 
     func sectionForCollectionBrickCell(cell: CollectionBrickCell) -> BrickSection
     func currentPageForCollectionBrickCell(cell: CollectionBrickCell) -> Int?
 }
@@ -47,6 +55,10 @@ public extension CollectionBrickCellDataSource {
     func currentPageForCollectionBrickCell(brickCollectionCell: CollectionBrickCell) -> Int? {
         return nil
     }
+    
+    func configure(for cell: CollectionBrickCell) {}
+    
+    func registerBricks(for cell: CollectionBrickCell) {}
 }
 
 // MARK: - Models
@@ -57,13 +69,15 @@ public class CollectionBrickCellModel: CollectionBrickCellDataSource {
             dataSource.setSection(section)
         }
     }
-    public var configureHandler: ConfigureCollectionBrickBlock
+    
+    public var configureHandler: ConfigureCollectionBrickBlock?
+    public var registerBricksHandler: RegisterBricksCollectionBrickBlock?
     public var dataSource: BrickCollectionViewDataSource
 
-    public init(section: BrickSection, configureHandler: ConfigureCollectionBrickBlock) {
+    public init(section: BrickSection, configureHandler: ConfigureCollectionBrickBlock? = nil, registerBricksHandler: RegisterBricksCollectionBrickBlock? = nil) {
         self.section = section
         self.configureHandler = configureHandler
-
+        self.registerBricksHandler = registerBricksHandler
         dataSource = BrickCollectionViewDataSource()
         dataSource.setSection(section)
     }
@@ -71,9 +85,13 @@ public class CollectionBrickCellModel: CollectionBrickCellDataSource {
     public func dataSourceForCollectionBrickCell(brickCollectionCell: CollectionBrickCell) -> BrickCollectionViewDataSource {
         return dataSource
     }
+    
+    public func configure(for cell: CollectionBrickCell) {
+        configureHandler?(cell: cell)
+    }
 
-    public func configureCollectionBrickViewForBrickCollectionCell(brickCollectionCell: CollectionBrickCell) {
-        configureHandler(cell: brickCollectionCell)
+    public func registerBricks(for cell: CollectionBrickCell) {
+        registerBricksHandler?(cell: cell)
     }
 }
 
@@ -140,8 +158,16 @@ public class CollectionBrickCell: BrickCell, Bricklike, AsynchronousResizableCel
         brickCollectionView.resetRegisteredBricks()
         brickCollectionView.layout.delegate = self
 
-        brick.dataSource.configureCollectionBrickViewForBrickCollectionCell(self)
-
+        brickCollectionView.beginConfiguration {
+            self.brick.dataSource.configure(for: self)
+        }
+        
+        brick.brickTypes.forEach {
+            self.brickCollectionView.registerBrickClass($0)
+        }
+        
+        brick.dataSource.registerBricks(for: self)
+        
         brickCollectionView.collectionInfo = CollectionInfo(index: self.index, identifier: self.brick.identifier)
         
         let section = brick.dataSource.sectionForCollectionBrickCell(self)

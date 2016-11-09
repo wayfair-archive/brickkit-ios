@@ -33,9 +33,7 @@ class ImagesInCollectionBrickHorizontalViewController: BrickViewController {
         collectionSection.repeatCountDataSource = self
 
         let section = BrickSection(bricks: [
-            CollectionBrick(scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { (cell) in
-                cell.brickCollectionView.registerBrickClass(ImageBrick.self)
-            }))
+            CollectionBrick(scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: collectionSection), brickTypes: [ImageBrick.self])
             ])
 
         self.setSection(section)

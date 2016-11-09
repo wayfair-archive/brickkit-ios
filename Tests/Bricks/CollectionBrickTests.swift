@@ -36,13 +36,10 @@ class CollectionBrickTests: XCTestCase {
             CollectionBrick("Collection1", height: .Fixed(size: 10), dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { cell in
                 cell.brickCollectionView.registerBrickClass(DummyBrick.self)
             })),
-            CollectionBrick("Collection2", height: .Fixed(size: 10), dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { cell in
+            CollectionBrick("Collection2", height: .Fixed(size: 10), dataSource: CollectionBrickCellModel(section: collectionSection, registerBricksHandler: { cell in
                 cell.brickCollectionView.registerBrickClass(DummyBrick.self)
             })),
-            CollectionBrick("Collection3", height: .Fixed(size: 10), dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { cell in
-                cell.brickCollectionView.registerBrickClass(DummyBrick.self)
-            }))
-
+            CollectionBrick("Collection3", height: .Fixed(size: 10), dataSource: CollectionBrickCellModel(section: collectionSection), brickTypes: [DummyBrick.self])
             ])
         brickView.setSection(section)
         brickView.layoutSubviews()

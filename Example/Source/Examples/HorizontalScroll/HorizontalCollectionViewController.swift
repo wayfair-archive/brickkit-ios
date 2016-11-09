@@ -48,7 +48,7 @@ class HorizontalCollectionViewController: BrickViewController {
         self.registerBrickClass(CollectionBrick.self)
 
         let section = BrickSection(bricks: [
-            CollectionBrick(HorizontalCollectionViewController.Identifiers.collectionBrick, width: .Ratio(ratio: 1/2), backgroundColor: .brickSection, dataSource: self)
+            CollectionBrick(HorizontalCollectionViewController.Identifiers.collectionBrick, width: .Ratio(ratio: 1/2), backgroundColor: .brickSection, dataSource: self, brickTypes: [LabelBrick.self, ImageBrick.self])
             ], inset: 20)
         section.repeatCountDataSource = self
 
@@ -71,11 +71,6 @@ extension HorizontalCollectionViewController: BrickRepeatCountDataSource {
 }
 
 extension HorizontalCollectionViewController: CollectionBrickCellDataSource {
-
-    func configureCollectionBrickViewForBrickCollectionCell(brickCollectionCell: CollectionBrickCell) {
-        brickCollectionCell.brickCollectionView.registerBrickClass(LabelBrick.self)
-        brickCollectionCell.brickCollectionView.registerBrickClass(ImageBrick.self)
-    }
 
     func sectionForCollectionBrickCell(cell: CollectionBrickCell) -> BrickSection {
         return collectionSection
