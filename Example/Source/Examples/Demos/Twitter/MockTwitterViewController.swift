@@ -151,7 +151,7 @@ class MockTwitterViewController: BrickViewController {
             HeaderAndFooterBrick(MockTwitterViewController.Identifiers.dailySalesHeader, width: .Ratio(ratio: 1), /*height: .Fixed(size: 40),*/ backgroundColor: .whiteColor(), backgroundView: nil){ cell in
                 cell.textLabel.text = "Daily Sales"
             },
-            CollectionBrick(/*height: .Fixed(size: 140), */scrollDirection: .Horizontal, dataSource: self)
+            CollectionBrick(/*height: .Fixed(size: 140), */scrollDirection: .Horizontal, dataSource: self, brickTypes: [DailySalesBrick.self])
             ], edgeInsets: UIEdgeInsets(top: 0, left: 0, bottom: 2, right: 0), inset: 1)
         section.repeatCountDataSource = self
 
@@ -226,8 +226,9 @@ extension MockTwitterViewController: WhoToFollowBrickDataSource {
 }
 
 extension MockTwitterViewController: CollectionBrickCellDataSource {
-    func configureCollectionBrickViewForBrickCollectionCell(brickCollectionCell: CollectionBrickCell) {
-        brickCollectionCell.brickCollectionView.registerBrickClass(DailySalesBrick.self)
+    
+    func configure(for brickCollectionCell: CollectionBrickCell) {
+        
         brickCollectionCell.brickCollectionView.delegate = self
       //  brickCollectionCell.brickCollectionView.pagingEnabled = false
         brickCollectionCell.brickCollectionView.showsHorizontalScrollIndicator = true
@@ -312,20 +313,3 @@ extension MockTwitterViewController {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

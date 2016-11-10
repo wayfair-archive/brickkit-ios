@@ -155,17 +155,11 @@ section3.repeatCountDataSource = self
 
 let section = BrickSection(bricks: [
     LabelBrick(text: "1/4 Ratio"),
-    CollectionBrick(scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section1, configureHandler: { (brickCollectionCell) in
-        brickCollectionCell.brickCollectionView.registerBrickClass(ImageBrick.self)
-    })),
+    CollectionBrick(scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section1), brickTypes: [ImageBrick.self]),
     LabelBrick(text: "1/2 Ratio"),
-    CollectionBrick(scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section2, configureHandler: { (brickCollectionCell) in
-        brickCollectionCell.brickCollectionView.registerBrickClass(ImageBrick.self)
-    })),
+    CollectionBrick(scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section2), brickTypes: [ImageBrick.self]),
     LabelBrick(text: "100px Fixed"),
-    CollectionBrick(scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section3, configureHandler: { (brickCollectionCell) in
-        brickCollectionCell.brickCollectionView.registerBrickClass(ImageBrick.self)
-    })),
+    CollectionBrick(scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section3), brickTypes: [ImageBrick.self]),
     ])
 setSection(section)
 

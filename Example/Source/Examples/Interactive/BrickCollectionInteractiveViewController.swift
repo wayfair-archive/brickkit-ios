@@ -66,6 +66,9 @@ class BrickCollectionInteractiveViewController: BrickViewController {
         let footerSection = BrickSection(FooterSection, backgroundColor: .darkGrayColor(), bricks: [
             LabelBrick(FooterTitleLabel, backgroundColor: .brickGray1, dataSource: footerModel),
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
+        
+        let bricksTypes: [Brick.Type] = [LabelBrick.self, CollectionBrick.self]
+        
         #if os(iOS)
             let section = BrickSection(Section, bricks: [
                 LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray3, dataSource: LabelBrickCellModel(text: "Tap here to change the collections".uppercaseString) { cell in
@@ -75,7 +78,7 @@ class BrickCollectionInteractiveViewController: BrickViewController {
                 StepperBrick(Stepper, backgroundColor: .brickGray1, dataSource: stepperModel, delegate: self),
                 
                 BrickSection(RepeatSection, bricks: [
-                    CollectionBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: self)
+                    CollectionBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: self, brickTypes: bricksTypes)
                     ], inset: 5),
                 footerSection
                 ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
@@ -85,7 +88,7 @@ class BrickCollectionInteractiveViewController: BrickViewController {
                     cell.configure()
                     }),
                 BrickSection(RepeatSection, bricks: [
-                    CollectionBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: self)
+                    CollectionBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: self, brickTypes: bricksTypes)
                     ], inset: 5),
                 footerSection
                 ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
@@ -169,16 +172,15 @@ extension BrickCollectionInteractiveViewController: StepperBrickCellDelegate {
 #endif
 
 extension BrickCollectionInteractiveViewController: CollectionBrickCellDataSource {
-    func configureCollectionBrickViewForBrickCollectionCell(cell: CollectionBrickCell) {
-
+    func registerBricks(for cell: CollectionBrickCell) {
+        #if os(iOS)
+            cell.brickCollectionView.registerBrickClass(StepperBrick.self)
+        #endif
+    }
+    
+    func configure(for cell: CollectionBrickCell) {
         let layout = cell.brickCollectionView.layout
         layout.hideBehaviorDataSource = self
-
-        cell.brickCollectionView.registerBrickClass(LabelBrick.self)
-        cell.brickCollectionView.registerBrickClass(CollectionBrick.self)
-        #if os(iOS)
-        cell.brickCollectionView.registerBrickClass(StepperBrick.self)
-        #endif
     }
 
     func dataSourceForCollectionBrickCell(cell: CollectionBrickCell) -> BrickCollectionViewDataSource {

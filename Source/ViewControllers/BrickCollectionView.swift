@@ -56,6 +56,8 @@ public class BrickCollectionView: UICollectionView {
     /// Dictionary to keep track of what identifier to load for a certain brick
     internal private(set) var registeredBricks: [String:String] = [:]
 
+    internal private(set) var isConfiguringCollectionBrick: Bool = false
+
     // MARK: - Overrides
 
     public override var frame: CGRect {
@@ -135,7 +137,11 @@ extension BrickCollectionView {
         } else {
             fatalError("Nib or cell class not found")
         }
-
+        
+        if isConfiguringCollectionBrick {
+            print("calling `registerBrickClass` in `configure(for cell: CollectionBrickCell)` is depercated. Use `registerBricks(for cell: CollectionBrickCell)` or `CollectionBrickCell(brickTypes: [Brick.Type])`. This will be a fatalError in a future release")
+        }
+        
         registeredBricks[nibName] = cellIdentifier
     }
 
@@ -147,6 +153,11 @@ extension BrickCollectionView {
     public func registerNib(nib: UINib, forBrickWithIdentifier identifier: String) {
         let cellIdentifier = String(nib.hashValue)
         self.registerNib(nib, forCellWithReuseIdentifier: cellIdentifier)
+        
+        if isConfiguringCollectionBrick {
+            print("calling `registerNib` in `configure(for cell: CollectionBrickCell)` is depercated. Use `registerBricks(for cell: CollectionBrickCell)` or `CollectionBrickCell(brickTypes: [Brick.Type])`. This will be a fatalError in a future release")
+        }
+        
         registeredBricks[CustomNibPrefix + identifier] = cellIdentifier
     }
 
@@ -469,7 +480,11 @@ extension BrickCollectionView {
         return changedSections
     }
 
-
+    internal func beginConfiguration(action: (() -> Void)) {
+        isConfiguringCollectionBrick = true
+        action()
+        isConfiguringCollectionBrick = false
+    }
 }
 
 // MARK: - UICollectionViewDataSource
