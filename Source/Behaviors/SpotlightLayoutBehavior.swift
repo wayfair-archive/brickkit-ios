@@ -77,7 +77,7 @@ public class SpotlightLayoutBehavior: BrickLayoutBehavior {
 
                 attributes.frame.origin.y = originalFrameWithInsets.maxY - spotlightHeight
                 // Dont stretch if the top brick is not a spotlight brick
-                if firstSpotlightBrickBelowTopOfCollectionView && scrollAttributes.first?.indexPath.row != 0 {
+                if firstSpotlightBrickBelowTopOfCollectionView && firstFrameOriginY > 0 {
                     spotlightHeight = originalFrameWithInsets.size.height
                     attributes.frame.origin.y = originalFrameWithInsets.origin.y
                 }
