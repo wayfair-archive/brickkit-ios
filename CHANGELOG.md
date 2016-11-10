@@ -1,5 +1,27 @@
 # Change Log
 
+## [0.9.3](https://github.com/wayfair/brickkit-ios/tree/0.9.3) (2016-11-10)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/0.9.2...0.9.3)
+
+**Fixed bugs:**
+
+- Flickering CollectionBrick's [\#28](https://github.com/wayfair/brickkit-ios/issues/28)
+
+**Closed issues:**
+
+- Fix Spotlight Layout Behavior Issue [\#30](https://github.com/wayfair/brickkit-ios/issues/30)
+- Carthage [\#20](https://github.com/wayfair/brickkit-ios/issues/20)
+
+**Merged pull requests:**
+
+- Fix spotlight layout behavior bug [\#31](https://github.com/wayfair/brickkit-ios/pull/31) ([djriefler](https://github.com/djriefler))
+- Fixed reloading of CollectionBricks [\#29](https://github.com/wayfair/brickkit-ios/pull/29) ([rubencagnie](https://github.com/rubencagnie))
+- Added data source method on collection brick to register bricks and array of bricks for collection brick [\#25](https://github.com/wayfair/brickkit-ios/pull/25) ([jay18001](https://github.com/jay18001))
+- Update README.md [\#24](https://github.com/wayfair/brickkit-ios/pull/24) ([klundberg](https://github.com/klundberg))
+- Update README.md [\#23](https://github.com/wayfair/brickkit-ios/pull/23) ([klundberg](https://github.com/klundberg))
+- Added Carthage install in README.md [\#22](https://github.com/wayfair/brickkit-ios/pull/22) ([rubencagnie](https://github.com/rubencagnie))
+- Added Flickr example [\#2](https://github.com/wayfair/brickkit-ios/pull/2) ([jay18001](https://github.com/jay18001))
+
 ## [0.9.2](https://github.com/wayfair/brickkit-ios/tree/0.9.2) (2016-10-27)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/0.9.1...0.9.2)
 
