@@ -139,7 +139,7 @@ extension BrickCollectionView {
         }
         
         if isConfiguringCollectionBrick {
-            print("calling `registerBrickClass` in `configure(for cell: CollectionBrickCell)` is depercated. Use `registerBricks(for cell: CollectionBrickCell)` or `CollectionBrickCell(brickTypes: [Brick.Type])`. This will be a fatalError in a future release")
+            print("calling `registerBrickClass` in `configure(for cell: CollectionBrickCell)` is deprecated. Use `registerBricks(for cell: CollectionBrickCell)` or `CollectionBrickCell(brickTypes: [Brick.Type])`. This will be a fatalError in a future release")
         }
         
         registeredBricks[nibName] = cellIdentifier
@@ -155,7 +155,7 @@ extension BrickCollectionView {
         self.registerNib(nib, forCellWithReuseIdentifier: cellIdentifier)
         
         if isConfiguringCollectionBrick {
-            print("calling `registerNib` in `configure(for cell: CollectionBrickCell)` is depercated. Use `registerBricks(for cell: CollectionBrickCell)` or `CollectionBrickCell(brickTypes: [Brick.Type])`. This will be a fatalError in a future release")
+            print("calling `registerNib` in `configure(for cell: CollectionBrickCell)` is deprecated. Use `registerBricks(for cell: CollectionBrickCell)`. This will be a fatalError in a future release")
         }
         
         registeredBricks[CustomNibPrefix + identifier] = cellIdentifier
