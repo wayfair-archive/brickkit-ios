@@ -10,7 +10,7 @@ import Foundation
 import BrickKit
 
 class HeaderAndFooterBrick: Brick {
-    let dataSource: HeaderAndFooterBrickModel
+    weak var dataSource: HeaderAndFooterBrickModel?
     
     init(_ identifier: String, width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: ((HeaderAndFooterBrickCell) -> Void)) {
         self.dataSource = HeaderAndFooterBrickModel(configureCell: dataSource)
@@ -41,7 +41,7 @@ class HeaderAndFooterBrickCell: BrickCell, Bricklike {
     
     override func updateContent() {
         super.updateContent()
-        brick.dataSource.text(self)
+        brick.dataSource?.text(self)
     }
     
 }

@@ -11,7 +11,7 @@ import Foundation
 import BrickKit
 
 class DailySalesBrick: Brick {
-    let dataSource: DailySalesBrickDataSource
+    weak var dataSource: DailySalesBrickDataSource?
     
     init (_ identifier: String, width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, dataSource: DailySalesBrickDataSource) {
         self.dataSource = dataSource
@@ -29,12 +29,16 @@ class DailySalesBrickCell: BrickCell, Bricklike {
     override func updateContent() {
         super.updateContent()
         
-        imageView.image = brick.dataSource.image(self)
-        nameButton.setTitle(brick.dataSource.buttonTitle(self), forState: .Normal)
+        guard let dataSource = brick.dataSource else {
+            return
+        }
+        
+        imageView.image = dataSource.image(self)
+        nameButton.setTitle(dataSource.buttonTitle(self), forState: .Normal)
     }
 }
 
-protocol DailySalesBrickDataSource {
+protocol DailySalesBrickDataSource: class {
     func image(cell: DailySalesBrickCell) -> UIImage
     func buttonTitle(cell: DailySalesBrickCell) -> String
 }

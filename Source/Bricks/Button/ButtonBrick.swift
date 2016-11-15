@@ -20,8 +20,8 @@ public struct ButtonBrickNibs {
 // MARK: - Brick
 
 public class ButtonBrick: Brick {
-    public let dataSource: ButtonBrickCellDataSource
-    public let delegate: ButtonBrickCellDelegate?
+    public weak var dataSource: ButtonBrickCellDataSource?
+    public weak var delegate: ButtonBrickCellDelegate?
 
     public var title: String? {
         set {
@@ -57,6 +57,9 @@ public class ButtonBrick: Brick {
         }
     }
 
+    private var dataSourceModel: ButtonBrickCellModel?
+    private var delegateModel: ButtonBrickCellModel?
+
     convenience public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, title: String, configureButtonBlock: ConfigureButtonBlock? = nil, onButtonTappedHandler: ButtonTappedBlock? = nil) {
         let model = ButtonBrickCellModel(title: title, configureButtonBlock: configureButtonBlock, onButtonTappedHandler: onButtonTappedHandler)
         self.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView, dataSource: model, delegate: model)
@@ -66,18 +69,26 @@ public class ButtonBrick: Brick {
         self.dataSource = dataSource
         self.delegate = delegate
         super.init(identifier, width: width, height: height, backgroundColor:backgroundColor, backgroundView:backgroundView)
+        
+        if let delegateModel = delegate as? ButtonBrickCellModel {
+            self.delegateModel = delegateModel
+        }
+
+        if let dataSourceModel = dataSource as? ButtonBrickCellModel where delegate !== dataSource {
+            self.dataSourceModel = dataSourceModel
+        }
     }
 }
 
 // MARK: - DataSource
 
-public protocol ButtonBrickCellDataSource {
+public protocol ButtonBrickCellDataSource: class {
     func configureButtonBrick(cell: ButtonBrickCell)
 }
 
 // MARK: - Delegate
 
-public protocol ButtonBrickCellDelegate {
+public protocol ButtonBrickCellDelegate: class {
     func didTapOnButtonForButtonBrickCell(cell: ButtonBrickCell)
 }
 
@@ -114,7 +125,7 @@ public class ButtonBrickCell: BrickCell, Bricklike {
 
     override public func updateContent() {
         super.updateContent()
-        brick.dataSource.configureButtonBrick(self)
+        brick.dataSource?.configureButtonBrick(self)
     }
 
     @IBAction public func didTapButton(sender: AnyObject) {

@@ -38,10 +38,10 @@ public class BrickFlowLayout: UICollectionViewLayout, BrickLayout {
     public var zIndexBehavior: BrickLayoutZIndexBehavior = .TopDown
 
     /// Hide Behavior
-    public var hideBehaviorDataSource: HideBehaviorDataSource?
+    public weak var hideBehaviorDataSource: HideBehaviorDataSource?
 
     /// Appear Behavior
-    public var appearBehavior: BrickAppearBehavior?
+    public weak var appearBehavior: BrickAppearBehavior?
 
     /// Width Ratio
     public var widthRatio: CGFloat = 1

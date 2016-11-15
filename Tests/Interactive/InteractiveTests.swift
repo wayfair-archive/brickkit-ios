@@ -539,9 +539,11 @@ class InteractiveTests: XCTestCase {
                 })
                 ])
             ])
+        
+        let fixedStickyLayout = FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 1)])
         let repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: [DummyBrickIdentifier: 30])
         section.repeatCountDataSource = repeatCountDataSource
-        let sticky = StickyLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 1)]))
+        let sticky = StickyLayoutBehavior(dataSource: fixedStickyLayout)
         brickView.layout.behaviors.insert(sticky)
 
         brickView.setSection(section)

@@ -6,12 +6,12 @@
 //  Copyright © 2016 Wayfair LLC. All rights reserved.
 //
 
-public protocol SpotlightLayoutBehaviorDataSource {
+public protocol SpotlightLayoutBehaviorDataSource: class {
     func spotlightLayoutBehavior(behavior: SpotlightLayoutBehavior, smallHeightForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat?
 }
 
 public class SpotlightLayoutBehavior: BrickLayoutBehavior {
-    let dataSource: SpotlightLayoutBehaviorDataSource
+    weak var dataSource: SpotlightLayoutBehaviorDataSource?
     public var scrollLastBrickToTop = true
     public var lastBrickStretchy = false
     public var scrollAttributes: [BrickLayoutAttributes] = []
@@ -26,14 +26,14 @@ public class SpotlightLayoutBehavior: BrickLayoutBehavior {
     }
 
     public override func registerAttributes(attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
-        if let _ = dataSource.spotlightLayoutBehavior(self, smallHeightForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
+        if let _ = dataSource?.spotlightLayoutBehavior(self, smallHeightForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
             scrollAttributes.append(attributes)
         }
     }
 
     public override func invalidateInCollectionViewLayout(collectionViewLayout: UICollectionViewLayout, inout contentSize: CGSize, attributesDidUpdate: (attributes: BrickLayoutAttributes, oldFrame: CGRect?) -> Void) {
 
-        guard let collectionView = collectionViewLayout.collectionView, let firstAttribute = scrollAttributes.first else {
+        guard let collectionView = collectionViewLayout.collectionView, let firstAttribute = scrollAttributes.first, let dataSource = self.dataSource else {
             return
         }
 

@@ -10,7 +10,7 @@ import Foundation
 import BrickKit
 
 class WhoToFollowBrick: Brick {
-    let dataSource: WhoToFollowBrickDataSource
+    weak var dataSource: WhoToFollowBrickDataSource?
     
     init(_ identifier: String, width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: WhoToFollowBrickDataSource) {
         self.dataSource = dataSource
@@ -18,7 +18,7 @@ class WhoToFollowBrick: Brick {
     }
 }
 
-protocol WhoToFollowBrickDataSource {
+protocol WhoToFollowBrickDataSource: class {
     func whoToFollowImage(cell: WhoToFollowBrickCell) -> UIImage
     func whoToFollowTitle(cell: WhoToFollowBrickCell) -> String
     func whoToFollowDescription(cell: WhoToFollowBrickCell) -> String
@@ -43,10 +43,10 @@ class WhoToFollowBrickCell: BrickCell, Bricklike {
         imageView.layer.cornerRadius = 4
         imageView.clipsToBounds = true
         
-        imageView.image = brick.dataSource.whoToFollowImage(self)
-        titleLabel.text = brick.dataSource.whoToFollowTitle(self)
-        descriptionLabel.text = brick.dataSource.whoToFollowDescription(self)
-        atTag.text = brick.dataSource.whoToFollowAtTag(self)
+        imageView.image = brick.dataSource?.whoToFollowImage(self)
+        titleLabel.text = brick.dataSource?.whoToFollowTitle(self)
+        descriptionLabel.text = brick.dataSource?.whoToFollowDescription(self)
+        atTag.text = brick.dataSource?.whoToFollowAtTag(self)
         
     }
 }

@@ -16,6 +16,7 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     var thirdAttributes:UICollectionViewLayoutAttributes!
     var secondHeight:CGFloat!
     var behavior:SpotlightLayoutBehavior!
+    var layoutBehaviorDataSource: SpotlightLayoutBehaviorDataSource!
 
     override func setUp() {
         super.setUp()
@@ -34,7 +35,8 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     }
 
     func setupWithDataSources() {
-        behavior = SpotlightLayoutBehavior(dataSource: FixedSpotlightLayoutBehaviorDataSource(height: 100))
+        layoutBehaviorDataSource = FixedSpotlightLayoutBehaviorDataSource(height: 100)
+        behavior = SpotlightLayoutBehavior(dataSource: layoutBehaviorDataSource)
         behavior.scrollLastBrickToTop = false
         self.layout.behaviors.insert(behavior)
 
@@ -149,7 +151,8 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     }
 
     func testLastBrickStretchyAndOnlyTwoSections() {
-        behavior = SpotlightLayoutBehavior(dataSource: FixedSpotlightLayoutBehaviorDataSource(height: 100))
+        let behaviorDataSource = FixedSpotlightLayoutBehaviorDataSource(height: 100)
+        behavior = SpotlightLayoutBehavior(dataSource: behaviorDataSource)
         behavior.lastBrickStretchy = true
         self.layout.behaviors.insert(behavior)
 
@@ -162,7 +165,8 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     }
 
     func embeddedSetup(lastBrickStretchy: Bool, inset: CGFloat? = nil) {
-        behavior = SpotlightLayoutBehavior(dataSource: FixedSpotlightLayoutBehaviorDataSource(height: 100, identifiers: ["BRICK"]))
+        layoutBehaviorDataSource = FixedSpotlightLayoutBehaviorDataSource(height: 100, identifiers: ["BRICK"])
+        behavior = SpotlightLayoutBehavior(dataSource: layoutBehaviorDataSource)
         behavior.scrollLastBrickToTop = false
         behavior.lastBrickStretchy = lastBrickStretchy
 
@@ -320,7 +324,8 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
             DummyBrick(height: .Fixed(size: height)),
             ])
 
-        behavior = SpotlightLayoutBehavior(dataSource: FixedSpotlightLayoutBehaviorDataSource(height: 50))
+        layoutBehaviorDataSource = FixedSpotlightLayoutBehaviorDataSource(height: 50)
+        behavior = SpotlightLayoutBehavior(dataSource: layoutBehaviorDataSource)
 
         layout.behaviors.insert(behavior)
 

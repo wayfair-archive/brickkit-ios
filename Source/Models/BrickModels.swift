@@ -30,7 +30,7 @@ public class Brick: CustomStringConvertible {
     public var backgroundView: UIView?
 
     /// Delegate used to handle tap gestures for the brick. Defaults to nil
-    public var brickCellTapDelegate: BrickCellTapDelegate?
+    public weak var brickCellTapDelegate: BrickCellTapDelegate?
 
     /// Initialize a Brick
     ///

@@ -12,7 +12,8 @@ import XCTest
 class StickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     
     func testStickyBehavior() {
-        let stickyBehavior = StickyLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)]))
+        let behaviorDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])
+        let stickyBehavior = StickyLayoutBehavior(dataSource: behaviorDataSource)
         self.layout.behaviors.insert(stickyBehavior)
 
         let sectionCount = 20
@@ -64,7 +65,8 @@ class StickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     }
 
     func testStickyBehaviorWithContentInset() {
-        let stickyBehavior = StickyLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)]))
+        let behaviorDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])
+        let stickyBehavior = StickyLayoutBehavior(dataSource: behaviorDataSource)
         self.layout.behaviors.insert(stickyBehavior)
         self.collectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
 
@@ -96,7 +98,8 @@ class StickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
 
 
     func testStickyBehaviorWhenScrolled() {
-        let stickyBehavior = StickyLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)]))
+        let behaviorDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])
+        let stickyBehavior = StickyLayoutBehavior(dataSource: behaviorDataSource)
         self.layout.behaviors.insert(stickyBehavior)
 
         let sectionCount = 20
@@ -117,7 +120,8 @@ class StickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     }
 
     func testMultipleStickyBehavior() {
-        let stickyBehavior = StickyLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0), NSIndexPath(forItem: 2, inSection: 0)]))
+        let behaviorDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0), NSIndexPath(forItem: 2, inSection: 0)])
+        let stickyBehavior = StickyLayoutBehavior(dataSource: behaviorDataSource)
         self.layout.behaviors.insert(stickyBehavior)
 
         let sectionCount = 20
@@ -133,7 +137,8 @@ class StickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     }
     
     func testSectionStickyBehavior() {
-        let stickyBehavior = StickyLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 1), NSIndexPath(forItem: 0, inSection: 2)]))
+        let behaviorDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 1), NSIndexPath(forItem: 0, inSection: 2)])
+        let stickyBehavior = StickyLayoutBehavior(dataSource: behaviorDataSource)
         self.layout.behaviors.insert(stickyBehavior)
 
         setDataSources(SectionsCollectionViewDataSource(sections: [2, 2, 2]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1, 1], [1, 1], [1, 1]], heights: [[0, 0], [100, 1000], [100, 1000]], types: [[.Section(sectionIndex: 1), .Section(sectionIndex: 2)], [.Brick, .Brick], [.Brick, .Brick]]))
@@ -169,7 +174,8 @@ class StickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     func testStickingDelegateBehavior() {
         let indexPath = NSIndexPath(forItem: 1, inSection: 0)
         let stickingDelegate = FixedStickyLayoutBehaviorDelegate()
-        let stickyBehavior = StickyLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [indexPath]), delegate: stickingDelegate)
+        let behaviorDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [indexPath])
+        let stickyBehavior = StickyLayoutBehavior(dataSource: behaviorDataSource, delegate: stickingDelegate)
         self.layout.behaviors.insert(stickyBehavior)
 
         let sectionCount = 20
@@ -215,7 +221,8 @@ class StickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     func testStickingDelegateBehaviorWithContentInset() {
         let indexPath = NSIndexPath(forItem: 1, inSection: 0)
         let stickingDelegate = FixedStickyLayoutBehaviorDelegate()
-        let stickyBehavior = StickyLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [indexPath]), delegate: stickingDelegate)
+        let behaviorDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [indexPath])
+        let stickyBehavior = StickyLayoutBehavior(dataSource: behaviorDataSource, delegate: stickingDelegate)
         self.layout.behaviors.insert(stickyBehavior)
 
         self.collectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
@@ -260,7 +267,8 @@ class StickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     }
 
     func testStickySectionWithContentInset() {
-        let stickyBehavior = StickyLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)]))
+    let behaviorDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])
+        let stickyBehavior = StickyLayoutBehavior(dataSource: behaviorDataSource)
         self.layout.behaviors.insert(stickyBehavior)
 
         let sectionCount = 20
@@ -286,7 +294,8 @@ class StickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     }
 
     func testStickyNestedSection() {
-        let stickyBehavior = StickyLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)]))
+        let behaviorDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])
+        let stickyBehavior = StickyLayoutBehavior(dataSource: behaviorDataSource)
         self.layout.behaviors.insert(stickyBehavior)
 
         let sectionCount = 20
@@ -336,8 +345,8 @@ class StickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
 
         let repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Repeat" : 100])
         brickSection.repeatCountDataSource = repeatCountDataSource
-
-        let sticky = StickyLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 1)]))
+        let behaviorDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 1)])
+        let sticky = StickyLayoutBehavior(dataSource: behaviorDataSource)
         brickView.layout.behaviors.insert(sticky)
 
         brickView.setSection(brickSection)

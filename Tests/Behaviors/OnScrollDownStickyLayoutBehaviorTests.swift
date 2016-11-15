@@ -14,7 +14,8 @@ class OnScrollDownStickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     func testOnScrollDownStickingBehavior() {
         let indexPath = NSIndexPath(forItem: 0, inSection: 0)
 
-        let stickyBehavior = OnScrollDownStickyLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [indexPath]))
+        let fixedStickyLayout = FixedStickyLayoutBehaviorDataSource(indexPaths: [indexPath])
+        let stickyBehavior = OnScrollDownStickyLayoutBehavior(dataSource: fixedStickyLayout)
         self.layout.behaviors.insert(stickyBehavior)
 
         let sectionCount = 20
@@ -54,7 +55,8 @@ class OnScrollDownStickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     }
 
     func testOnScrollDownStickingSectionBehavior() {
-        let stickyBehavior = OnScrollDownStickyLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 1), NSIndexPath(forItem: 0, inSection: 2)]))
+        let fixedStickyLayout = FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 1), NSIndexPath(forItem: 0, inSection: 2)])
+        let stickyBehavior = OnScrollDownStickyLayoutBehavior(dataSource: fixedStickyLayout)
         self.layout.behaviors.insert(stickyBehavior)
 
 
@@ -99,8 +101,8 @@ class OnScrollDownStickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     func testOnScrollDownStickingBehaviorStacked() {
         let indexPath = NSIndexPath(forItem: 0, inSection: 0)
         let indexPath2 = NSIndexPath(forItem: 1, inSection: 0)
-
-        let stickyBehavior = OnScrollDownStickyLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [indexPath, indexPath2]))
+        let fixedStickyLayout = FixedStickyLayoutBehaviorDataSource(indexPaths: [indexPath, indexPath2])
+        let stickyBehavior = OnScrollDownStickyLayoutBehavior(dataSource: fixedStickyLayout)
         self.layout.behaviors.insert(stickyBehavior)
 
         let sectionCount = 20

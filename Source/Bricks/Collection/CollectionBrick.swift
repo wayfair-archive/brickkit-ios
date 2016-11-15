@@ -14,10 +14,12 @@ public typealias RegisterBricksCollectionBrickBlock = ((cell: CollectionBrickCel
 // MARK: - Brick
 
 public class CollectionBrick: Brick {
-    let dataSource: CollectionBrickCellDataSource
+    weak var dataSource: CollectionBrickCellDataSource?
     let scrollDirection: UICollectionViewScrollDirection
     var shouldCalculateFullHeight: Bool = true // This flag indicates that the collection brick is small enough to calculate its whole height directly
     var brickTypes: [Brick.Type]
+    
+    private var model: CollectionBrickCellModel?
     
     public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, scrollDirection: UICollectionViewScrollDirection = .Vertical, dataSource: CollectionBrickCellDataSource, brickTypes: [Brick.Type] = []) {
         self.dataSource = dataSource
@@ -26,13 +28,17 @@ public class CollectionBrick: Brick {
         self.brickTypes = brickTypes
         
         super.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView)
+        
+        if dataSource is CollectionBrickCellModel {
+            self.model = dataSource as? CollectionBrickCellModel
+        }
     }
 }
 
 // MARK: - DataSource
 
 /// An object that adopts the `CollectionBrickCellDataSource` protocol is responsible for providing the data required by a `CollectionBrick`.
-public protocol CollectionBrickCellDataSource {
+public protocol CollectionBrickCellDataSource: class {
    
     func configure(for cell: CollectionBrickCell)
     
@@ -113,6 +119,7 @@ public class CollectionBrickCell: BrickCell, Bricklike, AsynchronousResizableCel
             self.layout = brickCollectionView.layout as? BrickFlowLayout
         }
     }
+    
     @IBOutlet public weak var chevronImage: UIImageView? {
         didSet {
             chevronImage?.image = UIImage(named: "chevron", inBundle: CollectionBrick.bundle, compatibleWithTraitCollection: nil)
@@ -137,10 +144,14 @@ public class CollectionBrickCell: BrickCell, Bricklike, AsynchronousResizableCel
     }
 
     public override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        guard let dataSource = brick.dataSource else {
+            return super.preferredLayoutAttributesFittingAttributes(layoutAttributes)
+        }
+        
         isCalculatingHeight = true
 
         brickCollectionView.frame = layoutAttributes.bounds
-        self.currentPage = brick.dataSource.currentPageForCollectionBrickCell(self)
+        self.currentPage = dataSource.currentPageForCollectionBrickCell(self)
         brickCollectionView.layoutSubviews()
 
         if brick.shouldCalculateFullHeight && brickCollectionView.frame.height > 0 {
@@ -169,19 +180,20 @@ public class CollectionBrickCell: BrickCell, Bricklike, AsynchronousResizableCel
         brickCollectionView.layout.delegate = self
 
         brickCollectionView.beginConfiguration {
-            self.brick.dataSource.configure(for: self)
+            self.brick.dataSource?.configure(for: self)
         }
         
         brick.brickTypes.forEach {
             self.brickCollectionView.registerBrickClass($0)
         }
         
-        brick.dataSource.registerBricks(for: self)
+        brick.dataSource?.registerBricks(for: self)
         
         brickCollectionView.collectionInfo = CollectionInfo(index: self.index, identifier: self.brick.identifier)
         
-        let section = brick.dataSource.sectionForCollectionBrickCell(self)
-        brickCollectionView.setSection(section)
+        if let section = brick.dataSource?.sectionForCollectionBrickCell(self) {
+            brickCollectionView.setSection(section)
+        }
 
         layout?.scrollDirection = brick.scrollDirection
         layout?.dataSource = brickCollectionView

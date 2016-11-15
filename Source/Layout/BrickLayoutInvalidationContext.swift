@@ -32,7 +32,7 @@ enum BrickLayoutInvalidationContextType {
     }
 }
 
-protocol BrickLayoutInvalidationProvider {
+protocol BrickLayoutInvalidationProvider: class {
     var behaviors: Set<BrickLayoutBehavior> { get set }
     var contentSize: CGSize { get }
     var hideBehaviorDataSource: HideBehaviorDataSource? { get }
@@ -67,7 +67,7 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
 
     func invalidateWithLayout(layout: UICollectionViewLayout, context: UICollectionViewLayoutInvalidationContext) -> Bool {
         guard
-            var provider = layout as? BrickLayoutInvalidationProvider
+            let provider = layout as? BrickLayoutInvalidationProvider
             else { return false }
 
         let oldContentSize = provider.contentSize

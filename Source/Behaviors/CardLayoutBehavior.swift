@@ -7,7 +7,7 @@
 //
 
 /// DataSource for the CardLayoutBehavior
-public protocol CardLayoutBehaviorDataSource {
+public protocol CardLayoutBehaviorDataSource: class {
 
     /// If not nil, the small height is used to scroll the card layout
     ///
@@ -18,7 +18,7 @@ public protocol CardLayoutBehaviorDataSource {
 /// A CardLayoutBehavior organizes bricks on top of eachother, with the top one full height and the other ones are staggered behind
 /// - see CardLayoutBehaviorDataSource: The way to determine which bricks need to show
 public class CardLayoutBehavior: BrickLayoutBehavior {
-    let dataSource: CardLayoutBehaviorDataSource
+    weak var dataSource: CardLayoutBehaviorDataSource?
     var scrollLastBrickToTop = true
     var scrollAttributes: [BrickLayoutAttributes] = []
 
@@ -32,7 +32,7 @@ public class CardLayoutBehavior: BrickLayoutBehavior {
     }
 
     public override func registerAttributes(attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
-        if let _ = dataSource.cardLayoutBehavior(self, smallHeightForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
+        if let _ = dataSource?.cardLayoutBehavior(self, smallHeightForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
             scrollAttributes.append(attributes) // Only use the attributes that have a small-height
         }
     }
@@ -54,7 +54,7 @@ public class CardLayoutBehavior: BrickLayoutBehavior {
             let isBelow = attributes.originalFrame.minY > offsetY
             let isInSpotlight = !isAbove && !isBelow
 
-            guard let height = dataSource.cardLayoutBehavior(self, smallHeightForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) else {
+            guard let height = dataSource?.cardLayoutBehavior(self, smallHeightForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) else {
                 continue // Only use the attributes that have a small-height
             }
 

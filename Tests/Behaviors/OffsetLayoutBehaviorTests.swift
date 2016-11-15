@@ -29,7 +29,8 @@ class OffsetLayoutBehaviorTests: BrickFlowLayoutBaseTests {
 
 
     func testOriginOffset() {
-        behavior = OffsetLayoutBehavior(dataSource: FixedOffsetLayoutBehaviorDataSource(originOffset: CGSize(width: 20, height: -40), sizeOffset: nil))
+        let fixedOffsetLayout = FixedOffsetLayoutBehaviorDataSource(originOffset: CGSize(width: 20, height: -40), sizeOffset: nil)
+        behavior = OffsetLayoutBehavior(dataSource: fixedOffsetLayout)
         self.layout.behaviors.insert(behavior)
         setDataSources(SectionsCollectionViewDataSource(sections: [1]), brickLayoutDataSource: FixedBrickLayoutDataSource(widthRatio: 1, height: 300))
 
@@ -38,7 +39,8 @@ class OffsetLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     }
 
     func testSizeOffset() {
-        behavior = OffsetLayoutBehavior(dataSource: FixedOffsetLayoutBehaviorDataSource(originOffset: nil, sizeOffset: CGSize(width: -40, height: 20)))
+        let fixedOffsetLayout = FixedOffsetLayoutBehaviorDataSource(originOffset: nil, sizeOffset: CGSize(width: -40, height: 20))
+        behavior = OffsetLayoutBehavior(dataSource: fixedOffsetLayout)
         self.layout.behaviors.insert(behavior)
         setDataSources(SectionsCollectionViewDataSource(sections: [1]), brickLayoutDataSource: FixedBrickLayoutDataSource(widthRatio: 1, height: 300))
 
@@ -47,7 +49,8 @@ class OffsetLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     }
 
     func testOriginAndSizeOffset() {
-        behavior = OffsetLayoutBehavior(dataSource: FixedOffsetLayoutBehaviorDataSource(originOffset: CGSize(width: 20, height: -40), sizeOffset: CGSize(width: -40, height: 20)))
+        let fixedOffsetLayoutBehavior = FixedOffsetLayoutBehaviorDataSource(originOffset: CGSize(width: 20, height: -40), sizeOffset: CGSize(width: -40, height: 20))
+        behavior = OffsetLayoutBehavior(dataSource: fixedOffsetLayoutBehavior)
         self.layout.behaviors.insert(behavior)
         setDataSources(SectionsCollectionViewDataSource(sections: [1]), brickLayoutDataSource: FixedBrickLayoutDataSource(widthRatio: 1, height: 300))
 
@@ -56,7 +59,8 @@ class OffsetLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     }
 
     func testOffsetAfterScroll() {
-        behavior = OffsetLayoutBehavior(dataSource: FixedOffsetLayoutBehaviorDataSource(originOffset: CGSize(width: 20, height: -40), sizeOffset: CGSize(width: -40, height: 20)))
+        let fixedOffsetLayout = FixedOffsetLayoutBehaviorDataSource(originOffset: CGSize(width: 20, height: -40), sizeOffset: CGSize(width: -40, height: 20))
+        behavior = OffsetLayoutBehavior(dataSource: fixedOffsetLayout)
         self.layout.behaviors.insert(behavior)
         setDataSources(SectionsCollectionViewDataSource(sections: [1]), brickLayoutDataSource: FixedBrickLayoutDataSource(widthRatio: 1, height: 300))
 

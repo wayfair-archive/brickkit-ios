@@ -9,18 +9,35 @@
 // MARK: - Brick
 
 public class ImageBrick: Brick {
-    public let dataSource: ImageBrickDataSource
-
+    public weak var dataSource: ImageBrickDataSource?
+    
+    private var model: ImageBrickDataSource?
+    
     public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: ImageBrickDataSource) {
+    
         self.dataSource = dataSource
         super.init(identifier, width: width, height: height, backgroundColor:backgroundColor, backgroundView:backgroundView)
+        
+        if dataSource is ImageBrickModel || dataSource is ImageURLBrickModel {
+            self.model = dataSource
+        }
+    }
+    
+    public convenience init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, image: UIImage, contentMode: UIViewContentMode) {
+        let model = ImageBrickModel(image: image, contentMode: contentMode)
+        self.init(identifier, width: width, height: height, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
+    }
+    
+    public convenience init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, imageUrl: NSURL, contentMode: UIViewContentMode) {
+        let model = ImageURLBrickModel(url: imageUrl, contentMode: contentMode)
+        self.init(identifier, width: width, height: height, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
     }
 }
 
 // MARK: - DataSource
 
 /// An object that adopts the `ImageBrickDataSource` protocol is responsible for providing the data required by a `ImageBrick`.
-public protocol ImageBrickDataSource {
+public protocol ImageBrickDataSource: class {
     func imageURLForImageBrickCell(imageBrickCell: ImageBrickCell) -> NSURL?
     func imageForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIImage?
     func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIViewContentMode
@@ -104,17 +121,21 @@ public class ImageBrickCell: BrickCell, Bricklike, AsynchronousResizableCell, Im
     override public func updateContent() {
         super.updateContent()
 
+        guard let dataSource = brick.dataSource else {
+            return
+        }
+
         imageLoaded = false
-        imageView.contentMode = brick.dataSource.contentModeForImageBrickCell(self)
+        imageView.contentMode = dataSource.contentModeForImageBrickCell(self)
         imageView.image = nil
 
-        if let image = brick.dataSource.imageForImageBrickCell(self) {
+        if let image = dataSource.imageForImageBrickCell(self) {
             imageView.image = image
             if self.brick.height.isEstimate(in: self) {
                 setRatioConstraint(for: image)
             }
             imageLoaded = true
-        } else if let imageURL = brick.dataSource.imageURLForImageBrickCell(self) {
+        } else if let imageURL = dataSource.imageURLForImageBrickCell(self) {
             self.imageDownloader?.downloadImage(with: imageURL, onCompletion: { (image) in
                 self.imageLoaded = true
                 NSOperationQueue.mainQueue().addOperationWithBlock({

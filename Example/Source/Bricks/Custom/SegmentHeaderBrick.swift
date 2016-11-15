@@ -3,8 +3,8 @@ import UIKit
 import BrickKit
 
 class SegmentHeaderBrick: Brick {
-    var dataSource: SegmentHeaderBrickDataSource?
-    var delegate: SegmentHeaderBrickDelegate?
+    weak var dataSource: SegmentHeaderBrickDataSource?
+    weak var delegate: SegmentHeaderBrickDelegate?
 
     init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 100)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: SegmentHeaderBrickDataSource? = nil, delegate: SegmentHeaderBrickDelegate? = nil) {
         self.dataSource = dataSource
@@ -37,11 +37,11 @@ class SegmentHeaderBrickCell: BrickCell, Bricklike {
     }
 }
 
-protocol SegmentHeaderBrickDataSource {
+protocol SegmentHeaderBrickDataSource: class {
     var titles: [String] { get }
     var selectedSegmentIndex: Int { get }
 }
 
-protocol SegmentHeaderBrickDelegate {
+protocol SegmentHeaderBrickDelegate: class {
     func segementHeaderBrickCell(cell: SegmentHeaderBrickCell, didSelectIndex index: Int)
 }
