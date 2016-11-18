@@ -39,8 +39,6 @@ protocol BrickLayoutInvalidationProvider: class {
 
     func removeAllCachedSections()
     func calculateSections()
-    func recalculateZIndexes(updatedAttributes: OnAttributesUpdatedHandler)
-    func calculateZIndex()
     func updateHeight(for indexPath: NSIndexPath, with height: CGFloat, updatedAttributes: OnAttributesUpdatedHandler)
     func invalidateHeight(for indexPath: NSIndexPath, updatedAttributes: OnAttributesUpdatedHandler)
     func recalculateContentSize() -> CGSize
@@ -83,8 +81,6 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
         // Update Type
         switch type {
         case .Creation:
-            provider.calculateZIndex()
-            
             for behavior in provider.behaviors {
                 behavior.resetRegisteredAttributes(layout)
             }
@@ -110,7 +106,6 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
                 provider.updateNumberOfItemsInSection(section, numberOfItems: numberOfItems, updatedAttributes: { attributes, olfFrame in
                 })
             }
-            provider.recalculateZIndexes(updateAttributes)
             applyHideBehaviors(provider, updatedAttributes: updateAttributes)
         default: break
         }
@@ -153,7 +148,6 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
             behavior.resetRegisteredAttributes(layout)
         }
 
-        provider.calculateZIndex()
         provider.invalidateContent({ (attributes, oldFrame) in
             for behavior in provider.behaviors {
                 behavior.registerAttributes(attributes, forCollectionViewLayout: layout)

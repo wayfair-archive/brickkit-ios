@@ -19,6 +19,8 @@ class MaxZIndexBehaviorTests: BrickFlowLayoutBaseTests {
         let sectionCount = 20
         setDataSources(SectionsCollectionViewDataSource(sections: [sectionCount]), brickLayoutDataSource: FixedBrickLayoutDataSource(widthRatio: 1, height: 100))
 
+        XCTAssertEqual(self.layout.maxZIndex, 19)
+
         let attributes1 = layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0))
         XCTAssertNotNil(attributes1)
         XCTAssertEqual(attributes1?.zIndex, 20)

@@ -50,13 +50,13 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
 
     // Mark: - Horizontal
 
-    func setupHorizontalScroll(repeatCount: Int = 20) {
+    func setupHorizontalScroll(repeatCount: Int = 20, width: BrickDimension = .Fixed(size: 50), inset: CGFloat = 10) {
         brickView.layout.scrollDirection = .Horizontal
 
         brickView.registerBrickClass(DummyBrick.self)
         let section = BrickSection(bricks: [
-            DummyBrick("Brick", width: .Fixed(size: 50), height: .Fixed(size: 50))
-            ], inset: 10)
+            DummyBrick("Brick", width: width, height: .Fixed(size: 50))
+            ], inset: inset)
         repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick": repeatCount])
         section.repeatCountDataSource = repeatCountDataSource
         brickView.setSection(section)
@@ -82,6 +82,17 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
         snapBehavior.scrollDirection = .Horizontal(.Right)
         XCTAssertEqual(brickView.contentInset.left, rightStartHorizontal)
         XCTAssertEqual(brickView.contentInset.right, leftStartHorizontal)
+    }
+
+
+    func testStartInsetsHorizontalWithHalf() {
+        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .Horizontal(.Center))
+        brickView.layout.behaviors.insert(snapBehavior)
+        setupHorizontalScroll(6, width: .Ratio(ratio: 1/2), inset: 0)
+
+        //Should start in center
+        XCTAssertEqual(brickView.contentInset.left, 80)
+        XCTAssertEqual(brickView.contentInset.right, 80)
     }
 
     func testCenter() {

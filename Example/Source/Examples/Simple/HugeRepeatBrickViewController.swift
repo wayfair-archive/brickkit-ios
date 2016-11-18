@@ -1,31 +1,29 @@
 //
-//  SimpleRepeatBrickViewController.swift
-//  BrickApp
+//  HugeRepeatBrickViewController.swift
+//  BrickKit-Example
 //
-//  Created by Ruben Cagnie on 5/25/16.
-//  Copyright © 2016 Wayfair. All rights reserved.
+//  Created by Ruben Cagnie on 11/17/16.
+//  Copyright © 2016 Wayfair LLC. All rights reserved.
 //
 
 import UIKit
 import BrickKit
 
-class SimpleRepeatBrickViewController: BrickViewController, LabelBrickCellDataSource, BrickRepeatCountDataSource {
-    
+class HugeRepeatBrickViewController: BrickViewController, LabelBrickCellDataSource, BrickRepeatCountDataSource {
+
     override class var title: String {
-        return "Simple Repeat"
+        return "Huge Repeat"
     }
     override class var subTitle: String {
-        return "Example how to use the repeatCountDataSource"
+        return "Example how to repeat a huge amount of bricks"
     }
 
-    let numberOfLabels = 100
+    let numberOfLabels = 500000
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.brickCollectionView.registerBrickClass(LabelBrick.self)
-
-        self.layout.alignRowHeights = false
 
         self.view.backgroundColor = .brickBackground
 
@@ -36,19 +34,6 @@ class SimpleRepeatBrickViewController: BrickViewController, LabelBrickCellDataSo
         section.repeatCountDataSource = self
 
         self.setSection(section)
-        updateNavigationItem()
-    }
-
-    func updateNavigationItem() {
-        let selector: Selector = #selector(SimpleRepeatBrickViewController.toggleAlignBehavior)
-        let title = self.layout.alignRowHeights ? "Don't Align" : "Align"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: title, style: .Plain, target: self, action: selector)
-    }
-
-    func toggleAlignBehavior() {
-        self.layout.alignRowHeights = !self.layout.alignRowHeights
-        brickCollectionView.reloadData()
-        updateNavigationItem()
     }
 
     func repeatCount(for identifier: String, with collectionIndex: Int, collectionIdentifier: String) -> Int {
@@ -64,7 +49,7 @@ class SimpleRepeatBrickViewController: BrickViewController, LabelBrickCellDataSo
 
         for _ in 0...cell.index {
             if !text.isEmpty {
-                text += "\n"
+                text += " "
             }
             text += "BRICK \(cell.index)"
         }

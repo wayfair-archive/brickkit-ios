@@ -56,5 +56,13 @@ class MultiSectionBrickViewController: BrickApp.BaseBrickController {
 
         self.setSection(section)
     }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        for indexPath in brickCollectionView.indexPathsForVisibleItems() {
+            print(brickCollectionView.layoutAttributesForItemAtIndexPath(indexPath))
+        }
+    }
     
 }

@@ -54,7 +54,7 @@ public class StickyLayoutBehavior: BrickLayoutBehavior {
         var lastStickyFrame = CGRect()
         var section: Int = 0
         for (index, brickAttribute) in stickyAttributes.enumerate() {
-            guard brickAttribute.frame.height > 0 && !brickAttribute.hidden else {
+            guard !brickAttribute.hidden else {
                 continue
             }
             let sectionAttributes: BrickLayoutAttributes? = sectionAttributesForIndexPath(for: brickAttribute.indexPath, in: collectionViewLayout)

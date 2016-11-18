@@ -12,6 +12,23 @@ import XCTest
 private let half = CGFloat(1.0/2.0)
 private let third = CGFloat(1.0/3.0)
 
+extension BrickLayoutSection {
+
+    var orderedAttributes: [BrickLayoutAttributes] {
+        let orderedKeys = Array(self.attributes.keys).sort(<)
+        var orderedAttributes = [BrickLayoutAttributes]()
+        for key in orderedKeys {
+            orderedAttributes.append(attributes[key]!)
+        }
+        return orderedAttributes
+    }
+
+    var orderedAttributeFrames: [CGRect] {
+        return orderedAttributes.map({$0.frame})
+    }
+
+}
+
 class BrickLayoutSectionTests: XCTestCase {
     let layout = BrickFlowLayout()
 
@@ -23,7 +40,7 @@ class BrickLayoutSectionTests: XCTestCase {
         continueAfterFailure = false
     }
 
-    private func createSection(widthRatios: [CGFloat], heights: [CGFloat], edgeInsets: UIEdgeInsets, inset: CGFloat, sectionWidth: CGFloat, updatedAttributes: OnAttributesUpdatedHandler? = nil) -> BrickLayoutSection {
+    private func createSection(widthRatios: [CGFloat], heights: [CGFloat], edgeInsets: UIEdgeInsets, inset: CGFloat, sectionWidth: CGFloat, invalidate: Bool = true, updatedAttributes: OnAttributesUpdatedHandler? = nil) -> BrickLayoutSection {
         dataSource = FixedBrickLayoutSectionDataSource(widthRatios: widthRatios, heights: heights, edgeInsets: edgeInsets, inset: inset)
         let section = BrickLayoutSection(
             sectionIndex: 0,
@@ -32,8 +49,14 @@ class BrickLayoutSectionTests: XCTestCase {
             origin: CGPoint.zero,
             sectionWidth: sectionWidth,
             dataSource: dataSource)
-        section.invalidateAttributes(updatedAttributes)
+        if invalidate {
+            section.invalidateAttributes(updatedAttributes)
+        }
         return section
+    }
+
+    func orderedFrames() {
+
     }
 
     func testNoDataSource() {
@@ -60,7 +83,7 @@ class BrickLayoutSectionTests: XCTestCase {
 
         XCTAssertEqual(section.frame, CGRect(x: 0, y: 0, width: 320, height: 180))
 
-        let frames = section.attributes.map { $0.frame }
+        let frames = section.orderedAttributeFrames
         XCTAssertEqual(frames.count, 4)
         XCTAssertEqual(frames[0], CGRect(x: 10, y: 10, width: 300, height: 50))
         XCTAssertEqual(frames[1], CGRect(x: 10, y: 65, width: 147.5, height: 50))
@@ -73,7 +96,7 @@ class BrickLayoutSectionTests: XCTestCase {
 
         XCTAssertEqual(section.frame, CGRect(x: 0, y: 0, width: 320, height: 180))
 
-        let frames = section.attributes.map { $0.frame }
+        let frames = section.orderedAttributeFrames
         XCTAssertEqual(frames.count, 5)
         XCTAssertEqual(frames[0], CGRect(x: 5, y: 10, width: 310, height: 50))
         XCTAssertEqual(frames[1], CGRect(x: 5, y: 65, width: 100, height: 50))
@@ -87,7 +110,7 @@ class BrickLayoutSectionTests: XCTestCase {
 
         XCTAssertEqual(section.frame, CGRect(x: 0, y: 0, width: 320, height: 125))
 
-        let frames = section.attributes.map { $0.frame }
+        let frames = section.orderedAttributeFrames
         XCTAssertEqual(frames.count, 5)
         XCTAssertEqual(frames[0], CGRect(x: 5, y: 10, width: 100, height: 50))
         XCTAssertEqual(frames[1], CGRect(x: 110, y: 10, width: 100, height: 50))
@@ -113,7 +136,7 @@ class BrickLayoutSectionTests: XCTestCase {
         XCTAssertEqual(createdIndexPaths.count, 4)
         XCTAssertEqual(updatedIndexPaths.count, 4)
 
-        let frames = section.attributes.map { $0.frame }
+        let frames = section.orderedAttributeFrames
 
         XCTAssertEqual(section.frame, CGRect(x: 0, y: 0, width: 320, height: 150))
         XCTAssertEqual(frames.count, 4)
@@ -134,7 +157,7 @@ class BrickLayoutSectionTests: XCTestCase {
 
         XCTAssertEqual(section.frame, CGRect(x: 0, y: 0, width: 320, height: 125))
 
-        let frames = section.attributes.map { $0.frame }
+        let frames = section.orderedAttributeFrames
         XCTAssertEqual(frames.count, 5)
         XCTAssertEqual(frames[0], CGRect(x: 5, y: 10, width: 100, height: 50))
         XCTAssertEqual(frames[1], CGRect(x: 110, y: 10, width: 100, height: 50))
@@ -154,13 +177,23 @@ class BrickLayoutSectionTests: XCTestCase {
 
         XCTAssertEqual(section.frame, CGRect(x: 0, y: 0, width: 320, height: 155))
 
-        let frames = section.attributes.map { $0.frame }
+        let frames = section.orderedAttributeFrames
         XCTAssertEqual(frames.count, 5)
         XCTAssertEqual(frames[0], CGRect(x: 5, y: 10, width: 100, height: 50))
         XCTAssertEqual(frames[1], CGRect(x: 110, y: 10, width: 100, height: 50))
         XCTAssertEqual(frames[2], CGRect(x: 215, y: 10, width: 100, height: 80))
         XCTAssertEqual(frames[3], CGRect(x: 5, y: 95, width: 100, height: 50))
         XCTAssertEqual(frames[4], CGRect(x: 110, y: 95, width: 100, height: 50))
+    }
+
+    func testUpdateHeightOfAttributeThatDoesntExist() {
+        let section = createSection([third, third, third, third, third], heights: [50, 50, 50, 50, 50], edgeInsets: UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5), inset: 5, sectionWidth: 320)
+
+        var updatedIndexPaths: [NSIndexPath] = []
+        section.update(height: 80, at: 5, updatedAttributes: { attributes, _ in
+            updatedIndexPaths.append(attributes.indexPath)
+        })
+        XCTAssertEqual(updatedIndexPaths.count, 0)
     }
 
     func testAppendItem() {
@@ -176,7 +209,7 @@ class BrickLayoutSectionTests: XCTestCase {
             XCTAssertEqual(attributes.indexPath, NSIndexPath(forItem: 5, inSection: 0))
         }
 
-        let frames = section.attributes.map { $0.frame }
+        let frames = section.orderedAttributeFrames
         XCTAssertEqual(frames.count, 6)
         XCTAssertEqual(frames[0], CGRect(x: 5, y: 10, width: 310, height: 50))
         XCTAssertEqual(frames[1], CGRect(x: 5, y: 65, width: 310, height: 50))
@@ -208,7 +241,7 @@ class BrickLayoutSectionTests: XCTestCase {
             }, removedAttributes: nil)
         XCTAssertEqual(addedAttributes.count, 6)
 
-        let frames = section.attributes.map { $0.frame }
+        let frames = section.orderedAttributeFrames
         XCTAssertEqual(frames.count, 6)
         XCTAssertEqual(frames[0], CGRect(x: 5, y: 10, width: 310, height: 50))
         XCTAssertEqual(frames[1], CGRect(x: 5, y: 65, width: 310, height: 50))
@@ -237,7 +270,7 @@ class BrickLayoutSectionTests: XCTestCase {
             }, removedAttributes: nil)
         XCTAssertEqual(addedAttributes.count, 0)
 
-        let frames = section.attributes.map { $0.frame }
+        let frames = section.orderedAttributeFrames
         XCTAssertEqual(frames.count, 6)
         XCTAssertEqual(frames[0], CGRect(x: 5, y: 10, width: 310, height: 50))
         XCTAssertEqual(frames[1], CGRect(x: 5, y: 65, width: 310, height: 50))
@@ -261,7 +294,7 @@ class BrickLayoutSectionTests: XCTestCase {
             XCTAssertEqual(attributes.indexPath, NSIndexPath(forItem: 4, inSection: 0))
         }
 
-        let frames = section.attributes.map { $0.frame }
+        let frames = section.orderedAttributeFrames
         XCTAssertEqual(frames.count, 4)
         XCTAssertEqual(frames[0], CGRect(x: 5, y: 10, width: 310, height: 50))
         XCTAssertEqual(frames[1], CGRect(x: 5, y: 65, width: 310, height: 50))
@@ -276,7 +309,7 @@ class BrickLayoutSectionTests: XCTestCase {
 
         section.deleteLastItem(nil)
 
-        let frames = section.attributes.map { $0.frame }
+        let frames = section.orderedAttributeFrames
         XCTAssertEqual(frames.count, 0)
     }
 
@@ -302,7 +335,7 @@ class BrickLayoutSectionTests: XCTestCase {
         })
         XCTAssertEqual(deletedAttributes.count, 2)
 
-        let frames = section.attributes.map { $0.frame }
+        let frames = section.orderedAttributeFrames
         XCTAssertEqual(frames.count, 3)
         XCTAssertEqual(frames[0], CGRect(x: 5, y: 10, width: 310, height: 50))
         XCTAssertEqual(frames[1], CGRect(x: 5, y: 65, width: 310, height: 50))
@@ -310,5 +343,42 @@ class BrickLayoutSectionTests: XCTestCase {
 
         XCTAssertEqual(section.frame, CGRect(x: 0, y: 0, width: 320, height: 180))
     }
+
+    func testThatContinueCalculatingReturnsRightValue() {
+        let totalNumber = 20
+        let section = createSection(Array<CGFloat>(count: totalNumber, repeatedValue: 1), heights: Array<CGFloat>(count: totalNumber, repeatedValue: 50), edgeInsets: UIEdgeInsetsZero, inset: 0, sectionWidth: 320, invalidate: false)
+        dataSource.frameOfInterest = CGRect(x: 0, y: 0, width: 320, height: 200)
+
+        XCTAssertTrue(section.continueCalculatingCells())
+        XCTAssertEqual(section.attributes.count, 4)
+        XCTAssertTrue(section.continueCalculatingCells())
+
+        dataSource.frameOfInterest = CGRect(x: 0, y: 0, width: 320, height: CGFloat(50 * totalNumber))
+        XCTAssertTrue(section.continueCalculatingCells())
+        XCTAssertEqual(section.attributes.count, totalNumber)
+        XCTAssertFalse(section.continueCalculatingCells())
+    }
+
+    func testThatContinueCalculatingReturnsRightValueWithDownstreamIndexPaths() {
+        let totalNumber = 20
+        let section = createSection(Array<CGFloat>(count: totalNumber, repeatedValue: 1), heights: Array<CGFloat>(count: totalNumber, repeatedValue: 50), edgeInsets: UIEdgeInsetsZero, inset: 0, sectionWidth: 320, invalidate: false)
+        dataSource.frameOfInterest = CGRect(x: 0, y: 0, width: 320, height: 200)
+        dataSource.downStreamIndexPaths = [NSIndexPath(forItem: totalNumber-1, inSection: 0)]
+
+        XCTAssertTrue(section.continueCalculatingCells())
+        XCTAssertEqual(section.attributes.count, 5)
+        XCTAssertTrue(section.continueCalculatingCells())
+    }
+
+    func testThatInvalidatingAnAttributeThatIsNotYetCalculatedDoesNotCrashApp() {
+        let totalNumber = 20
+        let section = createSection(Array<CGFloat>(count: totalNumber, repeatedValue: 1), heights: Array<CGFloat>(count: totalNumber, repeatedValue: 50), edgeInsets: UIEdgeInsetsZero, inset: 0, sectionWidth: 320, invalidate: false)
+        dataSource.frameOfInterest = CGRect(x: 0, y: 0, width: 320, height: 200)
+        dataSource.downStreamIndexPaths = [NSIndexPath(forItem: totalNumber-1, inSection: 0)]
+
+        section.invalidate(at: 0, updatedAttributes: nil)
+    }
+
+
 
 }

@@ -30,28 +30,6 @@ class BrickSelfsizingFlowLayoutTests: XCTestCase {
         collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
 
-    func testInitialSetup() {
-        collectionView.layoutSubviews()
-        print("Number of Frames: \(framesForCollectionView().count)")
-        print(framesForCollectionView())
-
-        collectionView.contentOffset = CGPoint(x: 0, y: 100)
-        print("Number of Frames: \(framesForCollectionView().count)")
-        print(framesForCollectionView())
-
-        collectionView.contentOffset = CGPoint(x: 0, y: 1470.0)
-        print("Number of Frames: \(framesForCollectionView().count)")
-        print(framesForCollectionView())
-
-        collectionView.contentOffset = CGPoint(x: 0, y: 10000)
-        print("Number of Frames: \(framesForCollectionView().count)")
-        print(framesForCollectionView())
-
-        let indexPath = collectionView.indexPathForItemAtPoint(CGPoint(x: 0, y: 10000))
-        print(indexPath)
-
-    }
-
     private func framesForCollectionView() -> [CGRect] {
         collectionView.layoutSubviews()
         let frames = collectionView.subviews.map { $0.frame }

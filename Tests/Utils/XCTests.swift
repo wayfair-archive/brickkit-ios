@@ -11,13 +11,17 @@ import XCTest
 let frameSort: (CGRect, CGRect) -> Bool = {
     if $0.origin.y != $1.origin.y {
         return $0.origin.y < $1.origin.y
-    } else {
+    } else if $0.origin.x != $1.origin.x {
         return $0.origin.x < $1.origin.x
+    } else if $0.maxY != $1.maxY{
+        return $0.maxY < $1.maxY
+    } else {
+        return $0.maxX < $1.maxX
     }
 }
 
 public func XCTAssertEqualWithAccuracy(expression1: CGRect?, _ expression2: CGRect?, accuracy: CGRect, @autoclosure _ message: () -> String = "", file: StaticString = #file, line: UInt = #line) {
-    
+
     guard let argument1 = expression1, let argument2 = expression2 else {
         XCTAssertEqual(expression1, CGRectMake(0, 0, 320, 54), message, file: file, line: line)
         XCTAssertEqual(expression2, CGRectMake(0, 0, 305, 39), message, file: file, line: line)
@@ -27,6 +31,17 @@ public func XCTAssertEqualWithAccuracy(expression1: CGRect?, _ expression2: CGRe
     XCTAssertEqualWithAccuracy(argument1.origin.y, argument2.origin.y, accuracy: accuracy.origin.y, message, file: file, line: line)
     XCTAssertEqualWithAccuracy(argument1.size.width, argument2.size.width, accuracy: accuracy.size.width, message, file: file, line: line)
     XCTAssertEqualWithAccuracy(argument1.size.height, argument2.size.height, accuracy: accuracy.size.height, message, file: file, line: line)
+}
+
+public func XCTAssertEqualWithAccuracy(expression1: CGSize?, _ expression2: CGSize?, accuracy: CGSize, @autoclosure _ message: () -> String = "", file: StaticString = #file, line: UInt = #line) {
+
+    guard let argument1 = expression1, let argument2 = expression2 else {
+//        XCTAssertEqual(expression1, CGRectMake(0, 0, 320, 54), message, file: file, line: line)
+//        XCTAssertEqual(expression2, CGRectMake(0, 0, 305, 39), message, file: file, line: line)
+        return
+    }
+    XCTAssertEqualWithAccuracy(argument1.width, argument2.width, accuracy: accuracy.width, message, file: file, line: line)
+    XCTAssertEqualWithAccuracy(argument1.height, argument2.height, accuracy: accuracy.height, message, file: file, line: line)
 }
 
 extension XCTest {

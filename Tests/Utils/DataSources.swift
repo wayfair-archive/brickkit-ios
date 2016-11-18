@@ -131,7 +131,10 @@ class FixedBrickLayoutSectionDataSource: NSObject, BrickLayoutSectionDataSource 
     var inset: CGFloat
 
     var widthRatio: CGFloat = 1
+    var frameOfInterest: CGRect = CGRect(x: 0, y: 0, width: 320, height: CGFloat.infinity) // Infinite frame height
 
+    var downStreamIndexPaths: [NSIndexPath] = []
+    
     init(widthRatios: [CGFloat], heights: [CGFloat], edgeInsets: UIEdgeInsets, inset: CGFloat) {
         self.widthRatios = widthRatios
         self.heights = heights
@@ -156,7 +159,6 @@ class FixedBrickLayoutSectionDataSource: NSObject, BrickLayoutSectionDataSource 
     }
 
     func prepareForSizeCalculation(for attributes: BrickLayoutAttributes, containedIn width: CGFloat, origin: CGPoint, invalidate: Bool, in section: BrickLayoutSection, updatedAttributes: OnAttributesUpdatedHandler?) {
-
     }
     
     func size(for attributes: BrickLayoutAttributes, containedIn width: CGFloat, in section: BrickLayoutSection) -> CGSize {
@@ -179,6 +181,9 @@ class FixedBrickLayoutSectionDataSource: NSObject, BrickLayoutSectionDataSource 
         return true
     }
 
+    func downStreamIndexPaths(in section: BrickLayoutSection) -> [NSIndexPath] {
+        return downStreamIndexPaths
+    }
 
     var alignRowHeights: Bool = false
     var scrollDirection: UICollectionViewScrollDirection = .Vertical
@@ -262,17 +267,29 @@ class FixedCardLayoutBehaviorDataSource: CardLayoutBehaviorDataSource {
 class FixedOffsetLayoutBehaviorDataSource: OffsetLayoutBehaviorDataSource {
     var originOffset: CGSize?
     var sizeOffset: CGSize?
+    var indexPaths: [NSIndexPath]?
 
-    init(originOffset: CGSize?, sizeOffset: CGSize?) {
+    init(originOffset: CGSize?, sizeOffset: CGSize?, indexPaths: [NSIndexPath]? = nil) {
         self.originOffset = originOffset
         self.sizeOffset = sizeOffset
+        self.indexPaths = indexPaths
     }
 
     func offsetLayoutBehavior(behavior: OffsetLayoutBehavior, originOffsetForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
+        if let indexPaths = self.indexPaths {
+            if !indexPaths.contains(indexPath) {
+                return nil
+            }
+        }
         return originOffset
     }
 
     func offsetLayoutBehavior(behavior: OffsetLayoutBehavior, sizeOffsetForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
+        if let indexPaths = self.indexPaths {
+            if !indexPaths.contains(indexPath) {
+                return nil
+            }
+        }
         return sizeOffset
     }
 }

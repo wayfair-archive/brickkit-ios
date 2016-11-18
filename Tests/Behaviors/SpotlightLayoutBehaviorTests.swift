@@ -221,23 +221,12 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
 
     func testWithSectionInsets() {
         let sectionInset: CGFloat = 5
-        let smallHeight: CGFloat = 100
         embeddedSetup(false, inset: sectionInset)
-        let thirdRepeatingBrickOriginalFrame = CGRectMake(0, 565, 320, 150 + sectionInset)
         layout.collectionView?.contentOffset.y = 420
-        layout.invalidateLayoutWithContext(BrickLayoutInvalidationContext(type: .Scrolling))
-        layout.collectionView?.layoutIfNeeded()
 
-        let secondRepeatingBrick = layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 4, inSection: 1))
         let thirdRepeatingBrick = layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 5, inSection: 1))
 
-        let ratio = (thirdRepeatingBrickOriginalFrame.minY - 420) / thirdRepeatingBrickOriginalFrame.size.height
-        let leftOver = thirdRepeatingBrickOriginalFrame.size.height - smallHeight
-        let inset = (sectionInset - (leftOver * (1-ratio)))
-        let supposedOriginY = secondRepeatingBrick!.frame.maxY + inset
-        let supposedHeight = smallHeight + (leftOver * (1-ratio))
-        XCTAssertEqual(thirdRepeatingBrick?.frame, CGRect(x: 0, y: supposedOriginY, width: 320, height: supposedHeight))
-
+        XCTAssertEqualWithAccuracy(thirdRepeatingBrick!.frame, CGRect(x: 0, y: 566.45161290322585, width: 320, height: 103.54838709677419), accuracy: .zero)
     }
 
     func testWithEmbeddedBricks() {
@@ -290,8 +279,6 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         XCTAssertEqual(thirdRepeatingBrick?.frame , CGRect(x: 0, y: 490, width: 320, height: 100))
 
         layout.collectionView?.contentOffset.y = 340
-        layout.invalidateLayoutWithContext(BrickLayoutInvalidationContext(type: .Scrolling))
-        layout.collectionView?.layoutIfNeeded()
 
         // scrolling down should not change the size of any of the non spotlight bricks
         firstBrick = layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))

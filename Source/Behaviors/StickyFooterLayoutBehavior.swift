@@ -9,6 +9,19 @@
 /// A StickyFooterLayoutBehavior will stick certain bricks (based on the dataSource) on the bottom of its section
 public class StickyFooterLayoutBehavior: StickyLayoutBehavior {
 
+    public override var needsDownstreamCalculation: Bool {
+        return true
+    }
+
+    public override func shouldUseForDownstreamCalculation(for indexPath: NSIndexPath, with identifier: String, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+        if dataSource?.stickyLayoutBehavior(self, shouldStickItemAtIndexPath: indexPath, withIdentifier: identifier, inCollectionViewLayout: collectionViewLayout) == true {
+            return true
+        } else {
+            return super.shouldUseForDownstreamCalculation(for: indexPath, with: identifier, forCollectionViewLayout: collectionViewLayout)
+        }
+    }
+
+
     override func updateStickyAttributesInCollectionView(collectionViewLayout: UICollectionViewLayout, attributesDidUpdate: (attributes: BrickLayoutAttributes, oldFrame: CGRect?) -> Void) {
         //Sort the attributes ascending
         stickyAttributes.sortInPlace { (attributesOne, attributesTwo) -> Bool in

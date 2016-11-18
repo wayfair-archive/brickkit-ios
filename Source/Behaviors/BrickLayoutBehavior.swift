@@ -11,14 +11,19 @@ import Foundation
 /// A BrickBehavior can alter the way bricks are displayed and handled
 /// By subclassing the Behavior, an implementation can alter the frame of the brick as well as its origin
 public class BrickLayoutBehavior: NSObject {
-    public internal(set) weak var collectionViewLayout: UICollectionViewLayout?
+    public internal(set) weak var brickFlowLayout: BrickFlowLayout?
+
+    // Flag that indicates that this behavior needs some calculation down stream to function correctly
+    public var needsDownstreamCalculation: Bool {
+        return false
+    }
+
+    public func shouldUseForDownstreamCalculation(for indexPath: NSIndexPath, with identifier: String, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+        return false
+    }
 
     public func sectionAttributesForIndexPath(for indexPath: NSIndexPath, in layout: UICollectionViewLayout) -> BrickLayoutAttributes? {
-        if let layout = layout as? BrickFlowLayout {
-            return layout.layoutAttributesForSection(indexPath.section)
-        } else {
-            return nil
-        }
+        return brickFlowLayout?.layoutAttributesForSection(indexPath.section)
     }
 
     public func resetRegisteredAttributes(collectionViewLayout: UICollectionViewLayout) {

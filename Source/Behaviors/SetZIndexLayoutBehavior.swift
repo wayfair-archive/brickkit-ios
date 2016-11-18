@@ -17,23 +17,23 @@ public protocol SetZIndexLayoutBehaviorDataSource: class {
 public class SetZIndexLayoutBehavior: BrickLayoutBehavior {
     weak var dataSource: SetZIndexLayoutBehaviorDataSource?
     
-    var maxZIndex: Int = 0
-    
+
     public init(dataSource: SetZIndexLayoutBehaviorDataSource) {
         self.dataSource = dataSource
-    }
-    
-    public override func resetRegisteredAttributes(collectionViewLayout: UICollectionViewLayout) {
-        super.resetRegisteredAttributes(collectionViewLayout)
-        if let flow = collectionViewLayout as? BrickFlowLayout {
-            maxZIndex = flow.maxZIndex + 1
-        }
     }
 
     public override func registerAttributes(attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
         guard let offset = dataSource?.setZIndexLayoutBehavior(self, shouldHaveMaxZIndexAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) else {
             return
         }
+
+        let maxZIndex: Int
+        if let flow = collectionViewLayout as? BrickFlowLayout {
+            maxZIndex = flow.maxZIndex + 1
+        } else {
+            maxZIndex = 0
+        }
+
         attributes.zIndex = maxZIndex + offset
     }
 }

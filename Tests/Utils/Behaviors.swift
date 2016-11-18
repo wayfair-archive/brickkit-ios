@@ -39,11 +39,19 @@ class FixedStickyLayoutBehaviorDataSource: StickyLayoutBehaviorDataSource {
 
 class FixedStickyWithMinimumLayoutBehaviorDataSource: MinimumStickyLayoutBehaviorDataSource {
     let indexPaths: [NSIndexPath]
-    let minStickingHeight: CGFloat?
+    let minStickingHeights: [NSIndexPath: CGFloat?]
 
-    init(indexPaths: [NSIndexPath], minStickingHeight: CGFloat? = nil) {
+    convenience init(indexPaths: [NSIndexPath], minStickingHeight: CGFloat? = nil) {
+        var heights = [NSIndexPath: CGFloat?]()
+        for indexPath in indexPaths {
+            heights[indexPath] = minStickingHeight
+        }
+        self.init(indexPaths: indexPaths, minStickingHeights: heights)
+    }
+
+    init(indexPaths: [NSIndexPath], minStickingHeights: [NSIndexPath: CGFloat?]) {
         self.indexPaths = indexPaths
-        self.minStickingHeight = minStickingHeight
+        self.minStickingHeights = minStickingHeights
     }
 
     func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
@@ -51,7 +59,11 @@ class FixedStickyWithMinimumLayoutBehaviorDataSource: MinimumStickyLayoutBehavio
     }
 
     func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, minimumStickingHeightForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
-        return minStickingHeight
+        if let height = minStickingHeights[indexPath] {
+            return height
+        } else {
+            return nil
+        }
     }
 }
 

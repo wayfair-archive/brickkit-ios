@@ -72,6 +72,9 @@ class CollectionBrickTests: XCTestCase {
 
         let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
         XCTAssertEqual(cell1?.brickCollectionView.frame, CGRect(x: 0, y: 0, width: 320, height: 200))
+
+        XCTAssertFalse(brickView.layout.isInCollectionBrick)
+        XCTAssertTrue(cell1!.brickCollectionView.layout.isInCollectionBrick)
     }
 
     func testCollectionViewLargeFrame() {
