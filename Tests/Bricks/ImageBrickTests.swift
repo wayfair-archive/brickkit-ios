@@ -179,9 +179,9 @@ class FixedNSURLSessionImageDownloader: NSURLSessionImageDownloader {
         self.callback = callback
     }
 
-    override func downloadImage(with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage) -> Void)) {
-        super.downloadImage(with: imageURL) { (image) in
-            completionHandler(image: image)
+    override func downloadImage(with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage, url: NSURL) -> Void)) {
+        super.downloadImage(with: imageURL) { (image, url) in
+            completionHandler(image: image, url: url)
             NSOperationQueue.mainQueue().addOperationWithBlock({
                 self.callback(success: false)
                 })

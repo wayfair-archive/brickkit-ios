@@ -97,7 +97,7 @@ extension BaseBrickCell {
 public class BrickCell: BaseBrickCell {
 
     private var _brick: Brick!
-    private var tapGesture: UITapGestureRecognizer?
+    public var tapGesture: UITapGestureRecognizer?
     public private(set) var index: Int = 0
     public private(set) var collectionIndex: Int = 0
     public private(set) var collectionIdentifier: String?
