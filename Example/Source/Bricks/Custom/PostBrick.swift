@@ -9,7 +9,7 @@
 import UIKit
 import BrickKit
 
-protocol PostBrickCellDataSource {
+protocol PostBrickCellDataSource: class {
     func textImageBrickProfile(cell: PostBrickCell) -> UIImage
     func textImageBrickName(cell: PostBrickCell) -> String
     func textImageBrickText(cell: PostBrickCell) -> String
@@ -18,7 +18,7 @@ protocol PostBrickCellDataSource {
 }
 
 class PostBrick: Brick {
-    let dataSource: PostBrickCellDataSource
+    weak var dataSource: PostBrickCellDataSource?
     
     init(_ identifier: String, width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 300)), backgroundColor: UIColor = UIColor.whiteColor(), backgroundView: UIView? = nil, dataSource: PostBrickCellDataSource) {
         self.dataSource = dataSource
@@ -46,12 +46,12 @@ class PostBrickCell: BrickCell, Bricklike {
         profileImage.layer.cornerRadius = 4
         profileImage.clipsToBounds = true
         
-        
-        self.profileImage.image = brick.dataSource.textImageBrickProfile(self)
-        self.profileNameLabel.text = brick.dataSource.textImageBrickName(self)
-        self.postImage.image = brick.dataSource.textImageBrickImage(self)
-        self.postLabel.text = brick.dataSource.textImageBrickText(self)
-        self.atTagLabel.text = brick.dataSource.textImageBrickAtTag(self)
+
+        self.profileImage.image = brick.dataSource?.textImageBrickProfile(self)
+        self.profileNameLabel.text = brick.dataSource?.textImageBrickName(self)
+        self.postImage.image = brick.dataSource?.textImageBrickImage(self)
+        self.postLabel.text = brick.dataSource?.textImageBrickText(self)
+        self.atTagLabel.text = brick.dataSource?.textImageBrickAtTag(self)
     }
 }
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol BrickAppearBehavior {
+public protocol BrickAppearBehavior: class {
     func configureAttributesForAppearing(attributes: UICollectionViewLayoutAttributes, in collectionView: UICollectionView)
     func configureAttributesForDisappearing(attributes: UICollectionViewLayoutAttributes, in collectionView: UICollectionView)
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol OffsetLayoutBehaviorDataSource {
+public protocol OffsetLayoutBehaviorDataSource: class {
     func offsetLayoutBehavior(behavior: OffsetLayoutBehavior, originOffsetForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize?
 
     func offsetLayoutBehavior(behavior: OffsetLayoutBehavior, sizeOffsetForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize?
@@ -16,7 +16,7 @@ public protocol OffsetLayoutBehaviorDataSource {
 
 public class OffsetLayoutBehavior: BrickLayoutBehavior {
 
-    let dataSource: OffsetLayoutBehaviorDataSource
+    weak var dataSource: OffsetLayoutBehaviorDataSource?
 
     private(set) var offsetZIndex = 100
 
@@ -32,11 +32,11 @@ public class OffsetLayoutBehavior: BrickLayoutBehavior {
     }
 
     public override func registerAttributes(attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
-        if let _ = dataSource.offsetLayoutBehavior(self, originOffsetForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
+        if let _ = dataSource?.offsetLayoutBehavior(self, originOffsetForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
             offsetAttributes.append(attributes)
         }
 
-        if let _ = dataSource.offsetLayoutBehavior(self, sizeOffsetForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
+        if let _ = dataSource?.offsetLayoutBehavior(self, sizeOffsetForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
             offsetAttributes.append(attributes)
         }
     }
@@ -59,11 +59,11 @@ public class OffsetLayoutBehavior: BrickLayoutBehavior {
 
             let oldFrame = attributes.frame
             var currentFrame = attributes.originalFrame
-            if let sizeOffset = dataSource.offsetLayoutBehavior(self, sizeOffsetForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
+            if let sizeOffset = dataSource?.offsetLayoutBehavior(self, sizeOffsetForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
                 currentFrame.size = CGSize(width: currentFrame.size.width + sizeOffset.width, height: currentFrame.size.height + sizeOffset.height)
             }
 
-            if let originOffset = dataSource.offsetLayoutBehavior(self, originOffsetForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
+            if let originOffset = dataSource?.offsetLayoutBehavior(self, originOffsetForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
                 currentFrame.offsetInPlace(dx: originOffset.width, dy: originOffset.height)
             }
 

@@ -12,7 +12,8 @@ import XCTest
 class MinimumStickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
 
     func testMinimumStickyBehavior() {
-        let stickyBehavior = MinimumStickyLayoutBehavior(dataSource: FixedStickyWithMinimumLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)], minStickingHeight: 50))
+        let fixedStickyWithMinimumLayoutBehavior = FixedStickyWithMinimumLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)], minStickingHeight: 50)
+        let stickyBehavior = MinimumStickyLayoutBehavior(dataSource: fixedStickyWithMinimumLayoutBehavior)
         self.layout.behaviors.insert(stickyBehavior)
 
         let sectionCount = 20
@@ -50,7 +51,8 @@ class MinimumStickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     }
 
     func testMinimumStickyBehaviorWhenScrolled() {
-        let stickyBehavior = MinimumStickyLayoutBehavior(dataSource: FixedStickyWithMinimumLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)], minStickingHeight: 50))
+        let fixedStickyWithMinimumLayoutBehavior = FixedStickyWithMinimumLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)], minStickingHeight: 50)
+        let stickyBehavior = MinimumStickyLayoutBehavior(dataSource: fixedStickyWithMinimumLayoutBehavior)
         self.layout.behaviors.insert(stickyBehavior)
 
         let sectionCount = 20

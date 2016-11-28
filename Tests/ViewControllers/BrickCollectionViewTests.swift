@@ -121,10 +121,12 @@ class BrickCollectionViewTests: XCTestCase {
             DummyBrick("Brick1")
             ])
 
+        let collectionBrickCellModel = CollectionBrickCellModel(section: collectionSection) { cell in
+            cell.brickCollectionView.registerBrickClass(DummyBrick.self)
+        }
+        
         let section = BrickSection(bricks: [
-            CollectionBrick("CollectionBrick", dataSource: CollectionBrickCellModel(section: collectionSection) { cell in
-                cell.brickCollectionView.registerBrickClass(DummyBrick.self)
-                })
+            CollectionBrick("CollectionBrick", dataSource: collectionBrickCellModel)
             ])
 
         brickView.setSection(section)
@@ -147,11 +149,14 @@ class BrickCollectionViewTests: XCTestCase {
             DummyBrick("Brick1", height: .Fixed(size: 10))
             ])
 
+        let collectionBrickCellModel = CollectionBrickCellModel(section: collectionSection) { cell in
+            cell.brickCollectionView.registerBrickClass(DummyBrick.self)
+        }
+
         let section = BrickSection(bricks: [
-            CollectionBrick("CollectionBrick", dataSource: CollectionBrickCellModel(section: collectionSection) { cell in
-                cell.brickCollectionView.registerBrickClass(DummyBrick.self)
-                })
+            CollectionBrick("CollectionBrick", dataSource: collectionBrickCellModel)
             ])
+        
         let repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["CollectionBrick": 5])
         section.repeatCountDataSource = repeatCountDataSource
 
@@ -304,10 +309,12 @@ class BrickCollectionViewTests: XCTestCase {
         let fixed = FixedRepeatCountDataSource(repeatCountHash: ["Brick1": 0])
         collectionSection.repeatCountDataSource = fixed
 
+        let collectionBrickCellModel = CollectionBrickCellModel(section: collectionSection) { cell in
+            cell.brickCollectionView.registerBrickClass(DummyBrick.self)
+        }
+
         let section = BrickSection(bricks: [
-            CollectionBrick("CollectionBrick", dataSource: CollectionBrickCellModel(section: collectionSection) { cell in
-                cell.brickCollectionView.registerBrickClass(DummyBrick.self)
-                })
+            CollectionBrick("CollectionBrick", dataSource: collectionBrickCellModel)
             ])
 
         brickView.setSection(section)
@@ -371,9 +378,7 @@ class BrickCollectionViewTests: XCTestCase {
             ])
 
         let section = BrickSection(backgroundColor: .whiteColor(), bricks: [
-            CollectionBrick("Collection 1", backgroundColor: .orangeColor(), scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section1, configureHandler: { (brickCollectionCell) in
-                brickCollectionCell.brickCollectionView.registerBrickClass(ImageBrick.self)
-            })),
+            CollectionBrick("Collection 1", backgroundColor: .orangeColor(), scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section1), brickTypes: [ImageBrick.self]),
             ])
         brickView.setSection(section)
         brickView.layoutSubviews()
@@ -396,12 +401,8 @@ class BrickCollectionViewTests: XCTestCase {
             ])
 
         let section = BrickSection(backgroundColor: .whiteColor(), bricks: [
-            CollectionBrick("Collection 1", backgroundColor: .orangeColor(), scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section1, configureHandler: { (brickCollectionCell) in
-                brickCollectionCell.brickCollectionView.registerBrickClass(ImageBrick.self)
-            })),
-            CollectionBrick("Collection 2", backgroundColor: .orangeColor(), scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section2, configureHandler: { (brickCollectionCell) in
-                brickCollectionCell.brickCollectionView.registerBrickClass(ImageBrick.self)
-            })),
+            CollectionBrick("Collection 1", backgroundColor: .orangeColor(), scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section1), brickTypes: [ImageBrick.self]),
+            CollectionBrick("Collection 2", backgroundColor: .orangeColor(), scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section2), brickTypes: [ImageBrick.self]),
             ])
         brickView.setSection(section)
         brickView.layoutSubviews()

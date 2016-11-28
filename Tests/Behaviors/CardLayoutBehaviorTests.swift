@@ -17,13 +17,14 @@ class CardLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     var fourthAttributes:UICollectionViewLayoutAttributes!
     var secondHeight:CGFloat!
     var behavior:CardLayoutBehavior!
-
+    var fixedCardLayoutBehavior: FixedCardLayoutBehaviorDataSource!
+    
     override func setUp() {
         super.setUp()
 
         layout.zIndexBehavior = .BottomUp
-        
-        behavior = CardLayoutBehavior(dataSource: FixedCardLayoutBehaviorDataSource(height: 100))
+        fixedCardLayoutBehavior = FixedCardLayoutBehaviorDataSource(height: 100)
+        behavior = CardLayoutBehavior(dataSource: fixedCardLayoutBehavior)
         behavior.scrollLastBrickToTop = false
         layout.behaviors.insert(behavior)
 

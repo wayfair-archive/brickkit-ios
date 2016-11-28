@@ -10,18 +10,18 @@ import Foundation
 
 private let stickyZIndex = 1000
 
-public protocol StickyLayoutBehaviorDataSource {
+public protocol StickyLayoutBehaviorDataSource: class {
     func stickyLayoutBehavior(behavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool
 }
 
-public protocol StickyLayoutBehaviorDelegate {
+public protocol StickyLayoutBehaviorDelegate: class {
     func stickyLayoutBehavior(behavior: StickyLayoutBehavior, brickIsStickingWithPercentage percentage: CGFloat, forItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout)
 }
 
 /// A StickyLayoutBehavior will stick certain bricks (based on the dataSource) on the top of its section
 public class StickyLayoutBehavior: BrickLayoutBehavior {
-    let dataSource: StickyLayoutBehaviorDataSource
-    let delegate: StickyLayoutBehaviorDelegate?
+    weak var dataSource: StickyLayoutBehaviorDataSource?
+    weak var delegate: StickyLayoutBehaviorDelegate?
     public var contentOffset: CGFloat
     var stickyAttributes: [BrickLayoutAttributes]!
 
@@ -41,7 +41,7 @@ public class StickyLayoutBehavior: BrickLayoutBehavior {
     }
 
     public override func registerAttributes(attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
-        if dataSource.stickyLayoutBehavior(self, shouldStickItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
+        if dataSource?.stickyLayoutBehavior(self, shouldStickItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) == true {
             stickyAttributes.append(attributes)
         }
     }

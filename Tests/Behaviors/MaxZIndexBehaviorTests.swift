@@ -12,7 +12,8 @@ import XCTest
 class MaxZIndexBehaviorTests: BrickFlowLayoutBaseTests {
     
     func testMaxZIndex() {
-        let zIndexBehavior = MaxZIndexLayoutBehavior(dataSource: FixedMaxZIndexLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0), NSIndexPath(forItem: 1, inSection: 0)]))
+        let fixedMaxZIndex = FixedMaxZIndexLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0), NSIndexPath(forItem: 1, inSection: 0)])
+        let zIndexBehavior = MaxZIndexLayoutBehavior(dataSource: fixedMaxZIndex)
         self.layout.behaviors.insert(zIndexBehavior)
 
         let sectionCount = 20

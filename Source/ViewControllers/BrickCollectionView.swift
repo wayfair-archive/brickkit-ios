@@ -23,7 +23,7 @@ public class BrickCollectionView: UICollectionView {
     public static var imageDownloader: ImageDownloader = NSURLSessionImageDownloader()
 
     /// The brick layout
-    public var layout: BrickLayout {
+    public weak var layout: BrickLayout! {
         return collectionViewLayout as! BrickLayout
     }
 

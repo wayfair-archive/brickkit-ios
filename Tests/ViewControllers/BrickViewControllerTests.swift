@@ -31,7 +31,18 @@ class BrickViewControllerTests: XCTestCase {
         waitForExpectationsWithTimeout(5, handler: nil)
         XCTAssertNil(viewController)
     }
-
+    
+    func testDeinitLabelBrick() {
+        var viewController: TestBrickViewController? = TestBrickViewController(nibName: "TestBrickViewController", bundle: NSBundle(forClass: self.dynamicType))
+        viewController?.labelTest = true
+        
+        expectationForNotification("BrickViewController.deinit", object: nil, handler: nil)
+        viewController?.viewDidLoad()
+        viewController = nil
+        waitForExpectationsWithTimeout(5, handler: nil)
+        XCTAssertNil(viewController)
+    }
+    
     func testFromStoryBoard() {
         let viewController = UIStoryboard(name: "TestBrickViewController", bundle: NSBundle(forClass: self.dynamicType)).instantiateInitialViewController() as? BrickViewController
         XCTAssertNotNil(viewController)

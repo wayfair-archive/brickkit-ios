@@ -15,7 +15,8 @@ class StickyFooterLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         let sectionCount = 20
 
         let indexPath = NSIndexPath(forItem: sectionCount - 1, inSection: 0)
-        let stickyBehavior = StickyFooterLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [indexPath]))
+        let behaviorDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [indexPath])
+        let stickyBehavior = StickyFooterLayoutBehavior(dataSource: behaviorDataSource)
         self.layout.behaviors.insert(stickyBehavior)
 
         setDataSources(SectionsCollectionViewDataSource(sections: [sectionCount]), brickLayoutDataSource: FixedBrickLayoutDataSource(widthRatio: 1, height: 100))
@@ -44,7 +45,8 @@ class StickyFooterLayoutBehaviorTests: BrickFlowLayoutBaseTests {
 
         let indexPath1 = NSIndexPath(forItem: sectionCount - 1, inSection: 0)
         let indexPath2 = NSIndexPath(forItem: sectionCount - 2, inSection: 0)
-        let stickyBehavior = StickyFooterLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [indexPath1, indexPath2]))
+        let behaviorDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [indexPath1, indexPath2])
+        let stickyBehavior = StickyFooterLayoutBehavior(dataSource: behaviorDataSource)
         self.layout.behaviors.insert(stickyBehavior)
 
         setDataSources(SectionsCollectionViewDataSource(sections: [sectionCount]), brickLayoutDataSource: FixedBrickLayoutDataSource(widthRatio: 1, height: 100))
@@ -81,7 +83,8 @@ class StickyFooterLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         self.collectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
 
         let indexPath = NSIndexPath(forItem: sectionCount - 1, inSection: 0)
-        let stickyBehavior = StickyFooterLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [indexPath]))
+        let behaviorDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [indexPath])
+        let stickyBehavior = StickyFooterLayoutBehavior(dataSource: behaviorDataSource)
         self.layout.behaviors.insert(stickyBehavior)
 
         setDataSources(SectionsCollectionViewDataSource(sections: [sectionCount]), brickLayoutDataSource: FixedBrickLayoutDataSource(widthRatio: 1, height: 100))
@@ -108,8 +111,8 @@ class StickyFooterLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     func testSectionStickyBehavior() {
         let firstIndexPath = NSIndexPath(forItem: 1, inSection: 2)
         let secondIndexPath = NSIndexPath(forItem: 1, inSection: 3)
-
-        let stickyBehavior = StickyFooterLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [firstIndexPath, secondIndexPath]))
+        let behaviorDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [firstIndexPath, secondIndexPath])
+        let stickyBehavior = StickyFooterLayoutBehavior(dataSource: behaviorDataSource)
         self.layout.behaviors.insert(stickyBehavior)
 
         setDataSources(SectionsCollectionViewDataSource(sections: [1, 2, 2, 2]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1], [1, 1], [1, 1], [1, 1]], heights: [[0], [0, 0], [1000, 100], [1000, 100]], types: [[.Section(sectionIndex: 1)], [.Section(sectionIndex: 2), .Section(sectionIndex: 3)], [.Brick, .Brick], [.Brick, .Brick]]))
@@ -152,7 +155,8 @@ class StickyFooterLayoutBehaviorTests: BrickFlowLayoutBaseTests {
 
         let indexPath1 = NSIndexPath(forItem: 1, inSection: 1)
         let indexPath2 = NSIndexPath(forItem: sectionCount - 1, inSection: 2)
-        let stickyBehavior = StickyFooterLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [indexPath1, indexPath2]))
+        let behaviorDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [indexPath1, indexPath2])
+        let stickyBehavior = StickyFooterLayoutBehavior(dataSource: behaviorDataSource)
         stickyBehavior.canStackWithOtherSections = true
         self.layout.behaviors.insert(stickyBehavior)
 
@@ -189,8 +193,8 @@ class StickyFooterLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         let sectionIndexPath = NSIndexPath(forItem: 1, inSection: 1)
         let firstIndexPath = NSIndexPath(forItem: 0, inSection: 2)
         let secondIndexPath = NSIndexPath(forItem: 1, inSection: 2)
-
-        let stickyBehavior = StickyFooterLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [sectionIndexPath]))
+        let behaviorDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [sectionIndexPath])
+        let stickyBehavior = StickyFooterLayoutBehavior(dataSource: behaviorDataSource)
         self.layout.behaviors.insert(stickyBehavior)
 
         setDataSources(SectionsCollectionViewDataSource(sections: [1, 2, 2]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1], [1, 1], [1, 1]], heights: [[0], [1000, 0], [100, 100]], types: [[.Section(sectionIndex: 1)], [.Brick, .Section(sectionIndex: 2)], [.Brick, .Brick]]))

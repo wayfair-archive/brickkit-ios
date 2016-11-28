@@ -22,8 +22,8 @@ public struct LabelBrickNibs {
 // MARK: - Brick
 
 public class LabelBrick: Brick {
-    let dataSource: LabelBrickCellDataSource
-    let delegate: LabelBrickCellDelegate?
+    weak var dataSource: LabelBrickCellDataSource?
+    weak var delegate: LabelBrickCellDelegate?
 
 
     public var text: String? {
@@ -59,15 +59,28 @@ public class LabelBrick: Brick {
             }
         }
     }
-
+    
+    private var dataSourceModel: LabelBrickCellModel?
+    private var delegateModel: LabelBrickCellModel?
+    
     convenience public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, text: String, configureCellBlock: ConfigureLabelBlock? = nil) {
-        self.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView, dataSource: LabelBrickCellModel(text: text, configureCellBlock: configureCellBlock))
+        let model = LabelBrickCellModel(text: text, configureCellBlock: configureCellBlock)
+        self.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView, dataSource: model)
     }
 
     public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, dataSource: LabelBrickCellDataSource, delegate: LabelBrickCellDelegate? = nil) {
         self.dataSource = dataSource
         self.delegate = delegate
         super.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView)
+        
+        if let delegateModel = delegate as? LabelBrickCellModel {
+            self.delegateModel = delegateModel
+        }
+        
+        if let dataSourceModel = dataSource as? LabelBrickCellModel where delegate !== dataSource {
+            self.dataSourceModel = dataSourceModel
+        }
+
     }
     
 }
@@ -75,13 +88,13 @@ public class LabelBrick: Brick {
 // MARK: - DataSource
 
 /// An object that adopts the `LabelBrickCellDataSource` protocol is responsible for providing the data required by a `LabelBrick`.
-public protocol LabelBrickCellDataSource {
+public protocol LabelBrickCellDataSource: class {
     func configureLabelBrickCell(cell: LabelBrickCell)
 }
 
 // MARK: - Delegate
 
-public protocol LabelBrickCellDelegate {
+public protocol LabelBrickCellDelegate: class {
     func buttonTouchedForLabelBrickCell(cell: LabelBrickCell)
 }
 
@@ -140,7 +153,7 @@ public class LabelBrickCell: BrickCell, Bricklike {
     override public func updateContent() {
         horizontalRuleLeft?.hidden = true
         horizontalRuleRight?.hidden = true
-        brick.dataSource.configureLabelBrickCell(self)
+        brick.dataSource?.configureLabelBrickCell(self)
         super.updateContent()
     }
 

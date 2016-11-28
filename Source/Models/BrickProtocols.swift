@@ -9,7 +9,7 @@
 import Foundation
 
 /// Convenience datasource for a BrickViewController
-public protocol BrickRegistrationDataSource {
+public protocol BrickRegistrationDataSource: class {
     func registerBricks()
 }
 

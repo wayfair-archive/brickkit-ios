@@ -168,7 +168,8 @@ class BrickAttributesZoneTests: BrickFlowLayoutBaseTests {
     }
 
     func testStickyZone() {
-        let stickyBehavior = StickyLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)]))
+        let dataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])
+        let stickyBehavior = StickyLayoutBehavior(dataSource: dataSource)
         self.layout.behaviors.insert(stickyBehavior)
 
         let sectionCount = 20
@@ -187,7 +188,8 @@ class BrickAttributesZoneTests: BrickFlowLayoutBaseTests {
     }
 
     func testStickyZoneWithSection() {
-        let stickyBehavior = StickyLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)]))
+        let dataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])
+        let stickyBehavior = StickyLayoutBehavior(dataSource: dataSource)
         self.layout.behaviors.insert(stickyBehavior)
 
         setDataSources(SectionsCollectionViewDataSource(sections: [2, 2, 2]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1, 1], [1, 1], [1, 1]], heights: [[0, 0], [100, 480], [100, 480]], types: [[.Section(sectionIndex: 1), .Section(sectionIndex: 2)], [.Brick, .Brick], [.Brick, .Brick]]))
@@ -213,7 +215,8 @@ class BrickAttributesZoneTests: BrickFlowLayoutBaseTests {
     }
 
     func testStickyZoneWithHugeSections() {
-        let stickyBehavior = StickyLayoutBehavior(dataSource: FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)]))
+        let dataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])
+        let stickyBehavior = StickyLayoutBehavior(dataSource: dataSource)
         self.layout.behaviors.insert(stickyBehavior)
 
         setDataSources(SectionsCollectionViewDataSource(sections: [2, 2, 2]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1, 1], [1, 1], [1, 1]], heights: [[0, 0], [100, 1000], [100, 1000]], types: [[.Section(sectionIndex: 1), .Section(sectionIndex: 2)], [.Brick, .Brick], [.Brick, .Brick]]))

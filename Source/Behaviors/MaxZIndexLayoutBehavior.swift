@@ -8,12 +8,12 @@
 
 import UIKit
 
-public protocol MaxZIndexLayoutBehaviorDataSource {
+public protocol MaxZIndexLayoutBehaviorDataSource: class {
     func maxZIndexLayoutBehavior(behavior: MaxZIndexLayoutBehavior, shouldHaveMaxZIndexAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool
 }
 
 public class MaxZIndexLayoutBehavior: BrickLayoutBehavior {
-    let dataSource: MaxZIndexLayoutBehaviorDataSource
+    weak var dataSource: MaxZIndexLayoutBehaviorDataSource?
 
     var maxZIndex: Int = 0
     var currentZIndex: Int = 0
@@ -31,7 +31,7 @@ public class MaxZIndexLayoutBehavior: BrickLayoutBehavior {
     }
 
     public override func registerAttributes(attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
-        if dataSource.maxZIndexLayoutBehavior(self, shouldHaveMaxZIndexAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
+        if dataSource?.maxZIndexLayoutBehavior(self, shouldHaveMaxZIndexAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) == true {
             attributes.zIndex = maxZIndex + currentZIndex
             currentZIndex += 1
         }
