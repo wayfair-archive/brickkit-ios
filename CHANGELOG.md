@@ -1,5 +1,14 @@
 # Change Log
 
+## [0.9.4](https://github.com/wayfair/brickkit-ios/tree/0.9.4) (2016-11-28)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/0.9.3...0.9.4)
+
+**Merged pull requests:**
+
+- Added imageDownloadHandler to ImageBrick and made tapGesture public o… [\#35](https://github.com/wayfair/brickkit-ios/pull/35) ([jay18001](https://github.com/jay18001))
+- Fix all the memory issues [\#34](https://github.com/wayfair/brickkit-ios/pull/34) ([jay18001](https://github.com/jay18001))
+- Removed incorrect information in deprecation statement [\#32](https://github.com/wayfair/brickkit-ios/pull/32) ([jay18001](https://github.com/jay18001))
+
 ## [0.9.3](https://github.com/wayfair/brickkit-ios/tree/0.9.3) (2016-11-10)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/0.9.2...0.9.3)
 
