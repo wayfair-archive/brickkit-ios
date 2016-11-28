@@ -10,20 +10,19 @@ import UIKit
 
 // Mark: - Image Downloader
 public protocol ImageDownloader {
-    func downloadImage(with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage) -> Void))
+    func downloadImage(with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage, url: NSURL) -> Void))
 }
 
 class NSURLSessionImageDownloader: ImageDownloader {
 
-    func downloadImage(with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage) -> Void)) {
+    func downloadImage(with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage, url: NSURL) -> Void)) {
         NSURLSession.sharedSession().dataTaskWithURL(imageURL, completionHandler: { (data, response, error) in
             guard
                 let data = data where error == nil,
                 let image = UIImage(data: data)
                 else { return }
 
-            completionHandler(image: image)
+            completionHandler(image: image, url: imageURL)
         }).resume()
     }
 }
-

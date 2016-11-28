@@ -80,22 +80,23 @@ public class ImageBrickModel: ImageBrickDataSource {
 }
 
 public class ImageURLBrickModel: ImageBrickDataSource {
-    var imageURL: NSURL?
+    var imageURL: NSURL
     var contentMode: UIViewContentMode
-
+    
     public init(url: NSURL, contentMode: UIViewContentMode) {
         self.contentMode = contentMode
         self.imageURL = url
     }
-
+    
     public func imageURLForImageBrickCell(imageBrickCell: ImageBrickCell) -> NSURL? {
         return imageURL
     }
-
+    
     public func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIViewContentMode {
         return contentMode
     }
 }
+
 
 // MARK: - Cell
 
@@ -107,6 +108,7 @@ public class ImageBrickCell: BrickCell, Bricklike, AsynchronousResizableCell, Im
     public var imageDownloader: ImageDownloader?
 
     private var imageLoaded = false
+    private var currentImageURL: NSURL? = nil
 
     @IBOutlet weak var imageView: UIImageView!
     var heightRatioConstraint: NSLayoutConstraint?
@@ -127,7 +129,6 @@ public class ImageBrickCell: BrickCell, Bricklike, AsynchronousResizableCell, Im
 
         imageLoaded = false
         imageView.contentMode = dataSource.contentModeForImageBrickCell(self)
-        imageView.image = nil
 
         if let image = dataSource.imageForImageBrickCell(self) {
             imageView.image = image
@@ -136,8 +137,19 @@ public class ImageBrickCell: BrickCell, Bricklike, AsynchronousResizableCell, Im
             }
             imageLoaded = true
         } else if let imageURL = dataSource.imageURLForImageBrickCell(self) {
-            self.imageDownloader?.downloadImage(with: imageURL, onCompletion: { (image) in
+            guard currentImageURL != imageURL else {
+                return
+            }
+            
+            imageView.image = nil
+            currentImageURL = imageURL
+            self.imageDownloader?.downloadImage(with: imageURL, onCompletion: { (image, url) in
+                guard imageURL == url else {
+                    return
+                }
+                
                 self.imageLoaded = true
+                
                 NSOperationQueue.mainQueue().addOperationWithBlock({
                     if self.brick.height.isEstimate(in: self) {
                         self.setRatioConstraint(for: image)
@@ -146,8 +158,11 @@ public class ImageBrickCell: BrickCell, Bricklike, AsynchronousResizableCell, Im
                     self.imageView.image = image
                 })
             })
+        } else {
+            imageView.image = nil
         }
     }
+
 
     /// Set the ratio constraint based on a given image
     ///
