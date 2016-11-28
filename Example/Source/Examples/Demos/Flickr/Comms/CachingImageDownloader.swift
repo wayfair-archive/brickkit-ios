@@ -26,10 +26,10 @@ class CachingImageDownloader: ImageDownloader {
     
     private let cache = NSCache() //<NSURL, ChachedImage>() <-- For Swift 3.0
     var metaDataHandler: ((UIImage) -> Bool)? = nil
-    
-    func downloadImage(with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage) -> Void)) {
+
+    func downloadImage(with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage, url: NSURL) -> Void)) {
         if let cachedImage = cache.objectForKey(imageURL) as? CachedImage, let imageData = cachedImage.imageData, let image = UIImage(data: imageData) {
-            completionHandler(image: image)
+            completionHandler(image: image, url: imageURL)
             return
         }
         
@@ -48,7 +48,7 @@ class CachingImageDownloader: ImageDownloader {
                 return
             }
             
-            completionHandler(image: image)
+            completionHandler(image: image, url: imageURL)
         }).resume()
     }
 }
