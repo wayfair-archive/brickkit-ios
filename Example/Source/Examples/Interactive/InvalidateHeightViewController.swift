@@ -33,7 +33,10 @@ class InvalidateHeightViewController: BrickViewController {
             })
 
         let section = BrickSection(bricks: [
-            brick
+            brick,
+            LabelBrick(BrickIdentifiers.repeatLabel, backgroundColor: .brickGray2, dataSource: LabelBrickCellModel(text: "BRICK", configureCellBlock: { cell in
+                cell.configure()
+                }))
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
 
         self.setSection(section)

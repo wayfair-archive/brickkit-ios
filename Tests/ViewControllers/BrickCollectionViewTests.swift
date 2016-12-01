@@ -412,4 +412,87 @@ class BrickCollectionViewTests: XCTestCase {
         let cell2 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
         XCTAssertEqual(cell2?.frame, CGRect(x: 0, y: 80, width: 320, height: 160))
     }
+
+    func testThatBricksBelowABrickThatShrunkAreOnTheRightYOrigin() {
+
+        let brickView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
+        brickView.registerBrickClass(DummyBrick.self)
+        let brick = DummyBrick("resizeBrick", height: .Fixed(size: 150))
+        let section = BrickSection("TestSection", bricks:[
+            brick,
+            DummyBrick("secondBrick", height: .Fixed(size: 25))
+            ])
+        brickView.setSection(section)
+        brickView.layoutSubviews()
+
+        var height = brickView.contentSize.height
+        XCTAssertEqual(height, 175)
+        var cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 0, y: 0, width: 320, height: 150))
+        var cell2 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 0, y: 150, width: 320, height: 25))
+
+        brick.height = .Fixed(size: 100)
+        let expectation = expectationWithDescription("")
+
+        brickView.invalidateBricks { (completed) in
+            expectation.fulfill()
+        }
+
+        waitForExpectationsWithTimeout(1, handler: nil)
+        brickView.layoutIfNeeded()
+
+        height = brickView.contentSize.height
+        XCTAssertEqual(height, 125)
+
+        cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 0, y: 0, width: 320, height: 100))
+        cell2 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 0, y: 100, width: 320, height: 25))
+    }
+
+    func testThatBricksBelowABrickThatShrunkAreOnTheRightYOriginFromSecondBrick() {
+
+        let brickView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
+        brickView.registerBrickClass(DummyBrick.self)
+        let brick = DummyBrick("resizeBrick", height: .Fixed(size: 150))
+        let section = BrickSection("TestSection", bricks:[
+            DummyBrick("secondBrick", height: .Fixed(size: 25)),
+            brick,
+            DummyBrick("secondBrick", height: .Fixed(size: 25))
+            ])
+        brickView.setSection(section)
+        brickView.layoutSubviews()
+
+        var height = brickView.contentSize.height
+        XCTAssertEqual(height, 200)
+        var cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 0, y: 0, width: 320, height: 25))
+        var cell2 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 0, y: 25, width: 320, height: 150))
+        var cell3 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 2, inSection: 1))
+        XCTAssertEqual(cell3?.frame, CGRect(x: 0, y: 175, width: 320, height: 25))
+
+        brick.height = .Fixed(size: 100)
+        let expectation = expectationWithDescription("")
+
+        brickView.invalidateBricks { (completed) in
+            expectation.fulfill()
+        }
+
+        waitForExpectationsWithTimeout(1, handler: nil)
+        brickView.layoutIfNeeded()
+
+        height = brickView.contentSize.height
+        XCTAssertEqual(height, 150)
+
+        cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 0, y: 0, width: 320, height: 25))
+        cell2 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 0, y: 25, width: 320, height: 100))
+        cell3 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 2, inSection: 1))
+        XCTAssertEqual(cell3?.frame, CGRect(x: 0, y: 125, width: 320, height: 25))
+    }
+
+
 }

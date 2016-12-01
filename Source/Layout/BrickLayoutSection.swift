@@ -255,8 +255,10 @@ internal class BrickLayoutSection {
                     startOrigin = CGPoint(x: lastAttribute.originalFrame.maxX + inset, y: lastAttribute.originalFrame.origin.y)
                 }
             } else if let first = visibleAttributes.first, let firstAttributesIndex = visibleAttributes.indexOf(first) where firstAttributesIndex <= firstIndex {
-                maxY = first.originalFrame.maxY
-                startOrigin = first.originalFrame.origin
+                if !invalidate {
+                    maxY = first.originalFrame.maxY
+                    startOrigin = first.originalFrame.origin
+                }
             }
         }
 
