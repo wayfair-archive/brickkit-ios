@@ -1,5 +1,16 @@
 # Change Log
 
+## [0.9.5](https://github.com/wayfair/brickkit-ios/tree/0.9.5) (2016-12-02)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/0.9.4...0.9.5)
+
+**Closed issues:**
+
+- Wrong content size calculation when a brick's height shrinks [\#36](https://github.com/wayfair/brickkit-ios/issues/36)
+
+**Merged pull requests:**
+
+- Fixed wrong contentSize when Brick’s height changed [\#37](https://github.com/wayfair/brickkit-ios/pull/37) ([rubencagnie](https://github.com/rubencagnie))
+
 ## [0.9.4](https://github.com/wayfair/brickkit-ios/tree/0.9.4) (2016-11-28)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/0.9.3...0.9.4)
 
@@ -29,7 +40,6 @@
 - Update README.md [\#24](https://github.com/wayfair/brickkit-ios/pull/24) ([klundberg](https://github.com/klundberg))
 - Update README.md [\#23](https://github.com/wayfair/brickkit-ios/pull/23) ([klundberg](https://github.com/klundberg))
 - Added Carthage install in README.md [\#22](https://github.com/wayfair/brickkit-ios/pull/22) ([rubencagnie](https://github.com/rubencagnie))
-- Added Flickr example [\#2](https://github.com/wayfair/brickkit-ios/pull/2) ([jay18001](https://github.com/jay18001))
 
 ## [0.9.2](https://github.com/wayfair/brickkit-ios/tree/0.9.2) (2016-10-27)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/0.9.1...0.9.2)
@@ -59,11 +69,6 @@
 
 - Travis fix [\#12](https://github.com/wayfair/brickkit-ios/pull/12) ([rubencagnie](https://github.com/rubencagnie))
 - 0.9.1 [\#10](https://github.com/wayfair/brickkit-ios/pull/10) ([rubencagnie](https://github.com/rubencagnie))
-- Sticky footer was wrongly calculated [\#9](https://github.com/wayfair/brickkit-ios/pull/9) ([rubencagnie](https://github.com/rubencagnie))
-- Fix BrickDimension for iPad. [\#7](https://github.com/wayfair/brickkit-ios/pull/7) ([thevwu](https://github.com/thevwu))
-- SpotlightLayoutBehavior now calls `attributesDidUpdate` [\#5](https://github.com/wayfair/brickkit-ios/pull/5) ([rubencagnie](https://github.com/rubencagnie))
-- Integration with Travis [\#3](https://github.com/wayfair/brickkit-ios/pull/3) ([rubencagnie](https://github.com/rubencagnie))
-- Added travis build badge [\#1](https://github.com/wayfair/brickkit-ios/pull/1) ([klundberg](https://github.com/klundberg))
 
 ## [0.9.0](https://github.com/wayfair/brickkit-ios/tree/0.9.0) (2016-10-20)
 
