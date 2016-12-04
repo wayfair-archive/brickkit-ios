@@ -56,7 +56,7 @@ class SectionsLayoutDataSource: NSObject, BrickLayoutDataSource {
         }
     }
 
-    func brickLayout(layout: BrickLayout, widthForItemAtIndexPath indexPath: NSIndexPath, totalWidth: CGFloat, widthRatio: CGFloat) -> CGFloat {
+    func brickLayout(layout: BrickLayout, widthForItemAtIndexPath indexPath: NSIndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat {
         let ratio: CGFloat
         let sectionWidthRatios = widthRatios[indexPath.section]
         if sectionWidthRatios.count <= indexPath.item {
@@ -147,7 +147,7 @@ class FixedBrickLayoutSectionDataSource: NSObject, BrickLayoutSectionDataSource 
         return inset
     }
 
-    func width(for index: Int, totalWidth: CGFloat, in skeleton: BrickLayoutSection) -> CGFloat {
+    func width(for index: Int, totalWidth: CGFloat, startingAt origin: CGFloat, in skeleton: BrickLayoutSection) -> CGFloat {
         return BrickUtils.calculateWidth(for: widthRatios[index], widthRatio: widthRatio, totalWidth: totalWidth, inset: inset)
     }
 
@@ -199,7 +199,7 @@ class FixedBrickLayoutDataSource: NSObject, BrickLayoutDataSource {
         self.type = type
     }
 
-    func brickLayout(layout: BrickLayout, widthForItemAtIndexPath indexPath: NSIndexPath, totalWidth: CGFloat, widthRatio: CGFloat) -> CGFloat {
+    func brickLayout(layout: BrickLayout, widthForItemAtIndexPath indexPath: NSIndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat {
         return BrickUtils.calculateWidth(for: self.widthRatio, widthRatio: widthRatio, totalWidth: totalWidth, inset: inset)
     }
 

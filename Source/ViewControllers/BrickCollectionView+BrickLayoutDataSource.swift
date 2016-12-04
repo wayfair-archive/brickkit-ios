@@ -10,7 +10,7 @@ import Foundation
 
 extension BrickCollectionView: BrickLayoutDataSource {
     
-    public func brickLayout(layout: BrickLayout, widthForItemAtIndexPath indexPath: NSIndexPath, totalWidth: CGFloat, widthRatio: CGFloat) -> CGFloat {
+    public func brickLayout(layout: BrickLayout, widthForItemAtIndexPath indexPath: NSIndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat {
         let inset = self.brickLayout(layout, insetForSection: indexPath.section)
         let widthDimension = self.brick(at: indexPath).width
 
@@ -18,7 +18,7 @@ extension BrickCollectionView: BrickLayoutDataSource {
 
         switch dimension {
         case .Ratio(let ratio): return BrickUtils.calculateWidth(for: ratio, widthRatio: widthRatio, totalWidth: totalWidth, inset: inset)
-        default: return dimension.value(for: totalWidth, in: self)
+        default: return dimension.value(for: totalWidth, startingAt: origin, in: self)
         }
     }
 
@@ -38,7 +38,7 @@ extension BrickCollectionView: BrickLayoutDataSource {
         }
 
         let heightDimension = brick.height
-        return heightDimension.value(for: width, in: self)
+        return heightDimension.value(for: width, startingAt: 0, in: self)
     }
 
     public func brickLayout(layout: BrickLayout, edgeInsetsForSection section: Int) -> UIEdgeInsets {

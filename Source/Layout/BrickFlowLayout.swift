@@ -324,13 +324,13 @@ extension BrickFlowLayout: BrickLayoutSectionDataSource {
         return zIndexBehavior
     }
 
-    func width(for index: Int, totalWidth: CGFloat, in section: BrickLayoutSection) -> CGFloat {
+    func width(for index: Int, totalWidth: CGFloat, startingAt origin: CGFloat, in section: BrickLayoutSection) -> CGFloat {
         guard let dataSource = dataSource else {
             return 0
         }
 
         let indexPath = NSIndexPath(forItem: index, inSection: section.sectionIndex)
-        let width = dataSource.brickLayout(self, widthForItemAtIndexPath: indexPath, totalWidth: totalWidth, widthRatio: widthRatio)
+        let width = dataSource.brickLayout(self, widthForItemAtIndexPath: indexPath, totalWidth: totalWidth, widthRatio: widthRatio, startingAt: origin)
 
         return width
     }

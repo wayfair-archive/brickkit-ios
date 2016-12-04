@@ -494,5 +494,130 @@ class BrickCollectionViewTests: XCTestCase {
         XCTAssertEqual(cell3?.frame, CGRect(x: 0, y: 125, width: 320, height: 25))
     }
 
+    func testThatFillBrickDimensionIgnoresEdgeInsets() {
+
+        brickView.registerBrickClass(DummyBrick.self)
+        let section = BrickSection("TestSection", bricks:[
+            DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 25)),
+            DummyBrick(width: .Fill, height: .Fixed(size: 25))
+            ], inset: 5, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        brickView.setSection(section)
+        brickView.layoutSubviews()
+
+        var cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 10, width: 50, height: 25))
+        var cell2 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 65, y: 10, width: 245, height: 25))
+
+        // Rotate
+
+        brickView.frame.size = CGSize(width: 480, height: 320)
+        let expectation = expectationWithDescription("")
+
+        brickView.invalidateBricks { (completed) in
+            expectation.fulfill()
+        }
+
+        waitForExpectationsWithTimeout(1, handler: nil)
+
+        cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 10, width: 50, height: 25))
+        cell2 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 65, y: 10, width: 405, height: 25))
+    }
+
+    func testThatSingleFillBrickDimensionIsFullWidth() {
+
+        brickView.registerBrickClass(DummyBrick.self)
+        let section = BrickSection(bricks:[
+            DummyBrick(width: .Fill, height: .Fixed(size: 25))
+            ], inset: 5, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        brickView.setSection(section)
+        brickView.layoutSubviews()
+
+        var cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 10, width: 300, height: 25))
+
+        // Rotate
+
+        brickView.frame.size = CGSize(width: 480, height: 320)
+        let expectation = expectationWithDescription("")
+
+        brickView.invalidateBricks { (completed) in
+            expectation.fulfill()
+        }
+
+        waitForExpectationsWithTimeout(1, handler: nil)
+
+        cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 10, width: 460, height: 25))
+    }
+
+    func testThatFullWidthFillAsSecondDoesntCrash() {
+
+        brickView.registerBrickClass(DummyBrick.self)
+        let section = BrickSection("TestSection", bricks:[
+            DummyBrick(height: .Fixed(size: 25)),
+            DummyBrick(width: .Fill, height: .Fixed(size: 25))
+            ], inset: 5, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        brickView.setSection(section)
+        brickView.layoutSubviews()
+
+        var cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 10, width: 300, height: 25))
+        var cell2 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 10, y: 40, width: 300, height: 25))
+
+        // Rotate
+
+        brickView.frame.size = CGSize(width: 480, height: 320)
+        let expectation = expectationWithDescription("")
+
+        brickView.invalidateBricks { (completed) in
+            expectation.fulfill()
+        }
+
+        waitForExpectationsWithTimeout(1, handler: nil)
+
+        cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 10, width: 460, height: 25))
+        cell2 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 10, y: 40, width: 460, height: 25))
+    }
+
+    func testThatFillInSectionTakesOriginIntoAccount() {
+
+        brickView.registerBrickClass(DummyBrick.self)
+        let section = BrickSection("TestSection", bricks:[
+            BrickSection(bricks: [
+                DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 25)),
+                DummyBrick(width: .Fill, height: .Fixed(size: 25))
+                ])
+            ], inset: 5, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        brickView.setSection(section)
+        brickView.layoutSubviews()
+
+        var cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 2))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 10, width: 50, height: 25))
+        var cell2 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 2))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 60, y: 10, width: 250, height: 25))
+
+        // Rotate
+
+        brickView.frame.size = CGSize(width: 480, height: 320)
+        let expectation = expectationWithDescription("")
+
+        brickView.invalidateBricks { (completed) in
+            expectation.fulfill()
+        }
+
+        waitForExpectationsWithTimeout(1, handler: nil)
+
+        cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 2))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 10, width: 50, height: 25))
+        cell2 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 2))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 60, y: 10, width: 410, height: 25))
+    }
+
 
 }

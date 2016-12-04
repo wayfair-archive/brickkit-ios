@@ -27,6 +27,7 @@ extension UIView {
 public indirect enum BrickDimension {
     case Ratio(ratio: CGFloat)
     case Fixed(size: CGFloat)
+    case Fill
 
     case Auto(estimate: BrickDimension)
     case Orientation(landscape: BrickDimension, portrait: BrickDimension)
@@ -55,21 +56,27 @@ public indirect enum BrickDimension {
         }
     }
 
-    func value(for otherDimension: CGFloat, in view: UIView) -> CGFloat {
+    func value(for otherDimension: CGFloat, startingAt origin: CGFloat, in view: UIView) -> CGFloat {
         let actualDimension = dimension(in: view)
 
         switch actualDimension {
-        case .Auto(let dimension): return dimension.value(for: otherDimension, in: view)
-        default: return BrickDimension._rawValue(for: otherDimension, in: view, with: actualDimension)
+        case .Auto(let dimension): return dimension.value(for: otherDimension, startingAt: origin, in: view)
+        default: return BrickDimension._rawValue(for: otherDimension, startingAt: origin, in: view, with: actualDimension)
         }
     }
 
-    /// Function that gets the raw value of a BrickDimension. As of right now, only Ratio and Fixed are allowed
-    static func _rawValue(for otherDimension: CGFloat, in view: UIView, with dimension: BrickDimension) -> CGFloat {
+    /// Function that gets the raw value of a BrickDimension. As of right now, only Ratio, Fixed and Fill are allowed
+    static func _rawValue(for otherDimension: CGFloat, startingAt origin: CGFloat, in view: UIView, with dimension: BrickDimension) -> CGFloat {
         switch dimension {
         case .Ratio(let ratio): return ratio * otherDimension
         case .Fixed(let size): return size
-        default: fatalError("Only Ratio and Fixed are allowed")
+        case .Fill:
+            guard otherDimension > origin else {
+                // If the origin is bigger than the actual dimension, just return the whole dimension
+                return otherDimension
+            }
+            return otherDimension - origin
+        default: fatalError("Only Ratio, Fixed and Fill are allowed")
         }
     }
 }
@@ -96,6 +103,9 @@ public func ==(lhs: BrickDimension, rhs: BrickDimension) -> Bool {
 
     case (let .VerticalSizeClass(regular1, compact1), let .VerticalSizeClass(regular2, compact2)):
         return regular1 == regular2 && compact1 == compact2
+
+    case (.Fill, .Fill):
+        return true
 
     default:
         return false
