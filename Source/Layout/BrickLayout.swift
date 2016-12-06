@@ -58,7 +58,7 @@ extension BrickLayoutAttributes {
 }
 
 public protocol BrickLayoutDataSource: class {
-    func brickLayout(layout: BrickLayout, widthForItemAtIndexPath indexPath: NSIndexPath, totalWidth: CGFloat, widthRatio: CGFloat) -> CGFloat
+    func brickLayout(layout: BrickLayout, widthForItemAtIndexPath indexPath: NSIndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat
     func brickLayout(layout: BrickLayout, estimatedHeightForItemAtIndexPath indexPath: NSIndexPath, containedInWidth width: CGFloat) -> CGFloat
     func brickLayout(layout: BrickLayout, edgeInsetsForSection section: Int) -> UIEdgeInsets
     func brickLayout(layout: BrickLayout, insetForSection section: Int) -> CGFloat

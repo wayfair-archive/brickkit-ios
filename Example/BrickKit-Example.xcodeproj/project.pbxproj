@@ -165,6 +165,7 @@
 		4E3BD8ED1DB521C200541900 /* CoverFlowViewScrollingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD8EB1DB521C200541900 /* CoverFlowViewScrollingController.swift */; };
 		4E8E10F41DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8E10F31DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift */; };
 		4E8E10F51DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8E10F31DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift */; };
+		932365671DF449A500BE5183 /* FillBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932365661DF449A500BE5183 /* FillBrickViewController.swift */; };
 		9327D03E1DB94A9500D65BCB /* NibLessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327D03D1DB94A9500D65BCB /* NibLessViewController.swift */; };
 		9327D03F1DB94A9500D65BCB /* NibLessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327D03D1DB94A9500D65BCB /* NibLessViewController.swift */; };
 		9327D0431DB94AB300D65BCB /* NiblessBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327D0421DB94AB300D65BCB /* NiblessBrick.swift */; };
@@ -350,6 +351,7 @@
 		4E3BD8E61DB51E1200541900 /* BrickIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickIdentifiers.swift; sourceTree = "<group>"; };
 		4E3BD8EB1DB521C200541900 /* CoverFlowViewScrollingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverFlowViewScrollingController.swift; sourceTree = "<group>"; };
 		4E8E10F31DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbeddedSpotlightSnapScrollingViewController.swift; sourceTree = "<group>"; };
+		932365661DF449A500BE5183 /* FillBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillBrickViewController.swift; sourceTree = "<group>"; };
 		9327D03D1DB94A9500D65BCB /* NibLessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLessViewController.swift; sourceTree = "<group>"; };
 		9327D0421DB94AB300D65BCB /* NiblessBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NiblessBrick.swift; sourceTree = "<group>"; };
 		935D488F1DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesInCollectionBrickViewController.swift; sourceTree = "<group>"; };
@@ -624,6 +626,7 @@
 				4E3BD7A91DB1316400541900 /* SimpleRepeatFixedWidthViewController.swift */,
 				4E3BD7AA1DB1316400541900 /* SimpleRepeatHeightRatioViewController.swift */,
 				9327D03D1DB94A9500D65BCB /* NibLessViewController.swift */,
+				932365661DF449A500BE5183 /* FillBrickViewController.swift */,
 			);
 			path = Simple;
 			sourceTree = "<group>";
@@ -1002,6 +1005,7 @@
 				4E15F92C1DBA570600BBD363 /* MockTwitterViewController.swift in Sources */,
 				4E3BD7DE1DB1316400541900 /* SegmentHeaderBrick.swift in Sources */,
 				4E3BD8261DB1316400541900 /* HideSectionsViewController.swift in Sources */,
+				932365671DF449A500BE5183 /* FillBrickViewController.swift in Sources */,
 				4E3BD8241DB1316400541900 /* HideBrickViewController.swift in Sources */,
 				93EAFE2F1DB57D680036331C /* NavigationTransition.swift in Sources */,
 				4E3BD7D81DB1316400541900 /* PostBrick.swift in Sources */,

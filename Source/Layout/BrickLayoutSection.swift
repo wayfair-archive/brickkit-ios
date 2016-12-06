@@ -16,7 +16,7 @@ protocol BrickLayoutSectionDataSource: class {
 
     func edgeInsets(in section: BrickLayoutSection) -> UIEdgeInsets
     func inset(in section: BrickLayoutSection) -> CGFloat
-    func width(for index: Int, totalWidth: CGFloat, in section: BrickLayoutSection) -> CGFloat
+    func width(for index: Int, totalWidth: CGFloat, startingAt origin: CGFloat, in section: BrickLayoutSection) -> CGFloat
     func prepareForSizeCalculation(for attributes: BrickLayoutAttributes, containedIn width: CGFloat, origin: CGPoint, invalidate: Bool, in section: BrickLayoutSection, updatedAttributes: OnAttributesUpdatedHandler?)
     func size(for attributes: BrickLayoutAttributes, containedIn width: CGFloat, in section: BrickLayoutSection) -> CGSize
     func identifier(for index: Int, in section: BrickLayoutSection) -> String
@@ -185,7 +185,7 @@ internal class BrickLayoutSection {
 
         invalidateAttributes(attributes[index])
 
-        let width = widthAtIndex(index, dataSource: dataSource)
+        let width = widthAtIndex(index, startingAt: attributes[index].originalFrame.minX - dataSource.edgeInsets(in: self).left, dataSource: dataSource)
         let size = dataSource.size(for: attributes[index], containedIn: width, in: self)
         attributes[index].originalFrame.size = size
         attributes[index].frame.size = size
@@ -213,11 +213,11 @@ internal class BrickLayoutSection {
         }
     }
 
-    private func widthAtIndex(index: Int, dataSource: BrickLayoutSectionDataSource) -> CGFloat {
+    private func widthAtIndex(index: Int, startingAt origin: CGFloat, dataSource: BrickLayoutSectionDataSource) -> CGFloat {
         let edgeInsets = dataSource.edgeInsets(in: self)
         let totalWidth = sectionWidth - edgeInsets.left - edgeInsets.right
 
-        return dataSource.width(for: index, totalWidth: totalWidth, in: self)
+        return dataSource.width(for: index, totalWidth: totalWidth, startingAt: origin, in: self)
     }
 
     private func createOrUpdateCells(from firstIndex: Int, invalidate: Bool, updatedAttributes: OnAttributesUpdatedHandler?, customHeightProvider: ((attributes: BrickLayoutAttributes) -> CGFloat?)? = nil) {
@@ -299,7 +299,7 @@ internal class BrickLayoutSection {
                 brickAttributes.zIndex = dataSource.zIndex(for: index, in: self)
             }
 
-            var width = widthAtIndex(index, dataSource: dataSource)
+            var width = widthAtIndex(index, startingAt: x - edgeInsets.left - origin.x, dataSource: dataSource)
 
             let shouldBeOnNextRow: Bool
             switch dataSource.scrollDirection {

@@ -136,12 +136,28 @@ let section = BrickSection(bricks: [
 # BrickDimension - Advanced
 A dimension can also be complex and defined by "rules". This approach allows us to be extendable in the future
 
+## Fill
+
+The value of the dimension is the remainder of the row
+
+In this example, there will be an ImageBrick with a size of 50px. The width of the LabelBrick will be the remainder of the width.
+So if the screen is 320px, the LabelBrick will have a width of 270px
+
+```swift
+let section = BrickSection(bricks: [
+	ImageBrick(width: .Fixed(size: 50)),
+	LabelBrick(width: .Fill)
+])
+```
+
+> Fill is only supported for `width`
+
 ## Orientation(landscape: BrickDimension, portrait: BrickDimension)
 The value of the dimension is determined by the orientation of the device.
 
 In this example, there will be 2 bricks per row in portrait and 3 bricks per row in landscape
 
-```
+```swift
 let width: BrickDimension = .Orientation(landscape: .Ratio(ratio: 1/3), portrait: .Ratio(ratio: 1/2))
 ```
 
@@ -150,7 +166,7 @@ The value of the dimension is determined by the horizontal size class of the vie
 
 In this example, there will be 2 bricks per row in a regular trait class and 1 brick per row in a compact trait class
 
-```
+```swift
 let width: BrickDimension = .HorizontalSizeClass(regular: .Ratio(ratio: 1/2), compact: .Ratio(ratio: 1))
 ```
 
@@ -159,7 +175,7 @@ The value of the dimension is determined by the vertical size class of the view.
 
 In this example, there will be 2 bricks per row in a regular trait class and 1 brick per row in a compact trait class
 
-```
+```swift
 let width: BrickDimension = . VerticalSizeClass(regular: .Ratio(ratio: 1/2), compact: .Ratio(ratio: 1))
 ```
 
@@ -168,7 +184,7 @@ It's possible to mix and match the different type of BrickDimensions.
 
 In this example, the width depends on the size class. If it's regular and landscape, there will be 3 bricks per row and in portrait, 2 per row. If the size class is compact, it always shows just 1 brick per row
  
-```
+```swift
 let width: BrickDimension =
     .HorizontalSizeClass(
         regular: .Orientation(
