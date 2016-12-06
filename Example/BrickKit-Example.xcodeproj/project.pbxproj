@@ -165,6 +165,10 @@
 		4E3BD8ED1DB521C200541900 /* CoverFlowViewScrollingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD8EB1DB521C200541900 /* CoverFlowViewScrollingController.swift */; };
 		4E8E10F41DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8E10F31DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift */; };
 		4E8E10F51DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8E10F31DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift */; };
+		93186B031DDE89610095C849 /* HugeRepeatBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93186B021DDE89610095C849 /* HugeRepeatBrickViewController.swift */; };
+		93186B041DDE89610095C849 /* HugeRepeatBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93186B021DDE89610095C849 /* HugeRepeatBrickViewController.swift */; };
+		93186B081DDE8A580095C849 /* HugeRepeatCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93186B071DDE8A580095C849 /* HugeRepeatCollectionViewController.swift */; };
+		93186B091DDE8A580095C849 /* HugeRepeatCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93186B071DDE8A580095C849 /* HugeRepeatCollectionViewController.swift */; };
 		932365671DF449A500BE5183 /* FillBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932365661DF449A500BE5183 /* FillBrickViewController.swift */; };
 		9327D03E1DB94A9500D65BCB /* NibLessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327D03D1DB94A9500D65BCB /* NibLessViewController.swift */; };
 		9327D03F1DB94A9500D65BCB /* NibLessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327D03D1DB94A9500D65BCB /* NibLessViewController.swift */; };
@@ -174,6 +178,7 @@
 		935D48911DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D488F1DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift */; };
 		935D489B1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D489A1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift */; };
 		935D489C1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D489A1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift */; };
+		93DE8B4A1DF744BB00324EC8 /* FillBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932365661DF449A500BE5183 /* FillBrickViewController.swift */; };
 		93EAFE2D1DB57D680036331C /* NavigationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EAFE291DB57D680036331C /* NavigationDetailViewController.swift */; };
 		93EAFE2E1DB57D680036331C /* NavigationMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EAFE2A1DB57D680036331C /* NavigationMasterViewController.swift */; };
 		93EAFE2F1DB57D680036331C /* NavigationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EAFE2B1DB57D680036331C /* NavigationTransition.swift */; };
@@ -351,6 +356,8 @@
 		4E3BD8E61DB51E1200541900 /* BrickIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickIdentifiers.swift; sourceTree = "<group>"; };
 		4E3BD8EB1DB521C200541900 /* CoverFlowViewScrollingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverFlowViewScrollingController.swift; sourceTree = "<group>"; };
 		4E8E10F31DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbeddedSpotlightSnapScrollingViewController.swift; sourceTree = "<group>"; };
+		93186B021DDE89610095C849 /* HugeRepeatBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HugeRepeatBrickViewController.swift; sourceTree = "<group>"; };
+		93186B071DDE8A580095C849 /* HugeRepeatCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HugeRepeatCollectionViewController.swift; sourceTree = "<group>"; };
 		932365661DF449A500BE5183 /* FillBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillBrickViewController.swift; sourceTree = "<group>"; };
 		9327D03D1DB94A9500D65BCB /* NibLessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLessViewController.swift; sourceTree = "<group>"; };
 		9327D0421DB94AB300D65BCB /* NiblessBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NiblessBrick.swift; sourceTree = "<group>"; };
@@ -627,6 +634,8 @@
 				4E3BD7AA1DB1316400541900 /* SimpleRepeatHeightRatioViewController.swift */,
 				9327D03D1DB94A9500D65BCB /* NibLessViewController.swift */,
 				932365661DF449A500BE5183 /* FillBrickViewController.swift */,
+				93186B021DDE89610095C849 /* HugeRepeatBrickViewController.swift */,
+				93186B071DDE8A580095C849 /* HugeRepeatCollectionViewController.swift */,
 			);
 			path = Simple;
 			sourceTree = "<group>";
@@ -838,11 +847,11 @@
 					4E3BD5C61DB008CD00541900 = {
 						CreatedOnToolsVersion = 8.0;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					4E3BD6D41DB00F9F00541900 = {
 						CreatedOnToolsVersion = 8.0;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -955,6 +964,7 @@
 				4E15F9281DBA570600BBD363 /* ImageRequests.swift in Sources */,
 				4E3BD8001DB1316400541900 /* BaseRepeatBrickViewController.swift in Sources */,
 				4E3BD85C1DB1316400541900 /* StickingFooterBaseViewController.swift in Sources */,
+				93186B081DDE8A580095C849 /* HugeRepeatCollectionViewController.swift in Sources */,
 				4E3BD84E1DB1316400541900 /* SimpleRepeatFixedWidthViewController.swift in Sources */,
 				4E3BD7EE1DB1316400541900 /* WhoToFollowBrick.swift in Sources */,
 				4E3BD7C61DB1316400541900 /* DailySalesBrick.swift in Sources */,
@@ -1001,6 +1011,7 @@
 				4E8E10F41DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift in Sources */,
 				4E3BD7BC1DB1316400541900 /* AppDelegate.swift in Sources */,
 				935D48901DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift in Sources */,
+				93186B031DDE89610095C849 /* HugeRepeatBrickViewController.swift in Sources */,
 				4E3BD8441DB1316400541900 /* MultiDimensionBrickViewController.swift in Sources */,
 				4E15F92C1DBA570600BBD363 /* MockTwitterViewController.swift in Sources */,
 				4E3BD7DE1DB1316400541900 /* SegmentHeaderBrick.swift in Sources */,
@@ -1048,6 +1059,7 @@
 				4E3BD85F1DB1316400541900 /* StickingFooterSectionsViewController.swift in Sources */,
 				4E15F9291DBA570600BBD363 /* ImageRequests.swift in Sources */,
 				4E3BD8071DB1316400541900 /* RepeatCollectionBrickViewController.swift in Sources */,
+				93186B091DDE8A580095C849 /* HugeRepeatCollectionViewController.swift in Sources */,
 				93EAFE331DB57D6B0036331C /* NavigationTransition.swift in Sources */,
 				9327D0441DB94AB300D65BCB /* NiblessBrick.swift in Sources */,
 				93EAFE321DB57D6B0036331C /* NavigationMasterViewController.swift in Sources */,
@@ -1071,6 +1083,7 @@
 				4E3BD84B1DB1316400541900 /* SimpleRepeatBrickViewController.swift in Sources */,
 				4E3BD82B1DB1316400541900 /* InvalidateHeightViewController.swift in Sources */,
 				4E3BD8431DB1316400541900 /* SpotlightScrollingViewController.swift in Sources */,
+				93DE8B4A1DF744BB00324EC8 /* FillBrickViewController.swift in Sources */,
 				4E3BD7F91DB1316400541900 /* TwoLabelBrick.swift in Sources */,
 				4E3BD81B1DB1316400541900 /* AdvancedRepeatViewController.swift in Sources */,
 				93EAFE311DB57D6B0036331C /* NavigationDetailViewController.swift in Sources */,
@@ -1087,6 +1100,7 @@
 				4E3BD8451DB1316400541900 /* MultiDimensionBrickViewController.swift in Sources */,
 				4E3BD7DF1DB1316400541900 /* SegmentHeaderBrick.swift in Sources */,
 				4E3BD8271DB1316400541900 /* HideSectionsViewController.swift in Sources */,
+				93186B041DDE89610095C849 /* HugeRepeatBrickViewController.swift in Sources */,
 				4E3BD8251DB1316400541900 /* HideBrickViewController.swift in Sources */,
 				4E15F92D1DBA570600BBD363 /* MockTwitterViewController.swift in Sources */,
 				4E3BD7D91DB1316400541900 /* PostBrick.swift in Sources */,
@@ -1222,6 +1236,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wafair.BrickKit-Example";
@@ -1236,6 +1251,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wafair.BrickKit-Example";
@@ -1249,6 +1265,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wafair.BrickApp-tvOS";
@@ -1265,6 +1282,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wafair.BrickApp-tvOS";

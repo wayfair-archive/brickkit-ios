@@ -23,8 +23,8 @@ public class BrickCollectionView: UICollectionView {
     public static var imageDownloader: ImageDownloader = NSURLSessionImageDownloader()
 
     /// The brick layout
-    public weak var layout: BrickLayout! {
-        return collectionViewLayout as! BrickLayout
+    public var layout: BrickFlowLayout {
+        return collectionViewLayout as! BrickFlowLayout
     }
 
     /// Override to check if the layout is a BrickLayout
@@ -339,7 +339,8 @@ extension BrickCollectionView {
             }
 
             for i in 0..<abs(countDiff) {
-                indexPaths.append(NSIndexPath(forItem: (currentCount - i - 1), inSection: section))
+                let indexPath = NSIndexPath(forItem: (currentCount - i - 1), inSection: section)
+                indexPaths.append(indexPath)
             }
 
             if removed {
@@ -513,9 +514,9 @@ extension BrickCollectionView: UICollectionViewDataSource {
             if var resizable = brickCell as? AsynchronousResizableCell {
                 resizable.sizeChangedHandler = { [weak collectionView] cell in
                     let height = cell.heightForBrickView(withWidth: brickCell.frame.width)
-                    if let brickCollectionView = collectionView as? BrickCollectionView, let flow = brickCollectionView.layout as? BrickFlowLayout {
-                        brickCollectionView.performBatchUpdates({ 
-                            flow.updateHeight(indexPath, newHeight: height)
+                    if let brickCollectionView = collectionView as? BrickCollectionView {
+                        brickCollectionView.performBatchUpdates({
+                            brickCollectionView.layout.updateHeight(indexPath, newHeight: height)
                             }, completion: nil)
                     }
                 }

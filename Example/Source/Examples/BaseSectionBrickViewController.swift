@@ -21,7 +21,7 @@ class BaseSectionBrickViewController: BrickApp.BaseBrickController {
         self.brickCollectionView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(bricks: [
-            BrickSection(Group, backgroundColor: .brickGray3, bricks: [
+            BrickSection(Group, bricks: [
                 LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray2, text: "SECTION 1", configureCellBlock: BaseBrickController.configureCell),
                 LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray1, dataSource: self),
                 ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)),

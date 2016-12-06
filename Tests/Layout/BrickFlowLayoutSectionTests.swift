@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import BrickKit
 
 class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
 
@@ -154,51 +155,51 @@ class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
     func testNestedSections() {
         /*
          //SECTION 0
-        let section = BrickSection("Test", bricks: [
+         let section = BrickSection("Test", bricks: [
 
-            ExampleLabelBrick("Label Brick", widthRatio: 0.5, backgroundColor: .orangeColor(), text: "In label"),
+         ExampleLabelBrick("Label Brick", widthRatio: 0.5, backgroundColor: .orangeColor(), text: "In label"),
 
-            // Section 1
-            BrickSection("Section", widthRatio: 0.5 , backgroundColor: .redColor(), bricks: [
+         // Section 1
+         BrickSection("Section", widthRatio: 0.5 , backgroundColor: .redColor(), bricks: [
 
-                ExampleLabelBrick("Label Brick", widthRatio: 1, backgroundColor: .purpleColor(), text: "In section\nIn section"),
-                ExampleLabelBrick("Label Brick", widthRatio: 1, backgroundColor: .brownColor(), text: "In section"),
-                ]),
+         ExampleLabelBrick("Label Brick", widthRatio: 1, backgroundColor: .purpleColor(), text: "In section\nIn section"),
+         ExampleLabelBrick("Label Brick", widthRatio: 1, backgroundColor: .brownColor(), text: "In section"),
+         ]),
 
-            // Section 2
-            BrickSection("Section", widthRatio: 1 , backgroundColor: .redColor(), bricks: [
-            
-                // Section 3
-                BrickSection("Section", widthRatio: 1 / 3 , backgroundColor: .redColor(), bricks: [
+         // Section 2
+         BrickSection("Section", widthRatio: 1 , backgroundColor: .redColor(), bricks: [
 
-                    ExampleLabelBrick("Label Brick", widthRatio: 1, backgroundColor: .purpleColor(), text: "In section"),
-                    ExampleLabelBrick("Label Brick", widthRatio: 1, backgroundColor: .brownColor(), text: "In section"),
+         // Section 3
+         BrickSection("Section", widthRatio: 1 / 3 , backgroundColor: .redColor(), bricks: [
 
-                    ]),
-         
-                // Section 4
-                BrickSection("Section", widthRatio: 2 / 3 , backgroundColor: .redColor(), bricks: [
+         ExampleLabelBrick("Label Brick", widthRatio: 1, backgroundColor: .purpleColor(), text: "In section"),
+         ExampleLabelBrick("Label Brick", widthRatio: 1, backgroundColor: .brownColor(), text: "In section"),
 
-                    // Section 5
-                    ExampleLabelBrick("Label Brick", backgroundColor: .purpleColor(), text: "In section"),
-                    ExampleLabelBrick("Label Brick", backgroundColor: .brownColor(), text: "In section"),
-                    ExampleLabelBrick("Label Brick", backgroundColor: .grayColor(), text: "In section"),
+         ]),
 
-                    ], inset: 15),
-                ], inset: 5, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)),
-         
-            // Section 6
-            BrickSection("Section", widthRatio: 0.5 , backgroundColor: .redColor(), bricks: [
-         
-                ExampleLabelBrick("Label Brick", widthRatio: 1, backgroundColor: .purpleColor(), text: "In section"),
-                ExampleLabelBrick("Label Brick", widthRatio: 1, backgroundColor: .brownColor(), text: "In section"),
-                ]),
-         
+         // Section 4
+         BrickSection("Section", widthRatio: 2 / 3 , backgroundColor: .redColor(), bricks: [
 
-            ExampleLabelBrick("Label Brick", widthRatio: 0.5, backgroundColor: .orangeColor(), text: "In label"),
-            ExampleLabelBrick("Label Brick", widthRatio: 1, backgroundColor: .orangeColor(), text: "In label"),
-            ], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
-         
+         // Section 5
+         ExampleLabelBrick("Label Brick", backgroundColor: .purpleColor(), text: "In section"),
+         ExampleLabelBrick("Label Brick", backgroundColor: .brownColor(), text: "In section"),
+         ExampleLabelBrick("Label Brick", backgroundColor: .grayColor(), text: "In section"),
+
+         ], inset: 15),
+         ], inset: 5, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)),
+
+         // Section 6
+         BrickSection("Section", widthRatio: 0.5 , backgroundColor: .redColor(), bricks: [
+
+         ExampleLabelBrick("Label Brick", widthRatio: 1, backgroundColor: .purpleColor(), text: "In section"),
+         ExampleLabelBrick("Label Brick", widthRatio: 1, backgroundColor: .brownColor(), text: "In section"),
+         ]),
+
+
+         ExampleLabelBrick("Label Brick", widthRatio: 0.5, backgroundColor: .orangeColor(), text: "In label"),
+         ExampleLabelBrick("Label Brick", widthRatio: 1, backgroundColor: .orangeColor(), text: "In label"),
+         ], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+
          SECTION: 0: 1
          SECTION: 1: 6
          SECTION: 2: 2
@@ -291,12 +292,81 @@ class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
             ]
         ]
 
-        let attributes = layout.layoutAttributesForElementsInRect(collectionViewFrame)
+        let attributes = layout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 0, width: collectionViewFrame.width, height: CGFloat.infinity))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
         XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 800))
+    }
+
+    func testThatMultiSectionsAreCalculatedCorrectly() {
+        collectionView.registerBrickClass(LabelBrick.self)
+
+        let section = BrickSection(bricks: [
+            LabelBrick(width: .Ratio(ratio: 0.5), text: "BRICK"),
+            BrickSection(width: .Ratio(ratio: 0.5), bricks: [
+                LabelBrick(text: "BRICK\nBRICK"),
+                LabelBrick(text: "BRICK"),
+                LabelBrick(text: "BRICK"),
+                ], inset: 10),
+            BrickSection(bricks: [
+                BrickSection(width: .Ratio(ratio: 1/3), bricks: [
+                    LabelBrick(text: "BRICK"),
+                    LabelBrick(text: "BRICK"),
+                    ], inset: 5),
+                BrickSection(width: .Ratio(ratio: 2/3), bricks: [
+                    LabelBrick(text: "BRICK"),
+                    LabelBrick(text: "BRICK"),
+                    LabelBrick(text: "BRICK"),
+                    ], inset: 15),
+                ], inset: 5, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)),
+            BrickSection(width: .Ratio(ratio: 0.5), bricks: [
+                LabelBrick(text: "BRICK"),
+                LabelBrick(text: "BRICK"),
+                ], inset: 10),
+            LabelBrick(width: .Ratio(ratio: 0.5), text: "BRICK"),
+            LabelBrick("THIS ONE", text: "BRICK"),
+            ], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+        collectionView.setSection(section)
+        collectionView.layoutSubviews()
+
+        XCTAssertEqual(layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))?.frame, CGRect(x: 20, y: 20, width: 135, height: 17))
+
+        let previousToLastFrame = layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 3, inSection: 1))!.frame
+        XCTAssertEqual(layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 5, inSection: 1))?.frame, CGRect(x: 20, y: previousToLastFrame.maxY + 10, width: 280, height: 17))
+    }
+
+    func testThatMultiSectionsAreCalculatedCorrectlyOnRotation() {
+        collectionView.registerBrickClass(DummyBrick.self)
+
+        let section = BrickSection(bricks: [
+            DummyBrick(height: .Fixed(size: 50)),
+            BrickSection(bricks: [
+                BrickSection(bricks: [
+                    DummyBrick(height: .Fixed(size: 50)),
+                    ]),
+                ]),
+            ])
+
+        collectionView.setSection(section)
+        collectionView.layoutSubviews()
+
+        var attributes: UICollectionViewLayoutAttributes!
+
+        attributes = layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 3))
+        XCTAssertEqual(attributes.frame, CGRect(x: 0, y: 50, width: 320, height: 50))
+
+        collectionView.frame.size = CGSize(width: 480, height: 320)
+        collectionView.layoutSubviews()
+
+        attributes = layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 3))
+        XCTAssertEqual(attributes.frame, CGRect(x: 0, y: 50, width: 480, height: 50))
+
+
+        let frames = collectionView.visibleCells().map({$0.frame})
+        for frame in frames {
+            print(frame)
+        }
 
     }
-    
 
 }

@@ -22,4 +22,5 @@ class DummyBrickCell: BrickCell, Bricklike {
 
         self.contentView.layer.borderWidth = brick.border
     }
+
 }

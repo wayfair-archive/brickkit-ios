@@ -133,8 +133,7 @@ class AsynchronousResizableCellTests: XCTestCase {
 
         brickView.layoutSubviews()
 
-        print(brickView.collectionViewLayout.layoutAttributesForElementsInRect(brickView.frame))
-        waitForExpectationsWithTimeout(5000, handler: nil)
+        waitForExpectationsWithTimeout(5, handler: nil)
 
         brickView.layoutIfNeeded()
 
@@ -167,7 +166,9 @@ class AsynchronousResizableCellTests: XCTestCase {
         let resizableBrick = AsynchronousResizableBrick()
         resizableBrick.newHeight = 100
         resizableBrick.didChangeSizeCallBack = {
-            expectation.fulfill()
+            NSOperationQueue.mainQueue().addOperationWithBlock({ 
+                expectation.fulfill()
+            })
         }
 
         let collectionSection = BrickSection(bricks: [

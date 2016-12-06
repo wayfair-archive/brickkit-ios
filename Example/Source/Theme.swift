@@ -279,8 +279,15 @@ extension UIColor {
 
 #if os(tvOS)
 extension LabelBrickCell: FocusableBrickCell {
-    
-    public override var allowsFocus = true
+
+    dynamic override public var allowsFocus: Bool {
+        get {
+            return true
+        }
+        set {
+            super.allowsFocus = true
+        }
+    }
 
     public func willFocus() -> Bool {
         self.contentView.layer.borderWidth = 5

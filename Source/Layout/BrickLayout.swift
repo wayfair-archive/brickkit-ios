@@ -10,11 +10,6 @@ import Foundation
 
 internal typealias OnAttributesUpdatedHandler = (attributes: BrickLayoutAttributes, oldFrame: CGRect?) -> Void
 
-public enum BrickLayoutZIndexBehavior {
-    case TopDown // The cell at the top has the highest zIndex. Ideally for layouts that needs `Sticky` cells where the lower cells need to go below the top cells
-    case BottomUp // The cell at the bottom has the highest zIndex. Ideally for layouts where the lower cells are above the higher cells
-}
-
 public protocol BrickLayout: class {
     var widthRatio: CGFloat { get set }
     var behaviors: Set<BrickLayoutBehavior> { get set }
@@ -38,15 +33,44 @@ public enum BrickLayoutType {
 
 public class BrickLayoutAttributes: UICollectionViewLayoutAttributes {
      // These properties are intentially unwrapper, because otherwise we needed to override every initializer
+
+
+    /// The calculated frame before any behaviors (behaviors can change the frame of an attribute)
     public internal(set) var originalFrame: CGRect!
+
+    /// Brick Identifier
     internal var identifier: String!
+
+    // Flag that indicates if the size of this attribute is an estimate
     internal var isEstimateSize = true
 
+    /// Flag that keeps track if the zIndex has been set manually. This is to prevent that the `setAutoZIndex` will override the zIndex
+    private var fixedZIndex: Bool = false
+
+    /// zIndex
+    public override var zIndex: Int {
+        didSet {
+            fixedZIndex = true
+        }
+    }
+
+    /// Set a zIndex that is calculated automatically. If the zIndex was set manually, the given zIndex will be ignored
+    ///
+    /// - Parameter zIndex: The zIndex that is intended to be set
+    func setAutoZIndex(zIndex: Int) {
+        if !fixedZIndex {
+            self.zIndex = zIndex
+            self.fixedZIndex = false
+        }
+    }
+
+    /// Copy the attributes with all custom attributes. This is needed as UICollectionView will make copies of the attributes for height calculation etc
     public override func copyWithZone(zone: NSZone) -> AnyObject {
         let any = super.copyWithZone(zone)
         (any as? BrickLayoutAttributes)?.originalFrame = originalFrame
         (any as? BrickLayoutAttributes)?.identifier = identifier
         (any as? BrickLayoutAttributes)?.isEstimateSize = isEstimateSize
+        (any as? BrickLayoutAttributes)?.fixedZIndex = fixedZIndex
         return any
     }
 }

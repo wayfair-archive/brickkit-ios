@@ -217,8 +217,8 @@ class ButtonBrickTests: XCTestCase {
         XCTAssertEqual(cell?.rightSpaceConstraint?.constant, 10)
 
         #if os(iOS)
-            let cellSize = CGSize(width: 320, height: 65)
-            let buttonSize = CGSize(width: 320 - 15 - cell!.rightImage!.frame.width, height: 50)
+            let cellSize = CGSize(width: 320, height: 45)
+            let buttonSize = CGSize(width: 320 - 15 - cell!.rightImage!.frame.width, height: 30)
         #else
             let cellSize = CGSize(width: 320, height: 101)
             let buttonSize = CGSize(width: 320 - 15 - cell!.rightImage!.frame.width, height: 86)
@@ -235,8 +235,8 @@ class ButtonBrickTests: XCTestCase {
         })
 
         #if os(iOS)
-            let cellSize = CGSize(width: 320, height: 65)
-            let buttonSize = CGSize(width: 320 - 15 - cell!.rightImage!.frame.width, height: 50)
+            let cellSize = CGSize(width: 320, height: 63)
+            let buttonSize = CGSize(width: 320 - 15 - cell!.rightImage!.frame.width, height: 48)
         #else
             let cellSize = CGSize(width: 320, height: 147)
             let buttonSize = CGSize(width: 320 - 15 - cell!.rightImage!.frame.width, height: 132)

@@ -74,10 +74,10 @@ public class SnapToPointLayoutBehavior: BrickLayoutBehavior {
     public var forBehavior: BrickLayoutBehavior?
     public var scrollDirection: SnapToPointScrollDirection {
         didSet {
-            guard let collectionViewLayout = collectionViewLayout else {
+            guard let brickFlowLayout = brickFlowLayout else {
                 return
             }
-            resetCollectionViewContentInset(collectionViewLayout)
+            resetCollectionViewContentInset(brickFlowLayout)
         }
     }
 
@@ -109,40 +109,20 @@ public class SnapToPointLayoutBehavior: BrickLayoutBehavior {
         switch scrollDirection {
         case .Horizontal(let scrollLocation):
             let firstAttributes = attributes.minElement {
-                if self.sectionsToIgnore.contains($0.indexPath.section) {
-                    return false
-                }
-                if self.sectionsToIgnore.contains($1.indexPath.section) {
-                    return true
-                }
-
-                let distance1 = abs($0.frame.origin.x - 0)
-                let distance2 = abs($1.frame.origin.x - 0)
-
-                return distance1 < distance2
+                return self.minimumAttributesByXAnchor($0, attributes2: $1, for: scrollLocation, with: 0)
             }! // We can safely unwrap, because we checked if attributes is empty or not
 
             // The location on the left is the anchor point of the view - the anchor point of the brick
             let left = scrollLocation.offsetX(for: firstAttributes.frame.width, in: frame.size) - scrollLocation.anchorXComponent(for: firstAttributes.frame)
+            collectionViewLayout.collectionView?.contentInset.left = left
+
             // Right is the opposite
             let right = (frame.size.width - firstAttributes.frame.width) - left
-
-            collectionViewLayout.collectionView?.contentInset.left = left
             collectionViewLayout.collectionView?.contentInset.right = right
 
         case .Vertical(let scrollLocation):
             let firstAttributes = attributes.minElement {
-                if self.sectionsToIgnore.contains($0.indexPath.section) {
-                    return false
-                }
-                if self.sectionsToIgnore.contains($1.indexPath.section) {
-                    return true
-                }
-
-                let distance1 = abs($0.frame.origin.y - 0)
-                let distance2 = abs($1.frame.origin.y - 0)
-
-                return distance1 < distance2
+                return self.minimumAttributesByYAnchor($0, attributes2: $1, for: scrollLocation, with: 0)
             }! // We can safely unwrap, because we checked if attributes is empty or not
 
             // The location on the left is the anchor point of the view - the anchor point of the brick
@@ -172,19 +152,9 @@ public class SnapToPointLayoutBehavior: BrickLayoutBehavior {
         case .Horizontal(let scrollLocation):
             let anchorXComponent = scrollLocation.anchorXComponent(for: rect)
 
-            // Find the closest attribute by frame
-            let minimumAttributesByXAnchor: (UICollectionViewLayoutAttributes, UICollectionViewLayoutAttributes) -> Bool = {
-                if self.sectionsToIgnore.contains($0.indexPath.section) {
-                    return false
-                }
-                if self.sectionsToIgnore.contains($1.indexPath.section) {
-                    return true
-                }
-
-                let distance1 = abs(scrollLocation.anchorXComponent(for: $0.frame) - anchorXComponent)
-                let distance2 = abs(scrollLocation.anchorXComponent(for: $1.frame) - anchorXComponent)
-
-                return distance1 < distance2
+            // Find the closest attribute
+            let minimumAttributesByXAnchor: (BrickLayoutAttributes, BrickLayoutAttributes) -> Bool = {
+                return self.minimumAttributesByXAnchor($0, attributes2: $1, for: scrollLocation, with: anchorXComponent)
             }
 
             let closestAttributes = attributes.minElement(minimumAttributesByXAnchor)! // We can safely unwrap, because we checked if attributes is empty or not
@@ -192,28 +162,47 @@ public class SnapToPointLayoutBehavior: BrickLayoutBehavior {
             proposedContentOffset.x = scrollLocation.anchorXComponent(for: closestAttributes.frame) - scrollLocation.offsetX(for: closestAttributes.frame.width, in: frameSize)
 
         case .Vertical(let scrollLocation):
-                let anchorYComponent = scrollLocation.anchorYComponent(for: rect)
+            let anchorYComponent = scrollLocation.anchorYComponent(for: rect)
 
-                // Find the closest attribute by frame
-                let minimumAttributesByYAnchor: (BrickLayoutAttributes, BrickLayoutAttributes) -> Bool = {
-                    if self.sectionsToIgnore.contains($0.indexPath.section) {
-                        return false
-                    }
-                    if self.sectionsToIgnore.contains($1.indexPath.section) {
-                        return true
-                    }
+            // Find the closest attribute
+            let minimumAttributesByYAnchor: (BrickLayoutAttributes, BrickLayoutAttributes) -> Bool = {
+                return self.minimumAttributesByYAnchor($0, attributes2: $1, for: scrollLocation, with: anchorYComponent)
+            }
 
-                    let distance1 = abs(scrollLocation.anchorYComponent(for: $0.originalFrame) - anchorYComponent - self.originalTopContentInset)
-                    let distance2 = abs(scrollLocation.anchorYComponent(for: $1.originalFrame) - anchorYComponent - self.originalTopContentInset
-                    )
-
-                    return distance1 < distance2
-                }
-
-                let closestAttributes = attributes.minElement(minimumAttributesByYAnchor)!  // We can safely unwrap, because we checked if attributes is empty or not
-                
-                proposedContentOffset.y = scrollLocation.anchorYComponent(for: closestAttributes.originalFrame) - scrollLocation.offsetY(for: closestAttributes.frame.height, in: frameSize, topContentInset: originalTopContentInset)
-
+            let closestAttributes = attributes.minElement(minimumAttributesByYAnchor)!  // We can safely unwrap, because we checked if attributes is empty or not
+            
+            proposedContentOffset.y = scrollLocation.anchorYComponent(for: closestAttributes.originalFrame) - scrollLocation.offsetY(for: closestAttributes.frame.height, in: frameSize, topContentInset: originalTopContentInset)
         }
     }
+
+    /// Find the closest attribute vertically
+    func minimumAttributesByYAnchor(attributes1: BrickLayoutAttributes, attributes2: BrickLayoutAttributes, for scrollLocation: SnapToPointVerticalScrollLocation, with anchorYComponent: CGFloat) -> Bool {
+        if self.sectionsToIgnore.contains(attributes1.indexPath.section) {
+            return false
+        }
+        if self.sectionsToIgnore.contains(attributes2.indexPath.section) {
+            return true
+        }
+
+        let distance1 = abs(scrollLocation.anchorYComponent(for: attributes1.originalFrame) - anchorYComponent - self.originalTopContentInset)
+        let distance2 = abs(scrollLocation.anchorYComponent(for: attributes2.originalFrame) - anchorYComponent - self.originalTopContentInset)
+
+        return distance1 <= distance2
+    }
+
+    /// Find the closest attribute horizontally
+    func minimumAttributesByXAnchor(attributes1: BrickLayoutAttributes, attributes2: BrickLayoutAttributes, for scrollLocation: SnapToPointHorizontalScrollLocation, with anchorXComponent: CGFloat) -> Bool {
+        if self.sectionsToIgnore.contains(attributes1.indexPath.section) {
+            return false
+        }
+        if self.sectionsToIgnore.contains(attributes2.indexPath.section) {
+            return true
+        }
+
+        let distance1 = abs(scrollLocation.anchorXComponent(for: attributes1.originalFrame) - anchorXComponent)
+        let distance2 = abs(scrollLocation.anchorXComponent(for: attributes2.originalFrame) - anchorXComponent)
+
+        return distance1 <= distance2
+    }
+
 }

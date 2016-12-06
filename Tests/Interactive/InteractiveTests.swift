@@ -119,7 +119,7 @@ class InteractiveTests: XCTestCase {
         waitForExpectationsWithTimeout(5, handler: nil)
 
         XCTAssertEqual(brickView.visibleCells().count, 9)
-        let flow = brickView.layout as! BrickFlowLayout
+        let flow = brickView.layout 
         XCTAssertEqual(flow.sections?[3]?.sectionAttributes?.indexPath, NSIndexPath(forItem: 3, inSection: 1))
     }
 
@@ -561,6 +561,7 @@ class InteractiveTests: XCTestCase {
 
     // Mark: - Shouldn't crash
     func testShouldNotCrashOnReloadBricks() {
+        // we should check if the indexpath exists before adding it...
         brickView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection(bricks: [

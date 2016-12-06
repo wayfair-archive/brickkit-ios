@@ -114,19 +114,13 @@ public class CollectionBrickCell: BrickCell, Bricklike, AsynchronousResizableCel
     // https://github.com/wayfair/brickkit-ios/issues/28
     private var isCalculatingHeight = false
 
-    @IBOutlet public weak var brickCollectionView: BrickCollectionView! {
-        didSet {
-            self.layout = brickCollectionView.layout as? BrickFlowLayout
-        }
-    }
-    
+    @IBOutlet public weak var brickCollectionView: BrickCollectionView!
+
     @IBOutlet public weak var chevronImage: UIImageView? {
         didSet {
             chevronImage?.image = UIImage(named: "chevron", inBundle: CollectionBrick.bundle, compatibleWithTraitCollection: nil)
         }
     }
-
-    public var layout: BrickFlowLayout?
 
     public var currentPage: Int? {
         didSet {
@@ -195,8 +189,8 @@ public class CollectionBrickCell: BrickCell, Bricklike, AsynchronousResizableCel
             brickCollectionView.setSection(section)
         }
 
-        layout?.scrollDirection = brick.scrollDirection
-        layout?.dataSource = brickCollectionView
+        brickCollectionView.layout.scrollDirection = brick.scrollDirection
+        brickCollectionView.layout.dataSource = brickCollectionView
     }
 }
 

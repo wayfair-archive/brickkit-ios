@@ -235,7 +235,7 @@ class StickyFooterLayoutBehaviorTests: BrickFlowLayoutBaseTests {
             cell.edgeInsets.bottom = 11
         }
 
-        let footerSection = BrickSection(bricks: [
+        let footerSection = BrickSection("Footer", bricks: [
             LabelBrick("A", text: "Footer Title", configureCellBlock: configureCellBlock),
             LabelBrick("B", width: .Ratio(ratio: 0.5), text: "Footer Label 1", configureCellBlock: configureCellBlock),
             LabelBrick("C", width: .Ratio(ratio: 0.5), text: "Footer Label 2", configureCellBlock: configureCellBlock),

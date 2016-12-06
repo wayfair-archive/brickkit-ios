@@ -166,14 +166,7 @@ class BrickFlowLayoutTests: BrickFlowLayoutBaseTests {
     func testCalculateSectionsIfNeededWithoutDataSource() {
         let brickFlowLayout = BrickFlowLayout()
         expectFatalError("No dataSource was set for BrickFlowLayout") { 
-            brickFlowLayout.calculateSectionsIfNeeded()
-        }
-    }
-
-    func testCalculateZIndexWithoutCollectionView() {
-        let brickFlowLayout = BrickFlowLayout()
-        expectFatalError {
-            brickFlowLayout.calculateZIndex()
+            brickFlowLayout.calculateSectionsIfNeeded(self.hugeFrame)
         }
     }
 

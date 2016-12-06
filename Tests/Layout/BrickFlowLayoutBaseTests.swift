@@ -12,6 +12,7 @@ import XCTest
 class BrickFlowLayoutBaseTests: XCTestCase {
 
     let collectionViewFrame = CGRectMake(0, 0, 320, 480)
+    let hugeFrame = CGRect(x: 0, y: 0, width: 320, height: CGFloat.infinity)
 
     var layout: BrickFlowLayout!
     var collectionView: BrickCollectionView!
@@ -43,6 +44,6 @@ class BrickFlowLayoutBaseTests: XCTestCase {
         layout.dataSource = brickLayoutDataSource
         collectionView.dataSource = self.dataSource
         collectionView.reloadData()
-        layout.calculateSectionsIfNeeded()
+        layout.calculateSectionsIfNeeded(hugeFrame)
     }
 }

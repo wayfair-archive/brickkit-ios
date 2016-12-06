@@ -15,7 +15,6 @@ public protocol MaxZIndexLayoutBehaviorDataSource: class {
 public class MaxZIndexLayoutBehavior: BrickLayoutBehavior {
     weak var dataSource: MaxZIndexLayoutBehaviorDataSource?
 
-    var maxZIndex: Int = 0
     var currentZIndex: Int = 0
 
     public init(dataSource: MaxZIndexLayoutBehaviorDataSource) {
@@ -25,12 +24,17 @@ public class MaxZIndexLayoutBehavior: BrickLayoutBehavior {
     public override func resetRegisteredAttributes(collectionViewLayout: UICollectionViewLayout) {
         super.resetRegisteredAttributes(collectionViewLayout)
         currentZIndex = 0
-        if let layout = collectionViewLayout as? BrickLayout {
-            maxZIndex = layout.maxZIndex + 1
-        }
     }
 
     public override func registerAttributes(attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
+        let maxZIndex: Int
+
+        if let layout = collectionViewLayout as? BrickLayout {
+            maxZIndex = layout.maxZIndex + 1
+        } else {
+           maxZIndex = 0
+        }
+        
         if dataSource?.maxZIndexLayoutBehavior(self, shouldHaveMaxZIndexAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) == true {
             attributes.zIndex = maxZIndex + currentZIndex
             currentZIndex += 1
