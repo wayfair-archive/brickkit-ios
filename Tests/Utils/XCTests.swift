@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import BrickKit
 
 let frameSort: (CGRect, CGRect) -> Bool = {
     if $0.origin.y != $1.origin.y {
@@ -54,12 +55,12 @@ extension XCTest {
     func verifyAttributesToExpectedResult<T: Equatable>(attributes: [UICollectionViewLayoutAttributes], map: ((attribute: UICollectionViewLayoutAttributes) -> T), expectedResult: [Int: [T]], sort: ((T, T) -> Bool)? = nil) -> Bool {
 
         let array = simpleArrayWithFramesForCollectionViewAttributes(attributes, map: map)
-        print("Actual: \(array)")
-        print("Expected: \(expectedResult)")
+        BrickKit.print("Actual: \(array)")
+        BrickKit.print("Expected: \(expectedResult)")
         guard Array(expectedResult.keys.sort()) == Array(array.keys.sort()) else {
-            print("Keys are not the same")
-            print("Keys: \(Array(array.keys.sort()))")
-            print("Expected Keys: \(Array(expectedResult.keys.sort()))")
+            BrickKit.print("Keys are not the same")
+            BrickKit.print("Keys: \(Array(array.keys.sort()))")
+            BrickKit.print("Expected Keys: \(Array(expectedResult.keys.sort()))")
             return false
         }
 
@@ -73,12 +74,12 @@ extension XCTest {
             }
 
             if frames != expectedFrames {
-                print("\(section) not equal")
-                print("Frames: \(frames)")
-                print("ExpectedFrames: \(expectedFrames)")
+                BrickKit.print("\(section) not equal")
+                BrickKit.print("Frames: \(frames)")
+                BrickKit.print("ExpectedFrames: \(expectedFrames)")
                 return false
             } else {
-                print("\(section) equal")
+                BrickKit.print("\(section) equal")
             }
         }
         return true
@@ -118,5 +119,19 @@ extension XCTest {
 
     var isRunningOnA32BitDevice: Bool {
         return sizeof(Int) == sizeof(Int32)
+    }
+}
+
+extension BrickCollectionView {
+
+    func setupSectionAndLayout(section: BrickSection) {
+        self.registerBrickClass(CollectionBrick.self)
+        self.registerBrickClass(DummyBrick.self)
+        self.registerBrickClass(LabelBrick.self)
+        self.registerBrickClass(ButtonBrick.self)
+        self.registerBrickClass(ImageBrick.self)
+
+        self.setSection(section)
+        self.layoutSubviews()
     }
 }

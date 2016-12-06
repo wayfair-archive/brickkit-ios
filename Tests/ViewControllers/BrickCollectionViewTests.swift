@@ -52,11 +52,9 @@ class BrickCollectionViewTests: XCTestCase {
     }
 
     func testRegisterBrickWithNib() {
-        brickView.registerBrickClass(DummyBrick.self)
-        brickView.setSection(BrickSection(bricks: [
+        brickView.setupSectionAndLayout(BrickSection(bricks: [
             DummyBrick()
             ]))
-        brickView.layoutSubviews()
 
         let cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickCell
         XCTAssertNotNil(cell)
@@ -65,10 +63,9 @@ class BrickCollectionViewTests: XCTestCase {
 
     func testRegisterBrickWithClass() {
         brickView.registerBrickClass(DummyBrickWithoutNib.self)
-        brickView.setSection(BrickSection(bricks: [
+        brickView.setupSectionAndLayout(BrickSection(bricks: [
             DummyBrickWithoutNib()
             ]))
-        brickView.layoutSubviews()
 
         let cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickWithoutNibCell
         XCTAssertNotNil(cell)
@@ -81,11 +78,9 @@ class BrickCollectionViewTests: XCTestCase {
     }
 
     func testBrickInfo() {
-        brickView.registerBrickClass(DummyBrick.self)
-        brickView.setSection(BrickSection(bricks: [
+        brickView.setupSectionAndLayout(BrickSection(bricks: [
             DummyBrick("Brick1")
             ]))
-        brickView.layoutSubviews()
 
         let brickInfo = brickView.brickInfo(at: NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(brickInfo.brick.identifier, "Brick1")
@@ -115,8 +110,6 @@ class BrickCollectionViewTests: XCTestCase {
     }
 
     func testBrickInfoCollectionBrick() {
-        brickView.registerBrickClass(CollectionBrick.self)
-
         let collectionSection = BrickSection(bricks: [
             DummyBrick("Brick1")
             ])
@@ -129,8 +122,7 @@ class BrickCollectionViewTests: XCTestCase {
             CollectionBrick("CollectionBrick", dataSource: collectionBrickCellModel)
             ])
 
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
 
         let cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
         let collectionBrickView = cell!.brickCollectionView
@@ -143,7 +135,6 @@ class BrickCollectionViewTests: XCTestCase {
     }
 
     func testBrickInfoCollectionBrickRepeatCount() {
-        brickView.registerBrickClass(CollectionBrick.self)
 
         let collectionSection = BrickSection(bricks: [
             DummyBrick("Brick1", height: .Fixed(size: 10))
@@ -160,8 +151,7 @@ class BrickCollectionViewTests: XCTestCase {
         let repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["CollectionBrick": 5])
         section.repeatCountDataSource = repeatCountDataSource
 
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
 
         let cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 3, inSection: 1)) as? CollectionBrickCell
         let collectionBrickView = cell!.brickCollectionView
@@ -174,8 +164,6 @@ class BrickCollectionViewTests: XCTestCase {
     }
 
     func testIndexPathsForBricksWithIdentifier() {
-        brickView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection("Section1", bricks: [
             DummyBrick("Brick1"),
             BrickSection("Section2", bricks: [
@@ -183,8 +171,7 @@ class BrickCollectionViewTests: XCTestCase {
                 DummyBrick("Brick2")
                 ])
             ])
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
         XCTAssertEqual(brickView.indexPathsForBricksWithIdentifier("Section1"), [NSIndexPath(forItem: 0, inSection: 0)])
         XCTAssertEqual(brickView.indexPathsForBricksWithIdentifier("Section2"), [NSIndexPath(forItem: 1, inSection: 1)])
         XCTAssertEqual(brickView.indexPathsForBricksWithIdentifier("Brick1"), [NSIndexPath(forItem: 0, inSection: 1), NSIndexPath(forItem: 0, inSection: 2)])
@@ -193,8 +180,7 @@ class BrickCollectionViewTests: XCTestCase {
     }
 
     func testFatalErrorForBrickInfo() {
-        brickView.registerBrickClass(DummyBrick.self)
-        brickView.setSection(BrickSection(bricks: [ DummyBrick() ]))
+        brickView.setupSectionAndLayout(BrickSection(bricks: [ DummyBrick() ]))
 
         let indexPath = NSIndexPath(forItem: 1, inSection: 1)
         expectFatalError("Brick and index not found at indexPath: SECTION - \(indexPath.section) - ITEM: \(indexPath.item). This should never happen") {
@@ -203,13 +189,11 @@ class BrickCollectionViewTests: XCTestCase {
     }
 
     func testReloadBricks() {
-        brickView.registerBrickClass(DummyBrick.self)
         let brick = DummyBrick(width: .Ratio(ratio: 1/10))
         let section = BrickSection(bricks: [
             brick
             ])
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
 
         var cell: DummyBrickCell?
         cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickCell
@@ -238,13 +222,11 @@ class BrickCollectionViewTests: XCTestCase {
         let offsetDataSource = FixedMultipleOffsetLayoutBehaviorDataSource(originOffsets: ["DummyBrick": CGSize(width: 10, height: 10)], sizeOffsets: nil)
         brickView.layout.behaviors.insert(OffsetLayoutBehavior(dataSource: offsetDataSource))
 
-        brickView.registerBrickClass(DummyBrick.self)
         let brick = DummyBrick("DummyBrick")
         let section = BrickSection(bricks: [
             brick
             ])
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
 
         var cell: DummyBrickCell?
         cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickCell
@@ -271,28 +253,24 @@ class BrickCollectionViewTests: XCTestCase {
 
     func testCustomBrickWithSameIdentifier() {
         brickView.registerNib(UINib(nibName: "DummyBrick100", bundle: DummyBrick.bundle), forBrickWithIdentifier: "DummyBrick")
-        brickView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection(bricks: [
             DummyBrick("DummyBrick")
             ]
         )
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
 
         let cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickCell
         XCTAssertEqual(cell?.frame, CGRect(x: 0, y: 0, width: 320, height: 100))
     }
 
     func testCalculateSectionThatDoesntExist() {
-        brickView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection(bricks: [
             DummyBrick("DummyBrick")
             ]
         )
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
 
         expectFatalError {
             let flow = self.brickView.collectionViewLayout as! BrickFlowLayout
@@ -301,8 +279,6 @@ class BrickCollectionViewTests: XCTestCase {
     }
 
     func testInvalidateRepeatCountForCollectionBrick() {
-        brickView.registerBrickClass(CollectionBrick.self)
-
         let collectionSection = BrickSection(bricks: [
             DummyBrick("Brick1", height: .Fixed(size: 10))
             ])
@@ -317,8 +293,7 @@ class BrickCollectionViewTests: XCTestCase {
             CollectionBrick("CollectionBrick", dataSource: collectionBrickCellModel)
             ])
 
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
 
         var cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
         XCTAssertEqual(cell?.frame.height ?? 0, 0) //iOS9 and iOS10 have different behaviors, hence this code style to support both
@@ -334,11 +309,9 @@ class BrickCollectionViewTests: XCTestCase {
 
         cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
         XCTAssertEqual(cell?.frame, CGRect(x: 0, y: 0, width: 320, height: 100))
-
     }
 
     func testRepeatCountMakesLabelGoTooBig() {
-        brickView.registerBrickClass(LabelBrick.self)
         let section = BrickSection("Section", bricks: [
             BrickSection("RepeatSection", bricks: [
                 LabelBrick("BrickIdentifiers.repeatLabel", width: .Ratio(ratio: 0.5), height: .Auto(estimate: .Fixed(size: 50)), text: "BRICK")
@@ -348,8 +321,7 @@ class BrickCollectionViewTests: XCTestCase {
         let fixed = FixedRepeatCountDataSource(repeatCountHash: ["BrickIdentifiers.repeatLabel": 1])
         section.repeatCountDataSource = fixed
 
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
 
         var cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
 
@@ -357,7 +329,7 @@ class BrickCollectionViewTests: XCTestCase {
 
         fixed.repeatCountHash = ["BrickIdentifiers.repeatLabel": 2]
 
-        brickView.invalidateRepeatCounts(true)
+        brickView.invalidateRepeatCounts(reloadAllSections: true)
         brickView.layoutIfNeeded()
 
         cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
@@ -365,7 +337,7 @@ class BrickCollectionViewTests: XCTestCase {
         
         fixed.repeatCountHash = ["BrickIdentifiers.repeatLabel": 1]
 
-        brickView.invalidateRepeatCounts(true)
+        brickView.invalidateRepeatCounts(reloadAllSections: true)
         brickView.layoutIfNeeded()
 
         cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
@@ -374,8 +346,6 @@ class BrickCollectionViewTests: XCTestCase {
     }
 
     func testWithImageInCollectionBrick() {
-        brickView.registerBrickClass(CollectionBrick.self)
-
         let image: UIImage = UIImage(named: "image0", inBundle: NSBundle(forClass: self.classForCoder), compatibleWithTraitCollection: nil)!
 
         let section1 = BrickSection(bricks: [
@@ -385,16 +355,13 @@ class BrickCollectionViewTests: XCTestCase {
         let section = BrickSection(backgroundColor: .whiteColor(), bricks: [
             CollectionBrick("Collection 1", backgroundColor: .orangeColor(), scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section1), brickTypes: [ImageBrick.self]),
             ])
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
 
         let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 0, y: 0, width: 320, height: 80))
     }
 
     func testWithImagesInCollectionBrick() {
-        brickView.registerBrickClass(CollectionBrick.self)
-
         let image: UIImage = UIImage(named: "image0", inBundle: NSBundle(forClass: self.classForCoder), compatibleWithTraitCollection: nil)!
 
         let section1 = BrickSection(bricks: [
@@ -409,8 +376,7 @@ class BrickCollectionViewTests: XCTestCase {
             CollectionBrick("Collection 1", backgroundColor: .orangeColor(), scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section1), brickTypes: [ImageBrick.self]),
             CollectionBrick("Collection 2", backgroundColor: .orangeColor(), scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section2), brickTypes: [ImageBrick.self]),
             ])
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
 
         let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 0, y: 0, width: 320, height: 80))
@@ -419,15 +385,12 @@ class BrickCollectionViewTests: XCTestCase {
     }
 
     func testThatBricksBelowABrickThatShrunkAreOnTheRightYOrigin() {
-
-        brickView.registerBrickClass(DummyBrick.self)
         let brick = DummyBrick("resizeBrick", height: .Fixed(size: 150))
         let section = BrickSection("TestSection", bricks:[
             brick,
             DummyBrick("secondBrick", height: .Fixed(size: 25))
             ])
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
 
         var height = brickView.contentSize.height
         XCTAssertEqual(height, 175)
@@ -456,16 +419,13 @@ class BrickCollectionViewTests: XCTestCase {
     }
 
     func testThatBricksBelowABrickThatShrunkAreOnTheRightYOriginFromSecondBrick() {
-
-        brickView.registerBrickClass(DummyBrick.self)
         let brick = DummyBrick("resizeBrick", height: .Fixed(size: 150))
         let section = BrickSection("TestSection", bricks:[
             DummyBrick("secondBrick", height: .Fixed(size: 25)),
             brick,
             DummyBrick("secondBrick", height: .Fixed(size: 25))
             ])
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
 
         var height = brickView.contentSize.height
         XCTAssertEqual(height, 200)
@@ -498,14 +458,11 @@ class BrickCollectionViewTests: XCTestCase {
     }
 
     func testThatFillBrickDimensionIgnoresEdgeInsets() {
-
-        brickView.registerBrickClass(DummyBrick.self)
         let section = BrickSection("TestSection", bricks:[
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 25)),
             DummyBrick(width: .Fill, height: .Fixed(size: 25))
             ], inset: 5, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
 
         var cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 10, width: 50, height: 25))
@@ -530,13 +487,10 @@ class BrickCollectionViewTests: XCTestCase {
     }
 
     func testThatSingleFillBrickDimensionIsFullWidth() {
-
-        brickView.registerBrickClass(DummyBrick.self)
         let section = BrickSection(bricks:[
             DummyBrick(width: .Fill, height: .Fixed(size: 25))
             ], inset: 5, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
 
         var cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 10, width: 300, height: 25))
@@ -557,14 +511,11 @@ class BrickCollectionViewTests: XCTestCase {
     }
 
     func testThatFullWidthFillAsSecondDoesntCrash() {
-
-        brickView.registerBrickClass(DummyBrick.self)
         let section = BrickSection("TestSection", bricks:[
             DummyBrick(height: .Fixed(size: 25)),
             DummyBrick(width: .Fill, height: .Fixed(size: 25))
             ], inset: 5, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
 
         var cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 10, width: 300, height: 25))
@@ -589,16 +540,13 @@ class BrickCollectionViewTests: XCTestCase {
     }
 
     func testThatFillInSectionTakesOriginIntoAccount() {
-
-        brickView.registerBrickClass(DummyBrick.self)
         let section = BrickSection("TestSection", bricks:[
             BrickSection(bricks: [
                 DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 25)),
                 DummyBrick(width: .Fill, height: .Fixed(size: 25))
                 ])
             ], inset: 5, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
 
         var cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 2))
         XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 10, width: 50, height: 25))
@@ -627,19 +575,40 @@ class BrickCollectionViewTests: XCTestCase {
     }
 
     func testThatDescriptionIsCorrectWithCollectionBrick() {
-        brickView.registerBrickClass(CollectionBrick.self)
         let section = BrickSection(bricks: [
             CollectionBrick(dataSource: CollectionBrickCellModel(section: BrickSection(bricks:[DummyBrick()])), brickTypes: [DummyBrick.self])
             ])
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
         let collectionBrickCell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
-
         XCTAssertEqual(collectionBrickCell?.brickCollectionView.description.hasSuffix("CollectionBrick: true"), true)
     }
 
     func testThatGettingInvalidLayoutAttributesReturnRightValue() {
         XCTAssertNil(brickView.layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)))
+    }
+
+    func testThatRepeatCountGetsUpdatedWithReloadBricks() {
+        let brick = DummyBrick("Brick", width: .Fixed(size: 100), height: .Fixed(size: 50))
+        let section = BrickSection(bricks: [
+            brick
+            ])
+        let repeatDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick": 1])
+        section.repeatCountDataSource = repeatDataSource
+        brickView.setupSectionAndLayout(section)
+
+        XCTAssertNotNil(brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)))
+        XCTAssertNil(brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1)))
+
+        repeatDataSource.repeatCountHash = ["Brick": 2]
+        let expectation = expectationWithDescription("Invalidate Bricks")
+        brickView.invalidateBricks() { (completed) in
+            expectation.fulfill()
+        }
+
+        waitForExpectationsWithTimeout(5, handler: nil)
+        
+        XCTAssertNotNil(brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)))
+        XCTAssertNotNil(brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1)))
     }
 
 }

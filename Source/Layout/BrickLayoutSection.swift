@@ -29,6 +29,9 @@ protocol BrickLayoutSectionDataSource: class {
     /// Flag that indicates if row heights need to be aligned
     func isAlignRowHeights(in section: BrickLayoutSection) -> Bool
 
+    ///
+    func aligment(in section: BrickLayoutSection) -> BrickAlignment
+
     /// Function called right before the height is asked. This can be used to do some other pre-calcuations
     func prepareForSizeCalculation(for attributes: BrickLayoutAttributes, containedIn width: CGFloat, origin: CGPoint, invalidate: Bool, in section: BrickLayoutSection, updatedAttributes: OnAttributesUpdatedHandler?)
 
@@ -82,7 +85,7 @@ internal class BrickLayoutSection {
     internal private(set) var sectionWidth: CGFloat
 
     /// Origin of the frame. Can be set by `setOrigin`
-    private var origin: CGPoint {
+    internal var origin: CGPoint {
         return frame.origin
     }
 
@@ -199,8 +202,8 @@ internal class BrickLayoutSection {
 
     private func invalidateAttributes(attributes: BrickLayoutAttributes) {
         attributes.isEstimateSize = true
-        attributes.originalFrame.size = .zero
-        attributes.frame.size = .zero
+        attributes.originalFrame.size.width = 0
+        attributes.frame.size.width = 0
     }
 
     func update(height height: CGFloat, at index: Int, updatedAttributes: OnAttributesUpdatedHandler?) {
@@ -309,10 +312,7 @@ internal class BrickLayoutSection {
         }
 
         // If rows need to be aligned, make sure the previous lines are checked
-        if dataSource.isAlignRowHeights(in: self) && dataSource.scrollDirection == .Vertical {
-            let maxHeight = maxY - y
-            updateHeightForRowsFromIndex(attributes.count - 1, maxHeight: maxHeight, updatedAttributes: updatedAttributes)
-        }
+        handleRow(for: attributes.count - 1, maxHeight: maxY - y, updatedAttributes: updatedAttributes)
 
         // Downstream IndexPaths. Just add these attributes at the end of the stack.
         // The idea is to have them available for behaviors, but not visible
@@ -368,7 +368,6 @@ internal class BrickLayoutSection {
             // set a dummy height of 1 to not be set invisible
             frameHeight = 1 + edgeInsets.bottom + edgeInsets.top
         }
-
 
         frame.size.height = frameHeight
 
@@ -438,7 +437,115 @@ internal class BrickLayoutSection {
         return (startOrigin, maxY)
     }
 
+    func handleRow(for index: Int, maxHeight: CGFloat, updatedAttributes: OnAttributesUpdatedHandler?) {
+        if _dataSource.scrollDirection == .Vertical {
+            updateHeightAndAlignForRowWithStartingIndex(index, maxHeight: maxHeight, updatedAttributes: updatedAttributes)
+        }
+    }
+
+    /// Update the height for a row starting at a given index
+    func updateHeightAndAlignForRowWithStartingIndex(index: Int, maxHeight: CGFloat, updatedAttributes: OnAttributesUpdatedHandler?) {
+
+        var rowWidthWithoutInsets: CGFloat = 0 // Keep track of all the widths, so we can calculate the correct inset for `Justified`-alignment
+        let rowAttributes: [BrickLayoutAttributes] = calculateRowAttributes(startingAt: index, rowWidthWithoutInsets: &rowWidthWithoutInsets) // Keep track of all attributes in this row
+
+        guard rowAttributes.count > 0 else {
+            return
+        }
+
+        let edgeInsets = _dataSource.edgeInsets(in: self)
+        let totalSectionWidth = (sectionWidth - edgeInsets.right - edgeInsets.left) // Total width of the section minus the insets
+        let totalRowWidth = rowAttributes.last!.originalFrame.maxX - rowAttributes.first!.originalFrame.minX // Total width of the bricks (with insets, as supposed to rowWidths)
+
+        let inset: CGFloat
+        let numberOfInsets: CGFloat = CGFloat(rowAttributes.count-1)
+        let aligment = _dataSource.aligment(in: self)
+
+        switch aligment {
+        case .Justified:
+            // Distribute insets evenly
+            inset = (totalSectionWidth - rowWidthWithoutInsets) / numberOfInsets
+        default:
+            // Distribute the insets the way they were
+            inset = (totalRowWidth - rowWidthWithoutInsets) / numberOfInsets
+        }
+
+        // Get the x value of the first brick
+        let startX: CGFloat
+        switch aligment {
+        case .Center: startX = (totalSectionWidth - totalRowWidth) / 2 // Start from the middle minus the middle of the bricks total width
+        case .Right: startX = totalSectionWidth - totalRowWidth // Start at the end of the section minus the total of the bricks total width
+        default: startX = 0 // Start at zero
+        }
+
+        updateRow(for: rowAttributes, with: maxHeight, startingAt: startX, edgeInsets: edgeInsets, inset: inset, updatedAttributes: updatedAttributes)
+    }
+
+    /// Update the attributes within the row
+    private func updateRow(for rowAttributes: [BrickLayoutAttributes], with maxHeight: CGFloat, startingAt startX: CGFloat, edgeInsets: UIEdgeInsets, inset: CGFloat, updatedAttributes: OnAttributesUpdatedHandler?) {
+        // Check if the height need to be aligned
+        let alignRowHeights = _dataSource.isAlignRowHeights(in: self)
+
+        // start at the startX + insets + origin
+        var x: CGFloat = edgeInsets.left + origin.x + startX
+
+        // Iterate over the attributes (starting from the first one) and update each frame
+        for brickAttributes in rowAttributes {
+            let oldFrame = brickAttributes.frame
+            var newFrame = oldFrame
+            if alignRowHeights {
+                newFrame.size.height = maxHeight
+            }
+            newFrame.origin.x = x
+            if newFrame != oldFrame {
+                brickAttributes.frame = newFrame
+                updatedAttributes?(attributes: brickAttributes, oldFrame: oldFrame)
+                _dataSource.prepareForSizeCalculation(for: brickAttributes, containedIn: brickAttributes.frame.width, origin: brickAttributes.frame.origin, invalidate: false, in: self, updatedAttributes: updatedAttributes)
+            }
+            x += oldFrame.width + inset
+        }
+
+    }
+
+    /// Calculate the row attributes
+    ///
+    /// - Parameters:
+    ///   - startingIndex: index of the attributes within the row
+    ///   - rowWidthWithoutInsets: variable to indicate what the row width is without insets
+    /// - Returns: array of all attributes within the row
+    private func calculateRowAttributes(startingAt startingIndex: Int, inout rowWidthWithoutInsets: CGFloat) -> [BrickLayoutAttributes] {
+        guard let brickAttributes = self.attributes[startingIndex] else {
+            return []
+        }
+
+        var currentIndex = startingIndex
+        let y = brickAttributes.originalFrame.origin.y
+
+        var rowAttributes: [BrickLayoutAttributes] = [] // Keep track of all attributes in this row
+
+        // Count down until attributes are found with a lower Y-origin
+        while currentIndex >= 0 {
+            guard let brickAttributes = attributes[currentIndex] where !brickAttributes.hidden else {
+                currentIndex -= 1
+                continue
+            }
+            if brickAttributes.originalFrame.origin.y != y {
+                break // Done, no more attributes on this row
+            }
+
+            rowAttributes.insert(brickAttributes, atIndex: 0) // insert at the front, so the attributes are sorted by lowest first
+            rowWidthWithoutInsets += brickAttributes.originalFrame.width
+            currentIndex -= 1
+        }
+
+        return rowAttributes
+    }
+
     func printAttributes() {
+        guard attributes.count < 100 else {
+            // Prevent that the "Huge" test aren't taking forever to complete
+            return
+        }
         print("\n")
         print("Attributes for section \(sectionIndex) in \(dataSource)")
         print("Number of attributes: \(attributes.count) in \(_dataSource.frameOfInterest)")
@@ -457,10 +564,10 @@ internal class BrickLayoutSection {
 
         let indexPath = NSIndexPath(forItem: index, inSection: sectionIndex)
 
-        var width = widthAtIndex(index, startingAt: x - edgeInsets.left - origin.x, dataSource: dataSource)
-
         var brickAttributes: BrickLayoutAttributes! = attributes[index]
         let existingAttribute: Bool = brickAttributes != nil
+
+        var width = widthAtIndex(index, startingAt: x - edgeInsets.left - origin.x, dataSource: dataSource)
 
         let shouldBeOnNextRow: Bool
         switch dataSource.scrollDirection {
@@ -471,10 +578,7 @@ internal class BrickLayoutSection {
         var nextY: CGFloat = y
         var nextX: CGFloat = x
         if shouldBeOnNextRow {
-            if dataSource.isAlignRowHeights(in: self) && dataSource.scrollDirection == .Vertical {
-                let maxHeight = maxY - nextY
-                updateHeightForRowsFromIndex(index - 1, maxHeight: maxHeight, updatedAttributes: updatedAttributes)
-            }
+            handleRow(for: index - 1, maxHeight: maxY - nextY, updatedAttributes: updatedAttributes)
 
             if maxY > nextY  {
                 nextY = maxY + inset
@@ -538,12 +642,13 @@ internal class BrickLayoutSection {
         // Prepare the datasource that size calculation will happen
         dataSource.prepareForSizeCalculation(for: brickAttributes, containedIn: width, origin: cellOrigin, invalidate: invalidate, in: self, updatedAttributes: updatedAttributes)
 
-        if let brickFrame = oldOriginalFrame where brickFrame.width == width && !invalidate {
+        if let brickFrame = oldOriginalFrame where !invalidate {
             if let customHeight = customHeightProvider?(attributes: brickAttributes) {
                 height = customHeight
             } else {
                 height = brickFrame.height
             }
+            width = brickFrame.width
         } else {
             let size = dataSource.size(for: brickAttributes, containedIn: width, in: self)
             height = size.height
@@ -584,33 +689,6 @@ internal class BrickLayoutSection {
         brickAttributes.isEstimateSize = dataSource.isEstimate(for: brickAttributes, in: self)
         return brickAttributes
     }
-
-    /// Update the height for a row starting at a given index
-    func updateHeightForRowsFromIndex(index: Int, maxHeight: CGFloat, updatedAttributes: OnAttributesUpdatedHandler?) {
-        guard index >= 0, let brickAttributes = self.attributes[index] else {
-            return
-        }
-
-        var currentIndex = index
-        let y = brickAttributes.originalFrame.origin.y
-        while currentIndex >= 0 {
-            guard let brickAttributes = attributes[currentIndex] else {
-                continue
-            }
-            if brickAttributes.originalFrame.origin.y != y {
-                return
-            }
-            let oldFrame = brickAttributes.frame
-            var newFrame = oldFrame
-            newFrame.size.height = maxHeight
-            if newFrame != oldFrame {
-                brickAttributes.frame = newFrame
-                updatedAttributes?(attributes: brickAttributes, oldFrame: oldFrame)
-            }
-            currentIndex -= 1
-        }
-    }
-
 }
 
 // MARK: - Binary search for elements

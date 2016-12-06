@@ -12,10 +12,14 @@ import BrickKit
 
 class DailySalesBrick: Brick {
     weak var dataSource: DailySalesBrickDataSource?
-    
-    init (_ identifier: String, width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, dataSource: DailySalesBrickDataSource) {
+
+    convenience init(_ identifier: String, width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, dataSource: DailySalesBrickDataSource) {
+        self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView, dataSource: dataSource)
+    }
+
+    init(_ identifier: String, size: BrickSize, backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, dataSource: DailySalesBrickDataSource) {
         self.dataSource = dataSource
-        super.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView)
+        super.init(identifier, size: size, backgroundColor: backgroundColor, backgroundView: backgroundView)
     }
 }
 

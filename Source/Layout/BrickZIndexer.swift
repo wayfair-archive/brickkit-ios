@@ -179,7 +179,7 @@ class BrickZIndexer {
             let sectionStartIndex: Int
             if let indexPath = dataSource.brickLayout(layout, indexPathForSection: section) {
 
-                let indexPathZIndex = self.zIndex(for: indexPath)
+                let indexPathZIndex = self.zIndex(for: indexPath, withOffset: false)
                 sectionStartIndex = zIndexBehavior.startIndex(for: indexPathZIndex)
 
                 let ranges = sectionRanges[indexPath.section]
@@ -213,13 +213,22 @@ class BrickZIndexer {
         zIndexBehavior.finalizeReset(self)
     }
 
-    func zIndex(for indexPath: NSIndexPath) -> Int {
+    /// Gets the zIndex of a given indexPath
+    ///
+    /// - Parameters:
+    ///   - indexPath: indexPath
+    ///   - withOffset: flag that indicates if the zIndex needs to be offset (substract the maxZIndex)
+    func zIndex(for indexPath: NSIndexPath, withOffset: Bool = true) -> Int {
         let section = indexPath.section
         guard section < sectionRanges.count else {
             return 0
         }
         let ranges = sectionRanges[section]
-        return zIndexBehavior.zIndexFromRanges(ranges, index: indexPath.item)
+
+        // Offset with maxZIndex, because BrickCollectionView is using `self.layer.zPosition`
+        // But because this affects how things are layed out with normal UIViews (like scrolling indicator)
+        // the zIndex is now offset by the maxZIndex (so 0->20 is now -20->0)
+        return zIndexBehavior.zIndexFromRanges(ranges, index: indexPath.item) - (withOffset ? maxZIndex : 0)
     }
 
 // Mark: - Private methods

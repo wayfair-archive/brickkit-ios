@@ -51,14 +51,13 @@ class BaseBrickController: BrickViewController {
     func close() {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
-    static func configureCell(cell: LabelBrickCell) {
-        cell.configure()
-    }
-
 }
 
 extension LabelBrickCell {
+
+    static func configure(cell: LabelBrickCell) {
+        cell.configure()
+    }
 
     func configure() {
         label.textAlignment = .Center

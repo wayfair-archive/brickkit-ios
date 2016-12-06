@@ -176,7 +176,7 @@ class BrickDimensionTests: XCTestCase {
     }
 
     func testRawValue() {
-        expectFatalError("Only Ratio and Fixed are allowed") { 
+        expectFatalError { 
             let auto = BrickDimension.Auto(estimate: .Fixed(size: 30))
             BrickDimension._rawValue(for: 100, startingAt: 0, in: UIView(), with: auto)
         }

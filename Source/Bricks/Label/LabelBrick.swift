@@ -25,7 +25,6 @@ public class LabelBrick: Brick {
     weak var dataSource: LabelBrickCellDataSource?
     weak var delegate: LabelBrickCellDelegate?
 
-
     public var text: String? {
         set {
             if let model = dataSource as? LabelBrickCellModel {

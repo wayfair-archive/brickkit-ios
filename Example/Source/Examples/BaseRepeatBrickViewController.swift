@@ -22,9 +22,7 @@ class BaseRepeatBrickViewController: BrickApp.BaseBrickController {
 
         repeatLabel = LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), height: .Auto(estimate: .Fixed(size: 50)), backgroundColor: .brickGray3, dataSource: self)
 
-        titleLabelModel = LabelBrickCellModel(text: "HEADER", configureCellBlock: { cell in
-            cell.configure()
-        })
+        titleLabelModel = LabelBrickCellModel(text: "HEADER", configureCellBlock: LabelBrickCell.configure)
         
         let section = BrickSection(bricks: [
             LabelBrick(BrickIdentifiers.titleLabel, height: .Auto(estimate: .Fixed(size: 50)), backgroundColor: .brickGray1, dataSource: titleLabelModel),

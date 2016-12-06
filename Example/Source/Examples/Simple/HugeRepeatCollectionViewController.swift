@@ -11,19 +11,6 @@ import BrickKit
 
 private let reuseIdentifier = "Cell"
 
-class PrintableFlowLayout: UICollectionViewFlowLayout {
-    override func invalidateLayoutWithContext(context: UICollectionViewLayoutInvalidationContext) {
-        super.invalidateLayoutWithContext(context)
-
-        print("context.contentOffsetAdjustment: \(context.contentOffsetAdjustment)")
-    }
-
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        print("layoutAttributesForElementsInRect: \(rect)")
-        return super.layoutAttributesForElementsInRect(rect)
-    }
-}
-
 class HugeRepeatCollectionViewController: UICollectionViewController, LabelBrickCellDataSource {
 
     override class var title: String {
@@ -36,7 +23,7 @@ class HugeRepeatCollectionViewController: UICollectionViewController, LabelBrick
     let numberOfLabels = 100000
 
     init() {
-        let flow = PrintableFlowLayout()
+        let flow = UICollectionViewFlowLayout()
         let width = (UIScreen.mainScreen().bounds.width - 20) / 2
         flow.estimatedItemSize = CGSize(width: width, height: 50)
         flow.minimumLineSpacing = 10
@@ -75,7 +62,7 @@ class HugeRepeatCollectionViewController: UICollectionViewController, LabelBrick
     func configureLabelBrickCell(cell: LabelBrickCell) {
         var text = ""
 
-        for _ in 0...cell.index {
+        for _ in 0...min(cell.index, 5) {
             if !text.isEmpty {
                 text += " "
             }
