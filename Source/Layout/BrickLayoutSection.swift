@@ -14,10 +14,6 @@ protocol BrickLayoutSectionDelegate: class {
 
 protocol BrickLayoutSectionDataSource: class {
 
-    /// Indicates if the rows need to be aligned
-    var alignRowHeights: Bool { get }
-
-
     /// Scroll Direction of the layout
     var scrollDirection: UICollectionViewScrollDirection { get }
 
@@ -30,6 +26,9 @@ protocol BrickLayoutSectionDataSource: class {
     /// The inset for this section
     func inset(in section: BrickLayoutSection) -> CGFloat
 
+    /// Flag that indicates if row heights need to be aligned
+    func isAlignRowHeights(in section: BrickLayoutSection) -> Bool
+
     /// Function called right before the height is asked. This can be used to do some other pre-calcuations
     func prepareForSizeCalculation(for attributes: BrickLayoutAttributes, containedIn width: CGFloat, origin: CGPoint, invalidate: Bool, in section: BrickLayoutSection, updatedAttributes: OnAttributesUpdatedHandler?)
 
@@ -39,7 +38,6 @@ protocol BrickLayoutSectionDataSource: class {
     ///   - totalWidth: width minus the edgeinsets
     /// - Returns: width for attributes at a given index
     func width(for index: Int, totalWidth: CGFloat, startingAt origin: CGFloat, in section: BrickLayoutSection) -> CGFloat
-
 
     /// Returns the size for attributes at a given index
     func size(for attributes: BrickLayoutAttributes, containedIn width: CGFloat, in section: BrickLayoutSection) -> CGSize
@@ -311,7 +309,7 @@ internal class BrickLayoutSection {
         }
 
         // If rows need to be aligned, make sure the previous lines are checked
-        if dataSource.alignRowHeights && dataSource.scrollDirection == .Vertical {
+        if dataSource.isAlignRowHeights(in: self) && dataSource.scrollDirection == .Vertical {
             let maxHeight = maxY - y
             updateHeightForRowsFromIndex(attributes.count - 1, maxHeight: maxHeight, updatedAttributes: updatedAttributes)
         }
@@ -473,7 +471,7 @@ internal class BrickLayoutSection {
         var nextY: CGFloat = y
         var nextX: CGFloat = x
         if shouldBeOnNextRow {
-            if dataSource.alignRowHeights && dataSource.scrollDirection == .Vertical {
+            if dataSource.isAlignRowHeights(in: self) && dataSource.scrollDirection == .Vertical {
                 let maxHeight = maxY - nextY
                 updateHeightForRowsFromIndex(index - 1, maxHeight: maxHeight, updatedAttributes: updatedAttributes)
             }
@@ -551,7 +549,6 @@ internal class BrickLayoutSection {
             height = size.height
             width = size.width
         }
-
 
         var brickFrame = CGRect(origin: cellOrigin, size: CGSize(width: width, height: height))
 

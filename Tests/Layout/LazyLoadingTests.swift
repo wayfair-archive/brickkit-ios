@@ -138,8 +138,7 @@ class LazyLoadingTests: XCTestCase {
     func testThatAlignRowHeightsWorksProperly() {
         setupSection()
         brickView.section.inset = 10
-
-        flowLayout.alignRowHeights = true
+        brickView.section.alignRowHeights = true
 
         let attributes = brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 0, width: 320, height: 500))?.sort({$0.0.indexPath.item < $0.1.indexPath.item})
         let lastAttributes = attributes?.last

@@ -22,9 +22,6 @@ public class BrickFlowLayout: UICollectionViewLayout, BrickLayout {
         return collectionView?.superview?.superview is CollectionBrickCell
     }
 
-    /// Align Rowheights
-    public var alignRowHeights: Bool = false
-
     public var behaviors: Set<BrickLayoutBehavior> = [] {
         didSet {
             for behavior in behaviors {
@@ -385,6 +382,10 @@ extension BrickFlowLayout: BrickLayoutSectionDataSource {
 
     func inset(in section: BrickLayoutSection) -> CGFloat {
         return _dataSource.brickLayout(self, insetForSection: section.sectionIndex)
+    }
+
+    func isAlignRowHeights(in section: BrickLayoutSection) -> Bool {
+        return _dataSource.brickLayout(self, isAlignRowHeightsForSection: section.sectionIndex)
     }
 
     func identifier(for index: Int, in section: BrickLayoutSection) -> String {

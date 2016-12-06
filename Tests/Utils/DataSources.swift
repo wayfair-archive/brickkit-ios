@@ -185,7 +185,10 @@ class FixedBrickLayoutSectionDataSource: NSObject, BrickLayoutSectionDataSource 
         return downStreamIndexPaths
     }
 
-    var alignRowHeights: Bool = false
+    func isAlignRowHeights(in section: BrickLayoutSection) -> Bool {
+        return false
+    }
+
     var scrollDirection: UICollectionViewScrollDirection = .Vertical
 }
 
@@ -232,6 +235,9 @@ class FixedBrickLayoutDataSource: NSObject, BrickLayoutDataSource {
         return ""
     }
 
+    func brickLayout(layout: BrickLayout, isAlignRowHeightsForSection section: Int) -> Bool {
+        return false
+    }
 }
 
 class FixedSpotlightLayoutBehaviorDataSource: SpotlightLayoutBehaviorDataSource {

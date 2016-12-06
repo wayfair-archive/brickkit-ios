@@ -61,6 +61,16 @@ extension BrickCollectionView: BrickLayoutDataSource {
         return brickSection.inset
     }
 
+    public func brickLayout(layout: BrickLayout, isAlignRowHeightsForSection section: Int) -> Bool {
+        guard
+            let indexPath = self.section.indexPathForSection(section, in: collectionInfo),
+            let brickSection = self.brick(at:indexPath) as? BrickSection
+            else {
+                return false
+        }
+        return brickSection.alignRowHeights
+    }
+
     public func brickLayout(layout: BrickLayout, brickLayoutTypeForItemAtIndexPath indexPath: NSIndexPath) -> BrickLayoutType {
         let brick = self.brick(at:indexPath)
         if brick is BrickSection {

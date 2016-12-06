@@ -621,7 +621,7 @@ class BrickCollectionViewTests: XCTestCase {
         cell2 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 2))
         XCTAssertEqual(cell2?.frame, CGRect(x: 60, y: 10, width: 410, height: 25))
     }
-
+    
     func testThatDescriptionIsCorrect() {
         XCTAssertTrue(self.brickView.description.hasSuffix("CollectionBrick: false"))
     }

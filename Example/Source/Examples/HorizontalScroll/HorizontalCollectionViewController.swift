@@ -35,15 +35,13 @@ class HorizontalCollectionViewController: BrickViewController {
 
         self.view.backgroundColor = .brickBackground
 
-        self.brickCollectionView.layout.alignRowHeights = true
-
         collectionSection = BrickSection(bricks: [
             ImageBrick(width: .Ratio(ratio: 1/2), height: .Ratio(ratio: 1), dataSource: self),
             BrickSection(width: .Ratio(ratio: 1/2), bricks: [
                 LabelBrick(RepeatCollectionBrickViewController.Identifiers.titleLabel, backgroundColor: .brickGray2, dataSource: self),
                 LabelBrick(RepeatCollectionBrickViewController.Identifiers.subTitleLabel, backgroundColor: .brickGray4, dataSource: self)
                 ])
-            ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
+            ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), alignRowHeights: true)
 
         self.registerBrickClass(CollectionBrick.self)
 
