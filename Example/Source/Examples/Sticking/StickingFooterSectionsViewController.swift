@@ -31,8 +31,6 @@ class StickingFooterSectionsViewController: BrickApp.BaseBrickController {
 
         self.brickCollectionView.registerBrickClass(LabelBrick.self)
 
-        self.layout.alignRowHeights = true
-
         behavior = StickyFooterLayoutBehavior(dataSource: self)
 
         repeatLabel = LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio:0.5), backgroundColor:.lightGrayColor(), dataSource:self)

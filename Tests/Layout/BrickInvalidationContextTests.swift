@@ -912,12 +912,11 @@ class BrickInvalidationContextTests: XCTestCase {
 
     func testThatInvalidateWithAlignRowHeightsReportsCorrectly() {
         brickViewController.brickCollectionView.registerBrickClass(DummyBrick.self)
-        brickViewController.brickCollectionView.layout.alignRowHeights = true
 
         let section = BrickSection("Test Section", bricks: [
             DummyBrick("Brick 1", width: .Ratio(ratio: 1/2), height: .Fixed(size: 50)),
             DummyBrick("Brick 2", width: .Ratio(ratio: 1/2), height: .Fixed(size: 50)),
-            ])
+            ], alignRowHeights: true)
 
         brickViewController.setSection(section)
         brickViewController.collectionView!.layoutSubviews()

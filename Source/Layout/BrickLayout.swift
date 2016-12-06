@@ -16,7 +16,6 @@ public protocol BrickLayout: class {
     var contentSize: CGSize { get }
     var zIndexBehavior: BrickLayoutZIndexBehavior { get set }
     var maxZIndex: Int { get }
-    var alignRowHeights: Bool { get set }
     var scrollDirection: UICollectionViewScrollDirection { get set }
 
     weak var dataSource: BrickLayoutDataSource? { get set }
@@ -86,6 +85,7 @@ public protocol BrickLayoutDataSource: class {
     func brickLayout(layout: BrickLayout, estimatedHeightForItemAtIndexPath indexPath: NSIndexPath, containedInWidth width: CGFloat) -> CGFloat
     func brickLayout(layout: BrickLayout, edgeInsetsForSection section: Int) -> UIEdgeInsets
     func brickLayout(layout: BrickLayout, insetForSection section: Int) -> CGFloat
+    func brickLayout(layout: BrickLayout, isAlignRowHeightsForSection section: Int) -> Bool
     func brickLayout(layout: BrickLayout, brickLayoutTypeForItemAtIndexPath indexPath: NSIndexPath) -> BrickLayoutType
     func brickLayout(layout: BrickLayout, identifierForIndexPath indexPath: NSIndexPath) -> String
     func brickLayout(layout: BrickLayout, indexPathForSection section: Int) -> NSIndexPath?
@@ -102,6 +102,10 @@ extension BrickLayoutDataSource {
         return true
     }
 
+    func brickLayout(layout: BrickLayout, isAlignRowHeightsForSection section: Int) -> Bool {
+        return false
+    }
+    
 }
 
 public protocol BrickLayoutDelegate: class {

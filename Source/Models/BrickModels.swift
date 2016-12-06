@@ -104,6 +104,7 @@ public class BrickSection: Brick {
     public var bricks: [Brick]
     public var inset: CGFloat
     public var edgeInsets: UIEdgeInsets
+    public var alignRowHeights: Bool
 
     internal private(set) var collectionIndex: Int = 0
     internal private(set) var collectionIdentifier: String = ""
@@ -117,10 +118,11 @@ public class BrickSection: Brick {
         }
     }
 
-    public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 0)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, bricks: [Brick], inset: CGFloat = 0, edgeInsets: UIEdgeInsets = UIEdgeInsetsZero) {
+    public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 0)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, bricks: [Brick], inset: CGFloat = 0, edgeInsets: UIEdgeInsets = UIEdgeInsetsZero, alignRowHeights: Bool = false) {
         self.bricks = bricks
         self.inset = inset
         self.edgeInsets = edgeInsets
+        self.alignRowHeights = alignRowHeights
         super.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView)
     }
 

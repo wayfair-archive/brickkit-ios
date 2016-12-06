@@ -25,8 +25,6 @@ class SimpleRepeatBrickViewController: BrickViewController, LabelBrickCellDataSo
 
         self.brickCollectionView.registerBrickClass(LabelBrick.self)
 
-        self.layout.alignRowHeights = false
-
         self.view.backgroundColor = .brickBackground
 
         let section = BrickSection(bricks: [
@@ -41,12 +39,12 @@ class SimpleRepeatBrickViewController: BrickViewController, LabelBrickCellDataSo
 
     func updateNavigationItem() {
         let selector: Selector = #selector(SimpleRepeatBrickViewController.toggleAlignBehavior)
-        let title = self.layout.alignRowHeights ? "Don't Align" : "Align"
+        let title = self.brickCollectionView.section.alignRowHeights ? "Don't Align" : "Align"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: title, style: .Plain, target: self, action: selector)
     }
 
     func toggleAlignBehavior() {
-        self.layout.alignRowHeights = !self.layout.alignRowHeights
+        self.brickCollectionView.section.alignRowHeights = !self.brickCollectionView.section.alignRowHeights
         brickCollectionView.reloadData()
         updateNavigationItem()
     }
