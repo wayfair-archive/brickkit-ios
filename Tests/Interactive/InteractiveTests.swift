@@ -335,7 +335,7 @@ class InteractiveTests: XCTestCase {
         XCTAssertNotNil(label)
         XCTAssertEqual(label.frame, CGRect(x: 0, y: 0, width: 320, height: 100))
 
-        brick.width = .Ratio(ratio: 1/2)
+        brick.size.width = .Ratio(ratio: 1/2)
 
         let expectation = expectationWithDescription("Reload")
         brickView.performBatchUpdates({ 

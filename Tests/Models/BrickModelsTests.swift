@@ -18,7 +18,7 @@ class BrickModelsTests: XCTestCase {
 
     func testBrickDescription() {
         let brick = DummyBrick("Brick1")
-        XCTAssertEqual(brick.description, "<DummyBrick -Brick1- width: Ratio(1.0) - height: Auto(BrickKit.BrickDimension.Fixed(50.0))>")
+        XCTAssertEqual(brick.description, "<DummyBrick -Brick1- size: BrickSize(width: BrickKit.BrickDimension.Ratio(1.0), height: BrickKit.BrickDimension.Auto(BrickKit.BrickDimension.Fixed(50.0)))>")
     }
 
     func testSectionDescription() {
@@ -34,13 +34,13 @@ class BrickModelsTests: XCTestCase {
             ])
 
         let expectedResult: String = "" +
-            "<BrickSection -Section1- width: Ratio(1.0) - height: Auto(BrickKit.BrickDimension.Fixed(0.0))> inset: 0.0 edgeInsets: UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)\n" +
-            "    <DummyBrick -Brick1- width: Ratio(1.0) - height: Auto(BrickKit.BrickDimension.Fixed(50.0))>\n" +
-            "    <BrickSection -Section2- width: Ratio(1.0) - height: Auto(BrickKit.BrickDimension.Fixed(0.0))> inset: 0.0 edgeInsets: UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)\n" +
-            "        <DummyBrick -Brick2- width: Fixed(20.0) - height: Auto(BrickKit.BrickDimension.Fixed(50.0))>\n" +
-            "        <BrickSection -Section3- width: Ratio(1.0) - height: Auto(BrickKit.BrickDimension.Fixed(0.0))> inset: 0.0 edgeInsets: UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)\n" +
-            "            <DummyBrick -Brick3- width: Ratio(1.0) - height: Ratio(1.0)>\n" +
-            "    <DummyBrick -Brick4- width: Ratio(1.0) - height: Auto(BrickKit.BrickDimension.Fixed(50.0))>"
+            "<BrickSection -Section1- size: BrickSize(width: BrickKit.BrickDimension.Ratio(1.0), height: BrickKit.BrickDimension.Auto(BrickKit.BrickDimension.Fixed(0.0)))> inset: 0.0 edgeInsets: UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)\n" +
+            "    <DummyBrick -Brick1- size: BrickSize(width: BrickKit.BrickDimension.Ratio(1.0), height: BrickKit.BrickDimension.Auto(BrickKit.BrickDimension.Fixed(50.0)))>\n" +
+            "    <BrickSection -Section2- size: BrickSize(width: BrickKit.BrickDimension.Ratio(1.0), height: BrickKit.BrickDimension.Auto(BrickKit.BrickDimension.Fixed(0.0)))> inset: 0.0 edgeInsets: UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)\n" +
+            "        <DummyBrick -Brick2- size: BrickSize(width: BrickKit.BrickDimension.Fixed(20.0), height: BrickKit.BrickDimension.Auto(BrickKit.BrickDimension.Fixed(50.0)))>\n" +
+            "        <BrickSection -Section3- size: BrickSize(width: BrickKit.BrickDimension.Ratio(1.0), height: BrickKit.BrickDimension.Auto(BrickKit.BrickDimension.Fixed(0.0)))> inset: 0.0 edgeInsets: UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)\n" +
+            "            <DummyBrick -Brick3- size: BrickSize(width: BrickKit.BrickDimension.Ratio(1.0), height: BrickKit.BrickDimension.Ratio(1.0))>\n" +
+            "    <DummyBrick -Brick4- size: BrickSize(width: BrickKit.BrickDimension.Ratio(1.0), height: BrickKit.BrickDimension.Auto(BrickKit.BrickDimension.Fixed(50.0)))>"
 
         XCTAssertEqual(section.description, expectedResult)
     }

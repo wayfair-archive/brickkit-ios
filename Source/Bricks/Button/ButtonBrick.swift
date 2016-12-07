@@ -60,24 +60,34 @@ public class ButtonBrick: Brick {
     private var dataSourceModel: ButtonBrickCellModel?
     private var delegateModel: ButtonBrickCellModel?
 
-    convenience public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, title: String, configureButtonBlock: ConfigureButtonBlock? = nil, onButtonTappedHandler: ButtonTappedBlock? = nil) {
+    public convenience init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, title: String, configureButtonBlock: ConfigureButtonBlock? = nil, onButtonTappedHandler: ButtonTappedBlock? = nil) {
         let model = ButtonBrickCellModel(title: title, configureButtonBlock: configureButtonBlock, onButtonTappedHandler: onButtonTappedHandler)
         self.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView, dataSource: model, delegate: model)
     }
 
-    public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: ButtonBrickCellDataSource, delegate: ButtonBrickCellDelegate? = nil) {
+    public convenience init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: ButtonBrickCellDataSource, delegate: ButtonBrickCellDelegate? = nil) {
+        self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: dataSource, delegate: delegate)
+    }
+    
+    public convenience init(_ identifier: String, size: BrickSize, backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, title: String, configureButtonBlock: ConfigureButtonBlock? = nil, onButtonTappedHandler: ButtonTappedBlock? = nil) {
+        let model = ButtonBrickCellModel(title: title, configureButtonBlock: configureButtonBlock, onButtonTappedHandler: onButtonTappedHandler)
+        self.init(identifier, size: size, backgroundColor: backgroundColor, backgroundView: backgroundView, dataSource: model, delegate: model)
+    }
+    
+    public init(_ identifier: String, size: BrickSize, backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: ButtonBrickCellDataSource, delegate: ButtonBrickCellDelegate? = nil) {
         self.dataSource = dataSource
         self.delegate = delegate
-        super.init(identifier, width: width, height: height, backgroundColor:backgroundColor, backgroundView:backgroundView)
+        super.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView)
         
         if let delegateModel = delegate as? ButtonBrickCellModel {
             self.delegateModel = delegateModel
         }
-
+        
         if let dataSourceModel = dataSource as? ButtonBrickCellModel where delegate !== dataSource {
             self.dataSourceModel = dataSourceModel
         }
     }
+
 }
 
 // MARK: - DataSource
@@ -132,4 +142,3 @@ public class ButtonBrickCell: BrickCell, Bricklike {
         brick.delegate?.didTapOnButtonForButtonBrickCell(self)
     }
 }
-

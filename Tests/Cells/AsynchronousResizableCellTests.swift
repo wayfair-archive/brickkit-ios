@@ -69,6 +69,7 @@ class AsynchronousResizableCellTests: XCTestCase {
 
         resizableBrick.newHeight = 100
         resizableBrick.height = .Fixed(size: 70)
+        
         brickView.layoutSubviews()
 
         waitForExpectationsWithTimeout(5, handler: nil)
@@ -103,7 +104,7 @@ class AsynchronousResizableCellTests: XCTestCase {
 
         let resizableBrick2 = AsynchronousResizableBrick()
         resizableBrick2.newHeight = 100
-        resizableBrick2.height = .Fixed(size: 70)
+        resizableBrick2.size.height = .Fixed(size: 70)
 
         let expectation = expectationWithDescription("Async")
 

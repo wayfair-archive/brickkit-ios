@@ -12,7 +12,7 @@ extension BrickCollectionView: BrickLayoutDataSource {
     
     public func brickLayout(layout: BrickLayout, widthForItemAtIndexPath indexPath: NSIndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat {
         let inset = self.brickLayout(layout, insetForSection: indexPath.section)
-        let widthDimension = self.brick(at: indexPath).width
+        let widthDimension = self.brick(at: indexPath).size.width
 
         let dimension = widthDimension.dimension(in: self)
 
@@ -28,7 +28,7 @@ extension BrickCollectionView: BrickLayoutDataSource {
             return false
         }
 
-        return brick.height.isEstimate(in: self)
+        return brick.size.height.isEstimate(in: self)
     }
 
     public func brickLayout(layout: BrickLayout, estimatedHeightForItemAtIndexPath indexPath: NSIndexPath, containedInWidth width: CGFloat) -> CGFloat {
@@ -37,7 +37,7 @@ extension BrickCollectionView: BrickLayoutDataSource {
             return 0
         }
 
-        let heightDimension = brick.height
+        let heightDimension = brick.size.height
         return heightDimension.value(for: width, startingAt: 0, in: self)
     }
 
