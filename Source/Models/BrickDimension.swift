@@ -25,10 +25,10 @@ extension UIView {
 }
 
 public struct BrickSize {
-    var width: BrickDimension
-    var height: BrickDimension
+    public var width: BrickDimension
+    public var height: BrickDimension
     
-    init(width: BrickDimension, height: BrickDimension) {
+    public init(width: BrickDimension, height: BrickDimension) {
         self.width = width
         self.height = height
     }
