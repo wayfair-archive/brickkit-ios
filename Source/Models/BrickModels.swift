@@ -17,18 +17,34 @@ public class Brick: CustomStringConvertible {
     /// Identifier of the brick. Defaults to empty string
     public let identifier: String
 
+    public var size: BrickSize
+    
     /// Width dimension used to calculate the width. Defaults to .Ratio(ratio: 1)
-    public var width: BrickDimension
-
+    public var width: BrickDimension {
+        set(newWidth) {
+            size.width = newWidth
+        }
+        get {
+            return size.width
+        }
+    }
+    
     /// Height dimension used to calculate the height. Defaults to .Auto(estimate: .Fixed(size: 50))
-    public var height: BrickDimension
-
+    public var height: BrickDimension {
+        set(newHeight) {
+            size.height = newHeight
+        }
+        get {
+            return size.height
+        }
+    }
+    
     /// Background color used for the brick. Defaults to .clearColor()
     public var backgroundColor: UIColor
-
+    
     /// Background view used for the brick. Defaults to nil
     public var backgroundView: UIView?
-
+    
     /// Delegate used to handle tap gestures for the brick. Defaults to nil
     public weak var brickCellTapDelegate: BrickCellTapDelegate?
 
@@ -41,10 +57,13 @@ public class Brick: CustomStringConvertible {
     /// - parameter backgroundView:  Background view used for the brick. Defaults to nil
     ///
     /// - returns: brick
-    public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil) {
+    convenience public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil) {
+        self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView)
+    }
+    
+    public init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil) {
         self.identifier = identifier
-        self.width = width
-        self.height = height
+        self.size = size
         self.backgroundColor = backgroundColor
         self.backgroundView = backgroundView
     }
@@ -94,7 +113,7 @@ public class Brick: CustomStringConvertible {
         for _ in 0..<indentationLevel {
             description += "    "
         }
-        description += "<\(self.nibName) -\(identifier)- width: \(width) - height: \(height)>"
+        description += "<\(self.nibName) -\(identifier)- size: \(size)>"
 
         return description
     }
@@ -123,7 +142,7 @@ public class BrickSection: Brick {
         self.inset = inset
         self.edgeInsets = edgeInsets
         self.alignRowHeights = alignRowHeights
-        super.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView)
+        super.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView)
     }
 
     /// Invalidate the brick counts for a given collection. Recalculate where sections are in the tree

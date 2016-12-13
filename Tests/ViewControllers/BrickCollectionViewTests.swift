@@ -215,7 +215,7 @@ class BrickCollectionViewTests: XCTestCase {
         cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickCell
         XCTAssertEqual(cell?.frame.width, 32)
         XCTAssertEqual(cell?.frame.height, 64)
-
+        
         brick.width = .Ratio(ratio: 1/5)
 
         let expectation = expectationWithDescription("Invalidate Bricks")

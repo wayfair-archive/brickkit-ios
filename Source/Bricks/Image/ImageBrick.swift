@@ -13,14 +13,8 @@ public class ImageBrick: Brick {
     
     private var model: ImageBrickDataSource?
     
-    public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: ImageBrickDataSource) {
-    
-        self.dataSource = dataSource
-        super.init(identifier, width: width, height: height, backgroundColor:backgroundColor, backgroundView:backgroundView)
-        
-        if dataSource is ImageBrickModel || dataSource is ImageURLBrickModel {
-            self.model = dataSource
-        }
+    public convenience init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: ImageBrickDataSource) {
+        self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: dataSource)
     }
     
     public convenience init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, image: UIImage, contentMode: UIViewContentMode) {
@@ -32,6 +26,29 @@ public class ImageBrick: Brick {
         let model = ImageURLBrickModel(url: imageUrl, contentMode: contentMode)
         self.init(identifier, width: width, height: height, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
     }
+    
+    
+    public init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: ImageBrickDataSource) {
+        
+        self.dataSource = dataSource
+        super.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView)
+        
+        if dataSource is ImageBrickModel || dataSource is ImageURLBrickModel {
+            self.model = dataSource
+        }
+    }
+    
+    public convenience init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, image: UIImage, contentMode: UIViewContentMode) {
+        let model = ImageBrickModel(image: image, contentMode: contentMode)
+        self.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
+    }
+    
+    public convenience init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, imageUrl: NSURL, contentMode: UIViewContentMode) {
+        let model = ImageURLBrickModel(url: imageUrl, contentMode: contentMode)
+        self.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
+    }
+
+    
 }
 
 // MARK: - DataSource
@@ -132,7 +149,7 @@ public class ImageBrickCell: BrickCell, Bricklike, AsynchronousResizableCell, Im
 
         if let image = dataSource.imageForImageBrickCell(self) {
             imageView.image = image
-            if self.brick.height.isEstimate(in: self) {
+            if self.brick.size.height.isEstimate(in: self) {
                 setRatioConstraint(for: image)
             }
             imageLoaded = true
@@ -151,7 +168,7 @@ public class ImageBrickCell: BrickCell, Bricklike, AsynchronousResizableCell, Im
                 self.imageLoaded = true
                 
                 NSOperationQueue.mainQueue().addOperationWithBlock({
-                    if self.brick.height.isEstimate(in: self) {
+                    if self.brick.size.height.isEstimate(in: self) {
                         self.setRatioConstraint(for: image)
                         self.sizeChangedHandler?(cell: self)
                     }

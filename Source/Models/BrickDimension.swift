@@ -24,6 +24,16 @@ extension UIView {
     
 }
 
+public struct BrickSize {
+    var width: BrickDimension
+    var height: BrickDimension
+    
+    init(width: BrickDimension, height: BrickDimension) {
+        self.width = width
+        self.height = height
+    }
+}
+
 public indirect enum BrickDimension {
     case Ratio(ratio: CGFloat)
     case Fixed(size: CGFloat)

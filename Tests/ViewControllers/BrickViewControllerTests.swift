@@ -636,7 +636,7 @@ class BrickViewControllerTests: XCTestCase {
         XCTAssertEqualWithAccuracy(cell!.frame.width, width, accuracy: 0.01)
         XCTAssertEqualWithAccuracy(cell?.frame.height ?? 0, width * 2, accuracy: 0.5)
 
-        brick.width = .Ratio(ratio: 1/5)
+        brick.size.width = .Ratio(ratio: 1/5)
 
         let expectation = expectationWithDescription("Invalidate Bricks")
 
