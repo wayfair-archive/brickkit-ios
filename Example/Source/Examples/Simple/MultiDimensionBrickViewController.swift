@@ -52,9 +52,7 @@ class MultiDimensionBrickViewController: BrickViewController, LabelBrickCellData
                 )
         )
 
-        let header = LabelBrick(backgroundColor: .brickGray1, text: "ROTATE THE DEVICE TO SEE THE DIFFERENCE", configureCellBlock: { cell in
-            cell.configure()
-        })
+        let header = LabelBrick(backgroundColor: .brickGray1, text: "ROTATE THE DEVICE TO SEE THE DIFFERENCE", configureCellBlock: LabelBrickCell.configure)
 
         let section = BrickSection(bricks: [
             header,

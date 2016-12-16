@@ -64,6 +64,15 @@ public class BaseBrickCell: UICollectionViewCell {
         return UIView()
     }()
 
+    public override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.applyLayoutAttributes(layoutAttributes)
+
+        // Setting zPosition instead of relaying on
+        // UICollectionView zIndex management 'fixes' the issue
+        // http://stackoverflow.com/questions/12659301/uicollectionview-setlayoutanimated-not-preserving-zindex
+        self.layer.zPosition = CGFloat(layoutAttributes.zIndex)
+    }
+
     public override func layoutSubviews() {
         super.layoutSubviews()
         brickBackgroundView?.frame = self.bounds

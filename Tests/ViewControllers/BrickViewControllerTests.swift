@@ -75,27 +75,20 @@ class BrickViewControllerTests: XCTestCase {
     }
 
     func testWithSectionWithSameNameAsBrick() {
-        brickViewController.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection("DummyBrick", bricks: [
             DummyBrick("Brick 1"),
             ])
 
-        brickViewController.setSection(section)
-        brickViewController.brickCollectionView.layoutSubviews()
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
         XCTAssertTrue(brickViewController.brickCollectionView.dataSource?.collectionView(brickViewController.brickCollectionView, cellForItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0)) is BrickSectionCell)
-
     }
 
     func testWithDummyBrick() {
-        brickViewController.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection("Test Section", bricks: [
             DummyBrick("Brick 1"),
             ])
 
-        brickViewController.setSection(section)
-        brickViewController.collectionView!.layoutSubviews()
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
         let expectedResult = [
             0 : [
@@ -114,14 +107,11 @@ class BrickViewControllerTests: XCTestCase {
     }
 
     func testWithDummyBrickFixedWidth() {
-        brickViewController.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection("Test Section", bricks: [
             DummyBrick("Brick 1", width: .Fixed(size: 100)),
             ])
 
-        brickViewController.setSection(section)
-        brickViewController.collectionView!.layoutSubviews()
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
         let expectedResult = [
             0 : [
@@ -140,14 +130,11 @@ class BrickViewControllerTests: XCTestCase {
     }
 
     func testWithDummyBrickWithFixedHeight() {
-        brickViewController.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection("Test Section", bricks: [
             DummyBrick("Brick 1", height: .Fixed(size: 100)),
             ])
 
-        brickViewController.setSection(section)
-        brickViewController.collectionView!.layoutSubviews()
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
         let expectedResult = [
             0 : [
@@ -167,14 +154,11 @@ class BrickViewControllerTests: XCTestCase {
 
 
     func testWithDummyBrickWithHeightRatio() {
-        brickViewController.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection("Test Section", bricks: [
             DummyBrick("Brick 1", height: .Ratio(ratio: 5)),
             ])
 
-        brickViewController.setSection(section)
-        brickViewController.collectionView!.layoutSubviews()
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
         let expectedResult = [
             0 : [
@@ -205,14 +189,11 @@ class BrickViewControllerTests: XCTestCase {
     }
 
     func testWithDummyBricks() {
-        brickViewController.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection("Test Section", bricks: [
             DummyBrick("Brick 1"),
             DummyBrick("Brick 2")
             ])
-        brickViewController.setSection(section)
-        brickViewController.collectionView!.layoutSubviews()
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
         let expectedResult = [
             0 : [
@@ -232,15 +213,12 @@ class BrickViewControllerTests: XCTestCase {
     }
 
     func testWithDummyBricksSideBySide() {
-        brickViewController.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection("Test Section", bricks: [
             DummyBrick("Brick 1", width: .Ratio(ratio: 0.5)),
             DummyBrick("Brick 2", width: .Ratio(ratio: 0.5))
             ])
 
-        brickViewController.setSection(section)
-        brickViewController.collectionView!.layoutSubviews()
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
         let expectedResult = [
             0 : [
@@ -275,8 +253,7 @@ class BrickViewControllerTests: XCTestCase {
                 ]),
             ])
 
-        brickViewController.setSection(section)
-        brickViewController.collectionView!.layoutSubviews()
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
         brickViewController.collectionView?.contentOffset = CGPoint(x: 0, y: brickViewController.collectionView!.frame.height)
         brickViewController.collectionView!.layoutSubviews()
 
@@ -309,8 +286,6 @@ class BrickViewControllerTests: XCTestCase {
 
 
     func testWithDummyBricksInNestedSections() {
-        brickViewController.brickCollectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection("Test", bricks: [
             BrickSection("Test Section 1", bricks: [
                 BrickSection("Test Section 2", bricks: [
@@ -325,8 +300,7 @@ class BrickViewControllerTests: XCTestCase {
                 ]),
             ])
 
-        brickViewController.setSection(section)
-        brickViewController.collectionView!.layoutSubviews()
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
         let expectedResult = [
             0 : [
@@ -362,8 +336,6 @@ class BrickViewControllerTests: XCTestCase {
         let size = CGSize(width: 100, height: 100)
         brickViewController.view.frame = CGRect(origin: CGPoint.zero, size: size)
 
-        brickViewController.brickCollectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection("Test Section", bricks: [
             DummyBrick("Brick 1"),
             BrickSection("Test Section 2", bricks: [
@@ -371,8 +343,7 @@ class BrickViewControllerTests: XCTestCase {
                 ], inset: 20, edgeInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
 
-        brickViewController.setSection(section)
-        brickViewController.brickCollectionView.layoutSubviews()
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
         XCTAssertEqual(brickViewController.brickCollectionView.brickLayout(brickViewController.layout, insetForSection: 1), 10)
         XCTAssertEqual(brickViewController.brickCollectionView.brickLayout(brickViewController.layout, edgeInsetsForSection: 1), UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
@@ -391,8 +362,7 @@ class BrickViewControllerTests: XCTestCase {
         brickViewController.registerNib(UINib(nibName: "DummyBrick100", bundle: NSBundle(forClass: DummyBrick.self)), forBrickWithIdentifier: "Brick 1")
         brickViewController.registerNib(UINib(nibName: "DummyBrick150", bundle: NSBundle(forClass: DummyBrick.self)), forBrickWithIdentifier: "Brick 2")
 
-        brickViewController.setSection(section)
-        brickViewController.collectionView!.layoutSubviews()
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
         let expectedResult = [
             0 : [
@@ -417,11 +387,9 @@ class BrickViewControllerTests: XCTestCase {
             DummyBrick("Brick 2")
             ])
 
-        brickViewController.registerBrickClass(DummyBrick.self)
         brickViewController.registerNib(UINib(nibName: "DummyBrick150", bundle: NSBundle(forClass: DummyBrick.self)), forBrickWithIdentifier: "Brick 2")
 
-        brickViewController.setSection(section)
-        brickViewController.collectionView!.layoutSubviews()
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
         let expectedResult = [
             0 : [
@@ -441,14 +409,11 @@ class BrickViewControllerTests: XCTestCase {
     }
 
     func testAlignHeights() {
-        brickViewController.brickCollectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection("Test Section", bricks: [
             DummyBrick("Brick 1"),
             ])
 
-        brickViewController.setSection(section)
-        brickViewController.collectionView!.layoutSubviews()
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
         let expectedResult = [
             0 : [
@@ -467,8 +432,6 @@ class BrickViewControllerTests: XCTestCase {
 
 
     func testCollectionBrick() {
-        brickViewController.brickCollectionView.registerBrickClass(CollectionBrick.self)
-
         let collectionSection = BrickSection("CollectionBrick Section", bricks: [
             DummyBrick("Brick 1", height: .Fixed(size: 50)),
             ])
@@ -479,8 +442,7 @@ class BrickViewControllerTests: XCTestCase {
             }))
             ])
 
-        brickViewController.setSection(section)
-        brickViewController.collectionView!.layoutSubviews()
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
         let expectedResult = [
             0 : [
@@ -499,8 +461,6 @@ class BrickViewControllerTests: XCTestCase {
     }
 
     func testCollectionBrickWithNoContentFirst() {
-        brickViewController.brickCollectionView.registerBrickClass(CollectionBrick.self)
-
         let collectionSection = BrickSection("CollectionBrick Section", bricks: [
             DummyBrick("Brick 1", height: .Fixed(size: 50)),
             ])
@@ -515,8 +475,7 @@ class BrickViewControllerTests: XCTestCase {
             CollectionBrick("Collection Brick", scrollDirection: .Horizontal, dataSource: model)
             ])
 
-        brickViewController.setSection(section)
-        brickViewController.collectionView!.layoutSubviews()
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
         var expectedResult: [Int: [CGRect]] = [ : ]
 
@@ -545,14 +504,11 @@ class BrickViewControllerTests: XCTestCase {
     }
 
     func testUpdateFrame() {
-        brickViewController.brickCollectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection("Test Section", bricks: [
             DummyBrick("Brick 1", height: .Fixed(size: 50)),
             ])
 
-        brickViewController.setSection(section)
-        brickViewController.collectionView!.layoutSubviews()
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
         brickViewController.brickCollectionView.frame.size.width = 400
 
         let expectedResult = [
@@ -602,7 +558,6 @@ class BrickViewControllerTests: XCTestCase {
         brickViewController.resetRefreshControl()
 
         XCTAssertEqual(refreshControl.layer.zPosition, 1)
-        //        refreshControl?.layer.zPosition = (brickCollectionView.backgroundView?.layer.zPosition ?? 0) + 1
     }
 
     func testResetRefreshControlWithBackgroundView() {
@@ -621,36 +576,32 @@ class BrickViewControllerTests: XCTestCase {
     #endif
     
     func testReloadBricks() {
+        let width = brickViewController.brickCollectionView.frame.size.width
 
-        brickViewController.brickCollectionView.registerBrickClass(DummyBrick.self)
         let brick = DummyBrick(width: .Ratio(ratio: 1/10))
         let section = BrickSection(bricks: [
             brick
             ])
-        brickViewController.brickCollectionView.setSection(section)
-        brickViewController.brickCollectionView.layoutSubviews()
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
         var cell: DummyBrickCell?
         cell = brickViewController.brickCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickCell
-        let width = brickViewController.brickCollectionView.frame.width / 10
-        XCTAssertEqualWithAccuracy(cell!.frame.width, width, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell?.frame.height ?? 0, width * 2, accuracy: 0.5)
+        XCTAssertEqualWithAccuracy(cell!.frame.width, width / 10, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(cell?.frame.height ?? 0, (width / 10) * 2, accuracy: 0.5)
 
         brick.size.width = .Ratio(ratio: 1/5)
 
         let expectation = expectationWithDescription("Invalidate Bricks")
 
-        brickViewController.brickCollectionView.invalidateBricks() { completed in
+        brickViewController.brickCollectionView.invalidateBricks(true) { completed in
             expectation.fulfill()
         }
 
         waitForExpectationsWithTimeout(5, handler: nil)
 
-        brickViewController.brickCollectionView.layoutIfNeeded()
-
         cell = brickViewController.brickCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickCell
-        XCTAssertEqualWithAccuracy(cell?.frame.width ?? 0, width * 2, accuracy: 0.1)
-        XCTAssertEqualWithAccuracy(cell?.frame.height ?? 0 , width * 4, accuracy: 0.1)
+        XCTAssertEqualWithAccuracy(cell?.frame.width ?? 0, width / 5, accuracy: 0.1)
+        XCTAssertEqualWithAccuracy(cell?.frame.height ?? 0 , (width / 5) * 2, accuracy: 0.1)
     }
 
     #if os(tvOS)
@@ -683,8 +634,7 @@ class BrickViewControllerTests: XCTestCase {
             ])
         
         
-        brickViewController.setSection(section)
-        brickViewController.collectionView!.layoutSubviews()
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
         brickViewController.brickCollectionView.frame.size.width = 400
         
         let brickOneIndex = brickViewController.brickCollectionView.indexPathsForBricksWithIdentifier("Brick 1").first
@@ -712,8 +662,7 @@ class BrickViewControllerTests: XCTestCase {
             ])
         
         
-        brickViewController.setSection(section)
-        brickViewController.collectionView!.layoutSubviews()
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
         brickViewController.brickCollectionView.frame.size.width = 400
         
         
@@ -745,8 +694,7 @@ class BrickViewControllerTests: XCTestCase {
     
     func testKeepFocus() {
         brickViewController.brickCollectionView.registerBrickClass(DummyFocusableBrick.self)
-        brickViewController.brickCollectionView.registerBrickClass(DummyBrick.self)
-        
+
         let section = BrickSection("Test Section", bricks: [
             DummyFocusableBrick("Brick 1", height: .Fixed(size: 50)),
             DummyFocusableBrick("Brick 2", height: .Fixed(size: 50)),
@@ -754,10 +702,8 @@ class BrickViewControllerTests: XCTestCase {
             ])
         
         
-        brickViewController.setSection(section)
-        brickViewController.collectionView!.layoutSubviews()
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
         brickViewController.brickCollectionView.frame.size.width = 400
-        
         
         let brickOneIndex = brickViewController.brickCollectionView.indexPathsForBricksWithIdentifier("Brick 1").first
         let brickTwoIndex = brickViewController.brickCollectionView.indexPathsForBricksWithIdentifier("Brick 2").first

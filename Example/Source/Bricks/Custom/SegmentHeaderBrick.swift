@@ -9,7 +9,7 @@ class SegmentHeaderBrick: Brick {
     init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 100)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: SegmentHeaderBrickDataSource? = nil, delegate: SegmentHeaderBrickDelegate? = nil) {
         self.dataSource = dataSource
         self.delegate = delegate
-        super.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView)
+        super.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView)
     }
 }
 

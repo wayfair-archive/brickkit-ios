@@ -25,18 +25,14 @@ class FillBrickViewController: BrickViewController {
 
         self.view.backgroundColor = .brickBackground
 
-        let configureCell: (cell: LabelBrickCell) -> Void = { cell in
-            cell.configure()
-        }
-
         let section = BrickSection(bricks: [
-            LabelBrick(width: .Fixed(size: 50), backgroundColor: .brickGray1, text: "BRICK", configureCellBlock: configureCell),
-            LabelBrick(width: .Fill, backgroundColor: .brickGray3, text: "BRICK", configureCellBlock: configureCell),
-            LabelBrick(width: .Fill, backgroundColor: .brickGray5, text: "BRICK", configureCellBlock: configureCell),
-            LabelBrick(width: .Fixed(size: 50), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: configureCell),
+            LabelBrick(width: .Fixed(size: 100), backgroundColor: .brickGray1, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
+            LabelBrick(width: .Fill, backgroundColor: .brickGray3, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
+            LabelBrick(width: .Fill, backgroundColor: .brickGray5, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
+            LabelBrick(width: .Fixed(size: 100), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
             BrickSection(width: .Fill, backgroundColor: .brickGray4, bricks: [
-                LabelBrick(width: .Ratio(ratio: 0.25), backgroundColor: .brickGray1, text: "BRICK", configureCellBlock: configureCell),
-                LabelBrick(width: .Fill, backgroundColor: .brickGray3, text: "BRICK", configureCellBlock: configureCell),
+                LabelBrick(width: .Ratio(ratio: 1/3), backgroundColor: .brickGray1, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
+                LabelBrick(width: .Fill, backgroundColor: .brickGray3, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
                 ])
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10))
 

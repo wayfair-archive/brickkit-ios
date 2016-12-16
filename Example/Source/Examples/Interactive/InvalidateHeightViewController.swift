@@ -34,9 +34,7 @@ class InvalidateHeightViewController: BrickViewController {
 
         let section = BrickSection(bricks: [
             brick,
-            LabelBrick(BrickIdentifiers.repeatLabel, backgroundColor: .brickGray2, dataSource: LabelBrickCellModel(text: "BRICK", configureCellBlock: { cell in
-                cell.configure()
-                }))
+            LabelBrick(BrickIdentifiers.repeatLabel, backgroundColor: .brickGray2, dataSource: LabelBrickCellModel(text: "BRICK", configureCellBlock: LabelBrickCell.configure))
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
 
         self.setSection(section)
@@ -62,7 +60,7 @@ class InvalidateHeightViewController: BrickViewController {
         default: brick.height = .Fixed(size: 200)
         }
 
-        self.brickCollectionView.invalidateBricks()
+        self.brickCollectionView.invalidateBricks(false)
         self.updateNavigationItem()
     }
 

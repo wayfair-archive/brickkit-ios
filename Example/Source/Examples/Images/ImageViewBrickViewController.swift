@@ -27,11 +27,11 @@ class ImageViewBrickViewController: BrickViewController {
         registerBrickClass(LabelBrick.self)
 
         let section = BrickSection("RootSection", bricks: [
-            LabelBrick("L1", height: .Fixed(size: 38), backgroundColor: .brickGray1, text: "Fixed height with ScaleAspectFit", configureCellBlock: BaseBrickController.configureCell),
+            LabelBrick("L1", height: .Fixed(size: 38), backgroundColor: .brickGray1, text: "Fixed height with ScaleAspectFit", configureCellBlock: LabelBrickCell.configure),
             ImageBrick("I1", width: .Ratio(ratio: 1), height: .Fixed(size: 50), backgroundColor: .brickGray3, dataSource: ImageBrickModel(image: UIImage(named: "image0")!, contentMode: .ScaleAspectFit)),
-            LabelBrick("L1", height: .Fixed(size: 38), backgroundColor: .brickGray1, text: "Dynamic height", configureCellBlock: BaseBrickController.configureCell),
+            LabelBrick("L1", height: .Fixed(size: 38), backgroundColor: .brickGray1, text: "Dynamic height", configureCellBlock: LabelBrickCell.configure),
             ImageBrick("I1", width: .Ratio(ratio: 1), height: .Auto(estimate: .Fixed(size: 50)), backgroundColor: .brickGray3, dataSource: ImageBrickModel(image: UIImage(named: "image1")!, contentMode: .ScaleAspectFit)),
-            LabelBrick("L1", height: .Fixed(size: 38), backgroundColor: .brickGray1, text: "Fixed height with ScaleAspectFill", configureCellBlock: BaseBrickController.configureCell),
+            LabelBrick("L1", height: .Fixed(size: 38), backgroundColor: .brickGray1, text: "Fixed height with ScaleAspectFill", configureCellBlock: LabelBrickCell.configure),
             ImageBrick("I1", width: .Ratio(ratio: 1), height: .Fixed(size: 50), backgroundColor: .brickGray3, dataSource: ImageBrickModel(image: UIImage(named: "image2")!, contentMode: .ScaleAspectFill)),
             ], inset: 10)
 

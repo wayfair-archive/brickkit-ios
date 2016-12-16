@@ -189,6 +189,10 @@ class FixedBrickLayoutSectionDataSource: NSObject, BrickLayoutSectionDataSource 
         return false
     }
 
+    func aligment(in section: BrickLayoutSection) -> BrickAlignment {
+        return .Left
+    }
+
     var scrollDirection: UICollectionViewScrollDirection = .Vertical
 }
 
@@ -233,10 +237,6 @@ class FixedBrickLayoutDataSource: NSObject, BrickLayoutDataSource {
 
     func brickLayout(layout: BrickLayout, identifierForIndexPath indexPath: NSIndexPath) -> String {
         return ""
-    }
-
-    func brickLayout(layout: BrickLayout, isAlignRowHeightsForSection section: Int) -> Bool {
-        return false
     }
 }
 

@@ -54,6 +54,7 @@ class NavigationDataSource {
             FillBrickViewController.self,
             MultiSectionBrickViewController.self,
             MultiDimensionBrickViewController.self,
+            AlignmentBrickViewController.self
             ]),
         self.InteractiveExamples,
         NavigationItem(title: "Sticky", subTitle: "Examples of different sticky behaviors", viewControllers: [
@@ -114,7 +115,8 @@ class NavigationDataSource {
         ChangeNibBrickViewController.self,
         HideSectionsViewController.self,
         DynamicContentViewController.self,
-        InvalidateHeightViewController.self
+        InvalidateHeightViewController.self,
+        InteractiveAlignViewController.self,
         ])
     #else
     var InteractiveExamples = NavigationItem(title: "Interactive", subTitle: "Interactive Examples", viewControllers: [
@@ -125,7 +127,8 @@ class NavigationDataSource {
         ChangeNibBrickViewController.self,
         HideSectionsViewController.self,
         DynamicContentViewController.self,
-        InvalidateHeightViewController.self
+        InvalidateHeightViewController.self,
+        InteractiveAlignViewController.self
         ])
     #endif
 }

@@ -67,11 +67,6 @@ class NavigationMasterViewController: BrickViewController {
         // Setup hide behavior
         brickCollectionView.layout.hideBehaviorDataSource = self
 
-        #if os(iOS)
-            // Set the backbar button to empty string
-            navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
-        #endif
-
         // Register Bricks
         registerNib(LabelBrickNibs.Chevron, forBrickWithIdentifier: NavigationIdentifiers.navItemBrick)
         registerBrickClass(LabelBrick.self)
@@ -117,10 +112,11 @@ extension NavigationMasterViewController: BrickCellTapDelegate {
 
     func didTapBrickCell(brickCell: BrickCell) {
         let index = brickCell.index
-        self.dataSource.selectedItem = self.dataSource.item(for: index)
+        dataSource.selectedItem = self.dataSource.item(for: index)
+
         let navigationDetailViewController = NavigationDetailViewController()
         navigationDetailViewController.navItem = self.dataSource.selectedItem
-        self.navigationController?.pushViewController(navigationDetailViewController, animated: true)
+        navigationController?.pushViewController(navigationDetailViewController, animated: true)
     }
 
 }
@@ -196,6 +192,7 @@ extension NavigationMasterViewController: OffsetLayoutBehaviorDataSource {
 extension NavigationMasterViewController: HideBehaviorDataSource {
 
     func hideBehaviorDataSource(shouldHideItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+
         switch identifier {
         case NavigationIdentifiers.navItemBrick:
             if let selectedIndex = indexOfSelectedBrick {
@@ -205,6 +202,7 @@ extension NavigationMasterViewController: HideBehaviorDataSource {
             }
         default: return false
         }
+
     }
 
 }

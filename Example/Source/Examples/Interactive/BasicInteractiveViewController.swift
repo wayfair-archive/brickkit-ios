@@ -23,22 +23,6 @@ class BasicInteractiveViewController: BrickViewController, LabelBrickCellDataSou
         return "Shows how to add and remove bricks in an interactive way"
     }
 
-    var selectedSegmentIndex: Int = 0 {
-        didSet {
-            let appearBehavior: BrickAppearBehavior?
-            switch selectedSegmentIndex {
-            case 1: appearBehavior = BrickAppearTopBehavior()
-            case 2: appearBehavior = BrickAppearBottomBehavior()
-            default: appearBehavior = nil
-            }
-            self.layout.appearBehavior = appearBehavior
-        }
-    }
-
-    var titles: [String] {
-        return ["No animation", "From top", "From bottom"]
-    }
-
     var stepperModel = StepperBrickModel(count: 1)
     
     var titleModel = LabelBrickCellModel(text: "There are no values".uppercaseString) { cell in
@@ -115,14 +99,4 @@ extension BasicInteractiveViewController: StickyLayoutBehaviorDataSource {
     }
 }
 
-
-extension BasicInteractiveViewController: SegmentHeaderBrickDataSource {
-
-}
-
-extension BasicInteractiveViewController: SegmentHeaderBrickDelegate {
-    func segementHeaderBrickCell(cell: SegmentHeaderBrickCell, didSelectIndex index: Int) {
-        self.selectedSegmentIndex = index
-    }
-}
 

@@ -79,24 +79,26 @@ extension BrickFlowLayoutZIndexTests {
         layout.prepareLayout()
         collectionView.layoutSubviews()
 
+        let offset: Int = 15
+
         let expectedResult = [
             0 : [
-                0,
+                (0 - offset),
             ],
             1 : [
-                15, 9, 8, 2, 1
+                (15 - offset), (9 - offset), (8 - offset), (2 - offset), (1 - offset)
             ],
             2 : [
-                14, 10
+                (14 - offset), (10 - offset)
             ],
             3 : [
-                13, 12, 11
+                (13 - offset), (12 - offset), (11 - offset)
             ],
             4 : [
-                7, 3
+                (7 - offset), (3 - offset)
             ],
             5 : [
-                6, 5, 4
+                (6 - offset), (5 - offset), (4 - offset)
             ],
             ]
 
@@ -114,6 +116,7 @@ extension BrickFlowLayoutZIndexTests {
          ------B 4
          ------B 3
          */
+
         let section = BrickSection(bricks: [
             DummyBrick(width: .Ratio(ratio: 0.5)),
             BrickSection(bricks: [
@@ -126,18 +129,19 @@ extension BrickFlowLayoutZIndexTests {
         collectionView.setSection(section)
         collectionView.layoutSubviews()
 
+        let offset: Int = 5
         let expectedResult = [
             0 : [
-                0,
+                (0 - offset),
             ],
             1 : [
-                5, 1
+                (5 - offset), (1 - offset)
             ],
             2 : [
-                2
+                (2 - offset)
             ],
             3 : [
-                3, 4
+                (3 - offset), (4 - offset)
             ]
         ]
 
@@ -833,24 +837,25 @@ extension BrickFlowLayoutZIndexTests {
         layout.zIndexBehavior = .BottomUp
         collectionView.layoutSubviews()
 
+        let offset: Int = 15
         let expectedResult = [
             0 : [
-                0,
+                (0 - offset),
             ],
             1 : [
-                1, 2, 8, 9, 15
+                (1 - offset), (2 - offset), (8 - offset), (9 - offset), (15 - offset)
             ],
             2 : [
-                3, 4
+                (3 - offset), (4 - offset)
             ],
             3 : [
-                5, 6, 7
+                (5 - offset), (6 - offset), (7 - offset)
             ],
             4 : [
-                10, 11
+                (10 - offset), (11 - offset)
             ],
             5 : [
-                12, 13, 14
+                (12 - offset), (13 - offset), (14 - offset)
             ],
             ]
 
@@ -869,5 +874,38 @@ extension BrickFlowLayoutZIndexTests {
         collectionView.layoutSubviews()
 
         XCTAssertEqual(layout.maxZIndex, 15)
+    }
+
+    func testThatInvalidateRepeatCountWithBottomStickyRespectsZIndex() {
+        let repeatIndexPath = NSIndexPath(forItem: 15, inSection: 2)
+        let stickyIndexPath = NSIndexPath(forItem: 1, inSection: 1)
+
+        let section = BrickSection(bricks: [
+            BrickSection(bricks: [
+                DummyBrick("Brick", height: .Fixed(size: 20))
+                ]),
+            DummyBrick("Footer", height: .Fixed(size: 50))
+            ])
+        let repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick": 15])
+        section.repeatCountDataSource = repeatCountDataSource
+        let stickyDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [stickyIndexPath])
+        collectionView.layout.behaviors.insert(StickyFooterLayoutBehavior(dataSource: stickyDataSource))
+        collectionView.layout.zIndexBehavior = .BottomUp
+
+        collectionView.setupSectionAndLayout(section)
+
+        let expectation = expectationWithDescription("Invalidate Repeat Counts")
+
+        repeatCountDataSource.repeatCountHash = ["Brick": 16]
+        collectionView.invalidateRepeatCounts { (completed, insertedIndexPaths, deletedIndexPaths) in
+            expectation.fulfill()
+        }
+
+        waitForExpectationsWithTimeout(5, handler: nil)
+
+        let repeatIndex = collectionView.cellForItemAtIndexPath(repeatIndexPath)!.layer.zPosition
+        let stickyIndex = collectionView.cellForItemAtIndexPath(stickyIndexPath)!.layer.zPosition
+
+        XCTAssertEqual(repeatIndex + 1, stickyIndex)
     }
 }

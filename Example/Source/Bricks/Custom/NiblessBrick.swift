@@ -24,7 +24,7 @@ class NiblessBrick: Brick {
         self.text = text
         self.image = image
         self.configureCell = configureCell
-        super.init(identifier, width: width, height: height, backgroundColor:backgroundColor, backgroundView:backgroundView)
+        super.init(identifier, size: BrickSize(width: width, height: height), backgroundColor:backgroundColor, backgroundView:backgroundView)
     }
 
 }

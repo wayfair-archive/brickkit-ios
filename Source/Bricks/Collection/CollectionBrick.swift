@@ -148,10 +148,11 @@ public class CollectionBrickCell: BrickCell, Bricklike, AsynchronousResizableCel
         isCalculatingHeight = true
 
         brickCollectionView.frame = layoutAttributes.bounds
-        self.currentPage = dataSource.currentPageForCollectionBrickCell(self)
+
+        currentPage = dataSource.currentPageForCollectionBrickCell(self)
         brickCollectionView.layoutSubviews()
 
-        if brick.shouldCalculateFullHeight && brickCollectionView.frame.height > 0 {
+        if brick.shouldCalculateFullHeight {
             var y = brickCollectionView.frame.height
             while y < brickCollectionView.contentSize.height {
                 brickCollectionView.contentOffset.y += brickCollectionView.frame.height
@@ -187,13 +188,11 @@ public class CollectionBrickCell: BrickCell, Bricklike, AsynchronousResizableCel
         brick.dataSource?.registerBricks(for: self)
         
         brickCollectionView.collectionInfo = CollectionInfo(index: self.index, identifier: self.brick.identifier)
+        brickCollectionView.layout.scrollDirection = brick.scrollDirection
         
         if let section = brick.dataSource?.sectionForCollectionBrickCell(self) {
             brickCollectionView.setSection(section)
         }
-
-        brickCollectionView.layout.scrollDirection = brick.scrollDirection
-        brickCollectionView.layout.dataSource = brickCollectionView
     }
 }
 

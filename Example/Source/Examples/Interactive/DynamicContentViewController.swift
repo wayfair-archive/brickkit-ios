@@ -61,7 +61,7 @@ class DynamicContentViewController: BrickViewController {
     }
 
     func hideSectionNested() -> BrickSection {
-        let sectionLabelBrick = LabelBrick(backgroundColor: .brickGray3, dataSource: LabelBrickCellModel(text: "Section 0".uppercaseString, configureCellBlock: BaseBrickController.configureCell))
+        let sectionLabelBrick = LabelBrick(backgroundColor: .brickGray3, dataSource: LabelBrickCellModel(text: "Section 0".uppercaseString, configureCellBlock: LabelBrickCell.configure))
         let section = BrickSection(backgroundColor: .brickSection, bricks: [
             sectionLabelBrick
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 50, left: 20, bottom: 50, right: 20))
@@ -70,9 +70,9 @@ class DynamicContentViewController: BrickViewController {
     }
 
     func hideableSection() -> BrickSection {
-        let brick = LabelBrick(height: .Auto(estimate: .Fixed(size:30)), backgroundColor: .brickGray3, text: "Section 1 Label 0".uppercaseString, configureCellBlock: BaseBrickController.configureCell)
+        let brick = LabelBrick(height: .Auto(estimate: .Fixed(size:30)), backgroundColor: .brickGray3, text: "Section 1 Label 0".uppercaseString, configureCellBlock: LabelBrickCell.configure)
         let imageBrick = ImageBrick(DynamicContentViewController.Identifiers.HideableSectionContentImage, height: .Auto(estimate: .Fixed(size:100)), backgroundColor: .brickGray3, dataSource: self)
-        let brick0 = LabelBrick(height: .Auto(estimate: .Fixed(size:30)), backgroundColor: .brickGray3, text: "Section 1 Label 1".uppercaseString, configureCellBlock: BaseBrickController.configureCell)
+        let brick0 = LabelBrick(height: .Auto(estimate: .Fixed(size:30)), backgroundColor: .brickGray3, text: "Section 1 Label 1".uppercaseString, configureCellBlock: LabelBrickCell.configure)
 
         let section = BrickSection(backgroundColor: .brickSection, bricks: [
             brick0,
