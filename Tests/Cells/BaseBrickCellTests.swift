@@ -182,6 +182,44 @@ class BaseBrickCellTests: XCTestCase {
         XCTAssertNotNil(cell3?.contentView.viewWithTag(21))
         XCTAssertEqual(cell3?.contentView.subviews.first, backgroundView1)
     }
+    
+    func testBrickViewAppearance() {
+        brickView.registerBrickClass(LabelBrick.self)
+        
+        let testLabelBrick = LabelBrick("AppearanceTest", height: .Fixed(size: 100), text: "Appearance Test")
+        testLabelBrick.brickCellAppearanceDataSource = self
+        
+        brickView.setSection(BrickSection(bricks: [testLabelBrick]))
+        brickView.layoutSubviews()
+        
+        guard let cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? BrickCell else {
+            XCTAssert(false, "Cell Should Not be nil")
+            return
+        }
+        
+        cell.updateBrickCell(for: .Loading)
+
+        XCTAssertEqual(cell.contentView.subviews.last?.backgroundColor, .grayColor())
+        XCTAssertEqual(cell.contentView.subviews.last?.tag, 24)
+        
+        cell.updateBrickCell(for: .Loaded)
+        
+        guard let labelBrickCell = cell as? LabelBrickCell else {
+            XCTAssert(false, "Cell Should be of type LabelBrickCell")
+            return
+        }
+        
+        guard let labelView = cell.contentView.subviews.last as? UILabel, labelText = labelView.text else {
+            XCTAssert(false, "Visible view should be UILabel")
+            return
+        }
+        XCTAssertEqual(labelText, labelBrickCell.label.text)
+        
+        cell.updateBrickCell(for: .Error)
+        
+        XCTAssertEqual(cell.contentView.subviews.last?.backgroundColor, .redColor())
+        XCTAssertEqual(cell.contentView.subviews.last?.tag, 25)
+    }
 
     // Mark: - BrickCell
     func testEdgeInsets() {
@@ -204,4 +242,22 @@ class BaseBrickCellTests: XCTestCase {
     }
     
 
+}
+
+extension BaseBrickCellTests: BrickCellAppearanceDataSource {
+    func viewForLoadingAppearance(with identifier: String) -> UIView? {
+        let loadingView = UIView()
+        loadingView.backgroundColor = .grayColor()
+        loadingView.tag = 24
+        return loadingView
+    }
+    func viewForLoadedAppearance(with identifier: String) -> UIView? {
+        return nil
+    }
+    func viewForErrorAppearance(with identifier: String) -> UIView? {
+        let errorView = UIView()
+        errorView.backgroundColor = .redColor()
+        errorView.tag = 25
+        return errorView
+    }
 }

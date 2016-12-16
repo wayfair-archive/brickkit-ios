@@ -45,6 +45,9 @@ public class Brick: CustomStringConvertible {
     /// Background view used for the brick. Defaults to nil
     public var backgroundView: UIView?
     
+    /// Datasource used to handle which view to show for state. Defaults to nil
+    public var brickCellAppearanceDataSource: BrickCellAppearanceDataSource?
+    
     /// Delegate used to handle tap gestures for the brick. Defaults to nil
     public weak var brickCellTapDelegate: BrickCellTapDelegate?
 
