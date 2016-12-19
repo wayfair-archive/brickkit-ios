@@ -228,6 +228,8 @@
 		93F2CFEB1DDB91D400D5F881 /* BrickZIndexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F2CFE91DDB91D400D5F881 /* BrickZIndexer.swift */; };
 		93F9B4D21DAD686E00927BE6 /* BrickAppearBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9B4D11DAD686E00927BE6 /* BrickAppearBehavior.swift */; };
 		93F9B4D41DAD690400927BE6 /* BrickAppearBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9B4D31DAD690400927BE6 /* BrickAppearBehaviorTests.swift */; };
+		9DCBC0191E083A610043DFB5 /* TestBrickCellAppearanceDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBC0181E083A610043DFB5 /* TestBrickCellAppearanceDataSource.swift */; };
+		9DCBC01A1E0847DD0043DFB5 /* TestBrickCellAppearanceDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCBC0181E083A610043DFB5 /* TestBrickCellAppearanceDataSource.swift */; };
 		B8B8FFEB1DAD3F4A00A913E9 /* CoverFlowLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8FFEA1DAD3F4A00A913E9 /* CoverFlowLayoutBehaviorTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -380,6 +382,7 @@
 		93F2CFE91DDB91D400D5F881 /* BrickZIndexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickZIndexer.swift; sourceTree = "<group>"; };
 		93F9B4D11DAD686E00927BE6 /* BrickAppearBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickAppearBehavior.swift; sourceTree = "<group>"; };
 		93F9B4D31DAD690400927BE6 /* BrickAppearBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickAppearBehaviorTests.swift; sourceTree = "<group>"; };
+		9DCBC0181E083A610043DFB5 /* TestBrickCellAppearanceDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestBrickCellAppearanceDataSource.swift; sourceTree = "<group>"; };
 		B8B8FFEA1DAD3F4A00A913E9 /* CoverFlowLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverFlowLayoutBehaviorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -788,6 +791,7 @@
 				93D9EC311DA4057900D8C87A /* ImageDownloaderBrick.swift */,
 				93D9EC331DA4057900D8C87A /* ImageDownloaderCellTests.swift */,
 				930054041DA7D8A000239A13 /* BaseBrickCellTests.swift */,
+				9DCBC0181E083A610043DFB5 /* TestBrickCellAppearanceDataSource.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1121,6 +1125,7 @@
 				4E9A25671DABECFF00D7EA99 /* XCTests.swift in Sources */,
 				4E9A25601DABECFB00D7EA99 /* BrickSectionDataSourceTests.swift in Sources */,
 				4E9A25431DABECDF00D7EA99 /* SetZIndexBehaviorTests.swift in Sources */,
+				9DCBC01A1E0847DD0043DFB5 /* TestBrickCellAppearanceDataSource.swift in Sources */,
 				4E9A25421DABECDA00D7EA99 /* BrickKitTests.swift in Sources */,
 				4E9A25491DABECDF00D7EA99 /* OnScrollDownStickyLayoutBehaviorTests.swift in Sources */,
 				4E9A25441DABECDF00D7EA99 /* CardLayoutBehaviorTests.swift in Sources */,
@@ -1257,6 +1262,7 @@
 				93D9EC7A1DA4057900D8C87A /* BrickCollectionViewDataSourceTests.swift in Sources */,
 				9328EEA61DC19ACE007F2562 /* LazyLoadingTests.swift in Sources */,
 				930054051DA7D8A000239A13 /* BaseBrickCellTests.swift in Sources */,
+				9DCBC0191E083A610043DFB5 /* TestBrickCellAppearanceDataSource.swift in Sources */,
 				93D9EC611DA4057900D8C87A /* LabelBrickTests.swift in Sources */,
 				93D9EC7B1DA4057900D8C87A /* BrickDimensionTests.swift in Sources */,
 				93D9EC781DA4057900D8C87A /* BrickLayoutSectionTests.swift in Sources */,

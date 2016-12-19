@@ -25,7 +25,7 @@ public protocol BrickCellTapDelegate: UIGestureRecognizerDelegate {
 }
 
 
-public protocol BrickCellAppearanceDataSource {
+public protocol BrickCellAppearanceDataSource: class {
     func viewForLoadingAppearance(with identifier: String) -> UIView?
     // If brick view is originally from nib return nil for this method to return
     // back to the original nib view

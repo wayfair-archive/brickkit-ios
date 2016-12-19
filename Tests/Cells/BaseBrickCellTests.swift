@@ -187,7 +187,8 @@ class BaseBrickCellTests: XCTestCase {
         brickView.registerBrickClass(LabelBrick.self)
         
         let testLabelBrick = LabelBrick("AppearanceTest", height: .Fixed(size: 100), text: "Appearance Test")
-        testLabelBrick.brickCellAppearanceDataSource = self
+        let brickCellAppearanceDataSource = TestBrickCellAppearanceDataSource()
+        testLabelBrick.brickCellAppearanceDataSource = brickCellAppearanceDataSource
         
         brickView.setSection(BrickSection(bricks: [testLabelBrick]))
         brickView.layoutSubviews()
@@ -242,22 +243,4 @@ class BaseBrickCellTests: XCTestCase {
     }
     
 
-}
-
-extension BaseBrickCellTests: BrickCellAppearanceDataSource {
-    func viewForLoadingAppearance(with identifier: String) -> UIView? {
-        let loadingView = UIView()
-        loadingView.backgroundColor = .grayColor()
-        loadingView.tag = 24
-        return loadingView
-    }
-    func viewForLoadedAppearance(with identifier: String) -> UIView? {
-        return nil
-    }
-    func viewForErrorAppearance(with identifier: String) -> UIView? {
-        let errorView = UIView()
-        errorView.backgroundColor = .redColor()
-        errorView.tag = 25
-        return errorView
-    }
 }
