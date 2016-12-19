@@ -149,6 +149,7 @@ internal class BrickLayoutSection {
 
         if difference > 0 {
             self.numberOfItems = numberOfItems
+            updateAttributeIdentifiers()
             createOrUpdateCells(from: attributes.count, invalidate: false, updatedAttributes: addedAttributes)
         } else {
             self.numberOfItems = numberOfItems
@@ -159,7 +160,14 @@ internal class BrickLayoutSection {
                 
                 attributes.removeValueForKey(lastIndex)
             }
+            updateAttributeIdentifiers()
             createOrUpdateCells(from: attributes.count, invalidate: true, updatedAttributes: nil)
+        }
+    }
+
+    func updateAttributeIdentifiers() {
+        for (index, attribute) in attributes {
+            attribute.identifier = _dataSource.identifier(for: index, in: self)
         }
     }
 
@@ -636,6 +644,7 @@ internal class BrickLayoutSection {
             oldFrame = nil
             oldOriginalFrame = nil
         }
+        brickAttributes.identifier = dataSource.identifier(for: indexPath.item, in: self)
 
         let height: CGFloat
 
@@ -684,7 +693,6 @@ internal class BrickLayoutSection {
     func createAttribute(at indexPath: NSIndexPath, with dataSource: BrickLayoutSectionDataSource) -> BrickLayoutAttributes {
         let brickAttributes = BrickLayoutAttributes(forCellWithIndexPath: indexPath)
 
-        brickAttributes.identifier = dataSource.identifier(for: indexPath.item, in: self)
         attributes[indexPath.item] = brickAttributes
         brickAttributes.isEstimateSize = dataSource.isEstimate(for: brickAttributes, in: self)
         return brickAttributes

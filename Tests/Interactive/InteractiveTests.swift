@@ -594,5 +594,28 @@ class InteractiveTests: XCTestCase {
 
         waitForExpectationsWithTimeout(5, handler: nil)
     }
+
+    func testThatInvalidateRepeatCountsSetCorrectIdentifiers() {
+        let section = BrickSection(bricks: [
+            DummyBrick("Brick1", height: .Fixed(size: 50)),
+            DummyBrick("Brick2", height: .Fixed(size: 50))
+            ])
+        let repeatCount = FixedRepeatCountDataSource(repeatCountHash: ["Brick1": 1])
+        section.repeatCountDataSource = repeatCount
+        brickView.setupSectionAndLayout(section)
+
+        repeatCount.repeatCountHash = ["Brick1": 2]
+        let expecation = expectationWithDescription("Invalidate Repeat Counts")
+
+        brickView.invalidateRepeatCounts(reloadAllSections: false) { (completed, insertedIndexPaths, deletedIndexPaths) in
+            expecation.fulfill()
+        }
+
+
+        waitForExpectationsWithTimeout(5, handler: nil)
+
+        let attributes = brickView.layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1)) as? BrickLayoutAttributes
+        XCTAssertEqual(attributes?.identifier, "Brick1")
+    }
     
 }
