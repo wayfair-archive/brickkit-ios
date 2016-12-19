@@ -90,8 +90,13 @@ public class StickyLayoutBehavior: BrickLayoutBehavior {
             attributes.frame.origin.y = originY
         }
 
-        let stickingPercentage = (attributes.frame.origin.y - collectionView.contentOffset.y - collectionView.contentInset.top) / attributes.frame.height
-        self.delegate?.stickyLayoutBehavior(self, brickIsStickingWithPercentage: stickingPercentage, forItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout)
+        let stickingPercentage: CGFloat
+        if lastStickyFrame == .zero || lastStickyFrame.origin.y > collectionView.contentOffset.y {
+            stickingPercentage = (attributes.frame.origin.y - collectionView.contentOffset.y - collectionView.contentInset.top) / attributes.frame.height
+        } else {
+            stickingPercentage = (attributes.frame.origin.y - lastStickyFrame.maxY) / attributes.frame.height
+        }
+        self.delegate?.stickyLayoutBehavior(self, brickIsStickingWithPercentage: min(max(0, stickingPercentage), 1), forItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout)
 
         return attributes.frame
     }
