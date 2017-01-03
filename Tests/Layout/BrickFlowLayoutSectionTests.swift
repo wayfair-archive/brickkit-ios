@@ -361,12 +361,6 @@ class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
         attributes = layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 3))
         XCTAssertEqual(attributes.frame, CGRect(x: 0, y: 50, width: 480, height: 50))
 
-
-        let frames = collectionView.visibleCells().map({$0.frame})
-        for frame in frames {
-            print(frame)
-        }
-
     }
 
 }

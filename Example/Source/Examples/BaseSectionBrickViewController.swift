@@ -22,12 +22,12 @@ class BaseSectionBrickViewController: BrickApp.BaseBrickController {
 
         let section = BrickSection(bricks: [
             BrickSection(Group, bricks: [
-                LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray2, text: "SECTION 1", configureCellBlock: BaseBrickController.configureCell),
+                LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray2, text: "SECTION 1", configureCellBlock: LabelBrickCell.configure),
                 LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray1, dataSource: self),
                 ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)),
             BrickSection(Group, backgroundColor: .brickGray3, bricks: [
-                LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray2, text: "SECTION 2 BRICK 1", configureCellBlock: BaseBrickController.configureCell),
-                LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray4, text: "SECTION 2 BRICK 2", configureCellBlock: BaseBrickController.configureCell),
+                LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray2, text: "SECTION 2 BRICK 1", configureCellBlock: LabelBrickCell.configure),
+                LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray4, text: "SECTION 2 BRICK 2", configureCellBlock: LabelBrickCell.configure),
                 LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray1, dataSource: self),
                 ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
             ])

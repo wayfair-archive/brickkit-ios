@@ -18,7 +18,7 @@ class HugeRepeatBrickViewController: BrickViewController, LabelBrickCellDataSour
         return "Example how to repeat a huge amount of bricks"
     }
 
-    let numberOfLabels = 500000
+    let numberOfLabels = 1000000
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +47,7 @@ class HugeRepeatBrickViewController: BrickViewController, LabelBrickCellDataSour
     func configureLabelBrickCell(cell: LabelBrickCell) {
         var text = ""
 
-        for _ in 0...cell.index {
+        for _ in 0...min(cell.index, 5) {
             if !text.isEmpty {
                 text += " "
             }

@@ -86,6 +86,7 @@ public protocol BrickLayoutDataSource: class {
     func brickLayout(layout: BrickLayout, edgeInsetsForSection section: Int) -> UIEdgeInsets
     func brickLayout(layout: BrickLayout, insetForSection section: Int) -> CGFloat
     func brickLayout(layout: BrickLayout, isAlignRowHeightsForSection section: Int) -> Bool
+    func brickLayout(layout: BrickLayout, alignmentForSection section: Int) -> BrickAlignment
     func brickLayout(layout: BrickLayout, brickLayoutTypeForItemAtIndexPath indexPath: NSIndexPath) -> BrickLayoutType
     func brickLayout(layout: BrickLayout, identifierForIndexPath indexPath: NSIndexPath) -> String
     func brickLayout(layout: BrickLayout, indexPathForSection section: Int) -> NSIndexPath?
@@ -105,7 +106,11 @@ extension BrickLayoutDataSource {
     func brickLayout(layout: BrickLayout, isAlignRowHeightsForSection section: Int) -> Bool {
         return false
     }
-    
+
+    public func brickLayout(layout: BrickLayout, alignmentForSection section: Int) -> BrickAlignment {
+        return .Left
+    }
+
 }
 
 public protocol BrickLayoutDelegate: class {

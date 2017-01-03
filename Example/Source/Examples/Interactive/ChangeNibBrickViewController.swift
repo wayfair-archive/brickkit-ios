@@ -53,7 +53,7 @@ class ChangeNibBrickViewController: BrickViewController, LabelBrickCellDataSourc
 
         let section = BrickSection(bricks: [
             BrickSection(Buttons, backgroundColor: .whiteColor(), bricks: [
-                LabelBrick(ChangeButton, backgroundColor: .brickGray3, text: "Change".uppercaseString, configureCellBlock: BaseBrickController.configureCell),
+                LabelBrick(ChangeButton, backgroundColor: .brickGray3, text: "Change".uppercaseString, configureCellBlock: LabelBrickCell.configure),
                 ButtonBrick(Button2, width: .Ratio(ratio: 1/3), backgroundColor: .brickGray1, title: "Width".uppercaseString, configureButtonBlock: configureButton, onButtonTappedHandler:{_ in
                     self.changeWidth()
                 }),
@@ -99,9 +99,7 @@ class ChangeNibBrickViewController: BrickViewController, LabelBrickCellDataSourc
         repeatBrick.width = .Ratio(ratio: widthRatio)
 
         if reload {
-            UIView.performWithoutAnimation {
-                brickCollectionView.invalidateBricks()
-            }
+            brickCollectionView.invalidateBricks(false)
         }
     }
     

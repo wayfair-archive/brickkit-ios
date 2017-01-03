@@ -67,9 +67,14 @@ class InsertBrickViewController: BrickApp.BaseBrickController {
         updateRepeatCounts()
     }
 
-    func updateRepeatCounts() {
+    func removeBrick(indexPath: NSIndexPath) {
+        self.numberOfLabels -= 1
+        updateRepeatCounts([indexPath])
+    }
+
+    func updateRepeatCounts(fixedDeletedIndexPaths: [NSIndexPath]? = nil) {
         UIView.animateWithDuration(0.5, animations: {
-            self.brickCollectionView.invalidateRepeatCounts { (completed, insertedIndexPaths, deletedIndexPaths) in
+            self.brickCollectionView.invalidateRepeatCounts(reloadAllSections: false) { (completed, insertedIndexPaths, deletedIndexPaths) in
                 if let indexPath = insertedIndexPaths.first {
                     self.brickCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Bottom, animated: false)
                 }
@@ -87,10 +92,7 @@ class InsertBrickViewController: BrickApp.BaseBrickController {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let brickInfo = self.brickCollectionView.brickInfo(at: indexPath)
         if brickInfo.brick.identifier == BrickIdentifiers.repeatLabel {
-            if self.numberOfLabels >= 0 {
-                self.numberOfLabels -= 1
-                updateRepeatCounts()
-            }
+            removeBrick(indexPath)
         }
     }
 }

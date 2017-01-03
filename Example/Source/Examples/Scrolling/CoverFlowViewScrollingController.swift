@@ -12,6 +12,7 @@ class CoverFlowScrollingViewController: BrickViewController {
     override class var title: String {
         return "Cover Flow"
     }
+    
     override class var subTitle: String {
         return "Cover Flow layout behavior"
     }

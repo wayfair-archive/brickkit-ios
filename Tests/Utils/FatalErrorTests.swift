@@ -14,17 +14,9 @@ private struct FatalErrorHolder {
     static var assertionMessage: String?
 }
 
-@noreturn func testFatalError(message: String = "", file: StaticString = #file, line: UInt = #line) {
+func testFatalError(message: String = "", file: StaticString = #file, line: UInt = #line) {
     FatalErrorHolder.assertionMessage = message
     FatalErrorHolder.expectation?.fulfill()
-    unreachable()
-}
-
-// This is a `noreturn` function that pauses forever
-@noreturn func unreachable() {
-    repeat {
-        NSRunLoop.currentRunLoop().run()
-    } while (true)
 }
 
 extension XCTestCase {

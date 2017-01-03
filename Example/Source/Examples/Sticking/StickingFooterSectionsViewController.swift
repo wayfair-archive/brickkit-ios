@@ -36,21 +36,21 @@ class StickingFooterSectionsViewController: BrickApp.BaseBrickController {
         repeatLabel = LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio:0.5), backgroundColor:.lightGrayColor(), dataSource:self)
 
 
-        let section = BrickSection("Test", backgroundColor: .clearColor(), bricks: [
-            BrickSection("Section 1", backgroundColor: .whiteColor(), bricks: [
+        let section = BrickSection(bricks: [
+            BrickSection(bricks: [
                 repeatLabel,
-                BrickSection(StickySection, backgroundColor: .purpleColor(), bricks: [
-                    LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .orangeColor(), dataSource: LabelBrickCellModel(text: "Sticking Section 1")),
-                    LabelBrick(BrickIdentifiers.titleLabel, width: .Ratio(ratio: 0.5), backgroundColor: .blueColor(), dataSource: LabelBrickCellModel(text: "Brick 1-1")),
-                    LabelBrick(BrickIdentifiers.titleLabel, width: .Ratio(ratio: 0.5), backgroundColor:.redColor(), dataSource: LabelBrickCellModel(text: "Brick 2-1")),
+                BrickSection(StickySection, backgroundColor: .brickGray2, bricks: [
+                    LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray1, text: "Sticking Section 1", configureCellBlock: LabelBrickCell.configure),
+                    LabelBrick(BrickIdentifiers.titleLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray3, text: "Brick 1-1", configureCellBlock: LabelBrickCell.configure),
+                    LabelBrick(BrickIdentifiers.titleLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray5, text: "Brick 2-1", configureCellBlock: LabelBrickCell.configure),
                     ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)),
                 ]),
-            BrickSection("Section 2", backgroundColor: .whiteColor(), bricks: [
+            BrickSection(bricks: [
                 repeatLabel,
-                BrickSection(StickySection, backgroundColor: .purpleColor(), bricks: [
-                    LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .orangeColor(), dataSource: LabelBrickCellModel(text: "Sticking Section 2")),
-                    LabelBrick(BrickIdentifiers.titleLabel, width: .Ratio(ratio: 0.5), backgroundColor: .blueColor(), dataSource: LabelBrickCellModel(text: "Brick 1-2")),
-                    LabelBrick(BrickIdentifiers.titleLabel, width: .Ratio(ratio: 0.5), backgroundColor: .redColor(), dataSource: LabelBrickCellModel(text: "Brick 2-2")),
+                BrickSection(StickySection, backgroundColor: .brickGray2, bricks: [
+                    LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray1, text: "Sticking Section 2", configureCellBlock: LabelBrickCell.configure),
+                    LabelBrick(BrickIdentifiers.titleLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray3, text: "Brick 1-2", configureCellBlock: LabelBrickCell.configure),
+                    LabelBrick(BrickIdentifiers.titleLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray5, text: "Brick 2-2", configureCellBlock: LabelBrickCell.configure),
                     ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)),
                 ])
             ])
@@ -80,5 +80,6 @@ extension StickingFooterSectionsViewController: BrickRepeatCountDataSource {
 extension StickingFooterSectionsViewController: LabelBrickCellDataSource {
     func configureLabelBrickCell(cell: LabelBrickCell) {
         cell.label.text = "Label \(cell.index + 1)"
+        cell.configure()
     }
 }

@@ -86,7 +86,7 @@ class NavigationDetailViewController: BrickViewController {
         // Set the content offset back to top
         self.brickCollectionView.contentOffset = CGPoint(x: brickCollectionView.contentInset.left, y: -brickCollectionView.contentInset.top)
 
-        self.brickCollectionView.invalidateRepeatCounts(false) { (completed, insertedIndexPaths, deletedIndexPaths) in
+        self.brickCollectionView.invalidateRepeatCounts { (completed, insertedIndexPaths, deletedIndexPaths) in
             completion?(completed: completed)
         }
     }

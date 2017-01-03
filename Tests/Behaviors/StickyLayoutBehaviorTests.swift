@@ -266,8 +266,58 @@ class StickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         XCTAssertEqual(stickingDelegate.percentages[indexPath], 0)
     }
 
+    func testStickingDelegateBehaviorWithStackingBricks() {
+
+        let brickView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
+        let section = BrickSection(bricks: [
+            DummyBrick("Brick", height: .Fixed(size: 48))
+            ], inset: 48)
+
+        let repeatDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick": 20])
+        section.repeatCountDataSource = repeatDataSource
+
+        let indexPath1 = NSIndexPath(forItem: 1, inSection: 1)
+        let indexPath2 = NSIndexPath(forItem: 2, inSection: 1)
+        let stickingDelegate = FixedStickyLayoutBehaviorDelegate()
+        let behaviorDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [indexPath1, indexPath2])
+        let stickyBehavior = StickyLayoutBehavior(dataSource: behaviorDataSource, delegate: stickingDelegate)
+        brickView.layout.behaviors.insert(stickyBehavior)
+
+        brickView.setupSectionAndLayout(section)
+
+        brickView.contentOffset.y = 0
+        brickView.layout.invalidateLayoutWithContext(BrickLayoutInvalidationContext(type: .Scrolling))
+
+        XCTAssertEqual(stickingDelegate.percentages[indexPath1], 1)
+        XCTAssertEqual(stickingDelegate.percentages[indexPath2], 1)
+
+        brickView.contentOffset.y = 48 * 1.5
+        brickView.layout.invalidateLayoutWithContext(BrickLayoutInvalidationContext(type: .Scrolling))
+
+        XCTAssertEqual(stickingDelegate.percentages[indexPath1], 0.5)
+        XCTAssertEqual(stickingDelegate.percentages[indexPath2], 1)
+
+        brickView.contentOffset.y = 48 * 2
+        brickView.layout.invalidateLayoutWithContext(BrickLayoutInvalidationContext(type: .Scrolling))
+
+        XCTAssertEqual(stickingDelegate.percentages[indexPath1], 0)
+        XCTAssertEqual(stickingDelegate.percentages[indexPath2], 1)
+
+        brickView.contentOffset.y = 48 * 2.5
+        brickView.layout.invalidateLayoutWithContext(BrickLayoutInvalidationContext(type: .Scrolling))
+
+        XCTAssertEqual(stickingDelegate.percentages[indexPath1], 0)
+        XCTAssertEqual(stickingDelegate.percentages[indexPath2], 0.5)
+
+        brickView.contentOffset.y = 48 * 3
+        brickView.layout.invalidateLayoutWithContext(BrickLayoutInvalidationContext(type: .Scrolling))
+
+        XCTAssertEqual(stickingDelegate.percentages[indexPath1], 0)
+        XCTAssertEqual(stickingDelegate.percentages[indexPath2], 0)
+}
+
     func testStickySectionWithContentInset() {
-    let behaviorDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])
+        let behaviorDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0)])
         let stickyBehavior = StickyLayoutBehavior(dataSource: behaviorDataSource)
         self.layout.behaviors.insert(stickyBehavior)
 

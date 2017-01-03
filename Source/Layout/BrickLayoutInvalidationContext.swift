@@ -49,6 +49,12 @@ protocol BrickLayoutInvalidationProvider: class {
     func updateContentSize(contentSize: CGSize)
 }
 
+extension BrickLayoutInvalidationContext {
+    override var description: String {
+        return super.description + " type: \(type)"
+    }
+}
+
 class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext {
 
     let type: BrickLayoutInvalidationContextType

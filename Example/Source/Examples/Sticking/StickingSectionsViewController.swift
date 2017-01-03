@@ -36,24 +36,20 @@ class StickingSectionsViewController: BrickApp.BaseBrickController {
 
         repeatLabel = LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray1, dataSource: self)
 
-        let configureCell: (cell: LabelBrickCell) -> Void = { cell in
-            cell.configure()
-        }
-
         let section = BrickSection(backgroundColor: .clearColor(), bricks: [
             BrickSection(backgroundColor: .brickGray3, bricks: [
                 BrickSection(StickySection, backgroundColor: .brickGray5, bricks: [
-                    LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray2, text: "Sticking Section 1".uppercaseString, configureCellBlock: configureCell),
-                    LabelBrick(BrickIdentifiers.titleLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray4, text: "Brick 1-1".uppercaseString, configureCellBlock: configureCell),
-                    LabelBrick(BrickIdentifiers.titleLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray4, text: "Brick 2-1".uppercaseString, configureCellBlock: configureCell),
+                    LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray2, text: "Sticking Section 1".uppercaseString, configureCellBlock: LabelBrickCell.configure),
+                    LabelBrick(BrickIdentifiers.titleLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray4, text: "Brick 1-1".uppercaseString, configureCellBlock: LabelBrickCell.configure),
+                    LabelBrick(BrickIdentifiers.titleLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray4, text: "Brick 2-1".uppercaseString, configureCellBlock: LabelBrickCell.configure),
                     ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)),
                 repeatLabel,
                 ]),
             BrickSection(backgroundColor: .brickGray3, bricks: [
                 BrickSection(StickySection, backgroundColor: .brickGray5, bricks: [
-                    LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray2, text: "Sticking Section 2".uppercaseString, configureCellBlock: configureCell),
-                    LabelBrick(BrickIdentifiers.titleLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray4, text: "Brick 1-2".uppercaseString, configureCellBlock: configureCell),
-                    LabelBrick(BrickIdentifiers.titleLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray4, text: "Brick 2-2".uppercaseString, configureCellBlock: configureCell),
+                    LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray2, text: "Sticking Section 2".uppercaseString, configureCellBlock: LabelBrickCell.configure),
+                    LabelBrick(BrickIdentifiers.titleLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray4, text: "Brick 1-2".uppercaseString, configureCellBlock: LabelBrickCell.configure),
+                    LabelBrick(BrickIdentifiers.titleLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray4, text: "Brick 2-2".uppercaseString, configureCellBlock: LabelBrickCell.configure),
                     ]),
                 repeatLabel,
                 ]),

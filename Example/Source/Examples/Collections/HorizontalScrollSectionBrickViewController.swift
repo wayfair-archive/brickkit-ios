@@ -45,17 +45,12 @@ class HorizontalScrollSectionBrickViewController: BrickApp.BaseBrickController, 
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
         section3.repeatCountDataSource = self
 
-        let configureCell: ConfigureLabelBlock = { cell in
-            cell.label.textAlignment = .Center
-            cell.configure()
-        }
-
         let section = BrickSection(backgroundColor: .whiteColor(), bricks: [
-            LabelBrick(backgroundColor: .brickGray3, text: "1/4 Ratio", configureCellBlock: configureCell),
+            LabelBrick(backgroundColor: .brickGray3, text: "1/4 Ratio", configureCellBlock: LabelBrickCell.configure),
             CollectionBrick("Collection 1", backgroundColor: .brickGray1, scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section1), brickTypes:[ImageBrick.self]),
-            LabelBrick(backgroundColor: .brickGray3, text: "1/2 Ratio", configureCellBlock: configureCell),
+            LabelBrick(backgroundColor: .brickGray3, text: "1/2 Ratio", configureCellBlock: LabelBrickCell.configure),
             CollectionBrick("Collection 2", backgroundColor: .brickGray3, scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section2), brickTypes:[ImageBrick.self]),
-            LabelBrick(backgroundColor: .brickGray3, text: "100px Fixed", configureCellBlock: configureCell),
+            LabelBrick(backgroundColor: .brickGray3, text: "100px Fixed", configureCellBlock: LabelBrickCell.configure),
             CollectionBrick("Collection 3", backgroundColor: .brickGray5, scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section3), brickTypes:[ImageBrick.self]),
             ])
 

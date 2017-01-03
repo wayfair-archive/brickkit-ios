@@ -14,7 +14,7 @@ class ProfileHeaderBrick: Brick {
 
     init(_ identifier: String, width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 100)), backgroundColor: UIColor = .whiteColor(), backgroundView: UIView? = nil, model: ProfileHeaderModel) {
         self.model = model
-        super.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView)
+        super.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView)
     }
 }
 
