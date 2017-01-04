@@ -144,9 +144,10 @@ class ImageBrickTests: XCTestCase {
         let defaultImageDownloader = BrickCollectionView.imageDownloader
         let fixedImageDownloader = FixedNSURLSessionImageDownloader { (success) in
             expectation.fulfill()
-
         }
+        
         defer {
+            fixedImageDownloader.callback = nil
             BrickCollectionView.imageDownloader = defaultImageDownloader
         }
         BrickCollectionView.imageDownloader = fixedImageDownloader
@@ -154,7 +155,7 @@ class ImageBrickTests: XCTestCase {
         brickView.registerBrickClass(ImageBrick.self)
 
         let section = BrickSection(bricks: [
-            ImageBrick(dataSource: ImageURLBrickModel(url: imageURL, contentMode: .ScaleAspectFill)),
+            ImageBrick("imageBrick", dataSource: ImageURLBrickModel(url: imageURL, contentMode: .ScaleAspectFill)),
             ])
         brickView.setSection(section)
         brickView.layoutSubviews()
@@ -166,15 +167,69 @@ class ImageBrickTests: XCTestCase {
 
         waitForExpectationsWithTimeout(500, handler: nil)
         brickView.layoutIfNeeded()
-
+        brickView.invalidateBricks()
+        
         let ratio:CGFloat = 378 / 659
         XCTAssertEqualWithAccuracy(cell1!.frame.height, 320 * ratio, accuracy: 0.5)
         XCTAssertEqualWithAccuracy(cell1!.imageView.frame.height, 320 * ratio, accuracy: 0.5)
     }
+    
+    func testURLImageScaleResetSection() {
+        var downloadExpectation = expectationWithDescription("Wait for image to download for the first time")
+        let defaultImageDownloader = BrickCollectionView.imageDownloader
+        
+        var fixedImageDownloader = FixedNSURLSessionImageDownloader { (success) in
+            downloadExpectation.fulfill()
+        }
+        
+        defer {
+            BrickCollectionView.imageDownloader = defaultImageDownloader
+        }
+        
+        BrickCollectionView.imageDownloader = fixedImageDownloader
+        
+        let delegate = FixedDelegate()
+        brickView.layout.delegate = delegate
+        
+        brickView.registerBrickClass(ImageBrick.self)
+        
+        let section = BrickSection(bricks: [
+            ImageBrick("imageBrick", dataSource: ImageURLBrickModel(url: imageURL, contentMode: .ScaleAspectFill)),
+            ])
+        brickView.setSection(section)
+        brickView.layoutSubviews()
+        
+        let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? ImageBrickCell
+        cell1?.layoutIfNeeded()
+        XCTAssertEqual(cell1?.frame, CGRect(x: 0, y: 0, width: 320, height: 50))
+        XCTAssertEqual(cell1?.imageView.frame, CGRect(x: 0, y: 0, width: 320, height: 50))
+        
+        waitForExpectationsWithTimeout(10, handler: nil)
+        
+        fixedImageDownloader.callback = nil
+        
+        let invalidateExpectation = expectationWithDescription("Wait for layout to update")
+        
+        brickView.setSection(section)
+        brickView.layoutIfNeeded()
+        delegate.didUpdateHandler = {
+            invalidateExpectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(10, handler: nil)
+        
+        let cell2 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? ImageBrickCell
+        cell2?.layoutIfNeeded()
+        let ratio:CGFloat = 378 / 659
+        XCTAssertTrue(delegate.didUpdateCalled)
+        XCTAssertEqualWithAccuracy(cell2!.frame.height, 320 * ratio, accuracy: 0.5)
+        XCTAssertEqualWithAccuracy(cell2!.imageView.frame.height, 320 * ratio, accuracy: 0.5)
+        
+    }
 }
 
 class FixedNSURLSessionImageDownloader: NSURLSessionImageDownloader {
-    var callback: (success: Bool) -> Void
+    var callback: ((success: Bool) -> Void)?
     init(callback: (success: Bool) -> Void) {
         self.callback = callback
     }
@@ -182,9 +237,9 @@ class FixedNSURLSessionImageDownloader: NSURLSessionImageDownloader {
     override func downloadImage(with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage, url: NSURL) -> Void)) {
         super.downloadImage(with: imageURL) { (image, url) in
             completionHandler(image: image, url: url)
-            NSOperationQueue.mainQueue().addOperationWithBlock({
-                self.callback(success: false)
-                })
+            dispatch_async(dispatch_get_main_queue()) {
+                self.callback?(success: false)
+            }
         }
     }
 }

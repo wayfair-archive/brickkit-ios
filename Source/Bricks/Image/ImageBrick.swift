@@ -155,6 +155,9 @@ public class ImageBrickCell: BrickCell, Bricklike, AsynchronousResizableCell, Im
             imageLoaded = true
         } else if let imageURL = dataSource.imageURLForImageBrickCell(self) {
             guard currentImageURL != imageURL else {
+                if let image = self.imageView.image {
+                    set(image: image)
+                }
                 return
             }
             
@@ -166,13 +169,8 @@ public class ImageBrickCell: BrickCell, Bricklike, AsynchronousResizableCell, Im
                 }
                 
                 self.imageLoaded = true
-                
                 NSOperationQueue.mainQueue().addOperationWithBlock({
-                    if self.brick.size.height.isEstimate(in: self) {
-                        self.setRatioConstraint(for: image)
-                        self.sizeChangedHandler?(cell: self)
-                    }
-                    self.imageView.image = image
+                    self.set(image: image)
                 })
             })
         } else {
@@ -180,6 +178,14 @@ public class ImageBrickCell: BrickCell, Bricklike, AsynchronousResizableCell, Im
         }
     }
 
+
+    private func set(image image: UIImage) {
+        if self.brick.size.height.isEstimate(in: self) {
+            self.setRatioConstraint(for: image)
+            self.sizeChangedHandler?(cell: self)
+        }
+        self.imageView.image = image
+    }
 
     /// Set the ratio constraint based on a given image
     ///

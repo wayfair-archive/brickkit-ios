@@ -219,10 +219,12 @@ class BrickFlowLayoutTests: BrickFlowLayoutBaseTests {
 class FixedDelegate: BrickLayoutDelegate {
     var didUpdateCalled: Bool = false
     var updatedIndexPaths: Set<NSIndexPath> = []
-
+    var didUpdateHandler: ((Void) -> Void)? = nil
+    
     func brickLayout(layout: BrickLayout, didUpdateHeightForItemAtIndexPath indexPath: NSIndexPath) {
         didUpdateCalled = true
         updatedIndexPaths.insert(indexPath)
+        didUpdateHandler?()
     }
 
 }
