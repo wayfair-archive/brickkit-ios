@@ -24,6 +24,15 @@ public protocol BrickCellTapDelegate: UIGestureRecognizerDelegate {
     func didTapBrickCell(brickCell: BrickCell)
 }
 
+
+public protocol BrickCellAppearanceDataSource: class {
+    func viewForLoadingAppearance(with identifier: String) -> UIView?
+    // If brick view is originally from nib return nil for this method to return
+    // back to the original nib view
+    func viewForLoadedAppearance(with identifier: String) -> UIView?
+    func viewForErrorAppearance(with identifier: String) -> UIView?
+}
+
 public protocol Bricklike {
     associatedtype BrickType: Brick
     var brick: BrickType { get }
@@ -34,6 +43,13 @@ public protocol Bricklike {
 
 extension Bricklike where Self : BrickCell {
     public var brick: BrickType { return _brick as! BrickType }
+}
+
+
+public enum BrickCellAppearance {
+    case Loading
+    case Loaded
+    case Error
 }
 
 public class BaseBrickCell: UICollectionViewCell {
@@ -52,6 +68,24 @@ public class BaseBrickCell: UICollectionViewCell {
                 view.frame = self.bounds
                 view.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
                 self.contentView.insertSubview(view, atIndex: 0)
+            }
+        }
+    }
+    
+    var brickView: UIView? {
+        didSet {
+            // Remove the oldValue from the superview if it lays on top of the background view
+            if let brickBackgroundView = self.brickBackgroundView, oldValue = oldValue where oldValue.superview == brickBackgroundView {
+                oldValue.removeFromSuperview()
+            }
+            if oldValue?.superview == self.contentView {
+                //Make sure not to remove the oldValue from its current superview if it's not this contentview (reusability)
+                oldValue?.removeFromSuperview()
+            }
+            if let view = brickView {
+                view.frame = self.bounds
+                view.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+                self.contentView.addSubview(view)
             }
         }
     }
@@ -177,6 +211,17 @@ public class BrickCell: BaseBrickCell {
 
     func didTapCell() {
         _brick.brickCellTapDelegate?.didTapBrickCell(self)
+    }
+    
+    public func updateBrickCell(for appearance: BrickCellAppearance) {
+        switch appearance {
+        case .Loaded:
+            self.brickView = self._brick.brickCellAppearanceDataSource?.viewForLoadedAppearance(with: self._brick.identifier)
+        case .Loading:
+            self.brickView = self._brick.brickCellAppearanceDataSource?.viewForLoadingAppearance(with: self._brick.identifier)
+        default:
+            self.brickView = self._brick.brickCellAppearanceDataSource?.viewForErrorAppearance(with: self._brick.identifier)
+        }
     }
 
     public override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
