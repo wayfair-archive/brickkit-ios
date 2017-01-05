@@ -24,6 +24,12 @@ public protocol BrickCellTapDelegate: UIGestureRecognizerDelegate {
     func didTapBrickCell(brickCell: BrickCell)
 }
 
+public protocol PlaceholderContentSource: class {
+    var placeholderViewTag: Int { get }
+    func placeholderViewFrame(forBrickCell brickCell: BrickCell) -> CGRect
+    func placeholderView(forBrickCell brickCell: BrickCell) -> UIView?
+}
+
 public protocol Bricklike {
     associatedtype BrickType: Brick
     var brick: BrickType { get }
@@ -173,6 +179,25 @@ public class BrickCell: BaseBrickCell {
 
     internal func reloadContent() {
         updateContent()
+        overrideContent()
+    }
+
+    internal func overrideContent() {
+        guard let contentSource = self._brick.placeholderContentSource else {
+            return
+        }
+
+        // try to remove old view to prevent stacking of views from repeated calls to reloadContent
+        if let viewToRemove = self.viewWithTag(contentSource.placeholderViewTag) {
+            viewToRemove.removeFromSuperview()
+        }
+
+        // append a view if the source has one
+        if let view = contentSource.placeholderView(forBrickCell: self) {
+            view.tag = contentSource.placeholderViewTag
+            view.frame = contentSource.placeholderViewFrame(forBrickCell: self)
+            self.contentView.addSubview(view)
+        }
     }
 
     func didTapCell() {

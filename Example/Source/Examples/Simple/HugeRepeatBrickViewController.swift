@@ -27,9 +27,13 @@ class HugeRepeatBrickViewController: BrickViewController, LabelBrickCellDataSour
 
         self.view.backgroundColor = .brickBackground
 
-        let section = BrickSection(bricks: [
-            LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 1/2), height: .Auto(estimate: .Fixed(size: 50)), backgroundColor: .brickGray1, dataSource: self),
-            ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
+        let brick = LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 1/2),
+                               height: .Auto(estimate: .Fixed(size: 50)), backgroundColor: .brickGray1,
+                               dataSource: self)
+
+        brick.placeholderContentSource = self
+
+        let section = BrickSection(bricks: [brick], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
 
         section.repeatCountDataSource = self
 
@@ -55,5 +59,22 @@ class HugeRepeatBrickViewController: BrickViewController, LabelBrickCellDataSour
         }
         cell.label.text = text
         cell.configure()
+    }
+}
+
+extension HugeRepeatBrickViewController: PlaceholderContentSource {
+    var placeholderViewTag: Int {
+        return 1
+    }
+
+    func placeholderViewFrame(forBrickCell brickCell: BrickCell) -> CGRect {
+        return CGRect(x: 0, y: 0, width: brickCell.bounds.width, height: brickCell.bounds.height)
+    }
+
+    func placeholderView(forBrickCell brickCell: BrickCell) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .redColor()
+
+        return brickCell.index % 2 == 1 ? view : nil // override content if odd
     }
 }

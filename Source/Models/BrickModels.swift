@@ -47,6 +47,9 @@ public class Brick: CustomStringConvertible {
     
     /// Delegate used to handle tap gestures for the brick. Defaults to nil
     public weak var brickCellTapDelegate: BrickCellTapDelegate?
+    
+    /// Used to serve up content that can be shown after update content is shown. Defaults to nil
+    public weak var placeholderContentSource: PlaceholderContentSource?
 
     /// Initialize a Brick
     ///

@@ -264,6 +264,63 @@ class LabelBrickTests: XCTestCase {
         XCTAssertTrue(delegate.buttonTouched)
     }
 
+    func testPlaceholderContentSourceNoView() {
+        brickCollectionView.registerNib(LabelBrickNibs.Button, forBrickWithIdentifier: LabelBrickIdentifier)
+
+        let contentSource = MockPlaceholderContentSource()
+        let labelBrick = LabelBrick(text: "Hello World")
+        labelBrick.placeholderContentSource = contentSource
+        let _ = setupSection(labelBrick)
+
+        XCTAssertFalse(contentSource.didCallPlaceHolderViewFrame)
+        XCTAssertTrue(contentSource.didCallPlaceholderViewTag)
+        XCTAssertTrue(contentSource.didCallPlaceHolderView)
+    }
+
+    func testPlaceholderContentSourceWithView() {
+        brickCollectionView.registerNib(LabelBrickNibs.Button, forBrickWithIdentifier: LabelBrickIdentifier)
+
+        let contentSource = MockPlaceholderContentSource()
+        contentSource.shouldReturnView = true
+        let labelBrick = LabelBrick(text: "Hello World")
+        labelBrick.placeholderContentSource = contentSource
+        let labelBrickCell = setupSection(labelBrick)
+
+        XCTAssertTrue(contentSource.didCallPlaceHolderViewFrame)
+        XCTAssertTrue(contentSource.didCallPlaceholderViewTag)
+        XCTAssertTrue(contentSource.didCallPlaceHolderView)
+
+
+        guard let cell = labelBrickCell else {
+            XCTFail("a cell should have been returned")
+            return
+        }
+
+        XCTAssertEqual(cell.contentView.subviews.count, 2)
+        XCTAssertEqual(cell.contentView.subviews[1].tag, contentSource.placeholderViewTag)
+        XCTAssertEqual(cell.contentView.subviews[1].frame, contentSource.frame)
+    }
+
+    func testPlaceholderContentSourceWithViewMultipleCalls() {
+        brickCollectionView.registerNib(LabelBrickNibs.Button, forBrickWithIdentifier: LabelBrickIdentifier)
+
+        let contentSource = MockPlaceholderContentSource()
+        contentSource.shouldReturnView = true
+
+        let labelBrick = LabelBrick(text: "Hello World")
+        labelBrick.placeholderContentSource = contentSource
+
+        let cell = setupSection(labelBrick)
+        let callCount = 10
+
+        for _ in 0..<callCount {
+            brickCollectionView.reloadBricksWithIdentifiers([LabelBrickIdentifier])
+        }
+        
+        XCTAssertEqual(cell?.contentView.subviews.count, 2)
+    }
+
+
 }
 
 class FixedLabelDataSource: LabelBrickCellDataSource {
@@ -276,5 +333,28 @@ class FixedLabelDelegate: LabelBrickCellDelegate {
     func buttonTouchedForLabelBrickCell(cell: LabelBrickCell) {
         buttonTouched = true
     }
-    
+}
+
+class MockPlaceholderContentSource: PlaceholderContentSource {
+    var shouldReturnView = false
+    var frame = CGRectZero
+
+    var didCallPlaceholderViewTag = false
+    var didCallPlaceHolderViewFrame = false
+    var didCallPlaceHolderView = false
+
+    var placeholderViewTag: Int {
+        didCallPlaceholderViewTag = true
+        return 1
+    }
+
+    func placeholderViewFrame(forBrickCell brickCell: BrickCell) -> CGRect {
+        didCallPlaceHolderViewFrame = true
+        return frame
+    }
+
+    func placeholderView(forBrickCell brickCell: BrickCell) -> UIView? {
+        didCallPlaceHolderView = true
+        return shouldReturnView ? UIView() : nil
+    }
 }
