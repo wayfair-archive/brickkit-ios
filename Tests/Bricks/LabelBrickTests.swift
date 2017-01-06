@@ -296,11 +296,11 @@ class MockOverrideContentSource: OverrideContentSource {
     var didCallOverrideContent = false
     var didCallResetContent = false
 
-    func overrideContent(forBrickCell brickCell: BrickCell) {
+    func overrideContent(for brickCell: BrickCell) {
         didCallOverrideContent = true
     }
 
-    func resetContent(forBrickCell brickCell: BrickCell) {
+    func resetContent(for brickCell: BrickCell) {
         didCallResetContent = true
     }
 }
