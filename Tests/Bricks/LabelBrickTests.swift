@@ -264,9 +264,22 @@ class LabelBrickTests: XCTestCase {
         XCTAssertTrue(delegate.buttonTouched)
     }
 
+    func testOverrideContentSource() {
+        brickCollectionView.registerNib(LabelBrickNibs.Button, forBrickWithIdentifier: LabelBrickIdentifier)
+
+        let overrideSource = MockOverrideContentSource()
+        let labelBrick = LabelBrick(text: "Hello World")
+        labelBrick.overrideContentSource = overrideSource
+        let _ = setupSection(labelBrick)
+
+        XCTAssertTrue(overrideSource.didCallResetContent)
+        XCTAssertTrue(overrideSource.didCallOverrideContent)
+    }
 }
 
 class FixedLabelDataSource: LabelBrickCellDataSource {
+    var didCallOverrideContent = false
+
     func configureLabelBrickCell(cell: LabelBrickCell) {
     }
 }
@@ -277,4 +290,17 @@ class FixedLabelDelegate: LabelBrickCellDelegate {
         buttonTouched = true
     }
     
+}
+
+class MockOverrideContentSource: OverrideContentSource {
+    var didCallOverrideContent = false
+    var didCallResetContent = false
+
+    func overrideContent(forBrickCell brickCell: BrickCell) {
+        didCallOverrideContent = true
+    }
+
+    func resetContent(forBrickCell brickCell: BrickCell) {
+        didCallResetContent = true
+    }
 }

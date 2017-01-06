@@ -30,8 +30,10 @@ class DynamicContentViewController: BrickViewController {
     var hidden: Bool = false
     var reload: Bool = false
 
-    var imageURLs: [NSURL] = []
-
+    var imageURLs: [NSURL]?
+    let placeholderCount = 5
+    let overrideContentSource = ActivityIndicatorOverrideSource()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,14 +52,16 @@ class DynamicContentViewController: BrickViewController {
         self.setSection(section)
 
         NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(DynamicContentViewController.timerFired), userInfo: nil, repeats: false)
+        self.overrideContentSource.shouldOverride = true
     }
 
     func timerFired() {
+        self.overrideContentSource.shouldOverride = false
+        imageURLs = []
         for _ in 1...5 {
-            self.imageURLs.append(NSURL(string:"https://secure.img2.wfrcdn.com/lf/8/hash/2664/10628031/1/custom_image.jpg")!)
+            self.imageURLs?.append(NSURL(string:"https://secure.img2.wfrcdn.com/lf/8/hash/2664/10628031/1/custom_image.jpg")!)
         }
-
-        self.brickCollectionView.invalidateRepeatCounts()
+        self.brickCollectionView.invalidateBricks()
     }
 
     func hideSectionNested() -> BrickSection {
@@ -72,6 +76,7 @@ class DynamicContentViewController: BrickViewController {
     func hideableSection() -> BrickSection {
         let brick = LabelBrick(height: .Auto(estimate: .Fixed(size:30)), backgroundColor: .brickGray3, text: "Section 1 Label 0".uppercaseString, configureCellBlock: LabelBrickCell.configure)
         let imageBrick = ImageBrick(DynamicContentViewController.Identifiers.HideableSectionContentImage, height: .Auto(estimate: .Fixed(size:100)), backgroundColor: .brickGray3, dataSource: self)
+        imageBrick.overrideContentSource = self.overrideContentSource
         let brick0 = LabelBrick(height: .Auto(estimate: .Fixed(size:30)), backgroundColor: .brickGray3, text: "Section 1 Label 1".uppercaseString, configureCellBlock: LabelBrickCell.configure)
 
         let section = BrickSection(backgroundColor: .brickSection, bricks: [
@@ -99,6 +104,9 @@ extension DynamicContentViewController: BrickRepeatCountDataSource {
     func repeatCount(for identifier: String, with collectionIndex: Int, collectionIdentifier: String) -> Int {
         switch identifier {
         case DynamicContentViewController.Identifiers.HideableSectionContentImage:
+            guard let imageURLs = imageURLs else {
+                return placeholderCount
+            }
             return imageURLs.count
         default:
             return 1
@@ -109,7 +117,7 @@ extension DynamicContentViewController: BrickRepeatCountDataSource {
 extension DynamicContentViewController: ImageBrickDataSource {
 
     func imageURLForImageBrickCell(imageBrickCell: ImageBrickCell) -> NSURL? {
-        return imageURLs[imageBrickCell.index]
+        return imageURLs?[imageBrickCell.index]
     }
 
     func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIViewContentMode {

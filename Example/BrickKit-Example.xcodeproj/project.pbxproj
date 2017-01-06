@@ -191,6 +191,7 @@
 		93EAFE321DB57D6B0036331C /* NavigationMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EAFE2A1DB57D680036331C /* NavigationMasterViewController.swift */; };
 		93EAFE331DB57D6B0036331C /* NavigationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EAFE2B1DB57D680036331C /* NavigationTransition.swift */; };
 		93EAFE341DB57D6B0036331C /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EAFE2C1DB57D680036331C /* NavigationViewController.swift */; };
+		FCD401B61E203D080011173A /* ActivityIndicatorOverrideSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD401B51E203D080011173A /* ActivityIndicatorOverrideSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -373,6 +374,7 @@
 		93EAFE2A1DB57D680036331C /* NavigationMasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationMasterViewController.swift; sourceTree = "<group>"; };
 		93EAFE2B1DB57D680036331C /* NavigationTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationTransition.swift; sourceTree = "<group>"; };
 		93EAFE2C1DB57D680036331C /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+		FCD401B51E203D080011173A /* ActivityIndicatorOverrideSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorOverrideSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -581,6 +583,7 @@
 				4E3BD7911DB1316400541900 /* InsertBrickViewController.swift */,
 				4E3BD7921DB1316400541900 /* InvalidateHeightViewController.swift */,
 				93D7E8681DFB52830031A6C2 /* InteractiveAlignViewController.swift */,
+				FCD401B51E203D080011173A /* ActivityIndicatorOverrideSource.swift */,
 			);
 			path = Interactive;
 			sourceTree = "<group>";
@@ -980,6 +983,7 @@
 				4E3BD8461DB1316400541900 /* MultiSectionBrickViewController.swift in Sources */,
 				4E3BD8081DB1316400541900 /* SimpleCollectionBrickViewController.swift in Sources */,
 				4E3BD8501DB1316400541900 /* SimpleRepeatHeightRatioViewController.swift in Sources */,
+				FCD401B61E203D080011173A /* ActivityIndicatorOverrideSource.swift in Sources */,
 				4E3BD8401DB1316400541900 /* CardScrollingViewController.swift in Sources */,
 				4E15F92A1DBA570600BBD363 /* MockFlickrViewController.swift in Sources */,
 				4E3BD8121DB1316400541900 /* BlockHorizontalViewController.swift in Sources */,

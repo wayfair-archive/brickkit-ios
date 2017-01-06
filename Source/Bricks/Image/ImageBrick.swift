@@ -148,7 +148,7 @@ public class ImageBrickCell: BrickCell, Bricklike, AsynchronousResizableCell, Im
         imageView.contentMode = dataSource.contentModeForImageBrickCell(self)
 
         if let image = dataSource.imageForImageBrickCell(self) {
-            imageView.image = image
+            set(image: image)
             if self.brick.size.height.isEstimate(in: self) {
                 setRatioConstraint(for: image)
             }
