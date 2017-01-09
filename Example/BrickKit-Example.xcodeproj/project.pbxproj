@@ -192,6 +192,7 @@
 		93EAFE331DB57D6B0036331C /* NavigationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EAFE2B1DB57D680036331C /* NavigationTransition.swift */; };
 		93EAFE341DB57D6B0036331C /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EAFE2C1DB57D680036331C /* NavigationViewController.swift */; };
 		FCD401B61E203D080011173A /* ActivityIndicatorOverrideSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD401B51E203D080011173A /* ActivityIndicatorOverrideSource.swift */; };
+		FCD401B91E23D2600011173A /* ActivityIndicatorOverrideSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD401B51E203D080011173A /* ActivityIndicatorOverrideSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1076,6 +1077,7 @@
 				4E15F9291DBA570600BBD363 /* ImageRequests.swift in Sources */,
 				4E3BD8071DB1316400541900 /* RepeatCollectionBrickViewController.swift in Sources */,
 				93186B091DDE8A580095C849 /* HugeRepeatCollectionViewController.swift in Sources */,
+				FCD401B91E23D2600011173A /* ActivityIndicatorOverrideSource.swift in Sources */,
 				93EAFE331DB57D6B0036331C /* NavigationTransition.swift in Sources */,
 				9327D0441DB94AB300D65BCB /* NiblessBrick.swift in Sources */,
 				93EAFE321DB57D6B0036331C /* NavigationMasterViewController.swift in Sources */,

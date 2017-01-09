@@ -29,15 +29,6 @@ public protocol OverrideContentSource: class {
     func resetContent(for brickCell: BrickCell)
 }
 
-extension OverrideContentSource {
-    public func overrideContent(for brickCell: BrickCell) {
-        // Optional
-    }
-    func resetContent(for brickCell: BrickCell) {
-        // Optional
-    }
-}
-
 public protocol Bricklike {
     associatedtype BrickType: Brick
     var brick: BrickType { get }
