@@ -278,8 +278,6 @@ class LabelBrickTests: XCTestCase {
 }
 
 class FixedLabelDataSource: LabelBrickCellDataSource {
-    var didCallOverrideContent = false
-
     func configureLabelBrickCell(cell: LabelBrickCell) {
     }
 }
