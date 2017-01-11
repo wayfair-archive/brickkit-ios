@@ -61,7 +61,7 @@ class DynamicContentViewController: BrickViewController {
         for _ in 1...5 {
             self.imageURLs?.append(NSURL(string:"https://secure.img2.wfrcdn.com/lf/8/hash/2664/10628031/1/custom_image.jpg")!)
         }
-        self.brickCollectionView.invalidateBricks()
+        self.brickCollectionView.reloadBricksWithIdentifiers([DynamicContentViewController.Identifiers.HideableSectionContentImage])
     }
 
     func hideSectionNested() -> BrickSection {
