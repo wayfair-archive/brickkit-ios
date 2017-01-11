@@ -20,11 +20,11 @@ class NiblessBrick: Brick {
         return NiblessBrickCell.self
     }
 
-    init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, text: String, image: UIImage, configureCell: ConfigureNiblessCellBlock) {
+    init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, accessibilityIdentifier: String? = nil, text: String, image: UIImage, configureCell: ConfigureNiblessCellBlock) {
         self.text = text
         self.image = image
         self.configureCell = configureCell
-        super.init(identifier, width: width, height: height, backgroundColor:backgroundColor, backgroundView:backgroundView)
+        super.init(identifier, width: width, height: height, backgroundColor:backgroundColor, backgroundView:backgroundView, accessibilityIdentifier: accessibilityIdentifier)
     }
 
 }

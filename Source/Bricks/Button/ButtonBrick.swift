@@ -60,15 +60,15 @@ public class ButtonBrick: Brick {
     private var dataSourceModel: ButtonBrickCellModel?
     private var delegateModel: ButtonBrickCellModel?
 
-    convenience public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, title: String, configureButtonBlock: ConfigureButtonBlock? = nil, onButtonTappedHandler: ButtonTappedBlock? = nil) {
+    convenience public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, accessibilityIdentifier: String? = nil, title: String, configureButtonBlock: ConfigureButtonBlock? = nil, onButtonTappedHandler: ButtonTappedBlock? = nil) {
         let model = ButtonBrickCellModel(title: title, configureButtonBlock: configureButtonBlock, onButtonTappedHandler: onButtonTappedHandler)
-        self.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView, dataSource: model, delegate: model)
+        self.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView, accessibilityIdentifier: accessibilityIdentifier, dataSource: model, delegate: model)
     }
 
-    public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: ButtonBrickCellDataSource, delegate: ButtonBrickCellDelegate? = nil) {
+    public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, accessibilityIdentifier: String? = nil, dataSource: ButtonBrickCellDataSource, delegate: ButtonBrickCellDelegate? = nil) {
         self.dataSource = dataSource
         self.delegate = delegate
-        super.init(identifier, width: width, height: height, backgroundColor:backgroundColor, backgroundView:backgroundView)
+        super.init(identifier, width: width, height: height, backgroundColor:backgroundColor, backgroundView:backgroundView, accessibilityIdentifier: accessibilityIdentifier)
         
         if let delegateModel = delegate as? ButtonBrickCellModel {
             self.delegateModel = delegateModel

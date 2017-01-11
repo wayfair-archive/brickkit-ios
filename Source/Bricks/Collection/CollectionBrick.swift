@@ -21,13 +21,13 @@ public class CollectionBrick: Brick {
     
     private var model: CollectionBrickCellModel?
     
-    public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, scrollDirection: UICollectionViewScrollDirection = .Vertical, dataSource: CollectionBrickCellDataSource, brickTypes: [Brick.Type] = []) {
+    public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, accessibilityIdentifier: String? = nil, scrollDirection: UICollectionViewScrollDirection = .Vertical, dataSource: CollectionBrickCellDataSource, brickTypes: [Brick.Type] = []) {
         self.dataSource = dataSource
         self.scrollDirection = scrollDirection
         
         self.brickTypes = brickTypes
         
-        super.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView)
+        super.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView, accessibilityIdentifier: accessibilityIdentifier)
         
         if dataSource is CollectionBrickCellModel {
             self.model = dataSource as? CollectionBrickCellModel

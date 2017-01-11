@@ -63,15 +63,15 @@ public class LabelBrick: Brick {
     private var dataSourceModel: LabelBrickCellModel?
     private var delegateModel: LabelBrickCellModel?
     
-    convenience public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, text: String, configureCellBlock: ConfigureLabelBlock? = nil) {
+    convenience public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, accessibilityIdentifier: String? = nil, text: String, configureCellBlock: ConfigureLabelBlock? = nil) {
         let model = LabelBrickCellModel(text: text, configureCellBlock: configureCellBlock)
-        self.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView, dataSource: model)
+        self.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView, accessibilityIdentifier: accessibilityIdentifier, dataSource: model)
     }
 
-    public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, dataSource: LabelBrickCellDataSource, delegate: LabelBrickCellDelegate? = nil) {
+    public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, accessibilityIdentifier: String? = nil, dataSource: LabelBrickCellDataSource, delegate: LabelBrickCellDelegate? = nil) {
         self.dataSource = dataSource
         self.delegate = delegate
-        super.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView)
+        super.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView, accessibilityIdentifier: accessibilityIdentifier)
         
         if let delegateModel = delegate as? LabelBrickCellModel {
             self.delegateModel = delegateModel

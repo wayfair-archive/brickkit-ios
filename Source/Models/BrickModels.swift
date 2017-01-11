@@ -17,6 +17,15 @@ public class Brick: CustomStringConvertible {
     /// Identifier of the brick. Defaults to empty string
     public let identifier: String
 
+    /// Passes string to BrickCell's accessibilityIdentifier for UIAccessibility.  Defaults to the brick identifier
+    public var accessibilityIdentifier: String
+
+    /// Passes string to BrickCell's accessibilityLabel for UIAccessibility.  Defaults to nil
+    public var accessibilityLabel: String?
+
+    /// Passes string to BrickCell's accessibilityHint for UIAccessibility.  Defaults to nil
+    public var accessibilityHint: String?
+
     /// Width dimension used to calculate the width. Defaults to .Ratio(ratio: 1)
     public var width: BrickDimension
 
@@ -39,14 +48,15 @@ public class Brick: CustomStringConvertible {
     /// - parameter height:          Height dimension used to calculate the height. Defaults to .Auto(estimate: .Fixed(size: 50))
     /// - parameter backgroundColor: Background color used for the brick. Defaults to .clearColor()
     /// - parameter backgroundView:  Background view used for the brick. Defaults to nil
-    ///
+    /// - parameter accessibilityIdentifier: identifier that is passed to the brickcell to set the accessibilityIdentifier for UIAccessibility.  Defaults to nil
     /// - returns: brick
-    public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil) {
+    public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, accessibilityIdentifier: String? = nil) {
         self.identifier = identifier
         self.width = width
         self.height = height
         self.backgroundColor = backgroundColor
         self.backgroundView = backgroundView
+        self.accessibilityIdentifier = accessibilityIdentifier ?? identifier
     }
 
     // Mark: - Internal
