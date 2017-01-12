@@ -24,6 +24,11 @@ public protocol BrickCellTapDelegate: UIGestureRecognizerDelegate {
     func didTapBrickCell(brickCell: BrickCell)
 }
 
+public protocol OverrideContentSource: class {
+    func overrideContent(for brickCell: BrickCell)
+    func resetContent(for brickCell: BrickCell)
+}
+
 public protocol Bricklike {
     associatedtype BrickType: Brick
     var brick: BrickType { get }
@@ -172,7 +177,9 @@ public class BrickCell: BaseBrickCell {
     }
 
     internal func reloadContent() {
+        self._brick.overrideContentSource?.resetContent(for: self)
         updateContent()
+        self._brick.overrideContentSource?.overrideContent(for: self)
     }
 
     func didTapCell() {
