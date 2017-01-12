@@ -202,6 +202,42 @@ class BaseBrickCellTests: XCTestCase {
         brickView.setSection(section)
         brickView.layoutSubviews()
     }
-    
 
+    func testDefaultAccessibilityIdentifierSetFromBrickIdentifier() {
+        brickView.registerBrickClass(DummyBrick.self)
+        let dummyBrick = DummyBrick("BrickIdentifierThatIsDefaultAccessibilityIdentifier")
+        let section = BrickSection(bricks: [dummyBrick])
+        brickView.setSection(section)
+        brickView.layoutSubviews()
+        let dummyCell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickCell
+        XCTAssertEqual(dummyBrick.identifier, "BrickIdentifierThatIsDefaultAccessibilityIdentifier")
+        XCTAssertNil(dummyCell?.accessibilityHint)
+        XCTAssertNil(dummyCell?.accessibilityLabel)
+    }
+
+    func testSetAccessibilityIdentifier() {
+        brickView.registerBrickClass(DummyBrick.self)
+        let dummyBrick = DummyBrick("BrickIdentifierThatIsDefaultAccessibilityIdentifier")
+        dummyBrick.accessibilityIdentifier = "AccessibilityIdentifierForDummyBrickCell"
+        let section = BrickSection(bricks: [dummyBrick])
+        brickView.setSection(section)
+        brickView.layoutSubviews()
+        let dummyCell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickCell
+        XCTAssertEqual(dummyCell?.accessibilityIdentifier, "AccessibilityIdentifierForDummyBrickCell")
+        XCTAssertNil(dummyCell?.accessibilityHint)
+        XCTAssertNil(dummyCell?.accessibilityLabel)
+    }
+
+    func testSetAccessibilityHintAndLabel() {
+        brickView.registerBrickClass(DummyBrick.self)
+        let dummyBrick = DummyBrick("BrickIdentifierThatIsDefaultAccessibilityIdentifier")
+        dummyBrick.accessibilityHint = "Accessibility Hint"
+        dummyBrick.accessibilityLabel = "Accessibility Label"
+        let section = BrickSection(bricks: [dummyBrick])
+        brickView.setSection(section)
+        brickView.layoutSubviews()
+        let dummyCell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickCell
+        XCTAssertEqual(dummyCell?.accessibilityHint, "Accessibility Hint")
+        XCTAssertEqual(dummyCell?.accessibilityLabel, "Accessibility Label")
+    }
 }

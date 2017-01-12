@@ -110,7 +110,13 @@ extension BaseBrickCell {
 
 public class BrickCell: BaseBrickCell {
 
-    private var _brick: Brick!
+    private var _brick: Brick! {
+        didSet {
+            self.accessibilityIdentifier = _brick.accessibilityIdentifier
+            self.accessibilityLabel = _brick.accessibilityLabel
+            self.accessibilityHint = _brick.accessibilityHint
+        }
+    }
     public var tapGesture: UITapGestureRecognizer?
     public private(set) var index: Int = 0
     public private(set) var collectionIndex: Int = 0
