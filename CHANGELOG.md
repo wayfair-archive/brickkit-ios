@@ -1,5 +1,19 @@
 # Change Log
 
+## [0.9.7](https://github.com/wayfair/brickkit-ios/tree/0.9.7) (2017-01-12)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/0.9.6...0.9.7)
+
+**Closed issues:**
+
+- Have BrickCells display different views based on appearance state [\#46](https://github.com/wayfair/brickkit-ios/issues/46)
+- Add support for UIAccessibility [\#59](https://github.com/wayfair/brickkit-ios/issues/59)
+
+**Merged pull requests:**
+
+- Add UIAccessibility properties to Brick class to pass along to BrickC… [\#61](https://github.com/wayfair/brickkit-ios/pull/61) ([joleary1987](https://github.com/joleary1987))
+- Provide a way to override brick cell content after the updateContent [\#58](https://github.com/wayfair/brickkit-ios/pull/58) ([wfsttam](https://github.com/wfsttam))
+- Fixed Image brick when the readding it to the section [\#54](https://github.com/wayfair/brickkit-ios/pull/54) ([jay18001](https://github.com/jay18001))
+
 ## [0.9.6](https://github.com/wayfair/brickkit-ios/tree/0.9.6) (2016-12-19)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/0.9.5...0.9.6)
 
