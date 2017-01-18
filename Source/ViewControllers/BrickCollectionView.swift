@@ -123,17 +123,23 @@ extension BrickCollectionView {
     /// If there is no class, the nib (`nibName`) will be used to register
     ///
     /// - parameter brickClass: The brick class to register
-    public func registerBrickClass(brickClass: Brick.Type) {
+    /// - parameter nib: The nib to register. This only needs to be set if the nib is different then the default
+    public func registerBrickClass(brickClass: Brick.Type, nib: UINib? = nil) {
         let nibName = brickClass.nibName
         let cellIdentifier: String
 
         if let cellClass = brickClass.cellClass {
             cellIdentifier = nibName
             self.registerClass(cellClass, forCellWithReuseIdentifier: cellIdentifier)
-        } else if let _ = brickClass.bundle.pathForResource(nibName, ofType: "nib") {
-            let nib = UINib(nibName: nibName, bundle: brickClass.bundle)
-            cellIdentifier = String(nib.hashValue)
-            self.registerNib(nib, forCellWithReuseIdentifier: cellIdentifier)
+        } else if nib != nil || brickClass.bundle.pathForResource(nibName, ofType: "nib") != nil {
+            let brickNib: UINib
+            if let defaultNib = nib {
+                brickNib = defaultNib
+            } else {
+                brickNib = UINib(nibName: nibName, bundle: brickClass.bundle)
+            }
+            cellIdentifier = String(brickNib.hashValue)
+            self.registerNib(brickNib, forCellWithReuseIdentifier: cellIdentifier)
         } else {
             fatalError("Nib or cell class not found")
         }

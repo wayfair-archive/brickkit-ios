@@ -87,8 +87,8 @@ extension BrickViewController {
         brickCollectionView.setSection(section)
     }
 
-    public func registerBrickClass(brickClass: Brick.Type) {
-        brickCollectionView.registerBrickClass(brickClass)
+    public func registerBrickClass(brickClass: Brick.Type, nib: UINib? = nil) {
+        brickCollectionView.registerBrickClass(brickClass, nib: nib)
     }
 
     public func registerNib(nib: UINib, forBrickWithIdentifier identifier: String) {
