@@ -59,7 +59,21 @@ class BrickCollectionViewTests: XCTestCase {
         let cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickCell
         XCTAssertNotNil(cell)
     }
-
+    
+    
+    func testRegisterBrickWithDefaultNib() {
+        brickView.registerBrickClass(LabelBrick.self, nib: LabelBrickNibs.Button)
+        
+        brickView.setSection(BrickSection(bricks: [
+            LabelBrick(text: "TEST")
+        ]))
+        
+        brickView.layoutSubviews()
+        
+        let cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? LabelBrickCell
+        XCTAssertNotNil(cell)
+        XCTAssertNotNil(cell?.button)
+    }
 
     func testRegisterBrickWithClass() {
         brickView.registerBrickClass(DummyBrickWithoutNib.self)
