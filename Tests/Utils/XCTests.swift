@@ -124,12 +124,20 @@ extension XCTest {
 
 extension BrickCollectionView {
 
+    func setupSingleBrickAndLayout(brick: Brick) {
+        setupSectionAndLayout(BrickSection(bricks: [brick]))
+    }
+
     func setupSectionAndLayout(section: BrickSection) {
         self.registerBrickClass(CollectionBrick.self)
         self.registerBrickClass(DummyBrick.self)
         self.registerBrickClass(LabelBrick.self)
         self.registerBrickClass(ButtonBrick.self)
         self.registerBrickClass(ImageBrick.self)
+
+        self.registerBrickClass(GenericBrick<UILabel>.self)
+        self.registerBrickClass(GenericBrick<UIButton>.self)
+        self.registerBrickClass(GenericBrick<UIImageView>.self)
 
         self.setSection(section)
         self.layoutSubviews()

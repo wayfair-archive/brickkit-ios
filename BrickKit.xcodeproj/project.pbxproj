@@ -137,6 +137,10 @@
 		932365731DF4FE1F00BE5183 /* BrickAlignmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932365711DF4FE1F00BE5183 /* BrickAlignmentTests.swift */; };
 		9328EEA61DC19ACE007F2562 /* LazyLoadingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328EEA51DC19ACE007F2562 /* LazyLoadingTests.swift */; };
 		9328EEA71DC19ACE007F2562 /* LazyLoadingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328EEA51DC19ACE007F2562 /* LazyLoadingTests.swift */; };
+		9333538A1E368903003CEC85 /* GenericBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933353891E368903003CEC85 /* GenericBrick.swift */; };
+		9333538B1E368903003CEC85 /* GenericBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933353891E368903003CEC85 /* GenericBrick.swift */; };
+		9333538E1E36A37F003CEC85 /* GenericBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9333538D1E36A37F003CEC85 /* GenericBrickTests.swift */; };
+		9333538F1E36A37F003CEC85 /* GenericBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9333538D1E36A37F003CEC85 /* GenericBrickTests.swift */; };
 		933FF95E1DC1207900E0B80E /* Swizzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933FF95D1DC1207900E0B80E /* Swizzle.swift */; };
 		933FF95F1DC1207900E0B80E /* Swizzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933FF95D1DC1207900E0B80E /* Swizzle.swift */; };
 		9350F0D61DA82A430051235F /* CollectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9350F0D51DA82A430051235F /* CollectionInfo.swift */; };
@@ -293,6 +297,8 @@
 		9323656E1DF4FD4900BE5183 /* BrickAlignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickAlignment.swift; sourceTree = "<group>"; };
 		932365711DF4FE1F00BE5183 /* BrickAlignmentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickAlignmentTests.swift; sourceTree = "<group>"; };
 		9328EEA51DC19ACE007F2562 /* LazyLoadingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyLoadingTests.swift; sourceTree = "<group>"; };
+		933353891E368903003CEC85 /* GenericBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenericBrick.swift; path = Generic/GenericBrick.swift; sourceTree = "<group>"; };
+		9333538D1E36A37F003CEC85 /* GenericBrickTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericBrickTests.swift; sourceTree = "<group>"; };
 		933FF95D1DC1207900E0B80E /* Swizzle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swizzle.swift; sourceTree = "<group>"; };
 		9350F0D51DA82A430051235F /* CollectionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionInfo.swift; sourceTree = "<group>"; };
 		935D48D51DB806990091AA39 /* CustomBrickCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBrickCollectionView.swift; sourceTree = "<group>"; };
@@ -571,6 +577,14 @@
 			path = tvOS;
 			sourceTree = "<group>";
 		};
+		9333538C1E368908003CEC85 /* Generic */ = {
+			isa = PBXGroup;
+			children = (
+				933353891E368903003CEC85 /* GenericBrick.swift */,
+			);
+			name = Generic;
+			sourceTree = "<group>";
+		};
 		93739B951DA4548F00DD4B81 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -671,6 +685,7 @@
 		93D9EBBF1DA4057000D8C87A /* Bricks */ = {
 			isa = PBXGroup;
 			children = (
+				9333538C1E368908003CEC85 /* Generic */,
 				93739BB31DA454AB00DD4B81 /* Button */,
 				93739BAD1DA454AB00DD4B81 /* Collection */,
 				93739BB11DA454AB00DD4B81 /* Image */,
@@ -779,6 +794,7 @@
 				93D9EC271DA4057900D8C87A /* LabelBrickTests.swift */,
 				93902D3A1DA4728C00BC3BA1 /* ImageBrickTests.swift */,
 				9303A6D41DA6E00100502803 /* ButtonBrickTests.swift */,
+				9333538D1E36A37F003CEC85 /* GenericBrickTests.swift */,
 			);
 			path = Bricks;
 			sourceTree = "<group>";
@@ -1106,6 +1122,7 @@
 				4E9A25371DABEB8D00D7EA99 /* BrickModels.swift in Sources */,
 				4E9A25321DABEB8800D7EA99 /* BrickLayoutInvalidationContext.swift in Sources */,
 				4E9A251E1DABEB6000D7EA99 /* CoverFlowLayoutBehavior.swift in Sources */,
+				9333538B1E368903003CEC85 /* GenericBrick.swift in Sources */,
 				4E9A252B1DABEB6F00D7EA99 /* ImageBrick.swift in Sources */,
 				4E9A253A1DABEB8D00D7EA99 /* CollectionInfo.swift in Sources */,
 				4E9A252E1DABEB8200D7EA99 /* BrickSectionCell.swift in Sources */,
@@ -1156,6 +1173,7 @@
 				4E9A25571DABECF500D7EA99 /* BrickFlowLayoutSectionTests.swift in Sources */,
 				4E9A255F1DABECFB00D7EA99 /* BrickModelsTests.swift in Sources */,
 				4E9A255A1DABECF500D7EA99 /* BrickInvalidationContextTests.swift in Sources */,
+				9333538F1E36A37F003CEC85 /* GenericBrickTests.swift in Sources */,
 				4E9A25E61DAC2AF400D7EA99 /* BaseBrickCellTests.swift in Sources */,
 				4E9A25641DABECFF00D7EA99 /* CollectionViewDataSource.swift in Sources */,
 				4E9A254E1DABECE300D7EA99 /* CollectionBrickTests.swift in Sources */,
@@ -1213,6 +1231,7 @@
 				93D9EBF41DA4057000D8C87A /* StickyFooterLayoutBehavior.swift in Sources */,
 				93D9EBF11DA4057000D8C87A /* SetZIndexLayoutBehavior.swift in Sources */,
 				93D9EC0D1DA4057000D8C87A /* BrickCollectionViewDataSource.swift in Sources */,
+				9333538A1E368903003CEC85 /* GenericBrick.swift in Sources */,
 				93D9EC081DA4057000D8C87A /* BrickFlowLayout.swift in Sources */,
 				93D9EC0B1DA4057000D8C87A /* BrickLayoutSection.swift in Sources */,
 				93D9EBEA1DA4057000D8C87A /* CoverFlowLayoutBehavior.swift in Sources */,
@@ -1237,6 +1256,7 @@
 				93D9EC721DA4057900D8C87A /* BrickFlowLayoutBaseTests.swift in Sources */,
 				9372C5081DA4073D007D7EA1 /* FatalErrorTests.swift in Sources */,
 				93D9EC621DA4057900D8C87A /* AsynchronousResizableBrick.swift in Sources */,
+				9333538E1E36A37F003CEC85 /* GenericBrickTests.swift in Sources */,
 				93D9EC591DA4057900D8C87A /* MinimumStickyLayoutBehaviorTests.swift in Sources */,
 				93D9EC7F1DA4057900D8C87A /* BrickExtensionsTests.swift in Sources */,
 				93D9EC651DA4057900D8C87A /* DummyBrick.swift in Sources */,
