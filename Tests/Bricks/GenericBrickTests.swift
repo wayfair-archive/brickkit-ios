@@ -30,7 +30,7 @@ class GenericBrickTests: XCTestCase {
     }
 
     func testGenericBrickWithLabel() {
-        brickCollectionView.setupSingleBrickAndLayout(GenericBrick<UILabel>(GenericLabelBrickIdentifier, size: BrickSize(width: .Ratio(ratio: 1), height: .Fixed(size: 50))) { label, view in
+        brickCollectionView.setupSingleBrickAndLayout(GenericBrick<UILabel>(GenericLabelBrickIdentifier, width: .Ratio(ratio: 1), height: .Fixed(size: 50)) { label, view in
             })
 
         let cell: GenericBrickCell? = firstCellForIdentifier(GenericLabelBrickIdentifier)

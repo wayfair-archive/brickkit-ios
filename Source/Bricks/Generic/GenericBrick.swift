@@ -17,6 +17,10 @@ public class GenericBrick<T: UIView>: Brick, ViewGenerator {
 
     public var configureView: ConfigureView
 
+    public convenience init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, configureView: ConfigureView) {
+        self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView, configureView: configureView)
+    }
+
     public init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, configureView: ConfigureView) {
         self.configureView = configureView
         super.init(identifier, size: size, backgroundColor: backgroundColor, backgroundView: backgroundView)
