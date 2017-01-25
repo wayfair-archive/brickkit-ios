@@ -78,11 +78,7 @@ public class BrickViewController: UIViewController, UICollectionViewDelegate {
         }
     }
 
-}
-
 // MARK: - Convenience methods
-extension BrickViewController {
-
     public func setSection(section: BrickSection) {
         brickCollectionView.setSection(section)
     }

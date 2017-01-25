@@ -103,6 +103,12 @@ public class Brick: CustomStringConvertible {
         return NSStringFromClass(self).componentsSeparatedByString(".").last!
     }
 
+    // The internal identifier to use for this brick
+    // This is used when storing the registered brick
+    public class var internalIdentifier: String {
+        return NSStringFromClass(self)
+    }
+
     /// Class variable: If not nil, this class will be used to load this brick's cell
     public class var cellClass: UICollectionViewCell.Type? {
         return nil
