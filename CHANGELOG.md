@@ -1,12 +1,25 @@
 # Change Log
 
+## [1.0.0](https://github.com/wayfair/brickkit-ios/tree/1.0.0) (2017-01-26)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/0.9.7...1.0.0)
+
+**Closed issues:**
+
+- Add support for UIAccessibility [\#59](https://github.com/wayfair/brickkit-ios/issues/59)
+- Generic Brick [\#64](https://github.com/wayfair/brickkit-ios/issues/64)
+- Move public functions in extensions into its respective class declaration [\#56](https://github.com/wayfair/brickkit-ios/issues/56)
+
+**Merged pull requests:**
+
+- GenericBrick [\#65](https://github.com/wayfair/brickkit-ios/pull/65) ([rubencagnie](https://github.com/rubencagnie))
+- Added changing the default nib [\#62](https://github.com/wayfair/brickkit-ios/pull/62) ([jay18001](https://github.com/jay18001))
+
 ## [0.9.7](https://github.com/wayfair/brickkit-ios/tree/0.9.7) (2017-01-12)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/0.9.6...0.9.7)
 
 **Closed issues:**
 
 - Have BrickCells display different views based on appearance state [\#46](https://github.com/wayfair/brickkit-ios/issues/46)
-- Add support for UIAccessibility [\#59](https://github.com/wayfair/brickkit-ios/issues/59)
 
 **Merged pull requests:**
 
