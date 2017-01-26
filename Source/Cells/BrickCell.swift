@@ -110,7 +110,7 @@ extension BaseBrickCell {
 
 public class BrickCell: BaseBrickCell {
 
-    private var _brick: Brick! {
+    internal var _brick: Brick! {
         didSet {
             self.accessibilityIdentifier = _brick.accessibilityIdentifier
             self.accessibilityLabel = _brick.accessibilityLabel
