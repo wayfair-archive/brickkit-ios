@@ -91,20 +91,14 @@
 		4E9A256B1DABED0600D7EA99 /* TestBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC531DA4057900D8C87A /* TestBrickViewController.swift */; };
 		4E9A256C1DABED0600D7EA99 /* TestBrickViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93D9EC541DA4057900D8C87A /* TestBrickViewController.xib */; };
 		4E9A257E1DAC0EAB00D7EA99 /* BrickKit.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25701DAC0EAB00D7EA99 /* BrickKit.xcassets */; };
-		4E9A257F1DAC0EAB00D7EA99 /* ButtonBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25731DAC0EAB00D7EA99 /* ButtonBrick.xib */; };
 		4E9A25801DAC0EAB00D7EA99 /* ButtonBrickWithChevron.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25741DAC0EAB00D7EA99 /* ButtonBrickWithChevron.xib */; };
 		4E9A25811DAC0EAB00D7EA99 /* CollectionBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25761DAC0EAB00D7EA99 /* CollectionBrick.xib */; };
-		4E9A25821DAC0EAB00D7EA99 /* ImageBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25781DAC0EAB00D7EA99 /* ImageBrick.xib */; };
-		4E9A25831DAC0EAB00D7EA99 /* LabelBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A257A1DAC0EAB00D7EA99 /* LabelBrick.xib */; };
 		4E9A25841DAC0EAB00D7EA99 /* LabelBrickButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A257B1DAC0EAB00D7EA99 /* LabelBrickButton.xib */; };
 		4E9A25851DAC0EAB00D7EA99 /* LabelBrickChevron.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A257C1DAC0EAB00D7EA99 /* LabelBrickChevron.xib */; };
 		4E9A25861DAC0EAB00D7EA99 /* LabelBrickImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A257D1DAC0EAB00D7EA99 /* LabelBrickImage.xib */; };
 		4E9A25AC1DAC216A00D7EA99 /* BrickKit.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A259E1DAC216A00D7EA99 /* BrickKit.xcassets */; };
-		4E9A25B61DAC21C200D7EA99 /* ButtonBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25B51DAC21C200D7EA99 /* ButtonBrick.xib */; };
 		4E9A25B81DAC222D00D7EA99 /* ButtonBrickWithChevron.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25B71DAC222D00D7EA99 /* ButtonBrickWithChevron.xib */; };
 		4E9A25BA1DAC22E300D7EA99 /* CollectionBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25B91DAC22E300D7EA99 /* CollectionBrick.xib */; };
-		4E9A25BC1DAC252200D7EA99 /* ImageBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25BB1DAC252200D7EA99 /* ImageBrick.xib */; };
-		4E9A25BE1DAC26F000D7EA99 /* LabelBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25BD1DAC26F000D7EA99 /* LabelBrick.xib */; };
 		4E9A25C01DAC27CE00D7EA99 /* LabelBrickButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25BF1DAC27CE00D7EA99 /* LabelBrickButton.xib */; };
 		4E9A25C21DAC28D000D7EA99 /* LabelBrickChevron.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25C11DAC28D000D7EA99 /* LabelBrickChevron.xib */; };
 		4E9A25C41DAC298300D7EA99 /* LabelBrickImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25C31DAC298300D7EA99 /* LabelBrickImage.xib */; };
@@ -262,20 +256,14 @@
 		4E9A25031DABEB3400D7EA99 /* BrickKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BrickKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E9A250B1DABEB3400D7EA99 /* BrickKit-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BrickKit-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E9A25701DAC0EAB00D7EA99 /* BrickKit.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = BrickKit.xcassets; sourceTree = "<group>"; };
-		4E9A25731DAC0EAB00D7EA99 /* ButtonBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonBrick.xib; sourceTree = "<group>"; };
 		4E9A25741DAC0EAB00D7EA99 /* ButtonBrickWithChevron.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonBrickWithChevron.xib; sourceTree = "<group>"; };
 		4E9A25761DAC0EAB00D7EA99 /* CollectionBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionBrick.xib; sourceTree = "<group>"; };
-		4E9A25781DAC0EAB00D7EA99 /* ImageBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageBrick.xib; sourceTree = "<group>"; };
-		4E9A257A1DAC0EAB00D7EA99 /* LabelBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBrick.xib; sourceTree = "<group>"; };
 		4E9A257B1DAC0EAB00D7EA99 /* LabelBrickButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBrickButton.xib; sourceTree = "<group>"; };
 		4E9A257C1DAC0EAB00D7EA99 /* LabelBrickChevron.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBrickChevron.xib; sourceTree = "<group>"; };
 		4E9A257D1DAC0EAB00D7EA99 /* LabelBrickImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBrickImage.xib; sourceTree = "<group>"; };
 		4E9A259E1DAC216A00D7EA99 /* BrickKit.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = BrickKit.xcassets; sourceTree = "<group>"; };
-		4E9A25B51DAC21C200D7EA99 /* ButtonBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonBrick.xib; sourceTree = "<group>"; };
 		4E9A25B71DAC222D00D7EA99 /* ButtonBrickWithChevron.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonBrickWithChevron.xib; sourceTree = "<group>"; };
 		4E9A25B91DAC22E300D7EA99 /* CollectionBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionBrick.xib; sourceTree = "<group>"; };
-		4E9A25BB1DAC252200D7EA99 /* ImageBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageBrick.xib; sourceTree = "<group>"; };
-		4E9A25BD1DAC26F000D7EA99 /* LabelBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBrick.xib; sourceTree = "<group>"; };
 		4E9A25BF1DAC27CE00D7EA99 /* LabelBrickButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBrickButton.xib; sourceTree = "<group>"; };
 		4E9A25C11DAC28D000D7EA99 /* LabelBrickChevron.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBrickChevron.xib; sourceTree = "<group>"; };
 		4E9A25C31DAC298300D7EA99 /* LabelBrickImage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBrickImage.xib; sourceTree = "<group>"; };
@@ -443,7 +431,6 @@
 			children = (
 				4E9A25721DAC0EAB00D7EA99 /* Button */,
 				4E9A25751DAC0EAB00D7EA99 /* Collection */,
-				4E9A25771DAC0EAB00D7EA99 /* Image */,
 				4E9A25791DAC0EAB00D7EA99 /* Label */,
 			);
 			path = Bricks;
@@ -452,7 +439,6 @@
 		4E9A25721DAC0EAB00D7EA99 /* Button */ = {
 			isa = PBXGroup;
 			children = (
-				4E9A25731DAC0EAB00D7EA99 /* ButtonBrick.xib */,
 				4E9A25741DAC0EAB00D7EA99 /* ButtonBrickWithChevron.xib */,
 			);
 			path = Button;
@@ -466,18 +452,9 @@
 			path = Collection;
 			sourceTree = "<group>";
 		};
-		4E9A25771DAC0EAB00D7EA99 /* Image */ = {
-			isa = PBXGroup;
-			children = (
-				4E9A25781DAC0EAB00D7EA99 /* ImageBrick.xib */,
-			);
-			path = Image;
-			sourceTree = "<group>";
-		};
 		4E9A25791DAC0EAB00D7EA99 /* Label */ = {
 			isa = PBXGroup;
 			children = (
-				4E9A257A1DAC0EAB00D7EA99 /* LabelBrick.xib */,
 				4E9A257B1DAC0EAB00D7EA99 /* LabelBrickButton.xib */,
 				4E9A257C1DAC0EAB00D7EA99 /* LabelBrickChevron.xib */,
 				4E9A257D1DAC0EAB00D7EA99 /* LabelBrickImage.xib */,
@@ -499,7 +476,6 @@
 			children = (
 				4E9A25A01DAC216A00D7EA99 /* Button */,
 				4E9A25A31DAC216A00D7EA99 /* Collection */,
-				4E9A25A51DAC216A00D7EA99 /* Image */,
 				4E9A25A71DAC216A00D7EA99 /* Label */,
 			);
 			path = Bricks;
@@ -508,7 +484,6 @@
 		4E9A25A01DAC216A00D7EA99 /* Button */ = {
 			isa = PBXGroup;
 			children = (
-				4E9A25B51DAC21C200D7EA99 /* ButtonBrick.xib */,
 				4E9A25B71DAC222D00D7EA99 /* ButtonBrickWithChevron.xib */,
 			);
 			path = Button;
@@ -522,18 +497,9 @@
 			path = Collection;
 			sourceTree = "<group>";
 		};
-		4E9A25A51DAC216A00D7EA99 /* Image */ = {
-			isa = PBXGroup;
-			children = (
-				4E9A25BB1DAC252200D7EA99 /* ImageBrick.xib */,
-			);
-			path = Image;
-			sourceTree = "<group>";
-		};
 		4E9A25A71DAC216A00D7EA99 /* Label */ = {
 			isa = PBXGroup;
 			children = (
-				4E9A25BD1DAC26F000D7EA99 /* LabelBrick.xib */,
 				4E9A25BF1DAC27CE00D7EA99 /* LabelBrickButton.xib */,
 				4E9A25C11DAC28D000D7EA99 /* LabelBrickChevron.xib */,
 				4E9A25C31DAC298300D7EA99 /* LabelBrickImage.xib */,
@@ -1031,14 +997,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E9A25B81DAC222D00D7EA99 /* ButtonBrickWithChevron.xib in Resources */,
-				4E9A25BE1DAC26F000D7EA99 /* LabelBrick.xib in Resources */,
 				4E9A25BA1DAC22E300D7EA99 /* CollectionBrick.xib in Resources */,
 				4E9A25AC1DAC216A00D7EA99 /* BrickKit.xcassets in Resources */,
-				4E9A25BC1DAC252200D7EA99 /* ImageBrick.xib in Resources */,
 				4E9A25C21DAC28D000D7EA99 /* LabelBrickChevron.xib in Resources */,
 				4E9A25C01DAC27CE00D7EA99 /* LabelBrickButton.xib in Resources */,
 				4E9A25C41DAC298300D7EA99 /* LabelBrickImage.xib in Resources */,
-				4E9A25B61DAC21C200D7EA99 /* ButtonBrick.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1066,10 +1029,7 @@
 				4E9A25801DAC0EAB00D7EA99 /* ButtonBrickWithChevron.xib in Resources */,
 				4E9A257E1DAC0EAB00D7EA99 /* BrickKit.xcassets in Resources */,
 				4E9A25841DAC0EAB00D7EA99 /* LabelBrickButton.xib in Resources */,
-				4E9A25821DAC0EAB00D7EA99 /* ImageBrick.xib in Resources */,
-				4E9A257F1DAC0EAB00D7EA99 /* ButtonBrick.xib in Resources */,
 				4E9A25861DAC0EAB00D7EA99 /* LabelBrickImage.xib in Resources */,
-				4E9A25831DAC0EAB00D7EA99 /* LabelBrick.xib in Resources */,
 				4E9A25851DAC0EAB00D7EA99 /* LabelBrickChevron.xib in Resources */,
 				4E9A25811DAC0EAB00D7EA99 /* CollectionBrick.xib in Resources */,
 			);

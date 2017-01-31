@@ -9,6 +9,15 @@
 import BrickKit
 
 class TwoLabelBrick: LabelBrick {
+
+    override class var cellClass: UICollectionViewCell.Type? {
+        return nil
+    }
+
+    override class var bundle: NSBundle {
+        return NSBundle(forClass: TwoLabelBrick.self)
+    }
+
 }
 
 

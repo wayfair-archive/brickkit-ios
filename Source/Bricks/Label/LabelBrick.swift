@@ -21,9 +21,21 @@ public struct LabelBrickNibs {
 
 // MARK: - Brick
 
-public class LabelBrick: Brick {
+public class LabelBrick: GenericBrick<UILabel> {
     weak var dataSource: LabelBrickCellDataSource?
     weak var delegate: LabelBrickCellDelegate?
+
+    public override class var internalIdentifier: String {
+        return self.nibName
+    }
+
+    public override class var cellClass: UICollectionViewCell.Type? {
+        return LabelBrickCell.self
+    }
+
+    public override class var bundle: NSBundle {
+        return NSBundle(forClass: Brick.self)
+    }
 
     public var text: String? {
         set {
@@ -81,8 +93,11 @@ public class LabelBrick: Brick {
     
         self.dataSource = dataSource
         self.delegate = delegate
-        super.init(identifier, size: size, backgroundColor: backgroundColor, backgroundView: backgroundView)
-        
+        super.init(identifier, size: size, backgroundColor: backgroundColor, backgroundView: backgroundView, configureView: { (label: UILabel, cell: BrickCell) in
+            label.numberOfLines = 0
+            label.font = UIFont.systemFontOfSize(14)
+        })
+
         if let delegateModel = delegate as? LabelBrickCellModel {
             self.delegateModel = delegateModel
         }
@@ -151,7 +166,7 @@ public class LabelWithDecorationImageBrickCellModel: LabelBrickCellModel {
 
 // MARK: - Cell
 
-public class LabelBrickCell: BrickCell, Bricklike {
+public class LabelBrickCell: GenericBrickCell, Bricklike {
     public typealias BrickType = LabelBrick
 
     @IBOutlet weak public var label: UILabel!
@@ -163,8 +178,13 @@ public class LabelBrickCell: BrickCell, Bricklike {
     override public func updateContent() {
         horizontalRuleLeft?.hidden = true
         horizontalRuleRight?.hidden = true
-        brick.dataSource?.configureLabelBrickCell(self)
+
         super.updateContent()
+
+        if !fromNib {
+            self.label = self.genericContentView as! UILabel
+        }
+        brick.dataSource?.configureLabelBrickCell(self)
     }
 
     @IBAction func buttonTapped(sender: UIButton) {

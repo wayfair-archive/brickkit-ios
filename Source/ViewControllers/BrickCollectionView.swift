@@ -125,16 +125,14 @@ public class BrickCollectionView: UICollectionView {
         let identifier = brickClass.internalIdentifier
         let cellIdentifier: String
 
-        if let cellClass = brickClass.cellClass {
+        if let nib = nib {
+            cellIdentifier = String(nib.hashValue)
+            self.registerNib(nib, forCellWithReuseIdentifier: cellIdentifier)
+        } else if let cellClass = brickClass.cellClass {
             cellIdentifier = identifier
             self.registerClass(cellClass, forCellWithReuseIdentifier: cellIdentifier)
-        } else if nib != nil || brickClass.bundle.pathForResource(brickClass.nibName, ofType: "nib") != nil {
-            let brickNib: UINib
-            if let defaultNib = nib {
-                brickNib = defaultNib
-            } else {
-                brickNib = UINib(nibName: brickClass.nibName, bundle: brickClass.bundle)
-            }
+        } else if brickClass.bundle.pathForResource(brickClass.nibName, ofType: "nib") != nil {
+            let brickNib: UINib = UINib(nibName: brickClass.nibName, bundle: brickClass.bundle)
             cellIdentifier = String(brickNib.hashValue)
             self.registerNib(brickNib, forCellWithReuseIdentifier: cellIdentifier)
         } else {
@@ -148,11 +146,9 @@ public class BrickCollectionView: UICollectionView {
         registeredBricks[identifier] = cellIdentifier
     }
 
-    /// Register a brick class.
-    /// If there is a class (`cellClass`) registered to this Brick, this will be registered to the UICollectionView.
-    /// If there is no class, the nib (`nibName`) will be used to register
-    ///
-    /// - parameter brickClass: The brick class to register
+    /// Register a nib for a brick.
+    /// - parameter nib: The nib to use
+    /// - parameter identifier: The identifier of the brick
     public func registerNib(nib: UINib, forBrickWithIdentifier identifier: String) {
         let cellIdentifier = String(nib.hashValue)
         self.registerNib(nib, forCellWithReuseIdentifier: cellIdentifier)
