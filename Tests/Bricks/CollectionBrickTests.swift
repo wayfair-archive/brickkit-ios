@@ -129,6 +129,43 @@ class CollectionBrickTests: XCTestCase {
         XCTAssertEqual(delegate.count, 1, "The delegate should have only been called 1 time for the updated height of the CollectionBrick")
     }
 
+    func testThatCollectionViewZeroFrameHeight() {
+        brickView.registerBrickClass(CollectionBrick.self)
+
+        let collectionSection = BrickSection("CollectionSection", bricks: [
+            DummyBrick("1", height: .Auto(estimate: .Fixed(size: 1000))),
+            DummyBrick("2", height: .Auto(estimate: .Fixed(size: 1000))),
+            DummyBrick("3", height: .Auto(estimate: .Fixed(size: 1000))),
+            DummyBrick("4", height: .Auto(estimate: .Fixed(size: 1000)))
+            ])
+
+        let section = BrickSection("RootSection", bricks: [
+            CollectionBrick("Collection1", dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { cell in
+                cell.brickCollectionView.registerBrickClass(DummyBrick.self)
+            }))
+            ])
+        brickView.setSection(section)
+        brickView.layoutSubviews()
+
+        let expectation = expectationWithDescription("Wait for batch updates")
+        brickView.performBatchUpdates({
+            // Run this inside a performBatchUpdates, so this is called after the sizeChangeHandler was called
+        }) { (completed) in
+            expectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(5, handler: nil)
+
+        let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
+        cell1?.layoutIfNeeded()
+        XCTAssertEqual(cell1?.brickCollectionView.frame, CGRect(x: 0, y: 0, width: 320, height: 320 * 8))
+
+        let mockAttributes = UICollectionViewLayoutAttributes()
+        mockAttributes.bounds = CGRect(x: 0, y: 0, width: 0, height: 0)
+
+        // do not assert anything, the function call simply needs to complete, previously this would infinitely loop
+        cell1?.preferredLayoutAttributesFittingAttributes(mockAttributes)
+    }
+
 }
 
 class FixedBrickLayoutDelegate: BrickLayoutDelegate {
