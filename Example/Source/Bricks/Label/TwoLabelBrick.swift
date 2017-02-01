@@ -10,6 +10,7 @@ import BrickKit
 
 class TwoLabelBrick: LabelBrick {
 
+    // Return nil, so the brick is loaded from the nib instead of the GenericBrickCell
     override class var cellClass: UICollectionViewCell.Type? {
         return nil
     }
