@@ -1,5 +1,32 @@
 # Change Log
 
+## [1.0.0](https://github.com/wayfair/brickkit-ios/tree/1.0.0) (2017-01-26)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/0.9.7...1.0.0)
+
+**Closed issues:**
+
+- Add support for UIAccessibility [\#59](https://github.com/wayfair/brickkit-ios/issues/59)
+- Generic Brick [\#64](https://github.com/wayfair/brickkit-ios/issues/64)
+- Move public functions in extensions into its respective class declaration [\#56](https://github.com/wayfair/brickkit-ios/issues/56)
+
+**Merged pull requests:**
+
+- GenericBrick [\#65](https://github.com/wayfair/brickkit-ios/pull/65) ([rubencagnie](https://github.com/rubencagnie))
+- Added changing the default nib [\#62](https://github.com/wayfair/brickkit-ios/pull/62) ([jay18001](https://github.com/jay18001))
+
+## [0.9.7](https://github.com/wayfair/brickkit-ios/tree/0.9.7) (2017-01-12)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/0.9.6...0.9.7)
+
+**Closed issues:**
+
+- Have BrickCells display different views based on appearance state [\#46](https://github.com/wayfair/brickkit-ios/issues/46)
+
+**Merged pull requests:**
+
+- Add UIAccessibility properties to Brick class to pass along to BrickC… [\#61](https://github.com/wayfair/brickkit-ios/pull/61) ([joleary1987](https://github.com/joleary1987))
+- Provide a way to override brick cell content after the updateContent [\#58](https://github.com/wayfair/brickkit-ios/pull/58) ([wfsttam](https://github.com/wfsttam))
+- Fixed Image brick when the readding it to the section [\#54](https://github.com/wayfair/brickkit-ios/pull/54) ([jay18001](https://github.com/jay18001))
+
 ## [0.9.6](https://github.com/wayfair/brickkit-ios/tree/0.9.6) (2016-12-19)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/0.9.5...0.9.6)
 

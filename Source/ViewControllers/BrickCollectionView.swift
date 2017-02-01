@@ -94,10 +94,7 @@ public class BrickCollectionView: UICollectionView {
         registerClass(BrickSectionCell.self, forCellWithReuseIdentifier: BrickSection.nibName)
     }
 
-}
-
 // MARK: - Setting up the models
-extension BrickCollectionView {
 
     /// Sets the section for the BrickCollectionView
     ///
@@ -123,17 +120,23 @@ extension BrickCollectionView {
     /// If there is no class, the nib (`nibName`) will be used to register
     ///
     /// - parameter brickClass: The brick class to register
-    public func registerBrickClass(brickClass: Brick.Type) {
-        let nibName = brickClass.nibName
+    /// - parameter nib: The nib to register. This only needs to be set if the nib is different then the default
+    public func registerBrickClass(brickClass: Brick.Type, nib: UINib? = nil) {
+        let identifier = brickClass.internalIdentifier
         let cellIdentifier: String
 
         if let cellClass = brickClass.cellClass {
-            cellIdentifier = nibName
+            cellIdentifier = identifier
             self.registerClass(cellClass, forCellWithReuseIdentifier: cellIdentifier)
-        } else if let _ = brickClass.bundle.pathForResource(nibName, ofType: "nib") {
-            let nib = UINib(nibName: nibName, bundle: brickClass.bundle)
-            cellIdentifier = String(nib.hashValue)
-            self.registerNib(nib, forCellWithReuseIdentifier: cellIdentifier)
+        } else if nib != nil || brickClass.bundle.pathForResource(brickClass.nibName, ofType: "nib") != nil {
+            let brickNib: UINib
+            if let defaultNib = nib {
+                brickNib = defaultNib
+            } else {
+                brickNib = UINib(nibName: brickClass.nibName, bundle: brickClass.bundle)
+            }
+            cellIdentifier = String(brickNib.hashValue)
+            self.registerNib(brickNib, forCellWithReuseIdentifier: cellIdentifier)
         } else {
             fatalError("Nib or cell class not found")
         }
@@ -142,7 +145,7 @@ extension BrickCollectionView {
             print("calling `registerBrickClass` in `configure(for cell: CollectionBrickCell)` is deprecated. Use `registerBricks(for cell: CollectionBrickCell)` or `CollectionBrickCell(brickTypes: [Brick.Type])`. This will be a fatalError in a future release")
         }
         
-        registeredBricks[nibName] = cellIdentifier
+        registeredBricks[identifier] = cellIdentifier
     }
 
     /// Register a brick class.
@@ -187,7 +190,7 @@ extension BrickCollectionView {
             identifier = BrickSection.nibName
         } else if let brickIdentifier = registeredBricks[CustomNibPrefix + brick.identifier] {
             identifier = brickIdentifier
-        } else if let brickIdentifier = registeredBricks[brick.nibName] {
+        } else if let brickIdentifier = registeredBricks[brick.dynamicType.internalIdentifier] {
             identifier = brickIdentifier
         } else {
             fatalError("No Nib Found for \(brick)")
@@ -195,10 +198,7 @@ extension BrickCollectionView {
         return identifier
     }
 
-}
-
 // MARK: - Invalidation
-extension BrickCollectionView {
 
     /// Invalidate the layout properties and recalculate sizes
     ///
@@ -234,10 +234,7 @@ extension BrickCollectionView {
         }
     }
     
-}
-
 // MARK: - Reloading
-extension BrickCollectionView {
 
     /// Reload bricks in a collectionbrick
     ///

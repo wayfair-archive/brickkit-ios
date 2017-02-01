@@ -24,6 +24,11 @@ public protocol BrickCellTapDelegate: UIGestureRecognizerDelegate {
     func didTapBrickCell(brickCell: BrickCell)
 }
 
+public protocol OverrideContentSource: class {
+    func overrideContent(for brickCell: BrickCell)
+    func resetContent(for brickCell: BrickCell)
+}
+
 public protocol Bricklike {
     associatedtype BrickType: Brick
     var brick: BrickType { get }
@@ -105,7 +110,13 @@ extension BaseBrickCell {
 
 public class BrickCell: BaseBrickCell {
 
-    private var _brick: Brick!
+    internal var _brick: Brick! {
+        didSet {
+            self.accessibilityIdentifier = _brick.accessibilityIdentifier
+            self.accessibilityLabel = _brick.accessibilityLabel
+            self.accessibilityHint = _brick.accessibilityHint
+        }
+    }
     public var tapGesture: UITapGestureRecognizer?
     public private(set) var index: Int = 0
     public private(set) var collectionIndex: Int = 0
@@ -172,7 +183,9 @@ public class BrickCell: BaseBrickCell {
     }
 
     internal func reloadContent() {
+        self._brick.overrideContentSource?.resetContent(for: self)
         updateContent()
+        self._brick.overrideContentSource?.overrideContent(for: self)
     }
 
     func didTapCell() {
