@@ -152,8 +152,7 @@ class CollectionBrickTests: XCTestCase {
         let mockAttributes = UICollectionViewLayoutAttributes()
         mockAttributes.bounds = CGRect(x: 0, y: 0, width: 0, height: 0)
 
-        // do not assert anything, the function call simply needs to complete, previously this would infinitely loop
-        cell1?.preferredLayoutAttributesFittingAttributes(mockAttributes)
+        cell1?.preferredLayoutAttributesFittingAttributes(mockAttributes) // if the function returns the test passes
     }
 
 }
