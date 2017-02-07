@@ -140,20 +140,10 @@ class CollectionBrickTests: XCTestCase {
             ])
 
         let section = BrickSection("RootSection", bricks: [
-            CollectionBrick("Collection1", dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { cell in
-                cell.brickCollectionView.registerBrickClass(DummyBrick.self)
-            }))
+            CollectionBrick("Collection1", dataSource: CollectionBrickCellModel(section: collectionSection), brickTypes: [DummyBrick.self])
             ])
-        brickView.setSection(section)
-        brickView.layoutSubviews()
 
-        let expectation = expectationWithDescription("Wait for batch updates")
-        brickView.performBatchUpdates({
-            // Run this inside a performBatchUpdates, so this is called after the sizeChangeHandler was called
-        }) { (completed) in
-            expectation.fulfill()
-        }
-        waitForExpectationsWithTimeout(5, handler: nil)
+        brickView.setupSectionAndLayout(section)
 
         let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
         cell1?.layoutIfNeeded()
