@@ -414,5 +414,45 @@ extension LazyLoadingTests {
         XCTAssertEqual(flowLayout.sections![1]!.attributes.count, 50)
     }
 
+    func testThatSectionsAreContinueToCalculateBricks() {
+
+        let createSection: () -> BrickSection = {
+            return BrickSection(bricks: [
+                LabelBrick(height: .Fixed(size: 50), text: "Foo"),
+                ButtonBrick(height: .Fixed(size: 50), title: "Bar"),
+
+                BrickSection(bricks: [
+                    LabelBrick(height: .Fixed(size: 50), text: "Foo"),
+                    ButtonBrick(height: .Fixed(size: 50), title: "Bar")
+                    ])
+                ])
+        }
+
+        let section = BrickSection(bricks: [])
+        for _ in 0...100 {
+            section.bricks.append(BrickSection(bricks: [
+                createSection(),
+                LabelBrick(height: .Fixed(size: 50), text: "Foo"),
+                createSection(),
+                LabelBrick(height: .Fixed(size: 50), text: "Foo"),
+                createSection()])
+            )
+        }
+        section.bricks.append(BrickSection(bricks: [
+            LabelBrick(height: .Fixed(size: 50), text: "Foo")
+            ])
+        )
+        brickView.setupSectionAndLayout(section)
+
+        XCTAssertEqual(brickView.subviews.count, 16)
+
+        brickView.contentOffset.y += brickView.frame.height
+        brickView.layoutSubviews()
+        brickView.contentOffset.y += brickView.frame.height
+        brickView.layoutSubviews()
+
+        XCTAssertEqual(brickView.subviews.count, 39)
+    }
+
 
 }
