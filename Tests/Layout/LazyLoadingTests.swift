@@ -444,14 +444,15 @@ extension LazyLoadingTests {
         )
         brickView.setupSectionAndLayout(section)
 
-        XCTAssertEqual(brickView.subviews.count, 16)
+        XCTAssertEqual(brickView.visibleCells().count, 16)
+
 
         brickView.contentOffset.y += brickView.frame.height
         brickView.layoutSubviews()
         brickView.contentOffset.y += brickView.frame.height
         brickView.layoutSubviews()
 
-        XCTAssertEqual(brickView.subviews.count, 39)
+        XCTAssertEqual(brickView.visibleCells().count, 18)
     }
 
 
