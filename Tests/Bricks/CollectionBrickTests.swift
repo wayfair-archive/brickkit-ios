@@ -129,6 +129,32 @@ class CollectionBrickTests: XCTestCase {
         XCTAssertEqual(delegate.count, 1, "The delegate should have only been called 1 time for the updated height of the CollectionBrick")
     }
 
+    func testThatCollectionViewZeroFrameHeight() {
+        brickView.registerBrickClass(CollectionBrick.self)
+
+        let collectionSection = BrickSection("CollectionSection", bricks: [
+            DummyBrick("1", height: .Auto(estimate: .Fixed(size: 1000))),
+            DummyBrick("2", height: .Auto(estimate: .Fixed(size: 1000))),
+            DummyBrick("3", height: .Auto(estimate: .Fixed(size: 1000))),
+            DummyBrick("4", height: .Auto(estimate: .Fixed(size: 1000)))
+            ])
+
+        let section = BrickSection("RootSection", bricks: [
+            CollectionBrick("Collection1", dataSource: CollectionBrickCellModel(section: collectionSection), brickTypes: [DummyBrick.self])
+            ])
+
+        brickView.setupSectionAndLayout(section)
+
+        let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
+        cell1?.layoutIfNeeded()
+        XCTAssertEqual(cell1?.brickCollectionView.frame, CGRect(x: 0, y: 0, width: 320, height: 320 * 8))
+
+        let mockAttributes = UICollectionViewLayoutAttributes()
+        mockAttributes.bounds = CGRect(x: 0, y: 0, width: 0, height: 0)
+
+        cell1?.preferredLayoutAttributesFittingAttributes(mockAttributes) // if the function returns the test passes
+    }
+
 }
 
 class FixedBrickLayoutDelegate: BrickLayoutDelegate {

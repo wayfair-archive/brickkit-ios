@@ -152,7 +152,7 @@ public class CollectionBrickCell: BrickCell, Bricklike, AsynchronousResizableCel
         currentPage = dataSource.currentPageForCollectionBrickCell(self)
         brickCollectionView.layoutSubviews()
 
-        if brick.shouldCalculateFullHeight {
+        if brick.shouldCalculateFullHeight && brickCollectionView.frame.height > 0 {
             var y = brickCollectionView.frame.height
             while y < brickCollectionView.contentSize.height {
                 brickCollectionView.contentOffset.y += brickCollectionView.frame.height
