@@ -122,7 +122,7 @@ public class ImageBrickCell: BrickCell, Bricklike, AsynchronousResizableCell, Im
 
     public var sizeChangedHandler: CellSizeChangedHandler?
 
-    public var imageDownloader: ImageDownloader?
+    public weak var imageDownloader: ImageDownloader?
 
     private var imageLoaded = false
     private var currentImageURL: NSURL? = nil
@@ -163,15 +163,11 @@ public class ImageBrickCell: BrickCell, Bricklike, AsynchronousResizableCell, Im
             
             imageView.image = nil
             currentImageURL = imageURL
-            self.imageDownloader?.downloadImage(with: imageURL, onCompletion: { (image, url) in
-                guard imageURL == url else {
-                    return
-                }
-                
+
+
+            self.imageDownloader?.downloadImageAndSet(on: self.imageView, with: imageURL, onCompletion: { (image, url) in
                 self.imageLoaded = true
-                NSOperationQueue.mainQueue().addOperationWithBlock({
-                    self.set(image: image)
-                })
+                self.set(image: image)
             })
         } else {
             imageView.image = nil
@@ -184,7 +180,6 @@ public class ImageBrickCell: BrickCell, Bricklike, AsynchronousResizableCell, Im
             self.setRatioConstraint(for: image)
             self.sizeChangedHandler?(cell: self)
         }
-        self.imageView.image = image
     }
 
     /// Set the ratio constraint based on a given image
