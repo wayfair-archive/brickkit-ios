@@ -190,7 +190,7 @@ class FixedBrickLayoutSectionDataSource: NSObject, BrickLayoutSectionDataSource 
     }
 
     func aligment(in section: BrickLayoutSection) -> BrickAlignment {
-        return .Left
+        return BrickAlignment(horizontal: .Left, vertical: .Top)
     }
 
     var scrollDirection: UICollectionViewScrollDirection = .Vertical

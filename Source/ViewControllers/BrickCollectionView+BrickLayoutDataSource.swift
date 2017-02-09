@@ -76,7 +76,7 @@ extension BrickCollectionView: BrickLayoutDataSource {
             let indexPath = self.section.indexPathForSection(section, in: collectionInfo),
             let brickSection = self.brick(at:indexPath) as? BrickSection
             else {
-                return .Left
+                return BrickAlignment(horizontal: .Left, vertical: .Top)
         }
         return brickSection.alignment
     }

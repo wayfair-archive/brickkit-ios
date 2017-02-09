@@ -16,13 +16,10 @@ class BrickAlignmentTests: BrickFlowLayoutBaseTests {
 extension BrickAlignmentTests {
 
     func testThatLeftAlignDoesnChangeDefaultBehavior() {
-        collectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection(bricks: [
             DummyBrick(height: .Fixed(size: 50)),
-            ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), alignment: .Left)
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+            ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), alignment: BrickAlignment(horizontal: .Left, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
 
         let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 5, y: 5, width: 310, height: 50))
@@ -31,14 +28,12 @@ extension BrickAlignmentTests {
     func testThatLeftAlignIgnoresHiddenBricks() {
         let hideBehaviorDataSource = FixedHideBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 1)])
         collectionView.layout.hideBehaviorDataSource = hideBehaviorDataSource
-        collectionView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection(bricks: [
             DummyBrick(height: .Fixed(size: 50)),
             DummyBrick(height: .Fixed(size: 50)),
-            ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), alignRowHeights: true, alignment: .Left)
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+            ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), alignRowHeights: true, alignment: BrickAlignment(horizontal: .Left, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
 
         let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertNil(cell1)
@@ -47,15 +42,12 @@ extension BrickAlignmentTests {
     }
     
     func testThatLeftAlignmentBricks() {
-        collectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection(bricks: [
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
-            ], alignment: .Left)
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+            ], alignment: BrickAlignment(horizontal: .Left, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
 
         let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 0, y: 0, width: 50, height: 50))
@@ -67,15 +59,12 @@ extension BrickAlignmentTests {
     }
 
     func testThatLeftAlignmentBricksWithInsets() {
-        collectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection(bricks: [
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
-            ], inset: 5, edgeInsets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), alignment: .Left)
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+            ], inset: 5, edgeInsets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), alignment: BrickAlignment(horizontal: .Left, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
 
         let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 0, width: 50, height: 50))
@@ -87,17 +76,14 @@ extension BrickAlignmentTests {
     }
 
     func testThatLeftAlignmentBricksWithInsetsAndSection() {
-        collectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection(bricks: [
             BrickSection(width: .Fixed(size: 50), bricks: [
                 DummyBrick(height: .Fixed(size: 50))
                 ]),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
-            ], inset: 5, edgeInsets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), alignment: .Left)
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+            ], inset: 5, edgeInsets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), alignment: BrickAlignment(horizontal: .Left, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
 
         let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 0, width: 50, height: 50))
@@ -115,28 +101,22 @@ extension BrickAlignmentTests {
 extension BrickAlignmentTests {
 
     func testThatRightAlignDoesnChangeDefaultBehavior() {
-        collectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection(bricks: [
             DummyBrick(height: .Fixed(size: 50)),
-            ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), alignment: .Right)
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+            ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), alignment: BrickAlignment(horizontal: .Right, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
 
         let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 5, y: 5, width: 310, height: 50))
     }
 
     func testThatRightAlignmentBricks() {
-        collectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection(bricks: [
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
-            ], alignment: .Right)
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+            ], alignment: BrickAlignment(horizontal: .Right, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
 
         let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 170, y: 0, width: 50, height: 50))
@@ -148,15 +128,12 @@ extension BrickAlignmentTests {
     }
 
     func testThatRightAlignmentBricksWithInsets() {
-        collectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection(bricks: [
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
-            ], inset: 5, edgeInsets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), alignment: .Right)
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+            ], inset: 5, edgeInsets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), alignment: BrickAlignment(horizontal: .Right, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
 
         let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 150, y: 0, width: 50, height: 50))
@@ -168,17 +145,14 @@ extension BrickAlignmentTests {
     }
 
     func testThatRightAlignmentBricksWithInsetsAndSection() {
-        collectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection(bricks: [
             BrickSection(width: .Fixed(size: 50), bricks: [
                 DummyBrick(height: .Fixed(size: 50))
                 ]),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
-            ], inset: 5, edgeInsets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), alignment: .Right)
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+            ], inset: 5, edgeInsets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), alignment: BrickAlignment(horizontal: .Right, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
 
         let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 150, y: 0, width: 50, height: 50))
@@ -192,17 +166,14 @@ extension BrickAlignmentTests {
     }
 
     func testThatRightAlignmentNestedBricksWithInsetsAndSection() {
-        collectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection(bricks: [
             BrickSection(bricks: [
                 DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
                 DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
                 DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
-                ], alignment: .Right),
+                ], alignment: BrickAlignment(horizontal: .Right, vertical: .Top)),
             ], inset: 5, edgeInsets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+        collectionView.setupSectionAndLayout(section)
 
         let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 2))
         XCTAssertEqual(cell1?.frame, CGRect(x: 160, y: 0, width: 50, height: 50))
@@ -214,18 +185,14 @@ extension BrickAlignmentTests {
     }
 
     func testThatRightAlignmentNestedBricksWithInsetsAndSectionInset() {
-        collectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection(bricks: [
             BrickSection(bricks: [
                 DummyBrick(width: .Fixed(size: 85), height: .Fixed(size: 50)),
                 DummyBrick(width: .Fixed(size: 85), height: .Fixed(size: 50)),
                 DummyBrick(width: .Fixed(size: 85), height: .Fixed(size: 50))
-                ], inset: 10, alignment: .Right)
+                ], inset: 10, alignment: BrickAlignment(horizontal: .Right, vertical: .Top))
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
-
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+        collectionView.setupSectionAndLayout(section)
 
         let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 2))
         XCTAssertEqual(cell1?.frame, CGRect(x: 25, y: 20, width: 85, height: 50))
@@ -240,28 +207,22 @@ extension BrickAlignmentTests {
 extension BrickAlignmentTests {
 
     func testThatCenterAlignDoesnChangeDefaultBehavior() {
-        collectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection(bricks: [
             DummyBrick(height: .Fixed(size: 50)),
-            ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), alignment: .Center)
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+            ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), alignment: BrickAlignment(horizontal: .Center, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
 
         let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 5, y: 5, width: 310, height: 50))
     }
 
     func testThatCenterAlignmentBricks() {
-        collectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection(bricks: [
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
-            ], alignment: .Center)
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+            ], alignment: BrickAlignment(horizontal: .Center, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
 
         let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 85, y: 0, width: 50, height: 50))
@@ -273,15 +234,12 @@ extension BrickAlignmentTests {
     }
 
     func testThatCenterAlignmentBricksWithInsets() {
-        collectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection(bricks: [
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
-            ], inset: 5, edgeInsets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), alignment: .Center)
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+            ], inset: 5, edgeInsets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), alignment: BrickAlignment(horizontal: .Center, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
 
         let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 80, y: 0, width: 50, height: 50))
@@ -293,17 +251,14 @@ extension BrickAlignmentTests {
     }
 
     func testThatCenterAlignmentBricksWithInsetsAndSection() {
-        collectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection(bricks: [
             BrickSection(width: .Fixed(size: 50), bricks: [
                 DummyBrick(height: .Fixed(size: 50))
                 ]),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
-            ], inset: 5, edgeInsets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), alignment: .Center)
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+            ], inset: 5, edgeInsets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), alignment: BrickAlignment(horizontal: .Center, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
 
         let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 80, y: 0, width: 50, height: 50))
@@ -317,15 +272,12 @@ extension BrickAlignmentTests {
     }
 
     func testThatAddingABrickAlignsProperly() {
-        collectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection(bricks: [
             DummyBrick("BRICK", width: .Ratio(ratio: 1/3), height: .Fixed(size: 50)),
-            ], edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), alignment: .Center)
+            ], edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), alignment: BrickAlignment(horizontal: .Center, vertical: .Top))
         let repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["BRICK": 2])
         section.repeatCountDataSource = repeatCountDataSource
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+        collectionView.setupSectionAndLayout(section)
 
         repeatCountDataSource.repeatCountHash = ["BRICK": 3]
         let expectation = expectationWithDescription("Invalidat Bricks")
@@ -350,28 +302,22 @@ extension BrickAlignmentTests {
 extension BrickAlignmentTests {
 
     func testThatJustifiedAlignDoesnChangeDefaultBehavior() {
-        collectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection(bricks: [
             DummyBrick(height: .Fixed(size: 50)),
-            ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), alignment: .Justified)
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+            ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), alignment: BrickAlignment(horizontal: .Justified, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
 
         let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 5, y: 5, width: 310, height: 50))
     }
 
     func testThatJustifiedAlignmentBricks() {
-        collectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection(bricks: [
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
-            ], alignment: .Justified)
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+            ], alignment: BrickAlignment(horizontal: .Justified, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
 
         let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 0, y: 0, width: 50, height: 50))
@@ -383,15 +329,12 @@ extension BrickAlignmentTests {
     }
 
     func testThatJustifiedAlignmentBricksWithInsets() {
-        collectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection(bricks: [
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
-            ], inset: 5, edgeInsets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), alignment: .Justified)
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+            ], inset: 5, edgeInsets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), alignment: BrickAlignment(horizontal: .Justified, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
 
         let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 0, width: 50, height: 50))
@@ -402,17 +345,14 @@ extension BrickAlignmentTests {
     }
 
     func testThatJustifiedAlignmentBricksWithInsetsAndSection() {
-        collectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection(bricks: [
             BrickSection(width: .Fixed(size: 50), bricks: [
                 DummyBrick(height: .Fixed(size: 50))
                 ]),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
             DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
-            ], inset: 5, edgeInsets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), alignment: .Justified)
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+            ], inset: 5, edgeInsets: UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10), alignment: BrickAlignment(horizontal: .Justified, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
 
         let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
         XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 0, width: 50, height: 50))
@@ -422,5 +362,249 @@ extension BrickAlignmentTests {
         XCTAssertEqual(cell2?.frame, CGRect(x: 135, y: 0, width: 50, height: 50))
         let cell3 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 2, inSection: 1))
         XCTAssertEqual(cell3?.frame, CGRect(x: 260, y: 0, width: 50, height: 50))
+    }
+}
+
+// MARK: - Top Align
+extension BrickAlignmentTests {
+
+    func testThatTopAlignDoesnChangeDefaultBehavior() {
+        let section = BrickSection(bricks: [
+            DummyBrick(height: .Fixed(size: 50)),
+            ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), alignment: BrickAlignment(horizontal: .Left, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
+
+        let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 5, y: 5, width: 310, height: 50))
+    }
+
+    func testThatTopAlignIgnoresHiddenBricks() {
+        let hideBehaviorDataSource = FixedHideBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 1)])
+        collectionView.layout.hideBehaviorDataSource = hideBehaviorDataSource
+
+        let section = BrickSection(bricks: [
+            DummyBrick(height: .Fixed(size: 50)),
+            DummyBrick(height: .Fixed(size: 50)),
+            ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), alignRowHeights: true, alignment: BrickAlignment(horizontal: .Left, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
+
+        let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertNil(cell1)
+        let cell2 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 5, y: 5, width: 310, height: 50))
+    }
+
+    func testThatTopAlignmentBricks() {
+        let section = BrickSection(bricks: [
+            DummyBrick(width: .Ratio(ratio: 0.5), height: .Fixed(size: 50)),
+            DummyBrick(width: .Ratio(ratio: 0.5), height: .Fixed(size: 10)),
+            ], alignment: BrickAlignment(horizontal: .Left, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
+
+        let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 0, y: 0, width: 160, height: 50))
+        let cell2 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 160, y: 0, width: 160, height: 10))
+    }
+
+    func testThatTopAlignmentBricksWithInsets() {
+        let section = BrickSection(bricks: [
+            DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
+            DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 30)),
+            DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 20)),
+            ], inset: 5, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), alignment: BrickAlignment(horizontal: .Left, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
+
+        let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 10, width: 50, height: 50))
+        let cell2 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 65, y: 10, width: 50, height: 30))
+        let cell3 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 2, inSection: 1))
+        XCTAssertEqual(cell3?.frame, CGRect(x: 120, y: 10, width: 50, height: 20))
+
+    }
+
+    func testThatTopAlignmentBricksWithInsetsAndSection() {
+        let section = BrickSection(bricks: [
+            BrickSection(width: .Fixed(size: 50), bricks: [
+                DummyBrick(height: .Fixed(size: 50))
+                ]),
+            DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 30)),
+            DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 20)),
+            ], inset: 5, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), alignment: BrickAlignment(horizontal: .Left, vertical: .Top))
+        collectionView.setupSectionAndLayout(section)
+
+        let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 10, width: 50, height: 50))
+        let cell12 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 2))
+        XCTAssertEqual(cell12?.frame, CGRect(x: 10, y: 10, width: 50, height: 50))
+        let cell2 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 65, y: 10, width: 50, height: 30))
+        let cell3 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 2, inSection: 1))
+        XCTAssertEqual(cell3?.frame, CGRect(x: 120, y: 10, width: 50, height: 20))
+        
+    }
+
+}
+
+// MARK: - Center Align
+extension BrickAlignmentTests {
+
+    func testThatVerticalCenterAlignDoesnChangeDefaultBehavior() {
+        let section = BrickSection(bricks: [
+            DummyBrick(height: .Fixed(size: 50)),
+            ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), alignment: BrickAlignment(horizontal: .Left, vertical: .Center))
+        collectionView.setupSectionAndLayout(section)
+
+        let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 5, y: 5, width: 310, height: 50))
+    }
+
+    func testThatVerticalCenterAlignIgnoresHiddenBricks() {
+        let hideBehaviorDataSource = FixedHideBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 1)])
+        collectionView.layout.hideBehaviorDataSource = hideBehaviorDataSource
+
+        let section = BrickSection(bricks: [
+            DummyBrick(height: .Fixed(size: 50)),
+            DummyBrick(height: .Fixed(size: 50)),
+            ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), alignRowHeights: true, alignment: BrickAlignment(horizontal: .Left, vertical: .Center))
+        collectionView.setupSectionAndLayout(section)
+
+        let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertNil(cell1)
+        let cell2 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 5, y: 5, width: 310, height: 50))
+    }
+
+    func testThatVerticalCenterAlignmentBricks() {
+        let section = BrickSection(bricks: [
+            DummyBrick(width: .Ratio(ratio: 0.5), height: .Fixed(size: 50)),
+            DummyBrick(width: .Ratio(ratio: 0.5), height: .Fixed(size: 10)),
+            ], alignment: BrickAlignment(horizontal: .Left, vertical: .Center))
+        collectionView.setupSectionAndLayout(section)
+
+        let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 0, y: 0, width: 160, height: 50))
+        let cell2 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 160, y: 20, width: 160, height: 10))
+    }
+
+    func testThatVerticalCenterAlignmentBricksWithInsets() {
+        let section = BrickSection(bricks: [
+            DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
+            DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 30)),
+            DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 20)),
+            ], inset: 5, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), alignment: BrickAlignment(horizontal: .Left, vertical: .Center))
+        collectionView.setupSectionAndLayout(section)
+
+        let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 10, width: 50, height: 50))
+        let cell2 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 65, y: 20, width: 50, height: 30))
+        let cell3 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 2, inSection: 1))
+        XCTAssertEqual(cell3?.frame, CGRect(x: 120, y: 25, width: 50, height: 20))
+
+    }
+
+    func testThatVerticalCenterAlignmentBricksWithInsetsAndSection() {
+        let section = BrickSection(bricks: [
+            BrickSection(width: .Fixed(size: 50), bricks: [
+                DummyBrick(height: .Fixed(size: 50))
+                ]),
+            DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 30)),
+            DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 20)),
+            ], inset: 5, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), alignment: BrickAlignment(horizontal: .Left, vertical: .Center))
+        collectionView.setupSectionAndLayout(section)
+
+        let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 10, width: 50, height: 50))
+        let cell12 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 2))
+        XCTAssertEqual(cell12?.frame, CGRect(x: 10, y: 10, width: 50, height: 50))
+        let cell2 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 65, y: 20, width: 50, height: 30))
+        let cell3 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 2, inSection: 1))
+        XCTAssertEqual(cell3?.frame, CGRect(x: 120, y: 25, width: 50, height: 20))
+        
+    }
+}
+
+// MARK: - Bottom Align
+extension BrickAlignmentTests {
+
+    func testThatBottomAlignDoesnChangeDefaultBehavior() {
+        let section = BrickSection(bricks: [
+            DummyBrick(height: .Fixed(size: 50)),
+            ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), alignment: BrickAlignment(horizontal: .Left, vertical: .Bottom))
+        collectionView.setupSectionAndLayout(section)
+
+        let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 5, y: 5, width: 310, height: 50))
+    }
+
+    func testThatBottomAlignIgnoresHiddenBricks() {
+        let hideBehaviorDataSource = FixedHideBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 1)])
+        collectionView.layout.hideBehaviorDataSource = hideBehaviorDataSource
+
+        let section = BrickSection(bricks: [
+            DummyBrick(height: .Fixed(size: 50)),
+            DummyBrick(height: .Fixed(size: 50)),
+            ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), alignRowHeights: true, alignment: BrickAlignment(horizontal: .Left, vertical: .Bottom))
+        collectionView.setupSectionAndLayout(section)
+
+        let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertNil(cell1)
+        let cell2 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 5, y: 5, width: 310, height: 50))
+    }
+
+    func testThatBottomAlignmentBricks() {
+        let section = BrickSection(bricks: [
+            DummyBrick(width: .Ratio(ratio: 0.5), height: .Fixed(size: 50)),
+            DummyBrick(width: .Ratio(ratio: 0.5), height: .Fixed(size: 10)),
+            ], alignment: BrickAlignment(horizontal: .Left, vertical: .Bottom))
+        collectionView.setupSectionAndLayout(section)
+
+        let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 0, y: 0, width: 160, height: 50))
+        let cell2 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 160, y: 40, width: 160, height: 10))
+    }
+
+    func testThatBottomAlignmentBricksWithInsets() {
+        let section = BrickSection(bricks: [
+            DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 50)),
+            DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 30)),
+            DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 20)),
+            ], inset: 5, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), alignment: BrickAlignment(horizontal: .Left, vertical: .Bottom))
+        collectionView.setupSectionAndLayout(section)
+
+        let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 10, width: 50, height: 50))
+        let cell2 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 65, y: 30, width: 50, height: 30))
+        let cell3 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 2, inSection: 1))
+        XCTAssertEqual(cell3?.frame, CGRect(x: 120, y: 40, width: 50, height: 20))
+
+    }
+
+    func testThatBottomAlignmentBricksWithInsetsAndSection() {
+        let section = BrickSection(bricks: [
+            BrickSection(width: .Fixed(size: 50), bricks: [
+                DummyBrick(height: .Fixed(size: 50))
+                ]),
+            DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 30)),
+            DummyBrick(width: .Fixed(size: 50), height: .Fixed(size: 20)),
+            ], inset: 5, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), alignment: BrickAlignment(horizontal: .Left, vertical: .Bottom))
+        collectionView.setupSectionAndLayout(section)
+
+        let cell1 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        XCTAssertEqual(cell1?.frame, CGRect(x: 10, y: 10, width: 50, height: 50))
+        let cell12 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 2))
+        XCTAssertEqual(cell12?.frame, CGRect(x: 10, y: 10, width: 50, height: 50))
+        let cell2 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        XCTAssertEqual(cell2?.frame, CGRect(x: 65, y: 30, width: 50, height: 30))
+        let cell3 = collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 2, inSection: 1))
+        XCTAssertEqual(cell3?.frame, CGRect(x: 120, y: 40, width: 50, height: 20))
+        
     }
 }

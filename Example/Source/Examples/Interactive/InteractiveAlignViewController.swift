@@ -55,7 +55,7 @@ class InteractiveAlignViewController: BrickViewController {
 
         let section = BrickSection(bricks: [
             labelBrick,
-            ], inset: 10, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), alignment: .Center)
+            ], inset: 10, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), alignment: BrickAlignment(horizontal: .Center, vertical: .Top))
         section.repeatCountDataSource = self
         setSection(section)
     }

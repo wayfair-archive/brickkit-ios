@@ -9,6 +9,27 @@
 import UIKit
 import BrickKit
 
+class HorizontalSegmentedControl: SegmentHeaderBrickDataSource {
+    static let identifier = "Horizontal"
+
+    var selectedSegmentIndex: Int = 0
+
+    var titles: [String] {
+        return ["Left", "Center", "Right", "Justified"]
+    }
+    
+}
+class VerticalSegmentedControl: SegmentHeaderBrickDataSource {
+    static let identifier = "Vertical"
+
+    var selectedSegmentIndex: Int = 0
+
+    var titles: [String] {
+        return ["Top", "Center", "Bottom"]
+    }
+    
+}
+
 class AlignmentBrickViewController: BrickViewController {
 
     override class var title: String {
@@ -22,20 +43,36 @@ class AlignmentBrickViewController: BrickViewController {
     var brickSection2: BrickSection!
     var brickSection3: BrickSection!
 
-    var selectedSegmentIndex: Int = 0 {
+    var horizontalSegmentedControl = HorizontalSegmentedControl()
+    var verticalSegmentedControl = VerticalSegmentedControl()
+
+    var horizontalSelectedSegmentIndex: Int = 0 {
         didSet {
-            let alignment: BrickAlignment
-            switch selectedSegmentIndex {
-            case 1: alignment = .Center
-            case 2: alignment = .Right
-            case 3: alignment = .Justified
-            default: alignment = .Left
-            }
-            brickSection1.alignment = alignment
-            brickSection2.alignment = alignment
-            brickSection3.alignment = alignment
-            self.brickCollectionView.invalidateBricks()
         }
+    }
+
+    func updateAligments() {
+        let horizontalAlignment: BrickHorizontalAlignment
+        switch horizontalSegmentedControl.selectedSegmentIndex {
+        case 1: horizontalAlignment = .Center
+        case 2: horizontalAlignment = .Right
+        case 3: horizontalAlignment = .Justified
+        default: horizontalAlignment = .Left
+        }
+
+        let verticalAlignment: BrickVerticalAlignment
+        switch verticalSegmentedControl.selectedSegmentIndex {
+        case 1: verticalAlignment = .Center
+        case 2: verticalAlignment = .Bottom
+        default: verticalAlignment = .Top
+        }
+
+        let alignment = BrickAlignment(horizontal: horizontalAlignment, vertical: verticalAlignment)
+        brickSection1.alignment = alignment
+        brickSection2.alignment = alignment
+        brickSection3.alignment = alignment
+
+        self.brickCollectionView.invalidateBricks(false)
     }
 
     override func viewDidLoad() {
@@ -47,14 +84,14 @@ class AlignmentBrickViewController: BrickViewController {
         self.brickCollectionView.registerBrickClass(SegmentHeaderBrick.self)
 
         brickSection1 = BrickSection(backgroundColor: .brickGray1, bricks: [
-            LabelBrick(width: .Fixed(size: 60), height: .Fixed(size: 100), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
-            LabelBrick(width: .Fixed(size: 60), height: .Fixed(size: 100), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
-            LabelBrick(width: .Fixed(size: 60), height: .Fixed(size: 100), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
+            LabelBrick(width: .Fixed(size: 70), height: .Fixed(size: 100), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
+            LabelBrick(width: .Fixed(size: 70), height: .Fixed(size: 50), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
+            LabelBrick(width: .Fixed(size: 70), height: .Fixed(size: 75), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
             ], inset: 10)
 
         brickSection2 = BrickSection(backgroundColor: .brickGray1, bricks: [
             LabelBrick(width: .Ratio(ratio: 1/3), height: .Fixed(size: 100), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
-            LabelBrick(width: .Ratio(ratio: 1/3), height: .Fixed(size: 100), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
+            LabelBrick(width: .Ratio(ratio: 1/3), height: .Fixed(size: 50), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
             ], inset: 10)
 
         brickSection3 = BrickSection(backgroundColor: .brickGray1, bricks: [
@@ -64,7 +101,14 @@ class AlignmentBrickViewController: BrickViewController {
         brickSection3.repeatCountDataSource = self
 
         let section = BrickSection(bricks: [
-            SegmentHeaderBrick(dataSource: self, delegate: self),
+            BrickSection(bricks: [
+                LabelBrick(text: "Horizontal", configureCellBlock: LabelBrickCell.configure),
+                SegmentHeaderBrick(HorizontalSegmentedControl.identifier, dataSource: horizontalSegmentedControl, delegate: self),
+                ]),
+            BrickSection(bricks: [
+                LabelBrick(text: "Vertical", configureCellBlock: LabelBrickCell.configure),
+                SegmentHeaderBrick(VerticalSegmentedControl.identifier, dataSource: verticalSegmentedControl, delegate: self),
+                ]),
             brickSection1,
             brickSection2,
             brickSection3
@@ -85,17 +129,14 @@ extension AlignmentBrickViewController: BrickRepeatCountDataSource {
     }
 }
 
-extension AlignmentBrickViewController: SegmentHeaderBrickDataSource {
-
-    var titles: [String] {
-        return ["Left", "Center", "Right", "Justified"]
-    }
-
-}
-
 extension AlignmentBrickViewController: SegmentHeaderBrickDelegate {
     func segementHeaderBrickCell(cell: SegmentHeaderBrickCell, didSelectIndex index: Int) {
-        self.selectedSegmentIndex = index
+        if cell.brick.identifier == HorizontalSegmentedControl.identifier {
+            self.horizontalSegmentedControl.selectedSegmentIndex = index
+        } else if cell.brick.identifier == VerticalSegmentedControl.identifier {
+            self.verticalSegmentedControl.selectedSegmentIndex = index
+        }
+        updateAligments()
     }
 }
 
