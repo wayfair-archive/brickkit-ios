@@ -60,6 +60,8 @@ class LabelBrickTests: XCTestCase {
         XCTAssertEqual(cell?.bottomSpaceConstraint?.constant, 0)
         XCTAssertEqual(cell?.leftSpaceConstraint?.constant, 0)
         XCTAssertEqual(cell?.rightSpaceConstraint?.constant, 0)
+        XCTAssertEqual(cell?.backgroundColor, UIColor.clearColor())
+        XCTAssertEqual(cell?.label.backgroundColor, UIColor.clearColor())
 
         XCTAssertEqualWithAccuracy(cell?.frame, CGRectMake(0, 0, 320, 20), accuracy: CGRectMake(0, 0, 1, 1))
         XCTAssertEqualWithAccuracy(cell?.label.frame, CGRectMake(0, 0, 320, 20), accuracy: CGRectMake(0, 0, 1, 1))

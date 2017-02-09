@@ -8,11 +8,23 @@
 
 // MARK: - Brick
 
-public class ImageBrick: Brick {
+public class ImageBrick: GenericBrick<UIImageView> {
     public weak var dataSource: ImageBrickDataSource?
     
     private var model: ImageBrickDataSource?
-    
+
+    public override class var internalIdentifier: String {
+        return self.nibName
+    }
+
+    public override class var cellClass: UICollectionViewCell.Type? {
+        return ImageBrickCell.self
+    }
+
+    public override class var bundle: NSBundle {
+        return NSBundle(forClass: Brick.self)
+    }
+
     public convenience init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: ImageBrickDataSource) {
         self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: dataSource)
     }
@@ -31,7 +43,10 @@ public class ImageBrick: Brick {
     public init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: ImageBrickDataSource) {
         
         self.dataSource = dataSource
-        super.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView)
+        super.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView, configureView: { imageView, cell in
+            imageView.contentMode = .ScaleToFill
+            imageView.clipsToBounds = true
+        })
         
         if dataSource is ImageBrickModel || dataSource is ImageURLBrickModel {
             self.model = dataSource
@@ -117,7 +132,7 @@ public class ImageURLBrickModel: ImageBrickDataSource {
 
 // MARK: - Cell
 
-public class ImageBrickCell: BrickCell, Bricklike, AsynchronousResizableCell, ImageDownloaderCell {
+public class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableCell, ImageDownloaderCell {
     public typealias BrickType = ImageBrick
 
     public var sizeChangedHandler: CellSizeChangedHandler?
@@ -139,6 +154,10 @@ public class ImageBrickCell: BrickCell, Bricklike, AsynchronousResizableCell, Im
 
     override public func updateContent() {
         super.updateContent()
+
+        if !fromNib {
+            self.imageView = self.genericContentView as! UIImageView
+        }
 
         guard let dataSource = brick.dataSource else {
             return

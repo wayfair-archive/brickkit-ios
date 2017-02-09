@@ -50,8 +50,19 @@ public class GenericBrickCell: BrickCell {
 
     var genericContentView: UIView?
 
+    var fromNib: Bool = false
+
+    public override func awakeFromNib() {
+        super.awakeFromNib()
+        fromNib = true
+    }
+
     public override func updateContent() {
         super.updateContent()
+
+        guard !fromNib else {
+            return
+        }
 
         clearContentViewAndConstraints()
 
@@ -76,6 +87,10 @@ public class GenericBrickCell: BrickCell {
             self.leftSpaceConstraint = leftSpaceConstraint
             self.rightSpaceConstraint = rightSpaceConstraint
         }
+
+        backgroundColor = .clearColor()
+        contentView.backgroundColor = .clearColor()
+        genericContentView?.backgroundColor = .clearColor()
 
     }
 

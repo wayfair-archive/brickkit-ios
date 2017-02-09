@@ -19,9 +19,21 @@ public struct ButtonBrickNibs {
 
 // MARK: - Brick
 
-public class ButtonBrick: Brick {
+public class ButtonBrick: GenericBrick<UIButton> {
     public weak var dataSource: ButtonBrickCellDataSource?
     public weak var delegate: ButtonBrickCellDelegate?
+
+    public override class var internalIdentifier: String {
+        return self.nibName
+    }
+
+    public override class var cellClass: UICollectionViewCell.Type? {
+        return ButtonBrickCell.self
+    }
+
+    public override class var bundle: NSBundle {
+        return NSBundle(forClass: Brick.self)
+    }
 
     public var title: String? {
         set {
@@ -77,7 +89,9 @@ public class ButtonBrick: Brick {
     public init(_ identifier: String, size: BrickSize, backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: ButtonBrickCellDataSource, delegate: ButtonBrickCellDelegate? = nil) {
         self.dataSource = dataSource
         self.delegate = delegate
-        super.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView)
+        super.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView, configureView: { (button, cell) in
+            button.titleLabel?.font = UIFont.systemFontOfSize(15)
+        })
         
         if let delegateModel = delegate as? ButtonBrickCellModel {
             self.delegateModel = delegateModel
@@ -127,7 +141,7 @@ public class ButtonBrickCellModel: ButtonBrickCellDataSource, ButtonBrickCellDel
 
 // MARK: - Cell
 
-public class ButtonBrickCell: BrickCell, Bricklike {
+public class ButtonBrickCell: GenericBrickCell, Bricklike {
     public typealias BrickType = ButtonBrick
 
     @IBOutlet weak public var button: UIButton!
@@ -135,6 +149,11 @@ public class ButtonBrickCell: BrickCell, Bricklike {
 
     override public func updateContent() {
         super.updateContent()
+
+        if !fromNib {
+            self.button = self.genericContentView as! UIButton
+        }
+
         brick.dataSource?.configureButtonBrick(self)
     }
 

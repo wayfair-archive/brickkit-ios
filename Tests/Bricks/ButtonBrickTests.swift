@@ -61,12 +61,7 @@ class ButtonBrickTests: XCTestCase {
         XCTAssertEqual(cell?.leftSpaceConstraint?.constant, 0)
         XCTAssertEqual(cell?.rightSpaceConstraint?.constant, 0)
         
-        #if os(iOS)
         let buttonSize = CGSize(width: 320, height: 30)
-        #else
-        let buttonSize = CGSize(width: 320, height: 86)
-        #endif
-        
         XCTAssertEqual(cell?.frame, CGRect(origin: CGPoint.zero, size: buttonSize))
         XCTAssertEqual(cell?.button.frame, CGRect(origin: CGPoint.zero, size: buttonSize))
 
@@ -77,12 +72,7 @@ class ButtonBrickTests: XCTestCase {
 
         XCTAssertEqual(cell?.button.titleLabel?.text, "Hello World\nHello World")
 
-        #if os(iOS)
-            let buttonSize = CGSize(width: 320, height: 48)
-        #else
-            let buttonSize = CGSize(width: 320, height: 132)
-        #endif
-
+        let buttonSize = CGSize(width: 320, height: 48)
         XCTAssertEqual(cell?.frame, CGRect(origin: CGPoint.zero, size: buttonSize))
         XCTAssertEqual(cell?.button.frame, CGRect(origin: CGPoint.zero, size: buttonSize))
     }
@@ -97,13 +87,8 @@ class ButtonBrickTests: XCTestCase {
         XCTAssertEqual(cell?.bottomSpaceConstraint?.constant, 10)
         XCTAssertEqual(cell?.rightSpaceConstraint?.constant, 10)
 
-        #if os(iOS)
-            let cellSize = CGSize(width: 320, height: 45)
-            let buttonSize = CGSize(width: 305, height: 30)
-        #else
-            let cellSize = CGSize(width: 320, height: 101)
-            let buttonSize = CGSize(width: 305, height: 86)
-        #endif
+        let cellSize = CGSize(width: 320, height: 45)
+        let buttonSize = CGSize(width: 305, height: 30)
 
         XCTAssertEqual(cell?.frame, CGRect(origin: CGPoint.zero, size: cellSize))
         XCTAssertEqual(cell?.button.frame, CGRect(origin: CGPoint(x: 5, y: 5), size: buttonSize))
@@ -114,13 +99,8 @@ class ButtonBrickTests: XCTestCase {
             cell.edgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 10, right: 10)
         })
 
-        #if os(iOS)
-            let cellSize = CGSize(width: 320, height: 63)
-            let buttonSize = CGSize(width: 305, height: 48)
-        #else
-            let cellSize = CGSize(width: 320, height: 147)
-            let buttonSize = CGSize(width: 305, height: 132)
-        #endif
+        let cellSize = CGSize(width: 320, height: 63)
+        let buttonSize = CGSize(width: 305, height: 48)
 
         XCTAssertEqual(cell?.frame, CGRect(origin: CGPoint.zero, size: cellSize))
         XCTAssertEqual(cell?.button.frame, CGRect(origin: CGPoint(x: 5, y: 5), size: buttonSize))
