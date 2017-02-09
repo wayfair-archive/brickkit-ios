@@ -156,7 +156,7 @@ public class BrickSection: Brick {
         }
     }
 
-    public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 0)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, bricks: [Brick], inset: CGFloat = 0, edgeInsets: UIEdgeInsets = UIEdgeInsetsZero, alignRowHeights: Bool = false, alignment: BrickAlignment = .Left) {
+    public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 0)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, bricks: [Brick], inset: CGFloat = 0, edgeInsets: UIEdgeInsets = UIEdgeInsetsZero, alignRowHeights: Bool = false, alignment: BrickAlignment = BrickAlignment(horizontal: .Left, vertical: .Top)) {
         self.bricks = bricks
         self.inset = inset
         self.edgeInsets = edgeInsets

@@ -108,7 +108,7 @@ extension BrickLayoutDataSource {
     }
 
     public func brickLayout(layout: BrickLayout, alignmentForSection section: Int) -> BrickAlignment {
-        return .Left
+        return BrickAlignment(horizontal: .Left, vertical: .Top)
     }
 
 }

@@ -467,9 +467,9 @@ internal class BrickLayoutSection {
 
         let inset: CGFloat
         let numberOfInsets: CGFloat = CGFloat(rowAttributes.count-1)
-        let aligment = _dataSource.aligment(in: self)
+        let alignment = _dataSource.aligment(in: self)
 
-        switch aligment {
+        switch alignment.horizontal {
         case .Justified:
             // Distribute insets evenly
             inset = (totalSectionWidth - rowWidthWithoutInsets) / numberOfInsets
@@ -480,7 +480,7 @@ internal class BrickLayoutSection {
 
         // Get the x value of the first brick
         let startX: CGFloat
-        switch aligment {
+        switch alignment.horizontal {
         case .Center: startX = (totalSectionWidth - totalRowWidth) / 2 // Start from the middle minus the middle of the bricks total width
         case .Right: startX = totalSectionWidth - totalRowWidth // Start at the end of the section minus the total of the bricks total width
         default: startX = 0 // Start at zero
@@ -505,6 +505,15 @@ internal class BrickLayoutSection {
                 newFrame.size.height = maxHeight
             }
             newFrame.origin.x = x
+
+            let offsetY: CGFloat
+            switch _dataSource.aligment(in: self).vertical {
+            case .Top: offsetY = 0
+            case .Center: offsetY = (maxHeight / 2) - (newFrame.height / 2)
+            case .Bottom: offsetY = maxHeight - newFrame.height
+            }
+
+            newFrame.origin.y += offsetY
             if newFrame != oldFrame {
                 brickAttributes.frame = newFrame
                 updatedAttributes?(attributes: brickAttributes, oldFrame: oldFrame)
