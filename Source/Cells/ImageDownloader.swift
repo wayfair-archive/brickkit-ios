@@ -14,7 +14,7 @@ public protocol ImageDownloader: class {
     func downloadImageAndSet(on imageView: UIImageView, with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage, url: NSURL) -> Void))
 }
 
-class NSURLSessionImageDownloader: ImageDownloader {
+public extension ImageDownloader {
 
     func downloadImageAndSet(on imageView: UIImageView, with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage, url: NSURL) -> Void)) {
         self.downloadImage(with: imageURL) { (image, url) in
@@ -22,14 +22,31 @@ class NSURLSessionImageDownloader: ImageDownloader {
                 return
             }
 
-            NSOperationQueue.mainQueue().addOperationWithBlock({
+            NSOperationQueue.mainQueue().addOperationWithBlock {
                 imageView.image = image
                 completionHandler(image: image, url: url)
-            })
+            }
         }
     }
 
-    func downloadImage(with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage, url: NSURL) -> Void)) {
+}
+
+public class NSURLSessionImageDownloader: ImageDownloader {
+
+    public func downloadImageAndSet(on imageView: UIImageView, with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage, url: NSURL) -> Void)) {
+        self.downloadImage(with: imageURL) { (image, url) in
+            guard imageURL == url else {
+                return
+            }
+
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                imageView.image = image
+                completionHandler(image: image, url: url)
+            }
+        }
+    }
+
+    public func downloadImage(with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage, url: NSURL) -> Void)) {
         NSURLSession.sharedSession().dataTaskWithURL(imageURL, completionHandler: { (data, response, error) in
             guard
                 let data = data where error == nil,
