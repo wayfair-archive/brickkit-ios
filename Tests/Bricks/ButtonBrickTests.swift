@@ -19,10 +19,8 @@ class ButtonBrickTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
+        continueAfterFailure = false
         brickCollectionView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
-    }
-    func noOp() {
-        // no op for mock gesture
     }
 
     func setupButtonBrickWithModel(model: ButtonBrickCellModel) -> ButtonBrickCell? {
@@ -231,7 +229,10 @@ class ButtonBrickTests: XCTestCase {
         let cell = setupSection(ButtonBrick(ButtonBrickIdentifier, dataSource: FixedButtonDataSource(), delegate: delegate))
         
         // Ideally cell?.button?.sendActionsForControlEvents(.TouchUpInside) is called, but this doesn't work in XCTests
-        cell?.didTapButton(cell!.button!)
+        let actions = cell?.button.actionsForTarget(cell, forControlEvent: .TouchUpInside)
+        XCTAssertEqual(actions?.count, 1)
+        cell!.performSelector(Selector(actions!.first!), withObject: cell!.button)
+        
         XCTAssertTrue(delegate.buttonTouched)
     }
 
