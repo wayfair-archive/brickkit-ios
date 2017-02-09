@@ -130,7 +130,7 @@ public class BrickFlowLayout: UICollectionViewLayout, BrickLayout {
                 var updated = false
                 for section in currentSections {
                     updateSection(section, updatedAttributes: updateAttributes, action: {
-                        updated = updated || section.continueCalculatingCells()
+                        updated = section.continueCalculatingCells() || updated
                     })
                 }
 
