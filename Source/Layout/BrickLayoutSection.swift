@@ -8,6 +8,8 @@
 
 import UIKit
 
+private let PrecisionAccuracy: CGFloat = 0.0000001
+
 protocol BrickLayoutSectionDelegate: class {
     func brickLayoutSection(section: BrickLayoutSection, didCreateAttributes attributes: BrickLayoutAttributes)
 }
@@ -580,7 +582,9 @@ internal class BrickLayoutSection {
         let shouldBeOnNextRow: Bool
         switch dataSource.scrollDirection {
         case .Horizontal: shouldBeOnNextRow = false
-        case .Vertical: shouldBeOnNextRow = (x + width - origin.x) > (sectionWidth - edgeInsets.right)
+        case .Vertical:
+            let leftOverSpace = (sectionWidth - edgeInsets.right) - (x + width - origin.x)
+            shouldBeOnNextRow = leftOverSpace < 0 && fabs(leftOverSpace) > PrecisionAccuracy
         }
 
         var nextY: CGFloat = y
