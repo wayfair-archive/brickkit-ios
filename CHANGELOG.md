@@ -1,13 +1,35 @@
 # Change Log
 
+## [1.1.0](https://github.com/wayfair/brickkit-ios/tree/1.1.0) (2017-02-10)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.0.0...1.1.0)
+
+**Closed issues:**
+
+- Width ratio doesn't always work on iPad [\#77](https://github.com/wayfair/brickkit-ios/issues/77)
+- Default ButtonBrick doesn't call `didTapOnButtonForButtonBrickCell`  [\#75](https://github.com/wayfair/brickkit-ios/issues/75)
+- ImageBrick - Image is added on main thread [\#72](https://github.com/wayfair/brickkit-ios/issues/72)
+- Bricks are not always displayed [\#70](https://github.com/wayfair/brickkit-ios/issues/70)
+- Vertically Center Bricks in a BrickSection [\#69](https://github.com/wayfair/brickkit-ios/issues/69)
+- LabelBrick should inherit from GenericBrick\<UILabel\> [\#66](https://github.com/wayfair/brickkit-ios/issues/66)
+- Generic Brick [\#64](https://github.com/wayfair/brickkit-ios/issues/64)
+- Move public functions in extensions into its respective class declaration [\#56](https://github.com/wayfair/brickkit-ios/issues/56)
+
+**Merged pull requests:**
+
+- Optimized brick calculation [\#78](https://github.com/wayfair/brickkit-ios/pull/78) ([rubencagnie](https://github.com/rubencagnie))
+- Fixed ButtonBrick by adding action to UIButton [\#76](https://github.com/wayfair/brickkit-ios/pull/76) ([rubencagnie](https://github.com/rubencagnie))
+- Horizontal and Vertical BrickAlignment [\#74](https://github.com/wayfair/brickkit-ios/pull/74) ([rubencagnie](https://github.com/rubencagnie))
+- Add function to ImageDownloader protocol [\#73](https://github.com/wayfair/brickkit-ios/pull/73) ([rubencagnie](https://github.com/rubencagnie))
+- Fixed operator order for continueCalculatingCells [\#71](https://github.com/wayfair/brickkit-ios/pull/71) ([rubencagnie](https://github.com/rubencagnie))
+- Bug fix collection brick content offset calculation [\#68](https://github.com/wayfair/brickkit-ios/pull/68) ([wfsttam](https://github.com/wfsttam))
+- Extend Label/Button/Image-Brick from GenericBrick [\#67](https://github.com/wayfair/brickkit-ios/pull/67) ([rubencagnie](https://github.com/rubencagnie))
+
 ## [1.0.0](https://github.com/wayfair/brickkit-ios/tree/1.0.0) (2017-01-26)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/0.9.7...1.0.0)
 
 **Closed issues:**
 
 - Add support for UIAccessibility [\#59](https://github.com/wayfair/brickkit-ios/issues/59)
-- Generic Brick [\#64](https://github.com/wayfair/brickkit-ios/issues/64)
-- Move public functions in extensions into its respective class declaration [\#56](https://github.com/wayfair/brickkit-ios/issues/56)
 
 **Merged pull requests:**
 
