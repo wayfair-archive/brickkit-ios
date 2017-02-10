@@ -152,6 +152,7 @@ public class ButtonBrickCell: GenericBrickCell, Bricklike {
 
         if !fromNib {
             self.button = self.genericContentView as! UIButton
+            self.button.addTarget(self, action: #selector(didTapButton(_:)), forControlEvents: .TouchUpInside)
         }
 
         brick.dataSource?.configureButtonBrick(self)
