@@ -214,6 +214,19 @@ class BrickFlowLayoutTests: BrickFlowLayoutBaseTests {
         XCTAssertEqual(delegate.updatedIndexPaths, [NSIndexPath(forItem: 0, inSection: 1)])
     }
 
+    func testPrecision() {
+        let brickView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 1024, height: 768))
+        let section = BrickSection(bricks: [
+            DummyBrick("Dummy", width: .Ratio(ratio: 1/5), height: .Fixed(size: 50))
+            ], inset: 8, edgeInsets: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+        let repeatCount = FixedRepeatCountDataSource(repeatCountHash: ["Dummy": 5])
+        section.repeatCountDataSource = repeatCount
+        brickView.setupSectionAndLayout(section)
+
+        let cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 4, inSection: 1))
+        XCTAssertEqualWithAccuracy(cell?.frame, CGRect(x: 820.8, y: 8, width: 195.2, height: 50), accuracy: CGRect(x: 0.1, y: 0.1, width: 0.1, height: 0.1))
+    }
+
 }
 
 class FixedDelegate: BrickLayoutDelegate {
