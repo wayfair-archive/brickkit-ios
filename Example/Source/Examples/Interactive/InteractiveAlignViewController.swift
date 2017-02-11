@@ -1,3 +1,4 @@
+
 //
 //  InteractiveAlignViewController.swift
 //  BrickKit-Example
@@ -16,13 +17,13 @@ class ScaleAppearBehavior: BrickAppearBehavior {
         self.scale = scale
     }
 
-    func configureAttributesForAppearing(attributes: UICollectionViewLayoutAttributes, in collectionView: UICollectionView) {
-        attributes.transform = CGAffineTransformMakeScale(scale, scale)
+    func configureAttributesForAppearing(_ attributes: UICollectionViewLayoutAttributes, in collectionView: UICollectionView) {
+        attributes.transform = CGAffineTransform(scaleX: scale, y: scale)
         attributes.alpha = 0
     }
 
-    func configureAttributesForDisappearing(attributes: UICollectionViewLayoutAttributes, in collectionView: UICollectionView) {
-        attributes.transform = CGAffineTransformMakeScale(scale, scale)
+    func configureAttributesForDisappearing(_ attributes: UICollectionViewLayoutAttributes, in collectionView: UICollectionView) {
+        attributes.transform = CGAffineTransform(scaleX: scale, y: scale)
         attributes.alpha = 0
     }
 
@@ -46,16 +47,16 @@ class InteractiveAlignViewController: BrickViewController {
 
         self.view.backgroundColor = .brickBackground
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(InteractiveAlignViewController.add))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(InteractiveAlignViewController.add))
 
         self.registerBrickClass(LabelBrick.self)
         self.brickCollectionView.layout.appearBehavior = ScaleAppearBehavior(scale: 0.5)
 
-        let labelBrick = LabelBrick("Label", width: .Ratio(ratio: 1/3), height: .Fixed(size: 100), backgroundColor: UIColor.lightGray.colorWithAlphaComponent(0.3), dataSource: self)
+        let labelBrick = LabelBrick("Label", width: .ratio(ratio: 1/3), height: .fixed(size: 100), backgroundColor: UIColor.lightGray.withAlphaComponent(0.3), dataSource: self)
 
         let section = BrickSection(bricks: [
             labelBrick,
-            ], inset: 10, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), alignment: BrickAlignment(horizontal: .Center, vertical: .Top))
+            ], inset: 10, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), alignment: BrickAlignment(horizontal: .center, vertical: .top))
         section.repeatCountDataSource = self
         setSection(section)
     }
@@ -67,23 +68,23 @@ class InteractiveAlignViewController: BrickViewController {
 
     func remove(indexPath: IndexPath) {
         numberOfItems -= 1
-        updateCounts([indexPath])
+        updateCounts(fixedDeletedIndexPaths: [indexPath])
     }
 
     func updateCounts(fixedDeletedIndexPaths: [IndexPath]? = nil) {
-        UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .CurveEaseIn, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
             self.brickCollectionView.invalidateRepeatCounts(reloadAllSections: false)
             }, completion: nil)
     }
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: IndexPath) {
-        remove(indexPath)
+        remove(indexPath: indexPath)
     }
 
 }
 
 extension InteractiveAlignViewController: LabelBrickCellDataSource {
-    func configureLabelBrickCell(cell: LabelBrickCell) {
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
         cell.label.text = "BRICK \(cell.index)"
         cell.configure()
     }

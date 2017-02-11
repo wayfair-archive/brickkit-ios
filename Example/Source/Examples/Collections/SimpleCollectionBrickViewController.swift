@@ -31,8 +31,8 @@ class SimpleCollectionBrickViewController: BrickApp.BaseBrickController {
         self.registerBrickClass(CollectionBrick.self)
 
         let collectionSection = BrickSection(bricks: [
-            ImageBrick(width: .Ratio(ratio: 1/2), height: .Ratio(ratio: 1), dataSource: ImageBrickModel(image: image, contentMode: .ScaleAspectFit)),
-            BrickSection(width: .Ratio(ratio: 1/2), bricks: [
+            ImageBrick(width: .ratio(ratio: 1/2), height: .ratio(ratio: 1), dataSource: ImageBrickModel(image: image, contentMode: .scaleAspectFit)),
+            BrickSection(width: .ratio(ratio: 1/2), bricks: [
                 LabelBrick(backgroundColor: .brickGray2, dataSource: LabelBrickCellModel(text: "MODEL", configureCellBlock: LabelBrickCell.configure)),
                 LabelBrick(backgroundColor: .brickGray4, dataSource: LabelBrickCellModel(text: "USING A COLLECTION BRICKCELL MODEL", configureCellBlock: LabelBrickCell.configure))
                 ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
@@ -53,8 +53,8 @@ extension SimpleCollectionBrickViewController: CollectionBrickCellDataSource {
 
     func sectionForCollectionBrickCell(cell: CollectionBrickCell) -> BrickSection {
         let collectionSection = BrickSection(bricks: [
-            ImageBrick(width: .Ratio(ratio: 1/2), height: .Ratio(ratio: 1), dataSource: ImageBrickModel(image: image, contentMode: .ScaleAspectFit)),
-            BrickSection(width: .Ratio(ratio: 1/2), bricks: [
+            ImageBrick(width: .ratio(ratio: 1/2), height: .ratio(ratio: 1), dataSource: ImageBrickModel(image: image, contentMode: .scaleAspectFit)),
+            BrickSection(width: .ratio(ratio: 1/2), bricks: [
                 LabelBrick(backgroundColor: .brickGray2, dataSource: LabelBrickCellModel(text: "DATASOURCE", configureCellBlock: LabelBrickCell.configure)),
                 LabelBrick(backgroundColor: .brickGray4, dataSource: LabelBrickCellModel(text: "USING A COLLECTION BRICKCELL DATASOURCE", configureCellBlock: LabelBrickCell.configure))
                 ])

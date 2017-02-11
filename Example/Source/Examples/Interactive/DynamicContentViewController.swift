@@ -51,11 +51,11 @@ class DynamicContentViewController: BrickViewController {
 
         self.setSection(section)
 
-        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: #selector(DynamicContentViewController.timerFired), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(DynamicContentViewController.timerFired), userInfo: nil, repeats: false)
         self.overrideContentSource.shouldOverride = true
     }
 
-    func timerFUIColor.red {
+    func timerFired() {
         self.overrideContentSource.shouldOverride = false
         imageURLs = []
         for _ in 1...5 {
@@ -74,10 +74,10 @@ class DynamicContentViewController: BrickViewController {
     }
 
     func hideableSection() -> BrickSection {
-        let brick = LabelBrick(height: .Auto(estimate: .Fixed(size:30)), backgroundColor: .brickGray3, text: "Section 1 Label 0".uppercased(), configureCellBlock: LabelBrickCell.configure)
-        let imageBrick = ImageBrick(DynamicContentViewController.Identifiers.HideableSectionContentImage, height: .Auto(estimate: .Fixed(size:100)), backgroundColor: .brickGray3, dataSource: self)
+        let brick = LabelBrick(height: .auto(estimate: .fixed(size:30)), backgroundColor: .brickGray3, text: "Section 1 Label 0".uppercased(), configureCellBlock: LabelBrickCell.configure)
+        let imageBrick = ImageBrick(DynamicContentViewController.Identifiers.HideableSectionContentImage, height: .auto(estimate: .fixed(size:100)), backgroundColor: .brickGray3, dataSource: self)
         imageBrick.overrideContentSource = self.overrideContentSource
-        let brick0 = LabelBrick(height: .Auto(estimate: .Fixed(size:30)), backgroundColor: .brickGray3, text: "Section 1 Label 1".uppercased(), configureCellBlock: LabelBrickCell.configure)
+        let brick0 = LabelBrick(height: .auto(estimate: .fixed(size:30)), backgroundColor: .brickGray3, text: "Section 1 Label 1".uppercased(), configureCellBlock: LabelBrickCell.configure)
 
         let section = BrickSection(backgroundColor: .brickSection, bricks: [
             brick0,
@@ -121,6 +121,6 @@ extension DynamicContentViewController: ImageBrickDataSource {
     }
 
     func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIViewContentMode {
-        return .ScaleAspectFit
+        return .scaleAspectFit
     }
 }

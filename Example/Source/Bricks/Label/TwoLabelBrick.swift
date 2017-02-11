@@ -16,7 +16,7 @@ class TwoLabelBrick: LabelBrick {
     }
 
     override class var bundle: Bundle {
-        return Bundle(forClass: TwoLabelBrick.self)
+        return Bundle(for: TwoLabelBrick.self)
     }
 
 }
@@ -28,6 +28,6 @@ class TwoLabelBrickCell: LabelBrickCell {
     override func updateContent() {
         super.updateContent()
 
-        self.imageView?.image = UIImage(named: "chevron", inBundle: Bundle(forClass: LabelBrickCell.classForCoder()), compatibleWithTraitCollection: nil)
+        self.imageView?.image = UIImage(named: "chevron", in: Bundle(for: LabelBrickCell.classForCoder()), compatibleWith: nil)
     }
 }

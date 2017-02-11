@@ -34,22 +34,22 @@ class StickingSectionsViewController: BrickApp.BaseBrickController {
 
         behavior = StickyLayoutBehavior(dataSource: self)
 
-        repeatLabel = LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray1, dataSource: self)
+        repeatLabel = LabelBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 0.5), backgroundColor: .brickGray1, dataSource: self)
 
         let section = BrickSection(backgroundColor: UIColor.clear, bricks: [
             BrickSection(backgroundColor: .brickGray3, bricks: [
                 BrickSection(StickySection, backgroundColor: .brickGray5, bricks: [
                     LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray2, text: "Sticking Section 1".uppercased(), configureCellBlock: LabelBrickCell.configure),
-                    LabelBrick(BrickIdentifiers.titleLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray4, text: "Brick 1-1".uppercased(), configureCellBlock: LabelBrickCell.configure),
-                    LabelBrick(BrickIdentifiers.titleLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray4, text: "Brick 2-1".uppercased(), configureCellBlock: LabelBrickCell.configure),
+                    LabelBrick(BrickIdentifiers.titleLabel, width: .ratio(ratio: 0.5), backgroundColor: .brickGray4, text: "Brick 1-1".uppercased(), configureCellBlock: LabelBrickCell.configure),
+                    LabelBrick(BrickIdentifiers.titleLabel, width: .ratio(ratio: 0.5), backgroundColor: .brickGray4, text: "Brick 2-1".uppercased(), configureCellBlock: LabelBrickCell.configure),
                     ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)),
                 repeatLabel,
                 ]),
             BrickSection(backgroundColor: .brickGray3, bricks: [
                 BrickSection(StickySection, backgroundColor: .brickGray5, bricks: [
                     LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray2, text: "Sticking Section 2".uppercased(), configureCellBlock: LabelBrickCell.configure),
-                    LabelBrick(BrickIdentifiers.titleLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray4, text: "Brick 1-2".uppercased(), configureCellBlock: LabelBrickCell.configure),
-                    LabelBrick(BrickIdentifiers.titleLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray4, text: "Brick 2-2".uppercased(), configureCellBlock: LabelBrickCell.configure),
+                    LabelBrick(BrickIdentifiers.titleLabel, width: .ratio(ratio: 0.5), backgroundColor: .brickGray4, text: "Brick 1-2".uppercased(), configureCellBlock: LabelBrickCell.configure),
+                    LabelBrick(BrickIdentifiers.titleLabel, width: .ratio(ratio: 0.5), backgroundColor: .brickGray4, text: "Brick 2-2".uppercased(), configureCellBlock: LabelBrickCell.configure),
                     ]),
                 repeatLabel,
                 ]),
@@ -61,7 +61,7 @@ class StickingSectionsViewController: BrickApp.BaseBrickController {
 }
 
 extension StickingSectionsViewController: StickyLayoutBehaviorDataSource {
-    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func stickyLayoutBehavior(_ stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         return identifier == StickySection
     }
 }
@@ -77,7 +77,7 @@ extension StickingSectionsViewController: BrickRepeatCountDataSource {
 }
 
 extension StickingSectionsViewController: LabelBrickCellDataSource {
-    func configureLabelBrickCell(cell: LabelBrickCell) {
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
         cell.label.text = "BRICK \(cell.index + 1)"
         cell.configure()
     }

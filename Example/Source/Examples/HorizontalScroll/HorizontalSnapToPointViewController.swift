@@ -1,3 +1,4 @@
+
 //
 //  HorizontalSnapToPointViewController.swift
 //  BrickKit
@@ -16,26 +17,26 @@ class HorizontalSnapToPointViewController: SimpleHorizontalScrollBrickViewContro
         return "Combine the horizontal scroll with the SnapToPointLayoutBehavior"
     }
 
-    var snapToPointBehavior = SnapToPointLayoutBehavior(scrollDirection: .Horizontal(.Center))
+    var snapToPointBehavior = SnapToPointLayoutBehavior(scrollDirection: .horizontal(.center))
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.layout.behaviors.insert(snapToPointBehavior)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Location", style: .Plain, target: self, action: #selector(HorizontalSnapToPointViewController.changeLocation))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Location", style: .plain, target: self, action: #selector(HorizontalSnapToPointViewController.changeLocation))
     }
 
     func changeLocation() {
-        let alert = UIAlertController(title: "Change location", message: "Change the location of the snap to point", preferredStyle: .ActionSheet)
+        let alert = UIAlertController(title: "Change location", message: "Change the location of the snap to point", preferredStyle: .actionSheet)
 
         alert.addAction(UIAlertAction(title: "Left", style: .Default, handler: { (action) in
-            self.updateScrollDirection(.Horizontal(.Left))
+            self.updateScrollDirection(scrollDirection: .horizontal(.left))
         }))
         alert.addAction(UIAlertAction(title: "Center", style: .Default, handler: { (action) in
-            self.updateScrollDirection(.Horizontal(.Center))
+            self.updateScrollDirection(scrollDirection: .horizontal(.center))
         }))
         alert.addAction(UIAlertAction(title: "Right", style: .Default, handler: { (action) in
-            self.updateScrollDirection(.Horizontal(.Right))
+            self.updateScrollDirection(scrollDirection: .horizontal(.right))
         }))
 
         self.present(alert, animated: true, completion: nil)

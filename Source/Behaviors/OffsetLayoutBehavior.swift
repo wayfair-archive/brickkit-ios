@@ -9,7 +9,7 @@
 import UIKit
 
 public protocol OffsetLayoutBehaviorDataSource: class {
-    func offsetLayoutBehavior(_ behavior: OffsetLayoutBehavior, originOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize?
+    func offsetLayoutBehaviorWithOrigin(_ behavior: OffsetLayoutBehavior, originOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize?
 
     func offsetLayoutBehavior(_ behavior: OffsetLayoutBehavior, sizeOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize?
 }
@@ -32,7 +32,7 @@ open class OffsetLayoutBehavior: BrickLayoutBehavior {
     }
 
     open override func registerAttributes(_ attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
-        if let _ = dataSource?.offsetLayoutBehavior(self, originOffsetForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
+        if let _ = dataSource?.offsetLayoutBehaviorWithOrigin(self, originOffsetForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
             offsetAttributes.append(attributes)
         }
 
@@ -63,7 +63,7 @@ open class OffsetLayoutBehavior: BrickLayoutBehavior {
                 currentFrame?.size = CGSize(width: (currentFrame?.size.width)! + sizeOffset.width, height: (currentFrame?.size.height)! + sizeOffset.height)
             }
 
-            if let originOffset = dataSource?.offsetLayoutBehavior(self, originOffsetForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
+            if let originOffset = dataSource?.offsetLayoutBehaviorWithOrigin(self, originOffsetForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
                 currentFrame?.offsetBy(dx: originOffset.width, dy: originOffset.height)
             }
 

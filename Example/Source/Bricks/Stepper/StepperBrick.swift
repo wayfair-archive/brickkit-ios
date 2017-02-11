@@ -13,7 +13,7 @@ public class StepperBrick: Brick {
     public let dataSource: StepperBrickCellDataSource
     public let delegate: StepperBrickCellDelegate
 
-    public init(_ identifier: String, width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, dataSource: StepperBrickCellDataSource, delegate: StepperBrickCellDelegate) {
+    public init(_ identifier: String, width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, dataSource: StepperBrickCellDataSource, delegate: StepperBrickCellDelegate) {
         self.dataSource = dataSource
         self.delegate = delegate
         super.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView)
@@ -50,12 +50,12 @@ public class StepperBrickCell: BrickCell, Bricklike {
     override public func updateContent() {
         super.updateContent()
         
-        let count = brick.dataSource.countForExampleStepperBrickCell(self)
+        let count = brick.dataSource.countForExampleStepperBrickCell(cell: self)
         label.text = String(count)
         stepper.value = Double(count)
     }
 
     @IBAction func stepperDidUpdate(sender: UIStepper) {
-        brick.delegate.stepperBrickCellDidUpdateStepper(self)
+        brick.delegate.stepperBrickCellDidUpdateStepper(cell: self)
     }
 }

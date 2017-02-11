@@ -14,7 +14,7 @@ public class FlickrRecentImagesRequest: BaseRequest {
     var apiKey = "2f4747add301af4b5d34d688821b52ae" //Flickr example key
     var method = "flickr.photos.search"
     var format = "json"
-    var minUploadDate = NSDate().dateByAddingTimeInterval(-(60*60*24))
+    var minUploadDate = NSDate().addingTimeInterval(-(60*60*24))
     var privacyFilter = 1
     var safeSearch = 1
     
@@ -29,13 +29,13 @@ public class FlickrRecentImagesRequest: BaseRequest {
     
     public override func jsonValue() -> [NSString : AnyObject] {
         var map = super.jsonValue()
-        map["api_key"] = apiKey
-        map["method"] = method
-        map["format"] = format
-        map["nojsoncallback"] = "1"
-        map["min_upload_date"] = "\(minUploadDate.timeIntervalSince1970)"
-        map["privacy_filter"] = "\(privacyFilter)"
-        map["safe_search"] = "\(safeSearch)"
+        map["api_key"] = apiKey as AnyObject?
+        map["method"] = method as AnyObject?
+        map["format"] = format as AnyObject?
+        map["nojsoncallback"] = "1" as AnyObject?
+        map["min_upload_date"] = "\(minUploadDate.timeIntervalSince1970)" as AnyObject?
+        map["privacy_filter"] = "\(privacyFilter)" as AnyObject?
+        map["safe_search"] = "\(safeSearch)" as AnyObject?
         return map
     }
 }
@@ -87,8 +87,9 @@ class FlickrImageResponse: Mappable {
         owner = map["owner"] as! String
         secret = map["secret"] as! String
         server = map["server"] as! String
-        farmId = (map["farm"] as! NSNumber).integerValue
+        farmId = (map["farm"] as! NSNumber).intValue
         title = map["title"] as! String
-        isPublic = Bool(map["ispublic"] as! Int)
+        let isPublicInt = map["ispublic"] as! Int
+        isPublic = (isPublicInt > 0)
     }
 }

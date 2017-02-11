@@ -117,7 +117,7 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
         }
 
         // Calculate content size
-        provider.recalculateContentSize()
+        _ = provider.recalculateContentSize()
 
         // Behaviors
         var contentSize = provider.contentSize
@@ -127,7 +127,7 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
 
         // Calculate content size
         if contentSize == provider.contentSize { // If no behavior changed the content size, let's just recalculate it based on the frames
-            provider.recalculateContentSize()
+            _ = provider.recalculateContentSize()
         } else {
             provider.updateContentSize(contentSize)
         }

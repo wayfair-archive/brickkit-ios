@@ -47,8 +47,8 @@ public class BaseRequest: Mappable {
     }
 }
 
-extension NSURL {
-    func URLByAppendingQueryParameters(parameters: [String:String]) -> NSURL? {
+extension URL {
+    func URLByAppendingQueryParameters(parameters: [String:String]) -> URL? {
         if parameters.count == 0 {
             return self
         }
@@ -56,7 +56,7 @@ extension NSURL {
         var urlVars = [String]()
         
         for (k, value) in parameters {
-            if let encodedValue = value.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()) {
+            if let encodedValue = value.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
                 urlVars.append(k + "=" + encodedValue)
             }
         }
@@ -65,7 +65,8 @@ extension NSURL {
             return self
         }
 
-        return NSURL(string: "\(self.absoluteString!)\(self.query != nil ? "&" : "?")\(urlVars.joinWithSeparator("&"))")
+        let stringOperator = self.query != nil ? "&" : "?"
+        return URL(string: "\(self.absoluteString)\(stringOperator)\(urlVars.joined(separator: "&"))")
     }
 }
 
@@ -76,9 +77,9 @@ public class CommunicationBase {
     let queueName = "com.brickkit.communicationbase"
     
     public var urlArguments = false
-    public var timeOutInterval : NSTimeInterval = 60
-    public var qualityOfService : NSQualityOfService = .Default
-    public var jsonReadingOptions : JSONSerialization.ReadingOptions = [.AllowFragments]
+    public var timeOutInterval : TimeInterval = 60
+    public var qualityOfService : QualityOfService = .default
+    public var jsonReadingOptions : JSONSerialization.ReadingOptions = [.allowFragments]
     public var sendStats = true
     public var printParams = true
     public var printRespose = true
@@ -99,26 +100,26 @@ public extension CommunicationBase {
                             successHandler : ((T?) -> Void)? = nil,
                             errorHandler: ((NSError?) -> Void)? = nil) {
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+        
+        DispatchQueue.global(qos: .utility).async {
+            let jsonURL = self.serviceEndPoint.appendingPathComponent("\(request.controller)/\(request.action)")
             
-            let jsonURL = self.serviceEndPoint.URLByAppendingPathComponent("\(request.controller)/\(request.action)")
-            
-            var webRequest = NSMutableURLRequest(URL: jsonURL!)
+            var webRequest = NSMutableURLRequest(url: jsonURL!)
             
             if request.useURLPrams {
-                let newURL = jsonURL?.URLByAppendingQueryParameters(request.jsonValue() as! [String : String])
-                webRequest = NSMutableURLRequest(URL: newURL!)
+                let newURL = jsonURL?.URLByAppendingQueryParameters(parameters: request.jsonValue() as! [String : String])
+                webRequest = NSMutableURLRequest(url: newURL!)
             } else {
             
-                let requestData = try? NSJSONSerialization.dataWithJSONObject(request.jsonValue() as NSDictionary, options: [.PrettyPrinted])
+                let requestData = try? JSONSerialization.data(withJSONObject: request.jsonValue() as NSDictionary, options: [.prettyPrinted])
                 webRequest.timeoutInterval = self.timeOutInterval
-                webRequest.HTTPMethod = HTTPMethod.POST.rawValue
+                webRequest.httpMethod = HTTPMethod.POST.rawValue
                 
-                webRequest.setValue("\(requestData?.length ?? 0)", forHTTPHeaderField:"Content-Length")
+                webRequest.setValue("\(requestData?.count ?? 0)", forHTTPHeaderField:"Content-Length")
                 
                 webRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField:"Content-Type")
                 
-                webRequest.HTTPBody = requestData;
+                webRequest.httpBody = requestData;
 
             }
             
@@ -133,8 +134,8 @@ public extension CommunicationBase {
             queue.qualityOfService = self.qualityOfService
             
             if self.printParams {
-                    if webRequest.HTTPBody != nil {
-                        print("\(NSString(data: webRequest.HTTPBody!, encoding: NSUTF8StringEncoding))")
+                    if webRequest.httpBody != nil {
+                        print("\(NSString(data: webRequest.httpBody!, encoding: String.Encoding.utf8.rawValue))")
                     } else {
                         print("no params")
                     }
@@ -142,23 +143,23 @@ public extension CommunicationBase {
                 print(webRequest.allHTTPHeaderFields)
             }
             
-            let config = URLSessionConfiguration.defaultSessionConfiguration()
-            let session = NSURLSession(configuration: config, delegate: nil, delegateQueue: queue)
-            let task = session.dataTaskWithRequest(webRequest) { (data, response, error) in
+            let config = URLSessionConfiguration.default
+            let session = URLSession(configuration: config, delegate: nil, delegateQueue: queue)
+            let task = session.dataTask(with: webRequest as URLRequest) { (data, response, error) in
                 
-                let httpResponse = response as? NSHTTPURLResponse
+                let httpResponse = response as? HTTPURLResponse
                 let responseStatusCode = httpResponse?.statusCode ?? 400
                 
                 if self.printRespose {
                     if data != nil {
-                        print("\(jsonURL):\(NSString(data: data!, encoding: NSUTF8StringEncoding))")
+                        print("\(jsonURL):\(NSString(data: data!, encoding: String.Encoding.utf8.rawValue))")
                     } else {
                         print("\(jsonURL): retured nil")
                     }
                 }
                 
                 if error != nil {
-                    dispatch_async(dispatch_get_main_queue()) {
+                    DispatchQueue.main.async {
                         errorHandler?(error as NSError?)
                     }
                     return
@@ -166,7 +167,7 @@ public extension CommunicationBase {
                 
                 if responseStatusCode >= 300 && responseStatusCode != 500 {
                     let errorReturn = NSError(domain:"HTTP Error", code: responseStatusCode, userInfo: nil)
-                     dispatch_async(dispatch_get_main_queue()) {
+                    DispatchQueue.main.async {
                         errorHandler?(errorReturn)
                     }
                     return
@@ -181,7 +182,7 @@ public extension CommunicationBase {
                 
                 var responseJSON : Any
                 do {
-                    responseJSON = try NSJSONSerialization.JSONObjectWithData(returnData, options: self.jsonReadingOptions)
+                    responseJSON = try JSONSerialization.jsonObject(with: returnData, options: self.jsonReadingOptions)
                 } catch let error as NSError {
                     errorHandler?(error)
                     return
@@ -189,7 +190,7 @@ public extension CommunicationBase {
                 
                 if responseStatusCode >= 500 {
                     let errorReturn = NSError(domain: "Interanl Server Error", code: responseStatusCode, userInfo: responseJSON as? [NSString: AnyObject])
-                     dispatch_async(dispatch_get_main_queue()) {
+                    DispatchQueue.main.async {
                         errorHandler?(errorReturn)
                     }
                     return
@@ -215,7 +216,7 @@ public extension CommunicationBase {
                 }
                 
                 
-                 dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     successHandler?(value)
                 }
             }
@@ -228,22 +229,21 @@ public extension CommunicationBase {
                                 successHandler: ((T?) -> Void)? = nil,
                                 errorHandler: ((NSError?) -> Void)? = nil) {
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+        DispatchQueue.global(qos: .utility).async {
+            let jsonURL = self.serviceEndPoint.appendingPathComponent("\(request.controller)/\(request.action)")
             
-            let jsonURL = self.serviceEndPoint.URLByAppendingPathComponent("\(request.controller)/\(request.action)")
+            let requestData = try? JSONSerialization.data(withJSONObject: request.jsonValue() as NSDictionary, options: [.prettyPrinted])
             
-            let requestData = try? NSJSONSerialization.dataWithJSONObject(request.jsonValue() as NSDictionary, options: [.PrettyPrinted])
-            
-            let webRequest = NSMutableURLRequest(URL: jsonURL!)
+            let webRequest = NSMutableURLRequest(url: jsonURL!)
             
             webRequest.timeoutInterval = self.timeOutInterval
-            webRequest.HTTPMethod = HTTPMethod.POST.rawValue
+            webRequest.httpMethod = HTTPMethod.POST.rawValue
             
-            webRequest.setValue("\(requestData?.length ?? 0)", forHTTPHeaderField:"Content-Length")
+            webRequest.setValue("\(requestData?.count ?? 0)", forHTTPHeaderField:"Content-Length")
             
             webRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField:"Content-Type")
             
-            webRequest.HTTPBody = requestData;
+            webRequest.httpBody = requestData;
             
             if let additionalHeaders = request.headers {
                 for (key, value) in additionalHeaders {
@@ -256,8 +256,8 @@ public extension CommunicationBase {
             queue.qualityOfService = self.qualityOfService
             
             if self.printParams {
-                if webRequest.HTTPBody != nil {
-                    print("\(NSString(data: webRequest.HTTPBody!, encoding: NSUTF8StringEncoding))")
+                if webRequest.httpBody != nil {
+                    print("\(NSString(data: webRequest.httpBody!, encoding: String.Encoding.utf8.rawValue))")
                 } else {
                     print("no params")
                 }
@@ -265,16 +265,16 @@ public extension CommunicationBase {
                 print(webRequest.allHTTPHeaderFields)
             }
             
-            let config = URLSessionConfiguration.defaultSessionConfiguration()
-            let session = NSURLSession(configuration: config, delegate: nil, delegateQueue: queue)
-            let task = session.dataTaskWithRequest(webRequest) { (data, response, error) in
+            let config = URLSessionConfiguration.default
+            let session = URLSession(configuration: config, delegate: nil, delegateQueue: queue)
+            let task = session.dataTask(with: webRequest as URLRequest) { (data, response, error) in
                 
-                let httpResponse = response as? NSHTTPURLResponse
+                let httpResponse = response as? HTTPURLResponse
                 let responseStatusCode = httpResponse?.statusCode ?? 400
                 
                 if self.printRespose {
                     if data != nil {
-                        print("\(jsonURL):\(NSString(data: data!, encoding: NSUTF8StringEncoding))")
+                        print("\(jsonURL):\(NSString(data: data!, encoding: String.Encoding.utf8.rawValue))")
                     } else {
                         print("\(jsonURL): retured nil")
                     }
@@ -300,7 +300,7 @@ public extension CommunicationBase {
                 
                 var responseJSON : Any
                 do {
-                    responseJSON = try NSJSONSerialization.JSONObjectWithData(returnData, options: self.jsonReadingOptions)
+                    responseJSON = try JSONSerialization.jsonObject(with: returnData, options: self.jsonReadingOptions)
                 } catch let error as NSError {
                     errorHandler?(error)
                     return

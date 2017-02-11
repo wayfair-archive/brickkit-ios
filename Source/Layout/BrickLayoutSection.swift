@@ -194,7 +194,7 @@ internal class BrickLayoutSection {
         }
 
         self.frame.origin = origin
-        continueCalculatingCells()
+        _ = continueCalculatingCells()
 
         createOrUpdateCells(from: 0, invalidate: false, updatedAttributes: updatedAttributes)
     }
@@ -339,7 +339,7 @@ internal class BrickLayoutSection {
                 }
             } else {
                 // create the attribute, so it's available for the behaviors to pick it up
-                createOrUpdateAttribute(at: (indexPath as IndexPath).item, with: dataSource, x: &x, y: &y, maxY: &maxY, force: true, invalidate: invalidate, frameOfInterest: frameOfInterest, updatedAttributes: updatedAttributes, customHeightProvider: customHeightProvider)
+                _ = createOrUpdateAttribute(at: (indexPath as IndexPath).item, with: dataSource, x: &x, y: &y, maxY: &maxY, force: true, invalidate: invalidate, frameOfInterest: frameOfInterest, updatedAttributes: updatedAttributes, customHeightProvider: customHeightProvider)
             }
         }
 
@@ -778,7 +778,7 @@ extension BrickLayoutSection {
 
         // Verify the behaviors attributes and check if they are in the frame as well
         for indexPath in behaviorAttributesIndexPaths {
-            frameCheck((indexPath as IndexPath).item)
+            _ = frameCheck((indexPath as IndexPath).item)
         }
 
         return attributes

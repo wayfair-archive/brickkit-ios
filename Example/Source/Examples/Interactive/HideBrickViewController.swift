@@ -53,8 +53,8 @@ class HideBrickViewController: BrickApp.BaseBrickController {
             LabelBrick(HideBrickViewController.Identifiers.SimpleBrick, backgroundColor: .brickGray3, dataSource: LabelBrickCellModel(text: "BRICK", configureCellBlock: LabelBrickCell.configure)),
             hideBrickButton,
             BrickSection(HideBrickViewController.Identifiers.SimpleSection, backgroundColor: .brickGray3, bricks: [
-                LabelBrick(width: .Ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: LabelBrickCellModel(text: "BRICK", configureCellBlock: LabelBrickCell.configure)),
-                LabelBrick(width: .Ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: LabelBrickCellModel(text: "BRICK", configureCellBlock: LabelBrickCell.configure)),
+                LabelBrick(width: .ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: LabelBrickCellModel(text: "BRICK", configureCellBlock: LabelBrickCell.configure)),
+                LabelBrick(width: .ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: LabelBrickCellModel(text: "BRICK", configureCellBlock: LabelBrickCell.configure)),
                 ]),
             hideSectionButton
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))

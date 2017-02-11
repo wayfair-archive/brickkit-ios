@@ -24,7 +24,7 @@ class OffsetBrickViewController: BaseRepeatBrickViewController {
 }
 
 extension OffsetBrickViewController: OffsetLayoutBehaviorDataSource {
-    func offsetLayoutBehavior(behavior: OffsetLayoutBehavior, originOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
+    func offsetLayoutBehaviorWithOrigin(_ behavior: OffsetLayoutBehavior, originOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
         if identifier == BrickIdentifiers.titleLabel {
             return CGSize(width: 20, height: -50)
         } else {
@@ -32,7 +32,7 @@ extension OffsetBrickViewController: OffsetLayoutBehaviorDataSource {
         }
     }
 
-    func offsetLayoutBehavior(behavior: OffsetLayoutBehavior, sizeOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
+    func offsetLayoutBehavior(_ behavior: OffsetLayoutBehavior, sizeOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
         if identifier == BrickIdentifiers.titleLabel {
             return CGSize(width: 0, height: 80)
         } else {

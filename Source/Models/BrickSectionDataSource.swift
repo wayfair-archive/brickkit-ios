@@ -14,7 +14,7 @@ extension BrickSection {
 
     /// Number Of Sections
     func numberOfSections(in collection: CollectionInfo) -> Int {
-        invalidateIfNeeded(in: collection)
+        _ = invalidateIfNeeded(in: collection)
         return sectionCount
     }
 
@@ -36,7 +36,7 @@ extension BrickSection {
     ///
     /// - returns: The number of items in the given section
     func numberOfItems(in section: Int, in collection: CollectionInfo) -> Int {
-        invalidateIfNeeded(in: collection)
+        _ = invalidateIfNeeded(in: collection)
 
         guard section > 0 else {
             return 1
@@ -50,7 +50,7 @@ extension BrickSection {
     }
 
     internal func brickAndIndex(at indexPath: IndexPath, in collection: CollectionInfo) -> (Brick, Int)? {
-        invalidateIfNeeded(in: collection)
+        _ = invalidateIfNeeded(in: collection)
 
         if (indexPath as IndexPath).section == 0 {
             return (self, 0)

@@ -16,51 +16,51 @@ class NavigationTransition: NSObject {
 
     /// The current content offset when going from Master > Detail
     /// Used for going back from Detail > Master
-    private var masterContentOffset: CGPoint!
+    fileprivate var masterContentOffset: CGPoint!
 
 }
 
 // MARK: - UIViewControllerAnimatedTransitioning
 extension NavigationTransition: UIViewControllerAnimatedTransitioning {
 
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 1
     }
 
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let animationDuration = transitionDuration(transitionContext)
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let animationDuration = transitionDuration(using: transitionContext)
 
         if presenting {
             // Verify if we have the correct viewcontrollers
             guard
-                let masterVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) as? NavigationMasterViewController,
-                let detailVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as? NavigationDetailViewController else {
+                let masterVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as? NavigationMasterViewController,
+                let detailVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as? NavigationDetailViewController else {
 
                     transitionContext.completeTransition(false)
                     return
             }
 
-            self.presentDetail(masterVC, detailVC: detailVC, containerView: transitionContext.containerView(), animationDuration: animationDuration) { completed in
+            self.presentDetail(masterVC: masterVC, detailVC: detailVC, containerView: transitionContext.containerView, animationDuration: animationDuration) { completed in
                 transitionContext.completeTransition(true)
             }
         } else {
             // Verify if we have the correct viewcontrollers
             guard
-                let masterVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as? NavigationMasterViewController,
-                let detailVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) as? NavigationDetailViewController else {
+                let masterVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as? NavigationMasterViewController,
+                let detailVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as? NavigationDetailViewController else {
 
                     transitionContext.completeTransition(false)
                     return
             }
 
-            self.popDetail(masterVC, detailVC: detailVC, containerView: transitionContext.containerView(), animationDuration: animationDuration) { completed in
+            self.popDetail(masterVC: masterVC, detailVC: detailVC, containerView: transitionContext.containerView, animationDuration: animationDuration) { completed in
                 transitionContext.completeTransition(true)
             }
         }
     }
 
     /// Present the details of a navigation item
-    func presentDetail(masterVC: NavigationMasterViewController, detailVC: NavigationDetailViewController, containerView: UIView?, animationDuration: NSTimeInterval, completion: (completed: Bool) -> Void) {
+    func presentDetail(masterVC: NavigationMasterViewController, detailVC: NavigationDetailViewController, containerView: UIView?, animationDuration: TimeInterval, completion: @escaping (_ completed: Bool) -> Void) {
 
 
         masterContentOffset = masterVC.brickCollectionView.contentOffset
@@ -71,7 +71,7 @@ extension NavigationTransition: UIViewControllerAnimatedTransitioning {
             y: -masterVC.brickCollectionView.contentInset.top
         )
 
-        UIView.animateWithDuration(animationDuration / 2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [.CurveEaseInOut], animations: {
+        UIView.animate(withDuration: animationDuration / 2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [.curveEaseInOut], animations: {
 
             // Scroll to top
             masterVC.brickCollectionView.contentOffset = topContentOffset
@@ -86,8 +86,8 @@ extension NavigationTransition: UIViewControllerAnimatedTransitioning {
                 }
 
                 // Show the brick from the top
-                UIView.animateWithDuration(animationDuration / 2, animations: {
-                    detailVC.setBricksHidden(false, completion: nil)
+                UIView.animate(withDuration: animationDuration / 2, animations: {
+                    detailVC.setBricksHidden(hidden: false, completion: nil)
                     }, completion: completion)
             }
 
@@ -96,12 +96,12 @@ extension NavigationTransition: UIViewControllerAnimatedTransitioning {
     }
 
     /// Pop back to the master viewcontroller
-    func popDetail(masterVC: NavigationMasterViewController, detailVC: NavigationDetailViewController, containerView: UIView?, animationDuration: NSTimeInterval, completion: (completed: Bool) -> Void) {
+    func popDetail(masterVC: NavigationMasterViewController, detailVC: NavigationDetailViewController, containerView: UIView?, animationDuration: TimeInterval, completion: @escaping (_ completed: Bool) -> Void) {
 
-        UIView.animateWithDuration(animationDuration / 2, animations: {
+        UIView.animate(withDuration: animationDuration / 2, animations: {
 
             // Hide the bricks from the top
-            detailVC.setBricksHidden(true){ completed in
+            detailVC.setBricksHidden(hidden: true){ completed in
 
                 if let containerView = containerView {
                     // Add/remove viewcontroller views
@@ -109,7 +109,7 @@ extension NavigationTransition: UIViewControllerAnimatedTransitioning {
                     containerView.addSubview(masterVC.view)
                 }
 
-                UIView.animateWithDuration(animationDuration / 2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [.CurveEaseInOut], animations: {
+                UIView.animate(withDuration: animationDuration / 2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [.curveEaseInOut], animations: {
 
                     // Set back the content offset from before showing the detail
                     masterVC.brickCollectionView.contentOffset = self.masterContentOffset

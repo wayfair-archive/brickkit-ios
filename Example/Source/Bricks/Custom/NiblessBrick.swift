@@ -9,7 +9,7 @@
 import UIKit
 import BrickKit
 
-typealias ConfigureNiblessCellBlock = ((cell: NiblessBrickCell) -> Void)
+typealias ConfigureNiblessCellBlock = ((_ cell: NiblessBrickCell) -> Void)
 
 class NiblessBrick: Brick {
     var text: String
@@ -20,7 +20,7 @@ class NiblessBrick: Brick {
         return NiblessBrickCell.self
     }
 
-    init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, text: String, image: UIImage, configureCell: ConfigureNiblessCellBlock) {
+    init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, text: String, image: UIImage, configureCell: @escaping ConfigureNiblessCellBlock) {
         self.text = text
         self.image = image
         self.configureCell = configureCell
@@ -57,15 +57,15 @@ class NiblessBrickCell: BrickCell, Bricklike {
         contentView.addSubview(imageView)
 
         // Image Constraints
-        contentView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Left, relatedBy: .Equal, toItem: contentView, attribute: .Left, multiplier: 1, constant: inset))
-        contentView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Top, relatedBy: .Equal, toItem: contentView, attribute: .Top, multiplier: 1, constant: inset))
-        contentView.addConstraint(NSLayoutConstraint(item: contentView, attribute: .Bottom, relatedBy: .Equal, toItem: imageView, attribute: .Bottom, multiplier: 1, constant: inset))
+        contentView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .left, relatedBy: .equal, toItem: contentView, attribute: .left, multiplier: 1, constant: inset))
+        contentView.addConstraint(NSLayoutConstraint(item: imageView, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: inset))
+        contentView.addConstraint(NSLayoutConstraint(item: contentView, attribute: .bottom, relatedBy: .equal, toItem: imageView, attribute: .bottom, multiplier: 1, constant: inset))
 
         // Label Constraints
-        contentView.addConstraint(NSLayoutConstraint(item: label, attribute: .Left, relatedBy: .Equal, toItem: imageView, attribute: .Right, multiplier: 1, constant: inset))
-        contentView.addConstraint(NSLayoutConstraint(item: label, attribute: .Top, relatedBy: .Equal, toItem: contentView, attribute: .Top, multiplier: 1, constant: inset))
-        contentView.addConstraint(NSLayoutConstraint(item: contentView, attribute: .Bottom, relatedBy: .Equal, toItem: label, attribute: .Bottom, multiplier: 1, constant: inset))
-        contentView.addConstraint(NSLayoutConstraint(item: contentView, attribute: .Right, relatedBy: .Equal, toItem: label, attribute: .Right, multiplier: 1, constant: inset))
+        contentView.addConstraint(NSLayoutConstraint(item: label, attribute: .left, relatedBy: .equal, toItem: imageView, attribute: .right, multiplier: 1, constant: inset))
+        contentView.addConstraint(NSLayoutConstraint(item: label, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: inset))
+        contentView.addConstraint(NSLayoutConstraint(item: contentView, attribute: .bottom, relatedBy: .equal, toItem: label, attribute: .bottom, multiplier: 1, constant: inset))
+        contentView.addConstraint(NSLayoutConstraint(item: contentView, attribute: .right, relatedBy: .equal, toItem: label, attribute: .right, multiplier: 1, constant: inset))
     }
 
     override func updateContent() {
@@ -74,7 +74,7 @@ class NiblessBrickCell: BrickCell, Bricklike {
         label.text = brick.text
         imageView.image = brick.image
 
-        brick.configureCell(cell: self)
+        brick.configureCell(self)
     }
 
 }

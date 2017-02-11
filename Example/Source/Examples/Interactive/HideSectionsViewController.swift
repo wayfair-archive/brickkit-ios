@@ -113,7 +113,7 @@ class HideSectionsViewController: BrickViewController {
         }
 
         let selector: Selector = #selector(HideSectionsViewController.toggleHidden)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: title, style: .Plain, target: self, action: selector)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: selector)
     }
 
     func toggleHidden() {

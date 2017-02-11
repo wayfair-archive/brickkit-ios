@@ -12,7 +12,7 @@ import BrickKit
 class ProfileHeaderBrick: Brick {
     let model: ProfileHeaderModel
 
-    init(_ identifier: String, width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 100)), backgroundColor: UIColor = UIColor.white, backgroundView: UIView? = nil, model: ProfileHeaderModel) {
+    init(_ identifier: String, width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 100)), backgroundColor: UIColor = UIColor.white, backgroundView: UIView? = nil, model: ProfileHeaderModel) {
         self.model = model
         super.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView)
     }

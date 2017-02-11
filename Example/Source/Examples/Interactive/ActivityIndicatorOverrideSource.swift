@@ -15,17 +15,17 @@ class ActivityIndicatorOverrideSource: OverrideContentSource {
 
     func overrideContent(for brickCell: BrickCell) {
         if shouldOverride {
-            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .White)
+            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
             indicator.tag = 1
             indicator.backgroundColor = brickCell.contentView.backgroundColor
             indicator.translatesAutoresizingMaskIntoConstraints = false
             brickCell.contentView.addSubview(indicator)
 
             brickCell.contentView.addConstraints([
-                NSLayoutConstraint(item: indicator, attribute: .Left, relatedBy: .Equal, toItem: brickCell.contentView, attribute: .Left, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: indicator, attribute: .Top, relatedBy: .Equal, toItem: brickCell.contentView, attribute: .Top, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: indicator, attribute: .Right, relatedBy: .Equal, toItem: brickCell.contentView, attribute: .Right, multiplier: 1, constant: 0),
-                NSLayoutConstraint(item: indicator, attribute: .Bottom, relatedBy: .Equal, toItem: brickCell.contentView, attribute: .Bottom, multiplier: 1, constant: 0)
+                NSLayoutConstraint(item: indicator, attribute: .left, relatedBy: .equal, toItem: brickCell.contentView, attribute: .left, multiplier: 1, constant: 0),
+                NSLayoutConstraint(item: indicator, attribute: .top, relatedBy: .equal, toItem: brickCell.contentView, attribute: .top, multiplier: 1, constant: 0),
+                NSLayoutConstraint(item: indicator, attribute: .right, relatedBy: .equal, toItem: brickCell.contentView, attribute: .right, multiplier: 1, constant: 0),
+                NSLayoutConstraint(item: indicator, attribute: .bottom, relatedBy: .equal, toItem: brickCell.contentView, attribute: .bottom, multiplier: 1, constant: 0)
                 ])
             
             indicator.startAnimating()

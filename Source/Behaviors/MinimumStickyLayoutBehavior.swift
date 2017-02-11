@@ -14,7 +14,7 @@ public protocol MinimumStickyLayoutBehaviorDataSource: StickyLayoutBehaviorDataS
 open class MinimumStickyLayoutBehavior: StickyLayoutBehavior {
 
     override func updateFrameForAttribute(_ attributes:inout BrickLayoutAttributes, sectionAttributes: BrickLayoutAttributes?, lastStickyFrame: CGRect, contentBounds: CGRect, collectionViewLayout: UICollectionViewLayout) -> Bool {
-        super.updateFrameForAttribute(&attributes, sectionAttributes: sectionAttributes, lastStickyFrame: lastStickyFrame, contentBounds: contentBounds, collectionViewLayout: collectionViewLayout)
+        _ = super.updateFrameForAttribute(&attributes, sectionAttributes: sectionAttributes, lastStickyFrame: lastStickyFrame, contentBounds: contentBounds, collectionViewLayout: collectionViewLayout)
 
         guard let minimumDataSource = dataSource as? MinimumStickyLayoutBehaviorDataSource else {
             return true

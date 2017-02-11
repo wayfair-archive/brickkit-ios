@@ -155,11 +155,11 @@ open class BrickFlowLayout: UICollectionViewLayout, BrickLayout {
                 }
 
                 if updated { // Invalidate the behaviors
-                    BrickLayoutInvalidationContext(type: .scrolling).invalidateWithLayout(self)
+                    _ = BrickLayoutInvalidationContext(type: .scrolling).invalidateWithLayout(self)
                 }
             }
         } else {
-            BrickLayoutInvalidationContext(type: .creation).invalidateWithLayout(self)
+            _ = BrickLayoutInvalidationContext(type: .creation).invalidateWithLayout(self)
         }
 
         isCalculating = false
@@ -303,7 +303,7 @@ extension BrickFlowLayout {
         if context.invalidateEverything {
             self.removeAllCachedSections()
         } else if let context = context as? BrickLayoutInvalidationContext {
-            context.invalidateWithLayout(self)
+            _ = context.invalidateWithLayout(self)
 
             switch context.type {
             case .updateHeight(let indexPath, _): delegate?.brickLayout(self, didUpdateHeightForItemAtIndexPath: indexPath)
@@ -331,14 +331,14 @@ extension BrickFlowLayout {
             }
         }
         if !changedSections.isEmpty {
-            BrickLayoutInvalidationContext(type: .invalidateDataSourceCounts(sections: changedSections)).invalidateWithLayout(self, context: context)
+            _ = BrickLayoutInvalidationContext(type: .invalidateDataSourceCounts(sections: changedSections)).invalidateWithLayout(self, context: context)
         }
 
     }
 
     open override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         if !isCalculating {
-            calculateSectionsIfNeeded(rect)
+            _ = calculateSectionsIfNeeded(rect)
         }
 
         guard let sections = self.sections else {

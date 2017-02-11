@@ -28,7 +28,7 @@ class SimpleRepeatBrickViewController: BrickViewController, LabelBrickCellDataSo
         self.view.backgroundColor = .brickBackground
 
         let section = BrickSection(bricks: [
-            LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 1/2), height: .Auto(estimate: .Fixed(size: 50)), backgroundColor: .brickGray1, dataSource: self),
+            LabelBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 1/2), height: .auto(estimate: .fixed(size: 50)), backgroundColor: .brickGray1, dataSource: self),
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
 
         section.repeatCountDataSource = self
@@ -40,7 +40,7 @@ class SimpleRepeatBrickViewController: BrickViewController, LabelBrickCellDataSo
     func updateNavigationItem() {
         let selector: Selector = #selector(SimpleRepeatBrickViewController.toggleAlignBehavior)
         let title = self.brickCollectionView.section.alignRowHeights ? "Don't Align" : "Align"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: title, style: .Plain, target: self, action: selector)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: selector)
     }
 
     func toggleAlignBehavior() {
@@ -57,7 +57,7 @@ class SimpleRepeatBrickViewController: BrickViewController, LabelBrickCellDataSo
         }
     }
 
-    func configureLabelBrickCell(cell: LabelBrickCell) {
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
         var text = ""
 
         for _ in 0...cell.index {

@@ -24,7 +24,7 @@ class HugeRepeatCollectionViewController: UICollectionViewController, LabelBrick
 
     init() {
         let flow = UICollectionViewFlowLayout()
-        let width = (UIScreen.mainScreen().bounds.width - 20) / 2
+        let width = (UIScreen.main.bounds.width - 20) / 2
         flow.estimatedItemSize = CGSize(width: width, height: 50)
         flow.minimumLineSpacing = 10
         flow.minimumInteritemSpacing = 10
@@ -41,16 +41,16 @@ class HugeRepeatCollectionViewController: UICollectionViewController, LabelBrick
         super.viewDidLoad()
         self.view.backgroundColor = .brickBackground
         self.collectionView!.backgroundColor = UIColor.clear
-        self.collectionView!.registerNib(LabelBrickNibs.Default, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(LabelBrickNibs.Default, forCellWithReuseIdentifier: reuseIdentifier)
     }
 
     // MARK: UICollectionViewDataSource
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return numberOfLabels
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! LabelBrickCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LabelBrickCell
 
         let brick = LabelBrick(backgroundColor: .brickGray1, dataSource: self)
         cell.setContent(brick, index: indexPath.item, collectionIndex: 0, collectionIdentifier: nil)
@@ -59,7 +59,7 @@ class HugeRepeatCollectionViewController: UICollectionViewController, LabelBrick
         return cell
     }
 
-    func configureLabelBrickCell(cell: LabelBrickCell) {
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
         var text = ""
 
         for _ in 0...min(cell.index, 5) {

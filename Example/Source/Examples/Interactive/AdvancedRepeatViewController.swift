@@ -51,7 +51,7 @@ class AdvancedRepeatViewController: BrickApp.BaseBrickController {
                 loadButton
                 ]),
             BrickSection(ItemsSection, backgroundColor: .brickGray1, bricks: [
-                LabelBrick(Item, width: .Ratio(ratio: 1/2), height: .Auto(estimate: .Fixed(size: 38)), backgroundColor: .brickGray3, dataSource: self),
+                LabelBrick(Item, width: .ratio(ratio: 1/2), height: .auto(estimate: .fixed(size: 38)), backgroundColor: .brickGray3, dataSource: self),
                 ], inset: 5, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)),
             ])
 
@@ -90,7 +90,7 @@ extension AdvancedRepeatViewController: BrickRepeatCountDataSource {
 
 extension AdvancedRepeatViewController: LabelBrickCellDataSource {
 
-    func configureLabelBrickCell(cell: LabelBrickCell) {
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
         cell.label.text = items[cell.index]
         cell.configure()
     }

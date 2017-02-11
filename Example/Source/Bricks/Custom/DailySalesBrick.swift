@@ -13,7 +13,7 @@ import BrickKit
 class DailySalesBrick: Brick {
     weak var dataSource: DailySalesBrickDataSource?
 
-    convenience init(_ identifier: String, width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, dataSource: DailySalesBrickDataSource) {
+    convenience init(_ identifier: String, width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, dataSource: DailySalesBrickDataSource) {
         self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView, dataSource: dataSource)
     }
 
@@ -37,8 +37,8 @@ class DailySalesBrickCell: BrickCell, Bricklike {
             return
         }
         
-        imageView.image = dataSource.image(self)
-        nameButton.setTitle(dataSource.buttonTitle(self), forState: .Normal)
+        imageView.image = dataSource.image(cell: self)
+        nameButton.setTitle(dataSource.buttonTitle(cell: self), for: .normal)
     }
 }
 

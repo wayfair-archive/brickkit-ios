@@ -31,27 +31,27 @@ class HorizontalScrollSectionBrickViewController: BrickApp.BaseBrickController, 
         self.registerBrickClass(LabelBrick.self)
 
         let section1 = BrickSection(backgroundColor: .brickGray1, bricks: [
-            ImageBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 1/4), height: .Ratio(ratio: 1), backgroundColor: .brickGray3, dataSource: self),
+            ImageBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 1/4), height: .ratio(ratio: 1), backgroundColor: .brickGray3, dataSource: self),
             ] , inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
         section1.repeatCountDataSource = self
 
         let section2 = BrickSection(backgroundColor: .brickGray1, bricks: [
-            ImageBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 1/2), height: .Ratio(ratio: 1), backgroundColor: .brickGray3, dataSource: self),
+            ImageBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 1/2), height: .ratio(ratio: 1), backgroundColor: .brickGray3, dataSource: self),
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
         section2.repeatCountDataSource = self
 
         let section3 = BrickSection(backgroundColor: .brickGray1, bricks: [
-            ImageBrick(BrickIdentifiers.repeatLabel, width: .Fixed(size: 100), height: .Ratio(ratio: 1), backgroundColor: .brickGray3, dataSource: self),
+            ImageBrick(BrickIdentifiers.repeatLabel, width: .fixed(size: 100), height: .ratio(ratio: 1), backgroundColor: .brickGray3, dataSource: self),
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
         section3.repeatCountDataSource = self
 
         let section = BrickSection(backgroundColor: UIColor.white, bricks: [
             LabelBrick(backgroundColor: .brickGray3, text: "1/4 Ratio", configureCellBlock: LabelBrickCell.configure),
-            CollectionBrick("Collection 1", backgroundColor: .brickGray1, scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section1), brickTypes:[ImageBrick.self]),
+            CollectionBrick("Collection 1", backgroundColor: .brickGray1, scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section1), brickTypes:[ImageBrick.self]),
             LabelBrick(backgroundColor: .brickGray3, text: "1/2 Ratio", configureCellBlock: LabelBrickCell.configure),
-            CollectionBrick("Collection 2", backgroundColor: .brickGray3, scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section2), brickTypes:[ImageBrick.self]),
+            CollectionBrick("Collection 2", backgroundColor: .brickGray3, scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section2), brickTypes:[ImageBrick.self]),
             LabelBrick(backgroundColor: .brickGray3, text: "100px Fixed", configureCellBlock: LabelBrickCell.configure),
-            CollectionBrick("Collection 3", backgroundColor: .brickGray5, scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section3), brickTypes:[ImageBrick.self]),
+            CollectionBrick("Collection 3", backgroundColor: .brickGray5, scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section3), brickTypes:[ImageBrick.self]),
             ])
 
         self.setSection(section)
@@ -73,7 +73,7 @@ extension HorizontalScrollSectionBrickViewController: ImageBrickDataSource {
     }
 
     func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIViewContentMode {
-        return .ScaleAspectFill
+        return .scaleAspectFill
     }
 }
 

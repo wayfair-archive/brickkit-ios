@@ -20,8 +20,8 @@ class SimpleRepeatFixedHeightViewController: BaseRepeatBrickViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        repeatLabel.width = .Ratio(ratio: 1/4)
-        repeatLabel.height = .Fixed(size: 80)
+        repeatLabel.width = .ratio(ratio: 1/4)
+        repeatLabel.height = .fixed(size: 80)
     }
 
 }

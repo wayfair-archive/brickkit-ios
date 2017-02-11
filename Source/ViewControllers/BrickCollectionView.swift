@@ -104,7 +104,7 @@ open class BrickCollectionView: UICollectionView {
     }
 
     open func brick(at indexPath: IndexPath) -> Brick {
-        self.section.invalidateIfNeeded(in: collectionInfo)
+        _ = self.section.invalidateIfNeeded(in: collectionInfo)
         guard let brick = section.brick(at: indexPath, in: collectionInfo) else {
             fatalError("Brick not found at indexPath: SECTION - \((indexPath as IndexPath).section) - ITEM: \((indexPath as NSIndexPath).item). This should never happen")
         }
@@ -201,7 +201,7 @@ open class BrickCollectionView: UICollectionView {
     /// - paramter reloadSections: A flag that indicates if the sections need to be reloaded
     /// - parameter completion: A completion handler block to execute when all of the operations are finished. This block takes a single Boolean parameter that contains the value true if all of the related animations completed successfully or false if they were interrupted. This parameter may be nil.
     open func invalidateBricks(_ reloadSections: Bool = true, completion: ((Bool) -> Void)? = nil) {
-        self.invalidateRepeatCountsWithoutPerformBatchUpdates(reloadSections)
+        _ = self.invalidateRepeatCountsWithoutPerformBatchUpdates(reloadSections)
         self.performBatchUpdates({
                 if reloadSections {
                     self.reloadSections(IndexSet(integersIn: NSMakeRange(0, self.numberOfSections).toRange()!))

@@ -29,8 +29,8 @@ class MultiDimensionBrickViewController: BrickViewController, LabelBrickCellData
         self.brickCollectionView.registerBrickClass(LabelBrick.self)
 
         let width: BrickDimension =
-            .HorizontalSizeClass(
-                regular: .Orientation(
+            .horizontalSizeClass(
+                regular: .orientation(
                     landscape: .Ratio(ratio: 1/3),
                     portrait: .Ratio(ratio: 1/2)
                 ),
@@ -41,8 +41,8 @@ class MultiDimensionBrickViewController: BrickViewController, LabelBrickCellData
         )
 
         let height: BrickDimension =
-            .HorizontalSizeClass(
-                regular: .Orientation(
+            .horizontalSizeClass(
+                regular: .orientation(
                     landscape: .Fixed(size: 200),
                     portrait: .Fixed(size: 100)
                 ),
@@ -72,7 +72,7 @@ class MultiDimensionBrickViewController: BrickViewController, LabelBrickCellData
         }
     }
 
-    func configureLabelBrickCell(cell: LabelBrickCell) {
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
         let text = "BRICK \(cell.index + 1)".uppercased()
         cell.label.text = text
         cell.configure()

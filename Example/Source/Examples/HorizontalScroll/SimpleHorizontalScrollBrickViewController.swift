@@ -24,11 +24,11 @@ class SimpleHorizontalScrollBrickViewController: BrickApp.BaseBrickController, B
 
         self.view.backgroundColor = .brickBackground
 
-        self.layout.scrollDirection = .Horizontal
+        self.layout.scrollDirection = .horizontal
         self.brickCollectionView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(backgroundColor: .brickSection, bricks: [
-            LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: self),
+            LabelBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: self),
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
 
         section.repeatCountDataSource = self
@@ -44,7 +44,7 @@ class SimpleHorizontalScrollBrickViewController: BrickApp.BaseBrickController, B
         }
     }
 
-    func configureLabelBrickCell(cell: LabelBrickCell) {
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
         cell.label.text = "BRICK \(cell.index + 1)"
         cell.configure()
     }

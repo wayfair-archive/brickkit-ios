@@ -20,12 +20,12 @@ class BaseRepeatBrickViewController: BrickApp.BaseBrickController {
 
         self.brickCollectionView.registerBrickClass(LabelBrick.self)
 
-        repeatLabel = LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), height: .Auto(estimate: .Fixed(size: 50)), backgroundColor: .brickGray3, dataSource: self)
+        repeatLabel = LabelBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 0.5), height: .auto(estimate: .fixed(size: 50)), backgroundColor: .brickGray3, dataSource: self)
 
         titleLabelModel = LabelBrickCellModel(text: "HEADER", configureCellBlock: LabelBrickCell.configure)
         
         let section = BrickSection(bricks: [
-            LabelBrick(BrickIdentifiers.titleLabel, height: .Auto(estimate: .Fixed(size: 50)), backgroundColor: .brickGray1, dataSource: titleLabelModel),
+            LabelBrick(BrickIdentifiers.titleLabel, height: .auto(estimate: .fixed(size: 50)), backgroundColor: .brickGray1, dataSource: titleLabelModel),
             repeatLabel,
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
         section.repeatCountDataSource = self
@@ -46,7 +46,7 @@ extension BaseRepeatBrickViewController: BrickRepeatCountDataSource {
 }
 
 extension BaseRepeatBrickViewController: LabelBrickCellDataSource {
-    func configureLabelBrickCell(cell: LabelBrickCell) {
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
         cell.label.text = "BRICK \(cell.index + 1)"
         cell.configure()
     }

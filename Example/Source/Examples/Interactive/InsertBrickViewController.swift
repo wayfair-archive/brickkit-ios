@@ -46,7 +46,7 @@ class InsertBrickViewController: BrickApp.BaseBrickController {
         self.brickCollectionView.registerBrickClass(LabelBrick.self)
         self.brickCollectionView.registerBrickClass(SegmentHeaderBrick.self)
 
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(InsertBrickViewController.insertBrick))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(InsertBrickViewController.insertBrick))
 
         let section = BrickSection(Section, bricks: [
             SegmentHeaderBrick(dataSource: self, delegate: self),
@@ -57,7 +57,7 @@ class InsertBrickViewController: BrickApp.BaseBrickController {
         self.setSection(section)
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.scrollToBottom()
     }
@@ -69,21 +69,21 @@ class InsertBrickViewController: BrickApp.BaseBrickController {
 
     func removeBrick(indexPath: IndexPath) {
         self.numberOfLabels -= 1
-        updateRepeatCounts([indexPath])
+        updateRepeatCounts(fixedDeletedIndexPaths: [indexPath])
     }
 
     func updateRepeatCounts(fixedDeletedIndexPaths: [IndexPath]? = nil) {
-        UIView.animateWithDuration(0.5, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.brickCollectionView.invalidateRepeatCounts(reloadAllSections: false) { (completed, insertedIndexPaths, deletedIndexPaths) in
                 if let indexPath = insertedIndexPaths.first {
-                    self.brickCollectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: UICollectionViewScrollPosition.Bottom, animated: false)
+                    self.brickCollectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.bottom, animated: false)
                 }
             }
         })
     }
 
     func scrollToBottom() {
-        let diffY = brickCollectionView.collectionViewLayout.collectionViewContentSize().height - brickCollectionView.bounds.height
+        let diffY = brickCollectionView.collectionViewLayout.collectionViewContentSize.height - brickCollectionView.bounds.height
         if (diffY + brickCollectionView.contentInset.top) > 0 {
             brickCollectionView.contentOffset = CGPoint(x: 0, y: diffY)
         }
@@ -92,7 +92,7 @@ class InsertBrickViewController: BrickApp.BaseBrickController {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: IndexPath) {
         let brickInfo = self.brickCollectionView.brickInfo(at: indexPath)
         if brickInfo.brick.identifier == BrickIdentifiers.repeatLabel {
-            removeBrick(indexPath)
+            removeBrick(indexPath: indexPath)
         }
     }
 }
@@ -109,7 +109,7 @@ extension InsertBrickViewController: BrickRepeatCountDataSource {
 }
 
 extension InsertBrickViewController: LabelBrickCellDataSource {
-    func configureLabelBrickCell(cell: LabelBrickCell) {
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
         cell.label.text = "BRICK \(cell.index + 1)"
         cell.configure()
     }

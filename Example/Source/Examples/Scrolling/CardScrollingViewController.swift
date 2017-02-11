@@ -20,14 +20,14 @@ class CardScrollingViewController: BaseScrollingViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        layout.zIndexBehavior = .BottomUp
+        layout.zIndexBehavior = .bottomUp
         behavior = CardLayoutBehavior(dataSource: self)
     }
 
 }
 
 extension CardScrollingViewController: CardLayoutBehaviorDataSource {
-    func cardLayoutBehavior(behavior: CardLayoutBehavior, smallHeightForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
+    func cardLayoutBehavior(_ behavior: CardLayoutBehavior, smallHeightForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
         return identifier == BrickIdentifiers.repeatLabel ? 50 : nil
     }
 }

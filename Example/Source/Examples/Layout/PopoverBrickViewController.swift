@@ -24,18 +24,18 @@ class PopoverBrickViewController: UIViewController {
         self.view.backgroundColor = .brickBackground
 
         // Do any additional setup after loading the view.
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Popover", style: .Plain, target: self, action: #selector(PopoverBrickViewController.showPopover))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Popover", style: .plain, target: self, action: #selector(PopoverBrickViewController.showPopover))
 
     }
 
     func showPopover(sender: UIBarButtonItem) {
         let brickController = SimpleRepeatBrickViewController()
 
-        brickController.modalPresentationStyle = .Popover
+        brickController.modalPresentationStyle = .popover
         self.present(brickController, animated: true, completion: nil)
         
         let popoverController = brickController.popoverPresentationController
-        popoverController?.permittedArrowDirections = .Any
+        popoverController?.permittedArrowDirections = .any
         popoverController?.barButtonItem = sender
     }
 
