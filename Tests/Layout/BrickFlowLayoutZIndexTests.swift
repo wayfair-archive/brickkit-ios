@@ -9,7 +9,7 @@
 import XCTest
 @testable import BrickKit
 
-private let zIndexMap: (attribute: UICollectionViewLayoutAttributes) -> Int = { $0.zIndex }
+private let zIndexMap: (_ attribute: UICollectionViewLayoutAttributes) -> Int = { $0.zIndex }
 private let zIndexSort: (Int, Int) -> Bool = { $0 < $1 }
 
 class BrickFlowLayoutZIndexTests: BrickFlowLayoutBaseTests {
@@ -66,7 +66,7 @@ class BrickFlowLayoutZIndexTests: BrickFlowLayoutBaseTests {
         zIndexer.reset(for: BrickFlowLayout())
 
         XCTAssertEqual(zIndexer.maxZIndex, 0)
-        XCTAssertEqual(layout.zIndexer.zIndex(for: NSIndexPath(forItem: 0, inSection: 0)), 0)
+        XCTAssertEqual(layout.zIndexer.zIndex(for: IndexPath(item: 0, section: 0)), 0)
     }
 
 }
@@ -76,7 +76,7 @@ extension BrickFlowLayoutZIndexTests {
 
     func testTopDownZIndex() {
         layout.invalidateLayout()
-        layout.prepareLayout()
+        layout.prepare()
         collectionView.layoutSubviews()
 
         let offset: Int = 15
@@ -102,7 +102,7 @@ extension BrickFlowLayoutZIndexTests {
             ],
             ]
 
-        let attributes = layout.layoutAttributesForElementsInRect(CGRect(origin:CGPoint.zero, size: layout.collectionViewContentSize()))
+        let attributes = layout.layoutAttributesForElements(in: CGRect(origin:CGPoint.zero, size: layout.collectionViewContentSize()))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, map: zIndexMap, expectedResult: expectedResult, sort: zIndexSort))
     }
@@ -118,9 +118,9 @@ extension BrickFlowLayoutZIndexTests {
          */
 
         let section = BrickSection(bricks: [
-            DummyBrick(width: .Ratio(ratio: 0.5)),
+            DummyBrick(width: .ratio(ratio: 0.5)),
             BrickSection(bricks: [
-                BrickSection(width: .Ratio(ratio: 1/2), bricks: [
+                BrickSection(width: .ratio(ratio: 1/2), bricks: [
                     DummyBrick(),
                     DummyBrick(),
                     ]),
@@ -176,7 +176,7 @@ extension BrickFlowLayoutZIndexTests {
         XCTAssertEqual(layout.zIndexer.sectionRanges[3], expectedRanges[3]!)
 
 
-        let attributes = layout.layoutAttributesForElementsInRect(CGRect(origin:CGPoint.zero, size: layout.collectionViewContentSize()))
+        let attributes = layout.layoutAttributesForElements(in: CGRect(origin:CGPoint.zero, size: layout.collectionViewContentSize()))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, map: zIndexMap, expectedResult: expectedResult, sort: zIndexSort))
     }
@@ -202,7 +202,7 @@ extension BrickFlowLayoutZIndexTests {
      */
     func testTopDownZIndexer() {
         layout.invalidateLayout()
-        layout.prepareLayout()
+        layout.prepare()
         collectionView.layoutSubviews()
 
         let expectedRanges: [Int: [SectionRange]] = [
@@ -246,7 +246,7 @@ extension BrickFlowLayoutZIndexTests {
             SectionRange(range: 3..<5, startIndex: 2)
         ]
 
-        let zIndex: BrickLayoutZIndexBehavior = .TopDown
+        let zIndex: BrickLayoutZIndexBehavior = .topDown
         XCTAssertEqual(zIndex.zIndexFromRanges(ranges, index: 0), 15)
         XCTAssertEqual(zIndex.zIndexFromRanges(ranges, index: 1), 9)
         XCTAssertEqual(zIndex.zIndexFromRanges(ranges, index: 2), 8)
@@ -261,7 +261,7 @@ extension BrickFlowLayoutZIndexTests {
             SectionRange(range: 0..<3, startIndex: 3)
         ]
 
-        let zIndex: BrickLayoutZIndexBehavior = .TopDown
+        let zIndex: BrickLayoutZIndexBehavior = .topDown
         XCTAssertEqual(zIndex.zIndexFromRanges(ranges, index: 0), 3)
         XCTAssertEqual(zIndex.zIndexFromRanges(ranges, index: 1), 2)
         XCTAssertEqual(zIndex.zIndexFromRanges(ranges, index: 2), 1)
@@ -548,9 +548,9 @@ extension BrickFlowLayoutZIndexTests {
      */
 
     func testBottomUpZIndexer() {
-        layout.zIndexBehavior = .BottomUp
+        layout.zIndexBehavior = .bottomUp
         layout.invalidateLayout()
-        layout.prepareLayout()
+        layout.prepare()
         collectionView.layoutSubviews()
 
         let expectedRanges: [Int: [SectionRange]] = [
@@ -597,7 +597,7 @@ extension BrickFlowLayoutZIndexTests {
          ----brick ac 5
 
          */
-        layout.zIndexBehavior = .BottomUp
+        layout.zIndexBehavior = .bottomUp
 
         let section = BrickSection("a", bricks: [
             DummyBrick("aa"),
@@ -658,7 +658,7 @@ extension BrickFlowLayoutZIndexTests {
             DummyBrick("ae"),
             ])
 
-        layout.zIndexBehavior = .BottomUp
+        layout.zIndexBehavior = .bottomUp
 
         collectionView.registerBrickClass(DummyBrick.self)
         collectionView.setSection(section)
@@ -717,7 +717,7 @@ extension BrickFlowLayoutZIndexTests {
             DummyBrick("ac"),
             ])
 
-        layout.zIndexBehavior = .BottomUp
+        layout.zIndexBehavior = .bottomUp
 
         collectionView.registerBrickClass(DummyBrick.self)
         collectionView.setSection(section)
@@ -783,7 +783,7 @@ extension BrickFlowLayoutZIndexTests {
             DummyBrick("ac"),
             ])
 
-        layout.zIndexBehavior = .BottomUp
+        layout.zIndexBehavior = .bottomUp
 
         collectionView.registerBrickClass(DummyBrick.self)
         collectionView.setSection(section)
@@ -825,7 +825,7 @@ extension BrickFlowLayoutZIndexTests {
             SectionRange(range: 2..<4, startIndex: 8),
             SectionRange(range: 4..<5, startIndex: 15)
         ]
-        let zIndex: BrickLayoutZIndexBehavior = .BottomUp
+        let zIndex: BrickLayoutZIndexBehavior = .bottomUp
         XCTAssertEqual(zIndex.zIndexFromRanges(ranges, index: 0), 1)
         XCTAssertEqual(zIndex.zIndexFromRanges(ranges, index: 1), 2)
         XCTAssertEqual(zIndex.zIndexFromRanges(ranges, index: 2), 8)
@@ -834,7 +834,7 @@ extension BrickFlowLayoutZIndexTests {
     }
 
     func testBottomUpZIndex() {
-        layout.zIndexBehavior = .BottomUp
+        layout.zIndexBehavior = .bottomUp
         collectionView.layoutSubviews()
 
         let offset: Int = 15
@@ -859,7 +859,7 @@ extension BrickFlowLayoutZIndexTests {
             ],
             ]
 
-        let attributes = layout.layoutAttributesForElementsInRect(CGRect(origin:CGPoint.zero, size: layout.collectionViewContentSize()))
+        let attributes = layout.layoutAttributesForElements(in: CGRect(origin:CGPoint.zero, size: layout.collectionViewContentSize()))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, map: zIndexMap, expectedResult: expectedResult, sort: zIndexSort))
     }
@@ -870,41 +870,41 @@ extension BrickFlowLayoutZIndexTests {
 extension BrickFlowLayoutZIndexTests {
     func testMaxZIndex() {
         layout.invalidateLayout()
-        layout.prepareLayout()
+        layout.prepare()
         collectionView.layoutSubviews()
 
         XCTAssertEqual(layout.maxZIndex, 15)
     }
 
     func testThatInvalidateRepeatCountWithBottomStickyRespectsZIndex() {
-        let repeatIndexPath = NSIndexPath(forItem: 15, inSection: 2)
-        let stickyIndexPath = NSIndexPath(forItem: 1, inSection: 1)
+        let repeatIndexPath = IndexPath(item: 15, section: 2)
+        let stickyIndexPath = IndexPath(item: 1, section: 1)
 
         let section = BrickSection(bricks: [
             BrickSection(bricks: [
-                DummyBrick("Brick", height: .Fixed(size: 20))
+                DummyBrick("Brick", height: .fixed(size: 20))
                 ]),
-            DummyBrick("Footer", height: .Fixed(size: 50))
+            DummyBrick("Footer", height: .fixed(size: 50))
             ])
         let repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick": 15])
         section.repeatCountDataSource = repeatCountDataSource
         let stickyDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [stickyIndexPath])
         collectionView.layout.behaviors.insert(StickyFooterLayoutBehavior(dataSource: stickyDataSource))
-        collectionView.layout.zIndexBehavior = .BottomUp
+        collectionView.layout.zIndexBehavior = .bottomUp
 
         collectionView.setupSectionAndLayout(section)
 
-        let expectation = expectationWithDescription("Invalidate Repeat Counts")
+        let expectation = self.expectation(description: "Invalidate Repeat Counts")
 
         repeatCountDataSource.repeatCountHash = ["Brick": 16]
         collectionView.invalidateRepeatCounts { (completed, insertedIndexPaths, deletedIndexPaths) in
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
 
-        let repeatIndex = collectionView.cellForItemAtIndexPath(repeatIndexPath)!.layer.zPosition
-        let stickyIndex = collectionView.cellForItemAtIndexPath(stickyIndexPath)!.layer.zPosition
+        let repeatIndex = collectionView.cellForItem(at: repeatIndexPath)!.layer.zPosition
+        let stickyIndex = collectionView.cellForItem(at: stickyIndexPath)!.layer.zPosition
 
         XCTAssertEqual(repeatIndex + 1, stickyIndex)
     }

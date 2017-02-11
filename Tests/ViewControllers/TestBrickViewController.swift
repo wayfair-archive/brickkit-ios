@@ -24,6 +24,6 @@ class TestBrickViewController: BrickViewController, BrickRegistrationDataSource 
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().postNotificationName("BrickViewController.deinit", object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "BrickViewController.deinit"), object: nil)
     }
 }

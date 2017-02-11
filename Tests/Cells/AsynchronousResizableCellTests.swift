@@ -23,7 +23,7 @@ class AsynchronousResizableCellTests: XCTestCase {
         brickView.registerBrickClass(AsynchronousResizableBrick.self)
 
         let resizableBrick = AsynchronousResizableBrick()
-        let expectation = expectationWithDescription("Async")
+        let expectation = self.expectation(description: "Async")
         resizableBrick.didChangeSizeCallBack = {
             expectation.fulfill()
         }
@@ -40,7 +40,7 @@ class AsynchronousResizableCellTests: XCTestCase {
         resizableBrick.newHeight = 100
         brickView.layoutSubviews()
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
 
         brickView.layoutIfNeeded()
 
@@ -53,26 +53,26 @@ class AsynchronousResizableCellTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickView.collectionViewLayout.layoutAttributesForElementsInRect(brickView.frame)
-        let frames = brickView.visibleCells().map({ $0.frame })
+        let attributes = brickView.collectionViewLayout.layoutAttributesForElements(in: brickView.frame)
+        let frames = brickView.visibleCells.map({ $0.frame })
         let expectedFrames = Array(expectedResult.values).flatMap({$0})
 
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
         XCTAssertEqual(frames, expectedFrames)
 
-        XCTAssertEqual(brickView.collectionViewLayout.collectionViewContentSize(), CGSize(width: 320, height: 100))
+        XCTAssertEqual(brickView.collectionViewLayout.collectionViewContentSize, CGSize(width: 320, height: 100))
     }
 
     func testResizingFixedHeight() {
         let resizableBrick = setupSectionWithOneResizableCell()
 
         resizableBrick.newHeight = 100
-        resizableBrick.height = .Fixed(size: 70)
+        resizableBrick.height = .fixed(size: 70)
         
         brickView.layoutSubviews()
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
 
         brickView.layoutIfNeeded()
 
@@ -85,15 +85,15 @@ class AsynchronousResizableCellTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickView.collectionViewLayout.layoutAttributesForElementsInRect(brickView.frame)
-        let frames = brickView.visibleCells().map({ $0.frame })
+        let attributes = brickView.collectionViewLayout.layoutAttributesForElements(in: brickView.frame)
+        let frames = brickView.visibleCells.map({ $0.frame })
         let expectedFrames = Array(expectedResult.values).flatMap({$0})
 
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
         XCTAssertEqual(frames, expectedFrames)
 
-        XCTAssertEqual(brickView.collectionViewLayout.collectionViewContentSize(), CGSize(width: 320, height: 70))
+        XCTAssertEqual(brickView.collectionViewLayout.collectionViewContentSize, CGSize(width: 320, height: 70))
     }
 
     func testResizingFixedHeightAndDynamicHeight() {
@@ -104,9 +104,9 @@ class AsynchronousResizableCellTests: XCTestCase {
 
         let resizableBrick2 = AsynchronousResizableBrick()
         resizableBrick2.newHeight = 100
-        resizableBrick2.size.height = .Fixed(size: 70)
+        resizableBrick2.size.height = .fixed(size: 70)
 
-        let expectation = expectationWithDescription("Async")
+        let expectation = self.expectation(description: "Async")
 
         var done1 = false
         var done2 = false
@@ -134,7 +134,7 @@ class AsynchronousResizableCellTests: XCTestCase {
 
         brickView.layoutSubviews()
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
 
         brickView.layoutIfNeeded()
 
@@ -148,26 +148,26 @@ class AsynchronousResizableCellTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickView.collectionViewLayout.layoutAttributesForElementsInRect(brickView.frame)
-        let frames = brickView.visibleCells().map({ $0.frame })
+        let attributes = brickView.collectionViewLayout.layoutAttributesForElements(in: brickView.frame)
+        let frames = brickView.visibleCells.map({ $0.frame })
         let expectedFrames = Array(expectedResult.values).flatMap({$0})
 
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(frames.sort(frameSort), expectedFrames.sort(frameSort))
+        XCTAssertEqual(frames.sorted(by: frameSort), expectedFrames.sorted(by: frameSort))
 
-        XCTAssertEqual(brickView.collectionViewLayout.collectionViewContentSize(), CGSize(width: 320, height: 170))
+        XCTAssertEqual(brickView.collectionViewLayout.collectionViewContentSize, CGSize(width: 320, height: 170))
     }
 
     func testResizingInCollectionBrick() {
         brickView.registerBrickClass(CollectionBrick.self)
 
-        let expectation = expectationWithDescription("Async")
+        let expectation = self.expectation(description: "Async")
 
         let resizableBrick = AsynchronousResizableBrick()
         resizableBrick.newHeight = 100
         resizableBrick.didChangeSizeCallBack = {
-            NSOperationQueue.mainQueue().addOperationWithBlock({ 
+            OperationQueue.main.addOperation({ 
                 expectation.fulfill()
             })
         }
@@ -183,7 +183,7 @@ class AsynchronousResizableCellTests: XCTestCase {
         brickView.setSection(section)
         brickView.layoutSubviews()
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
 
         brickView.layoutIfNeeded()
 
@@ -196,15 +196,15 @@ class AsynchronousResizableCellTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickView.collectionViewLayout.layoutAttributesForElementsInRect(brickView.frame)
-        let frames = brickView.visibleCells().map({ $0.frame })
+        let attributes = brickView.collectionViewLayout.layoutAttributesForElements(in: brickView.frame)
+        let frames = brickView.visibleCells.map({ $0.frame })
         let expectedFrames = Array(expectedResult.values).flatMap({$0})
 
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
         XCTAssertEqual(frames, expectedFrames)
 
-        XCTAssertEqual(brickView.collectionViewLayout.collectionViewContentSize(), CGSize(width: 320, height: 100))
+        XCTAssertEqual(brickView.collectionViewLayout.collectionViewContentSize, CGSize(width: 320, height: 100))
     }
 
     func testResizingInCollectionBrickScrolling() {
@@ -212,15 +212,15 @@ class AsynchronousResizableCellTests: XCTestCase {
 
 
         let collectionSection = BrickSection(bricks: [
-            DummyBrick(width: .Ratio(ratio: 1/2)),
-            DummyBrick(width: .Ratio(ratio: 1/2)),
-            DummyBrick(width: .Ratio(ratio: 1/2)),
-            DummyBrick(width: .Ratio(ratio: 1/2)),
-            DummyBrick(width: .Ratio(ratio: 1)),
+            DummyBrick(width: .ratio(ratio: 1/2)),
+            DummyBrick(width: .ratio(ratio: 1/2)),
+            DummyBrick(width: .ratio(ratio: 1/2)),
+            DummyBrick(width: .ratio(ratio: 1/2)),
+            DummyBrick(width: .ratio(ratio: 1)),
             ])
 
         let section = BrickSection(bricks: [
-            CollectionBrick(scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { (cell) in
+            CollectionBrick(scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { (cell) in
                 cell.brickCollectionView.registerBrickClass(DummyBrick.self)
             }))
             ])
@@ -229,7 +229,7 @@ class AsynchronousResizableCellTests: XCTestCase {
         brickView.setSection(section)
         brickView.layoutSubviews()
 
-        let cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
+        let cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? CollectionBrickCell
         cell?.brickCollectionView.contentOffset.x = 2 * brickView.frame.width
         brickView.layoutIfNeeded()
 
@@ -242,15 +242,15 @@ class AsynchronousResizableCellTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickView.collectionViewLayout.layoutAttributesForElementsInRect(brickView.frame)
-        let frames = brickView.visibleCells().map({ $0.frame })
+        let attributes = brickView.collectionViewLayout.layoutAttributesForElements(in: brickView.frame)
+        let frames = brickView.visibleCells.map({ $0.frame })
         let expectedFrames = Array(expectedResult.values).flatMap({$0})
 
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
         XCTAssertEqual(frames, expectedFrames)
 
-        XCTAssertEqual(brickView.collectionViewLayout.collectionViewContentSize(), CGSize(width: 320, height: 640))
+        XCTAssertEqual(brickView.collectionViewLayout.collectionViewContentSize, CGSize(width: 320, height: 640))
     }
 
 }

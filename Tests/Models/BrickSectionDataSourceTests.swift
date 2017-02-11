@@ -21,7 +21,7 @@ class BrickSectionDataSourceTests: XCTestCase {
         let section = BrickSection(bricks: [])
 
         section.invalidateIfNeeded(in: collection)
-        XCTAssertEqual(section.sectionIndexPaths[collection]!, [1: NSIndexPath(forItem: 0, inSection: 0)])
+        XCTAssertEqual(section.sectionIndexPaths[collection]!, [1: IndexPath(item: 0, section: 0)])
         XCTAssertEqual(section.numberOfItems(in: 0, in: collection), 1)
         XCTAssertEqual(section.numberOfItems(in: 1000, in: collection), 0)
     }
@@ -34,7 +34,7 @@ class BrickSectionDataSourceTests: XCTestCase {
                 ])
             ])
         section.invalidateIfNeeded(in: collection)
-        XCTAssertEqual(section.sectionIndexPaths[collection]!, [1: NSIndexPath(forItem: 0, inSection: 0), 2: NSIndexPath(forItem: 1, inSection: 1)])
+        XCTAssertEqual(section.sectionIndexPaths[collection]!, [1: IndexPath(item: 0, section: 0), 2: IndexPath(item: 1, section: 1)])
     }
 
     func testInvalidateWithOneLevelSectionInversed() {
@@ -45,7 +45,7 @@ class BrickSectionDataSourceTests: XCTestCase {
             Brick()
             ])
         section.invalidateIfNeeded(in: collection)
-        XCTAssertEqual(section.sectionIndexPaths[collection]!, [1: NSIndexPath(forItem: 0, inSection: 0), 2: NSIndexPath(forItem: 0, inSection: 1)])
+        XCTAssertEqual(section.sectionIndexPaths[collection]!, [1: IndexPath(item: 0, section: 0), 2: IndexPath(item: 0, section: 1)])
     }
 
     func testInvalidateWithMultiLevelsSection() {
@@ -69,12 +69,12 @@ class BrickSectionDataSourceTests: XCTestCase {
             ])
         section.invalidateIfNeeded(in: collection)
         XCTAssertEqual(section.sectionIndexPaths[collection]!, [
-            1: NSIndexPath(forItem: 0, inSection: 0),
-            2: NSIndexPath(forItem: 0, inSection: 1),
-            3: NSIndexPath(forItem: 1, inSection: 2),
-            4: NSIndexPath(forItem: 1, inSection: 3),
-            5: NSIndexPath(forItem: 2, inSection: 1),
-            6: NSIndexPath(forItem: 0, inSection: 5),
+            1: IndexPath(item: 0, section: 0),
+            2: IndexPath(item: 0, section: 1),
+            3: IndexPath(item: 1, section: 2),
+            4: IndexPath(item: 1, section: 3),
+            5: IndexPath(item: 2, section: 1),
+            6: IndexPath(item: 0, section: 5),
             ])
     }
 
@@ -93,11 +93,11 @@ class BrickSectionDataSourceTests: XCTestCase {
         section.invalidateIfNeeded(in: collection)
 
         XCTAssertEqual(section.sectionIndexPaths[collection]!, [
-            1: NSIndexPath(forItem: 0, inSection: 0),
-            2: NSIndexPath(forItem: 5, inSection: 1),
+            1: IndexPath(item: 0, section: 0),
+            2: IndexPath(item: 5, section: 1),
             ])
-        XCTAssertEqual(section.indexPathForSection(1, in: collection), NSIndexPath(forItem: 0, inSection: 0))
-        XCTAssertEqual(section.indexPathForSection(2, in: collection), NSIndexPath(forItem: 5, inSection: 1))
+        XCTAssertEqual(section.indexPathForSection(1, in: collection), IndexPath(item: 0, section: 0))
+        XCTAssertEqual(section.indexPathForSection(2, in: collection), IndexPath(item: 5, section: 1))
     }
 
     func testEmptySection() {
@@ -106,8 +106,8 @@ class BrickSectionDataSourceTests: XCTestCase {
         XCTAssertEqual(section.numberOfSections(in: collection), 2)
         XCTAssertEqual(section.numberOfItems(in: 0, in: collection), 1)
         XCTAssertEqual(section.numberOfItems(in: 1, in: collection), 0)
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 0, inSection: 0), in: collection)?.identifier, "Section1")
-        XCTAssertEqual(section.index(at: NSIndexPath(forItem: 0, inSection: 0), in: collection), 0)
+        XCTAssertEqual(section.brick(at: IndexPath(item: 0, section: 0), in: collection)?.identifier, "Section1")
+        XCTAssertEqual(section.index(at: IndexPath(item: 0, section: 0), in: collection), 0)
     }
 
     func testSectionWithOneLevelBricks() {
@@ -119,10 +119,10 @@ class BrickSectionDataSourceTests: XCTestCase {
         XCTAssertEqual(section.numberOfSections(in: collection), 2)
         XCTAssertEqual(section.numberOfItems(in: 0, in: collection), 1)
         XCTAssertEqual(section.numberOfItems(in: 1, in: collection), 2)
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 0, inSection: 1), in: collection)?.identifier, "Brick1")
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 1, inSection: 1), in: collection)?.identifier, "Brick2")
-        XCTAssertNil(section.brick(at: NSIndexPath(forItem: 2, inSection: 1), in: collection))
-        XCTAssertNil(section.brick(at: NSIndexPath(forItem: 0, inSection: 2), in: collection))
+        XCTAssertEqual(section.brick(at: IndexPath(item: 0, section: 1), in: collection)?.identifier, "Brick1")
+        XCTAssertEqual(section.brick(at: IndexPath(item: 1, section: 1), in: collection)?.identifier, "Brick2")
+        XCTAssertNil(section.brick(at: IndexPath(item: 2, section: 1), in: collection))
+        XCTAssertNil(section.brick(at: IndexPath(item: 0, section: 2), in: collection))
     }
 
     func testSectionWithOneLevelBricksRepeatCount() {
@@ -138,37 +138,37 @@ class BrickSectionDataSourceTests: XCTestCase {
         XCTAssertEqual(section.numberOfSections(in: collection), 2)
         XCTAssertEqual(section.numberOfItems(in: 0, in: collection), 1)
         XCTAssertEqual(section.numberOfItems(in: 1, in: collection), 15)
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 0, inSection: 1), in: collection)?.identifier, "Brick1")
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 1, inSection: 1), in: collection)?.identifier, "Brick1")
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 2, inSection: 1), in: collection)?.identifier, "Brick1")
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 3, inSection: 1), in: collection)?.identifier, "Brick1")
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 4, inSection: 1), in: collection)?.identifier, "Brick1")
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 5, inSection: 1), in: collection)?.identifier, "Brick2")
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 6, inSection: 1), in: collection)?.identifier, "Brick2")
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 7, inSection: 1), in: collection)?.identifier, "Brick2")
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 8, inSection: 1), in: collection)?.identifier, "Brick2")
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 9, inSection: 1), in: collection)?.identifier, "Brick2")
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 10, inSection: 1), in: collection)?.identifier, "Brick2")
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 11, inSection: 1), in: collection)?.identifier, "Brick2")
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 12, inSection: 1), in: collection)?.identifier, "Brick2")
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 13, inSection: 1), in: collection)?.identifier, "Brick2")
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 14, inSection: 1), in: collection)?.identifier, "Brick2")
+        XCTAssertEqual(section.brick(at: IndexPath(item: 0, section: 1), in: collection)?.identifier, "Brick1")
+        XCTAssertEqual(section.brick(at: IndexPath(item: 1, section: 1), in: collection)?.identifier, "Brick1")
+        XCTAssertEqual(section.brick(at: IndexPath(item: 2, section: 1), in: collection)?.identifier, "Brick1")
+        XCTAssertEqual(section.brick(at: IndexPath(item: 3, section: 1), in: collection)?.identifier, "Brick1")
+        XCTAssertEqual(section.brick(at: IndexPath(item: 4, section: 1), in: collection)?.identifier, "Brick1")
+        XCTAssertEqual(section.brick(at: IndexPath(item: 5, section: 1), in: collection)?.identifier, "Brick2")
+        XCTAssertEqual(section.brick(at: IndexPath(item: 6, section: 1), in: collection)?.identifier, "Brick2")
+        XCTAssertEqual(section.brick(at: IndexPath(item: 7, section: 1), in: collection)?.identifier, "Brick2")
+        XCTAssertEqual(section.brick(at: IndexPath(item: 8, section: 1), in: collection)?.identifier, "Brick2")
+        XCTAssertEqual(section.brick(at: IndexPath(item: 9, section: 1), in: collection)?.identifier, "Brick2")
+        XCTAssertEqual(section.brick(at: IndexPath(item: 10, section: 1), in: collection)?.identifier, "Brick2")
+        XCTAssertEqual(section.brick(at: IndexPath(item: 11, section: 1), in: collection)?.identifier, "Brick2")
+        XCTAssertEqual(section.brick(at: IndexPath(item: 12, section: 1), in: collection)?.identifier, "Brick2")
+        XCTAssertEqual(section.brick(at: IndexPath(item: 13, section: 1), in: collection)?.identifier, "Brick2")
+        XCTAssertEqual(section.brick(at: IndexPath(item: 14, section: 1), in: collection)?.identifier, "Brick2")
 
-        XCTAssertEqual(section.index(at: NSIndexPath(forItem: 0, inSection: 1), in: collection), 0)
-        XCTAssertEqual(section.index(at: NSIndexPath(forItem: 1, inSection: 1), in: collection), 1)
-        XCTAssertEqual(section.index(at: NSIndexPath(forItem: 2, inSection: 1), in: collection), 2)
-        XCTAssertEqual(section.index(at: NSIndexPath(forItem: 3, inSection: 1), in: collection), 3)
-        XCTAssertEqual(section.index(at: NSIndexPath(forItem: 4, inSection: 1), in: collection), 4)
-        XCTAssertEqual(section.index(at: NSIndexPath(forItem: 5, inSection: 1), in: collection), 0)
-        XCTAssertEqual(section.index(at: NSIndexPath(forItem: 6, inSection: 1), in: collection), 1)
-        XCTAssertEqual(section.index(at: NSIndexPath(forItem: 7, inSection: 1), in: collection), 2)
-        XCTAssertEqual(section.index(at: NSIndexPath(forItem: 8, inSection: 1), in: collection), 3)
-        XCTAssertEqual(section.index(at: NSIndexPath(forItem: 9, inSection: 1), in: collection), 4)
-        XCTAssertEqual(section.index(at: NSIndexPath(forItem: 10, inSection: 1), in: collection), 5)
-        XCTAssertEqual(section.index(at: NSIndexPath(forItem: 11, inSection: 1), in: collection), 6)
-        XCTAssertEqual(section.index(at: NSIndexPath(forItem: 12, inSection: 1), in: collection), 7)
-        XCTAssertEqual(section.index(at: NSIndexPath(forItem: 13, inSection: 1), in: collection), 8)
-        XCTAssertEqual(section.index(at: NSIndexPath(forItem: 14, inSection: 1), in: collection), 9)
+        XCTAssertEqual(section.index(at: IndexPath(item: 0, section: 1), in: collection), 0)
+        XCTAssertEqual(section.index(at: IndexPath(item: 1, section: 1), in: collection), 1)
+        XCTAssertEqual(section.index(at: IndexPath(item: 2, section: 1), in: collection), 2)
+        XCTAssertEqual(section.index(at: IndexPath(item: 3, section: 1), in: collection), 3)
+        XCTAssertEqual(section.index(at: IndexPath(item: 4, section: 1), in: collection), 4)
+        XCTAssertEqual(section.index(at: IndexPath(item: 5, section: 1), in: collection), 0)
+        XCTAssertEqual(section.index(at: IndexPath(item: 6, section: 1), in: collection), 1)
+        XCTAssertEqual(section.index(at: IndexPath(item: 7, section: 1), in: collection), 2)
+        XCTAssertEqual(section.index(at: IndexPath(item: 8, section: 1), in: collection), 3)
+        XCTAssertEqual(section.index(at: IndexPath(item: 9, section: 1), in: collection), 4)
+        XCTAssertEqual(section.index(at: IndexPath(item: 10, section: 1), in: collection), 5)
+        XCTAssertEqual(section.index(at: IndexPath(item: 11, section: 1), in: collection), 6)
+        XCTAssertEqual(section.index(at: IndexPath(item: 12, section: 1), in: collection), 7)
+        XCTAssertEqual(section.index(at: IndexPath(item: 13, section: 1), in: collection), 8)
+        XCTAssertEqual(section.index(at: IndexPath(item: 14, section: 1), in: collection), 9)
     }
 
     func testSectionWithTwoLevelBricks() {
@@ -183,10 +183,10 @@ class BrickSectionDataSourceTests: XCTestCase {
         XCTAssertEqual(section.numberOfItems(in: 0, in: collection), 1)
         XCTAssertEqual(section.numberOfItems(in: 1, in: collection), 2)
         XCTAssertEqual(section.numberOfItems(in: 2, in: collection), 1)
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 0, inSection: 0), in: collection)?.identifier, "Section1")
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 0, inSection: 1), in: collection)?.identifier, "Brick1")
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 1, inSection: 1), in: collection)?.identifier, "Section2")
-        XCTAssertEqual(section.brick(at: NSIndexPath(forItem: 0, inSection: 2), in: collection)?.identifier, "Brick2")
+        XCTAssertEqual(section.brick(at: IndexPath(item: 0, section: 0), in: collection)?.identifier, "Section1")
+        XCTAssertEqual(section.brick(at: IndexPath(item: 0, section: 1), in: collection)?.identifier, "Brick1")
+        XCTAssertEqual(section.brick(at: IndexPath(item: 1, section: 1), in: collection)?.identifier, "Section2")
+        XCTAssertEqual(section.brick(at: IndexPath(item: 0, section: 2), in: collection)?.identifier, "Brick2")
     }
 
     func testIndexPathsForBricksWithIdentifier() {
@@ -197,10 +197,10 @@ class BrickSectionDataSourceTests: XCTestCase {
                 Brick("Brick2")
                 ])
             ])
-        XCTAssertEqual(section.indexPathsForBricksWithIdentifier("Section1", in: collection), [NSIndexPath(forItem: 0, inSection: 0)])
-        XCTAssertEqual(section.indexPathsForBricksWithIdentifier("Section2", in: collection), [NSIndexPath(forItem: 1, inSection: 1)])
-        XCTAssertEqual(section.indexPathsForBricksWithIdentifier("Brick1", in: collection), [NSIndexPath(forItem: 0, inSection: 1), NSIndexPath(forItem: 0, inSection: 2)])
-        XCTAssertEqual(section.indexPathsForBricksWithIdentifier("Brick2", in: collection), [NSIndexPath(forItem: 1, inSection: 2)])
+        XCTAssertEqual(section.indexPathsForBricksWithIdentifier("Section1", in: collection), [IndexPath(item: 0, section: 0)])
+        XCTAssertEqual(section.indexPathsForBricksWithIdentifier("Section2", in: collection), [IndexPath(item: 1, section: 1)])
+        XCTAssertEqual(section.indexPathsForBricksWithIdentifier("Brick1", in: collection), [IndexPath(item: 0, section: 1), IndexPath(item: 0, section: 2)])
+        XCTAssertEqual(section.indexPathsForBricksWithIdentifier("Brick2", in: collection), [IndexPath(item: 1, section: 2)])
         XCTAssertEqual(section.indexPathsForBricksWithIdentifier("Brick3", in: collection), [])
     }
     
@@ -215,23 +215,23 @@ class BrickSectionDataSourceTests: XCTestCase {
             ])
 
         XCTAssertEqual(section.indexPathsForBricksWithIdentifier("Brick1", in: collection), [
-            NSIndexPath(forItem: 0, inSection: 1),
-            NSIndexPath(forItem: 1, inSection: 1),
-            NSIndexPath(forItem: 2, inSection: 1),
-            NSIndexPath(forItem: 3, inSection: 1),
-            NSIndexPath(forItem: 4, inSection: 1),
+            IndexPath(item: 0, section: 1),
+            IndexPath(item: 1, section: 1),
+            IndexPath(item: 2, section: 1),
+            IndexPath(item: 3, section: 1),
+            IndexPath(item: 4, section: 1),
             ])
         XCTAssertEqual(section.indexPathsForBricksWithIdentifier("Brick2", in: collection), [
-            NSIndexPath(forItem: 5, inSection: 1),
-            NSIndexPath(forItem: 6, inSection: 1),
-            NSIndexPath(forItem: 7, inSection: 1),
-            NSIndexPath(forItem: 8, inSection: 1),
-            NSIndexPath(forItem: 9, inSection: 1),
-            NSIndexPath(forItem: 10, inSection: 1),
-            NSIndexPath(forItem: 11, inSection: 1),
-            NSIndexPath(forItem: 12, inSection: 1),
-            NSIndexPath(forItem: 13, inSection: 1),
-            NSIndexPath(forItem: 14, inSection: 1)
+            IndexPath(item: 5, section: 1),
+            IndexPath(item: 6, section: 1),
+            IndexPath(item: 7, section: 1),
+            IndexPath(item: 8, section: 1),
+            IndexPath(item: 9, section: 1),
+            IndexPath(item: 10, section: 1),
+            IndexPath(item: 11, section: 1),
+            IndexPath(item: 12, section: 1),
+            IndexPath(item: 13, section: 1),
+            IndexPath(item: 14, section: 1)
             ])
     }
 
@@ -246,10 +246,10 @@ class BrickSectionDataSourceTests: XCTestCase {
             ])
 
         XCTAssertEqual(section.indexPathsForBricksWithIdentifier("Brick1", index: 2, in: collection), [
-            NSIndexPath(forItem: 2, inSection: 1),
+            IndexPath(item: 2, section: 1),
             ])
         XCTAssertEqual(section.indexPathsForBricksWithIdentifier("Brick2", index: 2, in: collection), [
-            NSIndexPath(forItem: 7, inSection: 1),
+            IndexPath(item: 7, section: 1),
             ])
     }
 
@@ -267,11 +267,11 @@ class BrickSectionDataSourceTests: XCTestCase {
                 ])
             ])
 
-        XCTAssertEqual(section.sectionIndexForSectionAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), in: collection), 1)
-        XCTAssertEqual(section.sectionIndexForSectionAtIndexPath(NSIndexPath(forItem: 1, inSection: 1), in: collection), 2)
-        XCTAssertEqual(section.sectionIndexForSectionAtIndexPath(NSIndexPath(forItem: 1, inSection: 2), in: collection), 3)
-        XCTAssertEqual(section.sectionIndexForSectionAtIndexPath(NSIndexPath(forItem: 2, inSection: 1), in: collection), 4)
-        XCTAssertNil(section.sectionIndexForSectionAtIndexPath(NSIndexPath(forItem: 0, inSection: 5), in: collection))
+        XCTAssertEqual(section.sectionIndexForSectionAtIndexPath(IndexPath(item: 0, section: 0), in: collection), 1)
+        XCTAssertEqual(section.sectionIndexForSectionAtIndexPath(IndexPath(item: 1, section: 1), in: collection), 2)
+        XCTAssertEqual(section.sectionIndexForSectionAtIndexPath(IndexPath(item: 1, section: 2), in: collection), 3)
+        XCTAssertEqual(section.sectionIndexForSectionAtIndexPath(IndexPath(item: 2, section: 1), in: collection), 4)
+        XCTAssertNil(section.sectionIndexForSectionAtIndexPath(IndexPath(item: 0, section: 5), in: collection))
     }
 
     func testCurrentSectionCounts() {

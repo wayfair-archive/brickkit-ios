@@ -8,7 +8,7 @@
 
 import Foundation
 
-internal typealias OnAttributesUpdatedHandler = (attributes: BrickLayoutAttributes, oldFrame: CGRect?) -> Void
+internal typealias OnAttributesUpdatedHandler = (_ attributes: BrickLayoutAttributes, _ oldFrame: CGRect?) -> Void
 
 public protocol BrickLayout: class {
     var widthRatio: CGFloat { get set }
@@ -26,16 +26,16 @@ public protocol BrickLayout: class {
 }
 
 public enum BrickLayoutType {
-    case Brick
-    case Section(sectionIndex: Int)
+    case brick
+    case section(sectionIndex: Int)
 }
 
-public class BrickLayoutAttributes: UICollectionViewLayoutAttributes {
+open class BrickLayoutAttributes: UICollectionViewLayoutAttributes {
      // These properties are intentially unwrapper, because otherwise we needed to override every initializer
 
 
     /// The calculated frame before any behaviors (behaviors can change the frame of an attribute)
-    public internal(set) var originalFrame: CGRect!
+    open internal(set) var originalFrame: CGRect!
 
     /// Brick Identifier
     internal var identifier: String!
@@ -44,10 +44,10 @@ public class BrickLayoutAttributes: UICollectionViewLayoutAttributes {
     internal var isEstimateSize = true
 
     /// Flag that keeps track if the zIndex has been set manually. This is to prevent that the `setAutoZIndex` will override the zIndex
-    private var fixedZIndex: Bool = false
+    fileprivate var fixedZIndex: Bool = false
 
     /// zIndex
-    public override var zIndex: Int {
+    open override var zIndex: Int {
         didSet {
             fixedZIndex = true
         }
@@ -56,7 +56,7 @@ public class BrickLayoutAttributes: UICollectionViewLayoutAttributes {
     /// Set a zIndex that is calculated automatically. If the zIndex was set manually, the given zIndex will be ignored
     ///
     /// - Parameter zIndex: The zIndex that is intended to be set
-    func setAutoZIndex(zIndex: Int) {
+    func setAutoZIndex(_ zIndex: Int) {
         if !fixedZIndex {
             self.zIndex = zIndex
             self.fixedZIndex = false
@@ -64,8 +64,8 @@ public class BrickLayoutAttributes: UICollectionViewLayoutAttributes {
     }
 
     /// Copy the attributes with all custom attributes. This is needed as UICollectionView will make copies of the attributes for height calculation etc
-    public override func copyWithZone(zone: NSZone) -> AnyObject {
-        let any = super.copyWithZone(zone)
+    open override func copy(with zone: NSZone?) -> Any {
+        let any = super.copy(with: zone)
         (any as? BrickLayoutAttributes)?.originalFrame = originalFrame
         (any as? BrickLayoutAttributes)?.identifier = identifier
         (any as? BrickLayoutAttributes)?.isEstimateSize = isEstimateSize
@@ -75,45 +75,45 @@ public class BrickLayoutAttributes: UICollectionViewLayoutAttributes {
 }
 
 extension BrickLayoutAttributes {
-    public override var description: String {
+    open override var description: String {
         return super.description + " originalFrame: \(originalFrame); identifier: \(identifier)"
     }
 }
 
 public protocol BrickLayoutDataSource: class {
-    func brickLayout(layout: BrickLayout, widthForItemAtIndexPath indexPath: NSIndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat
-    func brickLayout(layout: BrickLayout, estimatedHeightForItemAtIndexPath indexPath: NSIndexPath, containedInWidth width: CGFloat) -> CGFloat
-    func brickLayout(layout: BrickLayout, edgeInsetsForSection section: Int) -> UIEdgeInsets
-    func brickLayout(layout: BrickLayout, insetForSection section: Int) -> CGFloat
-    func brickLayout(layout: BrickLayout, isAlignRowHeightsForSection section: Int) -> Bool
-    func brickLayout(layout: BrickLayout, alignmentForSection section: Int) -> BrickAlignment
-    func brickLayout(layout: BrickLayout, brickLayoutTypeForItemAtIndexPath indexPath: NSIndexPath) -> BrickLayoutType
-    func brickLayout(layout: BrickLayout, identifierForIndexPath indexPath: NSIndexPath) -> String
-    func brickLayout(layout: BrickLayout, indexPathForSection section: Int) -> NSIndexPath?
-    func brickLayout(layout: BrickLayout, isEstimatedHeightForIndexPath indexPath: NSIndexPath) -> Bool
+    func brickLayout(_ layout: BrickLayout, widthForItemAtIndexPath indexPath: IndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat
+    func brickLayout(_ layout: BrickLayout, estimatedHeightForItemAtIndexPath indexPath: IndexPath, containedInWidth width: CGFloat) -> CGFloat
+    func brickLayout(_ layout: BrickLayout, edgeInsetsForSection section: Int) -> UIEdgeInsets
+    func brickLayout(_ layout: BrickLayout, insetForSection section: Int) -> CGFloat
+    func brickLayout(_ layout: BrickLayout, isAlignRowHeightsForSection section: Int) -> Bool
+    func brickLayout(_ layout: BrickLayout, alignmentForSection section: Int) -> BrickAlignment
+    func brickLayout(_ layout: BrickLayout, brickLayoutTypeForItemAtIndexPath indexPath: IndexPath) -> BrickLayoutType
+    func brickLayout(_ layout: BrickLayout, identifierForIndexPath indexPath: IndexPath) -> String
+    func brickLayout(_ layout: BrickLayout, indexPathForSection section: Int) -> IndexPath?
+    func brickLayout(_ layout: BrickLayout, isEstimatedHeightForIndexPath indexPath: IndexPath) -> Bool
 }
 
 extension BrickLayoutDataSource {
 
-    public func brickLayout(layout: BrickLayout, indexPathForSection section: Int) -> NSIndexPath? {
+    public func brickLayout(_ layout: BrickLayout, indexPathForSection section: Int) -> IndexPath? {
         return nil
     }
 
-    func brickLayout(layout: BrickLayout, isEstimatedHeightForIndexPath indexPath: NSIndexPath) -> Bool {
+    func brickLayout(_ layout: BrickLayout, isEstimatedHeightForIndexPath indexPath: IndexPath) -> Bool {
         return true
     }
 
-    func brickLayout(layout: BrickLayout, isAlignRowHeightsForSection section: Int) -> Bool {
+    func brickLayout(_ layout: BrickLayout, isAlignRowHeightsForSection section: Int) -> Bool {
         return false
     }
 
-    public func brickLayout(layout: BrickLayout, alignmentForSection section: Int) -> BrickAlignment {
-        return BrickAlignment(horizontal: .Left, vertical: .Top)
+    public func brickLayout(_ layout: BrickLayout, alignmentForSection section: Int) -> BrickAlignment {
+        return BrickAlignment(horizontal: .left, vertical: .top)
     }
 
 }
 
 public protocol BrickLayoutDelegate: class {
-    func brickLayout(layout: BrickLayout, didUpdateHeightForItemAtIndexPath indexPath: NSIndexPath)
+    func brickLayout(_ layout: BrickLayout, didUpdateHeightForItemAtIndexPath indexPath: IndexPath)
 }
 

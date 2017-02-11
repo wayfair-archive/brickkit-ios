@@ -10,42 +10,42 @@ import Foundation
 
 /// A BrickBehavior can alter the way bricks are displayed and handled
 /// By subclassing the Behavior, an implementation can alter the frame of the brick as well as its origin
-public class BrickLayoutBehavior: NSObject {
-    public internal(set) weak var brickFlowLayout: BrickFlowLayout?
+open class BrickLayoutBehavior: NSObject {
+    open internal(set) weak var brickFlowLayout: BrickFlowLayout?
 
     // Flag that indicates that this behavior needs some calculation down stream to function correctly
-    public var needsDownstreamCalculation: Bool {
+    open var needsDownstreamCalculation: Bool {
         return false
     }
 
-    public func shouldUseForDownstreamCalculation(for indexPath: NSIndexPath, with identifier: String, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    open func shouldUseForDownstreamCalculation(for indexPath: IndexPath, with identifier: String, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         return false
     }
 
-    public func sectionAttributesForIndexPath(for indexPath: NSIndexPath, in layout: UICollectionViewLayout) -> BrickLayoutAttributes? {
-        return brickFlowLayout?.layoutAttributesForSection(indexPath.section)
+    open func sectionAttributesForIndexPath(for indexPath: IndexPath, in layout: UICollectionViewLayout) -> BrickLayoutAttributes? {
+        return brickFlowLayout?.layoutAttributesForSection((indexPath as NSIndexPath).section)
     }
 
-    public func resetRegisteredAttributes(collectionViewLayout: UICollectionViewLayout) {
+    open func resetRegisteredAttributes(_ collectionViewLayout: UICollectionViewLayout) {
         //Optional
     }
 
-    public func layoutDoneCalculating(collectionViewLayout: UICollectionViewLayout) {
+    open func layoutDoneCalculating(_ collectionViewLayout: UICollectionViewLayout) {
         //Optional
     }
 
-    public func registerAttributes(attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
+    open func registerAttributes(_ attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
         //Optional
     }
 
-    public func invalidateInCollectionViewLayout(collectionViewLayout: UICollectionViewLayout, inout contentSize: CGSize, attributesDidUpdate: (attributes: BrickLayoutAttributes, oldFrame: CGRect?) -> Void) {
+    open func invalidateInCollectionViewLayout(_ collectionViewLayout: UICollectionViewLayout, contentSize: inout CGSize, attributesDidUpdate: (_ attributes: BrickLayoutAttributes, _ oldFrame: CGRect?) -> Void) {
         //Optional
     }
 
     /**
      Override this to change the targetContentOffset for a collectionview
      */
-    public func targetContentOffsetForProposedContentOffset(inout proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
+    open func targetContentOffsetForProposedContentOffset(_ proposedContentOffset: inout CGPoint, withScrollingVelocity velocity: CGPoint, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
         //Optional
     }
 

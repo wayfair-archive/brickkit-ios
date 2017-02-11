@@ -28,28 +28,28 @@ class CollectionBrickTests: XCTestCase {
             "Collection3": 3
             ])
         let collectionSection = BrickSection("CollectionSection", bricks: [
-            DummyBrick("Brick", width: .Fixed(size: 10), height: .Fixed(size: 10))
+            DummyBrick("Brick", width: .fixed(size: 10), height: .fixed(size: 10))
             ])
         collectionSection.repeatCountDataSource = repeatDataSource
 
         let section = BrickSection(bricks: [
-            CollectionBrick("Collection1", height: .Fixed(size: 10), dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { cell in
+            CollectionBrick("Collection1", height: .fixed(size: 10), dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { cell in
                 cell.brickCollectionView.registerBrickClass(DummyBrick.self)
             })),
-            CollectionBrick("Collection2", height: .Fixed(size: 10), dataSource: CollectionBrickCellModel(section: collectionSection, registerBricksHandler: { cell in
+            CollectionBrick("Collection2", height: .fixed(size: 10), dataSource: CollectionBrickCellModel(section: collectionSection, registerBricksHandler: { cell in
                 cell.brickCollectionView.registerBrickClass(DummyBrick.self)
             })),
-            CollectionBrick("Collection3", height: .Fixed(size: 10), dataSource: CollectionBrickCellModel(section: collectionSection), brickTypes: [DummyBrick.self])
+            CollectionBrick("Collection3", height: .fixed(size: 10), dataSource: CollectionBrickCellModel(section: collectionSection), brickTypes: [DummyBrick.self])
             ])
         brickView.setSection(section)
         brickView.layoutSubviews()
 
-        let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
-        XCTAssertEqual(cell1?.brickCollectionView.visibleCells().count, 2)
-        let cell2 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1)) as? CollectionBrickCell
-        XCTAssertEqual(cell2?.brickCollectionView.visibleCells().count, 3)
-        let cell3 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 2, inSection: 1)) as? CollectionBrickCell
-        XCTAssertEqual(cell3?.brickCollectionView.visibleCells().count, 4)
+        let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? CollectionBrickCell
+        XCTAssertEqual(cell1?.brickCollectionView.visibleCells.count, 2)
+        let cell2 = brickView.cellForItem(at: IndexPath(item: 1, section: 1)) as? CollectionBrickCell
+        XCTAssertEqual(cell2?.brickCollectionView.visibleCells.count, 3)
+        let cell3 = brickView.cellForItem(at: IndexPath(item: 2, section: 1)) as? CollectionBrickCell
+        XCTAssertEqual(cell3?.brickCollectionView.visibleCells.count, 4)
 
         XCTAssertEqual(cell1!.brickCollectionView.dataSource!.collectionView(cell1!.brickCollectionView, numberOfItemsInSection: 1), 1)
         XCTAssertEqual(cell2!.brickCollectionView.dataSource!.collectionView(cell1!.brickCollectionView, numberOfItemsInSection: 1), 2)
@@ -60,7 +60,7 @@ class CollectionBrickTests: XCTestCase {
         brickView.registerBrickClass(CollectionBrick.self)
 
         let collectionSection = BrickSection(bricks: [
-            DummyBrick(height: .Fixed(size: 200))
+            DummyBrick(height: .fixed(size: 200))
             ])
         let section = BrickSection(bricks: [
             CollectionBrick("Collection1", dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { cell in
@@ -70,7 +70,7 @@ class CollectionBrickTests: XCTestCase {
         brickView.setSection(section)
         brickView.layoutSubviews()
 
-        let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
+        let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? CollectionBrickCell
         XCTAssertEqual(cell1?.brickCollectionView.frame, CGRect(x: 0, y: 0, width: 320, height: 200))
 
         XCTAssertFalse(brickView.layout.isInCollectionBrick)
@@ -81,10 +81,10 @@ class CollectionBrickTests: XCTestCase {
         brickView.registerBrickClass(CollectionBrick.self)
 
         let collectionSection = BrickSection("CollectionSection", bricks: [
-            DummyBrick("1", height: .Auto(estimate: .Fixed(size: 1000))),
-            DummyBrick("2", height: .Auto(estimate: .Fixed(size: 1000))),
-            DummyBrick("3", height: .Auto(estimate: .Fixed(size: 1000))),
-            DummyBrick("4", height: .Auto(estimate: .Fixed(size: 1000)))
+            DummyBrick("1", height: .auto(estimate: .fixed(size: 1000))),
+            DummyBrick("2", height: .auto(estimate: .fixed(size: 1000))),
+            DummyBrick("3", height: .auto(estimate: .fixed(size: 1000))),
+            DummyBrick("4", height: .auto(estimate: .fixed(size: 1000)))
             ])
 
         let section = BrickSection("RootSection", bricks: [
@@ -95,15 +95,15 @@ class CollectionBrickTests: XCTestCase {
         brickView.setSection(section)
         brickView.layoutSubviews()
 
-        let expectation = expectationWithDescription("Wait for batch updates")
+        let expectation = self.expectation(description: "Wait for batch updates")
         brickView.performBatchUpdates({ 
             // Run this inside a performBatchUpdates, so this is called after the sizeChangeHandler was called
             }) { (completed) in
                 expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
 
-        let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
+        let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? CollectionBrickCell
         cell1?.layoutIfNeeded()
         XCTAssertEqual(cell1?.brickCollectionView.frame, CGRect(x: 0, y: 0, width: 320, height: 320 * 8))
     }
@@ -133,10 +133,10 @@ class CollectionBrickTests: XCTestCase {
         brickView.registerBrickClass(CollectionBrick.self)
 
         let collectionSection = BrickSection("CollectionSection", bricks: [
-            DummyBrick("1", height: .Auto(estimate: .Fixed(size: 1000))),
-            DummyBrick("2", height: .Auto(estimate: .Fixed(size: 1000))),
-            DummyBrick("3", height: .Auto(estimate: .Fixed(size: 1000))),
-            DummyBrick("4", height: .Auto(estimate: .Fixed(size: 1000)))
+            DummyBrick("1", height: .auto(estimate: .fixed(size: 1000))),
+            DummyBrick("2", height: .auto(estimate: .fixed(size: 1000))),
+            DummyBrick("3", height: .auto(estimate: .fixed(size: 1000))),
+            DummyBrick("4", height: .auto(estimate: .fixed(size: 1000)))
             ])
 
         let section = BrickSection("RootSection", bricks: [
@@ -145,14 +145,14 @@ class CollectionBrickTests: XCTestCase {
 
         brickView.setupSectionAndLayout(section)
 
-        let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
+        let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? CollectionBrickCell
         cell1?.layoutIfNeeded()
         XCTAssertEqual(cell1?.brickCollectionView.frame, CGRect(x: 0, y: 0, width: 320, height: 320 * 8))
 
         let mockAttributes = UICollectionViewLayoutAttributes()
         mockAttributes.bounds = CGRect(x: 0, y: 0, width: 0, height: 0)
 
-        cell1?.preferredLayoutAttributesFittingAttributes(mockAttributes) // if the function returns the test passes
+        cell1?.preferredLayoutAttributesFitting(mockAttributes) // if the function returns the test passes
     }
 
 }
@@ -160,7 +160,7 @@ class CollectionBrickTests: XCTestCase {
 class FixedBrickLayoutDelegate: BrickLayoutDelegate {
     var count = 0
 
-    func brickLayout(layout: BrickLayout, didUpdateHeightForItemAtIndexPath indexPath: NSIndexPath) {
+    func brickLayout(_ layout: BrickLayout, didUpdateHeightForItemAtIndexPath indexPath: IndexPath) {
         count += 1
     }
 

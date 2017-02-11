@@ -13,8 +13,8 @@ import UIKit
 /// - Horizontal: Horizontal Scroll
 /// - Vertical:   Vertical Scroll
 public enum SnapToPointScrollDirection {
-    case Horizontal(SnapToPointHorizontalScrollLocation)
-    case Vertical(SnapToPointVerticalScrollLocation)
+    case horizontal(SnapToPointHorizontalScrollLocation)
+    case vertical(SnapToPointVerticalScrollLocation)
 }
 
 /// Horizontal Scroll Location
@@ -23,21 +23,21 @@ public enum SnapToPointScrollDirection {
 /// - Center: Snaps to the brick that is closests to the center of the brickCollectionView
 /// - Right:  Snaps to the brick that is closests to the right of the brickCollectionView
 public enum SnapToPointHorizontalScrollLocation {
-    case Left, Center, Right
+    case left, center, right
 
     func anchorXComponent(for frame: CGRect) -> CGFloat {
         switch self {
-        case .Left: return frame.minX
-        case .Center: return frame.midX
-        case .Right: return frame.maxX
+        case .left: return frame.minX
+        case .center: return frame.midX
+        case .right: return frame.maxX
         }
     }
 
     func offsetX(for cellWidth: CGFloat, in frameSize: CGSize) -> CGFloat {
         switch self {
-        case .Left: return 0
-        case .Center: return frameSize.width/2
-        case .Right: return frameSize.width
+        case .left: return 0
+        case .center: return frameSize.width/2
+        case .right: return frameSize.width
         }
     }
 }
@@ -48,31 +48,31 @@ public enum SnapToPointHorizontalScrollLocation {
 /// - Middle: Snaps to the brick that is closests to the middle of the brickCollectionView
 /// - Bottom: Snaps to the brick that is closests to the bottom of the brickCollectionView
 public enum SnapToPointVerticalScrollLocation {
-    case Top, Middle, Bottom
+    case top, middle, bottom
 
     func anchorYComponent(for frame: CGRect) -> CGFloat {
         switch self {
-        case .Top: return frame.minY
-        case .Middle: return frame.midY
-        case .Bottom: return frame.maxY
+        case .top: return frame.minY
+        case .middle: return frame.midY
+        case .bottom: return frame.maxY
         }
     }
 
     func offsetY(for cellWidth: CGFloat, in frameSize: CGSize, topContentInset: CGFloat) -> CGFloat {
         switch self {
-        case .Top: return topContentInset
-        case .Middle: return (frameSize.height + topContentInset)/2
-        case .Bottom: return frameSize.height
+        case .top: return topContentInset
+        case .middle: return (frameSize.height + topContentInset)/2
+        case .bottom: return frameSize.height
         }
     }
 }
 
 /// Snaps the closest brick to a given location
-public class SnapToPointLayoutBehavior: BrickLayoutBehavior {
+open class SnapToPointLayoutBehavior: BrickLayoutBehavior {
     var sectionsToIgnore: [Int] = [0]
-    private var originalTopContentInset: CGFloat = 0
-    public var forBehavior: BrickLayoutBehavior?
-    public var scrollDirection: SnapToPointScrollDirection {
+    fileprivate var originalTopContentInset: CGFloat = 0
+    open var forBehavior: BrickLayoutBehavior?
+    open var scrollDirection: SnapToPointScrollDirection {
         didSet {
             guard let brickFlowLayout = brickFlowLayout else {
                 return
@@ -86,29 +86,29 @@ public class SnapToPointLayoutBehavior: BrickLayoutBehavior {
         self.forBehavior = forBehavior
     }
 
-    public override func resetRegisteredAttributes(collectionViewLayout: UICollectionViewLayout) {
+    open override func resetRegisteredAttributes(_ collectionViewLayout: UICollectionViewLayout) {
         super.resetRegisteredAttributes(collectionViewLayout)
         collectionViewLayout.collectionView?.decelerationRate = UIScrollViewDecelerationRateFast
     }
 
-    public override func layoutDoneCalculating(collectionViewLayout: UICollectionViewLayout) {
+    open override func layoutDoneCalculating(_ collectionViewLayout: UICollectionViewLayout) {
         resetCollectionViewContentInset(collectionViewLayout)
     }
 
-    func resetCollectionViewContentInset(collectionViewLayout: UICollectionViewLayout) {
+    func resetCollectionViewContentInset(_ collectionViewLayout: UICollectionViewLayout) {
         guard let frame = collectionViewLayout.collectionView?.frame else {
             return
         }
 
-        guard let attributes = collectionViewLayout.layoutAttributesForElementsInRect(frame) as? [BrickLayoutAttributes] where !attributes.isEmpty else {
+        guard let attributes = collectionViewLayout.layoutAttributesForElements(in: frame) as? [BrickLayoutAttributes] , !attributes.isEmpty else {
             return
         }
 
         originalTopContentInset = collectionViewLayout.collectionView!.contentInset.top
 
         switch scrollDirection {
-        case .Horizontal(let scrollLocation):
-            let firstAttributes = attributes.minElement {
+        case .horizontal(let scrollLocation):
+            let firstAttributes = attributes.min {
                 return self.minimumAttributesByXAnchor($0, attributes2: $1, for: scrollLocation, with: 0)
             }! // We can safely unwrap, because we checked if attributes is empty or not
 
@@ -120,8 +120,8 @@ public class SnapToPointLayoutBehavior: BrickLayoutBehavior {
             let right = (frame.size.width - firstAttributes.frame.width) - left
             collectionViewLayout.collectionView?.contentInset.right = right
 
-        case .Vertical(let scrollLocation):
-            let firstAttributes = attributes.minElement {
+        case .vertical(let scrollLocation):
+            let firstAttributes = attributes.min {
                 return self.minimumAttributesByYAnchor($0, attributes2: $1, for: scrollLocation, with: 0)
             }! // We can safely unwrap, because we checked if attributes is empty or not
 
@@ -135,7 +135,7 @@ public class SnapToPointLayoutBehavior: BrickLayoutBehavior {
         }
     }
 
-    override public func targetContentOffsetForProposedContentOffset(inout proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
+    override open func targetContentOffsetForProposedContentOffset(_ proposedContentOffset: inout CGPoint, withScrollingVelocity velocity: CGPoint, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
         super.targetContentOffsetForProposedContentOffset(&proposedContentOffset, withScrollingVelocity: velocity, inCollectionViewLayout: collectionViewLayout)
         guard let collectionView = collectionViewLayout.collectionView else {
             fatalError("targetContentOffsetForProposedContentOffset should never be called without collectionview")
@@ -144,12 +144,12 @@ public class SnapToPointLayoutBehavior: BrickLayoutBehavior {
         let frameSize = collectionView.frame.size
         let rect = CGRect(origin: CGPoint(x: proposedContentOffset.x, y: proposedContentOffset.y) , size: frameSize)
 
-        guard let attributes = collectionViewLayout.layoutAttributesForElementsInRect(rect) as? [BrickLayoutAttributes] where !attributes.isEmpty else {
+        guard let attributes = collectionViewLayout.layoutAttributesForElements(in: rect) as? [BrickLayoutAttributes] , !attributes.isEmpty else {
             return
         }
 
         switch scrollDirection {
-        case .Horizontal(let scrollLocation):
+        case .horizontal(let scrollLocation):
             let anchorXComponent = scrollLocation.anchorXComponent(for: rect)
 
             // Find the closest attribute
@@ -157,11 +157,11 @@ public class SnapToPointLayoutBehavior: BrickLayoutBehavior {
                 return self.minimumAttributesByXAnchor($0, attributes2: $1, for: scrollLocation, with: anchorXComponent)
             }
 
-            let closestAttributes = attributes.minElement(minimumAttributesByXAnchor)! // We can safely unwrap, because we checked if attributes is empty or not
+            let closestAttributes = attributes.min(by: minimumAttributesByXAnchor)! // We can safely unwrap, because we checked if attributes is empty or not
 
             proposedContentOffset.x = scrollLocation.anchorXComponent(for: closestAttributes.frame) - scrollLocation.offsetX(for: closestAttributes.frame.width, in: frameSize)
 
-        case .Vertical(let scrollLocation):
+        case .vertical(let scrollLocation):
             let anchorYComponent = scrollLocation.anchorYComponent(for: rect)
 
             // Find the closest attribute
@@ -169,18 +169,18 @@ public class SnapToPointLayoutBehavior: BrickLayoutBehavior {
                 return self.minimumAttributesByYAnchor($0, attributes2: $1, for: scrollLocation, with: anchorYComponent)
             }
 
-            let closestAttributes = attributes.minElement(minimumAttributesByYAnchor)!  // We can safely unwrap, because we checked if attributes is empty or not
+            let closestAttributes = attributes.min(by: minimumAttributesByYAnchor)!  // We can safely unwrap, because we checked if attributes is empty or not
             
             proposedContentOffset.y = scrollLocation.anchorYComponent(for: closestAttributes.originalFrame) - scrollLocation.offsetY(for: closestAttributes.frame.height, in: frameSize, topContentInset: originalTopContentInset)
         }
     }
 
     /// Find the closest attribute vertically
-    func minimumAttributesByYAnchor(attributes1: BrickLayoutAttributes, attributes2: BrickLayoutAttributes, for scrollLocation: SnapToPointVerticalScrollLocation, with anchorYComponent: CGFloat) -> Bool {
-        if self.sectionsToIgnore.contains(attributes1.indexPath.section) {
+    func minimumAttributesByYAnchor(_ attributes1: BrickLayoutAttributes, attributes2: BrickLayoutAttributes, for scrollLocation: SnapToPointVerticalScrollLocation, with anchorYComponent: CGFloat) -> Bool {
+        if self.sectionsToIgnore.contains((attributes1.indexPath as NSIndexPath).section) {
             return false
         }
-        if self.sectionsToIgnore.contains(attributes2.indexPath.section) {
+        if self.sectionsToIgnore.contains((attributes2.indexPath as NSIndexPath).section) {
             return true
         }
 
@@ -191,11 +191,11 @@ public class SnapToPointLayoutBehavior: BrickLayoutBehavior {
     }
 
     /// Find the closest attribute horizontally
-    func minimumAttributesByXAnchor(attributes1: BrickLayoutAttributes, attributes2: BrickLayoutAttributes, for scrollLocation: SnapToPointHorizontalScrollLocation, with anchorXComponent: CGFloat) -> Bool {
-        if self.sectionsToIgnore.contains(attributes1.indexPath.section) {
+    func minimumAttributesByXAnchor(_ attributes1: BrickLayoutAttributes, attributes2: BrickLayoutAttributes, for scrollLocation: SnapToPointHorizontalScrollLocation, with anchorXComponent: CGFloat) -> Bool {
+        if self.sectionsToIgnore.contains((attributes1.indexPath as NSIndexPath).section) {
             return false
         }
-        if self.sectionsToIgnore.contains(attributes2.indexPath.section) {
+        if self.sectionsToIgnore.contains((attributes2.indexPath as NSIndexPath).section) {
             return true
         }
 

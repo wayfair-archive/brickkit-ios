@@ -18,9 +18,9 @@ class BrickFlowLayoutEdgeInsetsTests: BrickFlowLayoutBaseTests {
             ]
         ]
 
-        layout.prepareLayout()
+        layout.prepare()
 
-        let attributes = layout.layoutAttributesForElementsInRect(collectionViewFrame)
+        let attributes = layout.layoutAttributesForElements(in: collectionViewFrame)
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
 
@@ -37,7 +37,7 @@ class BrickFlowLayoutEdgeInsetsTests: BrickFlowLayoutBaseTests {
             ]
         ]
 
-        let attributes = layout.layoutAttributesForElementsInRect(collectionViewFrame)
+        let attributes = layout.layoutAttributesForElements(in: collectionViewFrame)
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
 
@@ -45,7 +45,7 @@ class BrickFlowLayoutEdgeInsetsTests: BrickFlowLayoutBaseTests {
     }
 
     func testCreateLayoutWithTwoBricksNextToEachotherAndOneBelow() {
-        setDataSources(SectionsCollectionViewDataSource(sections: [3]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[0.5, 0.5, 1]], heights: [[100, 100, 100]], edgeInsets: [UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)], types: [[.Brick, .Brick, .Brick]]))
+        setDataSources(SectionsCollectionViewDataSource(sections: [3]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[0.5, 0.5, 1]], heights: [[100, 100, 100]], edgeInsets: [UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)], types: [[.brick, .brick, .brick]]))
 
         let expectedResult = [
             0 : [
@@ -55,7 +55,7 @@ class BrickFlowLayoutEdgeInsetsTests: BrickFlowLayoutBaseTests {
             ]
         ]
 
-        let attributes = layout.layoutAttributesForElementsInRect(collectionViewFrame)
+        let attributes = layout.layoutAttributesForElements(in: collectionViewFrame)
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
 

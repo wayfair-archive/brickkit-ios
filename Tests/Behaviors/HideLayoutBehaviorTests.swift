@@ -12,10 +12,10 @@ import XCTest
 class HideLayoutBehaviorTests: BrickFlowLayoutBaseTests {
 
     func testHideOneRowBehavior() {
-        let hideBehaviorDataSource = FixedHideBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 1, inSection: 0)])
+        let hideBehaviorDataSource = FixedHideBehaviorDataSource(indexPaths: [IndexPath(item: 1, section: 0)])
         self.layout.hideBehaviorDataSource = hideBehaviorDataSource
 
-        setDataSources(SectionsCollectionViewDataSource(sections: [2]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1, 1]], heights: [[100, 100]], types: [[.Brick, .Brick]]))
+        setDataSources(SectionsCollectionViewDataSource(sections: [2]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1, 1]], heights: [[100, 100]], types: [[.brick, .brick]]))
 
         let expectedResult = [
             0 : [
@@ -23,25 +23,25 @@ class HideLayoutBehaviorTests: BrickFlowLayoutBaseTests {
             ]
         ]
 
-        let attributes = layout.layoutAttributesForElementsInRect(collectionViewFrame)
+        let attributes = layout.layoutAttributesForElements(in: collectionViewFrame)
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
         XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 100))
 
         let indexPaths = attributes?.map { return $0.indexPath }
         XCTAssertEqual(indexPaths?.count, 1)
-        XCTAssertEqual(indexPaths?.first, NSIndexPath(forItem: 0, inSection: 0))
+        XCTAssertEqual(indexPaths?.first, IndexPath(item: 0, section: 0))
     }
 
     func testHideAllRowsBehavior() {
-        let hideBehavior = FixedHideBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0), NSIndexPath(forItem: 1, inSection: 0)])
+        let hideBehavior = FixedHideBehaviorDataSource(indexPaths: [IndexPath(item: 0, section: 0), IndexPath(item: 1, section: 0)])
         self.layout.hideBehaviorDataSource = hideBehavior
 
-        setDataSources(SectionsCollectionViewDataSource(sections: [2]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1, 1]], heights: [[100, 100]], edgeInsets: [UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)], types: [[.Brick, .Brick]]))
+        setDataSources(SectionsCollectionViewDataSource(sections: [2]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1, 1]], heights: [[100, 100]], edgeInsets: [UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)], types: [[.brick, .brick]]))
 
         let expectedResult: [Int: [CGRect]] = [:]
 
-        let attributes = layout.layoutAttributesForElementsInRect(collectionViewFrame)
+        let attributes = layout.layoutAttributesForElements(in: collectionViewFrame)
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
         XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 0))
@@ -49,10 +49,10 @@ class HideLayoutBehaviorTests: BrickFlowLayoutBaseTests {
 
 
     func testHideOneSectionBehavior() {
-        let hideBehaviorDataSource = FixedHideBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 1, inSection: 0)])
+        let hideBehaviorDataSource = FixedHideBehaviorDataSource(indexPaths: [IndexPath(item: 1, section: 0)])
         self.layout.hideBehaviorDataSource = hideBehaviorDataSource
 
-        setDataSources(SectionsCollectionViewDataSource(sections: [2,1]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1, 1], [1]], heights: [[100, 100], [100]], types: [[.Brick, .Section(sectionIndex: 1)], [.Brick]]))
+        setDataSources(SectionsCollectionViewDataSource(sections: [2,1]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1, 1], [1]], heights: [[100, 100], [100]], types: [[.brick, .section(sectionIndex: 1)], [.brick]]))
 
         let expectedResult = [
             0 : [
@@ -60,7 +60,7 @@ class HideLayoutBehaviorTests: BrickFlowLayoutBaseTests {
             ]
         ]
 
-        let attributes = layout.layoutAttributesForElementsInRect(collectionViewFrame)
+        let attributes = layout.layoutAttributesForElements(in: collectionViewFrame)
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
         XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 100))
@@ -73,18 +73,18 @@ class HideLayoutBehaviorTests: BrickFlowLayoutBaseTests {
 
         let section = BrickSection("Section 1", bricks: [
             BrickSection("Section 2", bricks: [
-                BrickSection("Section 3", bricks: [DummyBrick(height: .Fixed(size: 50))]),
-                BrickSection("Section 4", bricks: [DummyBrick(height: .Fixed(size: 50))]),
-                BrickSection("Section 5", bricks: [DummyBrick(height: .Fixed(size: 50))])
+                BrickSection("Section 3", bricks: [DummyBrick(height: .fixed(size: 50))]),
+                BrickSection("Section 4", bricks: [DummyBrick(height: .fixed(size: 50))]),
+                BrickSection("Section 5", bricks: [DummyBrick(height: .fixed(size: 50))])
                 ])
             ])
-        let hideBehaviorDataSource = FixedHideBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 1)])
+        let hideBehaviorDataSource = FixedHideBehaviorDataSource(indexPaths: [IndexPath(item: 0, section: 1)])
         brickView.layout.hideBehaviorDataSource = hideBehaviorDataSource
 
         brickView.setSection(section)
         brickView.layoutSubviews()
 
-        XCTAssertEqual(brickView.visibleCells().count, 0)
+        XCTAssertEqual(brickView.visibleCells.count, 0)
     }
 
 }

@@ -34,7 +34,7 @@ class InteractiveTests: XCTestCase {
         brickView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(bricks: [
-            LabelBrick(LabelBrickIdentifier, height: .Fixed(size: 10), dataSource: labelModel)
+            LabelBrick(LabelBrickIdentifier, height: .fixed(size: 10), dataSource: labelModel)
             ])
         let fixedCount = FixedRepeatCountDataSource(repeatCountHash: [LabelBrickIdentifier: 1])
         section.repeatCountDataSource = fixedCount
@@ -45,48 +45,48 @@ class InteractiveTests: XCTestCase {
 
         fixedCount.repeatCountHash[LabelBrickIdentifier] = 5
 
-        let indexPathSort: (NSIndexPath, NSIndexPath) -> Bool = { indexPath1, indexPath2  in
-            if indexPath1.section == indexPath2.section {
-                return indexPath1.item < indexPath2.item
+        let indexPathSort: (IndexPath, IndexPath) -> Bool = { indexPath1, indexPath2  in
+            if (indexPath1 as NSIndexPath).section == (indexPath2 as NSIndexPath).section {
+                return (indexPath1 as NSIndexPath).item < (indexPath2 as NSIndexPath).item
             } else {
-                return indexPath1.section < indexPath2.section
+                return (indexPath1 as NSIndexPath).section < (indexPath2 as NSIndexPath).section
             }
         }
 
-        let addedExpectation = expectationWithDescription("Added Bricks")
+        let addedExpectation = expectation(description: "Added Bricks")
         self.brickView.invalidateRepeatCounts { (completed, insertedIndexPaths, deletedIndexPaths) in
-            XCTAssertEqual(insertedIndexPaths.sort(indexPathSort), [
-                NSIndexPath(forItem: 1, inSection: 1),
-                NSIndexPath(forItem: 2, inSection: 1),
-                NSIndexPath(forItem: 3, inSection: 1),
-                NSIndexPath(forItem: 4, inSection: 1),
+            XCTAssertEqual(insertedIndexPaths.sorted(by: indexPathSort), [
+                IndexPath(item: 1, section: 1),
+                IndexPath(item: 2, section: 1),
+                IndexPath(item: 3, section: 1),
+                IndexPath(item: 4, section: 1),
                 ])
             XCTAssertEqual(deletedIndexPaths, [])
 
             addedExpectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
 
-        XCTAssertEqual(brickView.visibleCells().count, 6)
+        XCTAssertEqual(brickView.visibleCells.count, 6)
 
         fixedCount.repeatCountHash[LabelBrickIdentifier] = 1
 
-        let removedExpectation = expectationWithDescription("Removed Bricks")
+        let removedExpectation = expectation(description: "Removed Bricks")
         self.brickView.invalidateRepeatCounts { (completed, insertedIndexPaths, deletedIndexPaths) in
             XCTAssertEqual(insertedIndexPaths, [])
-            XCTAssertEqual(deletedIndexPaths.sort(indexPathSort), [
-                NSIndexPath(forItem: 1, inSection: 1),
-                NSIndexPath(forItem: 2, inSection: 1),
-                NSIndexPath(forItem: 3, inSection: 1),
-                NSIndexPath(forItem: 4, inSection: 1),
+            XCTAssertEqual(deletedIndexPaths.sorted(by: indexPathSort), [
+                IndexPath(item: 1, section: 1),
+                IndexPath(item: 2, section: 1),
+                IndexPath(item: 3, section: 1),
+                IndexPath(item: 4, section: 1),
                 ])
             removedExpectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
 
-        XCTAssertEqual(brickView.visibleCells().count, 2)
+        XCTAssertEqual(brickView.visibleCells.count, 2)
     }
 
     func testInvalidateRepeatCountsLess() {
@@ -94,11 +94,11 @@ class InteractiveTests: XCTestCase {
 
         let section = BrickSection(bricks: [
             BrickSection(bricks: [
-                LabelBrick("Brick1", height: .Fixed(size: 10), dataSource: labelModel),
+                LabelBrick("Brick1", height: .fixed(size: 10), dataSource: labelModel),
                 ]),
-            LabelBrick("Brick2", height: .Fixed(size: 10), dataSource: labelModel),
+            LabelBrick("Brick2", height: .fixed(size: 10), dataSource: labelModel),
             BrickSection(bricks: [
-                LabelBrick("Brick3", height: .Fixed(size: 10), dataSource: labelModel),
+                LabelBrick("Brick3", height: .fixed(size: 10), dataSource: labelModel),
                 ]),
             ])
 
@@ -107,35 +107,35 @@ class InteractiveTests: XCTestCase {
         brickView.setSection(section)
         brickView.layoutIfNeeded()
 
-        XCTAssertEqual(brickView.visibleCells().count, 18)
+        XCTAssertEqual(brickView.visibleCells.count, 18)
 
         fixedCount.repeatCountHash = ["Brick1": 2, "Brick2": 2, "Brick3": 2]
 
-        let addedExpectation = expectationWithDescription("Added Bricks")
+        let addedExpectation = expectation(description: "Added Bricks")
         self.brickView.invalidateRepeatCounts { (completed) in
             addedExpectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
 
-        XCTAssertEqual(brickView.visibleCells().count, 9)
+        XCTAssertEqual(brickView.visibleCells.count, 9)
         let flow = brickView.layout 
-        XCTAssertEqual(flow.sections?[3]?.sectionAttributes?.indexPath, NSIndexPath(forItem: 3, inSection: 1))
+        XCTAssertEqual(flow.sections?[3]?.sectionAttributes?.indexPath, IndexPath(item: 3, section: 1))
     }
 
     func testInvalidateRepeatCountsMultiSections() {
         brickView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection(bricks: [
-            DummyBrick("Brick1", height: .Fixed(size: 10)),
+            DummyBrick("Brick1", height: .fixed(size: 10)),
             BrickSection(bricks: [
-                DummyBrick("Brick2", height: .Fixed(size: 10)),
+                DummyBrick("Brick2", height: .fixed(size: 10)),
                 BrickSection(bricks: [
-                    DummyBrick("Brick3", height: .Fixed(size: 10))
+                    DummyBrick("Brick3", height: .fixed(size: 10))
                     ])
                 ]),
             BrickSection(bricks: [
-                DummyBrick("Brick4", height: .Fixed(size: 10))
+                DummyBrick("Brick4", height: .fixed(size: 10))
                 ])
             ])
 
@@ -144,21 +144,21 @@ class InteractiveTests: XCTestCase {
 
         brickView.setSection(section)
         brickView.layoutIfNeeded()
-        XCTAssertEqual(brickView.visibleCells().count, 18)
+        XCTAssertEqual(brickView.visibleCells.count, 18)
 
         fixed.repeatCountHash["Brick1"] = 3
         fixed.repeatCountHash["Brick2"] = 2
         fixed.repeatCountHash["Brick3"] = 1
         fixed.repeatCountHash["Brick4"] = 0
 
-        let repeatCountExpectation = expectationWithDescription("RepeatCount")
+        let repeatCountExpectation = expectation(description: "RepeatCount")
         self.brickView.invalidateRepeatCounts { (completed) in
             repeatCountExpectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
 
-        XCTAssertEqual(brickView.visibleCells().count, 10)
+        XCTAssertEqual(brickView.visibleCells.count, 10)
     }
 
 
@@ -176,14 +176,14 @@ class InteractiveTests: XCTestCase {
 
         labelModel.text = "B"
 
-        let expectation = expectationWithDescription("Reload")
+        let expectation = self.expectation(description: "Reload")
         brickView.reloadBricksWithIdentifiers([LabelBrickIdentifier], shouldReloadCell: false) { (completed) in
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
 
-        let label = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? LabelBrickCell
+        let label = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? LabelBrickCell
         XCTAssertNotNil(label)
 
         XCTAssertEqual(label?.label.text, "B")
@@ -201,20 +201,20 @@ class InteractiveTests: XCTestCase {
 
         labelModel.text = "B"
 
-        let expectation = expectationWithDescription("Reload")
+        let expectation = self.expectation(description: "Reload")
         brickView.reloadBricksWithIdentifiers([LabelBrickIdentifier], shouldReloadCell: false) { (completed) in
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
 
-        var label = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? LabelBrickCell
+        var label = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? LabelBrickCell
         XCTAssertNil(label)
 
         brickView.contentOffset.y = 1000
         brickView.layoutIfNeeded()
 
-        label = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? LabelBrickCell
+        label = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? LabelBrickCell
         XCTAssertNotNil(label)
 
         XCTAssertEqual(label?.label.text, "B")
@@ -232,14 +232,14 @@ class InteractiveTests: XCTestCase {
 
         labelModel.text = "B"
 
-        let expectation = expectationWithDescription("Reload")
+        let expectation = self.expectation(description: "Reload")
         brickView.reloadBricksWithIdentifiers([LabelBrickIdentifier], shouldReloadCell: true) { (completed) in
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
 
-        let label = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? LabelBrickCell
+        let label = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? LabelBrickCell
         XCTAssertNotNil(label)
 
         XCTAssertEqual(label?.label.text, "B")
@@ -250,7 +250,7 @@ class InteractiveTests: XCTestCase {
         brickView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(RootSectionIdentifier, bricks: [
-            LabelBrick(LabelBrickIdentifier, height: .Fixed(size: 10), dataSource: labelModel)
+            LabelBrick(LabelBrickIdentifier, height: .fixed(size: 10), dataSource: labelModel)
             ])
         let fixedCount = FixedRepeatCountDataSource(repeatCountHash: [LabelBrickIdentifier: 1])
         section.repeatCountDataSource = fixedCount
@@ -261,14 +261,14 @@ class InteractiveTests: XCTestCase {
 
         fixedCount.repeatCountHash[LabelBrickIdentifier] = 5
 
-        let expectation = expectationWithDescription("Reload")
+        let expectation = self.expectation(description: "Reload")
         brickView.reloadBricksWithIdentifiers([RootSectionIdentifier], shouldReloadCell: true) { (completed) in
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
 
-        XCTAssertEqual(brickView.visibleCells().count, 6)
+        XCTAssertEqual(brickView.visibleCells.count, 6)
     }
 
     func testReloadBricksWithIdentifiersReloadCellMultiSectionRemove() {
@@ -276,25 +276,25 @@ class InteractiveTests: XCTestCase {
         brickView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(RootSectionIdentifier, bricks: [
-            LabelBrick(LabelBrickIdentifier, height: .Fixed(size: 10), dataSource: labelModel)
+            LabelBrick(LabelBrickIdentifier, height: .fixed(size: 10), dataSource: labelModel)
             ])
         let fixedCount = FixedRepeatCountDataSource(repeatCountHash: [LabelBrickIdentifier: 5])
         section.repeatCountDataSource = fixedCount
         brickView.setSection(section)
         brickView.layoutIfNeeded()
 
-        XCTAssertEqual(brickView.visibleCells().count, 6)
+        XCTAssertEqual(brickView.visibleCells.count, 6)
 
         fixedCount.repeatCountHash[LabelBrickIdentifier] = 1
 
-        let expectation = expectationWithDescription("Reload")
+        let expectation = self.expectation(description: "Reload")
         brickView.reloadBricksWithIdentifiers([RootSectionIdentifier], shouldReloadCell: true) { (completed) in
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
 
-        XCTAssertEqual(brickView.visibleCells().count, 2)
+        XCTAssertEqual(brickView.visibleCells.count, 2)
     }
 
     // Mark: - ReloadBricksWithIdentifier
@@ -313,7 +313,7 @@ class InteractiveTests: XCTestCase {
         brickView.reloadBrickWithIdentifier(LabelBrickIdentifier, andIndex: 0)
         brickView.layoutIfNeeded()
 
-        let label = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? LabelBrickCell
+        let label = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? LabelBrickCell
         XCTAssertNotNil(label)
 
         XCTAssertEqual(label?.label.text, "B")
@@ -323,7 +323,7 @@ class InteractiveTests: XCTestCase {
 
         brickView.registerBrickClass(LabelBrick.self)
 
-        let brick = LabelBrick(LabelBrickIdentifier, height: .Fixed(size: 100), dataSource: labelModel)
+        let brick = LabelBrick(LabelBrickIdentifier, height: .fixed(size: 100), dataSource: labelModel)
         let section = BrickSection(bricks: [
             brick
             ])
@@ -331,13 +331,13 @@ class InteractiveTests: XCTestCase {
         brickView.layoutIfNeeded()
 
         var label: LabelBrickCell
-        label = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as! LabelBrickCell
+        label = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as! LabelBrickCell
         XCTAssertNotNil(label)
         XCTAssertEqual(label.frame, CGRect(x: 0, y: 0, width: 320, height: 100))
 
-        brick.size.width = .Ratio(ratio: 1/2)
+        brick.size.width = .ratio(ratio: 1/2)
 
-        let expectation = expectationWithDescription("Reload")
+        let expectation = self.expectation(description: "Reload")
         brickView.performBatchUpdates({ 
             self.brickView.reloadBrickWithIdentifier(self.LabelBrickIdentifier, andIndex: 0)
             }) { (completed) in
@@ -345,14 +345,14 @@ class InteractiveTests: XCTestCase {
                 expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
 
         brickView.layoutSubviews()
 
-        XCTAssertEqual(brickView.collectionViewLayout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))?.frame, CGRect(x: 0, y: 0, width: 160, height: 100))
-        XCTAssertEqual(brickView.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))?.frame, CGRect(x: 0, y: 0, width: 160, height: 100))
+        XCTAssertEqual(brickView.collectionViewLayout.layoutAttributesForItem(at: IndexPath(item: 0, section: 1))?.frame, CGRect(x: 0, y: 0, width: 160, height: 100))
+        XCTAssertEqual(brickView.layoutAttributesForItem(at: IndexPath(item: 0, section: 1))?.frame, CGRect(x: 0, y: 0, width: 160, height: 100))
 
-        label = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as! LabelBrickCell
+        label = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as! LabelBrickCell
         XCTAssertNotNil(label)
         XCTAssertEqual(label.frame, CGRect(x: 0, y: 0, width: 160, height: 100))
     }
@@ -378,10 +378,10 @@ class InteractiveTests: XCTestCase {
         labelModel.text = "B"
         brickView.reloadBricksWithIdentifiers([LabelBrickIdentifier], inCollectionBrickWithIdentifier: CollectionBrickIdentifier)
 
-        let cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
+        let cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? CollectionBrickCell
         XCTAssertNotNil(cell)
 
-        let label = cell!.brickCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? LabelBrickCell
+        let label = cell!.brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1)) as? LabelBrickCell
         XCTAssertNotNil(label)
 
         XCTAssertEqual(label?.label.text, "B")
@@ -406,15 +406,15 @@ class InteractiveTests: XCTestCase {
         labelModel.text = "B"
         brickView.reloadBricksWithIdentifiers([LabelBrickIdentifier], inCollectionBrickWithIdentifier: CollectionBrickIdentifier)
 
-        var cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
+        var cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? CollectionBrickCell
         XCTAssertNil(cell)
 
         brickView.contentOffset.y = 1000
         brickView.layoutIfNeeded()
-        cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
+        cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? CollectionBrickCell
         XCTAssertNotNil(cell)
 
-        let label = cell!.brickCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? LabelBrickCell
+        let label = cell!.brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1)) as? LabelBrickCell
         XCTAssertNotNil(label)
 
         XCTAssertEqual(label?.label.text, "B")
@@ -441,18 +441,18 @@ class InteractiveTests: XCTestCase {
         labelModel.text = "B"
         brickView.reloadBricksWithIdentifiers([LabelBrickIdentifier], inCollectionBrickWithIdentifier: CollectionBrickIdentifier, andIndex: 2)
 
-        let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
+        let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? CollectionBrickCell
         XCTAssertNotNil(cell1)
 
-        let label1 = cell1!.brickCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? LabelBrickCell
+        let label1 = cell1!.brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1)) as? LabelBrickCell
         XCTAssertNotNil(label1)
 
         XCTAssertEqual(label1!.label.text, "A")
 
-        let cell2 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 2, inSection: 1)) as? CollectionBrickCell
+        let cell2 = brickView.cellForItem(at: IndexPath(item: 2, section: 1)) as? CollectionBrickCell
         XCTAssertNotNil(cell2)
 
-        let label2 = cell2!.brickCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? LabelBrickCell
+        let label2 = cell2!.brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1)) as? LabelBrickCell
         XCTAssertNotNil(label2)
 
         XCTAssertEqual(label2!.label.text, "B")
@@ -465,7 +465,7 @@ class InteractiveTests: XCTestCase {
         brickView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection(bricks: [
-            DummyBrick(DummyBrickIdentifier, height: .Auto(estimate: .Ratio(ratio: 1)))
+            DummyBrick(DummyBrickIdentifier, height: .auto(estimate: .ratio(ratio: 1)))
             ])
         brickView.setSection(section)
         brickView.layoutIfNeeded()
@@ -473,7 +473,7 @@ class InteractiveTests: XCTestCase {
         brickView.invalidateHeightForBrickWithIdentifier(DummyBrickIdentifier, newHeight: 21)
         brickView.layoutIfNeeded()
 
-        let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickCell
+        let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
         XCTAssertNotNil(cell1)
 
         XCTAssertEqual(cell1?.frame, CGRect(x: 0, y: 0, width: 320, height: 21))
@@ -483,7 +483,7 @@ class InteractiveTests: XCTestCase {
         brickView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection(bricks: [
-            DummyBrick(DummyBrickIdentifier, height: .Auto(estimate: .Ratio(ratio: 1)))
+            DummyBrick(DummyBrickIdentifier, height: .auto(estimate: .ratio(ratio: 1)))
             ])
         brickView.setSection(section)
         brickView.layoutIfNeeded()
@@ -491,7 +491,7 @@ class InteractiveTests: XCTestCase {
         brickView.invalidateHeightForBrickWithIdentifier(DummyBrickIdentifier, newHeight: 21)
         brickView.layoutIfNeeded()
 
-        let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickCell
+        let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
         XCTAssertNotNil(cell1)
 
         XCTAssertEqual(cell1?.frame, CGRect(x: 0, y: 0, width: 320, height: 21))
@@ -501,12 +501,12 @@ class InteractiveTests: XCTestCase {
         brickView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection(bricks: [
-            DummyBrick(DummyBrickIdentifier, height: .Auto(estimate: .Ratio(ratio: 1)))
+            DummyBrick(DummyBrickIdentifier, height: .auto(estimate: .ratio(ratio: 1)))
             ])
         brickView.setSection(section)
         brickView.layoutIfNeeded()
 
-        var cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickCell
+        var cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
         XCTAssertNotNil(cell)
         XCTAssertEqual(cell?.frame, CGRect(x: 0, y: 0, width: 320, height: 640))
 
@@ -515,7 +515,7 @@ class InteractiveTests: XCTestCase {
         brickView.invalidateHeightForBrickWithIdentifier(DummyBrickIdentifier, newHeight: nil)
         brickView.layoutIfNeeded()
 
-        cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickCell
+        cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
         XCTAssertNotNil(cell)
         XCTAssertEqual(cell?.frame, CGRect(x: 0, y: 0, width: 320, height: 640))
 
@@ -528,7 +528,7 @@ class InteractiveTests: XCTestCase {
         brickView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(bricks: [
-            DummyBrick(height: .Fixed(size: 50)),
+            DummyBrick(height: .fixed(size: 50)),
             BrickSection(bricks: [
                 LabelBrick(DummyBrickIdentifier, text: "", configureCellBlock: { cell in
                     var text = "Brick"
@@ -540,7 +540,7 @@ class InteractiveTests: XCTestCase {
                 ])
             ])
         
-        let fixedStickyLayout = FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 1)])
+        let fixedStickyLayout = FixedStickyLayoutBehaviorDataSource(indexPaths: [IndexPath(item: 0, section: 1)])
         let repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: [DummyBrickIdentifier: 30])
         section.repeatCountDataSource = repeatCountDataSource
         let sticky = StickyLayoutBehavior(dataSource: fixedStickyLayout)
@@ -550,12 +550,12 @@ class InteractiveTests: XCTestCase {
         brickView.layoutSubviews()
 
         brickView.contentOffset.y += brickView.frame.size.height
-        brickView.collectionViewLayout.invalidateLayoutWithContext(BrickLayoutInvalidationContext(type: .Scrolling))
+        brickView.collectionViewLayout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
         brickView.layoutIfNeeded()
 
-        let cell1 = brickView.collectionViewLayout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
+        let cell1 = brickView.collectionViewLayout.layoutAttributesForItem(at: IndexPath(item: 1, section: 1))
         XCTAssertEqual(cell1?.frame.origin.y, 50)
-        let cell2 = brickView.collectionViewLayout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        let cell2 = brickView.collectionViewLayout.layoutAttributesForItem(at: IndexPath(item: 0, section: 1))
         XCTAssertEqual(cell2?.frame, CGRect(x: 0, y: brickView.contentOffset.y, width: 320, height: 50))
     }
 
@@ -566,7 +566,7 @@ class InteractiveTests: XCTestCase {
 
         let section = BrickSection(bricks: [
             BrickSection("Section", bricks: [
-                DummyBrick("Item", width: .Ratio(ratio: 1/2), height: .Fixed(size: 38)),
+                DummyBrick("Item", width: .ratio(ratio: 1/2), height: .fixed(size: 38)),
                 ], inset: 5, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)),
             ])
 
@@ -579,42 +579,42 @@ class InteractiveTests: XCTestCase {
         var expectation: XCTestExpectation!
 
         repeatCount.repeatCountHash["Item"] = 30
-        expectation = expectationWithDescription("Invalidate bricks")
+        expectation = self.expectation(description: "Invalidate bricks")
         brickView.invalidateBricks { (completed) in
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
 
         repeatCount.repeatCountHash["Item"] = 0
-        expectation = expectationWithDescription("Invalidate bricks")
+        expectation = self.expectation(description: "Invalidate bricks")
         brickView.invalidateBricks { (completed) in
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
     }
 
     func testThatInvalidateRepeatCountsSetCorrectIdentifiers() {
         let section = BrickSection(bricks: [
-            DummyBrick("Brick1", height: .Fixed(size: 50)),
-            DummyBrick("Brick2", height: .Fixed(size: 50))
+            DummyBrick("Brick1", height: .fixed(size: 50)),
+            DummyBrick("Brick2", height: .fixed(size: 50))
             ])
         let repeatCount = FixedRepeatCountDataSource(repeatCountHash: ["Brick1": 1])
         section.repeatCountDataSource = repeatCount
         brickView.setupSectionAndLayout(section)
 
         repeatCount.repeatCountHash = ["Brick1": 2]
-        let expecation = expectationWithDescription("Invalidate Repeat Counts")
+        let expecation = expectation(description: "Invalidate Repeat Counts")
 
         brickView.invalidateRepeatCounts(reloadAllSections: false) { (completed, insertedIndexPaths, deletedIndexPaths) in
             expecation.fulfill()
         }
 
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
 
-        let attributes = brickView.layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1)) as? BrickLayoutAttributes
+        let attributes = brickView.layout.layoutAttributesForItem(at: IndexPath(item: 1, section: 1)) as? BrickLayoutAttributes
         XCTAssertEqual(attributes?.identifier, "Brick1")
     }
     

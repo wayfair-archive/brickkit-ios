@@ -11,7 +11,7 @@ import XCTest
 
 class LabelBrickTests: XCTestCase {
 
-    private let LabelBrickIdentifier = "LabelBrickIdentifier"
+    fileprivate let LabelBrickIdentifier = "LabelBrickIdentifier"
 
     var brickCollectionView: BrickCollectionView!
     var labelBrick: LabelBrick!
@@ -22,18 +22,18 @@ class LabelBrickTests: XCTestCase {
         brickCollectionView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
     }
 
-    func setupLabelBrickWithModel(model: LabelBrickCellModel) -> LabelBrickCell? {
+    func setupLabelBrickWithModel(_ model: LabelBrickCellModel) -> LabelBrickCell? {
         return setupSection(LabelBrick(LabelBrickIdentifier, dataSource: model))
     }
 
-    func setupLabelBrick(text: String, configureCellBlock: ConfigureLabelBlock? = nil) -> LabelBrickCell? {
+    func setupLabelBrick(_ text: String, configureCellBlock: ConfigureLabelBlock? = nil) -> LabelBrickCell? {
         return setupSection(LabelBrick(LabelBrickIdentifier, text: text, configureCellBlock: { cell in
             cell.label.font = UIFont(name: "Avenir-Medium", size: 14)
             configureCellBlock?(cell: cell)
             }))
     }
 
-    func setupSection(labelBrick: LabelBrick) -> LabelBrickCell? {
+    func setupSection(_ labelBrick: LabelBrick) -> LabelBrickCell? {
         brickCollectionView.registerBrickClass(LabelBrick.self)
         self.labelBrick = labelBrick
         let section = BrickSection(bricks: [
@@ -46,7 +46,7 @@ class LabelBrickTests: XCTestCase {
     }
 
     var labelCell: LabelBrickCell? {
-        let cell = brickCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? LabelBrickCell
+        let cell = brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1)) as? LabelBrickCell
         cell?.layoutIfNeeded()
         return cell
     }
@@ -60,11 +60,11 @@ class LabelBrickTests: XCTestCase {
         XCTAssertEqual(cell?.bottomSpaceConstraint?.constant, 0)
         XCTAssertEqual(cell?.leftSpaceConstraint?.constant, 0)
         XCTAssertEqual(cell?.rightSpaceConstraint?.constant, 0)
-        XCTAssertEqual(cell?.backgroundColor, UIColor.clearColor())
-        XCTAssertEqual(cell?.label.backgroundColor, UIColor.clearColor())
+        XCTAssertEqual(cell?.backgroundColor, UIColor.clear)
+        XCTAssertEqual(cell?.label.backgroundColor, UIColor.clear)
 
-        XCTAssertEqualWithAccuracy(cell?.frame, CGRectMake(0, 0, 320, 20), accuracy: CGRectMake(0, 0, 1, 1))
-        XCTAssertEqualWithAccuracy(cell?.label.frame, CGRectMake(0, 0, 320, 20), accuracy: CGRectMake(0, 0, 1, 1))
+        XCTAssertEqualWithAccuracy(cell?.frame, CGRect(x: 0, y: 0, width: 320, height: 20), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
+        XCTAssertEqualWithAccuracy(cell?.label.frame, CGRect(x: 0, y: 0, width: 320, height: 20), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
         
     }
 
@@ -73,8 +73,8 @@ class LabelBrickTests: XCTestCase {
 
         XCTAssertEqual(cell?.label.text, "Hello World\nHello World")
         
-        XCTAssertEqualWithAccuracy(cell?.frame, CGRectMake(0, 0, 320, 39), accuracy: CGRectMake(0, 0, 1, 1))
-        XCTAssertEqualWithAccuracy(cell?.label.frame, CGRectMake(0, 0, 320, 39), accuracy: CGRectMake(0, 0, 1, 1))
+        XCTAssertEqualWithAccuracy(cell?.frame, CGRect(x: 0, y: 0, width: 320, height: 39), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
+        XCTAssertEqualWithAccuracy(cell?.label.frame, CGRect(x: 0, y: 0, width: 320, height: 39), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
     }
 
     func testLabelBrickEdgeInsets() {
@@ -87,8 +87,8 @@ class LabelBrickTests: XCTestCase {
         XCTAssertEqual(cell?.bottomSpaceConstraint?.constant, 10)
         XCTAssertEqual(cell?.rightSpaceConstraint?.constant, 10)
 
-        XCTAssertEqualWithAccuracy(cell?.frame, CGRectMake(0, 0, 320, 35), accuracy: CGRectMake(0, 0, 1, 1))
-        XCTAssertEqualWithAccuracy(cell?.label.frame, CGRectMake(5, 5, 305, 20), accuracy: CGRectMake(0, 0, 1, 1))
+        XCTAssertEqualWithAccuracy(cell?.frame, CGRect(x: 0, y: 0, width: 320, height: 35), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
+        XCTAssertEqualWithAccuracy(cell?.label.frame, CGRect(x: 5, y: 5, width: 305, height: 20), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
     }
 
     func testLabelBrickEdgeInsetsMultiLine() {
@@ -97,13 +97,13 @@ class LabelBrickTests: XCTestCase {
             })
 
         guard let cellFrame = cell?.frame, let labelFrame = cell?.label.frame else {
-            XCTAssertEqual(cell?.frame, CGRectMake(0, 0, 320, 54))
-            XCTAssertEqual(cell?.label.frame, CGRectMake(0, 0, 305, 39))
+            XCTAssertEqual(cell?.frame, CGRect(x: 0, y: 0, width: 320, height: 54))
+            XCTAssertEqual(cell?.label.frame, CGRect(x: 0, y: 0, width: 305, height: 39))
             return
         }
         
-        XCTAssertEqualWithAccuracy(cellFrame, CGRectMake(0, 0, 320, 54), accuracy: CGRectMake(0, 0, 1, 1))
-        XCTAssertEqualWithAccuracy(labelFrame, CGRectMake(5, 5, 305, 39), accuracy: CGRectMake(0, 0, 1, 1))
+        XCTAssertEqualWithAccuracy(cellFrame, CGRect(x: 0, y: 0, width: 320, height: 54), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
+        XCTAssertEqualWithAccuracy(labelFrame, CGRect(x: 5, y: 5, width: 305, height: 39), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
     }
 
     func testChangeText() {
@@ -175,26 +175,26 @@ class LabelBrickTests: XCTestCase {
     }
 
     func testLabelModelWithTextColor() {
-        let cell = setupLabelBrickWithModel(LabelBrickCellModel(text: "Hello World", textColor: UIColor.blueColor()))
-        XCTAssertEqual(cell?.label.textColor, UIColor.blueColor())
+        let cell = setupLabelBrickWithModel(LabelBrickCellModel(text: "Hello World", textColor: UIColor.blue))
+        XCTAssertEqual(cell?.label.textColor, UIColor.blue)
     }
 
     func testLabelWithDecorationImageBrickCellModelWithWrongNib() {
-        let image = UIImage(named: "chevron", inBundle: LabelBrick.bundle, compatibleWithTraitCollection: nil)!
+        let image = UIImage(named: "chevron", in: LabelBrick.bundle, compatibleWith: nil)!
         let cell = setupLabelBrickWithModel(LabelWithDecorationImageBrickCellModel(text: "Hello World", image: image))
         XCTAssertNil(cell?.imageView?.image)
     }
 
     func testLabelWithDecorationImageBrickCellModel() {
         brickCollectionView.registerNib(LabelBrickNibs.Image, forBrickWithIdentifier: LabelBrickIdentifier)
-        let image = UIImage(named: "chevron", inBundle: LabelBrick.bundle, compatibleWithTraitCollection: nil)!
+        let image = UIImage(named: "chevron", in: LabelBrick.bundle, compatibleWith: nil)!
         let cell = setupLabelBrickWithModel(LabelWithDecorationImageBrickCellModel(text: "Hello World", image: image))
         XCTAssertEqual(cell?.imageView?.image, image)
     }
 
     func testLabelImage() {
         brickCollectionView.registerNib(LabelBrickNibs.Image, forBrickWithIdentifier: LabelBrickIdentifier)
-        let image = UIImage(named: "chevron", inBundle: LabelBrick.bundle, compatibleWithTraitCollection: nil)!
+        let image = UIImage(named: "chevron", in: LabelBrick.bundle, compatibleWith: nil)!
         let cell = setupLabelBrickWithModel(LabelWithDecorationImageBrickCellModel(text: "Hello World", image: image))
         XCTAssertEqual(cell?.imageView?.image, image)
     }
@@ -205,7 +205,7 @@ class LabelBrickTests: XCTestCase {
         
         let cell = setupLabelBrick("Hello World", configureCellBlock: { cell in
             XCTAssertNotNil(cell.button)
-            cell.button?.setTitle("BUTTON", forState: .Normal)
+            cell.button?.setTitle("BUTTON", for: UIControlState())
             cell.button?.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 14)
         })
         
@@ -232,7 +232,7 @@ class LabelBrickTests: XCTestCase {
         
         let cell = setupLabelBrick("Hello World", configureCellBlock: { cell in
             XCTAssertNotNil(cell.button)
-            cell.button?.setTitle("BUTTON", forState: .Normal)
+            cell.button?.setTitle("BUTTON", for: UIControlState())
             cell.edgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
             cell.button?.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 14)
         })
@@ -280,13 +280,13 @@ class LabelBrickTests: XCTestCase {
 }
 
 class FixedLabelDataSource: LabelBrickCellDataSource {
-    func configureLabelBrickCell(cell: LabelBrickCell) {
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
     }
 }
 
 class FixedLabelDelegate: LabelBrickCellDelegate {
     var buttonTouched = false
-    func buttonTouchedForLabelBrickCell(cell: LabelBrickCell) {
+    func buttonTouchedForLabelBrickCell(_ cell: LabelBrickCell) {
         buttonTouched = true
     }
     

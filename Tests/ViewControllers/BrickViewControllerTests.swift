@@ -23,42 +23,42 @@ class BrickViewControllerTests: XCTestCase {
     }
 
     func testDeinit() {
-        var viewController: BrickViewController? = TestBrickViewController(nibName: "TestBrickViewController", bundle: NSBundle(forClass: self.dynamicType))
+        var viewController: BrickViewController? = TestBrickViewController(nibName: "TestBrickViewController", bundle: Bundle(for: type(of: self)))
 
-        expectationForNotification("BrickViewController.deinit", object: nil, handler: nil)
+        expectation(forNotification: "BrickViewController.deinit", object: nil, handler: nil)
         viewController?.viewDidLoad()
         viewController = nil
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
         XCTAssertNil(viewController)
     }
     
     func testDeinitLabelBrick() {
-        var viewController: TestBrickViewController? = TestBrickViewController(nibName: "TestBrickViewController", bundle: NSBundle(forClass: self.dynamicType))
+        var viewController: TestBrickViewController? = TestBrickViewController(nibName: "TestBrickViewController", bundle: Bundle(for: type(of: self)))
         viewController?.labelTest = true
         
-        expectationForNotification("BrickViewController.deinit", object: nil, handler: nil)
+        expectation(forNotification: "BrickViewController.deinit", object: nil, handler: nil)
         viewController?.viewDidLoad()
         viewController = nil
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
         XCTAssertNil(viewController)
     }
     
     func testFromStoryBoard() {
-        let viewController = UIStoryboard(name: "TestBrickViewController", bundle: NSBundle(forClass: self.dynamicType)).instantiateInitialViewController() as? BrickViewController
+        let viewController = UIStoryboard(name: "TestBrickViewController", bundle: Bundle(for: type(of: self))).instantiateInitialViewController() as? BrickViewController
         XCTAssertNotNil(viewController)
         viewController?.viewDidLoad()
         XCTAssertTrue(viewController?.collectionView is BrickCollectionView)
     }
 
     func testFromNib() {
-        let viewController = TestBrickViewController(nibName: "TestBrickViewController", bundle: NSBundle(forClass: self.dynamicType))
+        let viewController = TestBrickViewController(nibName: "TestBrickViewController", bundle: Bundle(for: type(of: self)))
         XCTAssertNotNil(viewController)
         viewController.viewDidLoad()
         XCTAssertTrue(viewController.collectionView is BrickCollectionView)
     }
 
     func testRegistrationDataSource() {
-        let viewController = TestBrickViewController(nibName: "TestBrickViewController", bundle: NSBundle(forClass: self.dynamicType))
+        let viewController = TestBrickViewController(nibName: "TestBrickViewController", bundle: Bundle(for: type(of: self)))
         viewController.viewDidLoad()
         XCTAssertTrue(viewController.brickRegistered)
     }
@@ -80,7 +80,7 @@ class BrickViewControllerTests: XCTestCase {
             ])
 
         brickViewController.brickCollectionView.setupSectionAndLayout(section)
-        XCTAssertTrue(brickViewController.brickCollectionView.dataSource?.collectionView(brickViewController.brickCollectionView, cellForItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0)) is BrickSectionCell)
+        XCTAssertTrue(brickViewController.brickCollectionView.dataSource?.collectionView(brickViewController.brickCollectionView, cellForItemAt: IndexPath(item: 0, section: 0)) is BrickSectionCell)
     }
 
     func testWithDummyBrick() {
@@ -99,16 +99,16 @@ class BrickViewControllerTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: width * 2))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: width * 2))
 
     }
 
     func testWithDummyBrickFixedWidth() {
         let section = BrickSection("Test Section", bricks: [
-            DummyBrick("Brick 1", width: .Fixed(size: 100)),
+            DummyBrick("Brick 1", width: .fixed(size: 100)),
             ])
 
         brickViewController.brickCollectionView.setupSectionAndLayout(section)
@@ -122,16 +122,16 @@ class BrickViewControllerTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: 100 * 2)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: 100 * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 100 * 2))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 100 * 2))
 
     }
 
     func testWithDummyBrickWithFixedHeight() {
         let section = BrickSection("Test Section", bricks: [
-            DummyBrick("Brick 1", height: .Fixed(size: 100)),
+            DummyBrick("Brick 1", height: .fixed(size: 100)),
             ])
 
         brickViewController.brickCollectionView.setupSectionAndLayout(section)
@@ -145,17 +145,17 @@ class BrickViewControllerTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: 100)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: 100)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 100))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 100))
 
     }
 
 
     func testWithDummyBrickWithHeightRatio() {
         let section = BrickSection("Test Section", bricks: [
-            DummyBrick("Brick 1", height: .Ratio(ratio: 5)),
+            DummyBrick("Brick 1", height: .ratio(ratio: 5)),
             ])
 
         brickViewController.brickCollectionView.setupSectionAndLayout(section)
@@ -169,10 +169,10 @@ class BrickViewControllerTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 5)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 5)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: width * 5))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: width * 5))
 
     }
 
@@ -205,17 +205,17 @@ class BrickViewControllerTests: XCTestCase {
             ],
             ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 4)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 4)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: width * 4))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: width * 4))
 
     }
 
     func testWithDummyBricksSideBySide() {
         let section = BrickSection("Test Section", bricks: [
-            DummyBrick("Brick 1", width: .Ratio(ratio: 0.5)),
-            DummyBrick("Brick 2", width: .Ratio(ratio: 0.5))
+            DummyBrick("Brick 1", width: .ratio(ratio: 0.5)),
+            DummyBrick("Brick 2", width: .ratio(ratio: 0.5))
             ])
 
         brickViewController.brickCollectionView.setupSectionAndLayout(section)
@@ -230,25 +230,25 @@ class BrickViewControllerTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: width))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: width))
 
 
     }
 
     func testWithDummyBricksInNestedSectionsSimple() {
-        brickViewController.registerNib(UINib(nibName: "DummyBrick150", bundle: NSBundle(forClass: DummyBrick.self)), forBrickWithIdentifier: "Brick")
+        brickViewController.registerNib(UINib(nibName: "DummyBrick150", bundle: Bundle(for: DummyBrick.self)), forBrickWithIdentifier: "Brick")
 
         let section = BrickSection("Test", bricks: [
             BrickSection("Test Section 1", bricks: [
                 BrickSection("Test Section 2", bricks: [
-                    DummyBrick("Brick", height: .Auto(estimate: .Fixed(size: 100))),
-                    DummyBrick("Brick", height: .Auto(estimate: .Fixed(size: 150))),
+                    DummyBrick("Brick", height: .auto(estimate: .fixed(size: 100))),
+                    DummyBrick("Brick", height: .auto(estimate: .fixed(size: 150))),
                     ]),
                 BrickSection("Test Section 3", bricks: [
-                    DummyBrick("Brick", height: .Auto(estimate: .Fixed(size: 100))),
+                    DummyBrick("Brick", height: .auto(estimate: .fixed(size: 100))),
                     ]),
                 ]),
             ])
@@ -277,10 +277,10 @@ class BrickViewControllerTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: brickViewController.collectionViewLayout.collectionViewContentSize()))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: brickViewController.collectionViewLayout.collectionViewContentSize))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 150 * 3))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 150 * 3))
 
     }
 
@@ -289,13 +289,13 @@ class BrickViewControllerTests: XCTestCase {
         let section = BrickSection("Test", bricks: [
             BrickSection("Test Section 1", bricks: [
                 BrickSection("Test Section 2", bricks: [
-                    DummyBrick("Brick 1 in section 2", height: .Auto(estimate: .Fixed(size: 100))),
-                    DummyBrick("Brick 2 in section 2", height: .Auto(estimate: .Fixed(size: 100)))
+                    DummyBrick("Brick 1 in section 2", height: .auto(estimate: .fixed(size: 100))),
+                    DummyBrick("Brick 2 in section 2", height: .auto(estimate: .fixed(size: 100)))
                     ]),
                 BrickSection("Test Section 3", bricks: [
-                    DummyBrick("Brick 1 in section 3", height: .Auto(estimate: .Fixed(size: 100))),
-                    DummyBrick("Brick 2 in section 3", height: .Auto(estimate: .Fixed(size: 100))),
-                    DummyBrick("Brick 3 in section 3", height: .Auto(estimate: .Fixed(size: 100)))
+                    DummyBrick("Brick 1 in section 3", height: .auto(estimate: .fixed(size: 100))),
+                    DummyBrick("Brick 2 in section 3", height: .auto(estimate: .fixed(size: 100))),
+                    DummyBrick("Brick 3 in section 3", height: .auto(estimate: .fixed(size: 100)))
                     ]),
                 ]),
             ])
@@ -324,10 +324,10 @@ class BrickViewControllerTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: brickViewController.collectionViewLayout.collectionViewContentSize()))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: brickViewController.collectionViewLayout.collectionViewContentSize))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: width * 10))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: width * 10))
 
     }
 
@@ -359,8 +359,8 @@ class BrickViewControllerTests: XCTestCase {
             DummyBrick("Brick 2")
             ])
 
-        brickViewController.registerNib(UINib(nibName: "DummyBrick100", bundle: NSBundle(forClass: DummyBrick.self)), forBrickWithIdentifier: "Brick 1")
-        brickViewController.registerNib(UINib(nibName: "DummyBrick150", bundle: NSBundle(forClass: DummyBrick.self)), forBrickWithIdentifier: "Brick 2")
+        brickViewController.registerNib(UINib(nibName: "DummyBrick100", bundle: Bundle(for: DummyBrick.self)), forBrickWithIdentifier: "Brick 1")
+        brickViewController.registerNib(UINib(nibName: "DummyBrick150", bundle: Bundle(for: DummyBrick.self)), forBrickWithIdentifier: "Brick 2")
 
         brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
@@ -374,10 +374,10 @@ class BrickViewControllerTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: 250)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: 250)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 250))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 250))
 
     }
 
@@ -387,7 +387,7 @@ class BrickViewControllerTests: XCTestCase {
             DummyBrick("Brick 2")
             ])
 
-        brickViewController.registerNib(UINib(nibName: "DummyBrick150", bundle: NSBundle(forClass: DummyBrick.self)), forBrickWithIdentifier: "Brick 2")
+        brickViewController.registerNib(UINib(nibName: "DummyBrick150", bundle: Bundle(for: DummyBrick.self)), forBrickWithIdentifier: "Brick 2")
 
         brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
@@ -401,10 +401,10 @@ class BrickViewControllerTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 3.5)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 3.5)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: width * 2 + 150))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: width * 2 + 150))
 
     }
 
@@ -424,20 +424,20 @@ class BrickViewControllerTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: width * 2))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: width * 2))
     }
 
 
     func testCollectionBrick() {
         let collectionSection = BrickSection("CollectionBrick Section", bricks: [
-            DummyBrick("Brick 1", height: .Fixed(size: 50)),
+            DummyBrick("Brick 1", height: .fixed(size: 50)),
             ])
 
         let section = BrickSection("Test Section", bricks: [
-            CollectionBrick("Collection Brick", scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { (cell) in
+            CollectionBrick("Collection Brick", scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { (cell) in
                 cell.brickCollectionView.registerBrickClass(DummyBrick.self)
             }))
             ])
@@ -453,16 +453,16 @@ class BrickViewControllerTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 50))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 50))
 
     }
 
     func testCollectionBrickWithNoContentFirst() {
         let collectionSection = BrickSection("CollectionBrick Section", bricks: [
-            DummyBrick("Brick 1", height: .Fixed(size: 50)),
+            DummyBrick("Brick 1", height: .fixed(size: 50)),
             ])
         let model = CollectionBrickCellModel(section: collectionSection, configureHandler: { (cell) in
             cell.brickCollectionView.registerBrickClass(DummyBrick.self)
@@ -472,14 +472,14 @@ class BrickViewControllerTests: XCTestCase {
         model.section = collectionSection
 
         let section = BrickSection("Test Section", bricks: [
-            CollectionBrick("Collection Brick", scrollDirection: .Horizontal, dataSource: model)
+            CollectionBrick("Collection Brick", scrollDirection: .horizontal, dataSource: model)
             ])
 
         brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
         var expectedResult: [Int: [CGRect]] = [ : ]
 
-        var attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        var attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
 
@@ -497,15 +497,15 @@ class BrickViewControllerTests: XCTestCase {
             ]
         ]
 
-        attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 50))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 50))
     }
 
     func testUpdateFrame() {
         let section = BrickSection("Test Section", bricks: [
-            DummyBrick("Brick 1", height: .Fixed(size: 50)),
+            DummyBrick("Brick 1", height: .fixed(size: 50)),
             ])
 
         brickViewController.brickCollectionView.setupSectionAndLayout(section)
@@ -520,10 +520,10 @@ class BrickViewControllerTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: 400, height: 50)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: 400, height: 50)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: 400, height: 50))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: 400, height: 50))
     }
 
     #if os(iOS)
@@ -532,7 +532,7 @@ class BrickViewControllerTests: XCTestCase {
     func testRefreshControl() {
         let refreshControl = UIRefreshControl()
 
-        let expectation = expectationWithDescription("Refresh")
+        let expectation = self.expectation(description: "Refresh")
         brickViewController.addRefreshControl(refreshControl) { (refreshControl) in
             expectation.fulfill()
         }
@@ -541,12 +541,12 @@ class BrickViewControllerTests: XCTestCase {
         // I had hoped that `refreshControl.beginRefreshing()` or  `refreshControl.sendActionsForControlEvents(.ValueChanged)` would do the trick...
         brickViewController.refreshControlAction()
 
-        waitForExpectationsWithTimeout(2, handler: nil)
+        waitForExpectations(timeout: 2, handler: nil)
 
         XCTAssertNotNil(brickViewController.refreshControl)
         XCTAssertNotNil(brickViewController.refreshAction)
-        XCTAssertEqual(refreshControl.allTargets().count, 1)
-        XCTAssertEqual(refreshControl.allTargets().first, brickViewController)
+        XCTAssertEqual(refreshControl.allTargets.count, 1)
+        XCTAssertEqual(refreshControl.allTargets.first, brickViewController)
         XCTAssertEqual(refreshControl.superview, brickViewController.brickCollectionView)
     }
 
@@ -578,28 +578,28 @@ class BrickViewControllerTests: XCTestCase {
     func testReloadBricks() {
         let width = brickViewController.brickCollectionView.frame.size.width
 
-        let brick = DummyBrick(width: .Ratio(ratio: 1/10))
+        let brick = DummyBrick(width: .ratio(ratio: 1/10))
         let section = BrickSection(bricks: [
             brick
             ])
         brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
         var cell: DummyBrickCell?
-        cell = brickViewController.brickCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickCell
+        cell = brickViewController.brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
         XCTAssertEqualWithAccuracy(cell!.frame.width, width / 10, accuracy: 0.01)
         XCTAssertEqualWithAccuracy(cell?.frame.height ?? 0, (width / 10) * 2, accuracy: 0.5)
 
-        brick.size.width = .Ratio(ratio: 1/5)
+        brick.size.width = .ratio(ratio: 1/5)
 
-        let expectation = expectationWithDescription("Invalidate Bricks")
+        let expectation = self.expectation(description: "Invalidate Bricks")
 
         brickViewController.brickCollectionView.invalidateBricks(true) { completed in
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
 
-        cell = brickViewController.brickCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickCell
+        cell = brickViewController.brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
         XCTAssertEqualWithAccuracy(cell?.frame.width ?? 0, width / 5, accuracy: 0.1)
         XCTAssertEqualWithAccuracy(cell?.frame.height ?? 0 , (width / 5) * 2, accuracy: 0.1)
     }

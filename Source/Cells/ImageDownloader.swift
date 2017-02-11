@@ -8,16 +8,16 @@
 
 import UIKit
 
-private func _downloadImageAndSet(imageDownloader: ImageDownloader, on imageView: UIImageView, with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage, url: NSURL) -> Void)) {
+private func _downloadImageAndSet(_ imageDownloader: ImageDownloader, on imageView: UIImageView, with imageURL: URL, onCompletion completionHandler: @escaping ((_ image: UIImage, _ url: URL) -> Void)) {
     
     imageDownloader.downloadImage(with: imageURL) { (image, url) in
         guard imageURL == url else {
             return
         }
 
-        NSOperationQueue.mainQueue().addOperationWithBlock {
+        OperationQueue.main.addOperation {
             imageView.image = image
-            completionHandler(image: image, url: url)
+            completionHandler(image, url)
         }
     }
 
@@ -25,32 +25,32 @@ private func _downloadImageAndSet(imageDownloader: ImageDownloader, on imageView
 
 // Mark: - Image Downloader
 public protocol ImageDownloader: class {
-    func downloadImage(with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage, url: NSURL) -> Void))
-    func downloadImageAndSet(on imageView: UIImageView, with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage, url: NSURL) -> Void))
+    func downloadImage(with imageURL: URL, onCompletion completionHandler: ((_ image: UIImage, _ url: URL) -> Void))
+    func downloadImageAndSet(on imageView: UIImageView, with imageURL: URL, onCompletion completionHandler: ((_ image: UIImage, _ url: URL) -> Void))
 }
 
 public extension ImageDownloader {
 
-    func downloadImageAndSet(on imageView: UIImageView, with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage, url: NSURL) -> Void)) {
+    func downloadImageAndSet(on imageView: UIImageView, with imageURL: URL, onCompletion completionHandler: @escaping ((_ image: UIImage, _ url: URL) -> Void)) {
         _downloadImageAndSet(self, on: imageView, with: imageURL, onCompletion: completionHandler)
     }
 
 }
 
-public class NSURLSessionImageDownloader: ImageDownloader {
+open class NSURLSessionImageDownloader: ImageDownloader {
 
-    public func downloadImageAndSet(on imageView: UIImageView, with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage, url: NSURL) -> Void)) {
+    open func downloadImageAndSet(on imageView: UIImageView, with imageURL: URL, onCompletion completionHandler: @escaping ((_ image: UIImage, _ url: URL) -> Void)) {
         _downloadImageAndSet(self, on: imageView, with: imageURL, onCompletion: completionHandler)
     }
 
-    public func downloadImage(with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage, url: NSURL) -> Void)) {
-        NSURLSession.sharedSession().dataTaskWithURL(imageURL, completionHandler: { (data, response, error) in
+    open func downloadImage(with imageURL: URL, onCompletion completionHandler: @escaping ((_ image: UIImage, _ url: URL) -> Void)) {
+        URLSession.shared.dataTask(with: imageURL, completionHandler: { (data, response, error) in
             guard
-                let data = data where error == nil,
+                let data = data , error == nil,
                 let image = UIImage(data: data)
                 else { return }
 
-            completionHandler(image: image, url: imageURL)
+            completionHandler(image, imageURL)
         }).resume()
     }
 }

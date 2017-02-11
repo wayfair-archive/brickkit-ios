@@ -38,9 +38,9 @@ class BrickModelsTests: XCTestCase {
         let section = BrickSection("Section1", bricks: [
             DummyBrick("Brick1"),
             BrickSection("Section2", bricks: [
-                DummyBrick("Brick2", width: .Fixed(size: 20)),
+                DummyBrick("Brick2", width: .fixed(size: 20)),
                 BrickSection("Section3", bricks: [
-                    DummyBrick("Brick3", height: .Ratio(ratio: 1))
+                    DummyBrick("Brick3", height: .ratio(ratio: 1))
                     ])
                 ]),
             DummyBrick("Brick4")

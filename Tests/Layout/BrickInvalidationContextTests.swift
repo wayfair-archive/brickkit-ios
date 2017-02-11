@@ -25,16 +25,16 @@ class BrickInvalidationContextTests: XCTestCase {
         brickViewController.brickCollectionView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection("Test Section", bricks: [
-            DummyBrick("Brick 1", height: .Fixed(size: 50)),
-            DummyBrick("Brick 2", height: .Fixed(size: 50)),
-            DummyBrick("Brick 3", height: .Fixed(size: 50)),
+            DummyBrick("Brick 1", height: .fixed(size: 50)),
+            DummyBrick("Brick 2", height: .fixed(size: 50)),
+            DummyBrick("Brick 3", height: .fixed(size: 50)),
             ])
 
         brickViewController.setSection(section)
         brickViewController.collectionView!.layoutSubviews()
 
-        let context = BrickLayoutInvalidationContext(type: .UpdateHeight(indexPath: NSIndexPath(forItem: 0, inSection: 1), newHeight: 100))
-        brickViewController.layout.invalidateLayoutWithContext(context)
+        let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 0, section: 1), newHeight: 100))
+        brickViewController.layout.invalidateLayout(with: context)
 
         XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 4)
         XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
@@ -50,10 +50,10 @@ class BrickInvalidationContextTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 200))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 200))
 
 
     }
@@ -62,16 +62,16 @@ class BrickInvalidationContextTests: XCTestCase {
         brickViewController.brickCollectionView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection("Test Section", bricks: [
-            DummyBrick("Brick 1", height: .Fixed(size: 50)),
-            DummyBrick("Brick 2", height: .Fixed(size: 50)),
-            DummyBrick("Brick 3", height: .Fixed(size: 50)),
+            DummyBrick("Brick 1", height: .fixed(size: 50)),
+            DummyBrick("Brick 2", height: .fixed(size: 50)),
+            DummyBrick("Brick 3", height: .fixed(size: 50)),
             ])
 
         brickViewController.setSection(section)
         brickViewController.collectionView!.layoutSubviews()
 
-        let context = BrickLayoutInvalidationContext(type: .UpdateHeight(indexPath: NSIndexPath(forItem: 1, inSection: 1), newHeight: 100))
-        brickViewController.layout.invalidateLayoutWithContext(context)
+        let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 1, section: 1), newHeight: 100))
+        brickViewController.layout.invalidateLayout(with: context)
 
         XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 3)
         XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
@@ -87,10 +87,10 @@ class BrickInvalidationContextTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 200))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 200))
     }
 
 
@@ -98,16 +98,16 @@ class BrickInvalidationContextTests: XCTestCase {
         brickViewController.brickCollectionView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection("Test Section", bricks: [
-            DummyBrick("Brick 1", height: .Fixed(size: 50)),
-            DummyBrick("Brick 2", height: .Fixed(size: 50)),
-            DummyBrick("Brick 3", height: .Fixed(size: 50)),
+            DummyBrick("Brick 1", height: .fixed(size: 50)),
+            DummyBrick("Brick 2", height: .fixed(size: 50)),
+            DummyBrick("Brick 3", height: .fixed(size: 50)),
             ])
 
         brickViewController.setSection(section)
         brickViewController.collectionView!.layoutSubviews()
 
-        let context = BrickLayoutInvalidationContext(type: .UpdateHeight(indexPath: NSIndexPath(forItem: 2, inSection: 1), newHeight: 100))
-        brickViewController.layout.invalidateLayoutWithContext(context)
+        let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 2, section: 1), newHeight: 100))
+        brickViewController.layout.invalidateLayout(with: context)
         XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
 
         XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 2)
@@ -123,10 +123,10 @@ class BrickInvalidationContextTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 200))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 200))
     }
 
     func testInvalidateHeightWithSectionsFirstAttribute() {
@@ -134,12 +134,12 @@ class BrickInvalidationContextTests: XCTestCase {
 
         let section = BrickSection("Test Section", bricks: [
             BrickSection("Section 1", bricks: [
-                DummyBrick("Brick 1", height: .Fixed(size: 50)),
+                DummyBrick("Brick 1", height: .fixed(size: 50)),
                 ]),
             BrickSection("Section 2", bricks: [
-                DummyBrick("Brick 2", height: .Fixed(size: 50)),
+                DummyBrick("Brick 2", height: .fixed(size: 50)),
                 BrickSection("Section 3", bricks: [
-                    DummyBrick("Brick 3", height: .Fixed(size: 50)),
+                    DummyBrick("Brick 3", height: .fixed(size: 50)),
                     ])
                 ]),
             ])
@@ -147,8 +147,8 @@ class BrickInvalidationContextTests: XCTestCase {
         brickViewController.setSection(section)
         brickViewController.collectionView!.layoutSubviews()
 
-        let context = BrickLayoutInvalidationContext(type: .UpdateHeight(indexPath: NSIndexPath(forItem: 0, inSection: 2), newHeight: 100))
-        brickViewController.layout.invalidateLayoutWithContext(context)
+        let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 0, section: 2), newHeight: 100))
+        brickViewController.layout.invalidateLayout(with: context)
 
         XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 7)
         XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
@@ -174,10 +174,10 @@ class BrickInvalidationContextTests: XCTestCase {
 
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 200))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 200))
 
     }
 
@@ -186,12 +186,12 @@ class BrickInvalidationContextTests: XCTestCase {
 
         let section = BrickSection("Test Section", bricks: [
             BrickSection("Section 1", bricks: [
-                DummyBrick("Brick 1", height: .Fixed(size: 50)),
+                DummyBrick("Brick 1", height: .fixed(size: 50)),
                 ]),
             BrickSection("Section 2", bricks: [
-                DummyBrick("Brick 2", height: .Fixed(size: 50)),
+                DummyBrick("Brick 2", height: .fixed(size: 50)),
                 BrickSection("Section 3", bricks: [
-                    DummyBrick("Brick 3", height: .Fixed(size: 50)),
+                    DummyBrick("Brick 3", height: .fixed(size: 50)),
                     ])
                 ]),
             ])
@@ -199,8 +199,8 @@ class BrickInvalidationContextTests: XCTestCase {
         brickViewController.setSection(section)
         brickViewController.collectionView!.layoutSubviews()
 
-        let context = BrickLayoutInvalidationContext(type: .UpdateHeight(indexPath: NSIndexPath(forItem: 0, inSection: 3), newHeight: 100))
-        brickViewController.layout.invalidateLayoutWithContext(context)
+        let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 0, section: 3), newHeight: 100))
+        brickViewController.layout.invalidateLayout(with: context)
 
         XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 5)
         XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
@@ -226,10 +226,10 @@ class BrickInvalidationContextTests: XCTestCase {
 
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 200))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 200))
 
 
     }
@@ -239,12 +239,12 @@ class BrickInvalidationContextTests: XCTestCase {
 
         let section = BrickSection("Test Section", bricks: [
             BrickSection("Section 1", bricks: [
-                DummyBrick("Brick 1", height: .Fixed(size: 50)),
+                DummyBrick("Brick 1", height: .fixed(size: 50)),
                 ]),
             BrickSection("Section 2", bricks: [
-                DummyBrick("Brick 2", height: .Fixed(size: 50)),
+                DummyBrick("Brick 2", height: .fixed(size: 50)),
                 BrickSection("Section 3", bricks: [
-                    DummyBrick("Brick 3", height: .Fixed(size: 50)),
+                    DummyBrick("Brick 3", height: .fixed(size: 50)),
                     ])
                 ]),
             ])
@@ -252,8 +252,8 @@ class BrickInvalidationContextTests: XCTestCase {
         brickViewController.setSection(section)
         brickViewController.collectionView!.layoutSubviews()
 
-        let context = BrickLayoutInvalidationContext(type: .UpdateHeight(indexPath: NSIndexPath(forItem: 0, inSection: 4), newHeight: 100))
-        brickViewController.layout.invalidateLayoutWithContext(context)
+        let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 0, section: 4), newHeight: 100))
+        brickViewController.layout.invalidateLayout(with: context)
 
         XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 4)
         XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
@@ -279,10 +279,10 @@ class BrickInvalidationContextTests: XCTestCase {
 
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 200))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 200))
 
 
     }
@@ -292,14 +292,14 @@ class BrickInvalidationContextTests: XCTestCase {
 
         let section = BrickSection("Test Section", bricks: [
             BrickSection("Section 1", bricks: [
-                DummyBrick("Brick 1", height: .Fixed(size: 50)),
+                DummyBrick("Brick 1", height: .fixed(size: 50)),
                 ]),
             BrickSection("Section 2", bricks: [
                 BrickSection("Section 3", bricks: [
-                    DummyBrick("Brick 2", height: .Fixed(size: 50)),
+                    DummyBrick("Brick 2", height: .fixed(size: 50)),
                     ]),
                 BrickSection("Section 4", bricks: [
-                    DummyBrick("Brick 3", height: .Fixed(size: 50)),
+                    DummyBrick("Brick 3", height: .fixed(size: 50)),
                     ])
                 ]),
             ])
@@ -307,8 +307,8 @@ class BrickInvalidationContextTests: XCTestCase {
         brickViewController.setSection(section)
         brickViewController.collectionView!.layoutSubviews()
 
-        let context = BrickLayoutInvalidationContext(type: .UpdateHeight(indexPath: NSIndexPath(forItem: 0, inSection: 4), newHeight: 100))
-        brickViewController.layout.invalidateLayoutWithContext(context)
+        let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 0, section: 4), newHeight: 100))
+        brickViewController.layout.invalidateLayout(with: context)
 
         XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 6)
         XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
@@ -337,10 +337,10 @@ class BrickInvalidationContextTests: XCTestCase {
 
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 200))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 200))
 
 
     }
@@ -350,15 +350,15 @@ class BrickInvalidationContextTests: XCTestCase {
 
         let section = BrickSection("Test Section", bricks: [
             BrickSection("Section 1", bricks: [
-                DummyBrick("Brick 1", height: .Fixed(size: 50)),
-                DummyBrick("Brick 2", height: .Fixed(size: 50)),
+                DummyBrick("Brick 1", height: .fixed(size: 50)),
+                DummyBrick("Brick 2", height: .fixed(size: 50)),
                 ]),
             BrickSection("Section 2", bricks: [
                 BrickSection("Section 3", bricks: [
-                    DummyBrick("Brick 3", height: .Fixed(size: 50)),
+                    DummyBrick("Brick 3", height: .fixed(size: 50)),
                     ]),
                 BrickSection("Section 4", bricks: [
-                    DummyBrick("Brick 4", height: .Fixed(size: 50)),
+                    DummyBrick("Brick 4", height: .fixed(size: 50)),
                     ])
                 ]),
             ])
@@ -366,8 +366,8 @@ class BrickInvalidationContextTests: XCTestCase {
         brickViewController.setSection(section)
         brickViewController.collectionView!.layoutSubviews()
 
-        let context = BrickLayoutInvalidationContext(type: .UpdateHeight(indexPath: NSIndexPath(forItem: 0, inSection: 2), newHeight: 100))
-        brickViewController.layout.invalidateLayoutWithContext(context)
+        let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 0, section: 2), newHeight: 100))
+        brickViewController.layout.invalidateLayout(with: context)
 
         XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 9)
         XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
@@ -397,10 +397,10 @@ class BrickInvalidationContextTests: XCTestCase {
 
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 250))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 250))
 
 
     }
@@ -410,14 +410,14 @@ class BrickInvalidationContextTests: XCTestCase {
 
         let section = BrickSection("Test Section", bricks: [
             BrickSection("Section 1", bricks: [
-                DummyBrick("Brick 1", height: .Fixed(size: 50)),
+                DummyBrick("Brick 1", height: .fixed(size: 50)),
                 ]),
             BrickSection("Section 2", bricks: [
                 BrickSection("Section 3", bricks: [
-                    DummyBrick("Brick 3", height: .Fixed(size: 50)),
+                    DummyBrick("Brick 3", height: .fixed(size: 50)),
                     ]),
                 BrickSection("Section 4", bricks: [
-                    DummyBrick("Brick 4", height: .Fixed(size: 50)),
+                    DummyBrick("Brick 4", height: .fixed(size: 50)),
                     ])
                 ]),
             ])
@@ -425,8 +425,8 @@ class BrickInvalidationContextTests: XCTestCase {
         brickViewController.setSection(section)
         brickViewController.collectionView!.layoutSubviews()
 
-        let context = BrickLayoutInvalidationContext(type: .UpdateHeight(indexPath: NSIndexPath(forItem: 0, inSection: 2), newHeight: 0))
-        brickViewController.layout.invalidateLayoutWithContext(context)
+        let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 0, section: 2), newHeight: 0))
+        brickViewController.layout.invalidateLayout(with: context)
 
         XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 8)
         //            XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
@@ -451,10 +451,10 @@ class BrickInvalidationContextTests: XCTestCase {
 
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 100))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 100))
 
 
     }
@@ -464,15 +464,15 @@ class BrickInvalidationContextTests: XCTestCase {
 
         let section = BrickSection("Test Section", bricks: [
             BrickSection("Section 1", bricks: [
-                DummyBrick("Brick 1", width: .Ratio(ratio: 1/2), height: .Fixed(size: 50)),
-                DummyBrick("Brick 1", width: .Ratio(ratio: 1/2), height: .Fixed(size: 25)),
+                DummyBrick("Brick 1", width: .ratio(ratio: 1/2), height: .fixed(size: 50)),
+                DummyBrick("Brick 1", width: .ratio(ratio: 1/2), height: .fixed(size: 25)),
                 ]),
             BrickSection("Section 2", bricks: [
                 BrickSection("Section 3", bricks: [
-                    DummyBrick("Brick 2", height: .Fixed(size: 50)),
+                    DummyBrick("Brick 2", height: .fixed(size: 50)),
                     ]),
                 BrickSection("Section 4", bricks: [
-                    DummyBrick("Brick 3", height: .Fixed(size: 50)),
+                    DummyBrick("Brick 3", height: .fixed(size: 50)),
                     ])
                 ]),
             ])
@@ -480,8 +480,8 @@ class BrickInvalidationContextTests: XCTestCase {
         brickViewController.setSection(section)
         brickViewController.collectionView!.layoutSubviews()
 
-        let context = BrickLayoutInvalidationContext(type: .UpdateHeight(indexPath: NSIndexPath(forItem: 1, inSection: 2), newHeight: 50))
-        brickViewController.layout.invalidateLayoutWithContext(context)
+        let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 1, section: 2), newHeight: 50))
+        brickViewController.layout.invalidateLayout(with: context)
 
         XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 1)
         XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 0))
@@ -511,10 +511,10 @@ class BrickInvalidationContextTests: XCTestCase {
 
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 150))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 150))
 
 
     }
@@ -527,15 +527,15 @@ class BrickInvalidationContextTests: XCTestCase {
 
         let section = BrickSection("Test Section", bricks: [
             BrickSection("Section 1", bricks: [
-                DummyBrick("Brick 1", height: .Fixed(size: 50)),
-                DummyBrick("Brick 2", height: .Fixed(size: 50)),
+                DummyBrick("Brick 1", height: .fixed(size: 50)),
+                DummyBrick("Brick 2", height: .fixed(size: 50)),
                 ]),
             BrickSection("Section 2", bricks: [
                 BrickSection("Section 3", bricks: [
-                    DummyBrick("Brick 3", height: .Fixed(size: 50)),
+                    DummyBrick("Brick 3", height: .fixed(size: 50)),
                     ]),
                 BrickSection("Section 4", bricks: [
-                    DummyBrick("Brick 4", height: .Fixed(size: 50)),
+                    DummyBrick("Brick 4", height: .fixed(size: 50)),
                     ])
                 ]),
             ])
@@ -545,10 +545,10 @@ class BrickInvalidationContextTests: XCTestCase {
 
 
         // Hide a brick
-        hideBehaviorDataSource.indexPaths.append(NSIndexPath(forItem: 0, inSection: 2))
+        hideBehaviorDataSource.indexPaths.append(IndexPath(item: 0, section: 2))
 
-        var context = BrickLayoutInvalidationContext(type: .UpdateVisibility)
-        brickViewController.layout.invalidateLayoutWithContext(context)
+        var context = BrickLayoutInvalidationContext(type: .updateVisibility)
+        brickViewController.layout.invalidateLayout(with: context)
 
         var expectedResult = [
             0 : [
@@ -574,16 +574,16 @@ class BrickInvalidationContextTests: XCTestCase {
 
         ]
 
-        var attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        var attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 150))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 150))
 
         // Show a brick
         hideBehaviorDataSource.indexPaths.removeAll()
 
-        context = BrickLayoutInvalidationContext(type: .UpdateVisibility)
-        brickViewController.layout.invalidateLayoutWithContext(context)
+        context = BrickLayoutInvalidationContext(type: .updateVisibility)
+        brickViewController.layout.invalidateLayout(with: context)
 
         expectedResult = [
             0 : [
@@ -610,10 +610,10 @@ class BrickInvalidationContextTests: XCTestCase {
 
         ]
 
-        attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 200))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 200))
 
     }
 
@@ -625,15 +625,15 @@ class BrickInvalidationContextTests: XCTestCase {
 
         let section = BrickSection("Test Section", bricks: [
             BrickSection("Section 1", bricks: [
-                DummyBrick("Brick 1", height: .Fixed(size: 50)),
-                DummyBrick("Brick 2", height: .Fixed(size: 50)),
+                DummyBrick("Brick 1", height: .fixed(size: 50)),
+                DummyBrick("Brick 2", height: .fixed(size: 50)),
                 ]),
             BrickSection("Section 2", bricks: [
                 BrickSection("Section 3", bricks: [
-                    DummyBrick("Brick 3", height: .Fixed(size: 50)),
+                    DummyBrick("Brick 3", height: .fixed(size: 50)),
                     ]),
                 BrickSection("Section 4", bricks: [
-                    DummyBrick("Brick 4", height: .Fixed(size: 50)),
+                    DummyBrick("Brick 4", height: .fixed(size: 50)),
                     ])
                 ]),
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
@@ -646,10 +646,10 @@ class BrickInvalidationContextTests: XCTestCase {
 
         brickViewController.collectionView!.layoutSubviews()
 
-        hideBehaviorDataSource.indexPaths.append(NSIndexPath(forItem: 0, inSection: 1))
+        hideBehaviorDataSource.indexPaths.append(IndexPath(item: 0, section: 1))
 
-        var context = BrickLayoutInvalidationContext(type: .UpdateVisibility)
-        brickViewController.layout.invalidateLayoutWithContext(context)
+        var context = BrickLayoutInvalidationContext(type: .updateVisibility)
+        brickViewController.layout.invalidateLayout(with: context)
 
         var expectedResult = [
             0 : [
@@ -671,17 +671,17 @@ class BrickInvalidationContextTests: XCTestCase {
 
         ]
 
-        var attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        var attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 120))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 120))
 
         // Unhide a section
 
         hideBehaviorDataSource.indexPaths.removeAll()
 
-        context = BrickLayoutInvalidationContext(type: .UpdateVisibility)
-        brickViewController.layout.invalidateLayoutWithContext(context)
+        context = BrickLayoutInvalidationContext(type: .updateVisibility)
+        brickViewController.layout.invalidateLayout(with: context)
 
         /*
 
@@ -718,10 +718,10 @@ class BrickInvalidationContextTests: XCTestCase {
             ]
         ]
 
-        attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 230))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 230))
 
     }
 
@@ -733,16 +733,16 @@ class BrickInvalidationContextTests: XCTestCase {
 
         let section = BrickSection("Test Section", bricks: [
             BrickSection("Section 1", bricks: [
-                DummyBrick("Brick 1", height: .Fixed(size: 50)),
+                DummyBrick("Brick 1", height: .fixed(size: 50)),
                 ], inset: 10, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)),
             BrickSection("Section 2", bricks: [
-                DummyBrick("Brick 2", height: .Fixed(size: 50)),
+                DummyBrick("Brick 2", height: .fixed(size: 50)),
                 ], inset: 10, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)),
             BrickSection("Section 3", bricks: [
-                DummyBrick("Brick 3", height: .Fixed(size: 50)),
+                DummyBrick("Brick 3", height: .fixed(size: 50)),
                 ], inset: 10, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)),
             BrickSection("Section 4", bricks: [
-                DummyBrick("Brick 4", height: .Fixed(size: 50)),
+                DummyBrick("Brick 4", height: .fixed(size: 50)),
                 ], inset: 10, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)),
             ])
 
@@ -752,8 +752,8 @@ class BrickInvalidationContextTests: XCTestCase {
 
         // Show a brick
 
-        var context = BrickLayoutInvalidationContext(type: .UpdateVisibility)
-        brickViewController.layout.invalidateLayoutWithContext(context)
+        var context = BrickLayoutInvalidationContext(type: .updateVisibility)
+        brickViewController.layout.invalidateLayout(with: context)
 
         /*
          0: [(0.0, 0.0, 320.0, 280.0)],
@@ -789,17 +789,17 @@ class BrickInvalidationContextTests: XCTestCase {
             ],
             ]
 
-        var attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        var attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 280))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 280))
 
 
         // Hide a brick
-        hideBehaviorDataSource.indexPaths = [NSIndexPath(forItem: 0, inSection: 2), NSIndexPath(forItem: 0, inSection: 3)]
+        hideBehaviorDataSource.indexPaths = [IndexPath(item: 0, section: 2), IndexPath(item: 0, section: 3)]
 
-        context = BrickLayoutInvalidationContext(type: .UpdateVisibility)
-        brickViewController.layout.invalidateLayoutWithContext(context)
+        context = BrickLayoutInvalidationContext(type: .updateVisibility)
+        brickViewController.layout.invalidateLayout(with: context)
 
         expectedResult = [
             0 : [
@@ -818,18 +818,18 @@ class BrickInvalidationContextTests: XCTestCase {
 
         ]
 
-        attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 140))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 140))
 
     }
 
     func testHideBrickBehaviorMultipleBrickSections() {
-        let hideBehaviorDataSource = FixedHideBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 1), NSIndexPath(forItem: 1, inSection: 1)])
+        let hideBehaviorDataSource = FixedHideBehaviorDataSource(indexPaths: [IndexPath(item: 0, section: 1), IndexPath(item: 1, section: 1)])
         brickViewController.brickCollectionView.layout.hideBehaviorDataSource = hideBehaviorDataSource
 
-        brickViewController.brickCollectionView.registerNib(UINib(nibName: "DummyBrick100", bundle: NSBundle(forClass: DummyBrick.self)), forBrickWithIdentifier: "Brick")
+        brickViewController.brickCollectionView.registerNib(UINib(nibName: "DummyBrick100", bundle: Bundle(for: DummyBrick.self)), forBrickWithIdentifier: "Brick")
 
         let section = BrickSection("Test Section", bricks: [
             BrickSection("Section 1", bricks: [
@@ -868,16 +868,16 @@ class BrickInvalidationContextTests: XCTestCase {
             ],
             ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 200))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 200))
 
 
     }
 
     func testHideBrickBehaviorMultipleBrickNestedSections() {
-        brickViewController.brickCollectionView.registerNib(UINib(nibName: "DummyBrick100", bundle: NSBundle(forClass: DummyBrick.self)), forBrickWithIdentifier: "Brick")
+        brickViewController.brickCollectionView.registerNib(UINib(nibName: "DummyBrick100", bundle: Bundle(for: DummyBrick.self)), forBrickWithIdentifier: "Brick")
 
         let section = BrickSection("Test Section", bricks: [
             BrickSection("Section 1", bricks: [
@@ -893,20 +893,20 @@ class BrickInvalidationContextTests: XCTestCase {
 
 
         let hideBehaviorDataSource = FixedHideBehaviorDataSource(indexPaths: [])
-        hideBehaviorDataSource.indexPaths = [NSIndexPath(forItem: 0, inSection: 1)]
+        hideBehaviorDataSource.indexPaths = [IndexPath(item: 0, section: 1)]
         brickViewController.brickCollectionView.layout.hideBehaviorDataSource = hideBehaviorDataSource
         brickViewController.brickCollectionView.invalidateVisibility()
 
         let expectedResult: [Int: [CGRect]] = [:]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 0))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 0))
     }
 
     func testWrongCollectionView() {
-        let context = BrickLayoutInvalidationContext(type: .UpdateVisibility)
+        let context = BrickLayoutInvalidationContext(type: .updateVisibility)
         XCTAssertFalse(context.invalidateWithLayout(UICollectionViewFlowLayout()))
     }
 
@@ -914,22 +914,22 @@ class BrickInvalidationContextTests: XCTestCase {
         brickViewController.brickCollectionView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection("Test Section", bricks: [
-            DummyBrick("Brick 1", width: .Ratio(ratio: 1/2), height: .Fixed(size: 50)),
-            DummyBrick("Brick 2", width: .Ratio(ratio: 1/2), height: .Fixed(size: 50)),
+            DummyBrick("Brick 1", width: .ratio(ratio: 1/2), height: .fixed(size: 50)),
+            DummyBrick("Brick 2", width: .ratio(ratio: 1/2), height: .fixed(size: 50)),
             ], alignRowHeights: true)
 
         brickViewController.setSection(section)
         brickViewController.collectionView!.layoutSubviews()
 
-        let context = BrickLayoutInvalidationContext(type: .UpdateHeight(indexPath: NSIndexPath(forItem: 1, inSection: 1), newHeight: 100))
-        brickViewController.layout.invalidateLayoutWithContext(context)
+        let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 1, section: 1), newHeight: 100))
+        brickViewController.layout.invalidateLayout(with: context)
         brickViewController.brickCollectionView.layoutIfNeeded()
 
-        let cell = brickViewController.brickCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
+        let cell = brickViewController.brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1))
 
         XCTAssertEqual(cell?.frame, CGRect(x: 0, y: 0, width: width/2, height: 100))
         XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 3)
-        XCTAssertTrue(context.invalidatedItemIndexPaths!.contains(NSIndexPath(forItem: 0, inSection: 1)))
+        XCTAssertTrue(context.invalidatedItemIndexPaths!.contains(IndexPath(item: 0, section: 1)))
         XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
 
         let expectedResult = [
@@ -942,10 +942,10 @@ class BrickInvalidationContextTests: XCTestCase {
             ]
         ]
 
-        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 100))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 100))
     }
 
     

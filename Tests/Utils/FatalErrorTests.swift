@@ -14,25 +14,25 @@ private struct FatalErrorHolder {
     static var assertionMessage: String?
 }
 
-func testFatalError(message: String = "", file: StaticString = #file, line: UInt = #line) {
+func testFatalError(_ message: String = "", file: StaticString = #file, line: UInt = #line) {
     FatalErrorHolder.assertionMessage = message
     FatalErrorHolder.expectation?.fulfill()
 }
 
 extension XCTestCase {
 
-    func expectFatalError(expectedMessage: String? = nil, testcase: () -> Void) {
+    func expectFatalError(_ expectedMessage: String? = nil, testcase: @escaping () -> Void) {
 
         // For right now, we are skipping the expectFatalError tests because Travis can't handle this
         return;
 
-        FatalErrorHolder.expectation = expectationWithDescription("expectingFatalError")
+        FatalErrorHolder.expectation = expectation(description: "expectingFatalError")
         FatalErrorUtil.replaceFatalError(testFatalError)
 
         // act, perform on separate thead because a call to fatalError pauses forever
-        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), testcase)
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async(execute: testcase)
 
-        waitForExpectationsWithTimeout(25) { _ in
+        waitForExpectations(timeout: 25) { _ in
             defer {
                 FatalErrorHolder.expectation = nil
                 FatalErrorHolder.assertionMessage = nil

@@ -12,7 +12,7 @@ import XCTest
 class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
 
     func testCreateLayoutWithTwoSectionsWithOneItem() {
-        setDataSources(SectionsCollectionViewDataSource(sections: [2,1]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1, 1], [1]], heights: [[100, 0], [100]], types: [[.Brick, .Section(sectionIndex: 1)], [.Brick]]))
+        setDataSources(SectionsCollectionViewDataSource(sections: [2,1]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1, 1], [1]], heights: [[100, 0], [100]], types: [[.brick, .section(sectionIndex: 1)], [.brick]]))
 
         let expectedResult = [
             0 : [
@@ -24,14 +24,14 @@ class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
             ]
         ]
 
-        let attributes = layout.layoutAttributesForElementsInRect(collectionViewFrame)
+        let attributes = layout.layoutAttributesForElements(in: collectionViewFrame)
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
         XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 200))
     }
 
     func testCreateLayoutWithTwoSectionsWithTwoItemsBelow() {
-        setDataSources(SectionsCollectionViewDataSource(sections: [2,2]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1, 1], [1, 1]], heights: [[100, 0], [100, 100]], types: [[.Brick, .Section(sectionIndex: 1)], [.Brick, .Brick]]))
+        setDataSources(SectionsCollectionViewDataSource(sections: [2,2]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1, 1], [1, 1]], heights: [[100, 0], [100, 100]], types: [[.brick, .section(sectionIndex: 1)], [.brick, .brick]]))
 
         let expectedResult = [
             0 : [
@@ -44,14 +44,14 @@ class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
             ]
         ]
 
-        let attributes = layout.layoutAttributesForElementsInRect(collectionViewFrame)
+        let attributes = layout.layoutAttributesForElements(in: collectionViewFrame)
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
         XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 300))
     }
 
     func testCreateLayoutWithTwoSectionsWithTwoItemsNextToEachother() {
-        setDataSources(SectionsCollectionViewDataSource(sections: [2,2]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1, 1], [0.5, 0.5]], heights: [[100, 0], [100, 100]], types: [[.Brick, .Section(sectionIndex: 1)], [.Brick, .Brick]]))
+        setDataSources(SectionsCollectionViewDataSource(sections: [2,2]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1, 1], [0.5, 0.5]], heights: [[100, 0], [100, 100]], types: [[.brick, .section(sectionIndex: 1)], [.brick, .brick]]))
 
         let expectedResult = [
             0 : [
@@ -64,14 +64,14 @@ class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
             ]
         ]
 
-        let attributes = layout.layoutAttributesForElementsInRect(collectionViewFrame)
+        let attributes = layout.layoutAttributesForElements(in: collectionViewFrame)
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
         XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 200))
     }
 
     func testCreateLayoutWithThreeSections() {
-        setDataSources(SectionsCollectionViewDataSource(sections: [3, 2, 2]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1, 0.5, 0.5], [1, 1], [1, 1]], heights: [[100, 0, 0], [100, 100], [100, 100]], types: [[.Brick, .Section(sectionIndex: 1), .Section(sectionIndex: 2)], [.Brick, .Brick], [.Brick, .Brick]]))
+        setDataSources(SectionsCollectionViewDataSource(sections: [3, 2, 2]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1, 0.5, 0.5], [1, 1], [1, 1]], heights: [[100, 0, 0], [100, 100], [100, 100]], types: [[.brick, .section(sectionIndex: 1), .section(sectionIndex: 2)], [.brick, .brick], [.brick, .brick]]))
 
         let expectedResult = [
             0 : [
@@ -89,14 +89,14 @@ class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
             ]
         ]
 
-        let attributes = layout.layoutAttributesForElementsInRect(collectionViewFrame)
+        let attributes = layout.layoutAttributesForElements(in: collectionViewFrame)
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
         XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 300))
     }
 
     func testCreateLayoutWithThreeSectionsNested() {
-        setDataSources(SectionsCollectionViewDataSource(sections: [2, 2, 2, 2]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1/4, 3/4], [0.5, 0.5], [1,1], [1,1]], heights: [[100, 0], [0, 0], [100, 100], [100, 100]], types: [[.Brick, .Section(sectionIndex: 1)], [.Section(sectionIndex: 2), .Section(sectionIndex: 3)], [.Brick, .Brick], [.Brick, .Brick]]))
+        setDataSources(SectionsCollectionViewDataSource(sections: [2, 2, 2, 2]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1/4, 3/4], [0.5, 0.5], [1,1], [1,1]], heights: [[100, 0], [0, 0], [100, 100], [100, 100]], types: [[.brick, .section(sectionIndex: 1)], [.section(sectionIndex: 2), .section(sectionIndex: 3)], [.brick, .brick], [.brick, .brick]]))
 
         let expectedResult = [
             0 : [
@@ -117,7 +117,7 @@ class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
             ]
         ]
 
-        let attributes = layout.layoutAttributesForElementsInRect(collectionViewFrame)
+        let attributes = layout.layoutAttributesForElements(in: collectionViewFrame)
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
         XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 200))
@@ -125,7 +125,7 @@ class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
     
     func testCreateLayoutWithThreeSectionsNestedWithEdgeInsets() {
         let customEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-        setDataSources(SectionsCollectionViewDataSource(sections: [2, 2, 2, 2]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1/4, 3/4], [0.5, 0.5], [1,1], [1,1]], heights: [[100, 0], [0, 0], [100, 100], [100, 100]], edgeInsets: [UIEdgeInsetsZero, customEdgeInsets, customEdgeInsets, customEdgeInsets], types: [[.Brick, .Section(sectionIndex: 1)], [.Section(sectionIndex: 2), .Section(sectionIndex: 3)], [.Brick, .Brick], [.Brick, .Brick]]))
+        setDataSources(SectionsCollectionViewDataSource(sections: [2, 2, 2, 2]), brickLayoutDataSource: SectionsLayoutDataSource(widthRatios: [[1/4, 3/4], [0.5, 0.5], [1,1], [1,1]], heights: [[100, 0], [0, 0], [100, 100], [100, 100]], edgeInsets: [UIEdgeInsets.zero, customEdgeInsets, customEdgeInsets, customEdgeInsets], types: [[.brick, .section(sectionIndex: 1)], [.section(sectionIndex: 2), .section(sectionIndex: 3)], [.brick, .brick], [.brick, .brick]]))
 
         let expectedResult = [
             0 : [
@@ -146,7 +146,7 @@ class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
             ]
         ]
 
-        let attributes = layout.layoutAttributesForElementsInRect(collectionViewFrame)
+        let attributes = layout.layoutAttributesForElements(in: collectionViewFrame)
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
         XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 280))
@@ -230,13 +230,13 @@ class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
                 [100,100],
             ],
             edgeInsets: [
-                UIEdgeInsetsZero, //UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
-                UIEdgeInsetsZero,
-                UIEdgeInsetsZero,
-                UIEdgeInsetsZero,
-                UIEdgeInsetsZero,
-                UIEdgeInsetsZero, //UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5),
-                UIEdgeInsetsZero,
+                UIEdgeInsets.zero, //UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20),
+                UIEdgeInsets.zero,
+                UIEdgeInsets.zero,
+                UIEdgeInsets.zero,
+                UIEdgeInsets.zero,
+                UIEdgeInsets.zero, //UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5),
+                UIEdgeInsets.zero,
             ],
             insets: [
                 0, // 10,
@@ -248,13 +248,13 @@ class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
                 0
             ],
             types: [
-                [.Section(sectionIndex: 1)],
-                [.Brick, .Section(sectionIndex: 2), .Section(sectionIndex: 3), .Section(sectionIndex: 6), .Brick, .Brick],
-                [.Brick, .Brick],
-                [.Section(sectionIndex: 4), .Section(sectionIndex: 5)],
-                [.Brick, .Brick],
-                [.Brick, .Brick, .Brick],
-                [.Brick, .Brick]
+                [.section(sectionIndex: 1)],
+                [.brick, .section(sectionIndex: 2), .section(sectionIndex: 3), .section(sectionIndex: 6), .brick, .brick],
+                [.brick, .brick],
+                [.section(sectionIndex: 4), .section(sectionIndex: 5)],
+                [.brick, .brick],
+                [.brick, .brick, .brick],
+                [.brick, .brick]
             ]))
 
         let expectedResult = [
@@ -292,7 +292,7 @@ class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
             ]
         ]
 
-        let attributes = layout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 0, width: collectionViewFrame.width, height: CGFloat.infinity))
+        let attributes = layout.layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: collectionViewFrame.width, height: CGFloat.infinity))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
         XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 800))
@@ -302,47 +302,47 @@ class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
         collectionView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(bricks: [
-            LabelBrick(width: .Ratio(ratio: 0.5), text: "BRICK"),
-            BrickSection(width: .Ratio(ratio: 0.5), bricks: [
+            LabelBrick(width: .ratio(ratio: 0.5), text: "BRICK"),
+            BrickSection(width: .ratio(ratio: 0.5), bricks: [
                 LabelBrick(text: "BRICK\nBRICK"),
                 LabelBrick(text: "BRICK"),
                 LabelBrick(text: "BRICK"),
                 ], inset: 10),
             BrickSection(bricks: [
-                BrickSection(width: .Ratio(ratio: 1/3), bricks: [
+                BrickSection(width: .ratio(ratio: 1/3), bricks: [
                     LabelBrick(text: "BRICK"),
                     LabelBrick(text: "BRICK"),
                     ], inset: 5),
-                BrickSection(width: .Ratio(ratio: 2/3), bricks: [
+                BrickSection(width: .ratio(ratio: 2/3), bricks: [
                     LabelBrick(text: "BRICK"),
                     LabelBrick(text: "BRICK"),
                     LabelBrick(text: "BRICK"),
                     ], inset: 15),
                 ], inset: 5, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)),
-            BrickSection(width: .Ratio(ratio: 0.5), bricks: [
+            BrickSection(width: .ratio(ratio: 0.5), bricks: [
                 LabelBrick(text: "BRICK"),
                 LabelBrick(text: "BRICK"),
                 ], inset: 10),
-            LabelBrick(width: .Ratio(ratio: 0.5), text: "BRICK"),
+            LabelBrick(width: .ratio(ratio: 0.5), text: "BRICK"),
             LabelBrick("THIS ONE", text: "BRICK"),
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
         collectionView.setSection(section)
         collectionView.layoutSubviews()
 
-        XCTAssertEqual(layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))?.frame, CGRect(x: 20, y: 20, width: 135, height: 17))
+        XCTAssertEqual(layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 1))?.frame, CGRect(x: 20, y: 20, width: 135, height: 17))
 
-        let previousToLastFrame = layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 3, inSection: 1))!.frame
-        XCTAssertEqual(layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 5, inSection: 1))?.frame, CGRect(x: 20, y: previousToLastFrame.maxY + 10, width: 280, height: 17))
+        let previousToLastFrame = layout.layoutAttributesForItem(at: IndexPath(item: 3, section: 1))!.frame
+        XCTAssertEqual(layout.layoutAttributesForItem(at: IndexPath(item: 5, section: 1))?.frame, CGRect(x: 20, y: previousToLastFrame.maxY + 10, width: 280, height: 17))
     }
 
     func testThatMultiSectionsAreCalculatedCorrectlyOnRotation() {
         collectionView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection(bricks: [
-            DummyBrick(height: .Fixed(size: 50)),
+            DummyBrick(height: .fixed(size: 50)),
             BrickSection(bricks: [
                 BrickSection(bricks: [
-                    DummyBrick(height: .Fixed(size: 50)),
+                    DummyBrick(height: .fixed(size: 50)),
                     ]),
                 ]),
             ])
@@ -352,13 +352,13 @@ class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
 
         var attributes: UICollectionViewLayoutAttributes!
 
-        attributes = layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 3))
+        attributes = layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 3))
         XCTAssertEqual(attributes.frame, CGRect(x: 0, y: 50, width: 320, height: 50))
 
         collectionView.frame.size = CGSize(width: 480, height: 320)
         collectionView.layoutSubviews()
 
-        attributes = layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 3))
+        attributes = layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 3))
         XCTAssertEqual(attributes.frame, CGRect(x: 0, y: 50, width: 480, height: 50))
 
     }

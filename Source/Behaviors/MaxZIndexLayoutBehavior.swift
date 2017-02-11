@@ -9,10 +9,10 @@
 import UIKit
 
 public protocol MaxZIndexLayoutBehaviorDataSource: class {
-    func maxZIndexLayoutBehavior(behavior: MaxZIndexLayoutBehavior, shouldHaveMaxZIndexAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool
+    func maxZIndexLayoutBehavior(_ behavior: MaxZIndexLayoutBehavior, shouldHaveMaxZIndexAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool
 }
 
-public class MaxZIndexLayoutBehavior: BrickLayoutBehavior {
+open class MaxZIndexLayoutBehavior: BrickLayoutBehavior {
     weak var dataSource: MaxZIndexLayoutBehaviorDataSource?
 
     var currentZIndex: Int = 0
@@ -21,12 +21,12 @@ public class MaxZIndexLayoutBehavior: BrickLayoutBehavior {
         self.dataSource = dataSource
     }
 
-    public override func resetRegisteredAttributes(collectionViewLayout: UICollectionViewLayout) {
+    open override func resetRegisteredAttributes(_ collectionViewLayout: UICollectionViewLayout) {
         super.resetRegisteredAttributes(collectionViewLayout)
         currentZIndex = 0
     }
 
-    public override func registerAttributes(attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
+    open override func registerAttributes(_ attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
         let maxZIndex: Int
 
         if let layout = collectionViewLayout as? BrickLayout {

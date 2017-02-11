@@ -20,7 +20,7 @@ public protocol BrickRepeatCountDataSource: class {
 
 /// This can be used to hide/show bricks. This can be set on a `BrickLayout` 
 public protocol HideBehaviorDataSource: class {
-    func hideBehaviorDataSource(shouldHideItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool
+    func hideBehaviorDataSource(shouldHideItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool
 }
 
 #if os(tvOS)

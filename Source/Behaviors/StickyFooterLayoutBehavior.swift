@@ -7,13 +7,13 @@
 //
 
 /// A StickyFooterLayoutBehavior will stick certain bricks (based on the dataSource) on the bottom of its section
-public class StickyFooterLayoutBehavior: StickyLayoutBehavior {
+open class StickyFooterLayoutBehavior: StickyLayoutBehavior {
 
-    public override var needsDownstreamCalculation: Bool {
+    open override var needsDownstreamCalculation: Bool {
         return true
     }
 
-    public override func shouldUseForDownstreamCalculation(for indexPath: NSIndexPath, with identifier: String, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    open override func shouldUseForDownstreamCalculation(for indexPath: IndexPath, with identifier: String, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         if dataSource?.stickyLayoutBehavior(self, shouldStickItemAtIndexPath: indexPath, withIdentifier: identifier, inCollectionViewLayout: collectionViewLayout) == true {
             return true
         } else {
@@ -22,9 +22,9 @@ public class StickyFooterLayoutBehavior: StickyLayoutBehavior {
     }
 
 
-    override func updateStickyAttributesInCollectionView(collectionViewLayout: UICollectionViewLayout, attributesDidUpdate: (attributes: BrickLayoutAttributes, oldFrame: CGRect?) -> Void) {
+    override func updateStickyAttributesInCollectionView(_ collectionViewLayout: UICollectionViewLayout, attributesDidUpdate: (_ attributes: BrickLayoutAttributes, _ oldFrame: CGRect?) -> Void) {
         //Sort the attributes ascending
-        stickyAttributes.sortInPlace { (attributesOne, attributesTwo) -> Bool in
+        stickyAttributes.sort { (attributesOne, attributesTwo) -> Bool in
             let maxYOne: CGFloat = attributesOne.originalFrame.maxY
             let maxYTwo: CGFloat = attributesTwo.originalFrame.maxY
             return maxYOne >= maxYTwo
@@ -32,9 +32,9 @@ public class StickyFooterLayoutBehavior: StickyLayoutBehavior {
         super.updateStickyAttributesInCollectionView(collectionViewLayout, attributesDidUpdate: attributesDidUpdate)
     }
 
-    override func updateFrameForAttribute(inout attributes:BrickLayoutAttributes, sectionAttributes: BrickLayoutAttributes?, lastStickyFrame: CGRect, contentBounds: CGRect, collectionViewLayout: UICollectionViewLayout) -> Bool {
+    override func updateFrameForAttribute(_ attributes:inout BrickLayoutAttributes, sectionAttributes: BrickLayoutAttributes?, lastStickyFrame: CGRect, contentBounds: CGRect, collectionViewLayout: UICollectionViewLayout) -> Bool {
 
-        let isOnFirstSection = sectionAttributes == nil || sectionAttributes?.indexPath == NSIndexPath(forRow: 0, inSection: 0)
+        let isOnFirstSection = sectionAttributes == nil || sectionAttributes?.indexPath == IndexPath(row: 0, section: 0)
         let bottomInset = collectionViewLayout.collectionView!.contentInset.bottom
 
         if isOnFirstSection {
@@ -45,7 +45,7 @@ public class StickyFooterLayoutBehavior: StickyLayoutBehavior {
             attributes.frame.origin.y = min(y, attributes.originalFrame.origin.y)
         }
 
-        if lastStickyFrame.size != CGSizeZero {
+        if lastStickyFrame.size != CGSize.zero {
             attributes.frame.origin.y = min(lastStickyFrame.minY - attributes.originalFrame.height, attributes.originalFrame.origin.y)
         }
 

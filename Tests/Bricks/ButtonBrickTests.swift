@@ -11,7 +11,7 @@ import XCTest
 
 class ButtonBrickTests: XCTestCase {
     
-    private let ButtonBrickIdentifier = "ButtonBrickIdentifier"
+    fileprivate let ButtonBrickIdentifier = "ButtonBrickIdentifier"
 
     var brickCollectionView: BrickCollectionView!
     var buttonBrick: ButtonBrick!
@@ -23,15 +23,15 @@ class ButtonBrickTests: XCTestCase {
         brickCollectionView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
     }
 
-    func setupButtonBrickWithModel(model: ButtonBrickCellModel) -> ButtonBrickCell? {
+    func setupButtonBrickWithModel(_ model: ButtonBrickCellModel) -> ButtonBrickCell? {
         return setupSection(ButtonBrick(ButtonBrickIdentifier, dataSource: model))
     }
 
-    func setupButtonBrick(title: String, configureButtonBlock: ConfigureButtonBlock? = nil) -> ButtonBrickCell? {
+    func setupButtonBrick(_ title: String, configureButtonBlock: ConfigureButtonBlock? = nil) -> ButtonBrickCell? {
         return setupSection(ButtonBrick(ButtonBrickIdentifier, title: title, configureButtonBlock: configureButtonBlock))
     }
 
-    func setupSection(buttonBrick: ButtonBrick) -> ButtonBrickCell? {
+    func setupSection(_ buttonBrick: ButtonBrick) -> ButtonBrickCell? {
         brickCollectionView.registerBrickClass(ButtonBrick.self)
         self.buttonBrick = buttonBrick
         let section = BrickSection(bricks: [
@@ -44,7 +44,7 @@ class ButtonBrickTests: XCTestCase {
     }
 
     var buttonCell: ButtonBrickCell? {
-        let cell = brickCollectionView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? ButtonBrickCell
+        let cell = brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ButtonBrickCell
         cell?.layoutIfNeeded()
         return cell
     }
@@ -114,7 +114,7 @@ class ButtonBrickTests: XCTestCase {
 
         brickCollectionView.reloadBricksWithIdentifiers([ButtonBrickIdentifier], shouldReloadCell: false)
         cell = buttonCell
-        XCTAssertEqual(cell?.button.titleForState(.Normal), "World Hello")
+        XCTAssertEqual(cell?.button.title(for: UIControlState()), "World Hello")
 
         buttonBrick.title = "Hello World"
         brickCollectionView.reloadBricksWithIdentifiers([ButtonBrickIdentifier], shouldReloadCell: true)
@@ -124,14 +124,14 @@ class ButtonBrickTests: XCTestCase {
     }
 
     func testSetupButtonBlock() {
-        let expectation = expectationWithDescription("Should call setup button block")
+        let expectation = self.expectation(description: "Should call setup button block")
 
         let model = ButtonBrickCellModel(title: "Hello World", configureButtonBlock: { (cell) in
             expectation.fulfill()
         })
         setupButtonBrickWithModel(model)
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
     }
 
     func testButtonChangeText() {
@@ -229,9 +229,9 @@ class ButtonBrickTests: XCTestCase {
         let cell = setupSection(ButtonBrick(ButtonBrickIdentifier, dataSource: FixedButtonDataSource(), delegate: delegate))
         
         // Ideally cell?.button?.sendActionsForControlEvents(.TouchUpInside) is called, but this doesn't work in XCTests
-        let actions = cell?.button.actionsForTarget(cell, forControlEvent: .TouchUpInside)
+        let actions = cell?.button.actions(forTarget: cell, forControlEvent: .touchUpInside)
         XCTAssertEqual(actions?.count, 1)
-        cell!.performSelector(Selector(actions!.first!), withObject: cell!.button)
+        cell!.perform(Selector(actions!.first!), with: cell!.button)
         
         XCTAssertTrue(delegate.buttonTouched)
     }
@@ -275,13 +275,13 @@ class ButtonBrickTests: XCTestCase {
 }
 
 class FixedButtonDataSource: ButtonBrickCellDataSource {
-    func configureButtonBrick(cell: ButtonBrickCell) {
+    func configureButtonBrick(_ cell: ButtonBrickCell) {
     }
 }
 
 class FixedButtonDelegate: ButtonBrickCellDelegate {
     var buttonTouched = false
-    func didTapOnButtonForButtonBrickCell(cell: ButtonBrickCell) {
+    func didTapOnButtonForButtonBrickCell(_ cell: ButtonBrickCell) {
         buttonTouched = true
     }
 
@@ -290,7 +290,7 @@ class FixedButtonDelegate: ButtonBrickCellDelegate {
 class MockBrickCellTapDelegate: NSObject, BrickCellTapDelegate {
     var didTapBrickCellCalled = false
 
-    func didTapBrickCell(brickCell: BrickCell) {
+    func didTapBrickCell(_ brickCell: BrickCell) {
         didTapBrickCellCalled = true
     }
 
