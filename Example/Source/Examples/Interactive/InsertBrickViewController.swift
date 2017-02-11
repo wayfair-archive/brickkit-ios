@@ -50,7 +50,7 @@ class InsertBrickViewController: BrickApp.BaseBrickController {
 
         let section = BrickSection(Section, bricks: [
             SegmentHeaderBrick(dataSource: self, delegate: self),
-            LabelBrick(BrickIdentifiers.repeatLabel, backgroundColor: .lightGrayColor(), dataSource: self)
+            LabelBrick(BrickIdentifiers.repeatLabel, backgroundColor: UIColor.lightGray, dataSource: self)
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
         section.repeatCountDataSource = self
 
@@ -67,12 +67,12 @@ class InsertBrickViewController: BrickApp.BaseBrickController {
         updateRepeatCounts()
     }
 
-    func removeBrick(indexPath: NSIndexPath) {
+    func removeBrick(indexPath: IndexPath) {
         self.numberOfLabels -= 1
         updateRepeatCounts([indexPath])
     }
 
-    func updateRepeatCounts(fixedDeletedIndexPaths: [NSIndexPath]? = nil) {
+    func updateRepeatCounts(fixedDeletedIndexPaths: [IndexPath]? = nil) {
         UIView.animateWithDuration(0.5, animations: {
             self.brickCollectionView.invalidateRepeatCounts(reloadAllSections: false) { (completed, insertedIndexPaths, deletedIndexPaths) in
                 if let indexPath = insertedIndexPaths.first {
@@ -89,7 +89,7 @@ class InsertBrickViewController: BrickApp.BaseBrickController {
         }
     }
 
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: IndexPath) {
         let brickInfo = self.brickCollectionView.brickInfo(at: indexPath)
         if brickInfo.brick.identifier == BrickIdentifiers.repeatLabel {
             removeBrick(indexPath)

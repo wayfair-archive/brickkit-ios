@@ -52,15 +52,15 @@ class ChangeNibBrickViewController: BrickViewController, LabelBrickCellDataSourc
         repeatBrick = LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: widthRatio), height: .Auto(estimate: .Fixed(size: 50)), backgroundColor: .brickGray5, dataSource: self)
 
         let section = BrickSection(bricks: [
-            BrickSection(Buttons, backgroundColor: .whiteColor(), bricks: [
-                LabelBrick(ChangeButton, backgroundColor: .brickGray3, text: "Change".uppercaseString, configureCellBlock: LabelBrickCell.configure),
-                ButtonBrick(Button2, width: .Ratio(ratio: 1/3), backgroundColor: .brickGray1, title: "Width".uppercaseString, configureButtonBlock: configureButton, onButtonTappedHandler:{_ in
+            BrickSection(Buttons, backgroundColor: UIColor.white, bricks: [
+                LabelBrick(ChangeButton, backgroundColor: .brickGray3, text: "Change".uppercased(), configureCellBlock: LabelBrickCell.configure),
+                ButtonBrick(Button2, width: .Ratio(ratio: 1/3), backgroundColor: .brickGray1, title: "Width".uppercased(), configureButtonBlock: configureButton, onButtonTappedHandler:{_ in
                     self.changeWidth()
                 }),
-                ButtonBrick(Button1, width: .Ratio(ratio: 1/3), backgroundColor: .brickGray1, title: "Nib".uppercaseString, configureButtonBlock: configureButton, onButtonTappedHandler:{_ in
+                ButtonBrick(Button1, width: .Ratio(ratio: 1/3), backgroundColor: .brickGray1, title: "Nib".uppercased(), configureButtonBlock: configureButton, onButtonTappedHandler:{_ in
                     self.changeNib()
                 }),
-                ButtonBrick(Button2, width: .Ratio(ratio: 1/3), backgroundColor: .brickGray1, title: "Nib + Width".uppercaseString, configureButtonBlock: configureButton, onButtonTappedHandler:{_ in
+                ButtonBrick(Button2, width: .Ratio(ratio: 1/3), backgroundColor: .brickGray1, title: "Nib + Width".uppercased(), configureButtonBlock: configureButton, onButtonTappedHandler:{_ in
                     self.changeNibAndWidth()
                 }),
                 ]),
@@ -112,7 +112,7 @@ class ChangeNibBrickViewController: BrickViewController, LabelBrickCellDataSourc
 }
 
 extension ChangeNibBrickViewController: StickyLayoutBehaviorDataSource {
-    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         return identifier == Buttons
     }
 }

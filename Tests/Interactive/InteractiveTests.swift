@@ -46,10 +46,10 @@ class InteractiveTests: XCTestCase {
         fixedCount.repeatCountHash[LabelBrickIdentifier] = 5
 
         let indexPathSort: (IndexPath, IndexPath) -> Bool = { indexPath1, indexPath2  in
-            if (indexPath1 as NSIndexPath).section == (indexPath2 as NSIndexPath).section {
-                return (indexPath1 as NSIndexPath).item < (indexPath2 as NSIndexPath).item
+            if (indexPath1 as IndexPath).section == (indexPath2 as NSIndexPath).section {
+                return (indexPath1 as IndexPath).item < (indexPath2 as NSIndexPath).item
             } else {
-                return (indexPath1 as NSIndexPath).section < (indexPath2 as NSIndexPath).section
+                return (indexPath1 as IndexPath).section < (indexPath2 as NSIndexPath).section
             }
         }
 

@@ -89,7 +89,7 @@ extension XCTest {
         var result = [Int: [T]]()
 
         let categorised = attributes.categorise { (attribute) -> Int in
-            return (attribute.indexPath as NSIndexPath).section
+            return (attribute.indexPath as IndexPath).section
         }
 
         for (index, attributes) in categorised {

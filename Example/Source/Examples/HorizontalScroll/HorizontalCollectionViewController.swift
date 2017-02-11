@@ -93,9 +93,9 @@ extension HorizontalCollectionViewController: LabelBrickCellDataSource {
         let collectionIndex = cell.collectionIndex + 1
 
         if identifier == RepeatCollectionBrickViewController.Identifiers.titleLabel {
-            cell.label.text = "Title \(collectionIndex)".uppercaseString
+            cell.label.text = "Title \(collectionIndex)".uppercased()
         } else if identifier == RepeatCollectionBrickViewController.Identifiers.subTitleLabel {
-            cell.label.text = "SubTitle \(collectionIndex)".uppercaseString
+            cell.label.text = "SubTitle \(collectionIndex)".uppercased()
         }
         
     }

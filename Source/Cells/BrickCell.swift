@@ -92,7 +92,7 @@ extension BaseBrickCell {
         topSeparatorLine.removeFromSuperview()
     }
 
-    public func addSeparatorLine(_ width: CGFloat, onTop: Bool? = false, xOrigin: CGFloat = 0, backgroundColor: UIColor = .lightGray(), height: CGFloat = 0.5) {
+    public func addSeparatorLine(_ width: CGFloat, onTop: Bool? = false, xOrigin: CGFloat = 0, backgroundColor: UIColor = UIColor.lightGray, height: CGFloat = 0.5) {
 
         let separator = (onTop == true) ? topSeparatorLine : bottomSeparatorLine
 

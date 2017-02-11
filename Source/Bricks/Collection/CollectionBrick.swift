@@ -21,11 +21,11 @@ open class CollectionBrick: Brick {
     
     fileprivate var model: CollectionBrickCellModel?
     
-    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = .clear(), backgroundView: UIView? = nil, scrollDirection: UICollectionViewScrollDirection = .vertical, dataSource: CollectionBrickCellDataSource, brickTypes: [Brick.Type] = []) {
+    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, scrollDirection: UICollectionViewScrollDirection = .vertical, dataSource: CollectionBrickCellDataSource, brickTypes: [Brick.Type] = []) {
         self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView, scrollDirection: scrollDirection, dataSource: dataSource, brickTypes: brickTypes)
     }
     
-    public init(_ identifier: String, size: BrickSize, backgroundColor: UIColor = .clear(), backgroundView: UIView? = nil, scrollDirection: UICollectionViewScrollDirection = .vertical, dataSource: CollectionBrickCellDataSource, brickTypes: [Brick.Type] = []) {
+    public init(_ identifier: String, size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, scrollDirection: UICollectionViewScrollDirection = .vertical, dataSource: CollectionBrickCellDataSource, brickTypes: [Brick.Type] = []) {
         self.dataSource = dataSource
         self.scrollDirection = scrollDirection
         

@@ -38,7 +38,7 @@ class HorizontalSnapToPointViewController: SimpleHorizontalScrollBrickViewContro
             self.updateScrollDirection(.Horizontal(.Right))
         }))
 
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
 
     func updateScrollDirection(scrollDirection: SnapToPointScrollDirection) {

@@ -27,7 +27,7 @@ class BrickCollectionViewDataSourceTests: XCTestCase {
         let indexPath = IndexPath(item: 1, section: 1)
         brickView.setSection(BrickSection(bricks: [ DummyBrick() ]))
 
-        expectFatalError("Brick not found at indexPath: SECTION - \((indexPath as NSIndexPath).section) - ITEM: \((indexPath as NSIndexPath).item). This should never happen") {
+        expectFatalError("Brick not found at indexPath: SECTION - \((indexPath as IndexPath).section) - ITEM: \((indexPath as NSIndexPath).item). This should never happen") {
             brickView.brick(at: indexPath)
         }
     }

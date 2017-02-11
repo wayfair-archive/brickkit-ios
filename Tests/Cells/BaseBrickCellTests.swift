@@ -35,7 +35,7 @@ class BaseBrickCellTests: XCTestCase {
         XCTAssertEqual(cell?.bottomSeparatorLine.frame.height, 0.5)
         XCTAssertEqual(cell?.bottomSeparatorLine.frame.origin.x, 0)
         XCTAssertEqual(cell?.bottomSeparatorLine.frame.origin.y, 99.5)
-        XCTAssertEqual(cell?.bottomSeparatorLine.backgroundColor, .lightGray())
+        XCTAssertEqual(cell?.bottomSeparatorLine.backgroundColor, UIColor.lightGray)
         XCTAssertNil(cell?.topSeparatorLine.superview)
     }
 
@@ -137,15 +137,15 @@ class BaseBrickCellTests: XCTestCase {
 
     func testBackgroundView() {
         let backgroundView1 = UIView()
-        backgroundView1.backgroundColor = .orange()
+        backgroundView1.backgroundColor = UIColor.orange
         backgroundView1.tag = 21
 
         let backgroundView2 = UIView()
-        backgroundView2.backgroundColor = .orange()
+        backgroundView2.backgroundColor = UIColor.orange
         backgroundView2.tag = 22
 
         let backgroundView3 = UIView()
-        backgroundView3.backgroundColor = .orange()
+        backgroundView3.backgroundColor = UIColor.orange
         backgroundView3.tag = 23
 
         brickView.registerBrickClass(DummyBrick.self)

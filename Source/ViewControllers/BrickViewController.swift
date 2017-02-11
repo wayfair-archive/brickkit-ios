@@ -68,7 +68,7 @@ open class BrickViewController: UIViewController, UICollectionViewDelegate {
     fileprivate func initializeComponents() {
         autoreleasepool { // This would result in not releasing the BrickCollectionView even when its being set to nil
             let collectionView = BrickCollectionView(frame: self.view.bounds, collectionViewLayout: BrickFlowLayout())
-            collectionView.backgroundColor = .clear()
+            collectionView.backgroundColor = UIColor.clear
             collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
             self.view.addSubview(collectionView)
@@ -154,7 +154,7 @@ extension BrickViewController {
         return false
     }
     
-    public func collectionView(collectionView: UICollectionView, canFocusItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    public func collectionView(collectionView: UICollectionView, canFocusItemAtIndexPath indexPath: IndexPath) -> Bool {
         let cell = brickCollectionView.cellForItemAtIndexPath(indexPath) as? BrickCell
         return cell is FocusableBrickCell && cell?.allowsFocus == true
     }

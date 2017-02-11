@@ -21,7 +21,7 @@ class ProfileImageBrickModel {
 class ProfileImageBrick: Brick {
     var model: ProfileImageBrickModel
     
-    init(_ identifier: String, width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Fixed(size: 60), backgroundColor: UIColor = .whiteColor(), backgroundView: UIView? = nil, model: ProfileImageBrickModel) {
+    init(_ identifier: String, width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Fixed(size: 60), backgroundColor: UIColor = UIColor.white, backgroundView: UIView? = nil, model: ProfileImageBrickModel) {
         self.model = model
         super.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView)
     }
@@ -42,7 +42,7 @@ class ProfileImageBrickCell: BrickCell, Bricklike {
         
         followButton.layer.cornerRadius = 4
         followButton.layer.borderWidth = 1
-        followButton.layer.borderColor = self.tintColor.CGColor
+        followButton.layer.borderColor = self.tintColor.cgColor
         
     }
 }

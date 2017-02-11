@@ -328,18 +328,18 @@ internal class BrickLayoutSection {
         // The idea is to have them available for behaviors, but not visible
         let downStreamIndexPaths = dataSource.downStreamIndexPaths(in: self)
         for indexPath in downStreamIndexPaths {
-            guard (indexPath as NSIndexPath).section == sectionIndex else {
+            guard (indexPath as IndexPath).section == sectionIndex else {
                 continue
             }
-            if let downstreamAttributes = self.attributes[(indexPath as NSIndexPath).item] {
+            if let downstreamAttributes = self.attributes[(indexPath as IndexPath).item] {
                 // If the attribute already exists, but not in the current frameset, push it off screen
-                if (indexPath as NSIndexPath).item >= attributes.count {
+                if (indexPath as IndexPath).item >= attributes.count {
                     downstreamAttributes.frame.origin.y = maxY
                     downstreamAttributes.originalFrame.origin.y = maxY
                 }
             } else {
                 // create the attribute, so it's available for the behaviors to pick it up
-                createOrUpdateAttribute(at: (indexPath as NSIndexPath).item, with: dataSource, x: &x, y: &y, maxY: &maxY, force: true, invalidate: invalidate, frameOfInterest: frameOfInterest, updatedAttributes: updatedAttributes, customHeightProvider: customHeightProvider)
+                createOrUpdateAttribute(at: (indexPath as IndexPath).item, with: dataSource, x: &x, y: &y, maxY: &maxY, force: true, invalidate: invalidate, frameOfInterest: frameOfInterest, updatedAttributes: updatedAttributes, customHeightProvider: customHeightProvider)
             }
         }
 
@@ -657,7 +657,7 @@ internal class BrickLayoutSection {
             oldFrame = nil
             oldOriginalFrame = nil
         }
-        brickAttributes.identifier = dataSource.identifier(for: (indexPath as NSIndexPath).item, in: self)
+        brickAttributes.identifier = dataSource.identifier(for: (indexPath as IndexPath).item, in: self)
 
         let height: CGFloat
 
@@ -706,7 +706,7 @@ internal class BrickLayoutSection {
     func createAttribute(at indexPath: IndexPath, with dataSource: BrickLayoutSectionDataSource) -> BrickLayoutAttributes {
         let brickAttributes = BrickLayoutAttributes(forCellWith: indexPath)
 
-        attributes[(indexPath as NSIndexPath).item] = brickAttributes
+        attributes[(indexPath as IndexPath).item] = brickAttributes
         brickAttributes.isEstimateSize = dataSource.isEstimate(for: brickAttributes, in: self)
         return brickAttributes
     }
@@ -778,7 +778,7 @@ extension BrickLayoutSection {
 
         // Verify the behaviors attributes and check if they are in the frame as well
         for indexPath in behaviorAttributesIndexPaths {
-            frameCheck((indexPath as NSIndexPath).item)
+            frameCheck((indexPath as IndexPath).item)
         }
 
         return attributes

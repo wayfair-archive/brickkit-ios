@@ -40,7 +40,7 @@ class AdvancedRepeatViewController: BrickApp.BaseBrickController {
         registerBrickClass(LabelBrick.self)
         registerBrickClass(ButtonBrick.self)
 
-        loadButton = ButtonBrick(LoadButton, title: "Load Items".uppercaseString, configureButtonBlock: { cell in
+        loadButton = ButtonBrick(LoadButton, title: "Load Items".uppercased(), configureButtonBlock: { cell in
             cell.configure()
         }) { cell in
             self.loadItems()
@@ -63,13 +63,13 @@ class AdvancedRepeatViewController: BrickApp.BaseBrickController {
 
     func loadItems() {
         if items.isEmpty {
-            loadButton.title = "Remove items".uppercaseString
+            loadButton.title = "Remove items".uppercased()
             items = []
             for index in 0..<30 {
                 items.append("BRICK \(index + 1)")
             }
         } else {
-            loadButton.title = "Load items".uppercaseString
+            loadButton.title = "Load items".uppercased()
             items.removeAll()
         }
 

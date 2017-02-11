@@ -61,7 +61,7 @@ class NavigationMasterViewController: BrickViewController {
         #endif
 
         // Setup background
-        self.view.backgroundColor = .whiteColor()
+        self.view.backgroundColor = UIColor.white
         collectionView?.backgroundColor = .brickPattern
 
         // Setup hide behavior
@@ -94,9 +94,9 @@ class NavigationMasterViewController: BrickViewController {
 #if os(tvOS)
 //MARK: - UICollectionViewDelegate
 extension NavigationMasterViewController {
-    func indexPathForPreferredFocusedViewInCollectionView(collectionView: UICollectionView) -> NSIndexPath? {
+    func indexPathForPreferredFocusedViewInCollectionView(collectionView: UICollectionView) -> IndexPath? {
         
-        let index = NSIndexPath(forItem: 0, inSection: 1)
+        let index = IndexPath(forItem: 0, inSection: 1)
         
         if let cell = brickCollectionView.cellForItemAtIndexPath(index) as? FocusableBrickCell {
             cell.willFocus()
@@ -127,12 +127,12 @@ extension NavigationMasterViewController: LabelBrickCellDataSource {
     func configureLabelBrickCell(cell: LabelBrickCell) {
         let text = dataSource.item(for: cell.index).title
 
-        cell.label.text = text.uppercaseString
+        cell.label.text = text.uppercased()
         cell.label.textColor = Theme.textColorForNavigationTitle
         cell.label.font = Theme.fontForNavigationTitle
         cell.label.textAlignment = .Left
 
-        cell.imageView?.tintColor = .whiteColor()
+        cell.imageView?.tintColor = UIColor.white
 
         cell.edgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
     }
@@ -154,11 +154,11 @@ extension NavigationMasterViewController: BrickRepeatCountDataSource {
 // MARK: - OffsetLayoutBehaviorDataSource
 extension NavigationMasterViewController: OffsetLayoutBehaviorDataSource {
 
-    func offsetLayoutBehavior(behavior: OffsetLayoutBehavior, sizeOffsetForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
+    func offsetLayoutBehavior(behavior: OffsetLayoutBehavior, sizeOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
         return nil
     }
 
-    func offsetLayoutBehavior(behavior: OffsetLayoutBehavior, originOffsetForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
+    func offsetLayoutBehavior(behavior: OffsetLayoutBehavior, originOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
 
         guard identifier == NavigationIdentifiers.navItemBrick else {
             return nil
@@ -191,7 +191,7 @@ extension NavigationMasterViewController: OffsetLayoutBehaviorDataSource {
 // MARK: - HideBehavior
 extension NavigationMasterViewController: HideBehaviorDataSource {
 
-    func hideBehaviorDataSource(shouldHideItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func hideBehaviorDataSource(shouldHideItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
 
         switch identifier {
         case NavigationIdentifiers.navItemBrick:

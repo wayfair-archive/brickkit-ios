@@ -48,31 +48,31 @@ class SectionsLayoutDataSource: NSObject, BrickLayoutDataSource {
     }
 
     func brickLayout(_ layout: BrickLayout, widthRatioForItemAtIndexPath indexPath: IndexPath) -> CGFloat {
-        let sectionWidthRatios = widthRatios[(indexPath as NSIndexPath).section]
-        if sectionWidthRatios.count <= (indexPath as NSIndexPath).item {
+        let sectionWidthRatios = widthRatios[(indexPath as IndexPath).section]
+        if sectionWidthRatios.count <= (indexPath as IndexPath).item {
             return sectionWidthRatios.last ?? 0
         } else {
-            return sectionWidthRatios[(indexPath as NSIndexPath).item]
+            return sectionWidthRatios[(indexPath as IndexPath).item]
         }
     }
 
     func brickLayout(_ layout: BrickLayout, widthForItemAtIndexPath indexPath: IndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat {
         let ratio: CGFloat
-        let sectionWidthRatios = widthRatios[(indexPath as NSIndexPath).section]
-        if sectionWidthRatios.count <= (indexPath as NSIndexPath).item {
+        let sectionWidthRatios = widthRatios[(indexPath as IndexPath).section]
+        if sectionWidthRatios.count <= (indexPath as IndexPath).item {
             ratio =  sectionWidthRatios.last ?? 0
         } else {
-            ratio = sectionWidthRatios[(indexPath as NSIndexPath).item]
+            ratio = sectionWidthRatios[(indexPath as IndexPath).item]
         }
-        return BrickUtils.calculateWidth(for: ratio, widthRatio: widthRatio, totalWidth: totalWidth, inset: self.brickLayout(layout, insetForSection: (indexPath as NSIndexPath).section))
+        return BrickUtils.calculateWidth(for: ratio, widthRatio: widthRatio, totalWidth: totalWidth, inset: self.brickLayout(layout, insetForSection: (indexPath as IndexPath).section))
     }
 
     func brickLayout(_ layout: BrickLayout, estimatedHeightForItemAtIndexPath indexPath: IndexPath, containedInWidth width: CGFloat) -> CGFloat {
-        let sectionHeights = heights[(indexPath as NSIndexPath).section]
-        if sectionHeights.count <= (indexPath as NSIndexPath).item {
+        let sectionHeights = heights[(indexPath as IndexPath).section]
+        if sectionHeights.count <= (indexPath as IndexPath).item {
             return sectionHeights.last ?? 0
         } else {
-            return sectionHeights[(indexPath as NSIndexPath).item]
+            return sectionHeights[(indexPath as IndexPath).item]
         }
     }
 
@@ -93,11 +93,11 @@ class SectionsLayoutDataSource: NSObject, BrickLayoutDataSource {
     }
 
     func brickLayout(_ layout: BrickLayout, brickLayoutTypeForItemAtIndexPath indexPath: IndexPath) -> BrickLayoutType {
-        let sectionTypes = types[(indexPath as NSIndexPath).section]
-        if sectionTypes.count <= (indexPath as NSIndexPath).item {
+        let sectionTypes = types[(indexPath as IndexPath).section]
+        if sectionTypes.count <= (indexPath as IndexPath).item {
             return sectionTypes.last ?? .brick
         } else {
-            return sectionTypes[(indexPath as NSIndexPath).item]
+            return sectionTypes[(indexPath as IndexPath).item]
         }
     }
 
@@ -162,7 +162,7 @@ class FixedBrickLayoutSectionDataSource: NSObject, BrickLayoutSectionDataSource 
     }
     
     func size(for attributes: BrickLayoutAttributes, containedIn width: CGFloat, in section: BrickLayoutSection) -> CGSize {
-        return CGSize(width: width, height: heights[(attributes.indexPath as NSIndexPath).item])
+        return CGSize(width: width, height: heights[(attributes.indexPath as IndexPath).item])
     }
 
     func identifier(for index: Int, in skeleton: BrickLayoutSection) -> String {

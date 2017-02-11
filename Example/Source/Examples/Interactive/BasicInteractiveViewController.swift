@@ -25,7 +25,7 @@ class BasicInteractiveViewController: BrickViewController, LabelBrickCellDataSou
 
     var stepperModel = StepperBrickModel(count: 1)
     
-    var titleModel = LabelBrickCellModel(text: "There are no values".uppercaseString) { cell in
+    var titleModel = LabelBrickCellModel(text: "There are no values".uppercased()) { cell in
         cell.configure()
     }
 
@@ -61,7 +61,7 @@ class BasicInteractiveViewController: BrickViewController, LabelBrickCellDataSou
     }
 
     func updateTitle() {
-            titleModel.text = "There are \(stepperModel.count) label(s)".uppercaseString
+            titleModel.text = "There are \(stepperModel.count) label(s)".uppercased()
         self.brickCollectionView.reloadBricksWithIdentifiers([BrickIdentifiers.titleLabel])
     }
 
@@ -94,7 +94,7 @@ extension BasicInteractiveViewController: StepperBrickCellDelegate {
 }
 
 extension BasicInteractiveViewController: StickyLayoutBehaviorDataSource {
-    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         return identifier == BrickIdentifiers.titleLabel
     }
 }

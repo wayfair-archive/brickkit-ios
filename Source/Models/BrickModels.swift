@@ -48,7 +48,7 @@ open class Brick: CustomStringConvertible {
         }
     }
     
-    /// Background color used for the brick. Defaults to .clearColor()
+    /// Background color used for the brick. Defaults to UIColor.clear
     open var backgroundColor: UIColor
     
     /// Background view used for the brick. Defaults to nil
@@ -65,14 +65,14 @@ open class Brick: CustomStringConvertible {
     /// - parameter identifier:      Identifier of the brick. Defaults to empty string
     /// - parameter width:           Width dimension used to calculate the width. Defaults to .Ratio(ratio: 1)
     /// - parameter height:          Height dimension used to calculate the height. Defaults to .Auto(estimate: .Fixed(size: 50))
-    /// - parameter backgroundColor: Background color used for the brick. Defaults to .clearColor()
+    /// - parameter backgroundColor: Background color used for the brick. Defaults to UIColor.clear
     /// - parameter backgroundView:  Background view used for the brick. Defaults to nil
     /// - returns: brick
-    convenience public init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = .clear(), backgroundView: UIView? = nil) {
+    convenience public init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil) {
         self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView)
     }
     
-    public init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = .clear(), backgroundView: UIView? = nil) {
+    public init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil) {
         self.identifier = identifier
         self.size = size
         self.backgroundColor = backgroundColor
@@ -156,7 +156,7 @@ open class BrickSection: Brick {
         }
     }
 
-    public init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 0)), backgroundColor: UIColor = .clear(), backgroundView: UIView? = nil, bricks: [Brick], inset: CGFloat = 0, edgeInsets: UIEdgeInsets = UIEdgeInsets.zero, alignRowHeights: Bool = false, alignment: BrickAlignment = BrickAlignment(horizontal: .left, vertical: .top)) {
+    public init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 0)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, bricks: [Brick], inset: CGFloat = 0, edgeInsets: UIEdgeInsets = UIEdgeInsets.zero, alignRowHeights: Bool = false, alignment: BrickAlignment = BrickAlignment(horizontal: .left, vertical: .top)) {
         self.bricks = bricks
         self.inset = inset
         self.edgeInsets = edgeInsets

@@ -76,7 +76,7 @@ class MockTwitterViewController: BrickViewController {
 
         let mainSection = BrickSection(bricks: [
             setUpProfileHeaderSection(),
-            SegmentHeaderBrick(MockTwitterViewController.Identifiers.segmentHeaderBrick, backgroundColor: .whiteColor()),
+            SegmentHeaderBrick(MockTwitterViewController.Identifiers.segmentHeaderBrick, backgroundColor: UIColor.white),
             setupTextAndImageSection(),
             setWhotoFollowSection(),
             setupTextAndImageSection(),
@@ -130,15 +130,15 @@ class MockTwitterViewController: BrickViewController {
     }
     
     func setupTextAndImageSection() -> BrickSection {
-        postBrick = PostBrick(MockTwitterViewController.Identifiers.postBrick, backgroundColor: UIColor.whiteColor(), dataSource: self)
-        let section = BrickSection(backgroundColor: .lightGrayColor(), bricks: [postBrick], edgeInsets: UIEdgeInsets(top: 0, left: 0, bottom: 2, right: 0), inset: 1)
+        postBrick = PostBrick(MockTwitterViewController.Identifiers.postBrick, backgroundColor: UIColor.white, dataSource: self)
+        let section = BrickSection(backgroundColor: UIColor.lightGray, bricks: [postBrick], edgeInsets: UIEdgeInsets(top: 0, left: 0, bottom: 2, right: 0), inset: 1)
         section.repeatCountDataSource = self
 
         return section
     }
   
     func setupHorizontalScrollSection() -> BrickSection {
-        let friendsRefBrick = DailySalesBrick(MockTwitterViewController.Identifiers.dailySalesBrick, width: .Fixed(size: 140), height: .Fixed(size: 140), backgroundColor: .whiteColor(), dataSource: self)
+        let friendsRefBrick = DailySalesBrick(MockTwitterViewController.Identifiers.dailySalesBrick, width: .Fixed(size: 140), height: .Fixed(size: 140), backgroundColor: UIColor.white, dataSource: self)
         
         collectionBrickDataSource = BrickCollectionViewDataSource()
         let salesSection = BrickSection(bricks: [
@@ -147,8 +147,8 @@ class MockTwitterViewController: BrickViewController {
         salesSection.repeatCountDataSource = self
         collectionBrickDataSource!.setSection(salesSection)
         
-        let section = BrickSection(backgroundColor: .lightGrayColor(), width: .Ratio(ratio: 1), bricks: [
-            HeaderAndFooterBrick(MockTwitterViewController.Identifiers.dailySalesHeader, width: .Ratio(ratio: 1), /*height: .Fixed(size: 40),*/ backgroundColor: .whiteColor(), backgroundView: nil){ cell in
+        let section = BrickSection(backgroundColor: UIColor.lightGray, width: .Ratio(ratio: 1), bricks: [
+            HeaderAndFooterBrick(MockTwitterViewController.Identifiers.dailySalesHeader, width: .Ratio(ratio: 1), /*height: .Fixed(size: 40),*/ backgroundColor: UIColor.white, backgroundView: nil){ cell in
                 cell.textLabel.text = "Daily Sales"
             },
             CollectionBrick(/*height: .Fixed(size: 140), */scrollDirection: .Horizontal, dataSource: self, brickTypes: [DailySalesBrick.self])
@@ -160,13 +160,13 @@ class MockTwitterViewController: BrickViewController {
     }
     
     func setWhotoFollowSection() -> BrickSection {
-        let whoToFollowBrick = WhoToFollowBrick(MockTwitterViewController.Identifiers.whoToFollowBrick, backgroundColor: .whiteColor(), dataSource: self)
+        let whoToFollowBrick = WhoToFollowBrick(MockTwitterViewController.Identifiers.whoToFollowBrick, backgroundColor: UIColor.white, dataSource: self)
         
-        let headerAndFooterBrick = HeaderAndFooterBrick(MockTwitterViewController.Identifiers.whoToFollowHeaderBrick, backgroundColor: .whiteColor()) { cell in
+        let headerAndFooterBrick = HeaderAndFooterBrick(MockTwitterViewController.Identifiers.whoToFollowHeaderBrick, backgroundColor: UIColor.white) { cell in
             cell.textLabel.text = "Who To Follow"
         }
         
-        let section = BrickSection(backgroundColor: .lightGrayColor(), bricks: [headerAndFooterBrick, whoToFollowBrick], edgeInsets: UIEdgeInsets(top: 0, left: 0, bottom: 2, right: 0), inset: 1)
+        let section = BrickSection(backgroundColor: UIColor.lightGray, bricks: [headerAndFooterBrick, whoToFollowBrick], edgeInsets: UIEdgeInsets(top: 0, left: 0, bottom: 2, right: 0), inset: 1)
         section.repeatCountDataSource = self
 
         return section
@@ -254,13 +254,13 @@ extension MockTwitterViewController: BrickRepeatCountDataSource {
 }
 
 extension MockTwitterViewController: MinimumStickyLayoutBehaviorDataSource {
-    func stickyLayoutBehavior(behavior: StickyLayoutBehavior, minimumStickingHeightForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
+    func stickyLayoutBehavior(behavior: StickyLayoutBehavior, minimumStickingHeightForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
         return 30
     }
 }
 
 extension MockTwitterViewController: StickyLayoutBehaviorDataSource {
-    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         if stickyLayoutBehavior == minimumStickyBehavior {
             return identifier == MockTwitterViewController.Identifiers.profileImageBrick
         } else {
@@ -274,7 +274,7 @@ extension MockTwitterViewController: StickyLayoutBehaviorDataSource {
 }
 
 extension MockTwitterViewController: StickyLayoutBehaviorDelegate {
-    func stickyLayoutBehavior(behavior: StickyLayoutBehavior, brickIsStickingWithPercentage percentage: CGFloat, forItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
+    func stickyLayoutBehavior(behavior: StickyLayoutBehavior, brickIsStickingWithPercentage percentage: CGFloat, forItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
         print(percentage)
     }
 }

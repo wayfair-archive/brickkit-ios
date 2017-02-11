@@ -11,7 +11,7 @@ import Foundation
 extension BrickCollectionView: BrickLayoutDataSource {
     
     public func brickLayout(_ layout: BrickLayout, widthForItemAtIndexPath indexPath: IndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat {
-        let inset = self.brickLayout(layout, insetForSection: (indexPath as NSIndexPath).section)
+        let inset = self.brickLayout(layout, insetForSection: (indexPath as IndexPath).section)
         let widthDimension = self.brick(at: indexPath).size.width
 
         let dimension = widthDimension.dimension(in: self)

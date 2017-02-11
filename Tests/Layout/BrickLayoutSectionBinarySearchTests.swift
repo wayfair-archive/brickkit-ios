@@ -9,7 +9,7 @@
 import XCTest
 @testable import BrickKit
 
-private let mapAttributesToItemIndex: (UICollectionViewLayoutAttributes) -> Int = {($0.indexPath as NSIndexPath).item}
+private let mapAttributesToItemIndex: (UICollectionViewLayoutAttributes) -> Int = {($0.indexPath as IndexPath).item}
 private let sortByNumber: (Int, Int) -> Bool = {$0 < $1}
 
 

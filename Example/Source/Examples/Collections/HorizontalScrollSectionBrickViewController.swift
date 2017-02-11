@@ -45,7 +45,7 @@ class HorizontalScrollSectionBrickViewController: BrickApp.BaseBrickController, 
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
         section3.repeatCountDataSource = self
 
-        let section = BrickSection(backgroundColor: .whiteColor(), bricks: [
+        let section = BrickSection(backgroundColor: UIColor.white, bricks: [
             LabelBrick(backgroundColor: .brickGray3, text: "1/4 Ratio", configureCellBlock: LabelBrickCell.configure),
             CollectionBrick("Collection 1", backgroundColor: .brickGray1, scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section1), brickTypes:[ImageBrick.self]),
             LabelBrick(backgroundColor: .brickGray3, text: "1/2 Ratio", configureCellBlock: LabelBrickCell.configure),

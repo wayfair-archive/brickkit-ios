@@ -55,7 +55,7 @@ class DynamicContentViewController: BrickViewController {
         self.overrideContentSource.shouldOverride = true
     }
 
-    func timerFired() {
+    func timerFUIColor.red {
         self.overrideContentSource.shouldOverride = false
         imageURLs = []
         for _ in 1...5 {
@@ -65,7 +65,7 @@ class DynamicContentViewController: BrickViewController {
     }
 
     func hideSectionNested() -> BrickSection {
-        let sectionLabelBrick = LabelBrick(backgroundColor: .brickGray3, dataSource: LabelBrickCellModel(text: "Section 0".uppercaseString, configureCellBlock: LabelBrickCell.configure))
+        let sectionLabelBrick = LabelBrick(backgroundColor: .brickGray3, dataSource: LabelBrickCellModel(text: "Section 0".uppercased(), configureCellBlock: LabelBrickCell.configure))
         let section = BrickSection(backgroundColor: .brickSection, bricks: [
             sectionLabelBrick
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 50, left: 20, bottom: 50, right: 20))
@@ -74,10 +74,10 @@ class DynamicContentViewController: BrickViewController {
     }
 
     func hideableSection() -> BrickSection {
-        let brick = LabelBrick(height: .Auto(estimate: .Fixed(size:30)), backgroundColor: .brickGray3, text: "Section 1 Label 0".uppercaseString, configureCellBlock: LabelBrickCell.configure)
+        let brick = LabelBrick(height: .Auto(estimate: .Fixed(size:30)), backgroundColor: .brickGray3, text: "Section 1 Label 0".uppercased(), configureCellBlock: LabelBrickCell.configure)
         let imageBrick = ImageBrick(DynamicContentViewController.Identifiers.HideableSectionContentImage, height: .Auto(estimate: .Fixed(size:100)), backgroundColor: .brickGray3, dataSource: self)
         imageBrick.overrideContentSource = self.overrideContentSource
-        let brick0 = LabelBrick(height: .Auto(estimate: .Fixed(size:30)), backgroundColor: .brickGray3, text: "Section 1 Label 1".uppercaseString, configureCellBlock: LabelBrickCell.configure)
+        let brick0 = LabelBrick(height: .Auto(estimate: .Fixed(size:30)), backgroundColor: .brickGray3, text: "Section 1 Label 1".uppercased(), configureCellBlock: LabelBrickCell.configure)
 
         let section = BrickSection(backgroundColor: .brickSection, bricks: [
             brick0,
@@ -89,7 +89,7 @@ class DynamicContentViewController: BrickViewController {
     }
 
     func shownSectionLabel() -> BrickSection {
-        let brick = LabelBrick(backgroundColor: .brickGray3, dataSource: LabelBrickCellModel(text: "Section 2 Label 1".uppercaseString))
+        let brick = LabelBrick(backgroundColor: .brickGray3, dataSource: LabelBrickCellModel(text: "Section 2 Label 1".uppercased()))
 
         let section = BrickSection(backgroundColor: .brickSection, bricks: [
             brick

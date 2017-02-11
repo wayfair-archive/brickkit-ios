@@ -36,13 +36,13 @@ class StickingFooterBaseViewController: BrickApp.BaseBrickController {
         let behavior = StickyFooterLayoutBehavior(dataSource: self)
         self.brickCollectionView.layout.behaviors.insert(behavior)
 
-        let footerSection = BrickSection(StickySection, backgroundColor: UIColor.whiteColor(), bricks: [
+        let footerSection = BrickSection(StickySection, backgroundColor: UIColor.white, bricks: [
             LabelBrick(FooterTitle, backgroundColor: .brickGray1, dataSource: LabelBrickCellModel(text: "Footer Title")),
-            LabelBrick(width: .Ratio(ratio: 0.5), backgroundColor: .lightGrayColor(), dataSource: LabelBrickCellModel(text: "Footer Label 1")),
-            LabelBrick(width: .Ratio(ratio: 0.5), backgroundColor: .lightGrayColor(), dataSource: LabelBrickCellModel(text: "Footer Label 2")),
+            LabelBrick(width: .Ratio(ratio: 0.5), backgroundColor: UIColor.lightGray, dataSource: LabelBrickCellModel(text: "Footer Label 1")),
+            LabelBrick(width: .Ratio(ratio: 0.5), backgroundColor: UIColor.lightGray, dataSource: LabelBrickCellModel(text: "Footer Label 2")),
             ], inset: 5, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
 
-        let section = BrickSection(backgroundColor: .whiteColor(), bricks: [
+        let section = BrickSection(backgroundColor: UIColor.white, bricks: [
             LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), height: .Auto(estimate: .Fixed(size: 38)), backgroundColor: .brickGray1, dataSource: self),
             footerSection
             ])
@@ -72,7 +72,7 @@ extension StickingFooterBaseViewController: LabelBrickCellDataSource {
 
 
 extension StickingFooterBaseViewController: StickyLayoutBehaviorDataSource {
-    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         return identifier == StickySection
     }
 }

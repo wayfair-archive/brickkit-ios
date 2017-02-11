@@ -63,11 +63,11 @@ class HideBrickViewController: BrickApp.BaseBrickController {
     }
 
     var titleForHideBrickButton: String {
-        return "\(brickHidden ? "Show" : "Hide") Brick".uppercaseString
+        return "\(brickHidden ? "Show" : "Hide") Brick".uppercased()
     }
 
     var titleForHideSectionButton: String {
-        return "\(sectionHidden ? "Show" : "Hide") Section".uppercaseString
+        return "\(sectionHidden ? "Show" : "Hide") Section".uppercased()
     }
 
     func hideBrick() {
@@ -88,7 +88,7 @@ class HideBrickViewController: BrickApp.BaseBrickController {
 
 extension HideBrickViewController: HideBehaviorDataSource {
 
-    func hideBehaviorDataSource(shouldHideItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func hideBehaviorDataSource(shouldHideItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         switch identifier {
         case HideBrickViewController.Identifiers.SimpleBrick:
             return brickHidden

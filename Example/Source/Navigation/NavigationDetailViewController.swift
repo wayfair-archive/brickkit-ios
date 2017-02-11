@@ -24,14 +24,14 @@ class NavigationDetailViewController: BrickViewController {
         super.viewDidLoad()
 
         // Setup title
-        self.navigationItem.title = navItem.title.uppercaseString
+        self.navigationItem.title = navItem.title.uppercased()
         #if os(iOS)
             // On iOS (not tvOS), hide the back title
             self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         #endif
 
         // Setup background
-        self.view.backgroundColor = .whiteColor()
+        self.view.backgroundColor = UIColor.white
         collectionView?.backgroundColor = .brickPattern
 
         // Setup appear behavior
@@ -40,7 +40,7 @@ class NavigationDetailViewController: BrickViewController {
         // Register Bricks
         registerBrickClass(TwoLabelBrick.self)
 
-        let labelBrick = TwoLabelBrick(NavigationIdentifiers.subItemBrick, width: .Ratio(ratio: 1), height: .Fixed(size: Constants.brickHeight), backgroundColor: .whiteColor(), dataSource: self)
+        let labelBrick = TwoLabelBrick(NavigationIdentifiers.subItemBrick, width: .Ratio(ratio: 1), height: .Fixed(size: Constants.brickHeight), backgroundColor: UIColor.white, dataSource: self)
         labelBrick.brickCellTapDelegate = self
 
         let section = BrickSection(NavigationIdentifiers.subItemSection, bricks: [
@@ -98,7 +98,7 @@ extension NavigationDetailViewController: BrickCellTapDelegate {
     func didTapBrickCell(brickCell: BrickCell) {
         let index = brickCell.index
         let detail = navItem.viewControllers[index].init()
-        detail.title = navItem.viewControllers[index].title.uppercaseString
+        detail.title = navItem.viewControllers[index].title.uppercased()
         self.navigationController?.pushViewController(detail, animated: true)
     }
 

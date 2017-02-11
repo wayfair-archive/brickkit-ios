@@ -21,7 +21,7 @@ open class GenericBrick<T: UIView>: Brick, ViewGenerator {
         self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView, configureView: configureView)
     }
 
-    public init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = .clear(), backgroundView: UIView? = nil, configureView: @escaping ConfigureView) {
+    public init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, configureView: @escaping ConfigureView) {
         self.configureView = configureView
         super.init(identifier, size: size, backgroundColor: backgroundColor, backgroundView: backgroundView)
     }
@@ -93,14 +93,11 @@ open class GenericBrickCell: BrickCell {
             self.rightSpaceConstraint = rightSpaceConstraint
         }
 
-<<<<<<< HEAD
-=======
-        backgroundColor = .clear()
-        contentView.backgroundColor = .clear()
-        genericContentView?.backgroundColor = .clear()
+        backgroundColor = UIColor.clear
+        contentView.backgroundColor = UIColor.clear
+        genericContentView?.backgroundColor = UIColor.clear
 
->>>>>>> e6dc8ea... 1st part of the conversion: With the swift conversion tool
-    }
+}
 
     fileprivate func clearContentViewAndConstraints() {
         genericContentView?.removeFromSuperview()

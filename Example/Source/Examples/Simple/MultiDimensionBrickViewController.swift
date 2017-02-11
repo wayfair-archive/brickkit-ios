@@ -73,7 +73,7 @@ class MultiDimensionBrickViewController: BrickViewController, LabelBrickCellData
     }
 
     func configureLabelBrickCell(cell: LabelBrickCell) {
-        let text = "BRICK \(cell.index + 1)".uppercaseString
+        let text = "BRICK \(cell.index + 1)".uppercased()
         cell.label.text = text
         cell.configure()
     }

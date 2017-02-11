@@ -40,7 +40,7 @@ class HugeRepeatCollectionViewController: UICollectionViewController, LabelBrick
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .brickBackground
-        self.collectionView!.backgroundColor = .clearColor()
+        self.collectionView!.backgroundColor = UIColor.clear
         self.collectionView!.registerNib(LabelBrickNibs.Default, forCellWithReuseIdentifier: reuseIdentifier)
     }
 
@@ -49,7 +49,7 @@ class HugeRepeatCollectionViewController: UICollectionViewController, LabelBrick
         return numberOfLabels
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! LabelBrickCell
 
         let brick = LabelBrick(backgroundColor: .brickGray1, dataSource: self)

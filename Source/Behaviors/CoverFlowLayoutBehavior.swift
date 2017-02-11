@@ -19,7 +19,7 @@ open class CoverFlowLayoutBehavior: BrickLayoutBehavior {
     }
 
     open override func registerAttributes(_ attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
-        guard (attributes.indexPath as NSIndexPath).section != 0 else {
+        guard (attributes.indexPath as IndexPath).section != 0 else {
             return
         }
         attributes.transform = CGAffineTransform(scaleX: minimumScaleFactor, y: minimumScaleFactor)
@@ -41,7 +41,7 @@ open class CoverFlowLayoutBehavior: BrickLayoutBehavior {
 
         // Scale each on-screen cell according to how far it is from the center
         for anAttribute in attributes {
-            guard (anAttribute.indexPath as NSIndexPath).section != 0 else {
+            guard (anAttribute.indexPath as IndexPath).section != 0 else {
                 continue
             }
 

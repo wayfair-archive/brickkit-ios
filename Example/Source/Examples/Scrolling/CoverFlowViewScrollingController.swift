@@ -50,6 +50,6 @@ class CoverFlowScrollingViewController: BrickViewController {
 extension CoverFlowScrollingViewController: LabelBrickCellDataSource {
     func configureLabelBrickCell(cell: LabelBrickCell) {
         cell.configure()
-        cell.label.text = cell.brick.identifier.uppercaseString
+        cell.label.text = cell.brick.identifier.uppercased()
     }
 }

@@ -177,10 +177,10 @@ open class SnapToPointLayoutBehavior: BrickLayoutBehavior {
 
     /// Find the closest attribute vertically
     func minimumAttributesByYAnchor(_ attributes1: BrickLayoutAttributes, attributes2: BrickLayoutAttributes, for scrollLocation: SnapToPointVerticalScrollLocation, with anchorYComponent: CGFloat) -> Bool {
-        if self.sectionsToIgnore.contains((attributes1.indexPath as NSIndexPath).section) {
+        if self.sectionsToIgnore.contains((attributes1.indexPath as IndexPath).section) {
             return false
         }
-        if self.sectionsToIgnore.contains((attributes2.indexPath as NSIndexPath).section) {
+        if self.sectionsToIgnore.contains((attributes2.indexPath as IndexPath).section) {
             return true
         }
 
@@ -192,10 +192,10 @@ open class SnapToPointLayoutBehavior: BrickLayoutBehavior {
 
     /// Find the closest attribute horizontally
     func minimumAttributesByXAnchor(_ attributes1: BrickLayoutAttributes, attributes2: BrickLayoutAttributes, for scrollLocation: SnapToPointHorizontalScrollLocation, with anchorXComponent: CGFloat) -> Bool {
-        if self.sectionsToIgnore.contains((attributes1.indexPath as NSIndexPath).section) {
+        if self.sectionsToIgnore.contains((attributes1.indexPath as IndexPath).section) {
             return false
         }
-        if self.sectionsToIgnore.contains((attributes2.indexPath as NSIndexPath).section) {
+        if self.sectionsToIgnore.contains((attributes2.indexPath as IndexPath).section) {
             return true
         }
 

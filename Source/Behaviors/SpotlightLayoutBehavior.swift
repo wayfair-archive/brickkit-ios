@@ -62,7 +62,7 @@ open class SpotlightLayoutBehavior: BrickLayoutBehavior {
         let firstFrameOriginY: CGFloat = firstAttribute.originalFrame.origin.y
 
         for (index, attributes) in scrollAttributes.enumerated() {
-            if let brickCollectionView = collectionView as? BrickCollectionView, let inset = brickCollectionView.layout.dataSource?.brickLayout(brickCollectionView.layout, insetForSection: (attributes.indexPath as NSIndexPath).section) {
+            if let brickCollectionView = collectionView as? BrickCollectionView, let inset = brickCollectionView.layout.dataSource?.brickLayout(brickCollectionView.layout, insetForSection: (attributes.indexPath as IndexPath).section) {
                 sectionInset = inset
             }
 
@@ -135,7 +135,7 @@ open class SpotlightLayoutBehavior: BrickLayoutBehavior {
 
         let lastAttribute = scrollAttributes.last! // We can safely unwrap, because we checked the count in the beginning of the function
 
-        if let brickCollectionView = collectionView as? BrickCollectionView, let inset = brickCollectionView.layout.dataSource?.brickLayout(brickCollectionView.layout, insetForSection: (lastAttribute.indexPath as NSIndexPath).section) {
+        if let brickCollectionView = collectionView as? BrickCollectionView, let inset = brickCollectionView.layout.dataSource?.brickLayout(brickCollectionView.layout, insetForSection: (lastAttribute.indexPath as IndexPath).section) {
             sectionInset = inset
         }
 

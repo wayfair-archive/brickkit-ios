@@ -25,22 +25,22 @@ open class ImageBrick: GenericBrick<UIImageView> {
         return Bundle(for: Brick.self)
     }
 
-    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = .clear(), backgroundView: UIView? = nil, dataSource: ImageBrickDataSource) {
+    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, dataSource: ImageBrickDataSource) {
         self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: dataSource)
     }
     
-    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = .clear(), backgroundView: UIView? = nil, image: UIImage, contentMode: UIViewContentMode) {
+    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, image: UIImage, contentMode: UIViewContentMode) {
         let model = ImageBrickModel(image: image, contentMode: contentMode)
         self.init(identifier, width: width, height: height, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
     }
     
-    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = .clear(), backgroundView: UIView? = nil, imageUrl: URL, contentMode: UIViewContentMode) {
+    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, imageUrl: URL, contentMode: UIViewContentMode) {
         let model = ImageURLBrickModel(url: imageUrl, contentMode: contentMode)
         self.init(identifier, width: width, height: height, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
     }
     
     
-    public init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = .clear(), backgroundView: UIView? = nil, dataSource: ImageBrickDataSource) {
+    public init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, dataSource: ImageBrickDataSource) {
         
         self.dataSource = dataSource
         super.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView, configureView: { imageView, cell in
@@ -53,12 +53,12 @@ open class ImageBrick: GenericBrick<UIImageView> {
         }
     }
     
-    public convenience init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = .clear(), backgroundView: UIView? = nil, image: UIImage, contentMode: UIViewContentMode) {
+    public convenience init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, image: UIImage, contentMode: UIViewContentMode) {
         let model = ImageBrickModel(image: image, contentMode: contentMode)
         self.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
     }
     
-    public convenience init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = .clear(), backgroundView: UIView? = nil, imageUrl: URL, contentMode: UIViewContentMode) {
+    public convenience init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, imageUrl: URL, contentMode: UIViewContentMode) {
         let model = ImageURLBrickModel(url: imageUrl, contentMode: contentMode)
         self.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
     }

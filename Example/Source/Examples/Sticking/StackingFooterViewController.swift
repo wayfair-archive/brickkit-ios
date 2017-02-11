@@ -51,7 +51,7 @@ class StackingFooterViewController: BrickApp.BaseBrickController {
 
         let section = BrickSection(bricks: [
             BrickSection(bricks: [
-                LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), height: .Auto(estimate: .Fixed(size: 200)), backgroundColor: .lightGrayColor(), dataSource: self),
+                LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), height: .Auto(estimate: .Fixed(size: 200)), backgroundColor: UIColor.lightGray, dataSource: self),
                 totalLabel
                 ], inset: 10, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)),
             BrickSection(BuySection, bricks: [
@@ -83,7 +83,7 @@ extension StackingFooterViewController: LabelBrickCellDataSource {
 
 
 extension StackingFooterViewController: StickyLayoutBehaviorDataSource {
-    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         return identifier == BuySection || identifier == TotalLabel
     }
 }

@@ -52,18 +52,18 @@ extension BrickSection {
     internal func brickAndIndex(at indexPath: IndexPath, in collection: CollectionInfo) -> (Brick, Int)? {
         invalidateIfNeeded(in: collection)
 
-        if (indexPath as NSIndexPath).section == 0 {
+        if (indexPath as IndexPath).section == 0 {
             return (self, 0)
         }
 
-        guard let section = brickSection(for: (indexPath as NSIndexPath).section, in: collection) else {
+        guard let section = brickSection(for: (indexPath as IndexPath).section, in: collection) else {
             return nil
         }
 
         var index = 0
         for brick in section.bricks {
-            if (indexPath as NSIndexPath).item < index + brick.count(for: collection) {
-                return (brick, (indexPath as NSIndexPath).item - index)
+            if (indexPath as IndexPath).item < index + brick.count(for: collection) {
+                return (brick, (indexPath as IndexPath).item - index)
             }
             index += brick.count(for: collection)
         }

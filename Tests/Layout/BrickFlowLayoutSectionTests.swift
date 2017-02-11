@@ -160,17 +160,17 @@ class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
          ExampleLabelBrick("Label Brick", widthRatio: 0.5, backgroundColor: .orangeColor(), text: "In label"),
 
          // Section 1
-         BrickSection("Section", widthRatio: 0.5 , backgroundColor: .redColor(), bricks: [
+         BrickSection("Section", widthRatio: 0.5 , backgroundColor: UIColor.red, bricks: [
 
          ExampleLabelBrick("Label Brick", widthRatio: 1, backgroundColor: .purpleColor(), text: "In section\nIn section"),
          ExampleLabelBrick("Label Brick", widthRatio: 1, backgroundColor: .brownColor(), text: "In section"),
          ]),
 
          // Section 2
-         BrickSection("Section", widthRatio: 1 , backgroundColor: .redColor(), bricks: [
+         BrickSection("Section", widthRatio: 1 , backgroundColor: UIColor.red, bricks: [
 
          // Section 3
-         BrickSection("Section", widthRatio: 1 / 3 , backgroundColor: .redColor(), bricks: [
+         BrickSection("Section", widthRatio: 1 / 3 , backgroundColor: UIColor.red, bricks: [
 
          ExampleLabelBrick("Label Brick", widthRatio: 1, backgroundColor: .purpleColor(), text: "In section"),
          ExampleLabelBrick("Label Brick", widthRatio: 1, backgroundColor: .brownColor(), text: "In section"),
@@ -178,7 +178,7 @@ class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
          ]),
 
          // Section 4
-         BrickSection("Section", widthRatio: 2 / 3 , backgroundColor: .redColor(), bricks: [
+         BrickSection("Section", widthRatio: 2 / 3 , backgroundColor: UIColor.red, bricks: [
 
          // Section 5
          ExampleLabelBrick("Label Brick", backgroundColor: .purpleColor(), text: "In section"),
@@ -189,7 +189,7 @@ class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
          ], inset: 5, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)),
 
          // Section 6
-         BrickSection("Section", widthRatio: 0.5 , backgroundColor: .redColor(), bricks: [
+         BrickSection("Section", widthRatio: 0.5 , backgroundColor: UIColor.red, bricks: [
 
          ExampleLabelBrick("Label Brick", widthRatio: 1, backgroundColor: .purpleColor(), text: "In section"),
          ExampleLabelBrick("Label Brick", widthRatio: 1, backgroundColor: .brownColor(), text: "In section"),

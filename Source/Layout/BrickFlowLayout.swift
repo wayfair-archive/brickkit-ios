@@ -355,10 +355,10 @@ extension BrickFlowLayout {
 
     open override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
 
-        if let attributes = sections?[(indexPath as NSIndexPath).section]?.attributes[(indexPath as NSIndexPath).item] {
+        if let attributes = sections?[(indexPath as IndexPath).section]?.attributes[(indexPath as NSIndexPath).item] {
             attributes.setAutoZIndex(zIndexer.zIndex(for: indexPath))
             return attributes
-        } else if (indexPath as NSIndexPath).section < _collectionView.numberOfSections && (indexPath as NSIndexPath).row < _collectionView.numberOfItems(inSection: (indexPath as NSIndexPath).section) {
+        } else if (indexPath as IndexPath).section < _collectionView.numberOfSections && (indexPath as NSIndexPath).row < _collectionView.numberOfItems(inSection: (indexPath as NSIndexPath).section) {
 
             // The attributes haven't been calculated because it's is not needed to be displayed yet
             // But `insertItemsAtIndexPaths` and `deleteItemsAtIndexPaths` might be called and the animation controller will need to know where these attributes are
@@ -501,12 +501,12 @@ extension BrickFlowLayout: BrickLayoutSectionDataSource {
 
 extension BrickFlowLayout: BrickLayoutInvalidationProvider {
     func invalidateHeight(for indexPath: IndexPath, updatedAttributes: @escaping OnAttributesUpdatedHandler) {
-        guard let section = sections?[(indexPath as NSIndexPath).section] else {
+        guard let section = sections?[(indexPath as IndexPath).section] else {
             return
         }
 
         updateSection(section, updatedAttributes: updatedAttributes) {
-            section.invalidate(at: (indexPath as NSIndexPath).item, updatedAttributes: { attributes, oldFrame in
+            section.invalidate(at: (indexPath as IndexPath).item, updatedAttributes: { attributes, oldFrame in
                 updatedAttributes(attributes, oldFrame)
                 self.attributesWereUpdated(attributes, oldFrame: oldFrame, fromBehaviors: false, updatedAttributes: updatedAttributes)
             })
@@ -514,12 +514,12 @@ extension BrickFlowLayout: BrickLayoutInvalidationProvider {
     }
 
     func updateHeight(for indexPath: IndexPath, with height: CGFloat, updatedAttributes: @escaping OnAttributesUpdatedHandler) {
-        guard let section = sections?[(indexPath as NSIndexPath).section] else {
+        guard let section = sections?[(indexPath as IndexPath).section] else {
             return
         }
 
         updateSection(section, updatedAttributes: updatedAttributes) {
-            section.update(height: height, at: (indexPath as NSIndexPath).item, updatedAttributes: { attributes, oldFrame in
+            section.update(height: height, at: (indexPath as IndexPath).item, updatedAttributes: { attributes, oldFrame in
                 updatedAttributes(attributes, oldFrame)
                 self.attributesWereUpdated(attributes, oldFrame: oldFrame, fromBehaviors: false, updatedAttributes: updatedAttributes)
             })
@@ -542,7 +542,7 @@ extension BrickFlowLayout: BrickLayoutInvalidationProvider {
     }
 
     func registerUpdatedAttributes(_ attributes: BrickLayoutAttributes, oldFrame: CGRect?, fromBehaviors: Bool, updatedAttributes: @escaping OnAttributesUpdatedHandler) {
-        self.sections?[(attributes.indexPath as NSIndexPath).section]?.registerUpdatedAttributes(attributes)
+        self.sections?[(attributes.indexPath as IndexPath).section]?.registerUpdatedAttributes(attributes)
 
         self.attributesWereUpdated(attributes, oldFrame: oldFrame, fromBehaviors: fromBehaviors, updatedAttributes: { attributes, oldFrame in
             updatedAttributes(attributes, oldFrame)
@@ -629,7 +629,7 @@ extension BrickFlowLayout: BrickLayoutInvalidationProvider {
             }
 
             if shouldHide != attributes.isHidden {
-                section.changeVisibility(shouldHide, at: (attributes.indexPath as NSIndexPath).item, updatedAttributes: { attributes, oldFrame in
+                section.changeVisibility(shouldHide, at: (attributes.indexPath as IndexPath).item, updatedAttributes: { attributes, oldFrame in
                     updatedAttributes(attributes: attributes, oldFrame: oldFrame)
                 })
             }
@@ -685,7 +685,7 @@ extension BrickFlowLayout {
 
     fileprivate func reloadItems(at indexPaths: [IndexPath]) {
         for indexPath in indexPaths {
-            if (indexPath as NSIndexPath).item >= collectionView?.numberOfItems(inSection: (indexPath as NSIndexPath).section)  {
+            if (indexPath as IndexPath).item >= collectionView?.numberOfItems(inSection: (indexPath as NSIndexPath).section)  {
                 continue
             }
 

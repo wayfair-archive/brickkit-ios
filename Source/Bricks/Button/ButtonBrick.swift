@@ -77,7 +77,7 @@ open class ButtonBrick: GenericBrick<UIButton> {
         self.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView, dataSource: model, delegate: model)
     }
 
-    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = .clear(), backgroundView: UIView? = nil, dataSource: ButtonBrickCellDataSource, delegate: ButtonBrickCellDelegate? = nil) {
+    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, dataSource: ButtonBrickCellDataSource, delegate: ButtonBrickCellDelegate? = nil) {
         self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: dataSource, delegate: delegate)
     }
     
@@ -86,7 +86,7 @@ open class ButtonBrick: GenericBrick<UIButton> {
         self.init(identifier, size: size, backgroundColor: backgroundColor, backgroundView: backgroundView, dataSource: model, delegate: model)
     }
     
-    public init(_ identifier: String, size: BrickSize, backgroundColor: UIColor = .clear(), backgroundView: UIView? = nil, dataSource: ButtonBrickCellDataSource, delegate: ButtonBrickCellDelegate? = nil) {
+    public init(_ identifier: String, size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, dataSource: ButtonBrickCellDataSource, delegate: ButtonBrickCellDelegate? = nil) {
         self.dataSource = dataSource
         self.delegate = delegate
         super.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView, configureView: { (button, cell) in

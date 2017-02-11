@@ -125,7 +125,7 @@ class HideSectionsViewController: BrickViewController {
 }
 
 extension HideSectionsViewController: HideBehaviorDataSource {
-    func hideBehaviorDataSource(shouldHideItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func hideBehaviorDataSource(shouldHideItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         guard let _ = collectionViewLayout.collectionView as? BrickCollectionView else {
             return false
         }

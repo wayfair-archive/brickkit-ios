@@ -106,7 +106,7 @@ open class BrickCollectionView: UICollectionView {
     open func brick(at indexPath: IndexPath) -> Brick {
         self.section.invalidateIfNeeded(in: collectionInfo)
         guard let brick = section.brick(at: indexPath, in: collectionInfo) else {
-            fatalError("Brick not found at indexPath: SECTION - \((indexPath as NSIndexPath).section) - ITEM: \((indexPath as NSIndexPath).item). This should never happen")
+            fatalError("Brick not found at indexPath: SECTION - \((indexPath as IndexPath).section) - ITEM: \((indexPath as NSIndexPath).item). This should never happen")
         }
         return brick
     }
@@ -167,7 +167,7 @@ open class BrickCollectionView: UICollectionView {
     /// - returns: BrickInfo
     open func brickInfo(at indexPath: IndexPath) -> BrickInfo {
         guard let brickAndIndex = section.brickAndIndex(at: indexPath, in: collectionInfo) else {
-            fatalError("Brick and index not found at indexPath: SECTION - \((indexPath as NSIndexPath).section) - ITEM: \((indexPath as NSIndexPath).item). This should never happen")
+            fatalError("Brick and index not found at indexPath: SECTION - \((indexPath as IndexPath).section) - ITEM: \((indexPath as NSIndexPath).item). This should never happen")
         }
         return (brickAndIndex.0, brickAndIndex.1, collectionInfo.index, collectionInfo.identifier)
     }

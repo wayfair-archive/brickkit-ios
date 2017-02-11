@@ -33,7 +33,7 @@ class StickingFooterSectionsViewController: BrickApp.BaseBrickController {
 
         behavior = StickyFooterLayoutBehavior(dataSource: self)
 
-        repeatLabel = LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio:0.5), backgroundColor:.lightGrayColor(), dataSource:self)
+        repeatLabel = LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio:0.5), backgroundColor:UIColor.lightGray, dataSource:self)
 
 
         let section = BrickSection(bricks: [
@@ -62,7 +62,7 @@ class StickingFooterSectionsViewController: BrickApp.BaseBrickController {
 }
 
 extension StickingFooterSectionsViewController: StickyLayoutBehaviorDataSource {
-    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         return identifier == StickySection
     }
 }

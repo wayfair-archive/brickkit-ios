@@ -36,7 +36,7 @@ class Theme {
     }
 
     class var textColorForNavigationTitle: UIColor {
-        return .whiteColor()
+        return UIColor.white
     }
 
     class var fontForNavigationTitle: UIFont {
@@ -177,7 +177,7 @@ private var brickPatternImage: UIImage = {
     let brickSize = CGSize(width: Constants.brickWidth, height: Constants.brickHeight)
     let frame = CGRect(x: 0, y: 0, width: (brickSize.width * 2) + (inset * 2), height: (brickSize.height * 2) + (inset * 2))
     let view = UIView(frame: frame)
-    view.backgroundColor = .clearColor()
+    view.backgroundColor = UIColor.clear
 
     let startY = -brickSize.height / 2
     for i in 0..<9 {
@@ -272,7 +272,7 @@ extension UIColor {
         case UIColor.brickGray3: return .brickGray1
         case UIColor.brickGray4: return .brickGray1
         case UIColor.brickGray5: return .brickGray1
-        default: return .whiteColor()
+        default: return UIColor.white
         }
     }
 }
@@ -291,14 +291,14 @@ extension LabelBrickCell: FocusableBrickCell {
 
     public func willFocus() -> Bool {
         self.contentView.layer.borderWidth = 5
-        self.contentView.layer.borderColor = UIColor.brickGray2.CGColor
+        self.contentView.layer.borderColor = UIColor.brickGray2.cgColor
         
         return true
     }
     
     public func willUnfocus() -> Bool {
         self.contentView.layer.borderWidth = 0
-        self.contentView.layer.borderColor = UIColor.clearColor().CGColor
+        self.contentView.layer.borderColor = UIColor.clear.cgColor
         
         return true
     }

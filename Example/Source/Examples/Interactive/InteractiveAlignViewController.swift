@@ -51,7 +51,7 @@ class InteractiveAlignViewController: BrickViewController {
         self.registerBrickClass(LabelBrick.self)
         self.brickCollectionView.layout.appearBehavior = ScaleAppearBehavior(scale: 0.5)
 
-        let labelBrick = LabelBrick("Label", width: .Ratio(ratio: 1/3), height: .Fixed(size: 100), backgroundColor: UIColor.lightGrayColor().colorWithAlphaComponent(0.3), dataSource: self)
+        let labelBrick = LabelBrick("Label", width: .Ratio(ratio: 1/3), height: .Fixed(size: 100), backgroundColor: UIColor.lightGray.colorWithAlphaComponent(0.3), dataSource: self)
 
         let section = BrickSection(bricks: [
             labelBrick,
@@ -65,18 +65,18 @@ class InteractiveAlignViewController: BrickViewController {
         updateCounts()
     }
 
-    func remove(indexPath: NSIndexPath) {
+    func remove(indexPath: IndexPath) {
         numberOfItems -= 1
         updateCounts([indexPath])
     }
 
-    func updateCounts(fixedDeletedIndexPaths: [NSIndexPath]? = nil) {
+    func updateCounts(fixedDeletedIndexPaths: [IndexPath]? = nil) {
         UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .CurveEaseIn, animations: {
             self.brickCollectionView.invalidateRepeatCounts(reloadAllSections: false)
             }, completion: nil)
     }
 
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: IndexPath) {
         remove(indexPath)
     }
 

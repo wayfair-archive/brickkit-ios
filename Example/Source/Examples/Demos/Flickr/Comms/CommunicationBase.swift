@@ -78,7 +78,7 @@ public class CommunicationBase {
     public var urlArguments = false
     public var timeOutInterval : NSTimeInterval = 60
     public var qualityOfService : NSQualityOfService = .Default
-    public var jsonReadingOptions : NSJSONReadingOptions = [.AllowFragments]
+    public var jsonReadingOptions : JSONSerialization.ReadingOptions = [.AllowFragments]
     public var sendStats = true
     public var printParams = true
     public var printRespose = true
@@ -128,7 +128,7 @@ public extension CommunicationBase {
                 }
             }
             
-            let queue = NSOperationQueue()
+            let queue = OperationQueue()
             queue.name = self.queueName
             queue.qualityOfService = self.qualityOfService
             
@@ -142,7 +142,7 @@ public extension CommunicationBase {
                 print(webRequest.allHTTPHeaderFields)
             }
             
-            let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+            let config = URLSessionConfiguration.defaultSessionConfiguration()
             let session = NSURLSession(configuration: config, delegate: nil, delegateQueue: queue)
             let task = session.dataTaskWithRequest(webRequest) { (data, response, error) in
                 
@@ -251,7 +251,7 @@ public extension CommunicationBase {
                 }
             }
             
-            let queue = NSOperationQueue()
+            let queue = OperationQueue()
             queue.name = self.queueName
             queue.qualityOfService = self.qualityOfService
             
@@ -265,7 +265,7 @@ public extension CommunicationBase {
                 print(webRequest.allHTTPHeaderFields)
             }
             
-            let config = NSURLSessionConfiguration.defaultSessionConfiguration()
+            let config = URLSessionConfiguration.defaultSessionConfiguration()
             let session = NSURLSession(configuration: config, delegate: nil, delegateQueue: queue)
             let task = session.dataTaskWithRequest(webRequest) { (data, response, error) in
                 

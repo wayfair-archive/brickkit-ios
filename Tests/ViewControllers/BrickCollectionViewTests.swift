@@ -197,7 +197,7 @@ class BrickCollectionViewTests: XCTestCase {
         brickView.setupSectionAndLayout(BrickSection(bricks: [ DummyBrick() ]))
 
         let indexPath = IndexPath(item: 1, section: 1)
-        expectFatalError("Brick and index not found at indexPath: SECTION - \((indexPath as NSIndexPath).section) - ITEM: \((indexPath as NSIndexPath).item). This should never happen") {
+        expectFatalError("Brick and index not found at indexPath: SECTION - \((indexPath as IndexPath).section) - ITEM: \((indexPath as NSIndexPath).item). This should never happen") {
             self.brickView.brickInfo(at: indexPath)
         }
     }
@@ -366,8 +366,8 @@ class BrickCollectionViewTests: XCTestCase {
             ImageBrick(width: .ratio(ratio: 1/4), height: .ratio(ratio: 1), dataSource: ImageBrickModel(image: image, contentMode: .scaleAspectFill)),
             ])
 
-        let section = BrickSection(backgroundColor: .white(), bricks: [
-            CollectionBrick("Collection 1", backgroundColor: .orange(), scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section1), brickTypes: [ImageBrick.self]),
+        let section = BrickSection(backgroundColor: UIColor.white, bricks: [
+            CollectionBrick("Collection 1", backgroundColor: UIColor.orange, scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section1), brickTypes: [ImageBrick.self]),
             ])
         brickView.setupSectionAndLayout(section)
 
@@ -386,9 +386,9 @@ class BrickCollectionViewTests: XCTestCase {
             ImageBrick(width: .ratio(ratio: 1/2), height: .ratio(ratio: 1), dataSource: ImageBrickModel(image: image, contentMode: .scaleAspectFill)),
             ])
 
-        let section = BrickSection(backgroundColor: .white(), bricks: [
-            CollectionBrick("Collection 1", backgroundColor: .orange(), scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section1), brickTypes: [ImageBrick.self]),
-            CollectionBrick("Collection 2", backgroundColor: .orange(), scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section2), brickTypes: [ImageBrick.self]),
+        let section = BrickSection(backgroundColor: UIColor.white, bricks: [
+            CollectionBrick("Collection 1", backgroundColor: UIColor.orange, scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section1), brickTypes: [ImageBrick.self]),
+            CollectionBrick("Collection 2", backgroundColor: UIColor.orange, scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section2), brickTypes: [ImageBrick.self]),
             ])
         brickView.setupSectionAndLayout(section)
 

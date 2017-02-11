@@ -32,7 +32,7 @@ class PopoverBrickViewController: UIViewController {
         let brickController = SimpleRepeatBrickViewController()
 
         brickController.modalPresentationStyle = .Popover
-        self.presentViewController(brickController, animated: true, completion: nil)
+        self.present(brickController, animated: true, completion: nil)
         
         let popoverController = brickController.popoverPresentationController
         popoverController?.permittedArrowDirections = .Any

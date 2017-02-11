@@ -63,7 +63,7 @@ class BrickCollectionInteractiveViewController: BrickViewController {
             LabelBrick(RepeatLabel2, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray4, dataSource: self),
             ])
 
-        let footerSection = BrickSection(FooterSection, backgroundColor: .darkGrayColor(), bricks: [
+        let footerSection = BrickSection(FooterSection, backgroundColor: UIColor.darkGray, bricks: [
             LabelBrick(FooterTitleLabel, backgroundColor: .brickGray1, dataSource: footerModel),
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
         
@@ -71,7 +71,7 @@ class BrickCollectionInteractiveViewController: BrickViewController {
         
         #if os(iOS)
             let section = BrickSection(Section, bricks: [
-                LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray3, dataSource: LabelBrickCellModel(text: "Tap here to change the collections".uppercaseString) { cell in
+                LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray3, dataSource: LabelBrickCellModel(text: "Tap here to change the collections".uppercased()) { cell in
                     cell.configure()
                     }),
                 
@@ -84,7 +84,7 @@ class BrickCollectionInteractiveViewController: BrickViewController {
                 ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
         #else
             let section = BrickSection(Section, bricks: [
-                LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray3, dataSource: LabelBrickCellModel(text: "Tap here to change the collections".uppercaseString) { cell in
+                LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray3, dataSource: LabelBrickCellModel(text: "Tap here to change the collections".uppercased()) { cell in
                     cell.configure()
                     }),
                 BrickSection(RepeatSection, bricks: [
@@ -134,7 +134,7 @@ class BrickCollectionInteractiveViewController: BrickViewController {
 
 extension BrickCollectionInteractiveViewController {
 
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: IndexPath) {
         let brickInfo = brickCollectionView.brickInfo(at:indexPath)
         if brickInfo.brick.identifier == BrickIdentifiers.titleLabel {
             even = !even
@@ -199,7 +199,7 @@ extension BrickCollectionInteractiveViewController: CollectionBrickCellDataSourc
 
 extension BrickCollectionInteractiveViewController: HideBehaviorDataSource {
 
-    func hideBehaviorDataSource(shouldHideItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func hideBehaviorDataSource(shouldHideItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         guard let brickCollectionView = collectionViewLayout.collectionView as? BrickCollectionView else {
             return false
         }
@@ -216,7 +216,7 @@ extension BrickCollectionInteractiveViewController: HideBehaviorDataSource {
 }
 
 extension BrickCollectionInteractiveViewController: StickyLayoutBehaviorDataSource {
-    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         return identifier == FooterSection
     }
 }
