@@ -25,13 +25,13 @@ func unreachable() -> Never  {
 struct FatalErrorUtil {
 
     // Called by the custom implementation of `fatalError`.
-    fileprivate static var fatalErrorClosure: (String, StaticString, UInt) -> () = defaultFatalErrorClosure
+    fileprivate static var fatalErrorClosure: (String, StaticString, UInt) -> Never = defaultFatalErrorClosure
 
     // backup of the original Swift `fatalError`
     fileprivate static let defaultFatalErrorClosure = { Swift.fatalError($0, file: $1, line: $2) }
 
     /// Replace the `fatalError` global function with something else.
-    static func replaceFatalError(_ closure: @escaping (String, StaticString, UInt) -> ()) {
+    static func replaceFatalError(_ closure: @escaping (String, StaticString, UInt) -> Never) {
         fatalErrorClosure = closure
     }
 

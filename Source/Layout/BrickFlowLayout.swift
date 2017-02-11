@@ -228,7 +228,7 @@ open class BrickFlowLayout: UICollectionViewLayout, BrickLayout {
         })
     }
 
-    internal func updateNumberOfItemsInSection(_ section: Int, numberOfItems: Int, updatedAttributes: OnAttributesUpdatedHandler) {
+    internal func updateNumberOfItemsInSection(_ section: Int, numberOfItems: Int, updatedAttributes: @escaping OnAttributesUpdatedHandler) {
         guard let brickSection = sections?[section] else {
             return
         }
@@ -347,7 +347,7 @@ extension BrickFlowLayout {
 
         var attributes: [UICollectionViewLayoutAttributes] = []
         for (_, section) in sections {
-            attributes.append(section.layoutAttributesForElementsInRect(rect, with: zIndexer))
+            attributes += section.layoutAttributesForElementsInRect(rect, with: zIndexer)
         }
 
         return attributes
@@ -526,7 +526,7 @@ extension BrickFlowLayout: BrickLayoutInvalidationProvider {
         }
     }
 
-    fileprivate func updateSection(_ section: BrickLayoutSection, updatedAttributes: OnAttributesUpdatedHandler, action: (() -> Void)) {
+    fileprivate func updateSection(_ section: BrickLayoutSection, updatedAttributes: @escaping OnAttributesUpdatedHandler, action: (() -> Void)) {
 
         let currentFrame = section.frame
         action()
@@ -597,7 +597,7 @@ extension BrickFlowLayout: BrickLayoutInvalidationProvider {
             if let brickSection = self.sections?[section] {
                 updateNumberOfItems(brickSection)
                 brickSection.setOrigin(attributes.frame.origin, fromBehaviors: fromBehaviors, updatedAttributes: { attributes, oldFrame in
-                    updatedAttributes(attributes: attributes, oldFrame: oldFrame)
+                    updatedAttributes(attributes, oldFrame)
                     self.attributesWereUpdated(attributes, oldFrame: oldFrame, fromBehaviors: fromBehaviors, updatedAttributes: updatedAttributes)
                 })
 
@@ -630,7 +630,7 @@ extension BrickFlowLayout: BrickLayoutInvalidationProvider {
 
             if shouldHide != attributes.isHidden {
                 section.changeVisibility(shouldHide, at: (attributes.indexPath as IndexPath).item, updatedAttributes: { attributes, oldFrame in
-                    updatedAttributes(attributes: attributes, oldFrame: oldFrame)
+                    updatedAttributes(attributes, oldFrame)
                 })
             }
 

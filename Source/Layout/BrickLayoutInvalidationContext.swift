@@ -39,13 +39,13 @@ protocol BrickLayoutInvalidationProvider: class {
 
     func removeAllCachedSections()
     func calculateSections()
-    func updateHeight(for indexPath: IndexPath, with height: CGFloat, updatedAttributes: OnAttributesUpdatedHandler)
-    func invalidateHeight(for indexPath: IndexPath, updatedAttributes: OnAttributesUpdatedHandler)
+    func updateHeight(for indexPath: IndexPath, with height: CGFloat, updatedAttributes: @escaping OnAttributesUpdatedHandler)
+    func invalidateHeight(for indexPath: IndexPath, updatedAttributes: @escaping OnAttributesUpdatedHandler)
     func recalculateContentSize() -> CGSize
-    func invalidateContent(_ updatedAttributes: OnAttributesUpdatedHandler)
-    func registerUpdatedAttributes(_ attributes: BrickLayoutAttributes, oldFrame: CGRect?, fromBehaviors: Bool, updatedAttributes: OnAttributesUpdatedHandler)
-    func updateNumberOfItemsInSection(_ section: Int, numberOfItems: Int, updatedAttributes: OnAttributesUpdatedHandler)
-    func applyHideBehavior(_ hideBehavior: HideBehaviorDataSource, updatedAttributes: OnAttributesUpdatedHandler)
+    func invalidateContent(_ updatedAttributes: @escaping OnAttributesUpdatedHandler)
+    func registerUpdatedAttributes(_ attributes: BrickLayoutAttributes, oldFrame: CGRect?, fromBehaviors: Bool, updatedAttributes: @escaping OnAttributesUpdatedHandler)
+    func updateNumberOfItemsInSection(_ section: Int, numberOfItems: Int, updatedAttributes: @escaping OnAttributesUpdatedHandler)
+    func applyHideBehavior(_ hideBehavior: HideBehaviorDataSource, updatedAttributes: @escaping OnAttributesUpdatedHandler)
     func updateContentSize(_ contentSize: CGSize)
 }
 
@@ -142,7 +142,7 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
         return true
     }
 
-    func applyHideBehaviors(_ provider: BrickLayoutInvalidationProvider, updatedAttributes: OnAttributesUpdatedHandler) {
+    func applyHideBehaviors(_ provider: BrickLayoutInvalidationProvider, updatedAttributes: @escaping OnAttributesUpdatedHandler) {
         guard let hideBehaviorDataSource = provider.hideBehaviorDataSource else {
             return
         }

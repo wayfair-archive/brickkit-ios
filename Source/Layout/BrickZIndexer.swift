@@ -75,7 +75,7 @@ public enum BrickLayoutZIndexBehavior {
     }
 
     /// Flag that indicates if a indexPath should split a range in half
-    fileprivate func shouldSplit(for indexPath: IndexPath, in range: Range<Int>) -> Bool {
+    fileprivate func shouldSplit(for indexPath: IndexPath, in range: CountableRange<Int>) -> Bool {
         guard range.count > 1 else {
             return false
         }

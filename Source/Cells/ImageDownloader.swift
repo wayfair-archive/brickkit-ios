@@ -25,8 +25,8 @@ private func _downloadImageAndSet(_ imageDownloader: ImageDownloader, on imageVi
 
 // Mark: - Image Downloader
 public protocol ImageDownloader: class {
-    func downloadImage(with imageURL: URL, onCompletion completionHandler: ((_ image: UIImage, _ url: URL) -> Void))
-    func downloadImageAndSet(on imageView: UIImageView, with imageURL: URL, onCompletion completionHandler: ((_ image: UIImage, _ url: URL) -> Void))
+    func downloadImage(with imageURL: URL, onCompletion completionHandler: @escaping ((_ image: UIImage, _ url: URL) -> Void))
+    func downloadImageAndSet(on imageView: UIImageView, with imageURL: URL, onCompletion completionHandler: @escaping ((_ image: UIImage, _ url: URL) -> Void))
 }
 
 public extension ImageDownloader {
@@ -38,7 +38,6 @@ public extension ImageDownloader {
 }
 
 open class NSURLSessionImageDownloader: ImageDownloader {
-
     open func downloadImageAndSet(on imageView: UIImageView, with imageURL: URL, onCompletion completionHandler: @escaping ((_ image: UIImage, _ url: URL) -> Void)) {
         _downloadImageAndSet(self, on: imageView, with: imageURL, onCompletion: completionHandler)
     }
