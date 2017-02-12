@@ -141,11 +141,11 @@ class BrickCollectionViewTests: XCTestCase {
         let cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? CollectionBrickCell
         let collectionBrickView = cell!.brickCollectionView
 
-        let brickInfo = collectionBrickView.brickInfo(at: IndexPath(item: 0, section: 1))
-        XCTAssertEqual(brickInfo.brick.identifier, "Brick1")
-        XCTAssertEqual(brickInfo.index, 0)
-        XCTAssertEqual(brickInfo.collectionIndex, 0)
-        XCTAssertEqual(brickInfo.collectionIdentifier, "CollectionBrick")
+        let brickInfo = collectionBrickView?.brickInfo(at: IndexPath(item: 0, section: 1))
+        XCTAssertEqual(brickInfo?.brick.identifier, "Brick1")
+        XCTAssertEqual(brickInfo?.index, 0)
+        XCTAssertEqual(brickInfo?.collectionIndex, 0)
+        XCTAssertEqual(brickInfo?.collectionIdentifier, "CollectionBrick")
     }
 
     func testBrickInfoCollectionBrickRepeatCount() {
@@ -170,11 +170,11 @@ class BrickCollectionViewTests: XCTestCase {
         let cell = brickView.cellForItem(at: IndexPath(item: 3, section: 1)) as? CollectionBrickCell
         let collectionBrickView = cell!.brickCollectionView
 
-        let brickInfo = collectionBrickView.brickInfo(at: IndexPath(item: 0, section: 1))
-        XCTAssertEqual(brickInfo.brick.identifier, "Brick1")
-        XCTAssertEqual(brickInfo.index, 0)
-        XCTAssertEqual(brickInfo.collectionIndex, 3)
-        XCTAssertEqual(brickInfo.collectionIdentifier, "CollectionBrick")
+        let brickInfo = collectionBrickView?.brickInfo(at: IndexPath(item: 0, section: 1))
+        XCTAssertEqual(brickInfo?.brick.identifier, "Brick1")
+        XCTAssertEqual(brickInfo?.index, 0)
+        XCTAssertEqual(brickInfo?.collectionIndex, 3)
+        XCTAssertEqual(brickInfo?.collectionIdentifier, "CollectionBrick")
     }
 
     func testIndexPathsForBricksWithIdentifier() {
@@ -198,7 +198,7 @@ class BrickCollectionViewTests: XCTestCase {
 
         let indexPath = IndexPath(item: 1, section: 1)
         expectFatalError("Brick and index not found at indexPath: SECTION - \((indexPath as IndexPath).section) - ITEM: \((indexPath as NSIndexPath).item). This should never happen") {
-            self.brickView.brickInfo(at: indexPath)
+            _ = self.brickView.brickInfo(at: indexPath)
         }
     }
 

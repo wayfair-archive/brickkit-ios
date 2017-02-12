@@ -32,7 +32,7 @@ class AsynchronousResizableBrickCell: BrickCell, Bricklike, AsynchronousResizabl
 
     func fireTimer() {
         self.heightConstraint.constant = brick.newHeight
-        sizeChangedHandler?(cell: self)
+        sizeChangedHandler?(self)
         brick.didChangeSizeCallBack?()
     }
 

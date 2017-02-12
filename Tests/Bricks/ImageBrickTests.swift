@@ -275,8 +275,8 @@ class FixedNSURLSessionImageDownloader: NSURLSessionImageDownloader {
 
     override func downloadImage(with imageURL: URL, onCompletion completionHandler: @escaping ((_ image: UIImage, _ url: URL) -> Void)) {
         super.downloadImage(with: imageURL) { (image, url) in
-            completionHandler(image: image, url: url)
-            self.callback?(success: false)
+            completionHandler(image, url)
+            self.callback?(false)
         }
     }
 }
@@ -294,8 +294,8 @@ class FixedNSURLSessionImageDownloaderWithCustomSetter: NSURLSessionImageDownloa
             }
 
             imageView.image = image
-            completionHandler(image: image, url: url)
-            self.callback?(success: false)
+            completionHandler(image, url)
+            self.callback?(false)
         }
     }
 }

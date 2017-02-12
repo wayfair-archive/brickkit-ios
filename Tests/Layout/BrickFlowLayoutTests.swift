@@ -17,7 +17,7 @@ class BrickFlowLayoutTests: BrickFlowLayoutBaseTests {
 
         let attributes = layout.layoutAttributesForElements(in: collectionViewFrame)
         XCTAssertEqual(attributes?.count, 0)
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 0, height: 0))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 0, height: 0))
     }
 
     func testCreateLayoutWithOneRow() {
@@ -32,7 +32,7 @@ class BrickFlowLayoutTests: BrickFlowLayoutBaseTests {
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
 
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 100))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 100))
 
         let firstAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 0))
         XCTAssertEqual(firstAttributes?.frame, CGRect(x: 0, y: 0, width: 320, height: 100))
@@ -52,7 +52,7 @@ class BrickFlowLayoutTests: BrickFlowLayoutBaseTests {
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
 
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 100))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 100))
     }
     
     func testCreateLayoutWithTwoBricksWithOneZeroHeight() {
@@ -68,7 +68,7 @@ class BrickFlowLayoutTests: BrickFlowLayoutBaseTests {
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
 
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 100))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 100))
     }
     
 
@@ -86,7 +86,7 @@ class BrickFlowLayoutTests: BrickFlowLayoutBaseTests {
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
 
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 200))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 200))
     }
     
 //    func testCreateLayoutWithTwoBricksNextToEachotherWithDifferentHeightsWithAlignRowHeights() {
@@ -106,7 +106,7 @@ class BrickFlowLayoutTests: BrickFlowLayoutBaseTests {
 //        XCTAssertNotNil(attributes)
 //        XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
 //
-//        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 350))
+//        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 350))
 //    }
 
     func testCreateLayoutWithTwoBricksNextToEachotherWithInset() {
@@ -123,7 +123,7 @@ class BrickFlowLayoutTests: BrickFlowLayoutBaseTests {
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
 
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 100))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 100))
     }
 
     func testCreateLayoutWithTwoBricksNextToEachotherAndOneBelow() {
@@ -141,7 +141,7 @@ class BrickFlowLayoutTests: BrickFlowLayoutBaseTests {
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
 
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 200))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 200))
     }
     
     
@@ -160,7 +160,7 @@ class BrickFlowLayoutTests: BrickFlowLayoutBaseTests {
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
 
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 210))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 210))
     }
 
     func testCalculateSectionsIfNeededWithoutDataSource() {

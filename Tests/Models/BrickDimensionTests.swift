@@ -178,7 +178,7 @@ class BrickDimensionTests: XCTestCase {
     func testRawValue() {
         expectFatalError { 
             let auto = BrickDimension.auto(estimate: .fixed(size: 30))
-            BrickDimension._rawValue(for: 100, startingAt: 0, in: UIView(), with: auto)
+            _ = BrickDimension._rawValue(for: 100, startingAt: 0, in: UIView(), with: auto)
         }
     }
 
@@ -189,12 +189,12 @@ extension BrickDimensionTests {
 
     /// Setup UIScreen.mainScreen to call a different method
     func swizzleScreen() {
-        NSObject.swizzleStaticMethodSelector(#selector(UIScreen.mainScreen), withSelector: #selector(UIScreen.stubMainScreen), forClass: UIScreen.self)
+        NSObject.swizzleStaticMethodSelector(#selector(getter: UIScreen.main), withSelector: #selector(UIScreen.stubMainScreen), forClass: UIScreen.self)
     }
 
     /// Reset UIScreen.mainScreen to call a different method
     func resetScreen() {
-        NSObject.swizzleStaticMethodSelector(#selector(UIScreen.stubMainScreen), withSelector: #selector(UIScreen.mainScreen), forClass: UIScreen.self)
+        NSObject.swizzleStaticMethodSelector(#selector(UIScreen.stubMainScreen), withSelector: #selector(getter: UIScreen.main), forClass: UIScreen.self)
     }
 
     /// Setup the UIScreen for the given test

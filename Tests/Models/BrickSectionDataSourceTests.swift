@@ -20,7 +20,7 @@ class BrickSectionDataSourceTests: XCTestCase {
     func testInvalidateEmptySection() {
         let section = BrickSection(bricks: [])
 
-        section.invalidateIfNeeded(in: collection)
+        _ = section.invalidateIfNeeded(in: collection)
         XCTAssertEqual(section.sectionIndexPaths[collection]!, [1: IndexPath(item: 0, section: 0)])
         XCTAssertEqual(section.numberOfItems(in: 0, in: collection), 1)
         XCTAssertEqual(section.numberOfItems(in: 1000, in: collection), 0)
@@ -33,7 +33,7 @@ class BrickSectionDataSourceTests: XCTestCase {
                 Brick()
                 ])
             ])
-        section.invalidateIfNeeded(in: collection)
+        _ = section.invalidateIfNeeded(in: collection)
         XCTAssertEqual(section.sectionIndexPaths[collection]!, [1: IndexPath(item: 0, section: 0), 2: IndexPath(item: 1, section: 1)])
     }
 
@@ -44,7 +44,7 @@ class BrickSectionDataSourceTests: XCTestCase {
                 ]),
             Brick()
             ])
-        section.invalidateIfNeeded(in: collection)
+        _ = section.invalidateIfNeeded(in: collection)
         XCTAssertEqual(section.sectionIndexPaths[collection]!, [1: IndexPath(item: 0, section: 0), 2: IndexPath(item: 0, section: 1)])
     }
 
@@ -67,7 +67,7 @@ class BrickSectionDataSourceTests: XCTestCase {
                 Brick()
                 ])
             ])
-        section.invalidateIfNeeded(in: collection)
+        _ = section.invalidateIfNeeded(in: collection)
         XCTAssertEqual(section.sectionIndexPaths[collection]!, [
             1: IndexPath(item: 0, section: 0),
             2: IndexPath(item: 0, section: 1),
@@ -90,7 +90,7 @@ class BrickSectionDataSourceTests: XCTestCase {
                 ]),
             brick2
             ])
-        section.invalidateIfNeeded(in: collection)
+        _ = section.invalidateIfNeeded(in: collection)
 
         XCTAssertEqual(section.sectionIndexPaths[collection]!, [
             1: IndexPath(item: 0, section: 0),
@@ -375,7 +375,7 @@ class BrickSectionDataSourceTests: XCTestCase {
         section.repeatCountDataSource = fixed
 
         expectFatalError { 
-            section.currentSectionCounts(in: self.collection)
+            _ = section.currentSectionCounts(in: self.collection)
         }
     }
 

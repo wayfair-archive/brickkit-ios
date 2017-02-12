@@ -281,7 +281,7 @@ class FixedOffsetLayoutBehaviorDataSource: OffsetLayoutBehaviorDataSource {
         self.indexPaths = indexPaths
     }
 
-    func offsetLayoutBehavior(_ behavior: OffsetLayoutBehavior, originOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
+    func offsetLayoutBehaviorWithOrigin(_ behavior: OffsetLayoutBehavior, originOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
         if let indexPaths = self.indexPaths {
             if !indexPaths.contains(indexPath) {
                 return nil
@@ -309,7 +309,7 @@ class FixedMultipleOffsetLayoutBehaviorDataSource: OffsetLayoutBehaviorDataSourc
         self.sizeOffsets = sizeOffsets
     }
 
-    func offsetLayoutBehavior(_ behavior: OffsetLayoutBehavior, originOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
+    func offsetLayoutBehaviorWithOrigin(_ behavior: OffsetLayoutBehavior, originOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
         return originOffsets?[identifier]
     }
 

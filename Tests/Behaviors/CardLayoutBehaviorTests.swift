@@ -58,7 +58,7 @@ class CardLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         XCTAssertTrue(firstAttributes.zIndex < secondAttributes.zIndex)
         XCTAssertTrue(secondAttributes.zIndex < thirdAttributes.zIndex)
         XCTAssertTrue(thirdAttributes.zIndex < fourthAttributes.zIndex)
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 1200))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 1200))
 
         layout.collectionView?.contentOffset.y = 100
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
@@ -138,14 +138,14 @@ class CardLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         fourthAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 3, section: 0))
         XCTAssertEqual(fourthAttributes?.frame, CGRect(x: 0, y: 500, width: 320, height: 300))
 
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 1200))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 1200))
     }
 
 //    func testScrollLastBrickToTop() {
 //        behavior.scrollLastBrickToTop = true
 //        layout.collectionView?.contentOffset.y = 0
 //        layout.invalidateLayoutWithContext(BrickLayoutInvalidationContext(type: .Scrolling))
-//        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 1380))
+//        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 1380))
 //    }
 
 

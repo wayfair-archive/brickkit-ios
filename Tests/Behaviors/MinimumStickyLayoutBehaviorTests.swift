@@ -29,10 +29,10 @@ class MinimumStickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
             0 : frames
         ]
 
-        let attributes = layout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: layout.collectionViewContentSize()))
+        let attributes = layout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: layout.collectionViewContentSize))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 2000))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 2000))
 
         var firstAttributes: UICollectionViewLayoutAttributes!
 
@@ -67,10 +67,10 @@ class MinimumStickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
             0 : frames
         ]
 
-        let attributes = layout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: layout.collectionViewContentSize()))
+        let attributes = layout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: layout.collectionViewContentSize))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 2000))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 2000))
 
         var firstAttributes: UICollectionViewLayoutAttributes!
 
@@ -128,10 +128,10 @@ class MinimumStickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
             0 : frames
         ]
 
-        let attributes = layout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: layout.collectionViewContentSize()))
+        let attributes = layout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: layout.collectionViewContentSize))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 2000))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 2000))
 
         var firstAttributes: UICollectionViewLayoutAttributes!
 

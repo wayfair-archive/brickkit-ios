@@ -35,7 +35,7 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
         layout.behaviors.insert(snapBehavior)
 
         expectFatalError {
-            layout.targetContentOffset(forProposedContentOffset: CGPoint.zero, withScrollingVelocity: CGPoint.zero)
+            _ = layout.targetContentOffset(forProposedContentOffset: CGPoint.zero, withScrollingVelocity: CGPoint.zero)
         }
 
     }

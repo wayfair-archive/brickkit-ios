@@ -26,7 +26,7 @@ class HideLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         let attributes = layout.layoutAttributesForElements(in: collectionViewFrame)
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 100))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 100))
 
         let indexPaths = attributes?.map { return $0.indexPath }
         XCTAssertEqual(indexPaths?.count, 1)
@@ -44,7 +44,7 @@ class HideLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         let attributes = layout.layoutAttributesForElements(in: collectionViewFrame)
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 0))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 0))
     }
 
 
@@ -63,7 +63,7 @@ class HideLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         let attributes = layout.layoutAttributesForElements(in: collectionViewFrame)
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 100))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 100))
 
     }
 

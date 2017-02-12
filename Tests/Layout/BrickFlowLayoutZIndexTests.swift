@@ -102,7 +102,7 @@ extension BrickFlowLayoutZIndexTests {
             ],
             ]
 
-        let attributes = layout.layoutAttributesForElements(in: CGRect(origin:CGPoint.zero, size: layout.collectionViewContentSize()))
+        let attributes = layout.layoutAttributesForElements(in: CGRect(origin:CGPoint.zero, size: layout.collectionViewContentSize))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, map: zIndexMap, expectedResult: expectedResult, sort: zIndexSort))
     }
@@ -156,17 +156,17 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1,.lowerBound: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<1,.lowerBound: 5),
-                SectionRange(range: 1..<2,.lowerBound: 1),
+                SectionRange(range: 0..<1,startIndex: 5),
+                SectionRange(range: 1..<2,startIndex: 1),
             ],
             2: [
-                SectionRange(range: 0..<1,.lowerBound: 2),
+                SectionRange(range: 0..<1,startIndex: 2),
             ],
             3: [
-                SectionRange(range: 0..<2,.lowerBound: 4)
+                SectionRange(range: 0..<2,startIndex: 4)
             ],
         ]
 
@@ -176,7 +176,7 @@ extension BrickFlowLayoutZIndexTests {
         XCTAssertEqual(layout.zIndexer.sectionRanges[3], expectedRanges[3]!)
 
 
-        let attributes = layout.layoutAttributesForElements(in: CGRect(origin:CGPoint.zero, size: layout.collectionViewContentSize()))
+        let attributes = layout.layoutAttributesForElements(in: CGRect(origin:CGPoint.zero, size: layout.collectionViewContentSize))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, map: zIndexMap, expectedResult: expectedResult, sort: zIndexSort))
     }
@@ -207,26 +207,26 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1,.lowerBound: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<1,.lowerBound: 15),
-                SectionRange(range: 1..<3,.lowerBound: 9),
-                SectionRange(range: 3..<5,.lowerBound: 2)
+                SectionRange(range: 0..<1,startIndex: 15),
+                SectionRange(range: 1..<3,startIndex: 9),
+                SectionRange(range: 3..<5,startIndex: 2)
             ],
             2: [
-                SectionRange(range: 0..<1,.lowerBound: 14),
-                SectionRange(range: 1..<2,.lowerBound: 10)
+                SectionRange(range: 0..<1,startIndex: 14),
+                SectionRange(range: 1..<2,startIndex: 10)
             ],
             3: [
-                SectionRange(range: 0..<3,.lowerBound: 13)
+                SectionRange(range: 0..<3,startIndex: 13)
             ],
             4: [
-                SectionRange(range: 0..<1,.lowerBound: 7),
-                SectionRange(range: 1..<2,.lowerBound: 3)
+                SectionRange(range: 0..<1,startIndex: 7),
+                SectionRange(range: 1..<2,startIndex: 3)
             ],
             5: [
-                SectionRange(range: 0..<3,.lowerBound: 6)
+                SectionRange(range: 0..<3,startIndex: 6)
             ]
         ]
 
@@ -241,9 +241,9 @@ extension BrickFlowLayoutZIndexTests {
 
     func testThatZIndexIsReturnedTopDown() {
         let ranges = [
-            SectionRange(range: 0..<1,.lowerBound: 15),
-            SectionRange(range: 1..<3,.lowerBound: 9),
-            SectionRange(range: 3..<5,.lowerBound: 2)
+            SectionRange(range: 0..<1,startIndex: 15),
+            SectionRange(range: 1..<3,startIndex: 9),
+            SectionRange(range: 3..<5,startIndex: 2)
         ]
 
         let zIndex: BrickLayoutZIndexBehavior = .topDown
@@ -258,7 +258,7 @@ extension BrickFlowLayoutZIndexTests {
 
     func testThatZIndexIsReturnedTopDown2() {
         let ranges = [
-            SectionRange(range: 0..<3,.lowerBound: 3)
+            SectionRange(range: 0..<3,startIndex: 3)
         ]
 
         let zIndex: BrickLayoutZIndexBehavior = .topDown
@@ -286,10 +286,10 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1,.lowerBound: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<3,.lowerBound: 3),
+                SectionRange(range: 0..<3,startIndex: 3),
             ],
         ]
 
@@ -324,14 +324,14 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1,.lowerBound: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<1,.lowerBound: 5),
-                SectionRange(range: 1..<3,.lowerBound: 2),
+                SectionRange(range: 0..<1,startIndex: 5),
+                SectionRange(range: 1..<3,startIndex: 2),
             ],
             2: [
-                SectionRange(range: 0..<2,.lowerBound: 4)
+                SectionRange(range: 0..<2,startIndex: 4)
             ]
         ]
 
@@ -375,18 +375,18 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1,.lowerBound: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<1,.lowerBound: 9),
-                SectionRange(range: 1..<3,.lowerBound: 6),
-                SectionRange(range: 3..<5,.lowerBound: 2),
+                SectionRange(range: 0..<1,startIndex: 9),
+                SectionRange(range: 1..<3,startIndex: 6),
+                SectionRange(range: 3..<5,startIndex: 2),
             ],
             2: [
-                SectionRange(range: 0..<2,.lowerBound: 8)
+                SectionRange(range: 0..<2,startIndex: 8)
             ],
             3: [
-                SectionRange(range: 0..<2,.lowerBound: 4)
+                SectionRange(range: 0..<2,startIndex: 4)
             ],
             ]
 
@@ -432,18 +432,18 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1,.lowerBound: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<1,.lowerBound: 9),
-                SectionRange(range: 1..<3,.lowerBound: 2),
+                SectionRange(range: 0..<1,startIndex: 9),
+                SectionRange(range: 1..<3,startIndex: 2),
             ],
             2: [
-                SectionRange(range: 0..<1,.lowerBound: 8),
-                SectionRange(range: 1..<3,.lowerBound: 4)
+                SectionRange(range: 0..<1,startIndex: 8),
+                SectionRange(range: 1..<3,startIndex: 4)
             ],
             3: [
-                SectionRange(range: 0..<3,.lowerBound: 7)
+                SectionRange(range: 0..<3,startIndex: 7)
             ],
             ]
 
@@ -496,22 +496,22 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1,.lowerBound: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<1,.lowerBound: 12),
-                SectionRange(range: 1..<3,.lowerBound: 2),
+                SectionRange(range: 0..<1,startIndex: 12),
+                SectionRange(range: 1..<3,startIndex: 2),
             ],
             2: [
-                SectionRange(range: 0..<1,.lowerBound: 11),
-                SectionRange(range: 1..<3,.lowerBound: 4)
+                SectionRange(range: 0..<1,startIndex: 11),
+                SectionRange(range: 1..<3,startIndex: 4)
             ],
             3: [
-                SectionRange(range: 0..<1,.lowerBound: 10),
-                SectionRange(range: 1..<3,.lowerBound: 6)
+                SectionRange(range: 0..<1,startIndex: 10),
+                SectionRange(range: 1..<3,startIndex: 6)
             ],
             4: [
-                SectionRange(range: 0..<3,.lowerBound: 9)
+                SectionRange(range: 0..<3,startIndex: 9)
             ],
             ]
 
@@ -555,24 +555,24 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1,.lowerBound: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<2,.lowerBound: 1),
-                SectionRange(range: 2..<4,.lowerBound: 8),
-                SectionRange(range: 4..<5,.lowerBound: 15)
+                SectionRange(range: 0..<2,startIndex: 1),
+                SectionRange(range: 2..<4,startIndex: 8),
+                SectionRange(range: 4..<5,startIndex: 15)
             ],
             2: [
-                SectionRange(range: 0..<2,.lowerBound: 3)
+                SectionRange(range: 0..<2,startIndex: 3)
             ],
             3: [
-                SectionRange(range: 0..<3,.lowerBound: 5)
+                SectionRange(range: 0..<3,startIndex: 5)
             ],
             4: [
-                SectionRange(range: 0..<2,.lowerBound: 10)
+                SectionRange(range: 0..<2,startIndex: 10)
             ],
             5: [
-                SectionRange(range: 0..<3,.lowerBound: 12)
+                SectionRange(range: 0..<3,startIndex: 12)
             ]
         ]
 
@@ -613,14 +613,14 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1,.lowerBound: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<2,.lowerBound: 1),
-                SectionRange(range: 2..<3,.lowerBound: 5),
+                SectionRange(range: 0..<2,startIndex: 1),
+                SectionRange(range: 2..<3,startIndex: 5),
             ],
             2: [
-                SectionRange(range: 0..<2,.lowerBound: 3)
+                SectionRange(range: 0..<2,startIndex: 3)
             ]
         ]
 
@@ -666,18 +666,18 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1,.lowerBound: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<2,.lowerBound: 1),
-                SectionRange(range: 2..<4,.lowerBound: 5),
-                SectionRange(range: 4..<5,.lowerBound: 9),
+                SectionRange(range: 0..<2,startIndex: 1),
+                SectionRange(range: 2..<4,startIndex: 5),
+                SectionRange(range: 4..<5,startIndex: 9),
             ],
             2: [
-                SectionRange(range: 0..<2,.lowerBound: 3)
+                SectionRange(range: 0..<2,startIndex: 3)
             ],
             3: [
-                SectionRange(range: 0..<2,.lowerBound: 7)
+                SectionRange(range: 0..<2,startIndex: 7)
             ],
             ]
 
@@ -725,18 +725,18 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1,.lowerBound: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<2,.lowerBound: 1),
-                SectionRange(range: 2..<3,.lowerBound: 9),
+                SectionRange(range: 0..<2,startIndex: 1),
+                SectionRange(range: 2..<3,startIndex: 9),
             ],
             2: [
-                SectionRange(range: 0..<2,.lowerBound: 3),
-                SectionRange(range: 2..<3,.lowerBound: 8)
+                SectionRange(range: 0..<2,startIndex: 3),
+                SectionRange(range: 2..<3,startIndex: 8)
             ],
             3: [
-                SectionRange(range: 0..<3,.lowerBound: 5)
+                SectionRange(range: 0..<3,startIndex: 5)
             ],
             ]
 
@@ -791,22 +791,22 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1,.lowerBound: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<2,.lowerBound: 1),
-                SectionRange(range: 2..<3,.lowerBound: 12),
+                SectionRange(range: 0..<2,startIndex: 1),
+                SectionRange(range: 2..<3,startIndex: 12),
             ],
             2: [
-                SectionRange(range: 0..<2,.lowerBound: 3),
-                SectionRange(range: 2..<3,.lowerBound: 11)
+                SectionRange(range: 0..<2,startIndex: 3),
+                SectionRange(range: 2..<3,startIndex: 11)
             ],
             3: [
-                SectionRange(range: 0..<2,.lowerBound: 5),
-                SectionRange(range: 2..<3,.lowerBound: 10)
+                SectionRange(range: 0..<2,startIndex: 5),
+                SectionRange(range: 2..<3,startIndex: 10)
             ],
             4: [
-                SectionRange(range: 0..<3,.lowerBound: 7)
+                SectionRange(range: 0..<3,startIndex: 7)
             ],
             ]
 
@@ -821,9 +821,9 @@ extension BrickFlowLayoutZIndexTests {
 
     func testThatZIndexIsReturnedBottomUp() {
         let ranges = [
-            SectionRange(range: 0..<2,.lowerBound: 1),
-            SectionRange(range: 2..<4,.lowerBound: 8),
-            SectionRange(range: 4..<5,.lowerBound: 15)
+            SectionRange(range: 0..<2,startIndex: 1),
+            SectionRange(range: 2..<4,startIndex: 8),
+            SectionRange(range: 4..<5,startIndex: 15)
         ]
         let zIndex: BrickLayoutZIndexBehavior = .bottomUp
         XCTAssertEqual(zIndex.zIndexFromRanges(ranges, index: 0), 1)
@@ -859,7 +859,7 @@ extension BrickFlowLayoutZIndexTests {
             ],
             ]
 
-        let attributes = layout.layoutAttributesForElements(in: CGRect(origin:CGPoint.zero, size: layout.collectionViewContentSize()))
+        let attributes = layout.layoutAttributesForElements(in: CGRect(origin:CGPoint.zero, size: layout.collectionViewContentSize))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, map: zIndexMap, expectedResult: expectedResult, sort: zIndexSort))
     }

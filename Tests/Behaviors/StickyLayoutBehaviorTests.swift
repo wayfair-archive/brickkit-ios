@@ -29,10 +29,10 @@ class StickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
             0 : frames
         ]
 
-        let attributes = layout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: layout.collectionViewContentSize()))
+        let attributes = layout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: layout.collectionViewContentSize))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 2000))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 2000))
 
         layout.collectionView?.contentOffset.y = 500
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
@@ -83,10 +83,10 @@ class StickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
             0 : frames
         ]
 
-        let attributes = layout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: layout.collectionViewContentSize()))
+        let attributes = layout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: layout.collectionViewContentSize))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 2000))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 2000))
 
         layout.collectionView?.contentOffset.y = 500
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
@@ -191,10 +191,10 @@ class StickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
             0 : frames
         ]
 
-        let attributes = layout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: layout.collectionViewContentSize()))
+        let attributes = layout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: layout.collectionViewContentSize))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 2000))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 2000))
 
         layout.collectionView?.contentOffset.y = 0
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
@@ -240,10 +240,10 @@ class StickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
             0 : frames
         ]
 
-        let attributes = layout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: layout.collectionViewContentSize()))
+        let attributes = layout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: layout.collectionViewContentSize))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 2000))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 2000))
 
         layout.collectionView?.contentOffset.y = 0
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))

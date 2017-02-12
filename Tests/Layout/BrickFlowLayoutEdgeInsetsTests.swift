@@ -24,7 +24,7 @@ class BrickFlowLayoutEdgeInsetsTests: BrickFlowLayoutBaseTests {
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
 
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 140))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 140))
     }
 
     func testCreateLayoutWithTwoBricksNextToEachother() {
@@ -41,7 +41,7 @@ class BrickFlowLayoutEdgeInsetsTests: BrickFlowLayoutBaseTests {
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
 
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 140))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 140))
     }
 
     func testCreateLayoutWithTwoBricksNextToEachotherAndOneBelow() {
@@ -59,7 +59,7 @@ class BrickFlowLayoutEdgeInsetsTests: BrickFlowLayoutBaseTests {
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
 
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 240))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 240))
     }
 
 }

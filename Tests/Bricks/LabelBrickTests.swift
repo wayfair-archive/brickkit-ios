@@ -29,7 +29,7 @@ class LabelBrickTests: XCTestCase {
     func setupLabelBrick(_ text: String, configureCellBlock: ConfigureLabelBlock? = nil) -> LabelBrickCell? {
         return setupSection(LabelBrick(LabelBrickIdentifier, text: text, configureCellBlock: { cell in
             cell.label.font = UIFont(name: "Avenir-Medium", size: 14)
-            configureCellBlock?(cell: cell)
+            configureCellBlock?(cell)
             }))
     }
 

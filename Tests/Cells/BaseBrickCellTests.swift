@@ -44,7 +44,7 @@ class BaseBrickCellTests: XCTestCase {
 
         let section = BrickSection(bricks: [
             LabelBrick(height: .fixed(size: 100), text: "HELLO WORLD", configureCellBlock: { (cell) in
-                cell.addSeparatorLine(100, onTop: false, xOrigin: 10, backgroundColor: .blue(), height: 1)
+                cell.addSeparatorLine(100, onTop: false, xOrigin: 10, backgroundColor: UIColor.blue, height: 1)
             })
             ])
         brickView.setSection(section)
@@ -56,16 +56,17 @@ class BaseBrickCellTests: XCTestCase {
         XCTAssertEqual(cell?.bottomSeparatorLine.frame.height, 1)
         XCTAssertEqual(cell?.bottomSeparatorLine.frame.origin.x, 10)
         XCTAssertEqual(cell?.bottomSeparatorLine.frame.origin.y, 99)
-        XCTAssertEqual(cell?.bottomSeparatorLine.backgroundColor, .blue())
+        XCTAssertEqual(cell?.bottomSeparatorLine.backgroundColor, UIColor.blue)
         XCTAssertNil(cell?.topSeparatorLine.superview)
     }
 
     func testSeparatorTopCustom() {
         brickView.registerBrickClass(LabelBrick.self)
 
+        
         let section = BrickSection(bricks: [
             LabelBrick(text: "HELLO WORLD", configureCellBlock: { (cell) in
-                cell.addSeparatorLine(100, onTop: true, xOrigin: 10, backgroundColor: .blue(), height: 1)
+                cell.addSeparatorLine(100, onTop: true, xOrigin: 10, backgroundColor: UIColor.blue, height: 1)
             })
             ])
         brickView.setSection(section)
@@ -77,7 +78,7 @@ class BaseBrickCellTests: XCTestCase {
         XCTAssertEqual(cell?.topSeparatorLine.frame.height, 1)
         XCTAssertEqual(cell?.topSeparatorLine.frame.origin.x, 10)
         XCTAssertEqual(cell?.topSeparatorLine.frame.origin.y, 0)
-        XCTAssertEqual(cell?.topSeparatorLine.backgroundColor, .blue())
+        XCTAssertEqual(cell?.topSeparatorLine.backgroundColor, UIColor.blue)
         XCTAssertNil(cell?.bottomSeparatorLine.superview)
     }
 

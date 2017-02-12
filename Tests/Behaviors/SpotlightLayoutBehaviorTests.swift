@@ -53,7 +53,7 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         XCTAssertEqual(secondAttributes?.frame, CGRect(x: 0, y: 300, width: 320, height: 100))
         thirdAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 2, section: 0))
         XCTAssertEqual(thirdAttributes?.frame, CGRect(x: 0, y: 400, width: 320, height: 100))
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 600))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 600))
 
         layout.collectionView?.contentOffset.y = 60
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
@@ -65,7 +65,7 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         XCTAssertEqual(secondAttributes?.frame, CGRect(x: 0, y: 300, width: 320, height: secondHeight))
         thirdAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 2, section: 0))
         XCTAssertEqual(thirdAttributes?.frame, CGRect(x: 0, y: 300 + secondHeight, width: 320, height: 100))
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 600))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 600))
 
         layout.collectionView?.contentOffset.y = 100
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
@@ -77,7 +77,7 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         XCTAssertEqual(secondAttributes?.frame, CGRect(x: 0, y: 300, width: 320, height: secondHeight))
         thirdAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 2, section: 0))
         XCTAssertEqual(thirdAttributes?.frame, CGRect(x: 0, y: 300 + secondHeight, width: 320, height: 100))
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 600))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 600))
 
         layout.collectionView?.contentOffset.y = 150
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
@@ -89,7 +89,7 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         XCTAssertEqual(secondAttributes?.frame, CGRect(x: 0, y: 300, width: 320, height: secondHeight))
         thirdAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 2, section: 0))
         XCTAssertEqual(thirdAttributes?.frame, CGRect(x: 0, y: 300 + secondHeight, width: 320, height: 100))
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 600))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 600))
 
         layout.collectionView?.contentOffset.y = 200
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
@@ -101,7 +101,7 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         XCTAssertEqual(secondAttributes?.frame, CGRect(x: 0, y: 300, width: 320, height: secondHeight))
         thirdAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 2, section: 0))
         XCTAssertEqual(thirdAttributes?.frame, CGRect(x: 0, y: 300 + secondHeight, width: 320, height: 100))
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 600))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 600))
 
         layout.collectionView?.contentOffset.y = 270
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
@@ -113,7 +113,7 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         XCTAssertEqual(secondAttributes?.frame, CGRect(x: 0, y: 300, width: 320, height: secondHeight))
         thirdAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 2, section: 0))
         XCTAssertEqual(thirdAttributes?.frame, CGRect(x: 0, y: 300 + secondHeight, width: 320, height: 100))
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 600))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 600))
     }
 
     func testScrollNegative() {
@@ -128,7 +128,7 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         XCTAssertEqual(secondAttributes?.frame, CGRect(x: 0, y: 300, width: 320, height: 100))
         thirdAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 2, section: 0))
         XCTAssertEqual(thirdAttributes?.frame, CGRect(x: 0, y: 400, width: 320, height: 100))
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 600))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 600))
     }
 
     func testScrollLastBrickToTop() {
@@ -137,7 +137,7 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         behavior.scrollLastBrickToTop = true
         layout.collectionView?.contentOffset.y = 0
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
-        XCTAssertEqual(layout.collectionViewContentSize(), CGSize(width: 320, height: 1080))
+        XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 1080))
     }
 
 
