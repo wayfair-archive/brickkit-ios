@@ -13,13 +13,13 @@ class Theme {
     class func applyTheme() {
 
         //Tint Color
-        UIApplication.sharedApplication().windows.first?.tintColor = .brickPurple1
+        UIApplication.shared.windows.first?.tintColor = .brickPurple1
 
         // UILabel
         #if os(tvOS)
             UILabel.appearance().font = UIFont.brickLightFont(25)
         #else
-            UILabel.appearance().font = UIFont.brickLightFont(15)
+            UILabel.appearance().font = UIFont.brickLightFont(size: 15)
         #endif
 
         // Navigation
@@ -43,7 +43,7 @@ class Theme {
         #if os(tvOS)
             return UIFont.brickSemiBoldFont(25)
         #else
-            return UIFont.brickSemiBoldFont(15)
+            return UIFont.brickSemiBoldFont(size: 15)
         #endif
     }
 
@@ -113,7 +113,7 @@ struct Constants {
         #if os(tvOS)
             return .AppleTV
         #else
-        let size = UIDevice.currentDevice().orientation.isPortrait ? UIScreen.mainScreen().bounds.width : UIScreen.mainScreen().bounds.height
+        let size = UIDevice.current.orientation.isPortrait ? UIScreen.main.bounds.width : UIScreen.main.bounds.height
         switch size {
         case 0...320: return .iPhone320
         case 321...375: return .iPhone375
@@ -185,7 +185,7 @@ private var brickPatternImage: UIImage = {
         let column = CGFloat(i % 3)
 
         let startX: CGFloat
-        if row % 2 == 0 {
+        if Int(row) % 2 == 0 {
             startX = -brickSize.width * 3 / 4
         } else {
             startX = -brickSize.width / 2
@@ -199,8 +199,8 @@ private var brickPatternImage: UIImage = {
         view.addSubview(subview)
     }
 
-    UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.mainScreen().scale)
-    view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+    UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.main.scale)
+    view.layer.render(in: UIGraphicsGetCurrentContext()!)
     let image = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
     

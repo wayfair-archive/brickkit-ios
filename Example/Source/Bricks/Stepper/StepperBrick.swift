@@ -55,7 +55,7 @@ public class StepperBrickCell: BrickCell, Bricklike {
         stepper.value = Double(count)
     }
 
-    @IBAction func stepperDidUpdate(sender: UIStepper) {
+    @IBAction func stepperDidUpdate(_ sender: UIStepper) {
         brick.delegate.stepperBrickCellDidUpdateStepper(cell: self)
     }
 }

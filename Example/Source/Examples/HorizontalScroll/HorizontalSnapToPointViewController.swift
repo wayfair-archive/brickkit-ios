@@ -29,13 +29,13 @@ class HorizontalSnapToPointViewController: SimpleHorizontalScrollBrickViewContro
     func changeLocation() {
         let alert = UIAlertController(title: "Change location", message: "Change the location of the snap to point", preferredStyle: .actionSheet)
 
-        alert.addAction(UIAlertAction(title: "Left", style: .Default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: "Left", style: .default, handler: { (action) in
             self.updateScrollDirection(scrollDirection: .horizontal(.left))
         }))
-        alert.addAction(UIAlertAction(title: "Center", style: .Default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: "Center", style: .default, handler: { (action) in
             self.updateScrollDirection(scrollDirection: .horizontal(.center))
         }))
-        alert.addAction(UIAlertAction(title: "Right", style: .Default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: "Right", style: .default, handler: { (action) in
             self.updateScrollDirection(scrollDirection: .horizontal(.right))
         }))
 

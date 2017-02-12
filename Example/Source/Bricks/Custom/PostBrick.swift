@@ -22,7 +22,7 @@ protocol PostBrickCellDataSource: class {
 class PostBrick: Brick {
     weak var dataSource: PostBrickCellDataSource?
     
-    init(_ identifier: String, width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 300)), backgroundColor: UIColor = UIColor.white, backgroundView: UIView? = nil, dataSource: PostBrickCellDataSource) {
+    init(_ identifier: String, width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 300)), backgroundColor: UIColor = UIColor.white, backgroundView: UIView? = nil, dataSource: PostBrickCellDataSource) {
         self.dataSource = dataSource
         super.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView)
     }

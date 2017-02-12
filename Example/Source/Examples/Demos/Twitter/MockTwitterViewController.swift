@@ -148,10 +148,10 @@ class MockTwitterViewController: BrickViewController {
         collectionBrickDataSource!.setSection(salesSection)
         
         let section = BrickSection(width: .ratio(ratio: 1), backgroundColor: UIColor.lightGray, bricks: [
-            HeaderAndFooterBrick(MockTwitterViewController.Identifiers.dailySalesHeader, width: .ratio(ratio: 1), /*height: .Fixed(size: 40),*/ backgroundColor: UIColor.white, backgroundView: nil){ cell in
+            HeaderAndFooterBrick(MockTwitterViewController.Identifiers.dailySalesHeader, width: .ratio(ratio: 1), /*height: .fixed(size: 40),*/ backgroundColor: UIColor.white, backgroundView: nil){ cell in
                 cell.textLabel.text = "Daily Sales"
             },
-            CollectionBrick(/*height: .Fixed(size: 140), */scrollDirection: .horizontal, dataSource: self, brickTypes: [DailySalesBrick.self])
+            CollectionBrick(/*height: .fixed(size: 140), */scrollDirection: .horizontal, dataSource: self, brickTypes: [DailySalesBrick.self])
             ], inset: 1, edgeInsets: UIEdgeInsets(top: 0, left: 0, bottom: 2, right: 0))
         section.repeatCountDataSource = self
 

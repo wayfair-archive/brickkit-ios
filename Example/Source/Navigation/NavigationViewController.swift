@@ -15,7 +15,7 @@ class NavigationViewController: UINavigationController {
     lazy var dataSource = NavigationDataSource()
 
     // Transition
-    lazy private var navigationTransition = NavigationTransition()
+    lazy fileprivate var navigationTransition = NavigationTransition()
 
     // Mark: - Overrides
     override func viewDidLoad() {

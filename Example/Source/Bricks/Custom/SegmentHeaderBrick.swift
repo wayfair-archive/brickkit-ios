@@ -18,7 +18,7 @@ class SegmentHeaderBrickCell: BrickCell, Bricklike {
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
 
-    @IBAction func didSelectIndex(sender: AnyObject) {
+    @IBAction func didSelectIndex(_ sender: AnyObject) {
         self.brick.delegate?.segementHeaderBrickCell(cell: self, didSelectIndex: segmentControl.selectedSegmentIndex)
     }
 

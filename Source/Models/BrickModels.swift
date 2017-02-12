@@ -28,7 +28,7 @@ open class Brick: CustomStringConvertible {
 
     open var size: BrickSize
     
-    /// Width dimension used to calculate the width. Defaults to .Ratio(ratio: 1)
+    /// Width dimension used to calculate the width. Defaults to .ratio(ratio: 1)
     open var width: BrickDimension {
         set(newWidth) {
             size.width = newWidth
@@ -38,7 +38,7 @@ open class Brick: CustomStringConvertible {
         }
     }
     
-    /// Height dimension used to calculate the height. Defaults to .Auto(estimate: .Fixed(size: 50))
+    /// Height dimension used to calculate the height. Defaults to .auto(estimate: .fixed(size: 50))
     open var height: BrickDimension {
         set(newHeight) {
             size.height = newHeight
@@ -63,8 +63,8 @@ open class Brick: CustomStringConvertible {
     /// Initialize a Brick
     ///
     /// - parameter identifier:      Identifier of the brick. Defaults to empty string
-    /// - parameter width:           Width dimension used to calculate the width. Defaults to .Ratio(ratio: 1)
-    /// - parameter height:          Height dimension used to calculate the height. Defaults to .Auto(estimate: .Fixed(size: 50))
+    /// - parameter width:           Width dimension used to calculate the width. Defaults to .ratio(ratio: 1)
+    /// - parameter height:          Height dimension used to calculate the height. Defaults to .auto(estimate: .fixed(size: 50))
     /// - parameter backgroundColor: Background color used for the brick. Defaults to UIColor.clear
     /// - parameter backgroundView:  Background view used for the brick. Defaults to nil
     /// - returns: brick

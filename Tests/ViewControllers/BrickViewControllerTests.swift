@@ -609,7 +609,7 @@ class BrickViewControllerTests: XCTestCase {
         brickViewController.brickCollectionView.registerBrickClass(DummyFocusableBrick.self)
         
         let section = BrickSection("Test Section", bricks: [
-            DummyFocusableBrick("Brick 1", height: .Fixed(size: 50)),
+            DummyFocusableBrick("Brick 1", height: .fixed(size: 50)),
             ])
         
         
@@ -629,8 +629,8 @@ class BrickViewControllerTests: XCTestCase {
         brickViewController.brickCollectionView.registerBrickClass(DummyFocusableBrick.self)
         
         let section = BrickSection("Test Section", bricks: [
-            DummyFocusableBrick("Brick 1", height: .Fixed(size: 50)),
-            DummyFocusableBrick("Brick 2", height: .Fixed(size: 50))
+            DummyFocusableBrick("Brick 1", height: .fixed(size: 50)),
+            DummyFocusableBrick("Brick 2", height: .fixed(size: 50))
             ])
         
         
@@ -657,8 +657,8 @@ class BrickViewControllerTests: XCTestCase {
         brickViewController.brickCollectionView.registerBrickClass(DummyFocusableBrick.self)
         
         let section = BrickSection("Test Section", bricks: [
-            DummyFocusableBrick("Brick 1", height: .Fixed(size: 50)),
-            DummyFocusableBrick("Brick 2", height: .Fixed(size: 50))
+            DummyFocusableBrick("Brick 1", height: .fixed(size: 50)),
+            DummyFocusableBrick("Brick 2", height: .fixed(size: 50))
             ])
         
         
@@ -696,9 +696,9 @@ class BrickViewControllerTests: XCTestCase {
         brickViewController.brickCollectionView.registerBrickClass(DummyFocusableBrick.self)
 
         let section = BrickSection("Test Section", bricks: [
-            DummyFocusableBrick("Brick 1", height: .Fixed(size: 50)),
-            DummyFocusableBrick("Brick 2", height: .Fixed(size: 50)),
-            DummyBrick("Brick 3", height: .Fixed(size: 50))
+            DummyFocusableBrick("Brick 1", height: .fixed(size: 50)),
+            DummyFocusableBrick("Brick 2", height: .fixed(size: 50)),
+            DummyBrick("Brick 3", height: .fixed(size: 50))
             ])
         
         

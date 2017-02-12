@@ -30,14 +30,14 @@ class HorizontalCollectionViewController: BrickViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = .brickBackground
-        self.layout.scrollDirection = .Horizontal
+        self.layout.scrollDirection = .horizontal
         self.brickCollectionView.registerBrickClass(ImageBrick.self)
 
         self.view.backgroundColor = .brickBackground
 
         collectionSection = BrickSection(bricks: [
-            ImageBrick(width: .Ratio(ratio: 1/2), height: .Ratio(ratio: 1), dataSource: self),
-            BrickSection(width: .Ratio(ratio: 1/2), bricks: [
+            ImageBrick(width: .ratio(ratio: 1/2), height: .ratio(ratio: 1), dataSource: self),
+            BrickSection(width: .ratio(ratio: 1/2), bricks: [
                 LabelBrick(RepeatCollectionBrickViewController.Identifiers.titleLabel, backgroundColor: .brickGray2, dataSource: self),
                 LabelBrick(RepeatCollectionBrickViewController.Identifiers.subTitleLabel, backgroundColor: .brickGray4, dataSource: self)
                 ])
@@ -46,7 +46,7 @@ class HorizontalCollectionViewController: BrickViewController {
         self.registerBrickClass(CollectionBrick.self)
 
         let section = BrickSection(bricks: [
-            CollectionBrick(HorizontalCollectionViewController.Identifiers.collectionBrick, width: .Ratio(ratio: 1/2), backgroundColor: .brickSection, dataSource: self, brickTypes: [LabelBrick.self, ImageBrick.self])
+            CollectionBrick(HorizontalCollectionViewController.Identifiers.collectionBrick, width: .ratio(ratio: 1/2), backgroundColor: .brickSection, dataSource: self, brickTypes: [LabelBrick.self, ImageBrick.self])
             ], inset: 20)
         section.repeatCountDataSource = self
 
@@ -82,13 +82,13 @@ extension HorizontalCollectionViewController: ImageBrickDataSource {
     }
 
     func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIViewContentMode {
-        return .ScaleAspectFill
+        return .scaleAspectFill
     }
 }
 
 extension HorizontalCollectionViewController: LabelBrickCellDataSource {
 
-    func configureLabelBrickCell(cell: LabelBrickCell) {
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
         let identifier = cell.brick.identifier
         let collectionIndex = cell.collectionIndex + 1
 

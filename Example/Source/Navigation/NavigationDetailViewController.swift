@@ -97,9 +97,10 @@ extension NavigationDetailViewController: BrickCellTapDelegate {
 
     func didTapBrickCell(_ brickCell: BrickCell) {
         let index = brickCell.index
-        _ = navItem.viewControllers[index].init()
-//        detail.title = navItem.viewControllers[index].title.uppercased()
-//        self.navigationController?.pushViewController(detail, animated: true)
+        let detailType = navItem.viewControllers[index]
+        let detail = detailType.init()
+        detail.navigationItem.title = detailType.title.uppercased()
+        self.navigationController?.pushViewController(detail, animated: true)
     }
 
 }

@@ -21,7 +21,7 @@ class ProfileImageBrickModel {
 class ProfileImageBrick: Brick {
     var model: ProfileImageBrickModel
     
-    init(_ identifier: String, width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Fixed(size: 60), backgroundColor: UIColor = UIColor.white, backgroundView: UIView? = nil, model: ProfileImageBrickModel) {
+    init(_ identifier: String, width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .fixed(size: 60), backgroundColor: UIColor = UIColor.white, backgroundView: UIView? = nil, model: ProfileImageBrickModel) {
         self.model = model
         super.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView)
     }

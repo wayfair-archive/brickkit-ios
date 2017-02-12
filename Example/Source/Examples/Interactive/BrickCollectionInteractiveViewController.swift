@@ -88,7 +88,7 @@ class BrickCollectionInteractiveViewController: BrickViewController {
                     cell.configure()
                     }),
                 BrickSection(RepeatSection, bricks: [
-                    CollectionBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: self, brickTypes: bricksTypes)
+                    CollectionBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: self, brickTypes: bricksTypes)
                     ], inset: 5),
                 footerSection
                 ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
