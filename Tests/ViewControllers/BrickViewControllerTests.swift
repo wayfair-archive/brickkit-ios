@@ -622,7 +622,7 @@ class BrickViewControllerTests: XCTestCase {
         
         XCTAssertNotNil(brickOneIndex)
         
-        XCTAssertTrue(brickViewController.collectionView(brickViewController.brickCollectionView, canFocusItemAtIndexPath: brickOneIndex!))
+        XCTAssertTrue(brickViewController.collectionView(collectionView: brickViewController.brickCollectionView, canFocusItemAtIndexPath: brickOneIndex!))
     }
     
     func testFocus() {
@@ -646,9 +646,9 @@ class BrickViewControllerTests: XCTestCase {
         let context = MockCollectionViewFocusUpdateContext()
         context.nextFocusedIndexPath = brickOneIndex!
         
-        brickViewController.collectionView(brickViewController.brickCollectionView, shouldUpdateFocusInContext: context)
+        brickViewController.collectionViewShouldUpdateFocusIn(context: context)
         
-        let cell = brickViewController.brickCollectionView.cellForItemAtIndexPath(brickOneIndex!) as? DummyFocusableBrickCell
+        let cell = brickViewController.brickCollectionView.cellForItem(at: brickOneIndex!) as? DummyFocusableBrickCell
         
         XCTAssertTrue(cell!.isCurrentlyFocused)
     }
@@ -675,18 +675,18 @@ class BrickViewControllerTests: XCTestCase {
         let context = MockCollectionViewFocusUpdateContext()
         context.nextFocusedIndexPath = brickOneIndex!
         
-        brickViewController.collectionView(brickViewController.brickCollectionView, shouldUpdateFocusInContext: context)
+        _ = brickViewController.collectionViewShouldUpdateFocusIn(context: context)
         
-        let cell1 = brickViewController.brickCollectionView.cellForItemAtIndexPath(brickOneIndex!) as? DummyFocusableBrickCell
+        let cell1 = brickViewController.brickCollectionView.cellForItem(at: brickOneIndex!) as? DummyFocusableBrickCell
         
         XCTAssertTrue(cell1!.isCurrentlyFocused)
         
         context.previouslyFocusedIndexPath = brickOneIndex!
         context.nextFocusedIndexPath = brickTwoIndex!
         
-        brickViewController.collectionView(brickViewController.brickCollectionView, shouldUpdateFocusInContext: context)
+        _ = brickViewController.collectionViewShouldUpdateFocusIn(context: context)
         
-        let cell2 = brickViewController.brickCollectionView.cellForItemAtIndexPath(brickTwoIndex!) as? DummyFocusableBrickCell
+        let cell2 = brickViewController.brickCollectionView.cellForItem(at: brickTwoIndex!) as? DummyFocusableBrickCell
         
         XCTAssertFalse(cell1!.isCurrentlyFocused)
         XCTAssertTrue(cell2!.isCurrentlyFocused)
@@ -716,9 +716,9 @@ class BrickViewControllerTests: XCTestCase {
         let context = MockCollectionViewFocusUpdateContext()
         context.nextFocusedIndexPath = brickThreeIndex!
         
-        XCTAssertFalse(brickViewController.collectionView(brickViewController.brickCollectionView, shouldUpdateFocusInContext: context))
+        XCTAssertFalse(brickViewController.collectionViewShouldUpdateFocusIn(context: context))
         
-        let cell1 = brickViewController.brickCollectionView.cellForItemAtIndexPath(brickOneIndex!) as? DummyFocusableBrickCell
+        let cell1 = brickViewController.brickCollectionView.cellForItem(at: brickOneIndex!) as? DummyFocusableBrickCell
         
         cell1?.shouldLoseFocus = false
         cell1?.isCurrentlyFocused = true
@@ -726,9 +726,9 @@ class BrickViewControllerTests: XCTestCase {
         context.previouslyFocusedIndexPath = brickOneIndex!
         context.nextFocusedIndexPath = brickTwoIndex!
         
-        brickViewController.collectionView(brickViewController.brickCollectionView, shouldUpdateFocusInContext: context)
+        _ = brickViewController.collectionViewShouldUpdateFocusIn(context: context)
         
-        let cell2 = brickViewController.brickCollectionView.cellForItemAtIndexPath(brickTwoIndex!) as? DummyFocusableBrickCell
+        let cell2 = brickViewController.brickCollectionView.cellForItem(at: brickTwoIndex!) as? DummyFocusableBrickCell
         
         XCTAssertTrue(cell1!.isCurrentlyFocused)
         XCTAssertFalse(cell2!.isCurrentlyFocused)

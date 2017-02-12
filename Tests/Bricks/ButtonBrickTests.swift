@@ -129,7 +129,7 @@ class ButtonBrickTests: XCTestCase {
         let model = ButtonBrickCellModel(title: "Hello World", configureButtonBlock: { (cell) in
             expectation.fulfill()
         })
-        setupButtonBrickWithModel(model)
+        _ = setupButtonBrickWithModel(model)
 
         waitForExpectations(timeout: 5, handler: nil)
     }

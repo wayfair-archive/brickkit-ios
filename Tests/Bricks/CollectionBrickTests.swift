@@ -152,7 +152,7 @@ class CollectionBrickTests: XCTestCase {
         let mockAttributes = UICollectionViewLayoutAttributes()
         mockAttributes.bounds = CGRect(x: 0, y: 0, width: 0, height: 0)
 
-        cell1?.preferredLayoutAttributesFitting(mockAttributes) // if the function returns the test passes
+        _ = cell1?.preferredLayoutAttributesFitting(mockAttributes) // if the function returns the test passes
     }
 
 }

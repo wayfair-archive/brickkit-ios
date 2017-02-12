@@ -96,10 +96,10 @@ class NavigationMasterViewController: BrickViewController {
 extension NavigationMasterViewController {
     func indexPathForPreferredFocusedViewInCollectionView(collectionView: UICollectionView) -> IndexPath? {
         
-        let index = IndexPath(forItem: 0, inSection: 1)
+        let index = IndexPath(item: 0, section: 1)
         
-        if let cell = brickCollectionView.cellForItemAtIndexPath(index) as? FocusableBrickCell {
-            cell.willFocus()
+        if let cell = brickCollectionView.cellForItem(at: index) as? FocusableBrickCell {
+            _ = cell.willFocus()
         }
         
         return index

@@ -17,7 +17,7 @@ class Theme {
 
         // UILabel
         #if os(tvOS)
-            UILabel.appearance().font = UIFont.brickLightFont(25)
+            UILabel.appearance().font = UIFont.brickLightFont(size: 25)
         #else
             UILabel.appearance().font = UIFont.brickLightFont(size: 15)
         #endif
@@ -41,7 +41,7 @@ class Theme {
 
     class var fontForNavigationTitle: UIFont {
         #if os(tvOS)
-            return UIFont.brickSemiBoldFont(25)
+            return UIFont.brickSemiBoldFont(size: 25)
         #else
             return UIFont.brickSemiBoldFont(size: 15)
         #endif
@@ -277,30 +277,4 @@ extension UIColor {
     }
 }
 
-#if os(tvOS)
-extension LabelBrickCell: FocusableBrickCell {
 
-    dynamic override public var allowsFocus: Bool {
-        get {
-            return true
-        }
-        set {
-            super.allowsFocus = true
-        }
-    }
-
-    public func willFocus() -> Bool {
-        self.contentView.layer.borderWidth = 5
-        self.contentView.layer.borderColor = UIColor.brickGray2.cgColor
-        
-        return true
-    }
-    
-    public func willUnfocus() -> Bool {
-        self.contentView.layer.borderWidth = 0
-        self.contentView.layer.borderColor = UIColor.clear.cgColor
-        
-        return true
-    }
-}
-#endif

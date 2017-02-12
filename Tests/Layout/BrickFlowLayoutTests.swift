@@ -166,7 +166,7 @@ class BrickFlowLayoutTests: BrickFlowLayoutBaseTests {
     func testCalculateSectionsIfNeededWithoutDataSource() {
         let brickFlowLayout = BrickFlowLayout()
         expectFatalError { 
-            brickFlowLayout.calculateSectionsIfNeeded(self.hugeFrame)
+            _ = brickFlowLayout.calculateSectionsIfNeeded(self.hugeFrame)
         }
     }
 

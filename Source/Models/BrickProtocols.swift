@@ -36,4 +36,30 @@ public protocol FocusableBrickCell {
     /// - returns: if brick should lose focus
     func willUnfocus() -> Bool
 }
+    
+extension LabelBrickCell: FocusableBrickCell {
+    
+    dynamic override public var allowsFocus: Bool {
+        get {
+            return true
+        }
+        set {
+            super.allowsFocus = true
+        }
+    }
+    
+    public func willFocus() -> Bool {
+        self.contentView.layer.borderWidth = 5
+        self.contentView.layer.borderColor = UIColor(white: 192/255.0, alpha: 1.0).cgColor
+        
+        return true
+    }
+    
+    public func willUnfocus() -> Bool {
+        self.contentView.layer.borderWidth = 0
+        self.contentView.layer.borderColor = UIColor.clear.cgColor
+        
+        return true
+    }
+}
 #endif

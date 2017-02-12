@@ -31,7 +31,7 @@ class DummyFocusableBrickCell: BrickCell, Bricklike {
 
 extension DummyFocusableBrickCell: FocusableBrickCell {
     
-    func willFocus() -> Bool {
+    open func willFocus() -> Bool {
         if !shouldTakeFocus {
             return false
         }

@@ -23,7 +23,7 @@ class FixedRepeatCountDataSource: BrickRepeatCountDataSource {
 
 #if os(tvOS)
     class MockCollectionViewFocusUpdateContext: UICollectionViewFocusUpdateContext {
-        private var internalNextFocusedIndexPath: IndexPath = NSIndexPath(forItem: 0, inSection: 0)
+        private var internalNextFocusedIndexPath: IndexPath = IndexPath(item: 0, section: 0)
         
         override var nextFocusedIndexPath: IndexPath {
             set(newIndex) {
@@ -34,7 +34,7 @@ class FixedRepeatCountDataSource: BrickRepeatCountDataSource {
             }
         }
         
-        private var internalPreviouslyFocusedIndexPath: IndexPath = NSIndexPath(forItem: 0, inSection: 0)
+        private var internalPreviouslyFocusedIndexPath: IndexPath = IndexPath(item: 0, section: 0)
         
         override var previouslyFocusedIndexPath: IndexPath {
             set(newIndex) {

@@ -114,7 +114,7 @@ extension NavigationDetailViewController: LabelBrickCellDataSource {
         }
 
         #if os(tvOS)
-            twoLabel.label.font = UIFont.brickSemiBoldFont(25)
+            twoLabel.label.font = UIFont.brickSemiBoldFont(size: 25)
         #else
             twoLabel.label.font = UIFont.brickSemiBoldFont(size: 15)
         #endif

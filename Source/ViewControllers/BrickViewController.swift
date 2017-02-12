@@ -135,19 +135,19 @@ extension BrickViewController {
 #if os(tvOS)
 extension BrickViewController {
     
-    public func collectionView(collectionView: UICollectionView, shouldUpdateFocusInContext context: UICollectionViewFocusUpdateContext) -> Bool {
+    open func collectionViewShouldUpdateFocusIn(context: UICollectionViewFocusUpdateContext) -> Bool {
         
         guard let nextIndex = context.nextFocusedIndexPath else {
             return false
         }
         
-        if let lastIndex = context.previouslyFocusedIndexPath, let cell = brickCollectionView.cellForItemAtIndexPath(lastIndex) as? FocusableBrickCell {
+        if let lastIndex = context.previouslyFocusedIndexPath, let cell = brickCollectionView.cellForItem(at: lastIndex) as? FocusableBrickCell {
             if !cell.willUnfocus() {
                 return false
             }
         }
         
-        if let cell = brickCollectionView.cellForItemAtIndexPath(nextIndex) as? FocusableBrickCell {
+        if let cell = brickCollectionView.cellForItem(at: nextIndex) as? FocusableBrickCell {
             return cell.willFocus()
         }
         
@@ -155,7 +155,7 @@ extension BrickViewController {
     }
     
     public func collectionView(collectionView: UICollectionView, canFocusItemAtIndexPath indexPath: IndexPath) -> Bool {
-        let cell = brickCollectionView.cellForItemAtIndexPath(indexPath) as? BrickCell
+        let cell = brickCollectionView.cellForItem(at: indexPath) as? BrickCell
         return cell is FocusableBrickCell && cell?.allowsFocus == true
     }
 }
