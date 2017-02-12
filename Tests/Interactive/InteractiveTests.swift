@@ -470,7 +470,7 @@ class InteractiveTests: XCTestCase {
         brickView.setSection(section)
         brickView.layoutIfNeeded()
 
-        _ = brickView.invalidateHeightForBrickWithIdentifier(DummyBrickIdentifier, newHeight: 21)
+        brickView.invalidateHeightForBrickWithIdentifier(DummyBrickIdentifier, newHeight: 21)
         brickView.layoutIfNeeded()
 
         let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
@@ -488,7 +488,7 @@ class InteractiveTests: XCTestCase {
         brickView.setSection(section)
         brickView.layoutIfNeeded()
 
-        _ = brickView.invalidateHeightForBrickWithIdentifier(DummyBrickIdentifier, newHeight: 21)
+        brickView.invalidateHeightForBrickWithIdentifier(DummyBrickIdentifier, newHeight: 21)
         brickView.layoutIfNeeded()
 
         let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
@@ -512,7 +512,7 @@ class InteractiveTests: XCTestCase {
 
         cell?.frame.size.height = 10
 
-        _ = brickView.invalidateHeightForBrickWithIdentifier(DummyBrickIdentifier, newHeight: nil)
+        brickView.invalidateHeightForBrickWithIdentifier(DummyBrickIdentifier, newHeight: nil)
         brickView.layoutIfNeeded()
 
         cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell

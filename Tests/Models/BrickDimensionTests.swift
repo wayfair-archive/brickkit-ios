@@ -189,12 +189,12 @@ extension BrickDimensionTests {
 
     /// Setup UIScreen.mainScreen to call a different method
     func swizzleScreen() {
-        NSObject.swizzleStaticMethodSelector(#selector(getter: UIScreen.main), withSelector: #selector(UIScreen.stubMainScreen), forClass: UIScreen.self)
+        _ = NSObject.swizzleStaticMethodSelector(#selector(getter: UIScreen.main), withSelector: #selector(UIScreen.stubMainScreen), forClass: UIScreen.self)
     }
 
     /// Reset UIScreen.mainScreen to call a different method
     func resetScreen() {
-        NSObject.swizzleStaticMethodSelector(#selector(UIScreen.stubMainScreen), withSelector: #selector(getter: UIScreen.main), forClass: UIScreen.self)
+        _ = NSObject.swizzleStaticMethodSelector(#selector(UIScreen.stubMainScreen), withSelector: #selector(getter: UIScreen.main), forClass: UIScreen.self)
     }
 
     /// Setup the UIScreen for the given test

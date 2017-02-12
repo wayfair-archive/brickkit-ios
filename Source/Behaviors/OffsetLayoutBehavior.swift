@@ -64,7 +64,7 @@ open class OffsetLayoutBehavior: BrickLayoutBehavior {
             }
 
             if let originOffset = dataSource?.offsetLayoutBehaviorWithOrigin(self, originOffsetForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
-                currentFrame?.offsetBy(dx: originOffset.width, dy: originOffset.height)
+                currentFrame = currentFrame?.offsetBy(dx: originOffset.width, dy: originOffset.height)
             }
 
             if currentFrame != attributes.frame {
