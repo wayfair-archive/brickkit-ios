@@ -44,6 +44,6 @@ class BrickFlowLayoutBaseTests: XCTestCase {
         layout.dataSource = brickLayoutDataSource
         collectionView.dataSource = self.dataSource
         collectionView.reloadData()
-        layout.calculateSectionsIfNeeded(hugeFrame)
+        _ = layout.calculateSectionsIfNeeded(hugeFrame)
     }
 }

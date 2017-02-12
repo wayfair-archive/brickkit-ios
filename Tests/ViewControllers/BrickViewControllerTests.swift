@@ -646,7 +646,7 @@ class BrickViewControllerTests: XCTestCase {
         let context = MockCollectionViewFocusUpdateContext()
         context.nextFocusedIndexPath = brickOneIndex!
         
-        brickViewController.collectionViewShouldUpdateFocusIn(context: context)
+        _ = brickViewController.collectionViewShouldUpdateFocusIn(context: context)
         
         let cell = brickViewController.brickCollectionView.cellForItem(at: brickOneIndex!) as? DummyFocusableBrickCell
         
