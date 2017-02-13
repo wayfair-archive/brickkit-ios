@@ -1,5 +1,17 @@
 # Change Log
 
+## [1.1.1](https://github.com/wayfair/brickkit-ios/tree/1.1.1) (2017-02-13)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.1.0...1.1.1)
+
+**Closed issues:**
+
+- GenericBrickCell is setting `backgroundColor` wrong [\#80](https://github.com/wayfair/brickkit-ios/issues/80)
+- invalidateRepeatCounts causes duplicate loading of newly added bricks [\#55](https://github.com/wayfair/brickkit-ios/issues/55)
+
+**Merged pull requests:**
+
+- Moved place where generic brick background color is set to clear [\#81](https://github.com/wayfair/brickkit-ios/pull/81) ([rubencagnie](https://github.com/rubencagnie))
+
 ## [1.1.0](https://github.com/wayfair/brickkit-ios/tree/1.1.0) (2017-02-10)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.0.0...1.1.0)
 
