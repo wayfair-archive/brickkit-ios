@@ -24,7 +24,7 @@ extension XCTestCase {
     func expectFatalError(_ expectedMessage: String? = nil, testcase: @escaping () -> Void) {
 
         // For right now, we are skipping the expectFatalError tests because Travis can't handle this
-        return;
+        return
 
 //        FatalErrorHolder.expectation = expectation(description: "expectingFatalError")
 //        FatalErrorUtil.replaceFatalError(testFatalError)
