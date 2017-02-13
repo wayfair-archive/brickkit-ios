@@ -39,6 +39,8 @@ public class GenericBrick<T: UIView>: Brick, ViewGenerator {
     public func generateView(frame: CGRect, in cell: GenericBrickCell) -> UIView {
         let view = T(frame: frame)
 
+        view.backgroundColor = .clearColor()
+
         self.configureView(view: view, cell: cell)
 
         return view
@@ -66,6 +68,9 @@ public class GenericBrickCell: BrickCell {
 
         clearContentViewAndConstraints()
 
+        backgroundColor = .clearColor()
+        contentView.backgroundColor = .clearColor()
+
         if let generic = self._brick as? ViewGenerator {
             let genericContentView = generic.generateView(self.frame, in: self)
             genericContentView.translatesAutoresizingMaskIntoConstraints = false
@@ -87,10 +92,6 @@ public class GenericBrickCell: BrickCell {
             self.leftSpaceConstraint = leftSpaceConstraint
             self.rightSpaceConstraint = rightSpaceConstraint
         }
-
-        backgroundColor = .clearColor()
-        contentView.backgroundColor = .clearColor()
-        genericContentView?.backgroundColor = .clearColor()
 
     }
 
