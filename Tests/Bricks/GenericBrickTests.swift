@@ -105,4 +105,16 @@ class GenericBrickTests: XCTestCase {
         XCTAssertEqual(label4.text, "LABEL 4")
     }
 
+    func testThatBackgroundColorIsNotReset() {
+        brickCollectionView.setupSingleBrickAndLayout(GenericBrick<UILabel>(GenericLabelBrickIdentifier, width: .Ratio(ratio: 1), height: .Fixed(size: 50), backgroundColor: .orangeColor()) { label, view in
+            label.backgroundColor = .redColor()
+            })
+
+        let cell: GenericBrickCell? = firstCellForIdentifier(GenericLabelBrickIdentifier)
+
+        XCTAssertEqual(cell?.genericContentView?.backgroundColor, UIColor.redColor())
+        XCTAssertEqual(cell?.contentView.backgroundColor, UIColor.orangeColor())
+    }
+
+
 }
