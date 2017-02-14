@@ -21,6 +21,19 @@ class BrickModelsTests: XCTestCase {
         XCTAssertEqual(brick.description, "<DummyBrick -Brick1- size: BrickSize(width: BrickKit.BrickDimension.Ratio(1.0), height: BrickKit.BrickDimension.Auto(BrickKit.BrickDimension.Fixed(50.0)))>")
     }
 
+    func testBrickIdentier() {
+        let brickView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
+
+        let expectation = expectationWithDescription("Wait for configure cell")
+        let genericBrick = GenericBrick<UILabel>("Brick", size: BrickSize(width: .Ratio(ratio: 1), height: .Fixed(size: 50))) { label, cell in
+            XCTAssertEqual(cell.identifier, "Brick")
+            expectation.fulfill()
+        }
+        brickView.setupSingleBrickAndLayout(genericBrick)
+
+        waitForExpectationsWithTimeout(5, handler: nil)
+    }
+
     func testSectionDescription() {
         let section = BrickSection("Section1", bricks: [
             DummyBrick("Brick1"),

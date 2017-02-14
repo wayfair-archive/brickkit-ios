@@ -118,6 +118,11 @@ public class BrickCell: BaseBrickCell {
         }
     }
     public var tapGesture: UITapGestureRecognizer?
+
+    public var identifier: String {
+        return _brick.identifier
+    }
+
     public private(set) var index: Int = 0
     public private(set) var collectionIndex: Int = 0
     public private(set) var collectionIdentifier: String?
