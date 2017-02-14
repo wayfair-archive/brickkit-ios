@@ -48,71 +48,71 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         setupWithDataSources()
 
         firstAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 0))
-        XCTAssertEqual(firstAttributes?.frame, CGRect(x: 0, y: 0, width: 320, height: 300))
+        XCTAssertEqualWithAccuracy(firstAttributes!.frame, CGRect(x: 0, y: 0, width: 320, height: 300), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
         secondAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 1, section: 0))
-        XCTAssertEqual(secondAttributes?.frame, CGRect(x: 0, y: 300, width: 320, height: 100))
+        XCTAssertEqualWithAccuracy(secondAttributes!.frame, CGRect(x: 0, y: 300, width: 320, height: 100), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
         thirdAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 2, section: 0))
-        XCTAssertEqual(thirdAttributes?.frame, CGRect(x: 0, y: 400, width: 320, height: 100))
+        XCTAssertEqualWithAccuracy(thirdAttributes!.frame, CGRect(x: 0, y: 400, width: 320, height: 100), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
         XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 600))
 
         layout.collectionView?.contentOffset.y = 60
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
 
         firstAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 0))
-        XCTAssertEqual(firstAttributes?.frame, CGRect(x: 0, y: 60, width: 320, height: 240))
+        XCTAssertEqualWithAccuracy(firstAttributes!.frame, CGRect(x: 0, y: 60, width: 320, height: 240), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
         secondAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 1, section: 0))
         secondHeight = CGFloat(100.0 + (200.0 * 60.0 / 300.0))
         XCTAssertEqualWithAccuracy(secondAttributes!.frame, CGRect(x: 0, y: 300, width: 320, height: secondHeight), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
         thirdAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 2, section: 0))
-        XCTAssertEqual(thirdAttributes?.frame, CGRect(x: 0, y: 300 + secondHeight, width: 320, height: 100))
+        XCTAssertEqualWithAccuracy(thirdAttributes!.frame, CGRect(x: 0, y: 300 + secondHeight, width: 320, height: 100), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
         XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 600))
 
         layout.collectionView?.contentOffset.y = 100
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
 
         firstAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 0))
-        XCTAssertEqual(firstAttributes?.frame, CGRect(x: 0, y: 100, width: 320, height: 200))
+        XCTAssertEqualWithAccuracy(firstAttributes!.frame, CGRect(x: 0, y: 100, width: 320, height: 200), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
         secondAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 1, section: 0))
         secondHeight = CGFloat(100.0 + (200.0 / 3.0))
         XCTAssertEqualWithAccuracy(secondAttributes!.frame, CGRect(x: 0, y: 300, width: 320, height: secondHeight), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
         thirdAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 2, section: 0))
-        XCTAssertEqual(thirdAttributes?.frame, CGRect(x: 0, y: 300 + secondHeight, width: 320, height: 100))
+        XCTAssertEqualWithAccuracy(thirdAttributes!.frame, CGRect(x: 0, y: 300 + secondHeight, width: 320, height: 100), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
         XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 600))
 
         layout.collectionView?.contentOffset.y = 150
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
 
         firstAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 0))
-        XCTAssertEqual(firstAttributes?.frame, CGRect(x: 0, y: 150, width: 320, height: 150))
+        XCTAssertEqualWithAccuracy(firstAttributes!.frame, CGRect(x: 0, y: 150, width: 320, height: 150), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
         secondAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 1, section: 0))
         secondHeight = CGFloat(100.0 + (200.0 / 2.0))
         XCTAssertEqualWithAccuracy(secondAttributes!.frame, CGRect(x: 0, y: 300, width: 320, height: secondHeight), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
         thirdAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 2, section: 0))
-        XCTAssertEqual(thirdAttributes?.frame, CGRect(x: 0, y: 300 + secondHeight, width: 320, height: 100))
+        XCTAssertEqualWithAccuracy(thirdAttributes!.frame, CGRect(x: 0, y: 300 + secondHeight, width: 320, height: 100), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
         XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 600))
 
         layout.collectionView?.contentOffset.y = 200
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
 
         firstAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 0))
-        XCTAssertEqual(firstAttributes?.frame, CGRect(x: 0, y: 200, width: 320, height: 100))
+        XCTAssertEqualWithAccuracy(firstAttributes!.frame, CGRect(x: 0, y: 200, width: 320, height: 100), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
         secondAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 1, section: 0))
         secondHeight = CGFloat(100.0 + (200.0 * 2.0 / 3.0))
         XCTAssertEqualWithAccuracy(secondAttributes!.frame, CGRect(x: 0, y: 300, width: 320, height: secondHeight), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
         thirdAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 2, section: 0))
-        XCTAssertEqual(thirdAttributes?.frame, CGRect(x: 0, y: 300 + secondHeight, width: 320, height: 100))
+        XCTAssertEqualWithAccuracy(thirdAttributes!.frame, CGRect(x: 0, y: 300 + secondHeight, width: 320, height: 100), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
         XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 600))
 
         layout.collectionView?.contentOffset.y = 270
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
 
         firstAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 0))
-        XCTAssertEqual(firstAttributes?.frame, CGRect(x: 0, y: 200, width: 320, height: 100))
+        XCTAssertEqualWithAccuracy(firstAttributes!.frame, CGRect(x: 0, y: 200, width: 320, height: 100), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
         secondAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 1, section: 0))
         secondHeight = CGFloat(100.0 + (200.0 * 270.0 / 300.0))
         XCTAssertEqualWithAccuracy(secondAttributes!.frame, CGRect(x: 0, y: 300, width: 320, height: secondHeight), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
         thirdAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 2, section: 0))
-        XCTAssertEqual(thirdAttributes?.frame, CGRect(x: 0, y: 300 + secondHeight, width: 320, height: 100))
+        XCTAssertEqualWithAccuracy(thirdAttributes!.frame, CGRect(x: 0, y: 300 + secondHeight, width: 320, height: 100), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
         XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 600))
     }
 
