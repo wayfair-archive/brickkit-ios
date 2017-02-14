@@ -24,14 +24,14 @@ class BrickModelsTests: XCTestCase {
     func testBrickIdentier() {
         let brickView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
 
-        let expectation = expectationWithDescription("Wait for configure cell")
-        let genericBrick = GenericBrick<UILabel>("Brick", size: BrickSize(width: .Ratio(ratio: 1), height: .Fixed(size: 50))) { label, cell in
+        let expect = expectation(description: "Wait for configure cell")
+        let genericBrick = GenericBrick<UILabel>("Brick", size: BrickSize(width: .ratio(ratio: 1), height: .fixed(size: 50))) { label, cell in
             XCTAssertEqual(cell.identifier, "Brick")
-            expectation.fulfill()
+            expect.fulfill()
         }
         brickView.setupSingleBrickAndLayout(genericBrick)
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
     }
 
     func testSectionDescription() {

@@ -39,7 +39,7 @@ open class GenericBrick<T: UIView>: Brick, ViewGenerator {
     open func generateView(_ frame: CGRect, in cell: GenericBrickCell) -> UIView {
         let view = T(frame: frame)
 
-        viee.backgroundColor = UIColor.clear
+        view.backgroundColor = UIColor.clear
 
         self.configureView(view, cell)
 
@@ -68,8 +68,8 @@ open class GenericBrickCell: BrickCell {
 
         clearContentViewAndConstraints()
 
-        backgroundColor = .clearColor()
-        contentView.backgroundColor = .clearColor()
+        backgroundColor = UIColor.clear
+        contentView.backgroundColor = UIColor.clear
 
         if let generic = self._brick as? ViewGenerator {
             let genericContentView = generic.generateView(self.frame, in: self)
