@@ -27,7 +27,7 @@ class CardScrollingViewController: BaseScrollingViewController {
 }
 
 extension CardScrollingViewController: CardLayoutBehaviorDataSource {
-    func cardLayoutBehavior(_ behavior: CardLayoutBehavior, smallHeightForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
+    func cardLayoutBehavior(_ behavior: CardLayoutBehavior, smallHeightForItemAt indexPath: IndexPath, with identifier: String, in collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
         return identifier == BrickIdentifiers.repeatLabel ? 50 : nil
     }
 }

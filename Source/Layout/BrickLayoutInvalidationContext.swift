@@ -156,7 +156,7 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
 
         provider.invalidateContent({ (attributes, oldFrame) in
             for behavior in provider.behaviors {
-                behavior.registerAttributes(attributes, forCollectionViewLayout: layout)
+                behavior.registerAttributes(attributes, for: layout)
             }
             self.handleAttributes(attributes, oldFrame: oldFrame, provider: provider, layout: layout, fromBehaviors: false)
         })

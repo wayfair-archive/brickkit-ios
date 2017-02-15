@@ -21,7 +21,7 @@ open class SpotlightLayoutBehavior: BrickLayoutBehavior {
         return true
     }
 
-    open override func shouldUseForDownstreamCalculation(for indexPath: IndexPath, with identifier: String, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    open override func shouldUseForDownstreamCalculation(for indexPath: IndexPath, with identifier: String, for collectionViewLayout: UICollectionViewLayout) -> Bool {
         return dataSource?.spotlightLayoutBehavior(self, smallHeightForItemAtIndexPath: indexPath, withIdentifier: identifier, inCollectionViewLayout: collectionViewLayout) != nil
     }
 
@@ -33,7 +33,7 @@ open class SpotlightLayoutBehavior: BrickLayoutBehavior {
         scrollAttributes = []
     }
 
-    open override func registerAttributes(_ attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
+    open override func registerAttributes(_ attributes: BrickLayoutAttributes, for collectionViewLayout: UICollectionViewLayout) {
         if let _ = dataSource?.spotlightLayoutBehavior(self, smallHeightForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
             scrollAttributes.append(attributes)
         }

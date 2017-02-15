@@ -31,7 +31,7 @@ open class OffsetLayoutBehavior: BrickLayoutBehavior {
         offsetAttributes = []
     }
 
-    open override func registerAttributes(_ attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
+    open override func registerAttributes(_ attributes: BrickLayoutAttributes, for collectionViewLayout: UICollectionViewLayout) {
         if let _ = dataSource?.offsetLayoutBehaviorWithOrigin(self, originOffsetForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
             offsetAttributes.append(attributes)
         }

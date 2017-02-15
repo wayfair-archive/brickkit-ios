@@ -12,7 +12,7 @@ public protocol CardLayoutBehaviorDataSource: class {
     /// If not nil, the small height is used to scroll the card layout
     ///
     /// - returns: small height for the brick
-    func cardLayoutBehavior(_ behavior: CardLayoutBehavior, smallHeightForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat?
+    func cardLayoutBehavior(_ behavior: CardLayoutBehavior, smallHeightForItemAt indexPath: IndexPath, with identifier: String, in collectionViewLayout: UICollectionViewLayout) -> CGFloat?
 }
 
 /// A CardLayoutBehavior organizes bricks on top of eachother, with the top one full height and the other ones are staggered behind
@@ -31,8 +31,8 @@ open class CardLayoutBehavior: BrickLayoutBehavior {
         scrollAttributes = []
     }
 
-    open override func registerAttributes(_ attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
-        if let _ = dataSource?.cardLayoutBehavior(self, smallHeightForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
+    open override func registerAttributes(_ attributes: BrickLayoutAttributes, for collectionViewLayout: UICollectionViewLayout) {
+        if let _ = dataSource?.cardLayoutBehavior(self, smallHeightForItemAt: attributes.indexPath, with: attributes.identifier, in: collectionViewLayout) {
             scrollAttributes.append(attributes) // Only use the attributes that have a small-height
         }
     }
@@ -54,7 +54,7 @@ open class CardLayoutBehavior: BrickLayoutBehavior {
             let isBelow = attributes.originalFrame.minY > offsetY
             let isInSpotlight = !isAbove && !isBelow
 
-            guard let height = dataSource?.cardLayoutBehavior(self, smallHeightForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) else {
+            guard let height = dataSource?.cardLayoutBehavior(self, smallHeightForItemAt: attributes.indexPath, with: attributes.identifier, in: collectionViewLayout) else {
                 continue // Only use the attributes that have a small-height
             }
 

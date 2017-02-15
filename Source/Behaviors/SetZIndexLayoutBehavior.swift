@@ -22,7 +22,7 @@ open class SetZIndexLayoutBehavior: BrickLayoutBehavior {
         self.dataSource = dataSource
     }
 
-    open override func registerAttributes(_ attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
+    open override func registerAttributes(_ attributes: BrickLayoutAttributes, for collectionViewLayout: UICollectionViewLayout) {
         guard let offset = dataSource?.setZIndexLayoutBehavior(self, shouldHaveMaxZIndexAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) else {
             return
         }

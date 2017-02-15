@@ -18,7 +18,7 @@ open class CoverFlowLayoutBehavior: BrickLayoutBehavior {
         super.init()
     }
 
-    open override func registerAttributes(_ attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
+    open override func registerAttributes(_ attributes: BrickLayoutAttributes, for collectionViewLayout: UICollectionViewLayout) {
         guard (attributes.indexPath as IndexPath).section != 0 else {
             return
         }

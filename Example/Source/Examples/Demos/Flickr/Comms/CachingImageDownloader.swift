@@ -48,7 +48,7 @@ class CachingImageDownloader: ImageDownloader {
                 return
             }
             
-            completionHandler(image, (imageURL as NSURL) as URL)
+            completionHandler(image, imageURL as URL)
         }).resume()
     }
     

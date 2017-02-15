@@ -10,7 +10,7 @@ import Foundation
 
 extension BrickCollectionView: BrickLayoutDataSource {
     
-    public func brickLayout(_ layout: BrickLayout, widthForItemAtIndexPath indexPath: IndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat {
+    public func brickLayout(_ layout: BrickLayout, widthForItemAt indexPath: IndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat {
         let inset = self.brickLayout(layout, insetForSection: (indexPath as IndexPath).section)
         let widthDimension = self.brick(at: indexPath).size.width
 
@@ -31,7 +31,7 @@ extension BrickCollectionView: BrickLayoutDataSource {
         return brick.size.height.isEstimate(in: self)
     }
 
-    public func brickLayout(_ layout: BrickLayout, estimatedHeightForItemAtIndexPath indexPath: IndexPath, containedInWidth width: CGFloat) -> CGFloat {
+    public func brickLayout(_ layout: BrickLayout, estimatedHeightForItemAt indexPath: IndexPath, containedIn width: CGFloat) -> CGFloat {
         let brick = self.brick(at: indexPath)
         if brick is BrickSection {
             return 0

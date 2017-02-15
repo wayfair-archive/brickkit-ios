@@ -56,7 +56,7 @@ class SectionsLayoutDataSource: NSObject, BrickLayoutDataSource {
         }
     }
 
-    func brickLayout(_ layout: BrickLayout, widthForItemAtIndexPath indexPath: IndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat {
+    func brickLayout(_ layout: BrickLayout, widthForItemAt indexPath: IndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat {
         let ratio: CGFloat
         let sectionWidthRatios = widthRatios[(indexPath as IndexPath).section]
         if sectionWidthRatios.count <= (indexPath as IndexPath).item {
@@ -67,7 +67,7 @@ class SectionsLayoutDataSource: NSObject, BrickLayoutDataSource {
         return BrickUtils.calculateWidth(for: ratio, widthRatio: widthRatio, totalWidth: totalWidth, inset: self.brickLayout(layout, insetForSection: (indexPath as IndexPath).section))
     }
 
-    func brickLayout(_ layout: BrickLayout, estimatedHeightForItemAtIndexPath indexPath: IndexPath, containedInWidth width: CGFloat) -> CGFloat {
+    func brickLayout(_ layout: BrickLayout, estimatedHeightForItemAt indexPath: IndexPath, containedIn width: CGFloat) -> CGFloat {
         let sectionHeights = heights[(indexPath as IndexPath).section]
         if sectionHeights.count <= (indexPath as IndexPath).item {
             return sectionHeights.last ?? 0
@@ -211,11 +211,11 @@ class FixedBrickLayoutDataSource: NSObject, BrickLayoutDataSource {
         self.type = type
     }
 
-    func brickLayout(_ layout: BrickLayout, widthForItemAtIndexPath indexPath: IndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat {
+    func brickLayout(_ layout: BrickLayout, widthForItemAt indexPath: IndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat {
         return BrickUtils.calculateWidth(for: self.widthRatio, widthRatio: widthRatio, totalWidth: totalWidth, inset: inset)
     }
 
-    func brickLayout(_ layout: BrickLayout, estimatedHeightForItemAtIndexPath indexPath: IndexPath, containedInWidth width: CGFloat) -> CGFloat {
+    func brickLayout(_ layout: BrickLayout, estimatedHeightForItemAt indexPath: IndexPath, containedIn width: CGFloat) -> CGFloat {
         return height
     }
 
@@ -265,7 +265,7 @@ class FixedCardLayoutBehaviorDataSource: CardLayoutBehaviorDataSource {
         self.height = height
     }
 
-    func cardLayoutBehavior(_ behavior: CardLayoutBehavior, smallHeightForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
+    func cardLayoutBehavior(_ behavior: CardLayoutBehavior, smallHeightForItemAt indexPath: IndexPath, with identifier: String, in collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
         return height
     }
 }

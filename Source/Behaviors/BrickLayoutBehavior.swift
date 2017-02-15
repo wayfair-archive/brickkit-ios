@@ -18,11 +18,11 @@ open class BrickLayoutBehavior: NSObject {
         return false
     }
 
-    open func shouldUseForDownstreamCalculation(for indexPath: IndexPath, with identifier: String, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    open func shouldUseForDownstreamCalculation(for indexPath: IndexPath, with identifier: String, for collectionViewLayout: UICollectionViewLayout) -> Bool {
         return false
     }
 
-    open func sectionAttributesForIndexPath(for indexPath: IndexPath, in layout: UICollectionViewLayout) -> BrickLayoutAttributes? {
+    open func sectionAttributes(for indexPath: IndexPath, in layout: UICollectionViewLayout) -> BrickLayoutAttributes? {
         return brickFlowLayout?.layoutAttributesForSection((indexPath as IndexPath).section)
     }
 
@@ -34,7 +34,7 @@ open class BrickLayoutBehavior: NSObject {
         //Optional
     }
 
-    open func registerAttributes(_ attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
+    open func registerAttributes(_ attributes: BrickLayoutAttributes, for collectionViewLayout: UICollectionViewLayout) {
         //Optional
     }
 

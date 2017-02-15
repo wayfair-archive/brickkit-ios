@@ -49,8 +49,7 @@ class BaseBrickController: BrickViewController {
     }
 
     func close() {
-        self.dismiss(animated:
-            true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

@@ -13,11 +13,11 @@ open class StickyFooterLayoutBehavior: StickyLayoutBehavior {
         return true
     }
 
-    open override func shouldUseForDownstreamCalculation(for indexPath: IndexPath, with identifier: String, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    open override func shouldUseForDownstreamCalculation(for indexPath: IndexPath, with identifier: String, for collectionViewLayout: UICollectionViewLayout) -> Bool {
         if dataSource?.stickyLayoutBehavior(self, shouldStickItemAtIndexPath: indexPath, withIdentifier: identifier, inCollectionViewLayout: collectionViewLayout) == true {
             return true
         } else {
-            return super.shouldUseForDownstreamCalculation(for: indexPath, with: identifier, forCollectionViewLayout: collectionViewLayout)
+            return super.shouldUseForDownstreamCalculation(for: indexPath, with: identifier, for: collectionViewLayout)
         }
     }
 

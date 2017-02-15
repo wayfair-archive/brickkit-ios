@@ -40,7 +40,7 @@ open class StickyLayoutBehavior: BrickLayoutBehavior {
         stickyAttributes = []
     }
 
-    open override func registerAttributes(_ attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
+    open override func registerAttributes(_ attributes: BrickLayoutAttributes, for collectionViewLayout: UICollectionViewLayout) {
         if dataSource?.stickyLayoutBehavior(self, shouldStickItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) == true {
             stickyAttributes.append(attributes)
         }
@@ -57,17 +57,17 @@ open class StickyLayoutBehavior: BrickLayoutBehavior {
             guard !brickAttribute.isHidden else {
                 continue
             }
-            let sectionAttributes: BrickLayoutAttributes? = sectionAttributesForIndexPath(for: brickAttribute.indexPath, in: collectionViewLayout)
+            let secAttributes: BrickLayoutAttributes? = sectionAttributes(for: brickAttribute.indexPath, in: collectionViewLayout)
 
             if !canStackWithOtherSections && section != (brickAttribute.indexPath as IndexPath).section {
                 section = (brickAttribute.indexPath as IndexPath).section
-                lastStickyFrame.origin = sectionAttributes?.frame.origin ?? CGPoint.zero
+                lastStickyFrame.origin = secAttributes?.frame.origin ?? CGPoint.zero
                 lastStickyFrame.size = CGSize.zero
             }
 
             var brickAttributes = brickAttribute
             let oldFrame = brickAttributes.frame
-            lastStickyFrame = self.updateStickyAttribute(&brickAttributes, sectionAttributes: sectionAttributes, inCollectionViewLayout: collectionViewLayout, withStickyIndex: index, withLastStickyFrame: lastStickyFrame)
+            lastStickyFrame = self.updateStickyAttribute(&brickAttributes, sectionAttributes: secAttributes, inCollectionViewLayout: collectionViewLayout, withStickyIndex: index, withLastStickyFrame: lastStickyFrame)
 
             if oldFrame != brickAttributes.frame {
                 attributesDidUpdate(brickAttributes, oldFrame)

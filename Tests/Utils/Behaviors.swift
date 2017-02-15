@@ -82,7 +82,7 @@ class FixedMaxZIndexLayoutBehaviorDataSource: MaxZIndexLayoutBehaviorDataSource 
         self.indexPaths = indexPaths
     }
 
-    func maxZIndexLayoutBehavior(_ behavior: MaxZIndexLayoutBehavior, shouldHaveMaxZIndexAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func maxZIndexLayoutBehavior(_ behavior: MaxZIndexLayoutBehavior, shouldHaveMaxZIndexAt indexPath: IndexPath, with identifier: String, in collectionViewLayout: UICollectionViewLayout) -> Bool {
         return indexPaths.contains(indexPath)
     }
 }
