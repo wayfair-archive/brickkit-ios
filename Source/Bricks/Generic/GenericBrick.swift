@@ -92,12 +92,7 @@ open class GenericBrickCell: BrickCell {
             self.leftSpaceConstraint = leftSpaceConstraint
             self.rightSpaceConstraint = rightSpaceConstraint
         }
-
-        backgroundColor = UIColor.clear
-        contentView.backgroundColor = UIColor.clear
-        genericContentView?.backgroundColor = UIColor.clear
-
-}
+    }
 
     fileprivate func clearContentViewAndConstraints() {
         genericContentView?.removeFromSuperview()
