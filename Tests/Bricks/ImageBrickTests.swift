@@ -259,7 +259,7 @@ class ImageBrickTests: XCTestCase {
         
         let cell2 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell
         cell2?.layoutIfNeeded()
-        let ratio:CGFloat = 378 / 659
+        let ratio:CGFloat = 378.0 / 659.0
         XCTAssertTrue(delegate.didUpdateCalled)
         XCTAssertEqualWithAccuracy(cell2!.frame.height, 320 * ratio, accuracy: 0.5)
         XCTAssertEqualWithAccuracy(cell2!.imageView.frame.height, 320 * ratio, accuracy: 0.5)
