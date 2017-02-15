@@ -96,8 +96,8 @@ class BrickSectionDataSourceTests: XCTestCase {
             1: IndexPath(item: 0, section: 0),
             2: IndexPath(item: 5, section: 1),
             ])
-        XCTAssertEqual(section.indexPathForSection(1, in: collection), IndexPath(item: 0, section: 0))
-        XCTAssertEqual(section.indexPathForSection(2, in: collection), IndexPath(item: 5, section: 1))
+        XCTAssertEqual(section.indexPathFor(1, in: collection), IndexPath(item: 0, section: 0))
+        XCTAssertEqual(section.indexPathFor(2, in: collection), IndexPath(item: 5, section: 1))
     }
 
     func testEmptySection() {

@@ -345,10 +345,10 @@ class BrickViewControllerTests: XCTestCase {
 
         brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
-        XCTAssertEqual(brickViewController.brickCollectionView.brickLayout(brickViewController.layout, insetForSection: 1), 10)
-        XCTAssertEqual(brickViewController.brickCollectionView.brickLayout(brickViewController.layout, edgeInsetsForSection: 1), UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-        XCTAssertEqual(brickViewController.brickCollectionView.brickLayout(brickViewController.layout, insetForSection: 2), 20)
-        XCTAssertEqual(brickViewController.brickCollectionView.brickLayout(brickViewController.layout, edgeInsetsForSection: 2), UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+        XCTAssertEqual(brickViewController.brickCollectionView.brickLayout(brickViewController.layout, insetFor: 1), 10)
+        XCTAssertEqual(brickViewController.brickCollectionView.brickLayout(brickViewController.layout, edgeInsetsFor: 1), UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        XCTAssertEqual(brickViewController.brickCollectionView.brickLayout(brickViewController.layout, insetFor: 2), 20)
+        XCTAssertEqual(brickViewController.brickCollectionView.brickLayout(brickViewController.layout, edgeInsetsFor: 2), UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
 
 
     }

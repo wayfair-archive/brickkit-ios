@@ -345,7 +345,7 @@ open class BrickCollectionView: UICollectionView {
                 insertedIndexPaths.append(contentsOf: indexPaths)
             }
 
-            if let sectionIndexPath = brickSection.indexPathForSection(section, in: self.collectionInfo) {
+            if let sectionIndexPath = brickSection.indexPathFor(section, in: self.collectionInfo) {
                 reloadIndexPaths.append(sectionIndexPath)
             }
         }

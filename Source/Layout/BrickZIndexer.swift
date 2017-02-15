@@ -177,7 +177,7 @@ class BrickZIndexer {
             maxZIndex += numberOfItems
             let sectionRange: CountableRange<Int> = 0..<numberOfItems
             let sectionStartIndex: Int
-            if let indexPath = dataSource.brickLayout(layout, indexPathForSection: section) {
+            if let indexPath = dataSource.brickLayout(layout, indexPathFor: section) {
 
                 let indexPathZIndex = self.zIndex(for: indexPath, withOffset: false)
                 sectionStartIndex = zIndexBehavior.startIndex(for: indexPathZIndex)
@@ -235,7 +235,7 @@ class BrickZIndexer {
 
     /// Update the count of the ranges to the parent section(s) of an inserted section
     fileprivate func updateRanges(to section: Int, with numberOfItems: Int, dataSource: BrickLayoutDataSource, layout: BrickFlowLayout) {
-        if let indexPath = dataSource.brickLayout(layout, indexPathForSection: section) {
+        if let indexPath = dataSource.brickLayout(layout, indexPathFor: section) {
             let ranges = sectionRanges[(indexPath as NSIndexPath).section]
                 var nextRange = false
                 for i in 0..<ranges.count {

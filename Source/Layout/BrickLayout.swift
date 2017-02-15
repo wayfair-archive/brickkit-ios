@@ -83,31 +83,31 @@ extension BrickLayoutAttributes {
 public protocol BrickLayoutDataSource: class {
     func brickLayout(_ layout: BrickLayout, widthForItemAt indexPath: IndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat
     func brickLayout(_ layout: BrickLayout, estimatedHeightForItemAt indexPath: IndexPath, containedIn width: CGFloat) -> CGFloat
-    func brickLayout(_ layout: BrickLayout, edgeInsetsForSection section: Int) -> UIEdgeInsets
-    func brickLayout(_ layout: BrickLayout, insetForSection section: Int) -> CGFloat
-    func brickLayout(_ layout: BrickLayout, isAlignRowHeightsForSection section: Int) -> Bool
-    func brickLayout(_ layout: BrickLayout, alignmentForSection section: Int) -> BrickAlignment
-    func brickLayout(_ layout: BrickLayout, brickLayoutTypeForItemAtIndexPath indexPath: IndexPath) -> BrickLayoutType
-    func brickLayout(_ layout: BrickLayout, identifierForIndexPath indexPath: IndexPath) -> String
-    func brickLayout(_ layout: BrickLayout, indexPathForSection section: Int) -> IndexPath?
-    func brickLayout(_ layout: BrickLayout, isEstimatedHeightForIndexPath indexPath: IndexPath) -> Bool
+    func brickLayout(_ layout: BrickLayout, edgeInsetsFor section: Int) -> UIEdgeInsets
+    func brickLayout(_ layout: BrickLayout, insetFor section: Int) -> CGFloat
+    func brickLayout(_ layout: BrickLayout, isAlignRowHeightsFor section: Int) -> Bool
+    func brickLayout(_ layout: BrickLayout, alignmentFor section: Int) -> BrickAlignment
+    func brickLayout(_ layout: BrickLayout, brickLayoutTypeForItemAt indexPath: IndexPath) -> BrickLayoutType
+    func brickLayout(_ layout: BrickLayout, identifierFor indexPath: IndexPath) -> String
+    func brickLayout(_ layout: BrickLayout, indexPathFor section: Int) -> IndexPath?
+    func brickLayout(_ layout: BrickLayout, isEstimatedHeightFor indexPath: IndexPath) -> Bool
 }
 
 extension BrickLayoutDataSource {
 
-    public func brickLayout(_ layout: BrickLayout, indexPathForSection section: Int) -> IndexPath? {
+    public func brickLayout(_ layout: BrickLayout, indexPathFor section: Int) -> IndexPath? {
         return nil
     }
 
-    func brickLayout(_ layout: BrickLayout, isEstimatedHeightForIndexPath indexPath: IndexPath) -> Bool {
+    func brickLayout(_ layout: BrickLayout, isEstimatedHeightFor indexPath: IndexPath) -> Bool {
         return true
     }
 
-    func brickLayout(_ layout: BrickLayout, isAlignRowHeightsForSection section: Int) -> Bool {
+    func brickLayout(_ layout: BrickLayout, isAlignRowHeightsFor section: Int) -> Bool {
         return false
     }
 
-    public func brickLayout(_ layout: BrickLayout, alignmentForSection section: Int) -> BrickAlignment {
+    public func brickLayout(_ layout: BrickLayout, alignmentFor section: Int) -> BrickAlignment {
         return BrickAlignment(horizontal: .left, vertical: .top)
     }
 

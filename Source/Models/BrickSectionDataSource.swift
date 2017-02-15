@@ -79,7 +79,7 @@ extension BrickSection {
         return brickAndIndex(at: indexPath, in: collection)?.1
     }
 
-    func indexPathForSection(_ section: Int, in collection: CollectionInfo) -> IndexPath? {
+    func indexPathFor(_ section: Int, in collection: CollectionInfo) -> IndexPath? {
         return sectionIndexPaths[collection]?[section] as IndexPath?
     }
 

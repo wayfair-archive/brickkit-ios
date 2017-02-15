@@ -11,7 +11,7 @@ import Foundation
 extension BrickCollectionView: BrickLayoutDataSource {
     
     public func brickLayout(_ layout: BrickLayout, widthForItemAt indexPath: IndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat {
-        let inset = self.brickLayout(layout, insetForSection: (indexPath as IndexPath).section)
+        let inset = self.brickLayout(layout, insetFor: (indexPath as IndexPath).section)
         let widthDimension = self.brick(at: indexPath).size.width
 
         let dimension = widthDimension.dimension(in: self)
@@ -22,7 +22,7 @@ extension BrickCollectionView: BrickLayoutDataSource {
         }
     }
 
-    public func brickLayout(_ layout: BrickLayout, isEstimatedHeightForIndexPath indexPath: IndexPath) -> Bool {
+    public func brickLayout(_ layout: BrickLayout, isEstimatedHeightFor indexPath: IndexPath) -> Bool {
         let brick = self.brick(at: indexPath)
         if brick is BrickSection {
             return false
@@ -41,9 +41,9 @@ extension BrickCollectionView: BrickLayoutDataSource {
         return heightDimension.value(for: width, startingAt: 0, in: self)
     }
 
-    public func brickLayout(_ layout: BrickLayout, edgeInsetsForSection section: Int) -> UIEdgeInsets {
+    public func brickLayout(_ layout: BrickLayout, edgeInsetsFor section: Int) -> UIEdgeInsets {
         guard
-            let indexPath = self.section.indexPathForSection(section, in: collectionInfo),
+            let indexPath = self.section.indexPathFor(section, in: collectionInfo),
             let brickSection = self.brick(at:indexPath) as? BrickSection
             else {
                 return UIEdgeInsets.zero
@@ -51,9 +51,9 @@ extension BrickCollectionView: BrickLayoutDataSource {
         return brickSection.edgeInsets
     }
 
-    public func brickLayout(_ layout: BrickLayout, insetForSection section: Int) -> CGFloat {
+    public func brickLayout(_ layout: BrickLayout, insetFor section: Int) -> CGFloat {
         guard
-            let indexPath = self.section.indexPathForSection(section, in: collectionInfo),
+            let indexPath = self.section.indexPathFor(section, in: collectionInfo),
             let brickSection = self.brick(at:indexPath) as? BrickSection
             else {
                 return 0
@@ -61,9 +61,9 @@ extension BrickCollectionView: BrickLayoutDataSource {
         return brickSection.inset
     }
 
-    public func brickLayout(_ layout: BrickLayout, isAlignRowHeightsForSection section: Int) -> Bool {
+    public func brickLayout(_ layout: BrickLayout, isAlignRowHeightsFor section: Int) -> Bool {
         guard
-            let indexPath = self.section.indexPathForSection(section, in: collectionInfo),
+            let indexPath = self.section.indexPathFor(section, in: collectionInfo),
             let brickSection = self.brick(at:indexPath) as? BrickSection
             else {
                 return false
@@ -71,9 +71,9 @@ extension BrickCollectionView: BrickLayoutDataSource {
         return brickSection.alignRowHeights
     }
 
-    public func brickLayout(_ layout: BrickLayout, alignmentForSection section: Int) -> BrickAlignment {
+    public func brickLayout(_ layout: BrickLayout, alignmentFor section: Int) -> BrickAlignment {
         guard
-            let indexPath = self.section.indexPathForSection(section, in: collectionInfo),
+            let indexPath = self.section.indexPathFor(section, in: collectionInfo),
             let brickSection = self.brick(at:indexPath) as? BrickSection
             else {
                 return BrickAlignment(horizontal: .left, vertical: .top)
@@ -81,7 +81,7 @@ extension BrickCollectionView: BrickLayoutDataSource {
         return brickSection.alignment
     }
 
-    public func brickLayout(_ layout: BrickLayout, brickLayoutTypeForItemAtIndexPath indexPath: IndexPath) -> BrickLayoutType {
+    public func brickLayout(_ layout: BrickLayout, brickLayoutTypeForItemAt indexPath: IndexPath) -> BrickLayoutType {
         let brick = self.brick(at:indexPath)
         if brick is BrickSection {
             return .section(sectionIndex: self.section.sectionIndexForSectionAtIndexPath(indexPath, in: collectionInfo)!) // We can safely unwrap, because this function will always return a value as the model knows it's a section
@@ -90,11 +90,11 @@ extension BrickCollectionView: BrickLayoutDataSource {
         return .brick
     }
 
-    public func brickLayout(_ layout: BrickLayout, identifierForIndexPath indexPath: IndexPath) -> String {
+    public func brickLayout(_ layout: BrickLayout, identifierFor indexPath: IndexPath) -> String {
         return self.section.brick(at:indexPath, in: collectionInfo)!.identifier
     }
 
-    public func brickLayout(_ layout: BrickLayout, indexPathForSection section: Int) -> IndexPath? {
+    public func brickLayout(_ layout: BrickLayout, indexPathFor section: Int) -> IndexPath? {
         return self.section.sectionIndexPaths[collectionInfo]?[section] as IndexPath?
     }
 }

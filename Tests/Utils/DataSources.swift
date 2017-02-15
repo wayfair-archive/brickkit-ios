@@ -64,7 +64,7 @@ class SectionsLayoutDataSource: NSObject, BrickLayoutDataSource {
         } else {
             ratio = sectionWidthRatios[(indexPath as IndexPath).item]
         }
-        return BrickUtils.calculateWidth(for: ratio, widthRatio: widthRatio, totalWidth: totalWidth, inset: self.brickLayout(layout, insetForSection: (indexPath as IndexPath).section))
+        return BrickUtils.calculateWidth(for: ratio, widthRatio: widthRatio, totalWidth: totalWidth, inset: self.brickLayout(layout, insetFor: (indexPath as IndexPath).section))
     }
 
     func brickLayout(_ layout: BrickLayout, estimatedHeightForItemAt indexPath: IndexPath, containedIn width: CGFloat) -> CGFloat {
@@ -76,7 +76,7 @@ class SectionsLayoutDataSource: NSObject, BrickLayoutDataSource {
         }
     }
 
-    func brickLayout(_ layout: BrickLayout, edgeInsetsForSection section: Int) -> UIEdgeInsets {
+    func brickLayout(_ layout: BrickLayout, edgeInsetsFor section: Int) -> UIEdgeInsets {
         if edgeInsets.count <= section {
             return edgeInsets.last ?? UIEdgeInsets.zero
         } else {
@@ -84,7 +84,7 @@ class SectionsLayoutDataSource: NSObject, BrickLayoutDataSource {
         }
     }
 
-    func brickLayout(_ layout: BrickLayout, insetForSection section: Int) -> CGFloat {
+    func brickLayout(_ layout: BrickLayout, insetFor section: Int) -> CGFloat {
         if insets.count <= section {
             return insets.last ?? 0
         } else {
@@ -92,7 +92,7 @@ class SectionsLayoutDataSource: NSObject, BrickLayoutDataSource {
         }
     }
 
-    func brickLayout(_ layout: BrickLayout, brickLayoutTypeForItemAtIndexPath indexPath: IndexPath) -> BrickLayoutType {
+    func brickLayout(_ layout: BrickLayout, brickLayoutTypeForItemAt indexPath: IndexPath) -> BrickLayoutType {
         let sectionTypes = types[(indexPath as IndexPath).section]
         if sectionTypes.count <= (indexPath as IndexPath).item {
             return sectionTypes.last ?? .brick
@@ -101,11 +101,11 @@ class SectionsLayoutDataSource: NSObject, BrickLayoutDataSource {
         }
     }
 
-    func brickLayout(_ layout: BrickLayout, identifierForIndexPath indexPath: IndexPath) -> String {
+    func brickLayout(_ layout: BrickLayout, identifierFor indexPath: IndexPath) -> String {
         return ""
     }
 
-    func brickLayout(_ layout: BrickLayout, indexPathForSection section: Int) -> IndexPath? {
+    func brickLayout(_ layout: BrickLayout, indexPathFor section: Int) -> IndexPath? {
         for (sectionIndex, type) in types.enumerated() {
             for (itemIndex, t) in type.enumerated() {
                 switch t {
@@ -219,15 +219,15 @@ class FixedBrickLayoutDataSource: NSObject, BrickLayoutDataSource {
         return height
     }
 
-    func brickLayout(_ layout: BrickLayout, edgeInsetsForSection section: Int) -> UIEdgeInsets {
+    func brickLayout(_ layout: BrickLayout, edgeInsetsFor section: Int) -> UIEdgeInsets {
         return edgeInsets
     }
 
-    func brickLayout(_ layout: BrickLayout, insetForSection section: Int) -> CGFloat {
+    func brickLayout(_ layout: BrickLayout, insetFor section: Int) -> CGFloat {
         return inset
     }
 
-    func brickLayout(_ layout: BrickLayout, brickLayoutTypeForItemAtIndexPath indexPath: IndexPath) -> BrickLayoutType {
+    func brickLayout(_ layout: BrickLayout, brickLayoutTypeForItemAt indexPath: IndexPath) -> BrickLayoutType {
         return type
     }
 
@@ -235,7 +235,7 @@ class FixedBrickLayoutDataSource: NSObject, BrickLayoutDataSource {
         return false
     }
 
-    func brickLayout(_ layout: BrickLayout, identifierForIndexPath indexPath: IndexPath) -> String {
+    func brickLayout(_ layout: BrickLayout, identifierFor indexPath: IndexPath) -> String {
         return ""
     }
 }

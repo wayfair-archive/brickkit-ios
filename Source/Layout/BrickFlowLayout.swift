@@ -197,7 +197,7 @@ open class BrickFlowLayout: UICollectionViewLayout, BrickLayout {
                 var downstreamIndexPaths = [IndexPath]()
                 for item in 0..<_collectionView.numberOfItems(inSection: section) {
                     let indexPath = IndexPath(item: item, section: section)
-                    let identifier = _dataSource.brickLayout(self, identifierForIndexPath: indexPath)
+                    let identifier = _dataSource.brickLayout(self, identifierFor: indexPath)
                     for behavior in downstreamBehaviors {
                         if behavior.shouldUseForDownstreamCalculation(for: indexPath, with: identifier, for: self) {
                             downstreamIndexPaths.append(indexPath)
@@ -233,14 +233,14 @@ open class BrickFlowLayout: UICollectionViewLayout, BrickLayout {
             return
         }
 
-        if let indexPath = dataSource?.brickLayout(self, indexPathForSection: section) {
+        if let indexPath = dataSource?.brickLayout(self, indexPathFor: section) {
             brickSection.sectionAttributes = self.layoutAttributesForItem(at: indexPath) as? BrickLayoutAttributes
         }
 
         let height = brickSection.frame.height
         self.updateNumberOfItems(brickSection, numberOfItems: numberOfItems)
 
-        guard let indexPath = dataSource?.brickLayout(self, indexPathForSection: section) else {
+        guard let indexPath = dataSource?.brickLayout(self, indexPathFor: section) else {
             return
         }
 
@@ -250,7 +250,7 @@ open class BrickFlowLayout: UICollectionViewLayout, BrickLayout {
     }
 
     internal func updateHeight(_ indexPath: IndexPath, newHeight: CGFloat) {
-        if _dataSource.brickLayout(self, isEstimatedHeightForIndexPath: indexPath) {
+        if _dataSource.brickLayout(self, isEstimatedHeightFor: indexPath) {
             let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: indexPath, newHeight: newHeight))
             invalidateLayout(with: context)
         }
@@ -405,27 +405,27 @@ extension BrickFlowLayout: BrickLayoutSectionDelegate {
 extension BrickFlowLayout: BrickLayoutSectionDataSource {
 
     func edgeInsets(in section: BrickLayoutSection) -> UIEdgeInsets {
-        return _dataSource.brickLayout(self, edgeInsetsForSection: section.sectionIndex)
+        return _dataSource.brickLayout(self, edgeInsetsFor: section.sectionIndex)
     }
 
     func inset(in section: BrickLayoutSection) -> CGFloat {
-        return _dataSource.brickLayout(self, insetForSection: section.sectionIndex)
+        return _dataSource.brickLayout(self, insetFor: section.sectionIndex)
     }
 
     func isAlignRowHeights(in section: BrickLayoutSection) -> Bool {
-        return _dataSource.brickLayout(self, isAlignRowHeightsForSection: section.sectionIndex)
+        return _dataSource.brickLayout(self, isAlignRowHeightsFor: section.sectionIndex)
     }
 
     func aligment(in section: BrickLayoutSection) -> BrickAlignment {
-        return _dataSource.brickLayout(self, alignmentForSection: section.sectionIndex)
+        return _dataSource.brickLayout(self, alignmentFor: section.sectionIndex)
     }
 
     func identifier(for index: Int, in section: BrickLayoutSection) -> String {
-        return _dataSource.brickLayout(self, identifierForIndexPath: IndexPath(item: index, section: section.sectionIndex))
+        return _dataSource.brickLayout(self, identifierFor: IndexPath(item: index, section: section.sectionIndex))
     }
 
     func isEstimate(for attributes: BrickLayoutAttributes, in section: BrickLayoutSection) -> Bool {
-        return _dataSource.brickLayout(self, isEstimatedHeightForIndexPath: attributes.indexPath)
+        return _dataSource.brickLayout(self, isEstimatedHeightFor: attributes.indexPath)
     }
 
     func width(for index: Int, totalWidth: CGFloat, startingAt origin: CGFloat, in section: BrickLayoutSection) -> CGFloat {
@@ -446,7 +446,7 @@ extension BrickFlowLayout: BrickLayoutSectionDataSource {
             attributes.isHidden = true
         }
 
-        let type = _dataSource.brickLayout(self, brickLayoutTypeForItemAtIndexPath: indexPath)
+        let type = _dataSource.brickLayout(self, brickLayoutTypeForItemAt: indexPath)
         switch type {
         case .brick: break
         case .section(let section):
@@ -470,12 +470,12 @@ extension BrickFlowLayout: BrickLayoutSectionDataSource {
     func size(for attributes: BrickLayoutAttributes, containedIn width: CGFloat, in section: BrickLayoutSection) -> CGSize {
         let indexPath = attributes.indexPath
 
-        let type = _dataSource.brickLayout(self, brickLayoutTypeForItemAtIndexPath: indexPath)
+        let type = _dataSource.brickLayout(self, brickLayoutTypeForItemAt: indexPath)
         var size: CGSize = .zero
         switch type {
         case .brick:
             // Check if the attributes already had a height. If so, use that height
-            if attributes.frame.height != 0 && _dataSource.brickLayout(self, isEstimatedHeightForIndexPath: indexPath) {
+            if attributes.frame.height != 0 && _dataSource.brickLayout(self, isEstimatedHeightFor: indexPath) {
                 let height = attributes.frame.size.height
                 size = CGSize(width: width, height: height)
             } else {
@@ -531,13 +531,13 @@ extension BrickFlowLayout: BrickLayoutInvalidationProvider {
         let currentFrame = section.frame
         action()
 
-        guard let indexPathForSection = dataSource?.brickLayout(self, indexPathForSection: section.sectionIndex) else {
+        guard let indexPathFor = dataSource?.brickLayout(self, indexPathFor: section.sectionIndex) else {
             return
         }
 
         if section.frame.size.height != currentFrame.size.height {
             // If the frame is changed, it's should update the frame of the section above
-            updateHeight(for: indexPathForSection, with: section.frame.height, updatedAttributes: updatedAttributes)
+            updateHeight(for: indexPathFor, with: section.frame.height, updatedAttributes: updatedAttributes)
         }
     }
 
@@ -584,14 +584,14 @@ extension BrickFlowLayout: BrickLayoutInvalidationProvider {
     }
 
     public func layoutAttributesForSection(_ section: Int) -> BrickLayoutAttributes? {
-        if let indexPath = dataSource?.brickLayout(self, indexPathForSection: section) {
+        if let indexPath = dataSource?.brickLayout(self, indexPathFor: section) {
             return self.layoutAttributesForItem(at: indexPath) as? BrickLayoutAttributes
         }
         return nil
     }
 
     fileprivate func attributesWereUpdated(_ attributes: BrickLayoutAttributes, oldFrame: CGRect?, fromBehaviors: Bool, updatedAttributes: @escaping OnAttributesUpdatedHandler) {
-        let type = _dataSource.brickLayout(self, brickLayoutTypeForItemAtIndexPath: attributes.indexPath)
+        let type = _dataSource.brickLayout(self, brickLayoutTypeForItemAt: attributes.indexPath)
         switch type {
         case .section(let section):
             if let brickSection = self.sections?[section] {
@@ -634,7 +634,7 @@ extension BrickFlowLayout: BrickLayoutInvalidationProvider {
                 })
             }
 
-            let type = _dataSource.brickLayout(self, brickLayoutTypeForItemAtIndexPath: attributes.indexPath)
+            let type = _dataSource.brickLayout(self, brickLayoutTypeForItemAt: attributes.indexPath)
             switch type {
             case .section(let sectionIndex):
                 if let brickSection = sections?[sectionIndex] {
@@ -647,8 +647,8 @@ extension BrickFlowLayout: BrickLayoutInvalidationProvider {
 
         if section.frame != currentFrame {
             // If the frame is changed, it's should update the frame of the section above
-            if let indexPathForSection = _dataSource.brickLayout(self, indexPathForSection: section.sectionIndex) {
-                updateHeight(for: indexPathForSection, with: section.frame.height, updatedAttributes: updatedAttributes)
+            if let indexPathFor = _dataSource.brickLayout(self, indexPathFor: section.sectionIndex) {
+                updateHeight(for: indexPathFor, with: section.frame.height, updatedAttributes: updatedAttributes)
             }
         }
 
@@ -689,7 +689,7 @@ extension BrickFlowLayout {
                 continue
             }
 
-            switch _dataSource.brickLayout(self, brickLayoutTypeForItemAtIndexPath: indexPath) {
+            switch _dataSource.brickLayout(self, brickLayoutTypeForItemAt: indexPath) {
             case .brick:
                 invalidateLayout(with: BrickLayoutInvalidationContext(type: .invalidateHeight(indexPath: indexPath)))
             default: break
