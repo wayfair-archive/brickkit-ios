@@ -59,6 +59,6 @@ extension ImagesInCollectionBrickViewController: ImageBrickDataSource {
     }
 
     func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIViewContentMode {
-        return .ScaleAspectFill
+        return .scaleAspectFill
     }
 }

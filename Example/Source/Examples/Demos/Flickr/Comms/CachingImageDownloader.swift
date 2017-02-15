@@ -24,31 +24,32 @@ class CachedImage {
 
 class CachingImageDownloader: ImageDownloader {
     
-    private let cache = NSCache() //<NSURL, ChachedImage>() <-- For Swift 3.0
+    private let cache = NSCache<NSURL, CachedImage>() //<NSURL, ChachedImage>() <-- For Swift 3.0
     var metaDataHandler: ((UIImage) -> Bool)? = nil
 
-    func downloadImage(with imageURL: NSURL, onCompletion completionHandler: ((image: UIImage, url: NSURL) -> Void)) {
-        if let cachedImage = cache.objectForKey(imageURL) as? CachedImage, let imageData = cachedImage.imageData, let image = UIImage(data: imageData) {
-            completionHandler(image: image, url: imageURL)
+    func downloadImage(with imageURL: URL, onCompletion completionHandler: @escaping ((_ image: UIImage, _ url: URL) -> Void)) {
+        if let cachedImage = cache.object(forKey: imageURL as NSURL), let imageData = cachedImage.imageData, let image = UIImage(data: imageData as Data) {
+            completionHandler(image, imageURL)
             return
         }
         
         
-        NSURLSession.sharedSession().dataTaskWithURL(imageURL, completionHandler: { (data, response, error) in
+        URLSession.shared.dataTask(with: imageURL, completionHandler: { (data, response, error) in
             guard
-                let data = data where error == nil,
+                let data = data , error == nil,
                 let image = UIImage(data: data)
                 else { return }
             
             
-            let cached = CachedImage(imageData: data, url: imageURL, expirationDate: NSDate())
+            let cached = CachedImage(imageData: data as NSData?, url: imageURL as NSURL, expirationDate: NSDate())
             cached.hasImage = self.metaDataHandler?(image) ?? true
             self.cache.setObject(cached, forKey: imageURL as NSURL)
             if !cached.hasImage {
                 return
             }
             
-            completionHandler(image: image, url: imageURL)
+            completionHandler(image, imageURL as URL)
         }).resume()
     }
+    
 }

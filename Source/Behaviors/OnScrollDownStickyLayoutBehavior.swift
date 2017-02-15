@@ -9,17 +9,17 @@
 import Foundation
 
 /// An OnScrollDownStickyLayoutBehavior will reveal certain bricks (based on the dataSource) when scroll back down
-public class OnScrollDownStickyLayoutBehavior: StickyLayoutBehavior {
-    private var lastCollectionViewContentOffset: CGPoint = CGPoint.zero
+open class OnScrollDownStickyLayoutBehavior: StickyLayoutBehavior {
+    fileprivate var lastCollectionViewContentOffset: CGPoint = CGPoint.zero
     
-    private var currentlyScrollingDown = false {
+    fileprivate var currentlyScrollingDown = false {
         didSet {
             directionChanged = oldValue != currentlyScrollingDown
         }
     }
-    private var directionChanged = false
+    fileprivate var directionChanged = false
 
-    public override func invalidateInCollectionViewLayout(collectionViewLayout: UICollectionViewLayout, inout contentSize: CGSize, attributesDidUpdate: (attributes: BrickLayoutAttributes, oldFrame: CGRect?) -> Void) {
+    open override func invalidateInCollectionViewLayout(_ collectionViewLayout: UICollectionViewLayout, contentSize: inout CGSize, attributesDidUpdate: (_ attributes: BrickLayoutAttributes, _ oldFrame: CGRect?) -> Void) {
         let collectionView = collectionViewLayout.collectionView!
 
         guard lastCollectionViewContentOffset.y != collectionView.contentOffset.y else {
@@ -32,23 +32,23 @@ public class OnScrollDownStickyLayoutBehavior: StickyLayoutBehavior {
         super.invalidateInCollectionViewLayout(collectionViewLayout, contentSize: &contentSize, attributesDidUpdate: attributesDidUpdate)
     }
 
-    override func updateStickyAttributesInCollectionView(collectionViewLayout: UICollectionViewLayout, attributesDidUpdate: (attributes: BrickLayoutAttributes, oldFrame: CGRect?) -> Void) {
+    override func updateStickyAttributesInCollectionView(_ collectionViewLayout: UICollectionViewLayout, attributesDidUpdate: (_ attributes: BrickLayoutAttributes, _ oldFrame: CGRect?) -> Void) {
         if directionChanged {
             //Sort the attributes ascending
-            stickyAttributes.sortInPlace {
-                $0.indexPath.section <= $1.indexPath.section && $0.indexPath.item > $1.indexPath.item
+            stickyAttributes.sort {
+                ($0.indexPath as IndexPath).section <= ($1.indexPath as NSIndexPath).section && ($0.indexPath as NSIndexPath).item > ($1.indexPath as NSIndexPath).item
             }
         } else {
             //Sort the attributes decending
-            stickyAttributes.sortInPlace({
-                $0.indexPath.section >= $1.indexPath.section && $0.indexPath.item < $1.indexPath.item
+            stickyAttributes.sort(by: {
+                ($0.indexPath as IndexPath).section >= ($1.indexPath as NSIndexPath).section && ($0.indexPath as NSIndexPath).item < ($1.indexPath as NSIndexPath).item
             })
         }
 
         super.updateStickyAttributesInCollectionView(collectionViewLayout, attributesDidUpdate: attributesDidUpdate)
     }
 
-    override func updateFrameForAttribute(inout attributes:BrickLayoutAttributes, sectionAttributes: BrickLayoutAttributes?, lastStickyFrame: CGRect, contentBounds: CGRect, collectionViewLayout: UICollectionViewLayout) -> Bool {
+    override func updateFrameForAttribute(_ attributes:inout BrickLayoutAttributes, sectionAttributes: BrickLayoutAttributes?, lastStickyFrame: CGRect, contentBounds: CGRect, collectionViewLayout: UICollectionViewLayout) -> Bool {
         if currentlyScrollingDown {
             let topInset = collectionViewLayout.collectionView!.contentInset.top
             if directionChanged {

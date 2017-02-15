@@ -11,23 +11,23 @@ import Foundation
 private let stickyZIndex = 1000
 
 public protocol StickyLayoutBehaviorDataSource: class {
-    func stickyLayoutBehavior(behavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool
+    func stickyLayoutBehavior(_ behavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool
 }
 
 public protocol StickyLayoutBehaviorDelegate: class {
-    func stickyLayoutBehavior(behavior: StickyLayoutBehavior, brickIsStickingWithPercentage percentage: CGFloat, forItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout)
+    func stickyLayoutBehavior(_ behavior: StickyLayoutBehavior, brickIsStickingWithPercentage percentage: CGFloat, forItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout)
 }
 
 /// A StickyLayoutBehavior will stick certain bricks (based on the dataSource) on the top of its section
-public class StickyLayoutBehavior: BrickLayoutBehavior {
+open class StickyLayoutBehavior: BrickLayoutBehavior {
     weak var dataSource: StickyLayoutBehaviorDataSource?
     weak var delegate: StickyLayoutBehaviorDelegate?
-    public var contentOffset: CGFloat
+    open var contentOffset: CGFloat
     var stickyAttributes: [BrickLayoutAttributes]!
 
-    private(set) var stickyZIndex = 1
+    fileprivate(set) var stickyZIndex = 1
 
-    public var canStackWithOtherSections = false
+    open var canStackWithOtherSections = false
 
     public init(dataSource: StickyLayoutBehaviorDataSource, delegate: StickyLayoutBehaviorDelegate? = nil, contentOffset: CGFloat = 0) {
         self.dataSource = dataSource
@@ -35,51 +35,51 @@ public class StickyLayoutBehavior: BrickLayoutBehavior {
         self.contentOffset = contentOffset
     }
 
-    public override func resetRegisteredAttributes(collectionViewLayout: UICollectionViewLayout) {
+    open override func resetRegisteredAttributes(_ collectionViewLayout: UICollectionViewLayout) {
         super.resetRegisteredAttributes(collectionViewLayout)
         stickyAttributes = []
     }
 
-    public override func registerAttributes(attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
+    open override func registerAttributes(_ attributes: BrickLayoutAttributes, for collectionViewLayout: UICollectionViewLayout) {
         if dataSource?.stickyLayoutBehavior(self, shouldStickItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) == true {
             stickyAttributes.append(attributes)
         }
     }
 
-    public override func invalidateInCollectionViewLayout(collectionViewLayout: UICollectionViewLayout, inout contentSize: CGSize, attributesDidUpdate: (attributes: BrickLayoutAttributes, oldFrame: CGRect?) -> Void) {
+    open override func invalidateInCollectionViewLayout(_ collectionViewLayout: UICollectionViewLayout, contentSize: inout CGSize, attributesDidUpdate: (_ attributes: BrickLayoutAttributes, _ oldFrame: CGRect?) -> Void) {
         updateStickyAttributesInCollectionView(collectionViewLayout, attributesDidUpdate: attributesDidUpdate)
     }
 
-    func updateStickyAttributesInCollectionView(collectionViewLayout: UICollectionViewLayout, attributesDidUpdate: (attributes: BrickLayoutAttributes, oldFrame: CGRect?) -> Void) {
+    func updateStickyAttributesInCollectionView(_ collectionViewLayout: UICollectionViewLayout, attributesDidUpdate: (_ attributes: BrickLayoutAttributes, _ oldFrame: CGRect?) -> Void) {
         var lastStickyFrame = CGRect()
         var section: Int = 0
-        for (index, brickAttribute) in stickyAttributes.enumerate() {
-            guard !brickAttribute.hidden else {
+        for (index, brickAttribute) in stickyAttributes.enumerated() {
+            guard !brickAttribute.isHidden else {
                 continue
             }
-            let sectionAttributes: BrickLayoutAttributes? = sectionAttributesForIndexPath(for: brickAttribute.indexPath, in: collectionViewLayout)
+            let secAttributes: BrickLayoutAttributes? = sectionAttributes(for: brickAttribute.indexPath, in: collectionViewLayout)
 
-            if !canStackWithOtherSections && section != brickAttribute.indexPath.section {
-                section = brickAttribute.indexPath.section
-                lastStickyFrame.origin = sectionAttributes?.frame.origin ?? CGPoint.zero
-                lastStickyFrame.size = CGSizeZero
+            if !canStackWithOtherSections && section != (brickAttribute.indexPath as IndexPath).section {
+                section = (brickAttribute.indexPath as IndexPath).section
+                lastStickyFrame.origin = secAttributes?.frame.origin ?? CGPoint.zero
+                lastStickyFrame.size = CGSize.zero
             }
 
             var brickAttributes = brickAttribute
             let oldFrame = brickAttributes.frame
-            lastStickyFrame = self.updateStickyAttribute(&brickAttributes, sectionAttributes: sectionAttributes, inCollectionViewLayout: collectionViewLayout, withStickyIndex: index, withLastStickyFrame: lastStickyFrame)
+            lastStickyFrame = self.updateStickyAttribute(&brickAttributes, sectionAttributes: secAttributes, inCollectionViewLayout: collectionViewLayout, withStickyIndex: index, withLastStickyFrame: lastStickyFrame)
 
             if oldFrame != brickAttributes.frame {
-                attributesDidUpdate(attributes: brickAttributes, oldFrame: oldFrame)
+                attributesDidUpdate(brickAttributes, oldFrame)
             }
         }
     }
 
-    private func updateStickyAttribute(inout attributes: BrickLayoutAttributes, sectionAttributes: BrickLayoutAttributes?, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout, withStickyIndex stickyIndex:Int, withLastStickyFrame lastStickyFrame: CGRect) -> CGRect {
+    fileprivate func updateStickyAttribute(_ attributes: inout BrickLayoutAttributes, sectionAttributes: BrickLayoutAttributes?, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout, withStickyIndex stickyIndex:Int, withLastStickyFrame lastStickyFrame: CGRect) -> CGRect {
         let collectionView = collectionViewLayout.collectionView!
 
         let shouldConstrain = updateFrameForAttribute(&attributes, sectionAttributes: sectionAttributes, lastStickyFrame: lastStickyFrame, contentBounds: collectionView.bounds, collectionViewLayout: collectionViewLayout)
-        let containedInFrame = sectionAttributes.map({ $0.frame }) ?? CGRect(origin: CGPoint.zero, size: collectionViewLayout.collectionViewContentSize())
+        let containedInFrame = sectionAttributes.map({ $0.frame }) ?? CGRect(origin: CGPoint.zero, size: collectionViewLayout.collectionViewContentSize)
         if shouldConstrain && !containedInFrame.contains(attributes.frame) {
             //constain to top
             var originY = max(containedInFrame.origin.y, attributes.frame.origin.y)
@@ -102,7 +102,7 @@ public class StickyLayoutBehavior: BrickLayoutBehavior {
     }
 
     /// - returns: True is the attribute should be constrainted
-    func updateFrameForAttribute(inout attributes:BrickLayoutAttributes, sectionAttributes: BrickLayoutAttributes?, lastStickyFrame: CGRect, contentBounds: CGRect, collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func updateFrameForAttribute(_ attributes:inout BrickLayoutAttributes, sectionAttributes: BrickLayoutAttributes?, lastStickyFrame: CGRect, contentBounds: CGRect, collectionViewLayout: UICollectionViewLayout) -> Bool {
 
         let topInset = collectionViewLayout.collectionView!.contentInset.top
 

@@ -23,11 +23,11 @@ class BlockHorizontalViewController: BrickViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = .brickBackground
-        self.layout.scrollDirection = .Horizontal
+        self.layout.scrollDirection = .horizontal
         self.brickCollectionView.registerBrickClass(ImageBrick.self)
 
         let section = BrickSection(backgroundColor: .brickGray1, bricks: [
-            ImageBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 1/4), height: .Ratio(ratio: 1), backgroundColor: .brickGray3, dataSource: self),
+            ImageBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 1/4), height: .ratio(ratio: 1), backgroundColor: .brickGray3, dataSource: self),
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
         section.repeatCountDataSource = self
 
@@ -54,6 +54,6 @@ extension BlockHorizontalViewController: ImageBrickDataSource {
     }
 
     func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIViewContentMode {
-        return .ScaleAspectFill
+        return .scaleAspectFill
     }
 }

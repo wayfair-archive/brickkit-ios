@@ -10,22 +10,22 @@ import Foundation
 
 private let MaximumScaleFactor: CGFloat = 1.0
 
-public class CoverFlowLayoutBehavior: BrickLayoutBehavior {
-    private let minimumScaleFactor: CGFloat
+open class CoverFlowLayoutBehavior: BrickLayoutBehavior {
+    fileprivate let minimumScaleFactor: CGFloat
 
     public init(minimumScaleFactor: CGFloat) {
         self.minimumScaleFactor = minimumScaleFactor
         super.init()
     }
 
-    public override func registerAttributes(attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
-        guard attributes.indexPath.section != 0 else {
+    open override func registerAttributes(_ attributes: BrickLayoutAttributes, for collectionViewLayout: UICollectionViewLayout) {
+        guard (attributes.indexPath as IndexPath).section != 0 else {
             return
         }
-        attributes.transform = CGAffineTransformMakeScale(minimumScaleFactor, minimumScaleFactor)
+        attributes.transform = CGAffineTransform(scaleX: minimumScaleFactor, y: minimumScaleFactor)
     }
 
-    public override func invalidateInCollectionViewLayout(collectionViewLayout: UICollectionViewLayout, inout contentSize: CGSize, attributesDidUpdate: (attributes: BrickLayoutAttributes, oldFrame: CGRect?) -> Void) {
+    open override func invalidateInCollectionViewLayout(_ collectionViewLayout: UICollectionViewLayout, contentSize: inout CGSize, attributesDidUpdate: (_ attributes: BrickLayoutAttributes, _ oldFrame: CGRect?) -> Void) {
         guard let collectionView = collectionViewLayout.collectionView else {
             return
         }
@@ -35,13 +35,13 @@ public class CoverFlowLayoutBehavior: BrickLayoutBehavior {
         let visibleRectCenter = visibleContentRect.midX
 
 
-        guard let attributes = collectionViewLayout.layoutAttributesForElementsInRect(visibleContentRect) as? [BrickLayoutAttributes] else {
+        guard let attributes = collectionViewLayout.layoutAttributesForElements(in: visibleContentRect) as? [BrickLayoutAttributes] else {
             return
         }
 
         // Scale each on-screen cell according to how far it is from the center
         for anAttribute in attributes {
-            guard anAttribute.indexPath.section != 0 else {
+            guard (anAttribute.indexPath as IndexPath).section != 0 else {
                 continue
             }
 
@@ -55,8 +55,8 @@ public class CoverFlowLayoutBehavior: BrickLayoutBehavior {
             let finalScaleFactor = min(max(self.minimumScaleFactor, baseScaleFactor), MaximumScaleFactor)
 
             let oldFrame = anAttribute.frame
-            anAttribute.transform = CGAffineTransformMakeScale(finalScaleFactor, finalScaleFactor)
-            attributesDidUpdate(attributes: anAttribute, oldFrame: oldFrame)
+            anAttribute.transform = CGAffineTransform(scaleX: finalScaleFactor, y: finalScaleFactor)
+            attributesDidUpdate(anAttribute, oldFrame)
         }
     }
 }

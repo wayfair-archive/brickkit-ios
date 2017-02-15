@@ -20,15 +20,15 @@ public struct BrickAlignment {
 
 /// Enum that indicates how bricks should be aligned horizontally within the same row
 public enum BrickHorizontalAlignment {
-    case Left
-    case Right
-    case Center
-    case Justified
+    case left
+    case right
+    case center
+    case justified
 }
 
 /// Enum that indicates how bricks should be aligned vertically within the same row
 public enum BrickVerticalAlignment {
-    case Top
-    case Bottom
-    case Center
+    case top
+    case bottom
+    case center
 }

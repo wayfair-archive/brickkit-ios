@@ -20,7 +20,7 @@ public protocol BrickRepeatCountDataSource: class {
 
 /// This can be used to hide/show bricks. This can be set on a `BrickLayout` 
 public protocol HideBehaviorDataSource: class {
-    func hideBehaviorDataSource(shouldHideItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool
+    func hideBehaviorDataSource(shouldHideItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool
 }
 
 #if os(tvOS)
@@ -35,5 +35,31 @@ public protocol FocusableBrickCell {
     ///
     /// - returns: if brick should lose focus
     func willUnfocus() -> Bool
+}
+    
+extension LabelBrickCell: FocusableBrickCell {
+    
+    dynamic override public var allowsFocus: Bool {
+        get {
+            return true
+        }
+        set {
+            super.allowsFocus = true
+        }
+    }
+    
+    public func willFocus() -> Bool {
+        self.contentView.layer.borderWidth = 5
+        self.contentView.layer.borderColor = UIColor(white: 192/255.0, alpha: 1.0).cgColor
+        
+        return true
+    }
+    
+    public func willUnfocus() -> Bool {
+        self.contentView.layer.borderWidth = 0
+        self.contentView.layer.borderColor = UIColor.clear.cgColor
+        
+        return true
+    }
 }
 #endif

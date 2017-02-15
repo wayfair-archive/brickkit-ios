@@ -17,7 +17,7 @@ class BrickAppearBehaviorTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        attributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: NSIndexPath(forItem: 0, inSection: 0))
+        attributes = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: 0, section: 0))
         attributes.frame = CGRect(x: 0, y: 0, width: 320, height: 200)
         brickCollectionView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
         brickCollectionView.contentSize = brickCollectionView.frame.size

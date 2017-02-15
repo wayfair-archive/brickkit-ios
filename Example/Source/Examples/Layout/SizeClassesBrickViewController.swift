@@ -30,11 +30,11 @@ class SizeClassesBrickViewController: BrickViewController {
         self.registerBrickClass(SizeClassBrick.self)
         self.registerBrickClass(TestBrick.self)
 
-        sizeClassFull = SizeClassBrick("Full", width: .Ratio(ratio: 1), backgroundColor: .brickSection)
+        sizeClassFull = SizeClassBrick("Full", width: .ratio(ratio: 1), backgroundColor: .brickSection)
         sizeClassFull.color = .brickGray3
         sizeClassFull.text = "Should be 100px Height"
 
-        sizeClassHalf = SizeClassBrick("Half", width: .Ratio(ratio: 0.5), backgroundColor: .brickSection)
+        sizeClassHalf = SizeClassBrick("Half", width: .ratio(ratio: 0.5), backgroundColor: .brickSection)
         sizeClassHalf.color = .brickGray5
 
         let section = BrickSection("Size Classes", bricks: [
@@ -49,7 +49,7 @@ class SizeClassesBrickViewController: BrickViewController {
     }
 
     func updateLabels() {
-        let isCompact = self.traitCollection.horizontalSizeClass == .Compact
+        let isCompact = self.traitCollection.horizontalSizeClass == .compact
         if isCompact {
             sizeClassFull.text = "COMPACT - SHOULD BE 100px"
             sizeClassHalf.text = "COMPACT - SHOULD BE 100px"

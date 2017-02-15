@@ -40,7 +40,7 @@ class AdvancedRepeatViewController: BrickApp.BaseBrickController {
         registerBrickClass(LabelBrick.self)
         registerBrickClass(ButtonBrick.self)
 
-        loadButton = ButtonBrick(LoadButton, title: "Load Items".uppercaseString, configureButtonBlock: { cell in
+        loadButton = ButtonBrick(LoadButton, title: "Load Items".uppercased(), configureButtonBlock: { cell in
             cell.configure()
         }) { cell in
             self.loadItems()
@@ -51,7 +51,7 @@ class AdvancedRepeatViewController: BrickApp.BaseBrickController {
                 loadButton
                 ]),
             BrickSection(ItemsSection, backgroundColor: .brickGray1, bricks: [
-                LabelBrick(Item, width: .Ratio(ratio: 1/2), height: .Auto(estimate: .Fixed(size: 38)), backgroundColor: .brickGray3, dataSource: self),
+                LabelBrick(Item, width: .ratio(ratio: 1/2), height: .auto(estimate: .fixed(size: 38)), backgroundColor: .brickGray3, dataSource: self),
                 ], inset: 5, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)),
             ])
 
@@ -63,13 +63,13 @@ class AdvancedRepeatViewController: BrickApp.BaseBrickController {
 
     func loadItems() {
         if items.isEmpty {
-            loadButton.title = "Remove items".uppercaseString
+            loadButton.title = "Remove items".uppercased()
             items = []
             for index in 0..<30 {
                 items.append("BRICK \(index + 1)")
             }
         } else {
-            loadButton.title = "Load items".uppercaseString
+            loadButton.title = "Load items".uppercased()
             items.removeAll()
         }
 
@@ -90,7 +90,7 @@ extension AdvancedRepeatViewController: BrickRepeatCountDataSource {
 
 extension AdvancedRepeatViewController: LabelBrickCellDataSource {
 
-    func configureLabelBrickCell(cell: LabelBrickCell) {
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
         cell.label.text = items[cell.index]
         cell.configure()
     }

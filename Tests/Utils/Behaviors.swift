@@ -14,51 +14,51 @@ class DummyLayoutBehavior: BrickLayoutBehavior {
 }
 
 class FixedHideBehaviorDataSource: HideBehaviorDataSource {
-    var indexPaths: [NSIndexPath]
+    var indexPaths: [IndexPath]
 
-    init(indexPaths: [NSIndexPath]) {
+    init(indexPaths: [IndexPath]) {
         self.indexPaths = indexPaths
     }
 
-    func hideBehaviorDataSource(shouldHideItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func hideBehaviorDataSource(shouldHideItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         return indexPaths.contains(indexPath)
     }
 }
 
 class FixedStickyLayoutBehaviorDataSource: StickyLayoutBehaviorDataSource {
-    let indexPaths: [NSIndexPath]
+    let indexPaths: [IndexPath]
 
-    init(indexPaths: [NSIndexPath]) {
+    init(indexPaths: [IndexPath]) {
         self.indexPaths = indexPaths
     }
 
-    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func stickyLayoutBehavior(_ stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         return indexPaths.contains(indexPath)
     }
 }
 
 class FixedStickyWithMinimumLayoutBehaviorDataSource: MinimumStickyLayoutBehaviorDataSource {
-    let indexPaths: [NSIndexPath]
-    let minStickingHeights: [NSIndexPath: CGFloat?]
+    let indexPaths: [IndexPath]
+    let minStickingHeights: [IndexPath: CGFloat?]
 
-    convenience init(indexPaths: [NSIndexPath], minStickingHeight: CGFloat? = nil) {
-        var heights = [NSIndexPath: CGFloat?]()
+    convenience init(indexPaths: [IndexPath], minStickingHeight: CGFloat? = nil) {
+        var heights = [IndexPath: CGFloat?]()
         for indexPath in indexPaths {
             heights[indexPath] = minStickingHeight
         }
         self.init(indexPaths: indexPaths, minStickingHeights: heights)
     }
 
-    init(indexPaths: [NSIndexPath], minStickingHeights: [NSIndexPath: CGFloat?]) {
+    init(indexPaths: [IndexPath], minStickingHeights: [IndexPath: CGFloat?]) {
         self.indexPaths = indexPaths
         self.minStickingHeights = minStickingHeights
     }
 
-    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func stickyLayoutBehavior(_ stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         return indexPaths.contains(indexPath)
     }
 
-    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, minimumStickingHeightForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
+    func stickyLayoutBehavior(_ stickyLayoutBehavior: StickyLayoutBehavior, minimumStickingHeightForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
         if let height = minStickingHeights[indexPath] {
             return height
         } else {
@@ -68,33 +68,33 @@ class FixedStickyWithMinimumLayoutBehaviorDataSource: MinimumStickyLayoutBehavio
 }
 
 class FixedStickyLayoutBehaviorDelegate: StickyLayoutBehaviorDelegate {
-    var percentages: [NSIndexPath: CGFloat] = [:]
+    var percentages: [IndexPath: CGFloat] = [:]
 
-    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, brickIsStickingWithPercentage percentage: CGFloat, forItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
+    func stickyLayoutBehavior(_ stickyLayoutBehavior: StickyLayoutBehavior, brickIsStickingWithPercentage percentage: CGFloat, forItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
         percentages[indexPath] = percentage
     }
 }
 
 class FixedMaxZIndexLayoutBehaviorDataSource: MaxZIndexLayoutBehaviorDataSource {
-    let indexPaths: [NSIndexPath]
+    let indexPaths: [IndexPath]
 
-    init(indexPaths: [NSIndexPath]) {
+    init(indexPaths: [IndexPath]) {
         self.indexPaths = indexPaths
     }
 
-    func maxZIndexLayoutBehavior(behavior: MaxZIndexLayoutBehavior, shouldHaveMaxZIndexAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func maxZIndexLayoutBehavior(_ behavior: MaxZIndexLayoutBehavior, shouldHaveMaxZIndexAt indexPath: IndexPath, with identifier: String, in collectionViewLayout: UICollectionViewLayout) -> Bool {
         return indexPaths.contains(indexPath)
     }
 }
 
 class FixedSetZIndexLayoutBehaviorDataSource: SetZIndexLayoutBehaviorDataSource {
-    let indexPaths: [NSIndexPath: Int]
+    let indexPaths: [IndexPath: Int]
 
-    init(indexPaths: [NSIndexPath: Int]) {
+    init(indexPaths: [IndexPath: Int]) {
         self.indexPaths = indexPaths
     }
 
-    func setZIndexLayoutBehavior(behavior: SetZIndexLayoutBehavior, shouldHaveMaxZIndexAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Int? {
+    func setZIndexLayoutBehavior(_ behavior: SetZIndexLayoutBehavior, shouldHaveMaxZIndexAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Int? {
         return indexPaths[indexPath]
     }
 }

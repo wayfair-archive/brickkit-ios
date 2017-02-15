@@ -9,15 +9,15 @@
 import UIKit
 
 enum BrickLayoutInvalidationContextType {
-    case Creation
-    case UpdateHeight(indexPath: NSIndexPath, newHeight: CGFloat)
-    case InvalidateHeight(indexPath: NSIndexPath)
-    case Scrolling
-    case Rotation
-    case BehaviorsChanged
-    case InvalidateDataSourceCounts(sections: [Int: Int]) // Key: section Value: numberOfItems
-    case Invalidate
-    case UpdateVisibility
+    case creation
+    case updateHeight(indexPath: IndexPath, newHeight: CGFloat)
+    case invalidateHeight(indexPath: IndexPath)
+    case scrolling
+    case rotation
+    case behaviorsChanged
+    case invalidateDataSourceCounts(sections: [Int: Int]) // Key: section Value: numberOfItems
+    case invalidate
+    case updateVisibility
 
     /**
      Flag that indicates if all attributes should be invalidated.
@@ -26,7 +26,7 @@ enum BrickLayoutInvalidationContextType {
      */
     var shouldInvalidateAllAttributes: Bool {
         switch self {
-        case .Rotation, .Invalidate, .Creation, .UpdateVisibility, .InvalidateDataSourceCounts(_)/*, .UpdateHeight(_)*/: return true
+        case .rotation, .invalidate, .creation, .updateVisibility, .invalidateDataSourceCounts(_)/*, .UpdateHeight(_)*/: return true
         default: return false
         }
     }
@@ -39,14 +39,14 @@ protocol BrickLayoutInvalidationProvider: class {
 
     func removeAllCachedSections()
     func calculateSections()
-    func updateHeight(for indexPath: NSIndexPath, with height: CGFloat, updatedAttributes: OnAttributesUpdatedHandler)
-    func invalidateHeight(for indexPath: NSIndexPath, updatedAttributes: OnAttributesUpdatedHandler)
+    func updateHeight(for indexPath: IndexPath, with height: CGFloat, updatedAttributes: @escaping OnAttributesUpdatedHandler)
+    func invalidateHeight(for indexPath: IndexPath, updatedAttributes: @escaping OnAttributesUpdatedHandler)
     func recalculateContentSize() -> CGSize
-    func invalidateContent(updatedAttributes: OnAttributesUpdatedHandler)
-    func registerUpdatedAttributes(attributes: BrickLayoutAttributes, oldFrame: CGRect?, fromBehaviors: Bool, updatedAttributes: OnAttributesUpdatedHandler)
-    func updateNumberOfItemsInSection(section: Int, numberOfItems: Int, updatedAttributes: OnAttributesUpdatedHandler)
-    func applyHideBehavior(hideBehavior: HideBehaviorDataSource, updatedAttributes: OnAttributesUpdatedHandler)
-    func updateContentSize(contentSize: CGSize)
+    func invalidateContent(_ updatedAttributes: @escaping OnAttributesUpdatedHandler)
+    func registerUpdatedAttributes(_ attributes: BrickLayoutAttributes, oldFrame: CGRect?, fromBehaviors: Bool, updatedAttributes: @escaping OnAttributesUpdatedHandler)
+    func updateNumberOfItemsInSection(_ section: Int, numberOfItems: Int, updatedAttributes: @escaping OnAttributesUpdatedHandler)
+    func applyHideBehavior(_ hideBehavior: HideBehaviorDataSource, updatedAttributes: @escaping OnAttributesUpdatedHandler)
+    func updateContentSize(_ contentSize: CGSize)
 }
 
 extension BrickLayoutInvalidationContext {
@@ -65,11 +65,11 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
         self.type = type
     }
 
-    func invalidateWithLayout(layout: UICollectionViewLayout) -> Bool {
+    func invalidateWithLayout(_ layout: UICollectionViewLayout) -> Bool {
         return self.invalidateWithLayout(layout, context: self)
     }
 
-    func invalidateWithLayout(layout: UICollectionViewLayout, context: UICollectionViewLayoutInvalidationContext) -> Bool {
+    func invalidateWithLayout(_ layout: UICollectionViewLayout, context: UICollectionViewLayoutInvalidationContext) -> Bool {
         guard
             let provider = layout as? BrickLayoutInvalidationProvider
             else { return false }
@@ -86,7 +86,7 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
 
         // Update Type
         switch type {
-        case .Creation:
+        case .creation:
             for behavior in provider.behaviors {
                 behavior.resetRegisteredAttributes(layout)
             }
@@ -97,16 +97,16 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
                 behavior.layoutDoneCalculating(layout)
             }
 
-        case .UpdateHeight(let indexPath, let newHeight):
+        case .updateHeight(let indexPath, let newHeight):
             provider.updateHeight(for: indexPath, with: newHeight, updatedAttributes: updateAttributes)
-        case .InvalidateHeight(let indexPath):
+        case .invalidateHeight(let indexPath):
             provider.invalidateHeight(for: indexPath, updatedAttributes: updateAttributes)
-        case .Rotation, .BehaviorsChanged, .Invalidate:
+        case .rotation, .behaviorsChanged, .invalidate:
             self.invalidateSections(provider, layout: layout)
-        case .UpdateVisibility:
+        case .updateVisibility:
             self.applyHideBehaviors(provider, updatedAttributes: updateAttributes)
-        case .InvalidateDataSourceCounts(let sections):
-            let keys = Array(sections.keys).sort(<) // We need to sort the keys first so the updates are done in the correct order
+        case .invalidateDataSourceCounts(let sections):
+            let keys = Array(sections.keys).sorted(by: <) // We need to sort the keys first so the updates are done in the correct order
             for section in keys {
                 let numberOfItems = sections[section]!
                 provider.updateNumberOfItemsInSection(section, numberOfItems: numberOfItems, updatedAttributes: { attributes, olfFrame in
@@ -117,17 +117,17 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
         }
 
         // Calculate content size
-        provider.recalculateContentSize()
+        _ = provider.recalculateContentSize()
 
         // Behaviors
         var contentSize = provider.contentSize
         invalidateInCollectionViewLayout(layout, withBehaviors: provider.behaviors, contentSize: &contentSize, updatedAttribute: {  attributes, oldFrame in
-            updateAttributesFromBehaviors(attributes: attributes, oldFrame: oldFrame)
+            updateAttributesFromBehaviors(attributes, oldFrame)
         })
 
         // Calculate content size
         if contentSize == provider.contentSize { // If no behavior changed the content size, let's just recalculate it based on the frames
-            provider.recalculateContentSize()
+            _ = provider.recalculateContentSize()
         } else {
             provider.updateContentSize(contentSize)
         }
@@ -136,27 +136,27 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
             // Content Size
             let difference = CGSize(width: provider.contentSize.width - oldContentSize.width, height: provider.contentSize.height - oldContentSize.height)
             context.contentSizeAdjustment = difference
-            context.invalidateItemsAtIndexPaths(updatedAttributes.map{ $0.indexPath })
+            context.invalidateItems(at: updatedAttributes.map{ $0.indexPath })
         }
 
         return true
     }
 
-    func applyHideBehaviors(provider: BrickLayoutInvalidationProvider, updatedAttributes: OnAttributesUpdatedHandler) {
+    func applyHideBehaviors(_ provider: BrickLayoutInvalidationProvider, updatedAttributes: @escaping OnAttributesUpdatedHandler) {
         guard let hideBehaviorDataSource = provider.hideBehaviorDataSource else {
             return
         }
         provider.applyHideBehavior(hideBehaviorDataSource, updatedAttributes: updatedAttributes)
     }
 
-    func invalidateSections(provider: BrickLayoutInvalidationProvider, layout: UICollectionViewLayout) {
+    func invalidateSections(_ provider: BrickLayoutInvalidationProvider, layout: UICollectionViewLayout) {
         for behavior in provider.behaviors {
             behavior.resetRegisteredAttributes(layout)
         }
 
         provider.invalidateContent({ (attributes, oldFrame) in
             for behavior in provider.behaviors {
-                behavior.registerAttributes(attributes, forCollectionViewLayout: layout)
+                behavior.registerAttributes(attributes, for: layout)
             }
             self.handleAttributes(attributes, oldFrame: oldFrame, provider: provider, layout: layout, fromBehaviors: false)
         })
@@ -166,7 +166,7 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
         }
     }
 
-    func handleAttributes(attributes: BrickLayoutAttributes, oldFrame: CGRect?, provider: BrickLayoutInvalidationProvider, layout: UICollectionViewLayout, fromBehaviors: Bool) {
+    func handleAttributes(_ attributes: BrickLayoutAttributes, oldFrame: CGRect?, provider: BrickLayoutInvalidationProvider, layout: UICollectionViewLayout, fromBehaviors: Bool) {
 
         if !updatedAttributes.contains(attributes) {
             updatedAttributes.append(attributes)
@@ -179,13 +179,13 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
         })
     }
 
-    func invalidateInCollectionViewLayout(collectionViewLayout: UICollectionViewLayout, withBehaviors behaviors: Set<BrickLayoutBehavior>, inout contentSize: CGSize, updatedAttribute: OnAttributesUpdatedHandler) {
+    func invalidateInCollectionViewLayout(_ collectionViewLayout: UICollectionViewLayout, withBehaviors behaviors: Set<BrickLayoutBehavior>, contentSize: inout CGSize, updatedAttribute: OnAttributesUpdatedHandler) {
         for behavior in behaviors {
             behavior.invalidateInCollectionViewLayout(collectionViewLayout, contentSize: &contentSize, attributesDidUpdate: updatedAttribute)
         }
     }
 
-    static func targetContentOffsetForProposedContentOffset(proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint, withBehaviors behaviors: Set<BrickLayoutBehavior>, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGPoint {
+    static func targetContentOffsetForProposedContentOffset(_ proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint, withBehaviors behaviors: Set<BrickLayoutBehavior>, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGPoint {
         var contentOffset = proposedContentOffset
         for behavior in behaviors {
             behavior.targetContentOffsetForProposedContentOffset(&contentOffset, withScrollingVelocity: velocity, inCollectionViewLayout: collectionViewLayout)

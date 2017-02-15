@@ -9,7 +9,7 @@
 import XCTest
 @testable import BrickKit
 
-private let zIndexMap: (attribute: UICollectionViewLayoutAttributes) -> Int = { $0.zIndex }
+private let zIndexMap: (_ attribute: UICollectionViewLayoutAttributes) -> Int = { $0.zIndex }
 private let zIndexSort: (Int, Int) -> Bool = { $0 < $1 }
 
 class BrickFlowLayoutZIndexTests: BrickFlowLayoutBaseTests {
@@ -66,7 +66,7 @@ class BrickFlowLayoutZIndexTests: BrickFlowLayoutBaseTests {
         zIndexer.reset(for: BrickFlowLayout())
 
         XCTAssertEqual(zIndexer.maxZIndex, 0)
-        XCTAssertEqual(layout.zIndexer.zIndex(for: NSIndexPath(forItem: 0, inSection: 0)), 0)
+        XCTAssertEqual(layout.zIndexer.zIndex(for: IndexPath(item: 0, section: 0)), 0)
     }
 
 }
@@ -76,7 +76,7 @@ extension BrickFlowLayoutZIndexTests {
 
     func testTopDownZIndex() {
         layout.invalidateLayout()
-        layout.prepareLayout()
+        layout.prepare()
         collectionView.layoutSubviews()
 
         let offset: Int = 15
@@ -102,7 +102,7 @@ extension BrickFlowLayoutZIndexTests {
             ],
             ]
 
-        let attributes = layout.layoutAttributesForElementsInRect(CGRect(origin:CGPoint.zero, size: layout.collectionViewContentSize()))
+        let attributes = layout.layoutAttributesForElements(in: CGRect(origin:CGPoint.zero, size: layout.collectionViewContentSize))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, map: zIndexMap, expectedResult: expectedResult, sort: zIndexSort))
     }
@@ -118,9 +118,9 @@ extension BrickFlowLayoutZIndexTests {
          */
 
         let section = BrickSection(bricks: [
-            DummyBrick(width: .Ratio(ratio: 0.5)),
+            DummyBrick(width: .ratio(ratio: 0.5)),
             BrickSection(bricks: [
-                BrickSection(width: .Ratio(ratio: 1/2), bricks: [
+                BrickSection(width: .ratio(ratio: 1/2), bricks: [
                     DummyBrick(),
                     DummyBrick(),
                     ]),
@@ -146,27 +146,27 @@ extension BrickFlowLayoutZIndexTests {
         ]
 
         /*
-         Optional(<BrickKit.BrickLayoutAttributes: 0x7f8cca525f60> index path: (<NSIndexPath: 0xc000000000000016> {length = 2, path = 0 - 0}); frame = (0 0; 320 114);  originalFrame: (0.0, 0.0, 320.0, 114.0); identifier: )
-         Optional(<BrickKit.BrickLayoutAttributes: 0x7f8cca4249b0> index path: (<NSIndexPath: 0xc000000000000116> {length = 2, path = 1 - 0}); frame = (0 0; 160 38); zIndex = 5;  originalFrame: (0.0, 0.0, 160.0, 38.0); identifier: )
-         Optional(<BrickKit.BrickLayoutAttributes: 0x7f8cca4249b0> index path: (<NSIndexPath: 0xc000000000200116> {length = 2, path = 1 - 1}); frame = (0 38; 320 76); zIndex = 1;  originalFrame: (0.0, 38.0, 320.0, 76.0); identifier: )
-         Optional(<BrickKit.BrickLayoutAttributes: 0x7f8cca4249b0> index path: (<NSIndexPath: 0xc000000000000216> {length = 2, path = 2 - 0}); frame = (0 38; 160 76); zIndex = 4;  originalFrame: (0.0, 38.0, 160.0, 76.0); identifier: )
-         Optional(<BrickKit.BrickLayoutAttributes: 0x7f8cca525f60> index path: (<NSIndexPath: 0xc000000000000316> {length = 2, path = 3 - 0}); frame = (0 38; 160 38); zIndex = 4;  originalFrame: (0.0, 38.0, 160.0, 38.0); identifier: )
-         Optional(<BrickKit.BrickLayoutAttributes: 0x7f8cca4249b0> index path: (<NSIndexPath: 0xc000000000200316> {length = 2, path = 3 - 1}); frame = (0 76; 160 38); zIndex = 3;  originalFrame: (0.0, 76.0, 160.0, 38.0); identifier: )
+         Optional(<BrickKit.BrickLayoutAttributes: 0x7f8cca525f60> index path: (<IndexPath: 0xc000000000000016> {length = 2, path = 0 - 0}); frame = (0 0; 320 114);  originalFrame: (0.0, 0.0, 320.0, 114.0); identifier: )
+         Optional(<BrickKit.BrickLayoutAttributes: 0x7f8cca4249b0> index path: (<IndexPath: 0xc000000000000116> {length = 2, path = 1 - 0}); frame = (0 0; 160 38); zIndex = 5;  originalFrame: (0.0, 0.0, 160.0, 38.0); identifier: )
+         Optional(<BrickKit.BrickLayoutAttributes: 0x7f8cca4249b0> index path: (<IndexPath: 0xc000000000200116> {length = 2, path = 1 - 1}); frame = (0 38; 320 76); zIndex = 1;  originalFrame: (0.0, 38.0, 320.0, 76.0); identifier: )
+         Optional(<BrickKit.BrickLayoutAttributes: 0x7f8cca4249b0> index path: (<IndexPath: 0xc000000000000216> {length = 2, path = 2 - 0}); frame = (0 38; 160 76); zIndex = 4;  originalFrame: (0.0, 38.0, 160.0, 76.0); identifier: )
+         Optional(<BrickKit.BrickLayoutAttributes: 0x7f8cca525f60> index path: (<IndexPath: 0xc000000000000316> {length = 2, path = 3 - 0}); frame = (0 38; 160 38); zIndex = 4;  originalFrame: (0.0, 38.0, 160.0, 38.0); identifier: )
+         Optional(<BrickKit.BrickLayoutAttributes: 0x7f8cca4249b0> index path: (<IndexPath: 0xc000000000200316> {length = 2, path = 3 - 1}); frame = (0 76; 160 38); zIndex = 3;  originalFrame: (0.0, 76.0, 160.0, 38.0); identifier: )
          */
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1, startIndex: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<1, startIndex: 5),
-                SectionRange(range: 1..<2, startIndex: 1),
+                SectionRange(range: 0..<1,startIndex: 5),
+                SectionRange(range: 1..<2,startIndex: 1),
             ],
             2: [
-                SectionRange(range: 0..<1, startIndex: 2),
+                SectionRange(range: 0..<1,startIndex: 2),
             ],
             3: [
-                SectionRange(range: 0..<2, startIndex: 4)
+                SectionRange(range: 0..<2,startIndex: 4)
             ],
         ]
 
@@ -176,7 +176,7 @@ extension BrickFlowLayoutZIndexTests {
         XCTAssertEqual(layout.zIndexer.sectionRanges[3], expectedRanges[3]!)
 
 
-        let attributes = layout.layoutAttributesForElementsInRect(CGRect(origin:CGPoint.zero, size: layout.collectionViewContentSize()))
+        let attributes = layout.layoutAttributesForElements(in: CGRect(origin:CGPoint.zero, size: layout.collectionViewContentSize))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, map: zIndexMap, expectedResult: expectedResult, sort: zIndexSort))
     }
@@ -202,31 +202,31 @@ extension BrickFlowLayoutZIndexTests {
      */
     func testTopDownZIndexer() {
         layout.invalidateLayout()
-        layout.prepareLayout()
+        layout.prepare()
         collectionView.layoutSubviews()
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1, startIndex: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<1, startIndex: 15),
-                SectionRange(range: 1..<3, startIndex: 9),
-                SectionRange(range: 3..<5, startIndex: 2)
+                SectionRange(range: 0..<1,startIndex: 15),
+                SectionRange(range: 1..<3,startIndex: 9),
+                SectionRange(range: 3..<5,startIndex: 2)
             ],
             2: [
-                SectionRange(range: 0..<1, startIndex: 14),
-                SectionRange(range: 1..<2, startIndex: 10)
+                SectionRange(range: 0..<1,startIndex: 14),
+                SectionRange(range: 1..<2,startIndex: 10)
             ],
             3: [
-                SectionRange(range: 0..<3, startIndex: 13)
+                SectionRange(range: 0..<3,startIndex: 13)
             ],
             4: [
-                SectionRange(range: 0..<1, startIndex: 7),
-                SectionRange(range: 1..<2, startIndex: 3)
+                SectionRange(range: 0..<1,startIndex: 7),
+                SectionRange(range: 1..<2,startIndex: 3)
             ],
             5: [
-                SectionRange(range: 0..<3, startIndex: 6)
+                SectionRange(range: 0..<3,startIndex: 6)
             ]
         ]
 
@@ -241,12 +241,12 @@ extension BrickFlowLayoutZIndexTests {
 
     func testThatZIndexIsReturnedTopDown() {
         let ranges = [
-            SectionRange(range: 0..<1, startIndex: 15),
-            SectionRange(range: 1..<3, startIndex: 9),
-            SectionRange(range: 3..<5, startIndex: 2)
+            SectionRange(range: 0..<1,startIndex: 15),
+            SectionRange(range: 1..<3,startIndex: 9),
+            SectionRange(range: 3..<5,startIndex: 2)
         ]
 
-        let zIndex: BrickLayoutZIndexBehavior = .TopDown
+        let zIndex: BrickLayoutZIndexBehavior = .topDown
         XCTAssertEqual(zIndex.zIndexFromRanges(ranges, index: 0), 15)
         XCTAssertEqual(zIndex.zIndexFromRanges(ranges, index: 1), 9)
         XCTAssertEqual(zIndex.zIndexFromRanges(ranges, index: 2), 8)
@@ -258,10 +258,10 @@ extension BrickFlowLayoutZIndexTests {
 
     func testThatZIndexIsReturnedTopDown2() {
         let ranges = [
-            SectionRange(range: 0..<3, startIndex: 3)
+            SectionRange(range: 0..<3,startIndex: 3)
         ]
 
-        let zIndex: BrickLayoutZIndexBehavior = .TopDown
+        let zIndex: BrickLayoutZIndexBehavior = .topDown
         XCTAssertEqual(zIndex.zIndexFromRanges(ranges, index: 0), 3)
         XCTAssertEqual(zIndex.zIndexFromRanges(ranges, index: 1), 2)
         XCTAssertEqual(zIndex.zIndexFromRanges(ranges, index: 2), 1)
@@ -286,10 +286,10 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1, startIndex: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<3, startIndex: 3),
+                SectionRange(range: 0..<3,startIndex: 3),
             ],
         ]
 
@@ -324,14 +324,14 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1, startIndex: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<1, startIndex: 5),
-                SectionRange(range: 1..<3, startIndex: 2),
+                SectionRange(range: 0..<1,startIndex: 5),
+                SectionRange(range: 1..<3,startIndex: 2),
             ],
             2: [
-                SectionRange(range: 0..<2, startIndex: 4)
+                SectionRange(range: 0..<2,startIndex: 4)
             ]
         ]
 
@@ -375,18 +375,18 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1, startIndex: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<1, startIndex: 9),
-                SectionRange(range: 1..<3, startIndex: 6),
-                SectionRange(range: 3..<5, startIndex: 2),
+                SectionRange(range: 0..<1,startIndex: 9),
+                SectionRange(range: 1..<3,startIndex: 6),
+                SectionRange(range: 3..<5,startIndex: 2),
             ],
             2: [
-                SectionRange(range: 0..<2, startIndex: 8)
+                SectionRange(range: 0..<2,startIndex: 8)
             ],
             3: [
-                SectionRange(range: 0..<2, startIndex: 4)
+                SectionRange(range: 0..<2,startIndex: 4)
             ],
             ]
 
@@ -432,18 +432,18 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1, startIndex: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<1, startIndex: 9),
-                SectionRange(range: 1..<3, startIndex: 2),
+                SectionRange(range: 0..<1,startIndex: 9),
+                SectionRange(range: 1..<3,startIndex: 2),
             ],
             2: [
-                SectionRange(range: 0..<1, startIndex: 8),
-                SectionRange(range: 1..<3, startIndex: 4)
+                SectionRange(range: 0..<1,startIndex: 8),
+                SectionRange(range: 1..<3,startIndex: 4)
             ],
             3: [
-                SectionRange(range: 0..<3, startIndex: 7)
+                SectionRange(range: 0..<3,startIndex: 7)
             ],
             ]
 
@@ -496,22 +496,22 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1, startIndex: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<1, startIndex: 12),
-                SectionRange(range: 1..<3, startIndex: 2),
+                SectionRange(range: 0..<1,startIndex: 12),
+                SectionRange(range: 1..<3,startIndex: 2),
             ],
             2: [
-                SectionRange(range: 0..<1, startIndex: 11),
-                SectionRange(range: 1..<3, startIndex: 4)
+                SectionRange(range: 0..<1,startIndex: 11),
+                SectionRange(range: 1..<3,startIndex: 4)
             ],
             3: [
-                SectionRange(range: 0..<1, startIndex: 10),
-                SectionRange(range: 1..<3, startIndex: 6)
+                SectionRange(range: 0..<1,startIndex: 10),
+                SectionRange(range: 1..<3,startIndex: 6)
             ],
             4: [
-                SectionRange(range: 0..<3, startIndex: 9)
+                SectionRange(range: 0..<3,startIndex: 9)
             ],
             ]
 
@@ -548,31 +548,31 @@ extension BrickFlowLayoutZIndexTests {
      */
 
     func testBottomUpZIndexer() {
-        layout.zIndexBehavior = .BottomUp
+        layout.zIndexBehavior = .bottomUp
         layout.invalidateLayout()
-        layout.prepareLayout()
+        layout.prepare()
         collectionView.layoutSubviews()
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1, startIndex: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<2, startIndex: 1),
-                SectionRange(range: 2..<4, startIndex: 8),
-                SectionRange(range: 4..<5, startIndex: 15)
+                SectionRange(range: 0..<2,startIndex: 1),
+                SectionRange(range: 2..<4,startIndex: 8),
+                SectionRange(range: 4..<5,startIndex: 15)
             ],
             2: [
-                SectionRange(range: 0..<2, startIndex: 3)
+                SectionRange(range: 0..<2,startIndex: 3)
             ],
             3: [
-                SectionRange(range: 0..<3, startIndex: 5)
+                SectionRange(range: 0..<3,startIndex: 5)
             ],
             4: [
-                SectionRange(range: 0..<2, startIndex: 10)
+                SectionRange(range: 0..<2,startIndex: 10)
             ],
             5: [
-                SectionRange(range: 0..<3, startIndex: 12)
+                SectionRange(range: 0..<3,startIndex: 12)
             ]
         ]
 
@@ -597,7 +597,7 @@ extension BrickFlowLayoutZIndexTests {
          ----brick ac 5
 
          */
-        layout.zIndexBehavior = .BottomUp
+        layout.zIndexBehavior = .bottomUp
 
         let section = BrickSection("a", bricks: [
             DummyBrick("aa"),
@@ -613,14 +613,14 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1, startIndex: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<2, startIndex: 1),
-                SectionRange(range: 2..<3, startIndex: 5),
+                SectionRange(range: 0..<2,startIndex: 1),
+                SectionRange(range: 2..<3,startIndex: 5),
             ],
             2: [
-                SectionRange(range: 0..<2, startIndex: 3)
+                SectionRange(range: 0..<2,startIndex: 3)
             ]
         ]
 
@@ -658,7 +658,7 @@ extension BrickFlowLayoutZIndexTests {
             DummyBrick("ae"),
             ])
 
-        layout.zIndexBehavior = .BottomUp
+        layout.zIndexBehavior = .bottomUp
 
         collectionView.registerBrickClass(DummyBrick.self)
         collectionView.setSection(section)
@@ -666,18 +666,18 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1, startIndex: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<2, startIndex: 1),
-                SectionRange(range: 2..<4, startIndex: 5),
-                SectionRange(range: 4..<5, startIndex: 9),
+                SectionRange(range: 0..<2,startIndex: 1),
+                SectionRange(range: 2..<4,startIndex: 5),
+                SectionRange(range: 4..<5,startIndex: 9),
             ],
             2: [
-                SectionRange(range: 0..<2, startIndex: 3)
+                SectionRange(range: 0..<2,startIndex: 3)
             ],
             3: [
-                SectionRange(range: 0..<2, startIndex: 7)
+                SectionRange(range: 0..<2,startIndex: 7)
             ],
             ]
 
@@ -717,7 +717,7 @@ extension BrickFlowLayoutZIndexTests {
             DummyBrick("ac"),
             ])
 
-        layout.zIndexBehavior = .BottomUp
+        layout.zIndexBehavior = .bottomUp
 
         collectionView.registerBrickClass(DummyBrick.self)
         collectionView.setSection(section)
@@ -725,18 +725,18 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1, startIndex: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<2, startIndex: 1),
-                SectionRange(range: 2..<3, startIndex: 9),
+                SectionRange(range: 0..<2,startIndex: 1),
+                SectionRange(range: 2..<3,startIndex: 9),
             ],
             2: [
-                SectionRange(range: 0..<2, startIndex: 3),
-                SectionRange(range: 2..<3, startIndex: 8)
+                SectionRange(range: 0..<2,startIndex: 3),
+                SectionRange(range: 2..<3,startIndex: 8)
             ],
             3: [
-                SectionRange(range: 0..<3, startIndex: 5)
+                SectionRange(range: 0..<3,startIndex: 5)
             ],
             ]
 
@@ -783,7 +783,7 @@ extension BrickFlowLayoutZIndexTests {
             DummyBrick("ac"),
             ])
 
-        layout.zIndexBehavior = .BottomUp
+        layout.zIndexBehavior = .bottomUp
 
         collectionView.registerBrickClass(DummyBrick.self)
         collectionView.setSection(section)
@@ -791,22 +791,22 @@ extension BrickFlowLayoutZIndexTests {
 
         let expectedRanges: [Int: [SectionRange]] = [
             0: [
-                SectionRange(range: 0..<1, startIndex: 0)
+                SectionRange(range: 0..<1,startIndex: 0)
             ],
             1: [
-                SectionRange(range: 0..<2, startIndex: 1),
-                SectionRange(range: 2..<3, startIndex: 12),
+                SectionRange(range: 0..<2,startIndex: 1),
+                SectionRange(range: 2..<3,startIndex: 12),
             ],
             2: [
-                SectionRange(range: 0..<2, startIndex: 3),
-                SectionRange(range: 2..<3, startIndex: 11)
+                SectionRange(range: 0..<2,startIndex: 3),
+                SectionRange(range: 2..<3,startIndex: 11)
             ],
             3: [
-                SectionRange(range: 0..<2, startIndex: 5),
-                SectionRange(range: 2..<3, startIndex: 10)
+                SectionRange(range: 0..<2,startIndex: 5),
+                SectionRange(range: 2..<3,startIndex: 10)
             ],
             4: [
-                SectionRange(range: 0..<3, startIndex: 7)
+                SectionRange(range: 0..<3,startIndex: 7)
             ],
             ]
 
@@ -821,11 +821,11 @@ extension BrickFlowLayoutZIndexTests {
 
     func testThatZIndexIsReturnedBottomUp() {
         let ranges = [
-            SectionRange(range: 0..<2, startIndex: 1),
-            SectionRange(range: 2..<4, startIndex: 8),
-            SectionRange(range: 4..<5, startIndex: 15)
+            SectionRange(range: 0..<2,startIndex: 1),
+            SectionRange(range: 2..<4,startIndex: 8),
+            SectionRange(range: 4..<5,startIndex: 15)
         ]
-        let zIndex: BrickLayoutZIndexBehavior = .BottomUp
+        let zIndex: BrickLayoutZIndexBehavior = .bottomUp
         XCTAssertEqual(zIndex.zIndexFromRanges(ranges, index: 0), 1)
         XCTAssertEqual(zIndex.zIndexFromRanges(ranges, index: 1), 2)
         XCTAssertEqual(zIndex.zIndexFromRanges(ranges, index: 2), 8)
@@ -834,7 +834,7 @@ extension BrickFlowLayoutZIndexTests {
     }
 
     func testBottomUpZIndex() {
-        layout.zIndexBehavior = .BottomUp
+        layout.zIndexBehavior = .bottomUp
         collectionView.layoutSubviews()
 
         let offset: Int = 15
@@ -859,7 +859,7 @@ extension BrickFlowLayoutZIndexTests {
             ],
             ]
 
-        let attributes = layout.layoutAttributesForElementsInRect(CGRect(origin:CGPoint.zero, size: layout.collectionViewContentSize()))
+        let attributes = layout.layoutAttributesForElements(in: CGRect(origin:CGPoint.zero, size: layout.collectionViewContentSize))
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, map: zIndexMap, expectedResult: expectedResult, sort: zIndexSort))
     }
@@ -870,41 +870,41 @@ extension BrickFlowLayoutZIndexTests {
 extension BrickFlowLayoutZIndexTests {
     func testMaxZIndex() {
         layout.invalidateLayout()
-        layout.prepareLayout()
+        layout.prepare()
         collectionView.layoutSubviews()
 
         XCTAssertEqual(layout.maxZIndex, 15)
     }
 
     func testThatInvalidateRepeatCountWithBottomStickyRespectsZIndex() {
-        let repeatIndexPath = NSIndexPath(forItem: 15, inSection: 2)
-        let stickyIndexPath = NSIndexPath(forItem: 1, inSection: 1)
+        let repeatIndexPath = IndexPath(item: 15, section: 2)
+        let stickyIndexPath = IndexPath(item: 1, section: 1)
 
         let section = BrickSection(bricks: [
             BrickSection(bricks: [
-                DummyBrick("Brick", height: .Fixed(size: 20))
+                DummyBrick("Brick", height: .fixed(size: 20))
                 ]),
-            DummyBrick("Footer", height: .Fixed(size: 50))
+            DummyBrick("Footer", height: .fixed(size: 50))
             ])
         let repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick": 15])
         section.repeatCountDataSource = repeatCountDataSource
         let stickyDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [stickyIndexPath])
         collectionView.layout.behaviors.insert(StickyFooterLayoutBehavior(dataSource: stickyDataSource))
-        collectionView.layout.zIndexBehavior = .BottomUp
+        collectionView.layout.zIndexBehavior = .bottomUp
 
         collectionView.setupSectionAndLayout(section)
 
-        let expectation = expectationWithDescription("Invalidate Repeat Counts")
+        let expectation = self.expectation(description: "Invalidate Repeat Counts")
 
         repeatCountDataSource.repeatCountHash = ["Brick": 16]
         collectionView.invalidateRepeatCounts { (completed, insertedIndexPaths, deletedIndexPaths) in
             expectation.fulfill()
         }
 
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
 
-        let repeatIndex = collectionView.cellForItemAtIndexPath(repeatIndexPath)!.layer.zPosition
-        let stickyIndex = collectionView.cellForItemAtIndexPath(stickyIndexPath)!.layer.zPosition
+        let repeatIndex = collectionView.cellForItem(at: repeatIndexPath)!.layer.zPosition
+        let stickyIndex = collectionView.cellForItem(at: stickyIndexPath)!.layer.zPosition
 
         XCTAssertEqual(repeatIndex + 1, stickyIndex)
     }

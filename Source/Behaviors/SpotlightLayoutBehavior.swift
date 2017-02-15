@@ -7,21 +7,21 @@
 //
 
 public protocol SpotlightLayoutBehaviorDataSource: class {
-    func spotlightLayoutBehavior(behavior: SpotlightLayoutBehavior, smallHeightForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat?
+    func spotlightLayoutBehavior(_ behavior: SpotlightLayoutBehavior, smallHeightForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat?
 }
 
-public class SpotlightLayoutBehavior: BrickLayoutBehavior {
+open class SpotlightLayoutBehavior: BrickLayoutBehavior {
     weak var dataSource: SpotlightLayoutBehaviorDataSource?
-    public var scrollLastBrickToTop = true
-    public var lastBrickStretchy = false
-    public var scrollAttributes: [BrickLayoutAttributes] = []
-    public var indexInSpotlight: Int = 0
+    open var scrollLastBrickToTop = true
+    open var lastBrickStretchy = false
+    open var scrollAttributes: [BrickLayoutAttributes] = []
+    open var indexInSpotlight: Int = 0
 
-    public override var needsDownstreamCalculation: Bool {
+    open override var needsDownstreamCalculation: Bool {
         return true
     }
 
-    public override func shouldUseForDownstreamCalculation(for indexPath: NSIndexPath, with identifier: String, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    open override func shouldUseForDownstreamCalculation(for indexPath: IndexPath, with identifier: String, for collectionViewLayout: UICollectionViewLayout) -> Bool {
         return dataSource?.spotlightLayoutBehavior(self, smallHeightForItemAtIndexPath: indexPath, withIdentifier: identifier, inCollectionViewLayout: collectionViewLayout) != nil
     }
 
@@ -29,17 +29,17 @@ public class SpotlightLayoutBehavior: BrickLayoutBehavior {
         self.dataSource = dataSource
     }
 
-    public override func resetRegisteredAttributes(collectionViewLayout: UICollectionViewLayout) {
+    open override func resetRegisteredAttributes(_ collectionViewLayout: UICollectionViewLayout) {
         scrollAttributes = []
     }
 
-    public override func registerAttributes(attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
+    open override func registerAttributes(_ attributes: BrickLayoutAttributes, for collectionViewLayout: UICollectionViewLayout) {
         if let _ = dataSource?.spotlightLayoutBehavior(self, smallHeightForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
             scrollAttributes.append(attributes)
         }
     }
 
-    public override func invalidateInCollectionViewLayout(collectionViewLayout: UICollectionViewLayout, inout contentSize: CGSize, attributesDidUpdate: (attributes: BrickLayoutAttributes, oldFrame: CGRect?) -> Void) {
+    open override func invalidateInCollectionViewLayout(_ collectionViewLayout: UICollectionViewLayout, contentSize: inout CGSize, attributesDidUpdate: (_ attributes: BrickLayoutAttributes, _ oldFrame: CGRect?) -> Void) {
 
         guard let collectionView = collectionViewLayout.collectionView, let firstAttribute = scrollAttributes.first, let dataSource = self.dataSource else {
             return
@@ -61,18 +61,18 @@ public class SpotlightLayoutBehavior: BrickLayoutBehavior {
 
         let firstFrameOriginY: CGFloat = firstAttribute.originalFrame.origin.y
 
-        for (index, attributes) in scrollAttributes.enumerate() {
-            if let brickCollectionView = collectionView as? BrickCollectionView, let inset = brickCollectionView.layout.dataSource?.brickLayout(brickCollectionView.layout, insetForSection: attributes.indexPath.section) {
+        for (index, attributes) in scrollAttributes.enumerated() {
+            if let brickCollectionView = collectionView as? BrickCollectionView, let inset = brickCollectionView.layout.dataSource?.brickLayout(brickCollectionView.layout, insetFor: (attributes.indexPath as IndexPath).section) {
                 sectionInset = inset
             }
 
             let oldFrame = attributes.frame
 
             var originalFrameWithInsets = attributes.originalFrame
-            originalFrameWithInsets.size.height = attributes.originalFrame.size.height + sectionInset
+            originalFrameWithInsets?.size.height = attributes.originalFrame.size.height + sectionInset
 
-            let isAbove = originalFrameWithInsets.maxY <= offsetY
-            let isBelow = originalFrameWithInsets.minY > offsetY
+            let isAbove = (originalFrameWithInsets?.maxY)! <= offsetY
+            let isBelow = (originalFrameWithInsets?.minY)! > offsetY
             let firstSpotlightBrickBelowTopOfCollectionView = firstFrameOriginY >= offsetY
             let isInSpotlight = (!isAbove && !isBelow) || (offsetY < 0 && index == 0) || (firstSpotlightBrickBelowTopOfCollectionView && index == 0)
 
@@ -80,42 +80,42 @@ public class SpotlightLayoutBehavior: BrickLayoutBehavior {
             let height = dataSource.spotlightLayoutBehavior(self, smallHeightForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout)!
 
             if isInSpotlight {
-                var spotlightHeight = max(height, originalFrameWithInsets.maxY - offsetY)
+                var spotlightHeight = max(height, (originalFrameWithInsets?.maxY)! - offsetY)
                 indexInSpotlight = index
 
-                attributes.frame.origin.y = originalFrameWithInsets.maxY - spotlightHeight
+                attributes.frame.origin.y = (originalFrameWithInsets?.maxY)! - spotlightHeight
                 // Dont stretch if the top brick is not a spotlight brick
                 if firstSpotlightBrickBelowTopOfCollectionView && firstFrameOriginY > 0 {
-                    spotlightHeight = originalFrameWithInsets.size.height
-                    attributes.frame.origin.y = originalFrameWithInsets.origin.y
+                    spotlightHeight = (originalFrameWithInsets?.size.height)!
+                    attributes.frame.origin.y = (originalFrameWithInsets?.origin.y)!
                 }
                 attributes.frame.size.height = spotlightHeight
             } else if previousAttributeWasInSpotlight && !firstSpotlightBrickBelowTopOfCollectionView {
                 //Allows for the last brick to stretch.
                 if lastBrickStretchy && indexInSpotlight == (scrollAttributes.count - 2) {
-                    let spotlightHeight = originalFrameWithInsets.size.height - scrollAttributes[index-1].frame.size.height
+                    let spotlightHeight = (originalFrameWithInsets?.size.height)! - scrollAttributes[index-1].frame.size.height
 
                     attributes.frame.origin.y = scrollAttributes[index-1].frame.maxY + sectionInset
-                    attributes.frame.size.height = originalFrameWithInsets.size.height + spotlightHeight
+                    attributes.frame.size.height = (originalFrameWithInsets?.size.height)! + spotlightHeight
                 } else {
-                    let ratio = (originalFrameWithInsets.minY - offsetY) / originalFrameWithInsets.size.height
-                    let leftOver = originalFrameWithInsets.size.height - height
+                    let ratio = ((originalFrameWithInsets?.minY)! - offsetY) / (originalFrameWithInsets?.size.height)!
+                    let leftOver = (originalFrameWithInsets?.size.height)! - height
                     let inset = (sectionInset - (leftOver * (1-ratio)))
 
                     attributes.frame.origin.y = currentY + (inset > 0 ? inset : 0)
                     attributes.frame.size.height = height + (leftOver * (1-ratio))
                 }
             } else if isAbove {
-                attributes.frame.origin.y = originalFrameWithInsets.maxY - height
+                attributes.frame.origin.y = (originalFrameWithInsets?.maxY)! - height
                 attributes.frame.size.height = height
             } else if isBelow {
                 //Last brick now expands in height when second to last brick expands as well.
                 if lastBrickStretchy && indexInSpotlight == (scrollAttributes.count - 3) {
                     var previousOriginalFrameWithInsets = scrollAttributes[index - 1].originalFrame
-                    previousOriginalFrameWithInsets.size.height = scrollAttributes[index - 1].originalFrame.size.height + sectionInset
+                    previousOriginalFrameWithInsets?.size.height = scrollAttributes[index - 1].originalFrame.size.height + sectionInset
 
-                    let ratio = (previousOriginalFrameWithInsets.minY - offsetY) / originalFrameWithInsets.size.height
-                    let leftOver = originalFrameWithInsets.size.height - height
+                    let ratio = ((previousOriginalFrameWithInsets?.minY)! - offsetY) / (originalFrameWithInsets?.size.height)!
+                    let leftOver = (originalFrameWithInsets?.size.height)! - height
 
                     attributes.frame.origin.y = scrollAttributes[index - 1].frame.maxY + sectionInset
                     attributes.frame.size.height = height + (leftOver * (1-ratio))
@@ -129,13 +129,13 @@ public class SpotlightLayoutBehavior: BrickLayoutBehavior {
             previousAttributeWasInSpotlight = isInSpotlight && offsetY >= 0
 
             if attributes.frame != oldFrame {
-                attributesDidUpdate(attributes: attributes, oldFrame: oldFrame)
+                attributesDidUpdate(attributes, oldFrame)
             }
         }
 
         let lastAttribute = scrollAttributes.last! // We can safely unwrap, because we checked the count in the beginning of the function
 
-        if let brickCollectionView = collectionView as? BrickCollectionView, let inset = brickCollectionView.layout.dataSource?.brickLayout(brickCollectionView.layout, insetForSection: lastAttribute.indexPath.section) {
+        if let brickCollectionView = collectionView as? BrickCollectionView, let inset = brickCollectionView.layout.dataSource?.brickLayout(brickCollectionView.layout, insetFor: (lastAttribute.indexPath as IndexPath).section) {
             sectionInset = inset
         }
 

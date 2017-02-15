@@ -24,11 +24,11 @@ class BrickCollectionViewDataSourceTests: XCTestCase {
 
     func testFatalErrorForBrick() {
         let brickView = BrickCollectionView()
-        let indexPath = NSIndexPath(forItem: 1, inSection: 1)
+        let indexPath = IndexPath(item: 1, section: 1)
         brickView.setSection(BrickSection(bricks: [ DummyBrick() ]))
 
-        expectFatalError("Brick not found at indexPath: SECTION - \(indexPath.section) - ITEM: \(indexPath.item). This should never happen") {
-            brickView.brick(at: indexPath)
+        expectFatalError("Brick not found at indexPath: SECTION - \((indexPath as IndexPath).section) - ITEM: \((indexPath as NSIndexPath).item). This should never happen") {
+            _ = brickView.brick(at: indexPath)
         }
     }
 

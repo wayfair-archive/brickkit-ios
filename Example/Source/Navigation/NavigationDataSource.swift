@@ -38,7 +38,7 @@ class NavigationDataSource {
         guard let selectedItem = self.selectedItem else {
             return nil
         }
-        return sections.indexOf(selectedItem)
+        return sections.index(of: selectedItem)
     }
 
     lazy var sections: [ NavigationItem ] = [

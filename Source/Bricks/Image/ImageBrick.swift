@@ -8,43 +8,43 @@
 
 // MARK: - Brick
 
-public class ImageBrick: GenericBrick<UIImageView> {
-    public weak var dataSource: ImageBrickDataSource?
+open class ImageBrick: GenericBrick<UIImageView> {
+    open weak var dataSource: ImageBrickDataSource?
     
-    private var model: ImageBrickDataSource?
+    fileprivate var model: ImageBrickDataSource?
 
-    public override class var internalIdentifier: String {
+    open override class var internalIdentifier: String {
         return self.nibName
     }
 
-    public override class var cellClass: UICollectionViewCell.Type? {
+    open override class var cellClass: UICollectionViewCell.Type? {
         return ImageBrickCell.self
     }
 
-    public override class var bundle: NSBundle {
-        return NSBundle(forClass: Brick.self)
+    open override class var bundle: Bundle {
+        return Bundle(for: Brick.self)
     }
 
-    public convenience init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: ImageBrickDataSource) {
+    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, dataSource: ImageBrickDataSource) {
         self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: dataSource)
     }
     
-    public convenience init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, image: UIImage, contentMode: UIViewContentMode) {
+    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, image: UIImage, contentMode: UIViewContentMode) {
         let model = ImageBrickModel(image: image, contentMode: contentMode)
         self.init(identifier, width: width, height: height, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
     }
     
-    public convenience init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, imageUrl: NSURL, contentMode: UIViewContentMode) {
+    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, imageUrl: URL, contentMode: UIViewContentMode) {
         let model = ImageURLBrickModel(url: imageUrl, contentMode: contentMode)
         self.init(identifier, width: width, height: height, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
     }
     
     
-    public init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: ImageBrickDataSource) {
+    public init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, dataSource: ImageBrickDataSource) {
         
         self.dataSource = dataSource
         super.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView, configureView: { imageView, cell in
-            imageView.contentMode = .ScaleToFill
+            imageView.contentMode = .scaleToFill
             imageView.clipsToBounds = true
         })
         
@@ -53,12 +53,12 @@ public class ImageBrick: GenericBrick<UIImageView> {
         }
     }
     
-    public convenience init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, image: UIImage, contentMode: UIViewContentMode) {
+    public convenience init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, image: UIImage, contentMode: UIViewContentMode) {
         let model = ImageBrickModel(image: image, contentMode: contentMode)
         self.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
     }
     
-    public convenience init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, imageUrl: NSURL, contentMode: UIViewContentMode) {
+    public convenience init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, imageUrl: URL, contentMode: UIViewContentMode) {
         let model = ImageURLBrickModel(url: imageUrl, contentMode: contentMode)
         self.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
     }
@@ -70,30 +70,30 @@ public class ImageBrick: GenericBrick<UIImageView> {
 
 /// An object that adopts the `ImageBrickDataSource` protocol is responsible for providing the data required by a `ImageBrick`.
 public protocol ImageBrickDataSource: class {
-    func imageURLForImageBrickCell(imageBrickCell: ImageBrickCell) -> NSURL?
-    func imageForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIImage?
-    func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIViewContentMode
+    func imageURLForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> URL?
+    func imageForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIImage?
+    func contentModeForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIViewContentMode
 }
 
 extension ImageBrickDataSource {
 
-    public func imageURLForImageBrickCell(imageBrickCell: ImageBrickCell) -> NSURL? {
+    public func imageURLForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> URL? {
         return nil
     }
 
-    public func imageForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIImage? {
+    public func imageForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIImage? {
         return nil
     }
 
-    public func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIViewContentMode {
-        return .ScaleToFill
+    public func contentModeForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIViewContentMode {
+        return .scaleToFill
     }
     
 }
 
 //MARK: - Models
 
-public class ImageBrickModel: ImageBrickDataSource {
+open class ImageBrickModel: ImageBrickDataSource {
     var image: UIImage?
     var contentMode: UIViewContentMode
 
@@ -102,29 +102,29 @@ public class ImageBrickModel: ImageBrickDataSource {
         self.contentMode = contentMode
     }
 
-    public func imageForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIImage? {
+    open func imageForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIImage? {
         return image
     }
 
-    public func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIViewContentMode {
+    open func contentModeForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIViewContentMode {
         return contentMode
     }
 }
 
-public class ImageURLBrickModel: ImageBrickDataSource {
-    var imageURL: NSURL
+open class ImageURLBrickModel: ImageBrickDataSource {
+    var imageURL: URL
     var contentMode: UIViewContentMode
     
-    public init(url: NSURL, contentMode: UIViewContentMode) {
+    public init(url: URL, contentMode: UIViewContentMode) {
         self.contentMode = contentMode
         self.imageURL = url
     }
     
-    public func imageURLForImageBrickCell(imageBrickCell: ImageBrickCell) -> NSURL? {
+    open func imageURLForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> URL? {
         return imageURL
     }
     
-    public func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIViewContentMode {
+    open func contentModeForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIViewContentMode {
         return contentMode
     }
 }
@@ -132,27 +132,27 @@ public class ImageURLBrickModel: ImageBrickDataSource {
 
 // MARK: - Cell
 
-public class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableCell, ImageDownloaderCell {
+open class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableCell, ImageDownloaderCell {
     public typealias BrickType = ImageBrick
 
-    public var sizeChangedHandler: CellSizeChangedHandler?
+    open var sizeChangedHandler: CellSizeChangedHandler?
 
-    public weak var imageDownloader: ImageDownloader?
+    open weak var imageDownloader: ImageDownloader?
 
-    private var imageLoaded = false
-    private var currentImageURL: NSURL? = nil
+    fileprivate var imageLoaded = false
+    fileprivate var currentImageURL: URL? = nil
 
     @IBOutlet weak var imageView: UIImageView!
     var heightRatioConstraint: NSLayoutConstraint?
 
-    public override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+    open override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         if !imageLoaded {
             return layoutAttributes
         }
-        return super.preferredLayoutAttributesFittingAttributes(layoutAttributes)
+        return super.preferredLayoutAttributesFitting(layoutAttributes)
     }
 
-    override public func updateContent() {
+    override open func updateContent() {
         super.updateContent()
 
         if !fromNib {
@@ -194,23 +194,23 @@ public class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableC
     }
 
 
-    private func set(image image: UIImage) {
+    fileprivate func set(image: UIImage) {
         if self.brick.size.height.isEstimate(in: self) {
             self.setRatioConstraint(for: image)
-            self.sizeChangedHandler?(cell: self)
+            self.sizeChangedHandler?(self)
         }
     }
 
     /// Set the ratio constraint based on a given image
     ///
     /// - parameter image: Image to use to constraint the ratio
-    private func setRatioConstraint(for image: UIImage) {
+    fileprivate func setRatioConstraint(for image: UIImage) {
         if let constraint = self.heightRatioConstraint {
             self.imageView.removeConstraint(constraint)
         }
 
         let aspectRatio = image.size.width / image.size.height
-        let ratioConstraint = NSLayoutConstraint(item:self.imageView, attribute:.Height, relatedBy:.Equal, toItem:self.imageView, attribute:.Width, multiplier: 1.0 / aspectRatio, constant:0)
+        let ratioConstraint = NSLayoutConstraint(item:self.imageView, attribute:.height, relatedBy:.equal, toItem:self.imageView, attribute:.width, multiplier: 1.0 / aspectRatio, constant:0)
 
         self.heightRatioConstraint = ratioConstraint
         self.imageView.addConstraint(ratioConstraint)

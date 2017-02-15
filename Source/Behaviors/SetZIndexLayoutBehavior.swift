@@ -10,11 +10,11 @@ import UIKit
 
 /// An object that adopts the SetZIndexLayoutBehaviorDataSource protocol is responsible for providing the index offset that should be used for a brick with a given identifier or indexPath
 public protocol SetZIndexLayoutBehaviorDataSource: class {
-    func setZIndexLayoutBehavior(behavior: SetZIndexLayoutBehavior, shouldHaveMaxZIndexAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Int?
+    func setZIndexLayoutBehavior(_ behavior: SetZIndexLayoutBehavior, shouldHaveMaxZIndexAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Int?
 }
 
 /// Allows a brick to have a different zIndex then the one assigned by the layout
-public class SetZIndexLayoutBehavior: BrickLayoutBehavior {
+open class SetZIndexLayoutBehavior: BrickLayoutBehavior {
     weak var dataSource: SetZIndexLayoutBehaviorDataSource?
     
 
@@ -22,7 +22,7 @@ public class SetZIndexLayoutBehavior: BrickLayoutBehavior {
         self.dataSource = dataSource
     }
 
-    public override func registerAttributes(attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
+    open override func registerAttributes(_ attributes: BrickLayoutAttributes, for collectionViewLayout: UICollectionViewLayout) {
         guard let offset = dataSource?.setZIndexLayoutBehavior(self, shouldHaveMaxZIndexAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) else {
             return
         }

@@ -24,10 +24,10 @@ class LazyLoadingTests: XCTestCase {
         brickView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
     }
 
-    func setupSection(repeatCount: Int = 100, widthRatio: CGFloat = 1, height: CGFloat = 100) {
+    func setupSection(_ repeatCount: Int = 100, widthRatio: CGFloat = 1, height: CGFloat = 100) {
         brickView.registerBrickClass(DummyBrick.self)
 
-        repeatBrick = DummyBrick(BrickIdentifier, width: .Ratio(ratio: widthRatio), height: .Fixed(size: height))
+        repeatBrick = DummyBrick(BrickIdentifier, width: .ratio(ratio: widthRatio), height: .fixed(size: height))
         let section = BrickSection(bricks: [
             repeatBrick
             ])
@@ -40,11 +40,11 @@ class LazyLoadingTests: XCTestCase {
     func testFrameOfInterest() {
         setupSection()
 
-        brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 0, width: 320, height: 500))
+        brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 320, height: 500))
         XCTAssertEqual(flowLayout.frameOfInterest, CGRect(x: 0, y: 0, width: 320, height: 500))
-        brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 500, width: 320, height: 500))
+        brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 500, width: 320, height: 500))
         XCTAssertEqual(flowLayout.frameOfInterest, CGRect(x: 0, y: 0, width: 320, height: 1000))
-        brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 20000, width: 320, height: 500))
+        brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 20000, width: 320, height: 500))
         XCTAssertEqual(flowLayout.frameOfInterest, CGRect(x: 0, y: 0, width: 320, height: 20500))
     }
     
@@ -59,7 +59,7 @@ class LazyLoadingTests: XCTestCase {
     func testThatOnlyNecessaryAttributesAreCreated() {
         setupSection()
 
-        brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 0, width: 320, height: 500))
+        brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 320, height: 500))
         XCTAssertEqual(flowLayout.sections![1]!.attributes.count, 5)
         XCTAssertEqual(flowLayout.sections![1]!.frame, CGRect(x: 0, y: 0, width: 320, height: 10000))
     }
@@ -67,9 +67,9 @@ class LazyLoadingTests: XCTestCase {
     func testThatOnlyNecessaryAttributesAreCreatedAndOrigin() {
         brickView.registerBrickClass(DummyBrick.self)
 
-        repeatBrick = DummyBrick(BrickIdentifier, height: .Fixed(size: 100))
+        repeatBrick = DummyBrick(BrickIdentifier, height: .fixed(size: 100))
         let section = BrickSection(bricks: [
-            DummyBrick(height: .Fixed(size: 20)),
+            DummyBrick(height: .fixed(size: 20)),
             BrickSection(bricks: [repeatBrick])
             ])
         repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: [BrickIdentifier: 100])
@@ -77,7 +77,7 @@ class LazyLoadingTests: XCTestCase {
 
         brickView.setSection(section)
 
-        brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 0, width: 320, height: 500))
+        brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 320, height: 500))
         XCTAssertEqual(flowLayout.sections![2]!.attributes.count, 5)
         XCTAssertEqual(flowLayout.sections![2]!.frame, CGRect(x: 0, y: 20, width: 320, height: 10000))
     }
@@ -85,7 +85,7 @@ class LazyLoadingTests: XCTestCase {
     func testThatOnlyNecessaryAttributesAreCreatedTwoBy() {
         setupSection(widthRatio: 1/2)
 
-        brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 0, width: 320, height: 500))
+        brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 320, height: 500))
         XCTAssertEqual(flowLayout.sections![1]!.attributes.count, 10)
         XCTAssertEqual(flowLayout.sections![1]!.frame, CGRect(x: 0, y: 0, width: 320, height: 5000))
     }
@@ -95,10 +95,10 @@ class LazyLoadingTests: XCTestCase {
         brickView.section.inset = 10
         brickView.section.edgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
 
-        brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 0, width: 320, height: 500))
+        brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 320, height: 500))
         XCTAssertEqual(flowLayout.sections![1]!.frame, CGRect(x: 0, y: 0, width: 320, height: 11000))
 
-        brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 0, width: 320, height: 11000))
+        brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 320, height: 11000))
         XCTAssertEqual(flowLayout.sections![1]!.frame, CGRect(x: 0, y: 0, width: 320, height: 11000))
     }
 
@@ -107,10 +107,10 @@ class LazyLoadingTests: XCTestCase {
         brickView.section.inset = 10
         brickView.section.edgeInsets = UIEdgeInsets(top: 15, left: 0, bottom: 15, right: 0)
 
-        brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 0, width: 320, height: 500))
+        brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 320, height: 500))
         XCTAssertEqual(flowLayout.sections![1]!.frame, CGRect(x: 0, y: 0, width: 320, height: 5520))
 
-        brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 0, width: 320, height: 5520))
+        brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 320, height: 5520))
         XCTAssertEqual(flowLayout.sections![1]!.frame, CGRect(x: 0, y: 0, width: 320, height: 5520))
     }
 
@@ -119,18 +119,18 @@ class LazyLoadingTests: XCTestCase {
         brickView.section.inset = 10
         brickView.section.edgeInsets = UIEdgeInsets(top: 15, left: 0, bottom: 15, right: 0)
 
-        brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 0, width: 320, height: 500))
+        brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 320, height: 500))
         XCTAssertEqual(flowLayout.sections![1]!.frame, CGRect(x: 0, y: 0, width: 320, height: 5465))
 
-        brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 0, width: 320, height: 5520))
+        brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 320, height: 5520))
         XCTAssertEqual(flowLayout.sections![1]!.frame, CGRect(x: 0, y: 0, width: 320, height: 5520))
     }
 
     func testThatOnlyNecessaryAttributesAreCreatedWhenScrolling() {
         setupSection()
         
-        brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 0, width: 320, height: 500))
-        brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 500, width: 320, height: 500))
+        brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 320, height: 500))
+        brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 500, width: 320, height: 500))
         XCTAssertEqual(flowLayout.sections![1]!.attributes.count, 10)
         XCTAssertEqual(flowLayout.sections![1]!.frame, CGRect(x: 0, y: 0, width: 320, height: 10000))
     }
@@ -140,7 +140,7 @@ class LazyLoadingTests: XCTestCase {
         brickView.section.inset = 10
         brickView.section.alignRowHeights = true
 
-        let attributes = brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 0, width: 320, height: 500))?.sort({$0.0.indexPath.item < $0.1.indexPath.item})
+        let attributes = brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 320, height: 500))?.sorted(by: {($0.0.indexPath as IndexPath).item < ($0.1.indexPath as NSIndexPath).item})
         let lastAttributes = attributes?.last
         XCTAssertEqual(lastAttributes?.frame, CGRect(x: 0.0, y: 440.0, width: 320.0, height: 100.0))
     }
@@ -151,11 +151,11 @@ extension LazyLoadingTests {
 
     func testThatStickyFooterWorksWithLazyLoading() {
         setupSection()
-        let stickyDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 99, inSection: 1)])
+        let stickyDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [IndexPath(item: 99, section: 1)])
         let stickyFooter = StickyFooterLayoutBehavior(dataSource: stickyDataSource)
         flowLayout.behaviors.insert(stickyFooter)
 
-        brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 0, width: 320, height: 500))
+        brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 320, height: 500))
         XCTAssertEqual(flowLayout.sections![1]!.frame, CGRect(x: 0, y: 0, width: 320, height: 10000))
         XCTAssertNotNil(flowLayout.sections![1]!.attributes[99])
         XCTAssertEqual(flowLayout.sections?[1]?.attributes[99]?.frame, CGRect(x: 0, y: 380, width: 320, height: 100))
@@ -165,7 +165,7 @@ extension LazyLoadingTests {
         let count = 1000
         setupSection(count, height: 50)
 
-        let stickyIndexPath = NSIndexPath(forItem: count-1, inSection: 1)
+        let stickyIndexPath = IndexPath(item: count-1, section: 1)
         let footerDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [stickyIndexPath])
         let footerBehavior = StickyFooterLayoutBehavior(dataSource: footerDataSource)
         brickView.layout.behaviors.insert(footerBehavior)
@@ -175,7 +175,7 @@ extension LazyLoadingTests {
         XCTAssertTrue(flowLayout.downStreamBehaviorIndexPaths[1]!.contains(stickyIndexPath))
         XCTAssertEqual(footerBehavior.stickyAttributes.count, 1)
         
-        let cell = brickView.cellForItemAtIndexPath(stickyIndexPath)
+        let cell = brickView.cellForItem(at: stickyIndexPath)
         XCTAssertNotNil(cell)
         XCTAssertEqual(cell?.frame, CGRect(x: 0, y: 430, width: 320, height: 50))
     }
@@ -186,7 +186,7 @@ extension LazyLoadingTests {
 
         brickView.registerBrickClass(DummyBrick.self)
 
-        repeatBrick = DummyBrick(BrickIdentifier, height: .Fixed(size: height))
+        repeatBrick = DummyBrick(BrickIdentifier, height: .fixed(size: height))
         let section = BrickSection(bricks: [
             BrickSection(bricks: [repeatBrick]),
             BrickSection(bricks: [repeatBrick])
@@ -194,7 +194,7 @@ extension LazyLoadingTests {
         repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: [BrickIdentifier: repeatCount])
         section.repeatCountDataSource = repeatCountDataSource
 
-        let stickyIndexPath = NSIndexPath(forItem: repeatCount-1, inSection: 3)
+        let stickyIndexPath = IndexPath(item: repeatCount-1, section: 3)
         let footerDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [stickyIndexPath])
         brickView.layout.behaviors.insert(StickyFooterLayoutBehavior(dataSource: footerDataSource))
 
@@ -206,12 +206,12 @@ extension LazyLoadingTests {
             brickView.layoutIfNeeded()
         }
 
-        let attributes = flowLayout.layoutAttributesForItemAtIndexPath(stickyIndexPath) as? BrickLayoutAttributes
+        let attributes = flowLayout.layoutAttributesForItem(at: stickyIndexPath) as? BrickLayoutAttributes
         let count = flowLayout.sections![3]!.attributes.count - 1
         let originY = CGFloat(repeatCount + count) * 50
         XCTAssertEqual(attributes?.originalFrame.origin.y, originY)
 
-        let cell = brickView.cellForItemAtIndexPath(stickyIndexPath)
+        let cell = brickView.cellForItem(at: stickyIndexPath)
         XCTAssertNotNil(cell)
         XCTAssertEqual(cell?.frame, CGRect(x: 0, y: brickView.contentOffset.y + 480 - 50, width: 320, height: 50))
     }
@@ -224,19 +224,19 @@ extension LazyLoadingTests {
 
         let section = BrickSection(bricks: [
             BrickSection(bricks: [
-                DummyBrick(BrickIdentifier, height: .Fixed(size: height))
+                DummyBrick(BrickIdentifier, height: .fixed(size: height))
                 ]),
             BrickSection(bricks: [
-                DummyBrick(BrickIdentifier, height: .Fixed(size: height)),
+                DummyBrick(BrickIdentifier, height: .fixed(size: height)),
                 BrickSection(bricks: [
-                    DummyBrick(height: .Fixed(size: height))
+                    DummyBrick(height: .fixed(size: height))
                     ])
                 ])
             ])
         repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: [BrickIdentifier: repeatCount])
         section.repeatCountDataSource = repeatCountDataSource
 
-        let stickyIndexPath = NSIndexPath(forItem: repeatCount, inSection: 3)
+        let stickyIndexPath = IndexPath(item: repeatCount, section: 3)
         let footerDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [stickyIndexPath])
         brickView.layout.behaviors.insert(StickyFooterLayoutBehavior(dataSource: footerDataSource))
 
@@ -248,13 +248,13 @@ extension LazyLoadingTests {
             brickView.layoutIfNeeded()
         }
 
-        XCTAssertEqual(flowLayout.layoutAttributesForItemAtIndexPath(stickyIndexPath)?.frame, CGRect(x: 0, y: brickView.contentOffset.y + 480 - 50, width: 320, height: 50))
-        let cell = brickView.cellForItemAtIndexPath(stickyIndexPath)
+        XCTAssertEqual(flowLayout.layoutAttributesForItem(at: stickyIndexPath)?.frame, CGRect(x: 0, y: brickView.contentOffset.y + 480 - 50, width: 320, height: 50))
+        let cell = brickView.cellForItem(at: stickyIndexPath)
         XCTAssertNotNil(cell)
         XCTAssertEqual(cell?.frame, CGRect(x: 0, y: brickView.contentOffset.y + 480 - 50, width: 320, height: 50))
 
-        let brickIndexPath = NSIndexPath(forItem: 0, inSection: 4)
-        let brickCell = brickView.cellForItemAtIndexPath(brickIndexPath)
+        let brickIndexPath = IndexPath(item: 0, section: 4)
+        let brickCell = brickView.cellForItem(at: brickIndexPath)
         XCTAssertNotNil(brickCell)
         XCTAssertEqual(brickCell?.frame, CGRect(x: 0, y: brickView.contentOffset.y + 480 - 50, width: 320, height: 50))
     }
@@ -267,27 +267,27 @@ extension LazyLoadingTests {
 
         let section = BrickSection(bricks: [
             BrickSection(bricks: [
-                DummyBrick(BrickIdentifier, height: .Fixed(size: height))
+                DummyBrick(BrickIdentifier, height: .fixed(size: height))
                 ]),
             BrickSection(bricks: [
-                DummyBrick(BrickIdentifier, height: .Fixed(size: height)),
+                DummyBrick(BrickIdentifier, height: .fixed(size: height)),
                 BrickSection(bricks: [
-                    DummyBrick(height: .Fixed(size: height))
+                    DummyBrick(height: .fixed(size: height))
                     ])
                 ])
             ])
         repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: [BrickIdentifier: repeatCount])
         section.repeatCountDataSource = repeatCountDataSource
 
-        let stickyIndexPath = NSIndexPath(forItem: repeatCount, inSection: 3)
+        let stickyIndexPath = IndexPath(item: repeatCount, section: 3)
         let footerDataSource = FixedStickyLayoutBehaviorDataSource(indexPaths: [stickyIndexPath])
         brickView.layout.behaviors.insert(StickyFooterLayoutBehavior(dataSource: footerDataSource))
 
         brickView.setSection(section)
         brickView.layoutSubviews()
 
-        XCTAssertEqual(flowLayout.layoutAttributesForItemAtIndexPath(stickyIndexPath)?.frame, CGRect(x: 0, y: brickView.contentOffset.y + 480 - 50, width: 320, height: 50))
-        let cell = brickView.cellForItemAtIndexPath(stickyIndexPath)
+        XCTAssertEqual(flowLayout.layoutAttributesForItem(at: stickyIndexPath)?.frame, CGRect(x: 0, y: brickView.contentOffset.y + 480 - 50, width: 320, height: 50))
+        let cell = brickView.cellForItem(at: stickyIndexPath)
         XCTAssertNotNil(cell)
         XCTAssertEqual(cell?.frame, CGRect(x: 0, y: brickView.contentOffset.y + 480 - 50, width: 320, height: 50))
     }
@@ -296,14 +296,14 @@ extension LazyLoadingTests {
         let count = 1000
         setupSection(1000, height: 50)
 
-        let firstOffsetIndexPath = NSIndexPath(forItem: 0, inSection: 1)
-        let lastOffsetIndexPath = NSIndexPath(forItem: count - 1, inSection: 1)
+        let firstOffsetIndexPath = IndexPath(item: 0, section: 1)
+        let lastOffsetIndexPath = IndexPath(item: count - 1, section: 1)
         let offsetDataSource = FixedOffsetLayoutBehaviorDataSource(originOffset: CGSize(width: 10, height: 10), sizeOffset: nil, indexPaths: [firstOffsetIndexPath, lastOffsetIndexPath])
         brickView.layout.behaviors.insert(OffsetLayoutBehavior(dataSource: offsetDataSource))
 
         brickView.layoutSubviews()
 
-        let firstCell = brickView.cellForItemAtIndexPath(firstOffsetIndexPath)
+        let firstCell = brickView.cellForItem(at: firstOffsetIndexPath)
         XCTAssertNotNil(firstCell)
         XCTAssertEqual(firstCell?.frame, CGRect(x: 10, y: 10, width: 320, height: 50))
 
@@ -312,16 +312,16 @@ extension LazyLoadingTests {
             brickView.layoutSubviews()
         }
 
-        let lastCell = brickView.cellForItemAtIndexPath(lastOffsetIndexPath)
+        let lastCell = brickView.cellForItem(at: lastOffsetIndexPath)
         XCTAssertNotNil(lastCell)
         XCTAssertEqual(lastCell?.frame, CGRect(x: 10, y: CGFloat((count-1) * 50) + 10, width: 320, height: 50))
     }
 
     func _testThatHorizontalScrollingCalculatesCorrectly() {
-        brickView.layout.scrollDirection = .Horizontal
+        brickView.layout.scrollDirection = .horizontal
         setupSection()
 
-        brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 0, width: 5 * 320, height: 480))
+        brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 5 * 320, height: 480))
         XCTAssertEqual(flowLayout.sections![1]!.attributes.count, 5)
         XCTAssertEqual(flowLayout.sections![1]!.frame, CGRect(x: 0, y: 0, width: 32000, height: 100))
 
@@ -329,14 +329,14 @@ extension LazyLoadingTests {
 
     func testThatHorizontalScrollingCalculatesCorrectlyWithMultipleBricks() {
         brickView.registerBrickClass(DummyBrick.self)
-        brickView.layout.scrollDirection = .Horizontal
+        brickView.layout.scrollDirection = .horizontal
         
         let section = BrickSection(bricks: [
-            DummyBrick(width: .Ratio(ratio: 1/2)),
-            DummyBrick(width: .Ratio(ratio: 1/2)),
-            DummyBrick(width: .Ratio(ratio: 1/2)),
-            DummyBrick(width: .Ratio(ratio: 1/2)),
-            DummyBrick(width: .Ratio(ratio: 1)),
+            DummyBrick(width: .ratio(ratio: 1/2)),
+            DummyBrick(width: .ratio(ratio: 1/2)),
+            DummyBrick(width: .ratio(ratio: 1/2)),
+            DummyBrick(width: .ratio(ratio: 1/2)),
+            DummyBrick(width: .ratio(ratio: 1)),
             ])
 
 
@@ -366,11 +366,11 @@ extension LazyLoadingTests {
 
 
 
-        let attributes = brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: .zero, size: CGSize(width: 960, height: 640)))
+        let attributes = brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: .zero, size: CGSize(width: 960, height: 640)))
 
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
-        XCTAssertEqual(brickView.collectionViewLayout.collectionViewContentSize(), CGSize(width: 960, height: 640))
+        XCTAssertEqual(brickView.collectionViewLayout.collectionViewContentSize, CGSize(width: 960, height: 640))
     }
 
     func testThatADummyCellIsReturnedIfNotYetCalculated() {
@@ -384,16 +384,16 @@ extension LazyLoadingTests {
 
         brickView.setSection(section)
 
-        XCTAssertNotNil(brickView.layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)))
-        XCTAssertNotNil(brickView.layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 99, inSection: 1)))
-        XCTAssertNil(brickView.layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 100, inSection: 1)))
-        XCTAssertNil(brickView.layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 2)))
+        XCTAssertNotNil(brickView.layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 1)))
+        XCTAssertNotNil(brickView.layout.layoutAttributesForItem(at: IndexPath(item: 99, section: 1)))
+        XCTAssertNil(brickView.layout.layoutAttributesForItem(at: IndexPath(item: 100, section: 1)))
+        XCTAssertNil(brickView.layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 2)))
     }
 
     func testThatSettingHigherNumberOfItemsIsHandled() {
         setupSection()
 
-        brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 0, width: 320, height: 5000))
+        brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 320, height: 5000))
         XCTAssertEqual(flowLayout.sections![1]!.attributes.count, 50)
         XCTAssertEqual(flowLayout.sections![1]!.frame, CGRect(x: 0, y: 0, width: 320, height: 10000))
 
@@ -405,7 +405,7 @@ extension LazyLoadingTests {
     func testThatSettingLowerNumberOfItemsIsHandled() {
         setupSection()
 
-        brickView.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(x: 0, y: 0, width: 320, height: 5000))
+        brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 320, height: 5000))
         XCTAssertEqual(flowLayout.sections![1]!.attributes.count, 50)
         XCTAssertEqual(flowLayout.sections![1]!.frame, CGRect(x: 0, y: 0, width: 320, height: 10000))
 
@@ -418,12 +418,12 @@ extension LazyLoadingTests {
 
         let createSection: () -> BrickSection = {
             return BrickSection(bricks: [
-                LabelBrick(height: .Fixed(size: 50), text: "Foo"),
-                ButtonBrick(height: .Fixed(size: 50), title: "Bar"),
+                LabelBrick(height: .fixed(size: 50), text: "Foo"),
+                ButtonBrick(height: .fixed(size: 50), title: "Bar"),
 
                 BrickSection(bricks: [
-                    LabelBrick(height: .Fixed(size: 50), text: "Foo"),
-                    ButtonBrick(height: .Fixed(size: 50), title: "Bar")
+                    LabelBrick(height: .fixed(size: 50), text: "Foo"),
+                    ButtonBrick(height: .fixed(size: 50), title: "Bar")
                     ])
                 ])
         }
@@ -432,19 +432,19 @@ extension LazyLoadingTests {
         for _ in 0...100 {
             section.bricks.append(BrickSection(bricks: [
                 createSection(),
-                LabelBrick(height: .Fixed(size: 50), text: "Foo"),
+                LabelBrick(height: .fixed(size: 50), text: "Foo"),
                 createSection(),
-                LabelBrick(height: .Fixed(size: 50), text: "Foo"),
+                LabelBrick(height: .fixed(size: 50), text: "Foo"),
                 createSection()])
             )
         }
         section.bricks.append(BrickSection(bricks: [
-            LabelBrick(height: .Fixed(size: 50), text: "Foo")
+            LabelBrick(height: .fixed(size: 50), text: "Foo")
             ])
         )
         brickView.setupSectionAndLayout(section)
 
-        XCTAssertEqual(brickView.visibleCells().count, 16)
+        XCTAssertEqual(brickView.visibleCells.count, 16)
 
 
         brickView.contentOffset.y += brickView.frame.height
@@ -452,7 +452,7 @@ extension LazyLoadingTests {
         brickView.contentOffset.y += brickView.frame.height
         brickView.layoutSubviews()
 
-        XCTAssertEqual(brickView.visibleCells().count, 18)
+        XCTAssertEqual(brickView.visibleCells.count, 18)
     }
 
 

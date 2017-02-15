@@ -41,7 +41,7 @@ class MockFlickrViewController: BrickApp.BaseBrickController {
         let request = FlickrRecentImagesRequest()
         request.useURLPrams = true
         
-        communicationBase.jsonRequest(request, responseType: FlickrRecentImagesResponse.self, successHandler: { [weak self] (response) in
+        communicationBase.jsonRequest(request: request, responseType: FlickrRecentImagesResponse.self, successHandler: { [weak self] (response) in
             self?.recentImages = response
             self?.setupBricks()
             }) { (error) in
@@ -59,17 +59,17 @@ extension MockFlickrViewController: BrickRegistrationDataSource {
     }
     
     func setupBricks() {
-        let configureCell: (cell: LabelBrickCell) -> Void = { cell in
+        let configureCell: (_ cell: LabelBrickCell) -> Void = { cell in
             cell.configure()
         }
         var sections = [BrickSection]()
-        recentImages?.photos.enumerate().forEach {
+        recentImages?.photos.enumerated().forEach {
             
             let section = BrickSection(bricks: [
                 BrickSection(StickySection, backgroundColor: .brickGray5, bricks: [
                     LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray2, text: $0.element.title, configureCellBlock: configureCell)
                     ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)),
-                ImageBrick("\($0.index)", width: .Auto(estimate: .Ratio(ratio: 1)), height: .Auto(estimate: .Fixed(size: 200)), backgroundColor: .whiteColor(), backgroundView: nil, dataSource: self)
+                ImageBrick("\($0.offset)", width: .auto(estimate: .ratio(ratio: 1)), height: .auto(estimate: .fixed(size: 200)), backgroundColor: UIColor.white, backgroundView: nil, dataSource: self)
                 ])
             sections.append(section)
         }
@@ -82,7 +82,7 @@ extension MockFlickrViewController: BrickRegistrationDataSource {
 }
 
 extension MockFlickrViewController: StickyLayoutBehaviorDataSource {
-    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func stickyLayoutBehavior(_ stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         #if os(tvOS)
         return false
             #else

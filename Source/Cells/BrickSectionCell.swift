@@ -12,7 +12,7 @@ class BrickSectionCell: BaseBrickCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.userInteractionEnabled = false
-        self.contentView.userInteractionEnabled = false
+        self.isUserInteractionEnabled = false
+        self.contentView.isUserInteractionEnabled = false
     }
 }

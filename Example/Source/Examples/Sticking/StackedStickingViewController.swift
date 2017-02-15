@@ -20,7 +20,7 @@ class StackedStickingViewController: BaseRepeatBrickViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        repeatLabel.width = .Ratio(ratio: 1)
+        repeatLabel.width = .ratio(ratio: 1)
         titleLabelModel.text = "All uneven bricks should stick"
 
         behavior = StickyLayoutBehavior(dataSource: self)
@@ -28,7 +28,7 @@ class StackedStickingViewController: BaseRepeatBrickViewController {
 }
 
 extension StackedStickingViewController: StickyLayoutBehaviorDataSource {
-    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func stickyLayoutBehavior(_ stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         return identifier != BrickIdentifiers.titleLabel && indexPath.row % 2 != 0
     }
 }

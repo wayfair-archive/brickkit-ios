@@ -21,9 +21,9 @@ class SimpleRepeatFixedWidthViewController: BaseRepeatBrickViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        repeatLabel.width = .Fixed(size: 80)
-        repeatLabel.height = .Auto(estimate: .Fixed(size: 38.0))
-        brickCollectionView.section.alignment = BrickAlignment(horizontal: .Justified, vertical: .Top)
+        repeatLabel.width = .fixed(size: 80)
+        repeatLabel.height = .auto(estimate: .fixed(size: 38.0))
+        brickCollectionView.section.alignment = BrickAlignment(horizontal: .justified, vertical: .top)
     }
 
 }

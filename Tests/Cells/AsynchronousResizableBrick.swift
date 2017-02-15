@@ -22,17 +22,17 @@ class AsynchronousResizableBrickCell: BrickCell, Bricklike, AsynchronousResizabl
     var sizeChangedHandler: CellSizeChangedHandler?
 
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
-    var timer: NSTimer?
+    var timer: Timer?
 
     override func updateContent() {
         super.updateContent()
 
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(AsynchronousResizableBrickCell.fireTimer), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(AsynchronousResizableBrickCell.fireTimer), userInfo: nil, repeats: false)
     }
 
     func fireTimer() {
         self.heightConstraint.constant = brick.newHeight
-        sizeChangedHandler?(cell: self)
+        sizeChangedHandler?(self)
         brick.didChangeSizeCallBack?()
     }
 

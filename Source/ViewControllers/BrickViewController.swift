@@ -9,21 +9,21 @@
 import UIKit
 
 /// A BrickViewController is a UIViewController that contains a BrickCollectionView
-public class BrickViewController: UIViewController, UICollectionViewDelegate {
+open class BrickViewController: UIViewController, UICollectionViewDelegate {
 
     // MARK: - Public members
 
-    public var layout: BrickFlowLayout {
+    open var layout: BrickFlowLayout {
         return collectionViewLayout as! BrickFlowLayout
     }
 
-    public var collectionViewLayout: UICollectionViewLayout {
+    open var collectionViewLayout: UICollectionViewLayout {
         return brickCollectionView.collectionViewLayout
     }
 
-    public var collectionView: UICollectionView?
+    open var collectionView: UICollectionView?
 
-    public var brickCollectionView: BrickCollectionView {
+    open var brickCollectionView: BrickCollectionView {
         return self.collectionView as! BrickCollectionView
     }
 
@@ -31,10 +31,10 @@ public class BrickViewController: UIViewController, UICollectionViewDelegate {
     // MARK: - Internal members
 
     /// Refresh control, if added
-    public internal(set) var refreshControl: UIRefreshControl?
+    open internal(set) var refreshControl: UIRefreshControl?
 
     /// Refresh action, if added
-    public internal(set) var refreshAction: ((refreshControl: UIRefreshControl) -> Void)?
+    open internal(set) var refreshAction: ((_ refreshControl: UIRefreshControl) -> Void)?
 
     #endif
 
@@ -44,7 +44,7 @@ public class BrickViewController: UIViewController, UICollectionViewDelegate {
         super.init(nibName: nil, bundle: nil)
     }
 
-    public override init(nibName: String?, bundle: NSBundle?) {
+    public override init(nibName: String?, bundle: Bundle?) {
         super.init(nibName: nibName, bundle: bundle)
     }
 
@@ -54,7 +54,7 @@ public class BrickViewController: UIViewController, UICollectionViewDelegate {
 
     // MARK: - UIViewController overrides
 
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         initializeComponents()
         
@@ -65,11 +65,11 @@ public class BrickViewController: UIViewController, UICollectionViewDelegate {
 
     // MARK: - Private Methods
 
-    private func initializeComponents() {
+    fileprivate func initializeComponents() {
         autoreleasepool { // This would result in not releasing the BrickCollectionView even when its being set to nil
             let collectionView = BrickCollectionView(frame: self.view.bounds, collectionViewLayout: BrickFlowLayout())
-            collectionView.backgroundColor = .clearColor()
-            collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+            collectionView.backgroundColor = UIColor.clear
+            collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
             self.view.addSubview(collectionView)
 
@@ -79,23 +79,23 @@ public class BrickViewController: UIViewController, UICollectionViewDelegate {
     }
 
 // MARK: - Convenience methods
-    public func setSection(section: BrickSection) {
+    open func setSection(_ section: BrickSection) {
         brickCollectionView.setSection(section)
     }
 
-    public func registerBrickClass(brickClass: Brick.Type, nib: UINib? = nil) {
+    open func registerBrickClass(_ brickClass: Brick.Type, nib: UINib? = nil) {
         brickCollectionView.registerBrickClass(brickClass, nib: nib)
     }
 
-    public func registerNib(nib: UINib, forBrickWithIdentifier identifier: String) {
+    open func registerNib(_ nib: UINib, forBrickWithIdentifier identifier: String) {
         brickCollectionView.registerNib(nib, forBrickWithIdentifier: identifier)
     }
 
-    public func reloadBricksWithIdentifiers(identifiers: [String], shouldReloadCell: Bool = false, completion: ((Bool) -> Void)? = nil) {
+    open func reloadBricksWithIdentifiers(_ identifiers: [String], shouldReloadCell: Bool = false, completion: ((Bool) -> Void)? = nil) {
         brickCollectionView.reloadBricksWithIdentifiers(identifiers, shouldReloadCell: shouldReloadCell, completion: completion)
     }
 
-    public func invalidateLayout() {
+    open func invalidateLayout() {
         brickCollectionView.invalidateBricks()
     }
 
@@ -109,16 +109,16 @@ extension BrickViewController {
     ///
     /// - parameter refreshControl: refreshControl
     /// - parameter action:         action
-    public func addRefreshControl(refreshControl: UIRefreshControl, action:((refreshControl: UIRefreshControl) -> Void)) {
+    public func addRefreshControl(_ refreshControl: UIRefreshControl, action:@escaping ((_ refreshControl: UIRefreshControl) -> Void)) {
         self.refreshControl = refreshControl
         self.refreshAction = action
-        self.refreshControl!.addTarget(self, action: #selector(refreshControlAction), forControlEvents: .ValueChanged)
+        self.refreshControl!.addTarget(self, action: #selector(refreshControlAction), for: .valueChanged)
         self.brickCollectionView.addSubview(self.refreshControl!)
     }
     
     /// This method needs to be called then ever you are do refreshing so it can be brought back to the the top
     public func resetRefreshControl() {
-        if refreshControl?.refreshing == true {
+        if refreshControl?.isRefreshing == true {
             refreshControl?.layer.zPosition = (brickCollectionView.backgroundView?.layer.zPosition ?? 0) + 1
         }
     }
@@ -126,7 +126,7 @@ extension BrickViewController {
     @objc internal func refreshControlAction() {
         refreshControl?.layer.zPosition = (brickCollectionView.backgroundView?.layer.zPosition ?? 0) - 1
         if let refreshControl = self.refreshControl {
-            self.refreshAction?(refreshControl: refreshControl)
+            self.refreshAction?(refreshControl)
         }
     }
 }
@@ -135,27 +135,27 @@ extension BrickViewController {
 #if os(tvOS)
 extension BrickViewController {
     
-    public func collectionView(collectionView: UICollectionView, shouldUpdateFocusInContext context: UICollectionViewFocusUpdateContext) -> Bool {
+    open func collectionViewShouldUpdateFocusIn(context: UICollectionViewFocusUpdateContext) -> Bool {
         
         guard let nextIndex = context.nextFocusedIndexPath else {
             return false
         }
         
-        if let lastIndex = context.previouslyFocusedIndexPath, let cell = brickCollectionView.cellForItemAtIndexPath(lastIndex) as? FocusableBrickCell {
+        if let lastIndex = context.previouslyFocusedIndexPath, let cell = brickCollectionView.cellForItem(at: lastIndex) as? FocusableBrickCell {
             if !cell.willUnfocus() {
                 return false
             }
         }
         
-        if let cell = brickCollectionView.cellForItemAtIndexPath(nextIndex) as? FocusableBrickCell {
+        if let cell = brickCollectionView.cellForItem(at: nextIndex) as? FocusableBrickCell {
             return cell.willFocus()
         }
         
         return false
     }
     
-    public func collectionView(collectionView: UICollectionView, canFocusItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        let cell = brickCollectionView.cellForItemAtIndexPath(indexPath) as? BrickCell
+    public func collectionView(collectionView: UICollectionView, canFocusItemAtIndexPath indexPath: IndexPath) -> Bool {
+        let cell = brickCollectionView.cellForItem(at: indexPath) as? BrickCell
         return cell is FocusableBrickCell && cell?.allowsFocus == true
     }
 }

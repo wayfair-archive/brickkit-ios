@@ -28,7 +28,7 @@ class HugeRepeatBrickViewController: BrickViewController, LabelBrickCellDataSour
         self.view.backgroundColor = .brickBackground
 
         let section = BrickSection(bricks: [
-            LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 1/2), height: .Auto(estimate: .Fixed(size: 50)), backgroundColor: .brickGray1, dataSource: self),
+            LabelBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 1/2), height: .auto(estimate: .fixed(size: 50)), backgroundColor: .brickGray1, dataSource: self),
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
 
         section.repeatCountDataSource = self
@@ -44,7 +44,7 @@ class HugeRepeatBrickViewController: BrickViewController, LabelBrickCellDataSour
         }
     }
 
-    func configureLabelBrickCell(cell: LabelBrickCell) {
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
         var text = ""
 
         for _ in 0...min(cell.index, 5) {

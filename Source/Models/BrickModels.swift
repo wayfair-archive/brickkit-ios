@@ -10,26 +10,26 @@ import Foundation
 import UIKit
 
 /// A Brick is the model representation of a BrickCell in a BrickCollectionView
-public class Brick: CustomStringConvertible {
+open class Brick: CustomStringConvertible {
 
     // Mark: - Public members
 
     /// Identifier of the brick. Defaults to empty string
-    public let identifier: String
+    open let identifier: String
 
     /// Passes string to BrickCell's accessibilityIdentifier for UIAccessibility.  Defaults to the brick identifier
-    public var accessibilityIdentifier: String
+    open var accessibilityIdentifier: String
 
     /// Passes string to BrickCell's accessibilityLabel for UIAccessibility.  Defaults to nil
-    public var accessibilityLabel: String?
+    open var accessibilityLabel: String?
 
     /// Passes string to BrickCell's accessibilityHint for UIAccessibility.  Defaults to nil
-    public var accessibilityHint: String?
+    open var accessibilityHint: String?
 
-    public var size: BrickSize
+    open var size: BrickSize
     
-    /// Width dimension used to calculate the width. Defaults to .Ratio(ratio: 1)
-    public var width: BrickDimension {
+    /// Width dimension used to calculate the width. Defaults to .ratio(ratio: 1)
+    open var width: BrickDimension {
         set(newWidth) {
             size.width = newWidth
         }
@@ -38,8 +38,8 @@ public class Brick: CustomStringConvertible {
         }
     }
     
-    /// Height dimension used to calculate the height. Defaults to .Auto(estimate: .Fixed(size: 50))
-    public var height: BrickDimension {
+    /// Height dimension used to calculate the height. Defaults to .auto(estimate: .fixed(size: 50))
+    open var height: BrickDimension {
         set(newHeight) {
             size.height = newHeight
         }
@@ -48,31 +48,31 @@ public class Brick: CustomStringConvertible {
         }
     }
     
-    /// Background color used for the brick. Defaults to .clearColor()
-    public var backgroundColor: UIColor
+    /// Background color used for the brick. Defaults to UIColor.clear
+    open var backgroundColor: UIColor
     
     /// Background view used for the brick. Defaults to nil
-    public var backgroundView: UIView?
+    open var backgroundView: UIView?
     
     /// Delegate used to handle tap gestures for the brick. Defaults to nil
-    public weak var brickCellTapDelegate: BrickCellTapDelegate?
+    open weak var brickCellTapDelegate: BrickCellTapDelegate?
     
     /// Used to override content. Defaults to nil
-    public weak var overrideContentSource: OverrideContentSource?
+    open weak var overrideContentSource: OverrideContentSource?
 
     /// Initialize a Brick
     ///
     /// - parameter identifier:      Identifier of the brick. Defaults to empty string
-    /// - parameter width:           Width dimension used to calculate the width. Defaults to .Ratio(ratio: 1)
-    /// - parameter height:          Height dimension used to calculate the height. Defaults to .Auto(estimate: .Fixed(size: 50))
-    /// - parameter backgroundColor: Background color used for the brick. Defaults to .clearColor()
+    /// - parameter width:           Width dimension used to calculate the width. Defaults to .ratio(ratio: 1)
+    /// - parameter height:          Height dimension used to calculate the height. Defaults to .auto(estimate: .fixed(size: 50))
+    /// - parameter backgroundColor: Background color used for the brick. Defaults to UIColor.clear
     /// - parameter backgroundView:  Background view used for the brick. Defaults to nil
     /// - returns: brick
-    convenience public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil) {
+    convenience public init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil) {
         self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView)
     }
     
-    public init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil) {
+    public init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil) {
         self.identifier = identifier
         self.size = size
         self.backgroundColor = backgroundColor
@@ -93,40 +93,40 @@ public class Brick: CustomStringConvertible {
     // Mark: - Loading nibs/cells
 
     /// Instance variable: Name of the nib that should be used to load this brick's cell
-    public var nibName: String {
-        return self.dynamicType.nibName
+    open var nibName: String {
+        return type(of: self).nibName
     }
 
     /// Class variable: Default nib name to be used for this brick's cell
     // If not overriden, it uses the same as the Brick class
-    public class var nibName: String {
-        return NSStringFromClass(self).componentsSeparatedByString(".").last!
+    open class var nibName: String {
+        return NSStringFromClass(self).components(separatedBy: ".").last!
     }
 
     // The internal identifier to use for this brick
     // This is used when storing the registered brick
-    public class var internalIdentifier: String {
+    open class var internalIdentifier: String {
         return NSStringFromClass(self)
     }
 
     /// Class variable: If not nil, this class will be used to load this brick's cell
-    public class var cellClass: UICollectionViewCell.Type? {
+    open class var cellClass: UICollectionViewCell.Type? {
         return nil
     }
 
     /// Bundle where the nib/class should be loaded from
-    public class var bundle: NSBundle {
-        return NSBundle(forClass: self)
+    open class var bundle: Bundle {
+        return Bundle(for: self)
     }
 
     // Mark: - CustomStringConvertible
 
-    public var description: String {
+    open var description: String {
         return descriptionWithIndentationLevel(0)
     }
 
     /// Convenience method to show description with an indentation
-    internal func descriptionWithIndentationLevel(indentationLevel: Int) -> String {
+    internal func descriptionWithIndentationLevel(_ indentationLevel: Int) -> String {
         var description = ""
         for _ in 0..<indentationLevel {
             description += "    "
@@ -137,26 +137,26 @@ public class Brick: CustomStringConvertible {
     }
 }
 
-public class BrickSection: Brick {
-    public var bricks: [Brick]
-    public var inset: CGFloat
-    public var edgeInsets: UIEdgeInsets
-    public var alignRowHeights: Bool
-    public var alignment: BrickAlignment
+open class BrickSection: Brick {
+    open var bricks: [Brick]
+    open var inset: CGFloat
+    open var edgeInsets: UIEdgeInsets
+    open var alignRowHeights: Bool
+    open var alignment: BrickAlignment
 
-    internal private(set) var collectionIndex: Int = 0
-    internal private(set) var collectionIdentifier: String = ""
+    internal fileprivate(set) var collectionIndex: Int = 0
+    internal fileprivate(set) var collectionIdentifier: String = ""
 
-    internal private(set) var sectionCount: Int = 0
-    internal private(set) var sectionIndexPaths: [CollectionInfo: [Int: NSIndexPath]] = [:] // Variable that keeps track of the indexpaths of the sections
+    internal fileprivate(set) var sectionCount: Int = 0
+    internal fileprivate(set) var sectionIndexPaths: [CollectionInfo: [Int: IndexPath]] = [:] // Variable that keeps track of the indexpaths of the sections
 
-    public weak var repeatCountDataSource: BrickRepeatCountDataSource? {
+    open weak var repeatCountDataSource: BrickRepeatCountDataSource? {
         didSet {
             sectionIndexPaths.removeAll()
         }
     }
 
-    public init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 0)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, bricks: [Brick], inset: CGFloat = 0, edgeInsets: UIEdgeInsets = UIEdgeInsetsZero, alignRowHeights: Bool = false, alignment: BrickAlignment = BrickAlignment(horizontal: .Left, vertical: .Top)) {
+    public init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 0)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, bricks: [Brick], inset: CGFloat = 0, edgeInsets: UIEdgeInsets = UIEdgeInsets.zero, alignRowHeights: Bool = false, alignment: BrickAlignment = BrickAlignment(horizontal: .left, vertical: .top)) {
         self.bricks = bricks
         self.inset = inset
         self.edgeInsets = edgeInsets
@@ -166,7 +166,7 @@ public class BrickSection: Brick {
     }
 
     /// Invalidate the brick counts for a given collection. Recalculate where sections are in the tree
-    func invalidateIfNeeded(in collection: CollectionInfo) -> [Int: NSIndexPath] {
+    func invalidateIfNeeded(in collection: CollectionInfo) -> [Int: IndexPath] {
         if let sectionIndexPaths = self.sectionIndexPaths[collection] {
             return sectionIndexPaths
         }
@@ -179,8 +179,8 @@ public class BrickSection: Brick {
         sectionIndexPaths[collection] = nil
     }
 
-    func invalidateSectionIndexPaths(in collection: CollectionInfo) -> [Int: NSIndexPath] {
-        var sectionIndexPaths: [Int: NSIndexPath] = [:]
+    func invalidateSectionIndexPaths(in collection: CollectionInfo) -> [Int: IndexPath] {
+        var sectionIndexPaths: [Int: IndexPath] = [:]
         var sectionCount = 0
 
         BrickSection.addSection(&sectionIndexPaths, sectionCount: &sectionCount, bricks: [self], repeatCountDataSource: repeatCountDataSource, in: collection)
@@ -192,7 +192,7 @@ public class BrickSection: Brick {
     }
 
     /// Add a section
-    static private func addSection(inout sectionIndexPaths: [Int: NSIndexPath], inout sectionCount: Int, bricks: [Brick], repeatCountDataSource: BrickRepeatCountDataSource?, atIndexPath indexPath: NSIndexPath? = nil, in collection: CollectionInfo) {
+    static fileprivate func addSection(_ sectionIndexPaths: inout [Int: IndexPath], sectionCount: inout Int, bricks: [Brick], repeatCountDataSource: BrickRepeatCountDataSource?, atIndexPath indexPath: IndexPath? = nil, in collection: CollectionInfo) {
         let sectionId = sectionCount
         sectionCount += 1
         if let indexPath = indexPath {
@@ -208,7 +208,7 @@ public class BrickSection: Brick {
                 if brick.count(for: collection) != 1 {
                     fatalError("Repeat count on a section is not allowed (requested \(brick.count(for: collection))). Please use `CollectionBrick`")
                 }
-                BrickSection.addSection(&sectionIndexPaths, sectionCount: &sectionCount, bricks: sectionModel.bricks, repeatCountDataSource: sectionModel.repeatCountDataSource ?? repeatCountDataSource, atIndexPath: NSIndexPath(forRow: index, inSection: sectionId), in: collection)
+                BrickSection.addSection(&sectionIndexPaths, sectionCount: &sectionCount, bricks: sectionModel.bricks, repeatCountDataSource: sectionModel.repeatCountDataSource ?? repeatCountDataSource, atIndexPath: IndexPath(row: index, section: sectionId), in: collection)
             }
 
             index += brick.count(for: collection)
@@ -218,7 +218,7 @@ public class BrickSection: Brick {
     // Mark: - CustomStringConvertible
 
     /// Convenience method to show description with an indentation
-    override internal func descriptionWithIndentationLevel(indentationLevel: Int) -> String {
+    override internal func descriptionWithIndentationLevel(_ indentationLevel: Int) -> String {
         var description = super.descriptionWithIndentationLevel(indentationLevel)
         description += " inset: \(inset) edgeInsets: \(edgeInsets)"
 

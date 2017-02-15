@@ -12,7 +12,7 @@ import XCTest
 class MaxZIndexBehaviorTests: BrickFlowLayoutBaseTests {
     
     func testMaxZIndex() {
-        let fixedMaxZIndex = FixedMaxZIndexLayoutBehaviorDataSource(indexPaths: [NSIndexPath(forItem: 0, inSection: 0), NSIndexPath(forItem: 1, inSection: 0)])
+        let fixedMaxZIndex = FixedMaxZIndexLayoutBehaviorDataSource(indexPaths: [IndexPath(item: 0, section: 0), IndexPath(item: 1, section: 0)])
         let zIndexBehavior = MaxZIndexLayoutBehavior(dataSource: fixedMaxZIndex)
         self.layout.behaviors.insert(zIndexBehavior)
 
@@ -21,11 +21,11 @@ class MaxZIndexBehaviorTests: BrickFlowLayoutBaseTests {
 
         XCTAssertEqual(self.layout.maxZIndex, 19)
 
-        let attributes1 = layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0))
+        let attributes1 = layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 0))
         XCTAssertNotNil(attributes1)
         XCTAssertEqual(attributes1?.zIndex, 20)
 
-        let attributes2 = layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 0))
+        let attributes2 = layout.layoutAttributesForItem(at: IndexPath(item: 1, section: 0))
         XCTAssertNotNil(attributes2)
         XCTAssertEqual(attributes2?.zIndex, 21)
     }

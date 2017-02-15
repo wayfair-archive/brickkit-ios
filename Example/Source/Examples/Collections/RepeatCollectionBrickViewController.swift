@@ -36,8 +36,8 @@ class RepeatCollectionBrickViewController: BrickApp.BaseBrickController, BrickRe
         self.view.backgroundColor = .brickBackground
 
         collectionSection = BrickSection(bricks: [
-            ImageBrick(width: .Ratio(ratio: 1/2), height: .Ratio(ratio: 1), dataSource: self),
-            BrickSection(width: .Ratio(ratio: 1/2), bricks: [
+            ImageBrick(width: .ratio(ratio: 1/2), height: .ratio(ratio: 1), dataSource: self),
+            BrickSection(width: .ratio(ratio: 1/2), bricks: [
                 LabelBrick(RepeatCollectionBrickViewController.Identifiers.titleLabel, backgroundColor: .brickGray2, dataSource: self),
                 LabelBrick(RepeatCollectionBrickViewController.Identifiers.subTitleLabel, backgroundColor: .brickGray4, dataSource: self)
                 ])
@@ -83,26 +83,26 @@ extension RepeatCollectionBrickViewController: ImageBrickDataSource {
     }
 
     func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIViewContentMode {
-        return .ScaleAspectFill
+        return .scaleAspectFill
     }
 }
 
 extension RepeatCollectionBrickViewController: LabelBrickCellDataSource {
 
-    func configureLabelBrickCell(cell: LabelBrickCell) {
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
         let identifier = cell.brick.identifier
         let collectionIndex = cell.collectionIndex + 1
 
         if identifier == RepeatCollectionBrickViewController.Identifiers.titleLabel {
-            cell.label.text = "Title \(collectionIndex)".uppercaseString
+            cell.label.text = "Title \(collectionIndex)".uppercased()
         } else if identifier == RepeatCollectionBrickViewController.Identifiers.subTitleLabel {
-            cell.label.text = "SubTitle \(collectionIndex)".uppercaseString
+            cell.label.text = "SubTitle \(collectionIndex)".uppercased()
         }
         
         cell.imageView?.translatesAutoresizingMaskIntoConstraints = true
         cell.imageView?.frame = CGRect(origin: cell.imageView?.frame.origin ?? CGPoint.zero, size: CGSize(width: 30, height: 30))
         cell.imageView?.clipsToBounds = true
-        cell.imageView?.contentMode = .ScaleAspectFit
+        cell.imageView?.contentMode = .scaleAspectFit
         cell.imageView?.image = UIImage(named: "wayfair")
         
     }

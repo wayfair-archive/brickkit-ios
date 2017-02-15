@@ -14,7 +14,7 @@ class BrickExtensionsTests: XCTestCase {
     func testAllKeysForValue() {
         let dict = ["a" : 1, "b" : 2, "c" : 1, "d" : 2]
         let keys = dict.allKeysForValue(1)
-        XCTAssertEqual(keys.sort { $0 < $1 }, ["a", "c"])
+        XCTAssertEqual(keys.sorted { $0 < $1 }, ["a", "c"])
     }
 
     func testAllKeysForValueNotFound() {

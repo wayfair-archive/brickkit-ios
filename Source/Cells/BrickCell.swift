@@ -10,7 +10,7 @@ import UIKit
 
 // Mark: - Resizeable cells
 
-public typealias CellSizeChangedHandler = ((cell: BrickCell) -> Void)
+public typealias CellSizeChangedHandler = ((_ cell: BrickCell) -> Void)
 
 public protocol AsynchronousResizableCell {
     var sizeChangedHandler: CellSizeChangedHandler? { get set }
@@ -21,7 +21,7 @@ public protocol ImageDownloaderCell {
 }
 
 public protocol BrickCellTapDelegate: UIGestureRecognizerDelegate {
-    func didTapBrickCell(brickCell: BrickCell)
+    func didTapBrickCell(_ brickCell: BrickCell)
 }
 
 public protocol OverrideContentSource: class {
@@ -41,7 +41,7 @@ extension Bricklike where Self : BrickCell {
     public var brick: BrickType { return _brick as! BrickType }
 }
 
-public class BaseBrickCell: UICollectionViewCell {
+open class BaseBrickCell: UICollectionViewCell {
 
     // Using the UICollectionViewCell.backgroundView is not really stable
     // Especially when reusing cells, the backgroundView might disappear and reappear when scrolling up or down
@@ -55,22 +55,22 @@ public class BaseBrickCell: UICollectionViewCell {
             }
             if let view = brickBackgroundView {
                 view.frame = self.bounds
-                view.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
-                self.contentView.insertSubview(view, atIndex: 0)
+                view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+                self.contentView.insertSubview(view, at: 0)
             }
         }
     }
 
-    public lazy var bottomSeparatorLine: UIView = {
+    open lazy var bottomSeparatorLine: UIView = {
         return UIView()
     }()
 
-    public lazy var topSeparatorLine: UIView = {
+    open lazy var topSeparatorLine: UIView = {
         return UIView()
     }()
 
-    public override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
-        super.applyLayoutAttributes(layoutAttributes)
+    open override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.apply(layoutAttributes)
 
         // Setting zPosition instead of relaying on
         // UICollectionView zIndex management 'fixes' the issue
@@ -78,7 +78,7 @@ public class BaseBrickCell: UICollectionViewCell {
         self.layer.zPosition = CGFloat(layoutAttributes.zIndex)
     }
 
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         brickBackgroundView?.frame = self.bounds
     }
@@ -92,7 +92,7 @@ extension BaseBrickCell {
         topSeparatorLine.removeFromSuperview()
     }
 
-    public func addSeparatorLine(width: CGFloat, onTop: Bool? = false, xOrigin: CGFloat = 0, backgroundColor: UIColor = .lightGrayColor(), height: CGFloat = 0.5) {
+    public func addSeparatorLine(_ width: CGFloat, onTop: Bool? = false, xOrigin: CGFloat = 0, backgroundColor: UIColor = UIColor.lightGray, height: CGFloat = 0.5) {
 
         let separator = (onTop == true) ? topSeparatorLine : bottomSeparatorLine
 
@@ -108,7 +108,7 @@ extension BaseBrickCell {
     }
 }
 
-public class BrickCell: BaseBrickCell {
+open class BrickCell: BaseBrickCell {
 
     internal var _brick: Brick! {
         didSet {
@@ -117,15 +117,15 @@ public class BrickCell: BaseBrickCell {
             self.accessibilityHint = _brick.accessibilityHint
         }
     }
-    public var tapGesture: UITapGestureRecognizer?
+    open var tapGesture: UITapGestureRecognizer?
 
-    public var identifier: String {
+    open var identifier: String {
         return _brick.identifier
     }
 
-    public private(set) var index: Int = 0
-    public private(set) var collectionIndex: Int = 0
-    public private(set) var collectionIdentifier: String?
+    open fileprivate(set) var index: Int = 0
+    open fileprivate(set) var collectionIndex: Int = 0
+    open fileprivate(set) var collectionIdentifier: String?
 
     #if os(tvOS)
     public var allowsFocus: Bool = true
@@ -144,16 +144,16 @@ public class BrickCell: BaseBrickCell {
         didSet { defaultRightConstraintConstant = rightSpaceConstraint?.constant ?? 0 }
     }
 
-    private var defaultTopConstraintConstant: CGFloat = 0
-    private var defaultBottomConstraintConstant: CGFloat = 0
-    private var defaultLeftConstraintConstant: CGFloat = 0
-    private var defaultRightConstraintConstant: CGFloat = 0
+    fileprivate var defaultTopConstraintConstant: CGFloat = 0
+    fileprivate var defaultBottomConstraintConstant: CGFloat = 0
+    fileprivate var defaultLeftConstraintConstant: CGFloat = 0
+    fileprivate var defaultRightConstraintConstant: CGFloat = 0
 
-    public var defaultEdgeInsets: UIEdgeInsets {
+    open var defaultEdgeInsets: UIEdgeInsets {
         return UIEdgeInsetsMake(defaultTopConstraintConstant, defaultLeftConstraintConstant, defaultBottomConstraintConstant, defaultRightConstraintConstant)
     }
 
-    public dynamic var edgeInsets: UIEdgeInsets = UIEdgeInsetsZero {
+    open dynamic var edgeInsets: UIEdgeInsets = UIEdgeInsets.zero {
         didSet {
             self.topSpaceConstraint?.constant = edgeInsets.top
             self.bottomSpaceConstraint?.constant = edgeInsets.bottom
@@ -162,13 +162,13 @@ public class BrickCell: BaseBrickCell {
         }
     }
 
-    public func setContent(brick: Brick, index: Int, collectionIndex: Int, collectionIdentifier: String?) {
+    open func setContent(_ brick: Brick, index: Int, collectionIndex: Int, collectionIdentifier: String?) {
         self._brick = brick
         self.index = index
         self.collectionIndex = collectionIndex
         self.collectionIdentifier = collectionIdentifier
 
-        self.userInteractionEnabled = true
+        self.isUserInteractionEnabled = true
         if let gesture = self.tapGesture {
             self.removeGestureRecognizer(gesture)
         }
@@ -183,7 +183,7 @@ public class BrickCell: BaseBrickCell {
         reloadContent()
     }
 
-    public func updateContent() {
+    open func updateContent() {
 
     }
 
@@ -197,7 +197,7 @@ public class BrickCell: BaseBrickCell {
         _brick.brickCellTapDelegate?.didTapBrickCell(self)
     }
 
-    public override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+    open override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         guard self._brick.size.height.isEstimate(in: self) else {
             return layoutAttributes
         }
@@ -209,10 +209,10 @@ public class BrickCell: BaseBrickCell {
         return preferred
     }
 
-    public func heightForBrickView(withWidth width: CGFloat) -> CGFloat {
+    open func heightForBrickView(withWidth width: CGFloat) -> CGFloat {
         self.layoutIfNeeded()
 
-        let size = self.systemLayoutSizeFittingSize(CGSize(width: width, height: 0), withHorizontalFittingPriority: 1000, verticalFittingPriority: 10)
+        let size = self.systemLayoutSizeFitting(CGSize(width: width, height: 0), withHorizontalFittingPriority: 1000, verticalFittingPriority: 10)
         return size.height
     }
 

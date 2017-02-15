@@ -31,31 +31,31 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
 
     func testWithoutCollectionView() {
         let layout = BrickFlowLayout()
-        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .Horizontal(.Center))
+        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .horizontal(.center))
         layout.behaviors.insert(snapBehavior)
 
         expectFatalError {
-            layout.targetContentOffsetForProposedContentOffset(CGPoint.zero, withScrollingVelocity: CGPoint.zero)
+            _ = layout.targetContentOffset(forProposedContentOffset: CGPoint.zero, withScrollingVelocity: CGPoint.zero)
         }
 
     }
 
     func testWithoutBricks() {
-        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .Horizontal(.Center))
+        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .horizontal(.center))
         brickView.layout.behaviors.insert(snapBehavior)
 
-        let contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(CGPoint.zero, withScrollingVelocity: CGPoint.zero)
+        let contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: CGPoint.zero, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset, CGPoint.zero)
     }
 
     // Mark: - Horizontal
 
-    func setupHorizontalScroll(repeatCount: Int = 20, width: BrickDimension = .Fixed(size: 50), inset: CGFloat = 10) {
-        brickView.layout.scrollDirection = .Horizontal
+    func setupHorizontalScroll(_ repeatCount: Int = 20, width: BrickDimension = .fixed(size: 50), inset: CGFloat = 10) {
+        brickView.layout.scrollDirection = .horizontal
 
         brickView.registerBrickClass(DummyBrick.self)
         let section = BrickSection(bricks: [
-            DummyBrick("Brick", width: width, height: .Fixed(size: 50))
+            DummyBrick("Brick", width: width, height: .fixed(size: 50))
             ], inset: inset)
         repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick": repeatCount])
         section.repeatCountDataSource = repeatCountDataSource
@@ -64,7 +64,7 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
     }
 
     func testStartInsetsHorizontal() {
-        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .Horizontal(.Center))
+        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .horizontal(.center))
         brickView.layout.behaviors.insert(snapBehavior)
         setupHorizontalScroll()
 
@@ -74,21 +74,21 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
         XCTAssertEqual(brickView.contentOffset.x, -centerStartHorizontal)
 
         //Should start left
-        snapBehavior.scrollDirection = .Horizontal(.Left)
+        snapBehavior.scrollDirection = .horizontal(.left)
         XCTAssertEqual(brickView.contentInset.left, leftStartHorizontal)
         XCTAssertEqual(brickView.contentInset.right, rightStartHorizontal)
 
         //Should start right
-        snapBehavior.scrollDirection = .Horizontal(.Right)
+        snapBehavior.scrollDirection = .horizontal(.right)
         XCTAssertEqual(brickView.contentInset.left, rightStartHorizontal)
         XCTAssertEqual(brickView.contentInset.right, leftStartHorizontal)
     }
 
 
     func testStartInsetsHorizontalWithHalf() {
-        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .Horizontal(.Center))
+        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .horizontal(.center))
         brickView.layout.behaviors.insert(snapBehavior)
-        setupHorizontalScroll(6, width: .Ratio(ratio: 1/2), inset: 0)
+        setupHorizontalScroll(6, width: .ratio(ratio: 1/2), inset: 0)
 
         //Should start in center
         XCTAssertEqual(brickView.contentInset.left, 80)
@@ -96,7 +96,7 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
     }
 
     func testCenter() {
-        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .Horizontal(.Center))
+        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .horizontal(.center))
         brickView.layout.behaviors.insert(snapBehavior)
         setupHorizontalScroll()
 
@@ -104,31 +104,31 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
 
         //Scroll a little bit further, but not too far
         brickView.contentOffset.x += 10
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.x, -centerStartHorizontal)
 
         //Scroll further so it will snap to the next brick
         brickView.contentOffset.x += 50
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.x, 60-centerStartHorizontal)
 
         brickView.contentOffset.x += 20
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.x, 60-centerStartHorizontal)
 
         //Scroll further so it will snap to the next brick
         brickView.contentOffset.x += 50
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.x, 120-centerStartHorizontal)
 
         brickView.contentOffset.x += 10
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.x, 120-centerStartHorizontal)
         
     }
 
     func testLeft() {
-        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .Horizontal(.Left))
+        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .horizontal(.left))
         brickView.layout.behaviors.insert(snapBehavior)
         setupHorizontalScroll()
 
@@ -136,31 +136,31 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
 
         //Scroll a little bit further, but not too far
         brickView.contentOffset.x += 10
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.x, -leftStartHorizontal)
 
         //Scroll further so it will snap to the next brick
         brickView.contentOffset.x += 50
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.x, 60-leftStartHorizontal)
 
         brickView.contentOffset.x += 10
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.x, 60-leftStartHorizontal)
 
         //Scroll further so it will snap to the next brick
         brickView.contentOffset.x += 50
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.x, 120-leftStartHorizontal)
 
         brickView.contentOffset.x += 10
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.x, 120-leftStartHorizontal)
         
     }
 
     func testRight() {
-        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .Horizontal(.Right))
+        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .horizontal(.right))
         brickView.layout.behaviors.insert(snapBehavior)
         setupHorizontalScroll()
 
@@ -168,35 +168,35 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
 
         //Scroll a little bit further, but not too far
         brickView.contentOffset.x += 10
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.x, -rightStartHorizontal)
 
         //Scroll further so it will snap to the next brick
         brickView.contentOffset.x += 50
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.x, 60-rightStartHorizontal)
 
         brickView.contentOffset.x += 10
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.x, 60-rightStartHorizontal)
 
         //Scroll further so it will snap to the next brick
         brickView.contentOffset.x += 50
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.x, 120-rightStartHorizontal)
 
         brickView.contentOffset.x += 10
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.x, 120-rightStartHorizontal)
     }
 
     // Mark: - Vertical
-    func setupVerticalScroll(repeatCount: Int = 20) {
-        brickView.layout.scrollDirection = .Vertical
+    func setupVerticalScroll(_ repeatCount: Int = 20) {
+        brickView.layout.scrollDirection = .vertical
 
         brickView.registerBrickClass(DummyBrick.self)
         let section = BrickSection(bricks: [
-            DummyBrick("Brick", height: .Fixed(size: 50))
+            DummyBrick("Brick", height: .fixed(size: 50))
             ], inset: 10)
         repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick": repeatCount])
         section.repeatCountDataSource = repeatCountDataSource
@@ -205,7 +205,7 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
     }
 
     func testStartInsetsVerticalTop() {
-        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .Vertical(.Top))
+        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .vertical(.top))
         brickView.layout.behaviors.insert(snapBehavior)
         setupHorizontalScroll()
         XCTAssertEqual(brickView.contentInset.top, topStartVertical)
@@ -213,7 +213,7 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
     }
 
     func testStartInsetsVerticalMiddle() {
-        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .Vertical(.Middle))
+        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .vertical(.middle))
         brickView.layout.behaviors.insert(snapBehavior)
         setupHorizontalScroll()
 
@@ -224,7 +224,7 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
     }
 
     func testStartInsetsVerticalBottom() {
-        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .Vertical(.Bottom))
+        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .vertical(.bottom))
         brickView.layout.behaviors.insert(snapBehavior)
         setupHorizontalScroll()
 
@@ -234,7 +234,7 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
     }
     
     func testMiddle() {
-        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .Vertical(.Middle))
+        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .vertical(.middle))
         brickView.layout.behaviors.insert(snapBehavior)
         setupVerticalScroll()
 
@@ -242,31 +242,31 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
 
         //Scroll a little bit further, but not too far
         brickView.contentOffset.y += 10
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.y, -middleStartVertical)
 
         //Scroll further so it will snap to the next brick
         brickView.contentOffset.y += 50
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.y, 60-middleStartVertical)
 
         brickView.contentOffset.y += 20
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.y, 60-middleStartVertical)
 
         //Scroll further so it will snap to the next brick
         brickView.contentOffset.y += 50
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.y, 120-middleStartVertical)
 
         brickView.contentOffset.y += 10
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.y, 120-middleStartVertical)
 
     }
 
     func testTop() {
-        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .Vertical(.Top))
+        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .vertical(.top))
         brickView.layout.behaviors.insert(snapBehavior)
         setupVerticalScroll()
 
@@ -274,31 +274,31 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
 
         //Scroll a little bit further, but not too far
         brickView.contentOffset.y += 10
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.y, -topStartVertical)
 
         //Scroll further so it will snap to the next brick
         brickView.contentOffset.y += 50
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.y, 60-topStartVertical)
 
         brickView.contentOffset.y += 10
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.y, 60-topStartVertical)
 
         //Scroll further so it will snap to the next brick
         brickView.contentOffset.y += 50
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.y, 120-topStartVertical)
 
         brickView.contentOffset.y += 10
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.y, 120-topStartVertical)
 
     }
 
     func testBottom() {
-        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .Vertical(.Bottom))
+        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .vertical(.bottom))
         brickView.layout.behaviors.insert(snapBehavior)
         setupVerticalScroll()
 
@@ -306,25 +306,25 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
 
         //Scroll a little bit further, but not too far
         brickView.contentOffset.y += 10
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.y, -bottomStartVertical)
 
         //Scroll further so it will snap to the next brick
         brickView.contentOffset.y += 50
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.y, 60-bottomStartVertical)
 
         brickView.contentOffset.y += 10
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.y, 60-bottomStartVertical)
 
         //Scroll further so it will snap to the next brick
         brickView.contentOffset.y += 50
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.y, 120-bottomStartVertical)
 
         brickView.contentOffset.y += 10
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.y, 120-bottomStartVertical)
     }
 
@@ -333,14 +333,14 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
             return
         }
 
-        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .Horizontal(.Center))
+        let snapBehavior = SnapToPointLayoutBehavior(scrollDirection: .horizontal(.center))
         brickView.layout.behaviors.insert(snapBehavior)
 
-        brickView.layout.scrollDirection = .Horizontal
+        brickView.layout.scrollDirection = .horizontal
 
         brickView.registerBrickClass(DummyBrick.self)
         let section = BrickSection(bricks: [
-            DummyBrick("Brick", width: .Ratio(ratio: 0.5), height: .Fixed(size: 50))
+            DummyBrick("Brick", width: .ratio(ratio: 0.5), height: .fixed(size: 50))
             ])
         repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick": 6])
         section.repeatCountDataSource = repeatCountDataSource
@@ -351,7 +351,7 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
 
         //Scroll a little bit further, but not too far
         brickView.contentOffset.x = brickView.frame.width
-        contentOffset = brickView.collectionViewLayout.targetContentOffsetForProposedContentOffset(brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
+        contentOffset = brickView.collectionViewLayout.targetContentOffset(forProposedContentOffset: brickView.contentOffset, withScrollingVelocity: CGPoint.zero)
         XCTAssertEqual(contentOffset.x, brickView.frame.width + brickView.frame.width / 4)
 
     }

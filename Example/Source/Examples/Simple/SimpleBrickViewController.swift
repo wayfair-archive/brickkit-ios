@@ -29,11 +29,11 @@ class SimpleBrickViewController: BrickApp.BaseBrickController {
         let section = BrickSection(bricks: [
             LabelBrick(backgroundColor: .brickGray1, text: "BRICK 1", configureCellBlock: LabelBrickCell.configure),
             LabelBrick(backgroundColor: .brickGray3, text: "MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK", configureCellBlock: LabelBrickCell.configure),
-            LabelBrick(width: .Ratio(ratio: 1/2), backgroundColor: .brickGray5, text: "1/2 BRICK", configureCellBlock: LabelBrickCell.configure),
-            LabelBrick(width: .Ratio(ratio: 1/2), backgroundColor: .brickGray5, text: "1/2 BRICK", configureCellBlock: LabelBrickCell.configure),
-            LabelBrick(width: .Ratio(ratio: 1/3), backgroundColor: .brickGray2, text: "1/3 BRICK", configureCellBlock: LabelBrickCell.configure),
-            LabelBrick(width: .Ratio(ratio: 1/3), backgroundColor: .brickGray2, text: "1/3 BRICK", configureCellBlock: LabelBrickCell.configure),
-            LabelBrick(width: .Ratio(ratio: 1/3), backgroundColor: .brickGray2, text: "1/3 BRICK", configureCellBlock: LabelBrickCell.configure),
+            LabelBrick(width: .ratio(ratio: 1/2), backgroundColor: .brickGray5, text: "1/2 BRICK", configureCellBlock: LabelBrickCell.configure),
+            LabelBrick(width: .ratio(ratio: 1/2), backgroundColor: .brickGray5, text: "1/2 BRICK", configureCellBlock: LabelBrickCell.configure),
+            LabelBrick(width: .ratio(ratio: 1/3), backgroundColor: .brickGray2, text: "1/3 BRICK", configureCellBlock: LabelBrickCell.configure),
+            LabelBrick(width: .ratio(ratio: 1/3), backgroundColor: .brickGray2, text: "1/3 BRICK", configureCellBlock: LabelBrickCell.configure),
+            LabelBrick(width: .ratio(ratio: 1/3), backgroundColor: .brickGray2, text: "1/3 BRICK", configureCellBlock: LabelBrickCell.configure),
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
 
         self.setSection(section)
