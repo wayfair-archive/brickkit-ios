@@ -6,10 +6,27 @@
 //  Copyright © 2016 Wayfair LLC. All rights reserved.
 //
 
+// MARK: - Custom ImageView that gives us the flexibility to call a delegate when the is set
+
+public typealias ImageSet = () -> Void
+
+public class ImageBrickImageView: UIImageView {
+    public var didSetImage: ImageSet?
+    
+    public override var image: UIImage? {
+        didSet {
+            if let didSetCompletion = self.didSetImage where image != nil {
+                didSetCompletion()
+            }
+        }
+    }
+}
+
 // MARK: - Brick
 
 public class ImageBrick: GenericBrick<UIImageView> {
     public weak var dataSource: ImageBrickDataSource?
+    public weak var delegate: ImageBrickDelegate?
     
     private var model: ImageBrickDataSource?
 
@@ -73,6 +90,10 @@ public protocol ImageBrickDataSource: class {
     func imageURLForImageBrickCell(imageBrickCell: ImageBrickCell) -> NSURL?
     func imageForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIImage?
     func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIViewContentMode
+}
+
+public protocol ImageBrickDelegate: class {
+    func didSetImage()
 }
 
 extension ImageBrickDataSource {
@@ -167,15 +188,13 @@ public class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableC
         imageView.contentMode = dataSource.contentModeForImageBrickCell(self)
 
         if let image = dataSource.imageForImageBrickCell(self) {
-            imageView.image = image
-            if self.brick.size.height.isEstimate(in: self) {
-                setRatioConstraint(for: image)
-            }
+            self.resize(image: image)
+            self.set(image)
             imageLoaded = true
         } else if let imageURL = dataSource.imageURLForImageBrickCell(self) {
             guard currentImageURL != imageURL else {
                 if let image = self.imageView.image {
-                    set(image: image)
+                    self.resize(image: image)
                 }
                 return
             }
@@ -186,15 +205,30 @@ public class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableC
 
             self.imageDownloader?.downloadImageAndSet(on: self.imageView, with: imageURL, onCompletion: { (image, url) in
                 self.imageLoaded = true
-                self.set(image: image)
+                self.resize(image: image)
+                
+                // Check if the image on the imageView was called in the callback
+                if let _ = self.imageView.image, delegate = self.brick.delegate {
+                    delegate.didSetImage()
+                }
             })
+            
         } else {
             imageView.image = nil
         }
     }
 
+    private func set(image: UIImage) {
+        self.imageView.image = image
+        
+        guard let delegate = brick.delegate else {
+            return
+        }
+        
+        delegate.didSetImage()
+    }
 
-    private func set(image image: UIImage) {
+    private func resize(image image: UIImage) {
         if self.brick.size.height.isEstimate(in: self) {
             self.setRatioConstraint(for: image)
             self.sizeChangedHandler?(cell: self)
