@@ -24,7 +24,7 @@ public class ImageBrickImageView: UIImageView {
 
 // MARK: - Brick
 
-public class ImageBrick: GenericBrick<UIImageView> {
+public class ImageBrick: GenericBrick<ImageBrickImageView> {
     public weak var dataSource: ImageBrickDataSource?
     public weak var delegate: ImageBrickDelegate?
     
