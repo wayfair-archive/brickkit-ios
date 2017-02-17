@@ -95,12 +95,26 @@ public class SnapToPointLayoutBehavior: BrickLayoutBehavior {
         resetCollectionViewContentInset(collectionViewLayout)
     }
 
+    internal func filteredAttributes(layout collectionViewLayout: UICollectionViewLayout, frame: CGRect) -> [BrickLayoutAttributes] {
+        guard let attributes = collectionViewLayout.layoutAttributesForElementsInRect(frame) as? [BrickLayoutAttributes] else {
+            return []
+        }
+
+        let filteredAttributes = attributes.filter {
+            return !self.sectionsToIgnore.contains($0.indexPath.section)
+        }
+
+        return filteredAttributes
+    }
+
     func resetCollectionViewContentInset(collectionViewLayout: UICollectionViewLayout) {
         guard let frame = collectionViewLayout.collectionView?.frame else {
             return
         }
 
-        guard let attributes = collectionViewLayout.layoutAttributesForElementsInRect(frame) as? [BrickLayoutAttributes] where !attributes.isEmpty else {
+        let filteredLayoutAttributes = filteredAttributes(layout: collectionViewLayout, frame: frame)
+
+        guard !filteredLayoutAttributes.isEmpty else {
             return
         }
 
@@ -108,7 +122,7 @@ public class SnapToPointLayoutBehavior: BrickLayoutBehavior {
 
         switch scrollDirection {
         case .Horizontal(let scrollLocation):
-            let firstAttributes = attributes.minElement {
+            let firstAttributes = filteredLayoutAttributes.minElement {
                 return self.minimumAttributesByXAnchor($0, attributes2: $1, for: scrollLocation, with: 0)
             }! // We can safely unwrap, because we checked if attributes is empty or not
 
@@ -121,7 +135,7 @@ public class SnapToPointLayoutBehavior: BrickLayoutBehavior {
             collectionViewLayout.collectionView?.contentInset.right = right
 
         case .Vertical(let scrollLocation):
-            let firstAttributes = attributes.minElement {
+            let firstAttributes = filteredLayoutAttributes.minElement {
                 return self.minimumAttributesByYAnchor($0, attributes2: $1, for: scrollLocation, with: 0)
             }! // We can safely unwrap, because we checked if attributes is empty or not
 
