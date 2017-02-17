@@ -193,8 +193,9 @@ public class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableC
         imageView.contentMode = dataSource.contentModeForImageBrickCell(self)
 
         if let image = dataSource.imageForImageBrickCell(self) {
-            self.resize(image: image)
-            
+            if self.brick.size.height.isEstimate(in: self) {
+                self.setRatioConstraint(for: image)
+            }
             imageView.image = image
             imageLoaded = true
         } else if let imageURL = dataSource.imageURLForImageBrickCell(self) {
