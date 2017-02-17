@@ -6,10 +6,11 @@
 //  Copyright © 2016 Wayfair LLC. All rights reserved.
 //
 
-// MARK: - Custom ImageView that gives us the flexibility to call a delegate when the is set
+// MARK: - Custom ImageBrick ImageView
 
 public typealias ImageSet = () -> Void
 
+/// An object that allows for manipulation of the image brick's image view
 public class ImageBrickImageView: UIImageView {
     public var didSetImage: ImageSet?
     
