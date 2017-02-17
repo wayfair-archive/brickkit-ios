@@ -163,7 +163,7 @@ public class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableC
     private var imageLoaded = false
     private var currentImageURL: NSURL? = nil
 
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: ImageBrickImageView!
     var heightRatioConstraint: NSLayoutConstraint?
 
     public override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
@@ -177,9 +177,13 @@ public class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableC
         super.updateContent()
 
         if !fromNib {
-            self.imageView = self.genericContentView as! UIImageView
+            self.imageView = self.genericContentView as! ImageBrickImageView
         }
 
+        if let delegate = brick.delegate {
+            imageView.didSetImage = delegate.didSetImage
+        }
+        
         guard let dataSource = brick.dataSource else {
             return
         }
@@ -189,7 +193,8 @@ public class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableC
 
         if let image = dataSource.imageForImageBrickCell(self) {
             self.resize(image: image)
-            self.set(image)
+            
+            imageView.image = image
             imageLoaded = true
         } else if let imageURL = dataSource.imageURLForImageBrickCell(self) {
             guard currentImageURL != imageURL else {
@@ -206,26 +211,11 @@ public class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableC
             self.imageDownloader?.downloadImageAndSet(on: self.imageView, with: imageURL, onCompletion: { (image, url) in
                 self.imageLoaded = true
                 self.resize(image: image)
-                
-                // Check if the image on the imageView was called in the callback
-                if let _ = self.imageView.image, delegate = self.brick.delegate {
-                    delegate.didSetImage()
-                }
             })
             
         } else {
             imageView.image = nil
         }
-    }
-
-    private func set(image: UIImage) {
-        self.imageView.image = image
-        
-        guard let delegate = brick.delegate else {
-            return
-        }
-        
-        delegate.didSetImage()
     }
 
     private func resize(image image: UIImage) {
