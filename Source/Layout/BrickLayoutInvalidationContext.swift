@@ -136,7 +136,7 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
             // Content Size
             let difference = CGSize(width: provider.contentSize.width - oldContentSize.width, height: provider.contentSize.height - oldContentSize.height)
             context.contentSizeAdjustment = difference
-            context.contentOffsetAdjustment = CGPoint(x: difference.width, y: -difference.height)
+            context.contentOffsetAdjustment = CGPoint(x: 0, y: -difference.height)
             context.invalidateItemsAtIndexPaths(updatedAttributes.map{ $0.indexPath })
         }
 
