@@ -10,6 +10,7 @@ import UIKit
 
 protocol ViewGenerator {
     func generateView(frame: CGRect, in cell: GenericBrickCell) -> UIView
+    func configureView(view: UIView, cell: GenericBrickCell)
 }
 
 public class GenericBrick<T: UIView>: Brick, ViewGenerator {
@@ -41,9 +42,11 @@ public class GenericBrick<T: UIView>: Brick, ViewGenerator {
 
         view.backgroundColor = .clearColor()
 
-        self.configureView(view: view, cell: cell)
-
         return view
+    }
+
+    func configureView(view: UIView, cell: GenericBrickCell) {
+        self.configureView(view: view as! T, cell: cell)
     }
 
 }
@@ -66,31 +69,36 @@ public class GenericBrickCell: BrickCell {
             return
         }
 
-        clearContentViewAndConstraints()
-
         backgroundColor = .clearColor()
         contentView.backgroundColor = .clearColor()
 
         if let generic = self._brick as? ViewGenerator {
-            let genericContentView = generic.generateView(self.frame, in: self)
-            genericContentView.translatesAutoresizingMaskIntoConstraints = false
+            if let genericContentView = self.genericContentView {
+                generic.configureView(genericContentView, cell: self)
+            } else {
+                let genericContentView = generic.generateView(self.frame, in: self)
+                generic.configureView(genericContentView, cell: self)
+                genericContentView.translatesAutoresizingMaskIntoConstraints = false
 
-            self.contentView.addSubview(genericContentView)
+                self.contentView.addSubview(genericContentView)
 
-            let topSpaceConstraint = genericContentView.topAnchor.constraintEqualToAnchor(self.contentView.topAnchor, constant: edgeInsets.top)
-            let bottomSpaceConstraint = self.contentView.bottomAnchor.constraintEqualToAnchor(genericContentView.bottomAnchor, constant: edgeInsets.bottom)
-            let leftSpaceConstraint = genericContentView.leftAnchor.constraintEqualToAnchor(self.contentView.leftAnchor, constant: edgeInsets.left)
-            let rightSpaceConstraint = self.contentView.rightAnchor.constraintEqualToAnchor(genericContentView.rightAnchor, constant: edgeInsets.right)
+                let topSpaceConstraint = genericContentView.topAnchor.constraintEqualToAnchor(self.contentView.topAnchor, constant: edgeInsets.top)
+                let bottomSpaceConstraint = self.contentView.bottomAnchor.constraintEqualToAnchor(genericContentView.bottomAnchor, constant: edgeInsets.bottom)
+                let leftSpaceConstraint = genericContentView.leftAnchor.constraintEqualToAnchor(self.contentView.leftAnchor, constant: edgeInsets.left)
+                let rightSpaceConstraint = self.contentView.rightAnchor.constraintEqualToAnchor(genericContentView.rightAnchor, constant: edgeInsets.right)
 
-            self.contentView.addConstraints([topSpaceConstraint, bottomSpaceConstraint, leftSpaceConstraint, rightSpaceConstraint])
-            self.contentView.setNeedsUpdateConstraints()
+                self.contentView.addConstraints([topSpaceConstraint, bottomSpaceConstraint, leftSpaceConstraint, rightSpaceConstraint])
+                self.contentView.setNeedsUpdateConstraints()
 
-            // Assign to instance
-            self.genericContentView = genericContentView
-            self.topSpaceConstraint = topSpaceConstraint
-            self.bottomSpaceConstraint = bottomSpaceConstraint
-            self.leftSpaceConstraint = leftSpaceConstraint
-            self.rightSpaceConstraint = rightSpaceConstraint
+                // Assign to instance
+                self.genericContentView = genericContentView
+                self.topSpaceConstraint = topSpaceConstraint
+                self.bottomSpaceConstraint = bottomSpaceConstraint
+                self.leftSpaceConstraint = leftSpaceConstraint
+                self.rightSpaceConstraint = rightSpaceConstraint
+            }
+        } else {
+            clearContentViewAndConstraints()
         }
 
     }
