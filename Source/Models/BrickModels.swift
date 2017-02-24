@@ -154,6 +154,8 @@ public class BrickSection: Brick {
     /// These nibs will be registered, when setting this BrickSection on a BrickCollectionView
     public var nibIdentifiers: [String: UINib]?
 
+    public internal(set) weak var brickCollectionView: BrickCollectionView?
+
     public weak var repeatCountDataSource: BrickRepeatCountDataSource? {
         didSet {
             sectionIndexPaths.removeAll()

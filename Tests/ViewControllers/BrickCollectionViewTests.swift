@@ -659,4 +659,29 @@ class BrickCollectionViewTests: XCTestCase {
         XCTAssertNotNil(cell?.imageView)
     }
 
+    func testThatBrickCollectionViewIsSetToTheSection() {
+        let brick = LabelBrick("Label", text: "Hello")
+        let section = BrickSection(bricks: [brick])
+        section.nibIdentifiers = [
+            "Label": LabelBrickNibs.Image
+        ]
+        brickView.setupSectionAndLayout(section)
+
+        XCTAssertEqual(section.brickCollectionView, brickView)
+    }
+
+    func testThatBrickCollectionViewIsSetToTheNestedSections() {
+        let brick = LabelBrick("Label", text: "Hello")
+        let innerSection = BrickSection(bricks: [brick])
+        let section = BrickSection(bricks: [innerSection ])
+        section.nibIdentifiers = [
+            "Label": LabelBrickNibs.Image
+        ]
+        brickView.setupSectionAndLayout(section)
+
+        XCTAssertEqual(section.brickCollectionView, brickView)
+        XCTAssertEqual(innerSection.brickCollectionView, brickView)
+    }
+
+
 }

@@ -486,6 +486,7 @@ public class BrickCollectionView: UICollectionView {
 
     /// Register the bricks in a section
     private func registerBricks(for section: BrickSection, nibIdentifiers: [String: UINib]?) {
+        section.brickCollectionView = self
         for brick in section.bricks {
             if let brickSection = brick as? BrickSection {
                 registerBricks(for: brickSection, nibIdentifiers: brickSection.nibIdentifiers ?? nibIdentifiers)
