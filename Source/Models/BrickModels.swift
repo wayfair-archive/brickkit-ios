@@ -150,6 +150,10 @@ public class BrickSection: Brick {
     internal private(set) var sectionCount: Int = 0
     internal private(set) var sectionIndexPaths: [CollectionInfo: [Int: NSIndexPath]] = [:] // Variable that keeps track of the indexpaths of the sections
 
+    /// Optional dictionary that holds the identifier of a brick as a key and the value is the nib that should be used for that brick
+    /// These nibs will be registered, when setting this BrickSection on a BrickCollectionView
+    public var nibIdentifiers: [String: UINib]?
+
     public weak var repeatCountDataSource: BrickRepeatCountDataSource? {
         didSet {
             sectionIndexPaths.removeAll()

@@ -48,6 +48,7 @@ public class BrickCollectionView: UICollectionView {
     /// Section model. Starts with an empty brick section
     public private(set) var section: BrickSection = BrickSection(bricks: []) {
         didSet {
+            self.registerBricks(for: section, nibIdentifiers: section.nibIdentifiers)
             section.invalidateCounts(in: collectionInfo)
             self.reloadData()
         }
@@ -178,7 +179,7 @@ public class BrickCollectionView: UICollectionView {
         registeredBricks = [:]
     }
 
-    internal func identifierForBrick(brick: Brick, collectionView: UICollectionView) -> String {
+    internal func identifierForBrick(brick: Brick) -> String? {
         let identifier: String
         if brick is BrickSection {
             //Safeguard to never load the wrong nib for a BrickSection,
@@ -189,7 +190,7 @@ public class BrickCollectionView: UICollectionView {
         } else if let brickIdentifier = registeredBricks[brick.dynamicType.internalIdentifier] {
             identifier = brickIdentifier
         } else {
-            fatalError("No Nib Found for \(brick)")
+            return nil
         }
         return identifier
     }
@@ -482,6 +483,25 @@ public class BrickCollectionView: UICollectionView {
         action()
         isConfiguringCollectionBrick = false
     }
+
+    /// Register the bricks in a section
+    private func registerBricks(for section: BrickSection, nibIdentifiers: [String: UINib]?) {
+        for brick in section.bricks {
+            if let brickSection = brick as? BrickSection {
+                registerBricks(for: brickSection, nibIdentifiers: brickSection.nibIdentifiers ?? nibIdentifiers)
+            } else if !isBrickRegistered(brick) {
+                if let nib = nibIdentifiers?[brick.identifier] {
+                    self.registerNib(nib, forBrickWithIdentifier: brick.identifier)
+                } else  {
+                    self.registerBrickClass(brick.dynamicType)
+                }
+            }
+        }
+    }
+
+    private func isBrickRegistered(brick: Brick) -> Bool {
+        return identifierForBrick(brick) != nil
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -502,7 +522,9 @@ extension BrickCollectionView: UICollectionViewDataSource {
 
         let info = brickCollectionView.brickInfo(at: indexPath)
         let brick = info.brick
-        let identifier = brickCollectionView.identifierForBrick(brick, collectionView: collectionView)
+        guard let identifier = brickCollectionView.identifierForBrick(brick) else {
+            fatalError("No Nib Found for \(brick)")
+        }
 
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! BaseBrickCell
 
