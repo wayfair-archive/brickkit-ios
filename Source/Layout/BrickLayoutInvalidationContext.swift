@@ -39,7 +39,7 @@ protocol BrickLayoutInvalidationProvider: class {
 
     func removeAllCachedSections()
     func calculateSections()
-    func updateHeight(for indexPath: NSIndexPath, with height: CGFloat, updatedAttributes: OnAttributesUpdatedHandler)
+    func updateHeight(for indexPath: NSIndexPath, with height: CGFloat, updatedAttributes: OnAttributesUpdatedHandler) -> CGPoint
     func invalidateHeight(for indexPath: NSIndexPath, updatedAttributes: OnAttributesUpdatedHandler)
     func recalculateContentSize() -> CGSize
     func invalidateContent(updatedAttributes: OnAttributesUpdatedHandler)
@@ -98,7 +98,8 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
             }
 
         case .UpdateHeight(let indexPath, let newHeight):
-            provider.updateHeight(for: indexPath, with: newHeight, updatedAttributes: updateAttributes)
+            let contentOffsetAdjustment = provider.updateHeight(for: indexPath, with: newHeight, updatedAttributes: updateAttributes)
+            context.contentOffsetAdjustment = contentOffsetAdjustment
         case .InvalidateHeight(let indexPath):
             provider.invalidateHeight(for: indexPath, updatedAttributes: updateAttributes)
         case .Rotation, .BehaviorsChanged, .Invalidate:

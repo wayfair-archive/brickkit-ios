@@ -493,10 +493,13 @@ extension BrickFlowLayout: BrickLayoutInvalidationProvider {
         }
     }
 
-    func updateHeight(for indexPath: NSIndexPath, with height: CGFloat, updatedAttributes: OnAttributesUpdatedHandler) {
-        guard let section = sections?[indexPath.section] else {
-            return
+    func updateHeight(for indexPath: NSIndexPath, with height: CGFloat, updatedAttributes: OnAttributesUpdatedHandler) -> CGPoint {
+        guard let section = sections?[indexPath.section], let firstAttributes = layoutAttributesForItemAtIndexPath(indexPath) else {
+            return .zero
         }
+
+        let shouldAdjustContentOffset = _collectionView.contentOffset.y > firstAttributes.frame.origin.y
+        let contentOffsetAdjustment = shouldAdjustContentOffset ? height - firstAttributes.frame.height : 0
 
         updateSection(section, updatedAttributes: updatedAttributes) {
             section.update(height: height, at: indexPath.item, updatedAttributes: { attributes, oldFrame in
@@ -504,6 +507,8 @@ extension BrickFlowLayout: BrickLayoutInvalidationProvider {
                 self.attributesWereUpdated(attributes, oldFrame: oldFrame, fromBehaviors: false, updatedAttributes: updatedAttributes)
             })
         }
+
+        return CGPoint(x: 0, y: contentOffsetAdjustment)
     }
 
     private func updateSection(section: BrickLayoutSection, updatedAttributes: OnAttributesUpdatedHandler, action: (() -> Void)) {
