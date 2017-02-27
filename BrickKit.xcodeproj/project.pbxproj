@@ -7,110 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4E387C561DAEAB350087820E /* BrickAppearBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9B4D11DAD686E00927BE6 /* BrickAppearBehavior.swift */; };
-		4E387C571DAEAB380087820E /* BrickAppearBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9B4D31DAD690400927BE6 /* BrickAppearBehaviorTests.swift */; };
-		4E3BD8E21DB5190100541900 /* DummyFocusableBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD8E01DB5190100541900 /* DummyFocusableBrick.swift */; };
-		4E3BD8E41DB51A9700541900 /* DummyFocusableBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8E31DB51A9700541900 /* DummyFocusableBrick.xib */; };
-		4E9A250C1DABEB3400D7EA99 /* BrickKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E9A25031DABEB3400D7EA99 /* BrickKit.framework */; };
-		4E9A251A1DABEB5200D7EA99 /* BrickKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 93D9EBBD1DA4057000D8C87A /* BrickKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4E9A251C1DABEB6000D7EA99 /* BrickLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBAF1DA4057000D8C87A /* BrickLayoutBehavior.swift */; };
-		4E9A251D1DABEB6000D7EA99 /* CardLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB01DA4057000D8C87A /* CardLayoutBehavior.swift */; };
-		4E9A251E1DABEB6000D7EA99 /* CoverFlowLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB11DA4057000D8C87A /* CoverFlowLayoutBehavior.swift */; };
-		4E9A25201DABEB6000D7EA99 /* MaxZIndexLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB41DA4057000D8C87A /* MaxZIndexLayoutBehavior.swift */; };
-		4E9A25211DABEB6000D7EA99 /* MinimumStickyLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB51DA4057000D8C87A /* MinimumStickyLayoutBehavior.swift */; };
-		4E9A25221DABEB6000D7EA99 /* OffsetLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB61DA4057000D8C87A /* OffsetLayoutBehavior.swift */; };
-		4E9A25231DABEB6000D7EA99 /* OnScrollDownStickyLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB71DA4057000D8C87A /* OnScrollDownStickyLayoutBehavior.swift */; };
-		4E9A25241DABEB6000D7EA99 /* SetZIndexLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB81DA4057000D8C87A /* SetZIndexLayoutBehavior.swift */; };
-		4E9A25251DABEB6000D7EA99 /* SnapToPointLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB91DA4057000D8C87A /* SnapToPointLayoutBehavior.swift */; };
-		4E9A25261DABEB6000D7EA99 /* SpotlightLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBBA1DA4057000D8C87A /* SpotlightLayoutBehavior.swift */; };
-		4E9A25271DABEB6000D7EA99 /* StickyFooterLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBBB1DA4057000D8C87A /* StickyFooterLayoutBehavior.swift */; };
-		4E9A25281DABEB6000D7EA99 /* StickyLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBBC1DA4057000D8C87A /* StickyLayoutBehavior.swift */; };
-		4E9A25291DABEB6500D7EA99 /* ButtonBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93739BB41DA454AB00DD4B81 /* ButtonBrick.swift */; };
-		4E9A252A1DABEB6900D7EA99 /* CollectionBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93739BAE1DA454AB00DD4B81 /* CollectionBrick.swift */; };
-		4E9A252B1DABEB6F00D7EA99 /* ImageBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93739BB21DA454AB00DD4B81 /* ImageBrick.swift */; };
-		4E9A252C1DABEB7700D7EA99 /* LabelBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93739BB01DA454AB00DD4B81 /* LabelBrick.swift */; };
-		4E9A252D1DABEB8200D7EA99 /* BrickCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBCE1DA4057000D8C87A /* BrickCell.swift */; };
-		4E9A252E1DABEB8200D7EA99 /* BrickSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBCF1DA4057000D8C87A /* BrickSectionCell.swift */; };
-		4E9A252F1DABEB8200D7EA99 /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBD21DA4057000D8C87A /* ImageDownloader.swift */; };
-		4E9A25301DABEB8800D7EA99 /* BrickFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBD51DA4057000D8C87A /* BrickFlowLayout.swift */; };
-		4E9A25311DABEB8800D7EA99 /* BrickLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBD61DA4057000D8C87A /* BrickLayout.swift */; };
-		4E9A25321DABEB8800D7EA99 /* BrickLayoutInvalidationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBD71DA4057000D8C87A /* BrickLayoutInvalidationContext.swift */; };
-		4E9A25331DABEB8800D7EA99 /* BrickLayoutSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBD81DA4057000D8C87A /* BrickLayoutSection.swift */; };
-		4E9A25351DABEB8D00D7EA99 /* BrickCollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBDB1DA4057000D8C87A /* BrickCollectionViewDataSource.swift */; };
-		4E9A25361DABEB8D00D7EA99 /* BrickDimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBDC1DA4057000D8C87A /* BrickDimension.swift */; };
-		4E9A25371DABEB8D00D7EA99 /* BrickModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBDD1DA4057000D8C87A /* BrickModels.swift */; };
-		4E9A25381DABEB8D00D7EA99 /* BrickProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBDE1DA4057000D8C87A /* BrickProtocols.swift */; };
-		4E9A25391DABEB8D00D7EA99 /* BrickSectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBDF1DA4057000D8C87A /* BrickSectionDataSource.swift */; };
-		4E9A253A1DABEB8D00D7EA99 /* CollectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9350F0D51DA82A430051235F /* CollectionInfo.swift */; };
-		4E9A253B1DABEB9300D7EA99 /* BrickExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBE11DA4057000D8C87A /* BrickExtensions.swift */; };
-		4E9A253C1DABEB9300D7EA99 /* BrickUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBE21DA4057000D8C87A /* BrickUtils.swift */; };
-		4E9A253D1DABEB9300D7EA99 /* FatalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBE31DA4057000D8C87A /* FatalError.swift */; };
-		4E9A253E1DABEB9800D7EA99 /* BrickCollectionView+BrickLayoutDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBE51DA4057000D8C87A /* BrickCollectionView+BrickLayoutDataSource.swift */; };
-		4E9A253F1DABEB9800D7EA99 /* BrickCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBE61DA4057000D8C87A /* BrickCollectionView.swift */; };
-		4E9A25401DABEB9800D7EA99 /* BrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBE71DA4057000D8C87A /* BrickViewController.swift */; };
-		4E9A25421DABECDA00D7EA99 /* BrickKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC251DA4057900D8C87A /* BrickKitTests.swift */; };
-		4E9A25431DABECDF00D7EA99 /* SetZIndexBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930054011DA7242800239A13 /* SetZIndexBehaviorTests.swift */; };
-		4E9A25441DABECDF00D7EA99 /* CardLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC1A1DA4057900D8C87A /* CardLayoutBehaviorTests.swift */; };
-		4E9A25451DABECDF00D7EA99 /* HideLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC1C1DA4057900D8C87A /* HideLayoutBehaviorTests.swift */; };
-		4E9A25461DABECDF00D7EA99 /* MaxZIndexBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC1D1DA4057900D8C87A /* MaxZIndexBehaviorTests.swift */; };
-		4E9A25471DABECDF00D7EA99 /* MinimumStickyLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC1E1DA4057900D8C87A /* MinimumStickyLayoutBehaviorTests.swift */; };
-		4E9A25481DABECDF00D7EA99 /* OffsetLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC1F1DA4057900D8C87A /* OffsetLayoutBehaviorTests.swift */; };
-		4E9A25491DABECDF00D7EA99 /* OnScrollDownStickyLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC201DA4057900D8C87A /* OnScrollDownStickyLayoutBehaviorTests.swift */; };
-		4E9A254A1DABECDF00D7EA99 /* SnapToPointLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC211DA4057900D8C87A /* SnapToPointLayoutBehaviorTests.swift */; };
-		4E9A254B1DABECDF00D7EA99 /* SpotlightLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC221DA4057900D8C87A /* SpotlightLayoutBehaviorTests.swift */; };
-		4E9A254C1DABECDF00D7EA99 /* StickyFooterLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC231DA4057900D8C87A /* StickyFooterLayoutBehaviorTests.swift */; };
-		4E9A254D1DABECDF00D7EA99 /* StickyLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC241DA4057900D8C87A /* StickyLayoutBehaviorTests.swift */; };
-		4E9A254E1DABECE300D7EA99 /* CollectionBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E7F9861DA5A22B000BE1AE /* CollectionBrickTests.swift */; };
-		4E9A254F1DABECE300D7EA99 /* LabelBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC271DA4057900D8C87A /* LabelBrickTests.swift */; };
-		4E9A25501DABECE300D7EA99 /* ImageBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93902D3A1DA4728C00BC3BA1 /* ImageBrickTests.swift */; };
-		4E9A25511DABECE300D7EA99 /* ButtonBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9303A6D41DA6E00100502803 /* ButtonBrickTests.swift */; };
-		4E9A25521DABECF000D7EA99 /* InteractiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC371DA4057900D8C87A /* InteractiveTests.swift */; };
-		4E9A25531DABECF500D7EA99 /* AlignRowHeightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC391DA4057900D8C87A /* AlignRowHeightTests.swift */; };
-		4E9A25551DABECF500D7EA99 /* BrickFlowLayoutBaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC3B1DA4057900D8C87A /* BrickFlowLayoutBaseTests.swift */; };
-		4E9A25561DABECF500D7EA99 /* BrickFlowLayoutEdgeInsetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC3C1DA4057900D8C87A /* BrickFlowLayoutEdgeInsetsTests.swift */; };
-		4E9A25571DABECF500D7EA99 /* BrickFlowLayoutSectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC3D1DA4057900D8C87A /* BrickFlowLayoutSectionTests.swift */; };
-		4E9A25581DABECF500D7EA99 /* BrickFlowLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC3E1DA4057900D8C87A /* BrickFlowLayoutTests.swift */; };
-		4E9A25591DABECF500D7EA99 /* BrickFlowLayoutZIndexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC3F1DA4057900D8C87A /* BrickFlowLayoutZIndexTests.swift */; };
-		4E9A255A1DABECF500D7EA99 /* BrickInvalidationContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC401DA4057900D8C87A /* BrickInvalidationContextTests.swift */; };
-		4E9A255B1DABECF500D7EA99 /* BrickLayoutSectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC411DA4057900D8C87A /* BrickLayoutSectionTests.swift */; };
-		4E9A255C1DABECF500D7EA99 /* BrickSelfsizingFlowLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC421DA4057900D8C87A /* BrickSelfsizingFlowLayoutTests.swift */; };
-		4E9A255D1DABECFB00D7EA99 /* BrickCollectionViewDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC441DA4057900D8C87A /* BrickCollectionViewDataSourceTests.swift */; };
-		4E9A255E1DABECFB00D7EA99 /* BrickDimensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC451DA4057900D8C87A /* BrickDimensionTests.swift */; };
-		4E9A255F1DABECFB00D7EA99 /* BrickModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC461DA4057900D8C87A /* BrickModelsTests.swift */; };
-		4E9A25601DABECFB00D7EA99 /* BrickSectionDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC471DA4057900D8C87A /* BrickSectionDataSourceTests.swift */; };
-		4E9A25611DABECFF00D7EA99 /* Behaviors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC491DA4057900D8C87A /* Behaviors.swift */; };
-		4E9A25621DABECFF00D7EA99 /* BrickExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC4A1DA4057900D8C87A /* BrickExtensionsTests.swift */; };
-		4E9A25631DABECFF00D7EA99 /* BrickUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC4B1DA4057900D8C87A /* BrickUtilsTests.swift */; };
-		4E9A25641DABECFF00D7EA99 /* CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC4C1DA4057900D8C87A /* CollectionViewDataSource.swift */; };
-		4E9A25651DABECFF00D7EA99 /* DataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC4D1DA4057900D8C87A /* DataSources.swift */; };
-		4E9A25661DABECFF00D7EA99 /* FatalErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9372C5061DA40735007D7EA1 /* FatalErrorTests.swift */; };
-		4E9A25671DABECFF00D7EA99 /* XCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC4E1DA4057900D8C87A /* XCTests.swift */; };
-		4E9A25681DABED0600D7EA99 /* BrickCollectionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC501DA4057900D8C87A /* BrickCollectionViewTests.swift */; };
-		4E9A25691DABED0600D7EA99 /* BrickViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC511DA4057900D8C87A /* BrickViewControllerTests.swift */; };
-		4E9A256A1DABED0600D7EA99 /* TestBrickViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93D9EC521DA4057900D8C87A /* TestBrickViewController.storyboard */; };
-		4E9A256B1DABED0600D7EA99 /* TestBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC531DA4057900D8C87A /* TestBrickViewController.swift */; };
-		4E9A256C1DABED0600D7EA99 /* TestBrickViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93D9EC541DA4057900D8C87A /* TestBrickViewController.xib */; };
 		4E9A257E1DAC0EAB00D7EA99 /* BrickKit.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25701DAC0EAB00D7EA99 /* BrickKit.xcassets */; };
-		4E9A25AC1DAC216A00D7EA99 /* BrickKit.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A259E1DAC216A00D7EA99 /* BrickKit.xcassets */; };
-		4E9A25B81DAC222D00D7EA99 /* ButtonBrickWithChevron.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25B71DAC222D00D7EA99 /* ButtonBrickWithChevron.xib */; };
-		4E9A25BA1DAC22E300D7EA99 /* CollectionBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25B91DAC22E300D7EA99 /* CollectionBrick.xib */; };
-		4E9A25C01DAC27CE00D7EA99 /* LabelBrickButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25BF1DAC27CE00D7EA99 /* LabelBrickButton.xib */; };
-		4E9A25C21DAC28D000D7EA99 /* LabelBrickChevron.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25C11DAC28D000D7EA99 /* LabelBrickChevron.xib */; };
-		4E9A25C41DAC298300D7EA99 /* LabelBrickImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25C31DAC298300D7EA99 /* LabelBrickImage.xib */; };
-		4E9A25E01DAC2AF400D7EA99 /* AsynchronousResizableBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC291DA4057900D8C87A /* AsynchronousResizableBrick.swift */; };
-		4E9A25E11DAC2AF400D7EA99 /* AsynchronousResizableCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC2B1DA4057900D8C87A /* AsynchronousResizableCellTests.swift */; };
-		4E9A25E21DAC2AF400D7EA99 /* DummyBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC2C1DA4057900D8C87A /* DummyBrick.swift */; };
-		4E9A25E31DAC2AF400D7EA99 /* DummyBrickWithoutNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC301DA4057900D8C87A /* DummyBrickWithoutNib.swift */; };
-		4E9A25E41DAC2AF400D7EA99 /* ImageDownloaderBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC311DA4057900D8C87A /* ImageDownloaderBrick.swift */; };
-		4E9A25E51DAC2AF400D7EA99 /* ImageDownloaderCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC331DA4057900D8C87A /* ImageDownloaderCellTests.swift */; };
-		4E9A25E61DAC2AF400D7EA99 /* BaseBrickCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930054041DA7D8A000239A13 /* BaseBrickCellTests.swift */; };
-		4E9A25FC1DAC312F00D7EA99 /* ImageDownloaderBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25F01DAC2E3600D7EA99 /* ImageDownloaderBrick.xib */; };
-		4E9A25FD1DAC312F00D7EA99 /* AsynchronousResizableBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25E71DAC2B0A00D7EA99 /* AsynchronousResizableBrick.xib */; };
-		4E9A25FE1DAC312F00D7EA99 /* DummyBrick100.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25EA1DAC2C0000D7EA99 /* DummyBrick100.xib */; };
-		4E9A25FF1DAC312F00D7EA99 /* DummyBrick150.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25EC1DAC2CDB00D7EA99 /* DummyBrick150.xib */; };
-		4E9A26011DAC312F00D7EA99 /* DummyBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25EE1DAC2D7500D7EA99 /* DummyBrick.xib */; };
-		4E9A26021DAC31A300D7EA99 /* image0.png in Resources */ = {isa = PBXBuildFile; fileRef = 93902D381DA4726900BC3BA1 /* image0.png */; };
-		4E9A26051DAD323400D7EA99 /* LabelWithEdgeInsets.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25F21DAC2E8D00D7EA99 /* LabelWithEdgeInsets.xib */; };
 		4E9A260C1DAD33F800D7EA99 /* AsynchronousResizableBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25C71DAC2ADF00D7EA99 /* AsynchronousResizableBrick.xib */; };
 		4E9A260D1DAD33F800D7EA99 /* DummyBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25C81DAC2ADF00D7EA99 /* DummyBrick.xib */; };
 		4E9A260E1DAD33F800D7EA99 /* DummyBrick100.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25C91DAC2ADF00D7EA99 /* DummyBrick100.xib */; };
@@ -121,20 +18,11 @@
 		930054051DA7D8A000239A13 /* BaseBrickCellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930054041DA7D8A000239A13 /* BaseBrickCellTests.swift */; };
 		9303A6D51DA6E00100502803 /* ButtonBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9303A6D41DA6E00100502803 /* ButtonBrickTests.swift */; };
 		9323656F1DF4FD4900BE5183 /* BrickAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9323656E1DF4FD4900BE5183 /* BrickAlignment.swift */; };
-		932365701DF4FD4900BE5183 /* BrickAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9323656E1DF4FD4900BE5183 /* BrickAlignment.swift */; };
 		932365721DF4FE1F00BE5183 /* BrickAlignmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932365711DF4FE1F00BE5183 /* BrickAlignmentTests.swift */; };
-		932365731DF4FE1F00BE5183 /* BrickAlignmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932365711DF4FE1F00BE5183 /* BrickAlignmentTests.swift */; };
 		9328EEA61DC19ACE007F2562 /* LazyLoadingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328EEA51DC19ACE007F2562 /* LazyLoadingTests.swift */; };
-		9328EEA71DC19ACE007F2562 /* LazyLoadingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9328EEA51DC19ACE007F2562 /* LazyLoadingTests.swift */; };
 		9333538A1E368903003CEC85 /* GenericBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933353891E368903003CEC85 /* GenericBrick.swift */; };
-		9333538B1E368903003CEC85 /* GenericBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933353891E368903003CEC85 /* GenericBrick.swift */; };
 		9333538E1E36A37F003CEC85 /* GenericBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9333538D1E36A37F003CEC85 /* GenericBrickTests.swift */; };
-		9333538F1E36A37F003CEC85 /* GenericBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9333538D1E36A37F003CEC85 /* GenericBrickTests.swift */; };
 		933FF95E1DC1207900E0B80E /* Swizzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933FF95D1DC1207900E0B80E /* Swizzle.swift */; };
-		933FF95F1DC1207900E0B80E /* Swizzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933FF95D1DC1207900E0B80E /* Swizzle.swift */; };
-		934ADAA31E53B4B200C36587 /* ButtonBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934ADA971E53B48200C36587 /* ButtonBrick.xib */; };
-		934ADAA41E53B4B200C36587 /* ImageBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934ADA9C1E53B49300C36587 /* ImageBrick.xib */; };
-		934ADAA51E53B4B200C36587 /* LabelBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934ADA991E53B48C00C36587 /* LabelBrick.xib */; };
 		934ADAB31E53B4C600C36587 /* ButtonBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934ADAA81E53B4C600C36587 /* ButtonBrick.xib */; };
 		934ADAB41E53B4C600C36587 /* ButtonBrickWithChevron.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934ADAA91E53B4C600C36587 /* ButtonBrickWithChevron.xib */; };
 		934ADAB51E53B4C600C36587 /* CollectionBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934ADAAB1E53B4C600C36587 /* CollectionBrick.xib */; };
@@ -145,7 +33,6 @@
 		934ADABA1E53B4C600C36587 /* LabelBrickImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934ADAB21E53B4C600C36587 /* LabelBrickImage.xib */; };
 		9350F0D61DA82A430051235F /* CollectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9350F0D51DA82A430051235F /* CollectionInfo.swift */; };
 		9361309B1DB83CB7008FFFEF /* CustomBrickCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D48D51DB806990091AA39 /* CustomBrickCollectionView.swift */; };
-		9361309C1DB83CB8008FFFEF /* CustomBrickCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D48D51DB806990091AA39 /* CustomBrickCollectionView.swift */; };
 		9372C5081DA4073D007D7EA1 /* FatalErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9372C5061DA40735007D7EA1 /* FatalErrorTests.swift */; };
 		93739BB51DA454AB00DD4B81 /* CollectionBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93739BAE1DA454AB00DD4B81 /* CollectionBrick.swift */; };
 		93739BB61DA454AB00DD4B81 /* LabelBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93739BB01DA454AB00DD4B81 /* LabelBrick.swift */; };
@@ -228,25 +115,15 @@
 		93D9EC861DA4057900D8C87A /* TestBrickViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93D9EC521DA4057900D8C87A /* TestBrickViewController.storyboard */; };
 		93D9EC871DA4057900D8C87A /* TestBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC531DA4057900D8C87A /* TestBrickViewController.swift */; };
 		93D9EC881DA4057900D8C87A /* TestBrickViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93D9EC541DA4057900D8C87A /* TestBrickViewController.xib */; };
-		93E435EE1DB6CB51007C159B /* CoverFlowLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8FFEA1DAD3F4A00A913E9 /* CoverFlowLayoutBehaviorTests.swift */; };
 		93E7F9881DA5A230000BE1AE /* CollectionBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E7F9861DA5A22B000BE1AE /* CollectionBrickTests.swift */; };
 		93EEFF971DC2B2E600FDFFFB /* BrickLayoutSectionBinarySearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EEFF961DC2B2E600FDFFFB /* BrickLayoutSectionBinarySearchTests.swift */; };
-		93EEFF981DC2B2E600FDFFFB /* BrickLayoutSectionBinarySearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EEFF961DC2B2E600FDFFFB /* BrickLayoutSectionBinarySearchTests.swift */; };
 		93F2CFEA1DDB91D400D5F881 /* BrickZIndexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F2CFE91DDB91D400D5F881 /* BrickZIndexer.swift */; };
-		93F2CFEB1DDB91D400D5F881 /* BrickZIndexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F2CFE91DDB91D400D5F881 /* BrickZIndexer.swift */; };
 		93F9B4D21DAD686E00927BE6 /* BrickAppearBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9B4D11DAD686E00927BE6 /* BrickAppearBehavior.swift */; };
 		93F9B4D41DAD690400927BE6 /* BrickAppearBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9B4D31DAD690400927BE6 /* BrickAppearBehaviorTests.swift */; };
 		B8B8FFEB1DAD3F4A00A913E9 /* CoverFlowLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8FFEA1DAD3F4A00A913E9 /* CoverFlowLayoutBehaviorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4E9A250D1DABEB3400D7EA99 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 93D9EB8A1DA4051B00D8C87A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4E9A25021DABEB3400D7EA99;
-			remoteInfo = "Brickkit-tvOS";
-		};
 		93D9EB9E1DA4051B00D8C87A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 93D9EB8A1DA4051B00D8C87A /* Project object */;
@@ -259,8 +136,6 @@
 /* Begin PBXFileReference section */
 		4E3BD8E01DB5190100541900 /* DummyFocusableBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyFocusableBrick.swift; sourceTree = "<group>"; };
 		4E3BD8E31DB51A9700541900 /* DummyFocusableBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DummyFocusableBrick.xib; sourceTree = "<group>"; };
-		4E9A25031DABEB3400D7EA99 /* BrickKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BrickKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4E9A250B1DABEB3400D7EA99 /* BrickKit-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BrickKit-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E9A25701DAC0EAB00D7EA99 /* BrickKit.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = BrickKit.xcassets; sourceTree = "<group>"; };
 		4E9A259E1DAC216A00D7EA99 /* BrickKit.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = BrickKit.xcassets; sourceTree = "<group>"; };
 		4E9A25B71DAC222D00D7EA99 /* ButtonBrickWithChevron.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonBrickWithChevron.xib; sourceTree = "<group>"; };
@@ -310,7 +185,7 @@
 		93902D381DA4726900BC3BA1 /* image0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image0.png; sourceTree = "<group>"; };
 		93902D3A1DA4728C00BC3BA1 /* ImageBrickTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBrickTests.swift; sourceTree = "<group>"; };
 		93D9EB931DA4051B00D8C87A /* BrickKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BrickKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		93D9EB9C1DA4051B00D8C87A /* BrickKitTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BrickKitTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		93D9EB9C1DA4051B00D8C87A /* BrickKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BrickKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		93D9EBAF1DA4057000D8C87A /* BrickLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickLayoutBehavior.swift; sourceTree = "<group>"; };
 		93D9EBB01DA4057000D8C87A /* CardLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardLayoutBehavior.swift; sourceTree = "<group>"; };
 		93D9EBB11DA4057000D8C87A /* CoverFlowLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverFlowLayoutBehavior.swift; sourceTree = "<group>"; };
@@ -396,21 +271,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4E9A24FF1DABEB3400D7EA99 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4E9A25081DABEB3400D7EA99 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4E9A250C1DABEB3400D7EA99 /* BrickKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		93D9EB8F1DA4051B00D8C87A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -640,9 +500,7 @@
 			isa = PBXGroup;
 			children = (
 				93D9EB931DA4051B00D8C87A /* BrickKit.framework */,
-				93D9EB9C1DA4051B00D8C87A /* BrickKitTests-iOS.xctest */,
-				4E9A25031DABEB3400D7EA99 /* BrickKit.framework */,
-				4E9A250B1DABEB3400D7EA99 /* BrickKit-tvOSTests.xctest */,
+				93D9EB9C1DA4051B00D8C87A /* BrickKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -886,14 +744,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		4E9A25001DABEB3400D7EA99 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4E9A251A1DABEB5200D7EA99 /* BrickKit.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		93D9EB901DA4051B00D8C87A /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -905,45 +755,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		4E9A25021DABEB3400D7EA99 /* BrickKit-tvOS */ = {
+		93D9EB921DA4051B00D8C87A /* BrickKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4E9A25141DABEB3400D7EA99 /* Build configuration list for PBXNativeTarget "BrickKit-tvOS" */;
-			buildPhases = (
-				4E9A24FE1DABEB3400D7EA99 /* Sources */,
-				4E9A24FF1DABEB3400D7EA99 /* Frameworks */,
-				4E9A25001DABEB3400D7EA99 /* Headers */,
-				4E9A25011DABEB3400D7EA99 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "BrickKit-tvOS";
-			productName = "Brickkit-tvOS";
-			productReference = 4E9A25031DABEB3400D7EA99 /* BrickKit.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		4E9A250A1DABEB3400D7EA99 /* BrickKit-tvOSTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4E9A25171DABEB3400D7EA99 /* Build configuration list for PBXNativeTarget "BrickKit-tvOSTests" */;
-			buildPhases = (
-				4E9A25071DABEB3400D7EA99 /* Sources */,
-				4E9A25081DABEB3400D7EA99 /* Frameworks */,
-				4E9A25091DABEB3400D7EA99 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				4E9A250E1DABEB3400D7EA99 /* PBXTargetDependency */,
-			);
-			name = "BrickKit-tvOSTests";
-			productName = "Brickkit-tvOSTests";
-			productReference = 4E9A250B1DABEB3400D7EA99 /* BrickKit-tvOSTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		93D9EB921DA4051B00D8C87A /* BrickKit-iOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 93D9EBA71DA4051B00D8C87A /* Build configuration list for PBXNativeTarget "BrickKit-iOS" */;
+			buildConfigurationList = 93D9EBA71DA4051B00D8C87A /* Build configuration list for PBXNativeTarget "BrickKit" */;
 			buildPhases = (
 				93D9EB8E1DA4051B00D8C87A /* Sources */,
 				93D9EB8F1DA4051B00D8C87A /* Frameworks */,
@@ -954,14 +768,14 @@
 			);
 			dependencies = (
 			);
-			name = "BrickKit-iOS";
+			name = BrickKit;
 			productName = BrickKit;
 			productReference = 93D9EB931DA4051B00D8C87A /* BrickKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		93D9EB9B1DA4051B00D8C87A /* BrickKitTests-iOS */ = {
+		93D9EB9B1DA4051B00D8C87A /* BrickKitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 93D9EBAA1DA4051B00D8C87A /* Build configuration list for PBXNativeTarget "BrickKitTests-iOS" */;
+			buildConfigurationList = 93D9EBAA1DA4051B00D8C87A /* Build configuration list for PBXNativeTarget "BrickKitTests" */;
 			buildPhases = (
 				93D9EB981DA4051B00D8C87A /* Sources */,
 				93D9EB991DA4051B00D8C87A /* Frameworks */,
@@ -972,9 +786,9 @@
 			dependencies = (
 				93D9EB9F1DA4051B00D8C87A /* PBXTargetDependency */,
 			);
-			name = "BrickKitTests-iOS";
+			name = BrickKitTests;
 			productName = BrickKitTests;
-			productReference = 93D9EB9C1DA4051B00D8C87A /* BrickKitTests-iOS.xctest */;
+			productReference = 93D9EB9C1DA4051B00D8C87A /* BrickKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -987,14 +801,6 @@
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = Wayfair;
 				TargetAttributes = {
-					4E9A25021DABEB3400D7EA99 = {
-						CreatedOnToolsVersion = 8.0;
-						ProvisioningStyle = Manual;
-					};
-					4E9A250A1DABEB3400D7EA99 = {
-						CreatedOnToolsVersion = 8.0;
-						ProvisioningStyle = Manual;
-					};
 					93D9EB921DA4051B00D8C87A = {
 						CreatedOnToolsVersion = 8.0;
 						ProvisioningStyle = Manual;
@@ -1017,48 +823,13 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				93D9EB921DA4051B00D8C87A /* BrickKit-iOS */,
-				93D9EB9B1DA4051B00D8C87A /* BrickKitTests-iOS */,
-				4E9A25021DABEB3400D7EA99 /* BrickKit-tvOS */,
-				4E9A250A1DABEB3400D7EA99 /* BrickKit-tvOSTests */,
+				93D9EB921DA4051B00D8C87A /* BrickKit */,
+				93D9EB9B1DA4051B00D8C87A /* BrickKitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		4E9A25011DABEB3400D7EA99 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				934ADAA31E53B4B200C36587 /* ButtonBrick.xib in Resources */,
-				4E9A25B81DAC222D00D7EA99 /* ButtonBrickWithChevron.xib in Resources */,
-				4E9A25BA1DAC22E300D7EA99 /* CollectionBrick.xib in Resources */,
-				4E9A25AC1DAC216A00D7EA99 /* BrickKit.xcassets in Resources */,
-				4E9A25C21DAC28D000D7EA99 /* LabelBrickChevron.xib in Resources */,
-				934ADAA41E53B4B200C36587 /* ImageBrick.xib in Resources */,
-				4E9A25C01DAC27CE00D7EA99 /* LabelBrickButton.xib in Resources */,
-				934ADAA51E53B4B200C36587 /* LabelBrick.xib in Resources */,
-				4E9A25C41DAC298300D7EA99 /* LabelBrickImage.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4E9A25091DABEB3400D7EA99 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4E9A25FC1DAC312F00D7EA99 /* ImageDownloaderBrick.xib in Resources */,
-				4E3BD8E41DB51A9700541900 /* DummyFocusableBrick.xib in Resources */,
-				4E9A256C1DABED0600D7EA99 /* TestBrickViewController.xib in Resources */,
-				4E9A256A1DABED0600D7EA99 /* TestBrickViewController.storyboard in Resources */,
-				4E9A25FF1DAC312F00D7EA99 /* DummyBrick150.xib in Resources */,
-				4E9A25FD1DAC312F00D7EA99 /* AsynchronousResizableBrick.xib in Resources */,
-				4E9A26011DAC312F00D7EA99 /* DummyBrick.xib in Resources */,
-				4E9A26051DAD323400D7EA99 /* LabelWithEdgeInsets.xib in Resources */,
-				4E9A26021DAC31A300D7EA99 /* image0.png in Resources */,
-				4E9A25FE1DAC312F00D7EA99 /* DummyBrick100.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		93D9EB911DA4051B00D8C87A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1094,115 +865,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4E9A24FE1DABEB3400D7EA99 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4E9A251C1DABEB6000D7EA99 /* BrickLayoutBehavior.swift in Sources */,
-				4E9A251D1DABEB6000D7EA99 /* CardLayoutBehavior.swift in Sources */,
-				4E9A252C1DABEB7700D7EA99 /* LabelBrick.swift in Sources */,
-				4E9A252D1DABEB8200D7EA99 /* BrickCell.swift in Sources */,
-				4E9A25381DABEB8D00D7EA99 /* BrickProtocols.swift in Sources */,
-				93F2CFEB1DDB91D400D5F881 /* BrickZIndexer.swift in Sources */,
-				4E9A253C1DABEB9300D7EA99 /* BrickUtils.swift in Sources */,
-				4E9A25231DABEB6000D7EA99 /* OnScrollDownStickyLayoutBehavior.swift in Sources */,
-				4E9A25251DABEB6000D7EA99 /* SnapToPointLayoutBehavior.swift in Sources */,
-				4E9A252F1DABEB8200D7EA99 /* ImageDownloader.swift in Sources */,
-				4E9A25351DABEB8D00D7EA99 /* BrickCollectionViewDataSource.swift in Sources */,
-				4E9A25201DABEB6000D7EA99 /* MaxZIndexLayoutBehavior.swift in Sources */,
-				4E9A25241DABEB6000D7EA99 /* SetZIndexLayoutBehavior.swift in Sources */,
-				4E9A253E1DABEB9800D7EA99 /* BrickCollectionView+BrickLayoutDataSource.swift in Sources */,
-				4E9A253B1DABEB9300D7EA99 /* BrickExtensions.swift in Sources */,
-				4E387C561DAEAB350087820E /* BrickAppearBehavior.swift in Sources */,
-				4E9A25331DABEB8800D7EA99 /* BrickLayoutSection.swift in Sources */,
-				4E9A25311DABEB8800D7EA99 /* BrickLayout.swift in Sources */,
-				4E9A25211DABEB6000D7EA99 /* MinimumStickyLayoutBehavior.swift in Sources */,
-				4E9A25301DABEB8800D7EA99 /* BrickFlowLayout.swift in Sources */,
-				4E9A25291DABEB6500D7EA99 /* ButtonBrick.swift in Sources */,
-				4E9A25371DABEB8D00D7EA99 /* BrickModels.swift in Sources */,
-				4E9A25321DABEB8800D7EA99 /* BrickLayoutInvalidationContext.swift in Sources */,
-				4E9A251E1DABEB6000D7EA99 /* CoverFlowLayoutBehavior.swift in Sources */,
-				9333538B1E368903003CEC85 /* GenericBrick.swift in Sources */,
-				4E9A252B1DABEB6F00D7EA99 /* ImageBrick.swift in Sources */,
-				4E9A253A1DABEB8D00D7EA99 /* CollectionInfo.swift in Sources */,
-				4E9A252E1DABEB8200D7EA99 /* BrickSectionCell.swift in Sources */,
-				4E9A25281DABEB6000D7EA99 /* StickyLayoutBehavior.swift in Sources */,
-				4E9A25391DABEB8D00D7EA99 /* BrickSectionDataSource.swift in Sources */,
-				4E9A252A1DABEB6900D7EA99 /* CollectionBrick.swift in Sources */,
-				4E9A25361DABEB8D00D7EA99 /* BrickDimension.swift in Sources */,
-				932365701DF4FD4900BE5183 /* BrickAlignment.swift in Sources */,
-				4E9A25401DABEB9800D7EA99 /* BrickViewController.swift in Sources */,
-				4E9A25261DABEB6000D7EA99 /* SpotlightLayoutBehavior.swift in Sources */,
-				4E9A253D1DABEB9300D7EA99 /* FatalError.swift in Sources */,
-				4E9A25271DABEB6000D7EA99 /* StickyFooterLayoutBehavior.swift in Sources */,
-				4E9A253F1DABEB9800D7EA99 /* BrickCollectionView.swift in Sources */,
-				4E9A25221DABEB6000D7EA99 /* OffsetLayoutBehavior.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4E9A25071DABEB3400D7EA99 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4E9A25671DABECFF00D7EA99 /* XCTests.swift in Sources */,
-				4E9A25601DABECFB00D7EA99 /* BrickSectionDataSourceTests.swift in Sources */,
-				4E9A25431DABECDF00D7EA99 /* SetZIndexBehaviorTests.swift in Sources */,
-				4E9A25421DABECDA00D7EA99 /* BrickKitTests.swift in Sources */,
-				4E9A25491DABECDF00D7EA99 /* OnScrollDownStickyLayoutBehaviorTests.swift in Sources */,
-				4E9A25441DABECDF00D7EA99 /* CardLayoutBehaviorTests.swift in Sources */,
-				4E9A25621DABECFF00D7EA99 /* BrickExtensionsTests.swift in Sources */,
-				4E9A25E51DAC2AF400D7EA99 /* ImageDownloaderCellTests.swift in Sources */,
-				4E9A25551DABECF500D7EA99 /* BrickFlowLayoutBaseTests.swift in Sources */,
-				4E9A25521DABECF000D7EA99 /* InteractiveTests.swift in Sources */,
-				4E9A25481DABECDF00D7EA99 /* OffsetLayoutBehaviorTests.swift in Sources */,
-				4E9A255B1DABECF500D7EA99 /* BrickLayoutSectionTests.swift in Sources */,
-				4E9A25661DABECFF00D7EA99 /* FatalErrorTests.swift in Sources */,
-				4E9A25471DABECDF00D7EA99 /* MinimumStickyLayoutBehaviorTests.swift in Sources */,
-				4E9A25E01DAC2AF400D7EA99 /* AsynchronousResizableBrick.swift in Sources */,
-				4E9A25561DABECF500D7EA99 /* BrickFlowLayoutEdgeInsetsTests.swift in Sources */,
-				93E435EE1DB6CB51007C159B /* CoverFlowLayoutBehaviorTests.swift in Sources */,
-				4E9A25E41DAC2AF400D7EA99 /* ImageDownloaderBrick.swift in Sources */,
-				4E9A25461DABECDF00D7EA99 /* MaxZIndexBehaviorTests.swift in Sources */,
-				4E9A25611DABECFF00D7EA99 /* Behaviors.swift in Sources */,
-				4E9A25451DABECDF00D7EA99 /* HideLayoutBehaviorTests.swift in Sources */,
-				4E3BD8E21DB5190100541900 /* DummyFocusableBrick.swift in Sources */,
-				4E9A25E31DAC2AF400D7EA99 /* DummyBrickWithoutNib.swift in Sources */,
-				4E9A25E11DAC2AF400D7EA99 /* AsynchronousResizableCellTests.swift in Sources */,
-				4E9A25681DABED0600D7EA99 /* BrickCollectionViewTests.swift in Sources */,
-				4E9A254B1DABECDF00D7EA99 /* SpotlightLayoutBehaviorTests.swift in Sources */,
-				4E9A25571DABECF500D7EA99 /* BrickFlowLayoutSectionTests.swift in Sources */,
-				4E9A255F1DABECFB00D7EA99 /* BrickModelsTests.swift in Sources */,
-				4E9A255A1DABECF500D7EA99 /* BrickInvalidationContextTests.swift in Sources */,
-				9333538F1E36A37F003CEC85 /* GenericBrickTests.swift in Sources */,
-				4E9A25E61DAC2AF400D7EA99 /* BaseBrickCellTests.swift in Sources */,
-				4E9A25641DABECFF00D7EA99 /* CollectionViewDataSource.swift in Sources */,
-				4E9A254E1DABECE300D7EA99 /* CollectionBrickTests.swift in Sources */,
-				4E9A25531DABECF500D7EA99 /* AlignRowHeightTests.swift in Sources */,
-				4E9A255E1DABECFB00D7EA99 /* BrickDimensionTests.swift in Sources */,
-				4E9A254F1DABECE300D7EA99 /* LabelBrickTests.swift in Sources */,
-				4E9A25511DABECE300D7EA99 /* ButtonBrickTests.swift in Sources */,
-				4E9A25631DABECFF00D7EA99 /* BrickUtilsTests.swift in Sources */,
-				4E9A25591DABECF500D7EA99 /* BrickFlowLayoutZIndexTests.swift in Sources */,
-				4E9A25581DABECF500D7EA99 /* BrickFlowLayoutTests.swift in Sources */,
-				4E9A254A1DABECDF00D7EA99 /* SnapToPointLayoutBehaviorTests.swift in Sources */,
-				4E9A254D1DABECDF00D7EA99 /* StickyLayoutBehaviorTests.swift in Sources */,
-				4E9A254C1DABECDF00D7EA99 /* StickyFooterLayoutBehaviorTests.swift in Sources */,
-				4E9A256B1DABED0600D7EA99 /* TestBrickViewController.swift in Sources */,
-				4E9A255C1DABECF500D7EA99 /* BrickSelfsizingFlowLayoutTests.swift in Sources */,
-				4E9A25501DABECE300D7EA99 /* ImageBrickTests.swift in Sources */,
-				932365731DF4FE1F00BE5183 /* BrickAlignmentTests.swift in Sources */,
-				4E387C571DAEAB380087820E /* BrickAppearBehaviorTests.swift in Sources */,
-				4E9A25651DABECFF00D7EA99 /* DataSources.swift in Sources */,
-				933FF95F1DC1207900E0B80E /* Swizzle.swift in Sources */,
-				4E9A25691DABED0600D7EA99 /* BrickViewControllerTests.swift in Sources */,
-				93EEFF981DC2B2E600FDFFFB /* BrickLayoutSectionBinarySearchTests.swift in Sources */,
-				4E9A25E21DAC2AF400D7EA99 /* DummyBrick.swift in Sources */,
-				4E9A255D1DABECFB00D7EA99 /* BrickCollectionViewDataSourceTests.swift in Sources */,
-				9328EEA71DC19ACE007F2562 /* LazyLoadingTests.swift in Sources */,
-				9361309C1DB83CB8008FFFEF /* CustomBrickCollectionView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		93D9EB8E1DA4051B00D8C87A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1314,93 +976,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4E9A250E1DABEB3400D7EA99 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4E9A25021DABEB3400D7EA99 /* BrickKit-tvOS */;
-			targetProxy = 4E9A250D1DABEB3400D7EA99 /* PBXContainerItemProxy */;
-		};
 		93D9EB9F1DA4051B00D8C87A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 93D9EB921DA4051B00D8C87A /* BrickKit-iOS */;
+			target = 93D9EB921DA4051B00D8C87A /* BrickKit */;
 			targetProxy = 93D9EB9E1DA4051B00D8C87A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		4E9A25151DABEB3400D7EA99 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wafair.Brickkit;
-				PRODUCT_NAME = "$(PROJECT_NAME)";
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-			};
-			name = Debug;
-		};
-		4E9A25161DABEB3400D7EA99 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wafair.Brickkit;
-				PRODUCT_NAME = "$(PROJECT_NAME)";
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.0;
-			};
-			name = Release;
-		};
-		4E9A25181DABEB3400D7EA99 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.wafair.BrickKit-tvOSTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				SWIFT_VERSION = 2.3;
-				TVOS_DEPLOYMENT_TARGET = 10.0;
-			};
-			name = Debug;
-		};
-		4E9A25191DABEB3400D7EA99 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.wafair.BrickKit-tvOSTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = appletvos;
-				SWIFT_VERSION = 2.3;
-				TVOS_DEPLOYMENT_TARGET = 10.0;
-			};
-			name = Release;
-		};
 		93D9EBA51DA4051B00D8C87A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1446,11 +1029,12 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos appletvsimulator appletvos";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1494,10 +1078,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos appletvsimulator appletvos";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1520,6 +1105,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.wayfair.BrickKit;
 				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos appletvsimulator appletvos";
 			};
 			name = Debug;
 		};
@@ -1539,6 +1125,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.wayfair.BrickKit;
 				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos appletvsimulator appletvos";
 			};
 			name = Release;
 		};
@@ -1571,24 +1158,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4E9A25141DABEB3400D7EA99 /* Build configuration list for PBXNativeTarget "BrickKit-tvOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4E9A25151DABEB3400D7EA99 /* Debug */,
-				4E9A25161DABEB3400D7EA99 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		4E9A25171DABEB3400D7EA99 /* Build configuration list for PBXNativeTarget "BrickKit-tvOSTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4E9A25181DABEB3400D7EA99 /* Debug */,
-				4E9A25191DABEB3400D7EA99 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		93D9EB8D1DA4051B00D8C87A /* Build configuration list for PBXProject "BrickKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1598,7 +1167,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		93D9EBA71DA4051B00D8C87A /* Build configuration list for PBXNativeTarget "BrickKit-iOS" */ = {
+		93D9EBA71DA4051B00D8C87A /* Build configuration list for PBXNativeTarget "BrickKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				93D9EBA81DA4051B00D8C87A /* Debug */,
@@ -1607,7 +1176,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		93D9EBAA1DA4051B00D8C87A /* Build configuration list for PBXNativeTarget "BrickKitTests-iOS" */ = {
+		93D9EBAA1DA4051B00D8C87A /* Build configuration list for PBXNativeTarget "BrickKitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				93D9EBAB1DA4051B00D8C87A /* Debug */,
