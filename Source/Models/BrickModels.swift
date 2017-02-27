@@ -26,7 +26,11 @@ public class Brick: CustomStringConvertible {
     /// Passes string to BrickCell's accessibilityHint for UIAccessibility.  Defaults to nil
     public var accessibilityHint: String?
 
+    /// Size of the brick
     public var size: BrickSize
+
+    /// Indicates if the brick is hidden
+    public var isHidden: Bool = false
     
     /// Width dimension used to calculate the width. Defaults to .Ratio(ratio: 1)
     public var width: BrickDimension {

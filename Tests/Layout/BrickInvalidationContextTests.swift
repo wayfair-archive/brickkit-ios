@@ -905,6 +905,32 @@ class BrickInvalidationContextTests: XCTestCase {
         XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 0))
     }
 
+    func testHideBrickBehaviorMultipleBrickNestedSectionsWithHidden() {
+        brickViewController.brickCollectionView.registerNib(UINib(nibName: "DummyBrick100", bundle: NSBundle(forClass: DummyBrick.self)), forBrickWithIdentifier: "Brick")
+
+        let section = BrickSection("Test Section", bricks: [
+            BrickSection("Section 1", bricks: [
+                DummyBrick("Brick"),
+                BrickSection("Section 2", bricks: [
+                    DummyBrick("Brick")
+                    ])
+                ]),
+            ])
+
+        brickViewController.setSection(section)
+        brickViewController.collectionView!.layoutSubviews()
+
+        section.bricks[0].isHidden = true
+        brickViewController.brickCollectionView.invalidateVisibility()
+
+        let expectedResult: [Int: [CGRect]] = [:]
+
+        let attributes = brickViewController.collectionViewLayout.layoutAttributesForElementsInRect(CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: width * 2)))
+        XCTAssertNotNil(attributes)
+        XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
+        XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 0))
+    }
+
     func testWrongCollectionView() {
         let context = BrickLayoutInvalidationContext(type: .UpdateVisibility)
         XCTAssertFalse(context.invalidateWithLayout(UICollectionViewFlowLayout()))
