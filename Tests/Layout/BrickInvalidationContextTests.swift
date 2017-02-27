@@ -21,6 +21,11 @@ class BrickInvalidationContextTests: XCTestCase {
         width = brickViewController.view.frame.width
     }
 
+    func testDescription() {
+        let context = BrickLayoutInvalidationContext(type: .Creation)
+        XCTAssertEqual(context.description, "BrickLayoutInvalidationContext of type: Creation")
+    }
+
     func testInvalidateHeightFirstAttribute() {
         brickViewController.brickCollectionView.registerBrickClass(DummyBrick.self)
 

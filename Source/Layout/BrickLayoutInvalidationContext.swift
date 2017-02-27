@@ -50,7 +50,7 @@ protocol BrickLayoutInvalidationProvider: class {
 
 extension BrickLayoutInvalidationContext {
     override var description: String {
-        return super.description + " type: \(type)"
+        return "BrickLayoutInvalidationContext of type: \(type)"
     }
 }
 
