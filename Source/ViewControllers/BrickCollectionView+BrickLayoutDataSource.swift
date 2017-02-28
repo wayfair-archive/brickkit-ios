@@ -22,6 +22,10 @@ extension BrickCollectionView: BrickLayoutDataSource {
         }
     }
 
+    public func brickLayout(layout: BrickLayout, isItemHiddenAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return self.brick(at: indexPath).isHidden
+    }
+
     public func brickLayout(layout: BrickLayout, isEstimatedHeightForIndexPath indexPath: NSIndexPath) -> Bool {
         let brick = self.brick(at: indexPath)
         if brick is BrickSection {

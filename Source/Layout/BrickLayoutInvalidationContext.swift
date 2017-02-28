@@ -35,7 +35,6 @@ enum BrickLayoutInvalidationContextType {
 protocol BrickLayoutInvalidationProvider: class {
     var behaviors: Set<BrickLayoutBehavior> { get set }
     var contentSize: CGSize { get }
-    var hideBehaviorDataSource: HideBehaviorDataSource? { get }
 
     func removeAllCachedSections()
     func calculateSections()
@@ -45,13 +44,13 @@ protocol BrickLayoutInvalidationProvider: class {
     func invalidateContent(updatedAttributes: OnAttributesUpdatedHandler)
     func registerUpdatedAttributes(attributes: BrickLayoutAttributes, oldFrame: CGRect?, fromBehaviors: Bool, updatedAttributes: OnAttributesUpdatedHandler)
     func updateNumberOfItemsInSection(section: Int, numberOfItems: Int, updatedAttributes: OnAttributesUpdatedHandler)
-    func applyHideBehavior(hideBehavior: HideBehaviorDataSource, updatedAttributes: OnAttributesUpdatedHandler)
+    func applyHideBehavior(updatedAttributes updatedAttributes: OnAttributesUpdatedHandler)
     func updateContentSize(contentSize: CGSize)
 }
 
 extension BrickLayoutInvalidationContext {
     override var description: String {
-        return super.description + " type: \(type)"
+        return "BrickLayoutInvalidationContext of type: \(type)"
     }
 }
 
@@ -143,10 +142,7 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
     }
 
     func applyHideBehaviors(provider: BrickLayoutInvalidationProvider, updatedAttributes: OnAttributesUpdatedHandler) {
-        guard let hideBehaviorDataSource = provider.hideBehaviorDataSource else {
-            return
-        }
-        provider.applyHideBehavior(hideBehaviorDataSource, updatedAttributes: updatedAttributes)
+        provider.applyHideBehavior(updatedAttributes: updatedAttributes)
     }
 
     func invalidateSections(provider: BrickLayoutInvalidationProvider, layout: UICollectionViewLayout) {

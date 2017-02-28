@@ -91,6 +91,7 @@ public protocol BrickLayoutDataSource: class {
     func brickLayout(layout: BrickLayout, identifierForIndexPath indexPath: NSIndexPath) -> String
     func brickLayout(layout: BrickLayout, indexPathForSection section: Int) -> NSIndexPath?
     func brickLayout(layout: BrickLayout, isEstimatedHeightForIndexPath indexPath: NSIndexPath) -> Bool
+    func brickLayout(layout: BrickLayout, isItemHiddenAtIndexPath indexPath: NSIndexPath) -> Bool
 }
 
 extension BrickLayoutDataSource {
@@ -109,6 +110,10 @@ extension BrickLayoutDataSource {
 
     public func brickLayout(layout: BrickLayout, alignmentForSection section: Int) -> BrickAlignment {
         return BrickAlignment(horizontal: .Left, vertical: .Top)
+    }
+
+    public func brickLayout(layout: BrickLayout, isItemHiddenAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
     }
 
 }

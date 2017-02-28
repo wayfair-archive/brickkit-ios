@@ -418,9 +418,7 @@ extension BrickFlowLayout: BrickLayoutSectionDataSource {
     func prepareForSizeCalculation(for attributes: BrickLayoutAttributes, containedIn width: CGFloat, origin: CGPoint, invalidate: Bool, in section: BrickLayoutSection, updatedAttributes: OnAttributesUpdatedHandler?) {
         let indexPath = attributes.indexPath
 
-        if let hideBehaviorDataSource = self.hideBehaviorDataSource {
-            attributes.hidden = hideBehaviorDataSource.hideBehaviorDataSource(shouldHideItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: self)
-        }
+        attributes.hidden = shouldHideItemAtIndexPath(shouldHideItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier)
 
         if let sectionAttributes = section.sectionAttributes where sectionAttributes.hidden {
             attributes.hidden = true
@@ -589,19 +587,30 @@ extension BrickFlowLayout: BrickLayoutInvalidationProvider {
         }
     }
 
-    func applyHideBehavior(hideBehaviorDataSource: HideBehaviorDataSource, updatedAttributes: OnAttributesUpdatedHandler) {
+    func applyHideBehavior(updatedAttributes updatedAttributes: OnAttributesUpdatedHandler) {
         guard let firstSection = sections?[0] else {
             return
         }
 
-        applyHideBehaviorForSection(hideBehaviorDataSource, for: firstSection, updatedAttributes: updatedAttributes)
+        applyHideBehaviorForSection(for: firstSection, updatedAttributes: updatedAttributes)
     }
 
-    func applyHideBehaviorForSection(hideBehaviorDataSource: HideBehaviorDataSource, for section: BrickLayoutSection, updatedAttributes: OnAttributesUpdatedHandler) {
+    func shouldHideItemAtIndexPath(shouldHideItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String) -> Bool {
+        if _dataSource.brickLayout(self, isItemHiddenAtIndexPath: indexPath) {
+            return true
+        }
+
+        if let hideBehaviorDataSource = hideBehaviorDataSource {
+            return hideBehaviorDataSource.hideBehaviorDataSource(shouldHideItemAtIndexPath: indexPath, withIdentifier: identifier, inCollectionViewLayout: self)
+        }
+        return false
+    }
+
+    func applyHideBehaviorForSection(for section: BrickLayoutSection, updatedAttributes: OnAttributesUpdatedHandler) {
         let currentFrame = section.frame
 
         for attributes in section.attributes.values {
-            var shouldHide = hideBehaviorDataSource.hideBehaviorDataSource(shouldHideItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: self)
+            var shouldHide = shouldHideItemAtIndexPath(shouldHideItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier)
 
             // If the sectionAttributes are hidden, hide this attribute as well
             if let sectionAttributes = section.sectionAttributes where sectionAttributes.hidden {
@@ -618,7 +627,7 @@ extension BrickFlowLayout: BrickLayoutInvalidationProvider {
             switch type {
             case .Section(let sectionIndex):
                 if let brickSection = sections?[sectionIndex] {
-                    applyHideBehaviorForSection(hideBehaviorDataSource, for: brickSection, updatedAttributes: updatedAttributes)
+                    applyHideBehaviorForSection(for: brickSection, updatedAttributes: updatedAttributes)
                 }
             default: break
             }
