@@ -8,16 +8,17 @@
 
 // MARK: - Custom ImageBrick ImageView
 
-public typealias ImageSet = () -> Void
+public typealias ImageSet = (ImageBrickCell) -> Void
 
 /// An object that allows for manipulation of the image brick's image view
 public class ImageBrickImageView: UIImageView {
     public var didSetImage: ImageSet?
+    public weak var imageCell: ImageBrickCell?
     
     public override var image: UIImage? {
         didSet {
-            if let didSetCompletion = self.didSetImage where image != nil {
-                didSetCompletion()
+            if let didSetCompletion = self.didSetImage, imageCell = imageCell where image != nil {
+                didSetCompletion(imageCell)
             }
         }
     }
@@ -94,7 +95,7 @@ public protocol ImageBrickDataSource: class {
 }
 
 public protocol ImageBrickDelegate: class {
-    func didSetImage()
+    func didSetImage(brickCell: ImageBrickCell)
 }
 
 extension ImageBrickDataSource {
@@ -183,6 +184,7 @@ public class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableC
 
         if let delegate = brick.delegate {
             imageView.didSetImage = delegate.didSetImage
+            imageView.imageCell = self
         }
         
         guard let dataSource = brick.dataSource else {
