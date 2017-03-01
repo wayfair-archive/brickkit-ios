@@ -43,6 +43,7 @@ class BrickInvalidationContextTests: XCTestCase {
 
         XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 4)
         XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
+        XCTAssertEqual(context.contentOffsetAdjustment, CGPoint(x: 0, y: 0))
 
         let expectedResult = [
             0 : [
@@ -979,5 +980,39 @@ class BrickInvalidationContextTests: XCTestCase {
         XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize(), CGSize(width: width, height: 100))
     }
 
-    
+    func testThatContentOffsetAdjustmentIsUpdatedWhenTopBrickUpdates() {
+        brickViewController.brickCollectionView.registerBrickClass(DummyBrick.self)
+
+        let section = BrickSection("Test Section", bricks: [
+            DummyBrick("Brick 1", height: .Fixed(size: 50)),
+            DummyBrick("Brick 2", height: .Fixed(size: 50)),
+            DummyBrick("Brick 3", height: .Fixed(size: 1000)),
+            ])
+
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
+
+        var context = BrickLayoutInvalidationContext(type: .UpdateHeight(indexPath: NSIndexPath(forItem: 0, inSection: 1), newHeight: 100))
+        brickViewController.layout.invalidateLayoutWithContext(context)
+        XCTAssertEqual(context.contentOffsetAdjustment, CGPoint(x: 0, y: 0))
+        brickViewController.brickCollectionView.layoutIfNeeded()
+        XCTAssertEqual(brickViewController.brickCollectionView.contentOffset.y, 0)
+
+        brickViewController.brickCollectionView.contentOffset.y = 100
+        context = BrickLayoutInvalidationContext(type: .UpdateHeight(indexPath: NSIndexPath(forItem: 0, inSection: 1), newHeight: 150))
+        brickViewController.layout.invalidateLayoutWithContext(context)
+        XCTAssertEqual(context.contentOffsetAdjustment, CGPoint(x: 0, y: 50))
+        brickViewController.brickCollectionView.layoutIfNeeded()
+        #if os(iOS) // On tvOS this check fails
+            XCTAssertEqual(brickViewController.brickCollectionView.contentOffset.y, 150)
+        #endif
+
+        context = BrickLayoutInvalidationContext(type: .UpdateHeight(indexPath: NSIndexPath(forItem: 0, inSection: 1), newHeight: 100))
+        brickViewController.layout.invalidateLayoutWithContext(context)
+        XCTAssertEqual(context.contentOffsetAdjustment, CGPoint(x: 0, y: -50))
+        brickViewController.brickCollectionView.layoutIfNeeded()
+        #if os(iOS) // On tvOS this check fails
+            XCTAssertEqual(brickViewController.brickCollectionView.contentOffset.y, 100)
+        #endif
+
+    }
 }
