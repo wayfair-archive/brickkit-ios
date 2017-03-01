@@ -227,17 +227,7 @@ internal class BrickLayoutSection {
         }
 
         brickAttributes.originalFrame.size.height = height
-        createOrUpdateCells(from: index, invalidate: false, updatedAttributes: updatedAttributes, customHeightProvider:{ attributes -> CGFloat? in
-            guard attributes.isEstimateSize else {
-                return nil
-            }
-
-            if attributes.identifier == self.attributes[index]?.identifier {
-                return brickAttributes.originalFrame.height
-            }
-
-            return nil
-        })
+        createOrUpdateCells(from: index, invalidate: false, updatedAttributes: updatedAttributes)
     }
 
     func invalidate(at index: Int, updatedAttributes: OnAttributesUpdatedHandler?) {
@@ -284,7 +274,7 @@ internal class BrickLayoutSection {
         let downStreamIndexPathsCount = dataSource?.downStreamIndexPaths(in: self).count ?? 0
         let nextIndex = max(0, attributes.count - downStreamIndexPathsCount)
 
-        createOrUpdateCells(from: nextIndex, invalidate: false, updatedAttributes: updatedAttributes, customHeightProvider: nil)
+        createOrUpdateCells(from: nextIndex, invalidate: false, updatedAttributes: updatedAttributes)
         return true
     }
 
@@ -294,8 +284,7 @@ internal class BrickLayoutSection {
     ///   - firstIndex: The index the calculation needs to start from (the main reason is to just calculate the next cells
     ///   - invalidate: Identifies if the attributes need to be invalidated (reset height etc)
     ///   - updatedAttributes: Callback for the attributes that have been updated
-    ///   - customHeightProvider: Callback that can return a custom height for a given attribute. This is used to update heights with the same identifiers
-    private func createOrUpdateCells(from firstIndex: Int, invalidate: Bool, updatedAttributes: OnAttributesUpdatedHandler?, customHeightProvider: ((attributes: BrickLayoutAttributes) -> CGFloat?)? = nil) {
+    private func createOrUpdateCells(from firstIndex: Int, invalidate: Bool, updatedAttributes: OnAttributesUpdatedHandler?) {
 
         guard let dataSource = dataSource else {
             return
@@ -316,7 +305,7 @@ internal class BrickLayoutSection {
 
         for index in firstIndex..<numberOfItems {
             // Create or Update an attribute at an index. If returned true, continue calculating. If not, break
-            if !createOrUpdateAttribute(at: index, with: dataSource, x: &x, y: &y, maxY: &maxY, force: false, invalidate: invalidate, frameOfInterest: frameOfInterest, updatedAttributes: updatedAttributes, customHeightProvider: customHeightProvider) {
+            if !createOrUpdateAttribute(at: index, with: dataSource, x: &x, y: &y, maxY: &maxY, force: false, invalidate: invalidate, frameOfInterest: frameOfInterest, updatedAttributes: updatedAttributes) {
                 break
             }
         }
@@ -339,7 +328,7 @@ internal class BrickLayoutSection {
                 }
             } else {
                 // create the attribute, so it's available for the behaviors to pick it up
-                createOrUpdateAttribute(at: indexPath.item, with: dataSource, x: &x, y: &y, maxY: &maxY, force: true, invalidate: invalidate, frameOfInterest: frameOfInterest, updatedAttributes: updatedAttributes, customHeightProvider: customHeightProvider)
+                createOrUpdateAttribute(at: indexPath.item, with: dataSource, x: &x, y: &y, maxY: &maxY, force: true, invalidate: invalidate, frameOfInterest: frameOfInterest, updatedAttributes: updatedAttributes)
             }
         }
 
@@ -577,7 +566,7 @@ internal class BrickLayoutSection {
 
     /// Create or update 1 cell
     /// - Returns: flag if the cell was created
-    func createOrUpdateAttribute(at index: Int, with dataSource: BrickLayoutSectionDataSource, inout x: CGFloat, inout y: CGFloat, inout maxY: CGFloat, force: Bool, invalidate: Bool, frameOfInterest: CGRect, updatedAttributes: OnAttributesUpdatedHandler?, customHeightProvider: ((attributes: BrickLayoutAttributes) -> CGFloat?)?) -> Bool {
+    func createOrUpdateAttribute(at index: Int, with dataSource: BrickLayoutSectionDataSource, inout x: CGFloat, inout y: CGFloat, inout maxY: CGFloat, force: Bool, invalidate: Bool, frameOfInterest: CGRect, updatedAttributes: OnAttributesUpdatedHandler?) -> Bool {
         let edgeInsets = dataSource.edgeInsets(in: self)
         let inset = dataSource.inset(in: self)
 
@@ -665,11 +654,7 @@ internal class BrickLayoutSection {
         dataSource.prepareForSizeCalculation(for: brickAttributes, containedIn: width, origin: cellOrigin, invalidate: invalidate, in: self, updatedAttributes: updatedAttributes)
 
         if let brickFrame = oldOriginalFrame where !invalidate {
-            if let customHeight = customHeightProvider?(attributes: brickAttributes) {
-                height = customHeight
-            } else {
-                height = brickFrame.height
-            }
+            height = brickFrame.height
             width = brickFrame.width
         } else {
             let size = dataSource.size(for: brickAttributes, containedIn: width, in: self)
