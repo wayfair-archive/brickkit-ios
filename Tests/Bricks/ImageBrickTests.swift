@@ -70,6 +70,7 @@ class ImageBrickTests: XCTestCase {
         brickView.registerBrickClass(ImageBrick.self)
         
         let brick = ImageBrick(dataSource: ImageBrickModel(image: image, contentMode: .ScaleAspectFill))
+        
         let brickDelegate = SimpleActionImageBrickDelegate()
         brick.delegate = brickDelegate
         
