@@ -197,7 +197,7 @@ class BrickCollectionViewTests: XCTestCase {
         brickView.setupSectionAndLayout(BrickSection(bricks: [ DummyBrick() ]))
 
         let indexPath = IndexPath(item: 1, section: 1)
-        expectFatalError("Brick and index not found at indexPath: SECTION - \((indexPath as IndexPath).section) - ITEM: \((indexPath as NSIndexPath).item). This should never happen") {
+        expectFatalError("Brick and index not found at indexPath: SECTION - \(indexPath.section) - ITEM: \(indexPath.item). This should never happen") {
             _ = self.brickView.brickInfo(at: indexPath)
         }
     }
@@ -623,6 +623,64 @@ class BrickCollectionViewTests: XCTestCase {
         
         XCTAssertNotNil(brickView.cellForItem(at: IndexPath(item: 0, section: 1)))
         XCTAssertNotNil(brickView.cellForItem(at: IndexPath(item: 1, section: 1)))
+    }
+
+    func testNibIdentifiers() {
+        let brick = LabelBrick("Label", text: "Hello")
+        let section = BrickSection(bricks: [brick])
+        section.nibIdentifiers = [
+            "Label": LabelBrickNibs.Image
+        ]
+        brickView.setupSectionAndLayout(section)
+
+        let cell = brickView.cellForItem(at: brickView.indexPathsForBricksWithIdentifier("Label").first!) as? LabelBrickCell
+        XCTAssertNotNil(cell?.imageView)
+    }
+
+    func testNestedNibIdentifiers() {
+        let brick = LabelBrick("Label", text: "Hello")
+        let section = BrickSection(bricks: [BrickSection(bricks: [brick])])
+        section.nibIdentifiers = [
+            "Label": LabelBrickNibs.Image
+        ]
+        brickView.setupSectionAndLayout(section)
+
+        let cell = brickView.cellForItem(at: brickView.indexPathsForBricksWithIdentifier("Label").first!) as? LabelBrickCell
+        XCTAssertNotNil(cell?.imageView)
+    }
+
+    func testClassNibIdentifiers() {
+        let brick = LabelBrick("Label", text: "Hello")
+        brickView.registerBrickClass(LabelBrick.self, nib: LabelBrickNibs.Image)
+        let section = BrickSection(bricks: [brick])
+        brickView.setupSectionAndLayout(section)
+
+        let cell = brickView.cellForItem(at: brickView.indexPathsForBricksWithIdentifier("Label").first!) as? LabelBrickCell
+        XCTAssertNotNil(cell?.imageView)
+    }
+
+    func testThatBrickCollectionViewIsSetToTheSection() {
+        let brick = LabelBrick("Label", text: "Hello")
+        let section = BrickSection(bricks: [brick])
+        section.nibIdentifiers = [
+            "Label": LabelBrickNibs.Image
+        ]
+        brickView.setupSectionAndLayout(section)
+
+        XCTAssertEqual(section.brickCollectionView, brickView)
+    }
+
+    func testThatBrickCollectionViewIsSetToTheNestedSections() {
+        let brick = LabelBrick("Label", text: "Hello")
+        let innerSection = BrickSection(bricks: [brick])
+        let section = BrickSection(bricks: [innerSection ])
+        section.nibIdentifiers = [
+            "Label": LabelBrickNibs.Image
+        ]
+        brickView.setupSectionAndLayout(section)
+
+        XCTAssertEqual(section.brickCollectionView, brickView)
+        XCTAssertEqual(innerSection.brickCollectionView, brickView)
     }
 
 }

@@ -36,6 +36,14 @@ class FixedURLImageBrickDataSource: ImageBrickDataSource {
 
 }
 
+class SimpleActionImageBrickDelegate: ImageBrickDelegate {
+    var imageSet = false
+
+    func didSetImage(brickCell: ImageBrickCell) {
+        imageSet = true
+    }
+}
+
 class ImageBrickTests: XCTestCase {
     var brickView: BrickCollectionView!
     var image: UIImage!
@@ -57,6 +65,22 @@ class ImageBrickTests: XCTestCase {
     }
 
     // Mark: - UIImage
+    func testImageBrickDelegate() {
+        brickView.registerBrickClass(ImageBrick.self)
+
+        let brick = ImageBrick(dataSource: ImageBrickModel(image: image, contentMode: .scaleAspectFill))
+        let brickDelegate = SimpleActionImageBrickDelegate()
+        brick.delegate = brickDelegate
+
+        let section = BrickSection(bricks: [brick])
+
+        brickView.setSection(section)
+        brickView.layoutSubviews()
+
+        let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell
+        cell1?.layoutIfNeeded()
+        XCTAssertTrue(brickDelegate.imageSet)
+    }
 
     func testUIImageScaleAspectFill() {
         brickView.registerBrickClass(ImageBrick.self)

@@ -134,13 +134,15 @@ public extension CommunicationBase {
             queue.qualityOfService = self.qualityOfService
             
             if self.printParams {
-                    if webRequest.httpBody != nil {
-                        print("\(NSString(data: webRequest.httpBody!, encoding: String.Encoding.utf8.rawValue))")
-                    } else {
-                        print("no params")
-                    }
-                
-                print(webRequest.allHTTPHeaderFields)
+                if webRequest.httpBody != nil {
+                    print("\(NSString(data: webRequest.httpBody!, encoding: String.Encoding.utf8.rawValue))")
+                } else {
+                    print("no params")
+                }
+
+                if let headers = webRequest.allHTTPHeaderFields {
+                    print(headers)
+                }
             }
             
             let config = URLSessionConfiguration.default
@@ -261,8 +263,10 @@ public extension CommunicationBase {
                 } else {
                     print("no params")
                 }
-                
-                print(webRequest.allHTTPHeaderFields)
+
+                if let headers = webRequest.allHTTPHeaderFields {
+                    print(headers)
+                }
             }
             
             let config = URLSessionConfiguration.default

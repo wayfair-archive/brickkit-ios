@@ -45,7 +45,7 @@ class MockFlickrViewController: BrickApp.BaseBrickController {
             self?.recentImages = response
             self?.setupBricks()
             }) { (error) in
-                print(error)
+                print(error!)
         }
     }
 }

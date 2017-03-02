@@ -35,23 +35,22 @@ enum BrickLayoutInvalidationContextType {
 protocol BrickLayoutInvalidationProvider: class {
     var behaviors: Set<BrickLayoutBehavior> { get set }
     var contentSize: CGSize { get }
-    var hideBehaviorDataSource: HideBehaviorDataSource? { get }
 
     func removeAllCachedSections()
     func calculateSections()
-    func updateHeight(for indexPath: IndexPath, with height: CGFloat, updatedAttributes: @escaping OnAttributesUpdatedHandler)
+    func updateHeight(for indexPath: IndexPath, with height: CGFloat, updatedAttributes: @escaping OnAttributesUpdatedHandler) -> CGPoint
     func invalidateHeight(for indexPath: IndexPath, updatedAttributes: @escaping OnAttributesUpdatedHandler)
     func recalculateContentSize() -> CGSize
     func invalidateContent(_ updatedAttributes: @escaping OnAttributesUpdatedHandler)
     func registerUpdatedAttributes(_ attributes: BrickLayoutAttributes, oldFrame: CGRect?, fromBehaviors: Bool, updatedAttributes: @escaping OnAttributesUpdatedHandler)
     func updateNumberOfItemsInSection(_ section: Int, numberOfItems: Int, updatedAttributes: @escaping OnAttributesUpdatedHandler)
-    func applyHideBehavior(_ hideBehavior: HideBehaviorDataSource, updatedAttributes: @escaping OnAttributesUpdatedHandler)
+    func applyHideBehavior(updatedAttributes: @escaping OnAttributesUpdatedHandler)
     func updateContentSize(_ contentSize: CGSize)
 }
 
 extension BrickLayoutInvalidationContext {
     override var description: String {
-        return super.description + " type: \(type)"
+        return "BrickLayoutInvalidationContext of type: \(type)"
     }
 }
 
@@ -98,7 +97,8 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
             }
 
         case .updateHeight(let indexPath, let newHeight):
-            provider.updateHeight(for: indexPath, with: newHeight, updatedAttributes: updateAttributes)
+            let contentOffsetAdjustment = provider.updateHeight(for: indexPath, with: newHeight, updatedAttributes: updateAttributes)
+            context.contentOffsetAdjustment = contentOffsetAdjustment
         case .invalidateHeight(let indexPath):
             provider.invalidateHeight(for: indexPath, updatedAttributes: updateAttributes)
         case .rotation, .behaviorsChanged, .invalidate:
@@ -143,10 +143,7 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
     }
 
     func applyHideBehaviors(_ provider: BrickLayoutInvalidationProvider, updatedAttributes: @escaping OnAttributesUpdatedHandler) {
-        guard let hideBehaviorDataSource = provider.hideBehaviorDataSource else {
-            return
-        }
-        provider.applyHideBehavior(hideBehaviorDataSource, updatedAttributes: updatedAttributes)
+        provider.applyHideBehavior(updatedAttributes: updatedAttributes)
     }
 
     func invalidateSections(_ provider: BrickLayoutInvalidationProvider, layout: UICollectionViewLayout) {

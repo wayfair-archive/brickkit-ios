@@ -95,12 +95,26 @@ open class SnapToPointLayoutBehavior: BrickLayoutBehavior {
         resetCollectionViewContentInset(collectionViewLayout)
     }
 
+    internal func filteredAttributes(layout collectionViewLayout: UICollectionViewLayout, frame: CGRect) -> [BrickLayoutAttributes] {
+        guard let attributes = collectionViewLayout.layoutAttributesForElements(in: frame) as? [BrickLayoutAttributes] else {
+            return []
+        }
+
+        let filteredAttributes = attributes.filter {
+            return !self.sectionsToIgnore.contains($0.indexPath.section)
+        }
+
+        return filteredAttributes
+    }
+
     func resetCollectionViewContentInset(_ collectionViewLayout: UICollectionViewLayout) {
         guard let frame = collectionViewLayout.collectionView?.frame else {
             return
         }
 
-        guard let attributes = collectionViewLayout.layoutAttributesForElements(in: frame) as? [BrickLayoutAttributes] , !attributes.isEmpty else {
+        let filteredLayoutAttributes = filteredAttributes(layout: collectionViewLayout, frame: frame)
+
+        guard !filteredLayoutAttributes.isEmpty else {
             return
         }
 
@@ -108,7 +122,7 @@ open class SnapToPointLayoutBehavior: BrickLayoutBehavior {
 
         switch scrollDirection {
         case .horizontal(let scrollLocation):
-            let firstAttributes = attributes.min {
+            let firstAttributes = filteredLayoutAttributes.min {
                 return self.minimumAttributesByXAnchor($0, attributes2: $1, for: scrollLocation, with: 0)
             }! // We can safely unwrap, because we checked if attributes is empty or not
 
@@ -121,7 +135,7 @@ open class SnapToPointLayoutBehavior: BrickLayoutBehavior {
             collectionViewLayout.collectionView?.contentInset.right = right
 
         case .vertical(let scrollLocation):
-            let firstAttributes = attributes.min {
+            let firstAttributes = filteredLayoutAttributes.min {
                 return self.minimumAttributesByYAnchor($0, attributes2: $1, for: scrollLocation, with: 0)
             }! // We can safely unwrap, because we checked if attributes is empty or not
 
@@ -177,10 +191,10 @@ open class SnapToPointLayoutBehavior: BrickLayoutBehavior {
 
     /// Find the closest attribute vertically
     func minimumAttributesByYAnchor(_ attributes1: BrickLayoutAttributes, attributes2: BrickLayoutAttributes, for scrollLocation: SnapToPointVerticalScrollLocation, with anchorYComponent: CGFloat) -> Bool {
-        if self.sectionsToIgnore.contains((attributes1.indexPath as IndexPath).section) {
+        if self.sectionsToIgnore.contains(attributes1.indexPath.section) {
             return false
         }
-        if self.sectionsToIgnore.contains((attributes2.indexPath as IndexPath).section) {
+        if self.sectionsToIgnore.contains(attributes2.indexPath.section) {
             return true
         }
 
@@ -192,10 +206,10 @@ open class SnapToPointLayoutBehavior: BrickLayoutBehavior {
 
     /// Find the closest attribute horizontally
     func minimumAttributesByXAnchor(_ attributes1: BrickLayoutAttributes, attributes2: BrickLayoutAttributes, for scrollLocation: SnapToPointHorizontalScrollLocation, with anchorXComponent: CGFloat) -> Bool {
-        if self.sectionsToIgnore.contains((attributes1.indexPath as IndexPath).section) {
+        if self.sectionsToIgnore.contains(attributes1.indexPath.section) {
             return false
         }
-        if self.sectionsToIgnore.contains((attributes2.indexPath as IndexPath).section) {
+        if self.sectionsToIgnore.contains(attributes2.indexPath.section) {
             return true
         }
 

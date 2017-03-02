@@ -180,6 +180,8 @@
 		935D489C1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D489A1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift */; };
 		938996A51DF77A3200E0F4F1 /* AlignmentBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938996A41DF77A3200E0F4F1 /* AlignmentBrickViewController.swift */; };
 		938996A61DF77A3200E0F4F1 /* AlignmentBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938996A41DF77A3200E0F4F1 /* AlignmentBrickViewController.swift */; };
+		93AB641D1E67AA4800395CAA /* IsHiddenBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AB641C1E67AA4800395CAA /* IsHiddenBrickViewController.swift */; };
+		93AB641E1E67AA4800395CAA /* IsHiddenBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AB641C1E67AA4800395CAA /* IsHiddenBrickViewController.swift */; };
 		93D7E8691DFB52830031A6C2 /* InteractiveAlignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D7E8681DFB52830031A6C2 /* InteractiveAlignViewController.swift */; };
 		93D7E86A1DFB52830031A6C2 /* InteractiveAlignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D7E8681DFB52830031A6C2 /* InteractiveAlignViewController.swift */; };
 		93DE8B4A1DF744BB00324EC8 /* FillBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932365661DF449A500BE5183 /* FillBrickViewController.swift */; };
@@ -370,6 +372,7 @@
 		935D488F1DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesInCollectionBrickViewController.swift; sourceTree = "<group>"; };
 		935D489A1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesInCollectionBrickHorizontalViewController.swift; sourceTree = "<group>"; };
 		938996A41DF77A3200E0F4F1 /* AlignmentBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlignmentBrickViewController.swift; sourceTree = "<group>"; };
+		93AB641C1E67AA4800395CAA /* IsHiddenBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsHiddenBrickViewController.swift; sourceTree = "<group>"; };
 		93D7E8681DFB52830031A6C2 /* InteractiveAlignViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractiveAlignViewController.swift; sourceTree = "<group>"; };
 		93EAFE291DB57D680036331C /* NavigationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationDetailViewController.swift; sourceTree = "<group>"; };
 		93EAFE2A1DB57D680036331C /* NavigationMasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationMasterViewController.swift; sourceTree = "<group>"; };
@@ -585,6 +588,7 @@
 				4E3BD7921DB1316400541900 /* InvalidateHeightViewController.swift */,
 				93D7E8681DFB52830031A6C2 /* InteractiveAlignViewController.swift */,
 				FCD401B51E203D080011173A /* ActivityIndicatorOverrideSource.swift */,
+				93AB641C1E67AA4800395CAA /* IsHiddenBrickViewController.swift */,
 			);
 			path = Interactive;
 			sourceTree = "<group>";
@@ -982,6 +986,7 @@
 				4E3BD7C61DB1316400541900 /* DailySalesBrick.swift in Sources */,
 				4E3BD8041DB1316400541900 /* HorizontalScrollSectionBrickViewController.swift in Sources */,
 				4E3BD8461DB1316400541900 /* MultiSectionBrickViewController.swift in Sources */,
+				93AB641D1E67AA4800395CAA /* IsHiddenBrickViewController.swift in Sources */,
 				4E3BD8081DB1316400541900 /* SimpleCollectionBrickViewController.swift in Sources */,
 				4E3BD8501DB1316400541900 /* SimpleRepeatHeightRatioViewController.swift in Sources */,
 				FCD401B61E203D080011173A /* ActivityIndicatorOverrideSource.swift in Sources */,
@@ -1059,6 +1064,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E3BD8ED1DB521C200541900 /* CoverFlowViewScrollingController.swift in Sources */,
+				93AB641E1E67AA4800395CAA /* IsHiddenBrickViewController.swift in Sources */,
 				93D7E86A1DFB52830031A6C2 /* InteractiveAlignViewController.swift in Sources */,
 				4E3BD8011DB1316400541900 /* BaseRepeatBrickViewController.swift in Sources */,
 				4E3BD85D1DB1316400541900 /* StickingFooterBaseViewController.swift in Sources */,

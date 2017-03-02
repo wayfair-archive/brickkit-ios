@@ -154,17 +154,17 @@ extension NavigationMasterViewController: BrickRepeatCountDataSource {
 // MARK: - OffsetLayoutBehaviorDataSource
 extension NavigationMasterViewController: OffsetLayoutBehaviorDataSource {
 
-    func offsetLayoutBehaviorWithOrigin(_ behavior: OffsetLayoutBehavior, originOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
+    func offsetLayoutBehavior(_ behavior: OffsetLayoutBehavior, sizeOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
         return nil
     }
 
-    func offsetLayoutBehavior(_ behavior: OffsetLayoutBehavior, sizeOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
+    func offsetLayoutBehaviorWithOrigin(_ behavior: OffsetLayoutBehavior, originOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
 
         guard identifier == NavigationIdentifiers.navItemBrick else {
             return nil
         }
 
-        guard indexOfSelectedBrick == nil  else {
+        guard indexOfSelectedBrick == nil else {
             #if os(iOS)
                 let height = navigationController!.navigationBar.frame.height + UIApplication.shared.statusBarFrame.size.height
             #else

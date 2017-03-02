@@ -23,7 +23,7 @@ open class BrickLayoutBehavior: NSObject {
     }
 
     open func sectionAttributes(for indexPath: IndexPath, in layout: UICollectionViewLayout) -> BrickLayoutAttributes? {
-        return brickFlowLayout?.layoutAttributesForSection((indexPath as IndexPath).section)
+        return brickFlowLayout?.layoutAttributesForSection(indexPath.section)
     }
 
     open func resetRegisteredAttributes(_ collectionViewLayout: UICollectionViewLayout) {

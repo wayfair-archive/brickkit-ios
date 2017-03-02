@@ -59,8 +59,8 @@ open class StickyLayoutBehavior: BrickLayoutBehavior {
             }
             let secAttributes: BrickLayoutAttributes? = sectionAttributes(for: brickAttribute.indexPath, in: collectionViewLayout)
 
-            if !canStackWithOtherSections && section != (brickAttribute.indexPath as IndexPath).section {
-                section = (brickAttribute.indexPath as IndexPath).section
+            if !canStackWithOtherSections && section != brickAttribute.indexPath.section {
+                section = brickAttribute.indexPath.section
                 lastStickyFrame.origin = secAttributes?.frame.origin ?? CGPoint.zero
                 lastStickyFrame.size = CGSize.zero
             }

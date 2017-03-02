@@ -46,10 +46,10 @@ class InteractiveTests: XCTestCase {
         fixedCount.repeatCountHash[LabelBrickIdentifier] = 5
 
         let indexPathSort: (IndexPath, IndexPath) -> Bool = { indexPath1, indexPath2  in
-            if (indexPath1 as IndexPath).section == (indexPath2 as NSIndexPath).section {
-                return (indexPath1 as IndexPath).item < (indexPath2 as NSIndexPath).item
+            if indexPath1.section == indexPath2.section {
+                return indexPath1.item < indexPath2.item
             } else {
-                return (indexPath1 as IndexPath).section < (indexPath2 as NSIndexPath).section
+                return indexPath1.section < indexPath2.section
             }
         }
 
@@ -456,68 +456,6 @@ class InteractiveTests: XCTestCase {
         XCTAssertNotNil(label2)
 
         XCTAssertEqual(label2!.label.text, "B")
-
-    }
-
-    //MARK: invalidateHeightForBrickWithIdentifier
-
-    func testInvalidateHeightForBrickWithIdentifier() {
-        brickView.registerBrickClass(DummyBrick.self)
-
-        let section = BrickSection(bricks: [
-            DummyBrick(DummyBrickIdentifier, height: .auto(estimate: .ratio(ratio: 1)))
-            ])
-        brickView.setSection(section)
-        brickView.layoutIfNeeded()
-
-        brickView.invalidateHeightForBrickWithIdentifier(DummyBrickIdentifier, newHeight: 21)
-        brickView.layoutIfNeeded()
-
-        let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
-        XCTAssertNotNil(cell1)
-
-        XCTAssertEqual(cell1?.frame, CGRect(x: 0, y: 0, width: 320, height: 21))
-    }
-
-    func testInvalidateHeightForBrickWithIdentifierAuto() {
-        brickView.registerBrickClass(DummyBrick.self)
-
-        let section = BrickSection(bricks: [
-            DummyBrick(DummyBrickIdentifier, height: .auto(estimate: .ratio(ratio: 1)))
-            ])
-        brickView.setSection(section)
-        brickView.layoutIfNeeded()
-
-        brickView.invalidateHeightForBrickWithIdentifier(DummyBrickIdentifier, newHeight: 21)
-        brickView.layoutIfNeeded()
-
-        let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
-        XCTAssertNotNil(cell1)
-
-        XCTAssertEqual(cell1?.frame, CGRect(x: 0, y: 0, width: 320, height: 21))
-    }
-
-    func testInvalidateHeightForBrickWithoutIdentifier() {
-        brickView.registerBrickClass(DummyBrick.self)
-
-        let section = BrickSection(bricks: [
-            DummyBrick(DummyBrickIdentifier, height: .auto(estimate: .ratio(ratio: 1)))
-            ])
-        brickView.setSection(section)
-        brickView.layoutIfNeeded()
-
-        var cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
-        XCTAssertNotNil(cell)
-        XCTAssertEqual(cell?.frame, CGRect(x: 0, y: 0, width: 320, height: 640))
-
-        cell?.frame.size.height = 10
-
-        brickView.invalidateHeightForBrickWithIdentifier(DummyBrickIdentifier, newHeight: nil)
-        brickView.layoutIfNeeded()
-
-        cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
-        XCTAssertNotNil(cell)
-        XCTAssertEqual(cell?.frame, CGRect(x: 0, y: 0, width: 320, height: 640))
 
     }
 

@@ -26,8 +26,12 @@ open class Brick: CustomStringConvertible {
     /// Passes string to BrickCell's accessibilityHint for UIAccessibility.  Defaults to nil
     open var accessibilityHint: String?
 
+    /// Size of the brick
     open var size: BrickSize
-    
+
+    /// Indicates if the brick is hidden
+    open var isHidden: Bool = false
+
     /// Width dimension used to calculate the width. Defaults to .ratio(ratio: 1)
     open var width: BrickDimension {
         set(newWidth) {
@@ -149,6 +153,12 @@ open class BrickSection: Brick {
 
     internal fileprivate(set) var sectionCount: Int = 0
     internal fileprivate(set) var sectionIndexPaths: [CollectionInfo: [Int: IndexPath]] = [:] // Variable that keeps track of the indexpaths of the sections
+
+    /// Optional dictionary that holds the identifier of a brick as a key and the value is the nib that should be used for that brick
+    /// These nibs will be registered, when setting this BrickSection on a BrickCollectionView
+    open var nibIdentifiers: [String: UINib]?
+
+    open internal(set) weak var brickCollectionView: BrickCollectionView?
 
     open weak var repeatCountDataSource: BrickRepeatCountDataSource? {
         didSet {

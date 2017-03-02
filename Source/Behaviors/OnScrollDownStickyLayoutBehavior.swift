@@ -36,12 +36,12 @@ open class OnScrollDownStickyLayoutBehavior: StickyLayoutBehavior {
         if directionChanged {
             //Sort the attributes ascending
             stickyAttributes.sort {
-                ($0.indexPath as IndexPath).section <= ($1.indexPath as NSIndexPath).section && ($0.indexPath as NSIndexPath).item > ($1.indexPath as NSIndexPath).item
+                $0.indexPath.section <= $1.indexPath.section && $0.indexPath.item > $1.indexPath.item
             }
         } else {
             //Sort the attributes decending
             stickyAttributes.sort(by: {
-                ($0.indexPath as IndexPath).section >= ($1.indexPath as NSIndexPath).section && ($0.indexPath as NSIndexPath).item < ($1.indexPath as NSIndexPath).item
+                $0.indexPath.section >= $1.indexPath.section && $0.indexPath.item < $1.indexPath.item
             })
         }
 

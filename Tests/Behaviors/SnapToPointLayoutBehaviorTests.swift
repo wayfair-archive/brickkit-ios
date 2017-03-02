@@ -356,6 +356,26 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
 
     }
 
+    func testAttributesFilter() {
+        let behavior = SnapToPointLayoutBehavior(scrollDirection: .horizontal(.center))
+        self.brickView.layout.behaviors.insert(behavior)
 
+        let labelModel = LabelBrickCellModel(text: "HELLO")
+        let labelBrick1 = LabelBrick("LABEL 1", width: .fixed(size: 0), height: .ratio(ratio: 1.0), dataSource: labelModel)
+        let labelBrick2 = LabelBrick("LABEL 2", width: .fixed(size: 0), height: .ratio(ratio: 1.0), dataSource: labelModel)
+        let collectionSection = BrickSection(bricks: [labelBrick1, labelBrick2])
+        let collectionModel = CollectionBrickCellModel(section: collectionSection)
+        let brickCollection = CollectionBrick("Collection brick", width: .fixed(size: 0), dataSource: collectionModel)
+
+        let section = BrickSection(bricks: [brickCollection], inset: 5.0)
+        self.brickView.setSection(section)
+
+        let attributes = self.brickView.layout.layoutAttributesForElements(in: self.brickView.frame) as? [BrickLayoutAttributes]
+        let filteredAttributes = behavior.filteredAttributes(layout: self.brickView.layout, frame: self.brickView.frame)
+
+        XCTAssert(attributes?.count == 1) // There is only one attribute. (The CollectionBrick)
+        XCTAssert(attributes?[0].indexPath == IndexPath(item: 0, section: 0)) // There is an item in section 0.
+        XCTAssert(filteredAttributes.isEmpty) // The item in section 0 is filtered out.
+    }
 
 }

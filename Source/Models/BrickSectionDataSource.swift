@@ -24,7 +24,7 @@ extension BrickSection {
 
     fileprivate func brickSection(for section: Int, in collection: CollectionInfo) -> BrickSection? {
         if let indexPath = sectionIndexPaths[collection]?[section] {
-            return brick(at: indexPath as IndexPath, in: collection) as? BrickSection
+            return brick(at: indexPath, in: collection) as? BrickSection
         }
 
         return nil
@@ -52,18 +52,18 @@ extension BrickSection {
     internal func brickAndIndex(at indexPath: IndexPath, in collection: CollectionInfo) -> (Brick, Int)? {
         _ = invalidateIfNeeded(in: collection)
 
-        if (indexPath as IndexPath).section == 0 {
+        if indexPath.section == 0 {
             return (self, 0)
         }
 
-        guard let section = brickSection(for: (indexPath as IndexPath).section, in: collection) else {
+        guard let section = brickSection(for: indexPath.section, in: collection) else {
             return nil
         }
 
         var index = 0
         for brick in section.bricks {
-            if (indexPath as IndexPath).item < index + brick.count(for: collection) {
-                return (brick, (indexPath as IndexPath).item - index)
+            if indexPath.item < index + brick.count(for: collection) {
+                return (brick, indexPath.item - index)
             }
             index += brick.count(for: collection)
         }
@@ -80,7 +80,7 @@ extension BrickSection {
     }
 
     func indexPathFor(_ section: Int, in collection: CollectionInfo) -> IndexPath? {
-        return sectionIndexPaths[collection]?[section] as IndexPath?
+        return sectionIndexPaths[collection]?[section]
     }
 
     /// Get the indexPaths for a brick with a certain identifier

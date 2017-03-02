@@ -6,11 +6,30 @@
 //  Copyright © 2016 Wayfair LLC. All rights reserved.
 //
 
+// MARK: - Custom ImageBrick ImageView
+
+public typealias ImageSet = (ImageBrickCell) -> Void
+
+/// An object that allows for manipulation of the image brick's image view
+public class ImageBrickImageView: UIImageView {
+    public var didSetImage: ImageSet?
+    public weak var imageCell: ImageBrickCell?
+
+    public override var image: UIImage? {
+        didSet {
+            if let didSetCompletion = self.didSetImage, let imageCell = imageCell, image != nil {
+                didSetCompletion(imageCell)
+            }
+        }
+    }
+}
+
 // MARK: - Brick
 
-open class ImageBrick: GenericBrick<UIImageView> {
+open class ImageBrick: GenericBrick<ImageBrickImageView> {
     open weak var dataSource: ImageBrickDataSource?
-    
+    open weak var delegate: ImageBrickDelegate?
+
     fileprivate var model: ImageBrickDataSource?
 
     open override class var internalIdentifier: String {
@@ -91,6 +110,12 @@ extension ImageBrickDataSource {
     
 }
 
+// MARK: - Delegate
+
+public protocol ImageBrickDelegate: class {
+    func didSetImage(brickCell: ImageBrickCell)
+}
+
 //MARK: - Models
 
 open class ImageBrickModel: ImageBrickDataSource {
@@ -142,7 +167,7 @@ open class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableCel
     fileprivate var imageLoaded = false
     fileprivate var currentImageURL: URL? = nil
 
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: ImageBrickImageView!
     var heightRatioConstraint: NSLayoutConstraint?
 
     open override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
@@ -156,7 +181,12 @@ open class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableCel
         super.updateContent()
 
         if !fromNib {
-            self.imageView = self.genericContentView as! UIImageView
+            self.imageView = self.genericContentView as! ImageBrickImageView
+        }
+
+        if let delegate = brick.delegate {
+            imageView.didSetImage = delegate.didSetImage
+            imageView.imageCell = self
         }
 
         guard let dataSource = brick.dataSource else {
@@ -167,15 +197,15 @@ open class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableCel
         imageView.contentMode = dataSource.contentModeForImageBrickCell(self)
 
         if let image = dataSource.imageForImageBrickCell(self) {
-            imageView.image = image
             if self.brick.size.height.isEstimate(in: self) {
-                setRatioConstraint(for: image)
+                self.setRatioConstraint(for: image)
             }
+            imageView.image = image
             imageLoaded = true
         } else if let imageURL = dataSource.imageURLForImageBrickCell(self) {
             guard currentImageURL != imageURL else {
                 if let image = self.imageView.image {
-                    set(image: image)
+                    self.resize(image: image)
                 }
                 return
             }
@@ -186,7 +216,7 @@ open class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableCel
 
             self.imageDownloader?.downloadImageAndSet(on: self.imageView, with: imageURL, onCompletion: { (image, url) in
                 self.imageLoaded = true
-                self.set(image: image)
+                self.resize(image: image)
             })
         } else {
             imageView.image = nil
@@ -194,7 +224,7 @@ open class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableCel
     }
 
 
-    fileprivate func set(image: UIImage) {
+    fileprivate func resize(image: UIImage) {
         if self.brick.size.height.isEstimate(in: self) {
             self.setRatioConstraint(for: image)
             self.sizeChangedHandler?(self)

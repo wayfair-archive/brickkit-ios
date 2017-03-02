@@ -48,6 +48,7 @@ open class BrickCollectionView: UICollectionView {
     /// Section model. Starts with an empty brick section
     open fileprivate(set) var section: BrickSection = BrickSection(bricks: []) {
         didSet {
+            self.registerBricks(for: section, nibIdentifiers: section.nibIdentifiers)
             section.invalidateCounts(in: collectionInfo)
             self.reloadData()
         }
@@ -106,7 +107,7 @@ open class BrickCollectionView: UICollectionView {
     open func brick(at indexPath: IndexPath) -> Brick {
         _ = self.section.invalidateIfNeeded(in: collectionInfo)
         guard let brick = section.brick(at: indexPath, in: collectionInfo) else {
-            fatalError("Brick not found at indexPath: SECTION - \((indexPath as IndexPath).section) - ITEM: \((indexPath as NSIndexPath).item). This should never happen")
+            fatalError("Brick not found at indexPath: SECTION - \(indexPath.section) - ITEM: \(indexPath.item). This should never happen")
         }
         return brick
     }
@@ -167,7 +168,7 @@ open class BrickCollectionView: UICollectionView {
     /// - returns: BrickInfo
     open func brickInfo(at indexPath: IndexPath) -> BrickInfo {
         guard let brickAndIndex = section.brickAndIndex(at: indexPath, in: collectionInfo) else {
-            fatalError("Brick and index not found at indexPath: SECTION - \((indexPath as IndexPath).section) - ITEM: \((indexPath as NSIndexPath).item). This should never happen")
+            fatalError("Brick and index not found at indexPath: SECTION - \(indexPath.section) - ITEM: \(indexPath.item). This should never happen")
         }
         return (brickAndIndex.0, brickAndIndex.1, collectionInfo.index, collectionInfo.identifier)
     }
@@ -178,7 +179,7 @@ open class BrickCollectionView: UICollectionView {
         registeredBricks = [:]
     }
 
-    internal func identifierForBrick(_ brick: Brick, collectionView: UICollectionView) -> String {
+    internal func identifier(for brick: Brick) -> String? {
         let identifier: String
         if brick is BrickSection {
             //Safeguard to never load the wrong nib for a BrickSection,
@@ -189,7 +190,7 @@ open class BrickCollectionView: UICollectionView {
         } else if let brickIdentifier = registeredBricks[type(of: brick).internalIdentifier] {
             identifier = brickIdentifier
         } else {
-            fatalError("No Nib Found for \(brick)")
+            return nil
         }
         return identifier
     }
@@ -262,24 +263,6 @@ open class BrickCollectionView: UICollectionView {
             let context = UICollectionViewLayoutInvalidationContext()
             context.invalidateItems(at: indexPaths)
             self.collectionViewLayout.invalidateLayout(with: context)
-        }
-    }
-
-    /// Invalidate a height for a brick
-    ///
-    /// - parameter identifier: Identifier of the brick
-    /// - parameter newHeight:  Optional height. If set, the height is fixed. If not, the height will be recalculated
-    @available(*, deprecated, message: "use AsynchronousResizableCell")
-    open func invalidateHeightForBrickWithIdentifier(_ identifier: String, newHeight: CGFloat?) {
-        let indexPaths = section.indexPathsForBricksWithIdentifier(identifier, in: collectionInfo)
-        for indexPath in indexPaths {
-            if let newHeight = newHeight {
-                self.brick(at: indexPath).height = .fixed(size: newHeight)
-                self.collectionViewLayout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .updateHeight(indexPath: indexPath, newHeight: newHeight)))
-            } else {
-                self.collectionViewLayout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .invalidateHeight(indexPath: indexPath)))
-                self.reloadBricksWithIdentifiers([identifier], shouldReloadCell: true)
-            }
         }
     }
 
@@ -482,6 +465,26 @@ open class BrickCollectionView: UICollectionView {
         action()
         isConfiguringCollectionBrick = false
     }
+
+    /// Register the bricks in a section
+    private func registerBricks(for section: BrickSection, nibIdentifiers: [String: UINib]?) {
+        section.brickCollectionView = self
+        for brick in section.bricks {
+            if let brickSection = brick as? BrickSection {
+                registerBricks(for: brickSection, nibIdentifiers: brickSection.nibIdentifiers ?? nibIdentifiers)
+            } else if !isBrickRegistered(brick: brick) {
+                if let nib = nibIdentifiers?[brick.identifier] {
+                    self.registerNib(nib, forBrickWithIdentifier: brick.identifier)
+                } else  {
+                    self.registerBrickClass(type(of: brick))
+                }
+            }
+        }
+    }
+
+    private func isBrickRegistered(brick: Brick) -> Bool {
+        return identifier(for: brick) != nil
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -502,7 +505,9 @@ extension BrickCollectionView: UICollectionViewDataSource {
 
         let info = brickCollectionView.brickInfo(at: indexPath)
         let brick = info.brick
-        let identifier = brickCollectionView.identifierForBrick(brick, collectionView: collectionView)
+        guard let identifier = brickCollectionView.identifier(for: brick) else {
+            fatalError("No Nib Found for \(brick)")
+        }
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! BaseBrickCell
 

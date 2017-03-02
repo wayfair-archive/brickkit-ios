@@ -80,8 +80,8 @@ public enum BrickLayoutZIndexBehavior {
             return false
         }
         switch self {
-        case .topDown: return (indexPath as NSIndexPath).item < range.upperBound
-        case .bottomUp: return (indexPath as NSIndexPath).item < range.upperBound - 1
+        case .topDown: return indexPath.item < range.upperBound
+        case .bottomUp: return indexPath.item < range.upperBound - 1
         }
     }
 
@@ -182,24 +182,24 @@ class BrickZIndexer {
                 let indexPathZIndex = self.zIndex(for: indexPath, withOffset: false)
                 sectionStartIndex = zIndexBehavior.startIndex(for: indexPathZIndex)
 
-                let ranges = sectionRanges[(indexPath as NSIndexPath).section]
+                let ranges = sectionRanges[indexPath.section]
 
                     // Let's find the range of this section in its parent and split the ranges there
                     let sectionRange = ranges.filter({ (sectionRange) -> Bool in
-                        return sectionRange.range.contains((indexPath as NSIndexPath).row)
+                        return sectionRange.range.contains(indexPath.row)
                     }).first! // We can force unwrap, because this index will always be found in the ranges
                     let i = ranges.index(of: sectionRange)! // Because the range was found, the index is also there
 
                     if zIndexBehavior.shouldSplit(for: indexPath, in: sectionRange.range) { // Only spit if it can be split...
-                        let newRanges = zIndexBehavior.split(at: (indexPath as NSIndexPath).item, in: sectionRange, with: numberOfItems, sectionStartIndex: sectionStartIndex)
-                        sectionRanges[(indexPath as NSIndexPath).section].remove(at: i)
-                        sectionRanges[(indexPath as NSIndexPath).section].insert(newRanges.0, at: i)
-                        sectionRanges[(indexPath as NSIndexPath).section].insert(newRanges.1, at: i+1)
+                        let newRanges = zIndexBehavior.split(at: indexPath.item, in: sectionRange, with: numberOfItems, sectionStartIndex: sectionStartIndex)
+                        sectionRanges[indexPath.section].remove(at: i)
+                        sectionRanges[indexPath.section].insert(newRanges.0, at: i)
+                        sectionRanges[indexPath.section].insert(newRanges.1, at: i+1)
                     } else {
-                        zIndexBehavior.updateRange(at: i, in: (indexPath as NSIndexPath).section, for: self, with: numberOfItems)
+                        zIndexBehavior.updateRange(at: i, in: indexPath.section, for: self, with: numberOfItems)
                 }
 
-                    updateRanges(to: (indexPath as NSIndexPath).section, with: numberOfItems, dataSource: dataSource, layout: layout)
+                    updateRanges(to: indexPath.section, with: numberOfItems, dataSource: dataSource, layout: layout)
             } else {
                 sectionStartIndex = 0
             }
@@ -219,7 +219,7 @@ class BrickZIndexer {
     ///   - indexPath: indexPath
     ///   - withOffset: flag that indicates if the zIndex needs to be offset (substract the maxZIndex)
     func zIndex(for indexPath: IndexPath, withOffset: Bool = true) -> Int {
-        let section = (indexPath as NSIndexPath).section
+        let section = indexPath.section
         guard section < sectionRanges.count else {
             return 0
         }
@@ -228,7 +228,7 @@ class BrickZIndexer {
         // Offset with maxZIndex, because BrickCollectionView is using `self.layer.zPosition`
         // But because this affects how things are layed out with normal UIViews (like scrolling indicator)
         // the zIndex is now offset by the maxZIndex (so 0->20 is now -20->0)
-        return zIndexBehavior.zIndexFromRanges(ranges, index: (indexPath as NSIndexPath).item) - (withOffset ? maxZIndex : 0)
+        return zIndexBehavior.zIndexFromRanges(ranges, index: indexPath.item) - (withOffset ? maxZIndex : 0)
     }
 
 // Mark: - Private methods
@@ -236,21 +236,21 @@ class BrickZIndexer {
     /// Update the count of the ranges to the parent section(s) of an inserted section
     fileprivate func updateRanges(to section: Int, with numberOfItems: Int, dataSource: BrickLayoutDataSource, layout: BrickFlowLayout) {
         if let indexPath = dataSource.brickLayout(layout, indexPathFor: section) {
-            let ranges = sectionRanges[(indexPath as NSIndexPath).section]
+            let ranges = sectionRanges[indexPath.section]
                 var nextRange = false
                 for i in 0..<ranges.count {
                     let sectionRange = ranges[i]
 
                     if nextRange {
-                        updateRange(at: i, for: (indexPath as NSIndexPath).section, with: numberOfItems, dataSource: dataSource, layout: layout)
+                        updateRange(at: i, for: indexPath.section, with: numberOfItems, dataSource: dataSource, layout: layout)
                         return
                     }
 
-                    if sectionRange.range.contains((indexPath as NSIndexPath).row) {
+                    if sectionRange.range.contains(indexPath.row) {
                         if zIndexBehavior.handleNextRangeWhileAppending {
                             nextRange = true
                         } else {
-                            updateRange(at: i, for: (indexPath as NSIndexPath).section, with: numberOfItems, dataSource: dataSource, layout: layout)
+                            updateRange(at: i, for: indexPath.section, with: numberOfItems, dataSource: dataSource, layout: layout)
                             return
                         }
                     }

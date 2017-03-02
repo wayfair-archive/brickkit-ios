@@ -114,6 +114,7 @@ class NavigationDataSource {
         InsertBrickViewController.self,
         ChangeNibBrickViewController.self,
         HideSectionsViewController.self,
+        IsHiddenBrickViewController.self,
         DynamicContentViewController.self,
         InvalidateHeightViewController.self,
         InteractiveAlignViewController.self,
@@ -126,6 +127,7 @@ class NavigationDataSource {
         InsertBrickViewController.self,
         ChangeNibBrickViewController.self,
         HideSectionsViewController.self,
+        IsHiddenBrickViewController.self,
         DynamicContentViewController.self,
         InvalidateHeightViewController.self,
         InteractiveAlignViewController.self

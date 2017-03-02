@@ -63,17 +63,6 @@ class BrickViewControllerTests: XCTestCase {
         XCTAssertTrue(viewController.brickRegistered)
     }
 
-    func testWithoutRegisteringBrick() {
-        let dummyBrick = DummyBrick("Brick 1")
-        expectFatalError("No Nib Found for \(dummyBrick)") {
-            let section = BrickSection(bricks: [
-                dummyBrick
-                ])
-            self.brickViewController.setSection(section)
-            self.brickViewController.brickCollectionView.layoutSubviews()
-        }
-    }
-
     func testWithSectionWithSameNameAsBrick() {
         let section = BrickSection("DummyBrick", bricks: [
             DummyBrick("Brick 1"),

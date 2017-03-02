@@ -89,7 +89,7 @@ extension XCTest {
         var result = [Int: [T]]()
 
         let categorised = attributes.categorise { (attribute) -> Int in
-            return (attribute.indexPath as IndexPath).section
+            return attribute.indexPath.section
         }
 
         for (index, attributes) in categorised {
@@ -129,16 +129,6 @@ extension BrickCollectionView {
     }
 
     func setupSectionAndLayout(_ section: BrickSection) {
-        self.registerBrickClass(CollectionBrick.self)
-        self.registerBrickClass(DummyBrick.self)
-        self.registerBrickClass(LabelBrick.self)
-        self.registerBrickClass(ButtonBrick.self)
-        self.registerBrickClass(ImageBrick.self)
-
-        self.registerBrickClass(GenericBrick<UILabel>.self)
-        self.registerBrickClass(GenericBrick<UIButton>.self)
-        self.registerBrickClass(GenericBrick<UIImageView>.self)
-
         self.setSection(section)
         self.layoutSubviews()
     }
