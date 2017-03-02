@@ -1,5 +1,16 @@
 # Change Log
 
+## [1.2.1](https://github.com/wayfair/brickkit-ios/tree/1.2.1) (2017-03-02)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.2.0...1.2.1)
+
+**Closed issues:**
+
+- Bricks get unexpected heights [\#97](https://github.com/wayfair/brickkit-ios/issues/97)
+
+**Merged pull requests:**
+
+- Fix imagebrick closure [\#100](https://github.com/wayfair/brickkit-ios/pull/100) ([butkis93](https://github.com/butkis93))
+
 ## [1.2.0](https://github.com/wayfair/brickkit-ios/tree/1.2.0) (2017-03-02)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.1.3...1.2.0)
 
@@ -10,7 +21,6 @@
 - ImageView goes blank [\#88](https://github.com/wayfair/brickkit-ios/issues/88)
 - Content offset for scrolling bricks upward needed [\#84](https://github.com/wayfair/brickkit-ios/issues/84)
 - SnapToPointLayoutBehavior does not always ignore the overall CollectionBrick section [\#82](https://github.com/wayfair/brickkit-ios/issues/82)
-- Bricks get unexpected heights [\#97](https://github.com/wayfair/brickkit-ios/issues/97)
 
 **Merged pull requests:**
 
