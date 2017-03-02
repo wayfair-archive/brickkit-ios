@@ -163,10 +163,6 @@ public class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableC
         if !fromNib {
             self.imageView = self.genericContentView as! UIImageView
         }
-
-        guard let delegate = brick.delegate else {
-            return
-        }
         
         guard let dataSource = brick.dataSource else {
             return
@@ -180,7 +176,11 @@ public class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableC
                 self.setRatioConstraint(for: image)
             }
             imageView.image = image
-            delegate.didSetImage(self)
+            
+            if let delegate = brick.delegate {
+                delegate.didSetImage(self)
+            }
+
             imageLoaded = true
         } else if let imageURL = dataSource.imageURLForImageBrickCell(self) {
             guard currentImageURL != imageURL else {
@@ -198,7 +198,7 @@ public class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableC
                 self.imageLoaded = true
                 self.resize(image: image)
                 
-                if let _ = self.imageView.image {
+                if let delegate = self.brick.delegate, _ = self.imageView.image {
                     delegate.didSetImage(self)
                 }
             })
