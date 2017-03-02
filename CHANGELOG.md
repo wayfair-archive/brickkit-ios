@@ -1,11 +1,43 @@
 # Change Log
 
+## [1.2.0](https://github.com/wayfair/brickkit-ios/tree/1.2.0) (2017-03-02)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.1.3...1.2.0)
+
+**Closed issues:**
+
+- Allow a Brick to hide individually [\#93](https://github.com/wayfair/brickkit-ios/issues/93)
+- BrickSection should know what bricks/nibs to register [\#90](https://github.com/wayfair/brickkit-ios/issues/90)
+- ImageView goes blank [\#88](https://github.com/wayfair/brickkit-ios/issues/88)
+- Content offset for scrolling bricks upward needed [\#84](https://github.com/wayfair/brickkit-ios/issues/84)
+- SnapToPointLayoutBehavior does not always ignore the overall CollectionBrick section [\#82](https://github.com/wayfair/brickkit-ios/issues/82)
+- Bricks get unexpected heights [\#97](https://github.com/wayfair/brickkit-ios/issues/97)
+
+**Merged pull requests:**
+
+- Removed customHeightProvider [\#98](https://github.com/wayfair/brickkit-ios/pull/98) ([rubencagnie](https://github.com/rubencagnie))
+- Update image brick delegate to pass back the corresponding image bric… [\#96](https://github.com/wayfair/brickkit-ios/pull/96) ([butkis93](https://github.com/butkis93))
+- isHidden property on Brick [\#94](https://github.com/wayfair/brickkit-ios/pull/94) ([rubencagnie](https://github.com/rubencagnie))
+- contentOffsetAdjustment on height change [\#92](https://github.com/wayfair/brickkit-ios/pull/92) ([rubencagnie](https://github.com/rubencagnie))
+- Add `nibIdentifiers` to the BrickSection [\#91](https://github.com/wayfair/brickkit-ios/pull/91) ([rubencagnie](https://github.com/rubencagnie))
+- Fixes GenericBrickCell by reusing view [\#89](https://github.com/wayfair/brickkit-ios/pull/89) ([rubencagnie](https://github.com/rubencagnie))
+- Fixed generic brick [\#86](https://github.com/wayfair/brickkit-ios/pull/86) ([butkis93](https://github.com/butkis93))
+- Fixed a bug that prevented the SnapToPointLayoutBehavior from filteri… [\#83](https://github.com/wayfair/brickkit-ios/pull/83) ([willspurgeon](https://github.com/willspurgeon))
+
+## [1.1.3](https://github.com/wayfair/brickkit-ios/tree/1.1.3) (2017-02-14)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.1.2...1.1.3)
+
+## [1.1.2](https://github.com/wayfair/brickkit-ios/tree/1.1.2) (2017-02-14)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.1.1...1.1.2)
+
+**Closed issues:**
+
+- GenericBrickCell is setting `backgroundColor` wrong [\#80](https://github.com/wayfair/brickkit-ios/issues/80)
+
 ## [1.1.1](https://github.com/wayfair/brickkit-ios/tree/1.1.1) (2017-02-13)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.1.0...1.1.1)
 
 **Closed issues:**
 
-- GenericBrickCell is setting `backgroundColor` wrong [\#80](https://github.com/wayfair/brickkit-ios/issues/80)
 - invalidateRepeatCounts causes duplicate loading of newly added bricks [\#55](https://github.com/wayfair/brickkit-ios/issues/55)
 
 **Merged pull requests:**
