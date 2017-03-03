@@ -151,8 +151,9 @@ internal class BrickLayoutSection {
 
         if difference > 0 {
             self.numberOfItems = numberOfItems
-            updateAttributeIdentifiers()
-            createOrUpdateCells(from: attributes.count, invalidate: false, updatedAttributes: addedAttributes)
+            var startIndex = attributes.count
+            updateAttributeIdentifiers(&startIndex)
+            createOrUpdateCells(from: startIndex, invalidate: true, updatedAttributes: addedAttributes)
         } else {
             self.numberOfItems = numberOfItems
             while attributes.count > numberOfItems {
@@ -162,14 +163,23 @@ internal class BrickLayoutSection {
                 
                 attributes.removeValueForKey(lastIndex)
             }
-            updateAttributeIdentifiers()
-            createOrUpdateCells(from: attributes.count, invalidate: true, updatedAttributes: nil)
+            var startIndex = attributes.count
+            updateAttributeIdentifiers(&startIndex)
+            createOrUpdateCells(from: startIndex, invalidate: true, updatedAttributes: nil)
         }
     }
 
-    func updateAttributeIdentifiers() {
+    /// Update the identifiers for the attributes
+    ///
+    /// - Parameter targetStartIndex: The index that should start invalidating bricks
+    func updateAttributeIdentifiers(inout targetStartIndex: Int) {
         for (index, attribute) in attributes {
-            attribute.identifier = _dataSource.identifier(for: index, in: self)
+            let identifier = _dataSource.identifier(for: index, in: self)
+            if attribute.identifier != identifier {
+                targetStartIndex = min(index, targetStartIndex)
+                attribute.identifier = identifier
+                invalidateAttributes(attribute)
+            }
         }
     }
 

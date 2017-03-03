@@ -617,5 +617,32 @@ class InteractiveTests: XCTestCase {
         let attributes = brickView.layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1)) as? BrickLayoutAttributes
         XCTAssertEqual(attributes?.identifier, "Brick1")
     }
+
+    func testThatInvalidateRepeatCountsHasCorrectValues() {
+        continueAfterFailure = true
+
+        let repeatDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick2": 1])
+        let section = BrickSection(bricks: [
+            LabelBrick("Brick1", height: .Fixed(size: 50), text: "Label 1"),
+            LabelBrick("Brick2", height: .Fixed(size: 10), text: "Label 2"),
+            LabelBrick("Brick3", height: .Fixed(size: 50), text: "Label 3"),
+            ])
+        section.repeatCountDataSource = repeatDataSource
+        brickView.setupSectionAndLayout(section)
+
+        repeatDataSource.repeatCountHash = ["Brick2": 3]
+        let expectation = expectationWithDescription("Wait for invalidateVisibility")
+        brickView.invalidateRepeatCounts(reloadAllSections: true) { (completed, insertedIndexPaths, deletedIndexPaths) in
+            expectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(5, handler: nil)
+        brickView.layoutIfNeeded()
+
+        XCTAssertEqual(brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))?.frame.height, 50)
+        XCTAssertEqual(brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))?.frame.height, 10)
+        XCTAssertEqual(brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 2, inSection: 1))?.frame.height, 10)
+        XCTAssertEqual(brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 3, inSection: 1))?.frame.height, 10)
+        XCTAssertEqual(brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 4, inSection: 1))?.frame.height, 50)
+    }
     
 }
