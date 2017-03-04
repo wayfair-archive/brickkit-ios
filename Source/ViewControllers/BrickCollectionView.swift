@@ -531,13 +531,14 @@ extension BrickCollectionView: UICollectionViewDataSource {
 
         if let brickCell = cell as? BrickCell {
             if var resizable = brickCell as? AsynchronousResizableCell {
-                resizable.sizeChangedHandler = { [weak collectionView] cell in
-                    let height = cell.heightForBrickView(withWidth: brickCell.frame.width)
-                    if let brickCollectionView = collectionView as? BrickCollectionView {
-                        brickCollectionView.performBatchUpdates({
-                            brickCollectionView.layout.updateHeight(indexPath, newHeight: height)
-                            }, completion: nil)
+                resizable.sizeChangedHandler = { [weak brickCollectionView] resizedCell in
+                    guard let brickCollectionView = brickCollectionView else {
+                        return
                     }
+                    let height = resizedCell.heightForBrickView(withWidth: resizedCell.frame.width)
+                    brickCollectionView.performBatchUpdates({
+                        brickCollectionView.layout.updateHeight(indexPath, newHeight: height)
+                        }, completion: nil)
                 }
             }
 
