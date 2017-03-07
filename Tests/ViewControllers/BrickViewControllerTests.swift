@@ -19,6 +19,7 @@ class BrickViewControllerTests: XCTestCase {
 
         continueAfterFailure = false
         brickViewController = BrickViewController()
+        brickViewController.view.frame = CGRect(x: 0, y: 0, width: 320, height: 480)
         width = brickViewController.view.frame.width
     }
 
