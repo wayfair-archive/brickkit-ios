@@ -953,6 +953,7 @@ class BrickInvalidationContextTests: XCTestCase {
         brickViewController.setSection(section)
         brickViewController.collectionView!.layoutSubviews()
 
+        section.bricks[1].height = .Fixed(size: 100)
         let context = BrickLayoutInvalidationContext(type: .UpdateHeight(indexPath: NSIndexPath(forItem: 1, inSection: 1), newHeight: 100))
         brickViewController.layout.invalidateLayoutWithContext(context)
         brickViewController.brickCollectionView.layoutIfNeeded()
@@ -991,6 +992,7 @@ class BrickInvalidationContextTests: XCTestCase {
 
         brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
+        section.bricks[0].height = .Fixed(size: 100)
         var context = BrickLayoutInvalidationContext(type: .UpdateHeight(indexPath: NSIndexPath(forItem: 0, inSection: 1), newHeight: 100))
         brickViewController.layout.invalidateLayoutWithContext(context)
         XCTAssertEqual(context.contentOffsetAdjustment, CGPoint(x: 0, y: 0))
@@ -998,6 +1000,7 @@ class BrickInvalidationContextTests: XCTestCase {
         XCTAssertEqual(brickViewController.brickCollectionView.contentOffset.y, 0)
 
         brickViewController.brickCollectionView.contentOffset.y = 100
+        section.bricks[0].height = .Fixed(size: 150)
         context = BrickLayoutInvalidationContext(type: .UpdateHeight(indexPath: NSIndexPath(forItem: 0, inSection: 1), newHeight: 150))
         brickViewController.layout.invalidateLayoutWithContext(context)
         XCTAssertEqual(context.contentOffsetAdjustment, CGPoint(x: 0, y: 50))
@@ -1006,6 +1009,7 @@ class BrickInvalidationContextTests: XCTestCase {
             XCTAssertEqual(brickViewController.brickCollectionView.contentOffset.y, 150)
         #endif
 
+        section.bricks[0].height = .Fixed(size: 100)
         context = BrickLayoutInvalidationContext(type: .UpdateHeight(indexPath: NSIndexPath(forItem: 0, inSection: 1), newHeight: 100))
         brickViewController.layout.invalidateLayoutWithContext(context)
         XCTAssertEqual(context.contentOffsetAdjustment, CGPoint(x: 0, y: -50))

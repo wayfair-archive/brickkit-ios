@@ -198,7 +198,8 @@ public class BrickCell: BaseBrickCell {
     }
 
     public override func preferredLayoutAttributesFittingAttributes(layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        guard self._brick.size.height.isEstimate(in: self) else {
+        guard self._brick.height.isEstimate else {
+            layoutAttributes.frame.size.height = self._brick.height.value(for: layoutAttributes.frame.width, startingAt: 0)
             return layoutAttributes
         }
 
