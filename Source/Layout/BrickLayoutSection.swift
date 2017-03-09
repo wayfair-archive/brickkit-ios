@@ -661,6 +661,8 @@ internal class BrickLayoutSection {
         let height: CGFloat
 
         // Prepare the datasource that size calculation will happen
+        brickAttributes.frame.origin = cellOrigin
+        brickAttributes.originalFrame = brickAttributes.frame
         dataSource.prepareForSizeCalculation(for: brickAttributes, containedIn: width, origin: cellOrigin, invalidate: invalidate, in: self, updatedAttributes: updatedAttributes)
 
         if let brickFrame = oldOriginalFrame where !invalidate {
