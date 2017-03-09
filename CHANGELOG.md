@@ -1,5 +1,19 @@
 # Change Log
 
+## [1.3.0](https://github.com/wayfair/brickkit-ios/tree/1.3.0) (2017-03-09)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.2.1...1.3.0)
+
+**Closed issues:**
+
+- Brick's height is not updated correctly when invalidating repeat count [\#101](https://github.com/wayfair/brickkit-ios/issues/101)
+- Bricks are offscreen [\#104](https://github.com/wayfair/brickkit-ios/issues/104)
+
+**Merged pull requests:**
+
+- SectionAttributes weren’t updated [\#105](https://github.com/wayfair/brickkit-ios/pull/105) ([rubencagnie](https://github.com/rubencagnie))
+- Fix severe memory leak when using async resizable cells [\#103](https://github.com/wayfair/brickkit-ios/pull/103) ([klundberg](https://github.com/klundberg))
+- Fixed invalidateRepeatCounts [\#102](https://github.com/wayfair/brickkit-ios/pull/102) ([rubencagnie](https://github.com/rubencagnie))
+
 ## [1.2.1](https://github.com/wayfair/brickkit-ios/tree/1.2.1) (2017-03-02)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.2.0...1.2.1)
 
