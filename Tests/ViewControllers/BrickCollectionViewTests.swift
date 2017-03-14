@@ -16,7 +16,9 @@ class BrickCollectionViewTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        brickView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
+        autoreleasepool {
+            self.brickView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
+        }
     }
 
     func testSetWrongCollectionViewLayout() {
@@ -682,6 +684,17 @@ class BrickCollectionViewTests: XCTestCase {
         XCTAssertEqual(section.brickCollectionView, brickView)
         XCTAssertEqual(innerSection.brickCollectionView, brickView)
     }
+    
+    func testThatBrickCollectionViewDoesNotCreateARetainCycleWithAsyncrhonousResizableCells() {
 
+        expectation(forNotification: "DeinitNotifyingAsyncBrickCell.deinit", object: nil, handler: nil)
+        autoreleasepool {
+            let brick = DeinitNotifyingAsyncBrick(size: BrickSize(width: .fill, height: .fill))
+            brickView.setupSingleBrickAndLayout(brick)
+            brickView = nil
+        }
+        
+        waitForExpectations(timeout: 5, handler: nil)
+    }
 
 }
