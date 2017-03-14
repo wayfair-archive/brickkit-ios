@@ -8,22 +8,6 @@
 
 import Foundation
 
-extension UIView {
-    
-    var isPortrait: Bool {
-        return UIScreen.main.bounds.width <= UIScreen.main.bounds.height
-    }
-
-    var horizontalSizeClass: UIUserInterfaceSizeClass {
-        return UIScreen.main.traitCollection.horizontalSizeClass
-    }
-
-    var verticalSizeClass: UIUserInterfaceSizeClass {
-        return UIScreen.main.traitCollection.verticalSizeClass
-    }
-    
-}
-
 public struct BrickSize {
     public var width: BrickDimension
     public var height: BrickDimension
@@ -44,39 +28,38 @@ public indirect enum BrickDimension {
     case horizontalSizeClass(regular: BrickDimension, compact: BrickDimension)
     case verticalSizeClass(regular: BrickDimension, compact: BrickDimension)
 
-    public func isEstimate(in view: UIView) -> Bool {
-        switch self.dimension(in: view) {
+    public var isEstimate: Bool {
+        switch self.dimension {
         case .auto(_): return true
         default: return false
         }
     }
 
-    func dimension(in view: UIView) -> BrickDimension {
+    var dimension: BrickDimension {
         switch self {
         case .orientation(let landScape, let portrait):
-            let isPortrait: Bool = view.isPortrait
-            return (isPortrait ? portrait : landScape).dimension(in: view)
+            return (BrickDimension.isPortrait ? portrait : landScape).dimension
         case .horizontalSizeClass(let regular, let compact):
-            let isRegular = view.horizontalSizeClass == .regular
-            return (isRegular ? regular : compact).dimension(in: view)
+            let isRegular = BrickDimension.horizontalInterfaceSizeClass == .regular
+            return (isRegular ? regular : compact).dimension
         case .verticalSizeClass(let regular, let compact):
-            let isRegular = view.verticalSizeClass == .regular
-            return (isRegular ? regular : compact).dimension(in: view)
+            let isRegular = BrickDimension.verticalInterfaceSizeClass == .regular
+            return (isRegular ? regular : compact).dimension
         default: return self
         }
     }
 
-    func value(for otherDimension: CGFloat, startingAt origin: CGFloat, in view: UIView) -> CGFloat {
-        let actualDimension = dimension(in: view)
-
+    func value(for otherDimension: CGFloat, startingAt origin: CGFloat) -> CGFloat {
+        let actualDimension = dimension
+        
         switch actualDimension {
-        case .auto(let dimension): return dimension.value(for: otherDimension, startingAt: origin, in: view)
-        default: return BrickDimension._rawValue(for: otherDimension, startingAt: origin, in: view, with: actualDimension)
+        case .auto(let dimension): return dimension.value(for: otherDimension, startingAt: origin)
+        default: return BrickDimension._rawValue(for: otherDimension, startingAt: origin, with: actualDimension)
         }
     }
 
     /// Function that gets the raw value of a BrickDimension. As of right now, only Ratio, Fixed and Fill are allowed
-    static func _rawValue(for otherDimension: CGFloat, startingAt origin: CGFloat, in view: UIView, with dimension: BrickDimension) -> CGFloat {
+    static func _rawValue(for otherDimension: CGFloat, startingAt origin: CGFloat, with dimension: BrickDimension) -> CGFloat {
         switch dimension {
         case .ratio(let ratio): return ratio * otherDimension
         case .fixed(let size): return size
@@ -89,6 +72,23 @@ public indirect enum BrickDimension {
         default: fatalError("Only Ratio, Fixed and Fill are allowed")
         }
     }
+    
+}
+
+extension BrickDimension {
+    
+    static var isPortrait: Bool {
+        return UIScreen.main.bounds.width <= UIScreen.main.bounds.height
+    }
+    
+    static var horizontalInterfaceSizeClass: UIUserInterfaceSizeClass {
+        return UIScreen.main.traitCollection.horizontalSizeClass
+    }
+    
+    static var verticalInterfaceSizeClass: UIUserInterfaceSizeClass {
+        return UIScreen.main.traitCollection.verticalSizeClass
+    }
+    
 }
 
 extension BrickDimension: Equatable {

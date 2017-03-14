@@ -28,105 +28,105 @@ class BrickDimensionTests: XCTestCase {
     func testViewPortrait() {
         setScreenPortrait(true)
 
-        XCTAssertNotNil(view.horizontalSizeClass)
-        XCTAssertNotNil(view.verticalSizeClass)
-        XCTAssertTrue(view.isPortrait)
+        XCTAssertNotNil(BrickDimension.horizontalSizeClass)
+        XCTAssertNotNil(BrickDimension.verticalSizeClass)
+        XCTAssertTrue(BrickDimension.isPortrait)
     }
 
     func testViewLandscape() {
         setScreenPortrait(false)
 
-        XCTAssertFalse(view.isPortrait)
+        XCTAssertFalse(BrickDimension.isPortrait)
     }
 
     func testViewSquare() {
         StubScreen.bounds.size = CGSize(width: 320, height: 320)
 
-        XCTAssertTrue(view.isPortrait)
+        XCTAssertTrue(BrickDimension.isPortrait)
     }
 
     func testFixed() {
         let fixed = BrickDimension.fixed(size: 50)
-        XCTAssertEqual(fixed.value(for: 1000, startingAt: 0, in: UIView()), 50)
-        XCTAssertEqual(fixed.dimension(in: UIView()), fixed)
-        XCTAssertFalse(fixed.isEstimate(in: UIView()))
+        XCTAssertEqual(fixed.value(for: 1000, startingAt: 0), 50)
+        XCTAssertEqual(fixed.dimension, fixed)
+        XCTAssertFalse(fixed.isEstimate)
         XCTAssertEqual(fixed, BrickDimension.fixed(size: 50))
         XCTAssertNotEqual(fixed, BrickDimension.fixed(size: 100))
     }
 
     func testRatio() {
         let ratio = BrickDimension.ratio(ratio: 0.5)
-        XCTAssertEqual(ratio.value(for: 1000, startingAt: 0, in: UIView()), 500)
-        XCTAssertEqual(ratio.dimension(in: UIView()), ratio)
-        XCTAssertFalse(ratio.isEstimate(in: UIView()))
+        XCTAssertEqual(ratio.value(for: 1000, startingAt: 0), 500)
+        XCTAssertEqual(ratio.dimension, ratio)
+        XCTAssertFalse(ratio.isEstimate)
         XCTAssertEqual(ratio, BrickDimension.ratio(ratio: 0.5))
         XCTAssertNotEqual(ratio, BrickDimension.fixed(size: 100))
     }
 
     func testFill() {
         let ratio = BrickDimension.fill
-        XCTAssertEqual(ratio.value(for: 1000, startingAt: 0, in: UIView()), 1000)
-        XCTAssertEqual(ratio.dimension(in: UIView()), ratio)
-        XCTAssertFalse(ratio.isEstimate(in: UIView()))
+        XCTAssertEqual(ratio.value(for: 1000, startingAt: 0), 1000)
+        XCTAssertEqual(ratio.dimension, ratio)
+        XCTAssertFalse(ratio.isEstimate)
         XCTAssertEqual(ratio, BrickDimension.fill)
         XCTAssertNotEqual(ratio, BrickDimension.fixed(size: 100))
     }
 
     func testFillWithStartingOrigin() {
         let ratio = BrickDimension.fill
-        XCTAssertEqual(ratio.value(for: 1000, startingAt: 500, in: UIView()), 500)
-        XCTAssertEqual(ratio.dimension(in: UIView()), ratio)
-        XCTAssertFalse(ratio.isEstimate(in: UIView()))
+        XCTAssertEqual(ratio.value(for: 1000, startingAt: 500), 500)
+        XCTAssertEqual(ratio.dimension, ratio)
+        XCTAssertFalse(ratio.isEstimate)
         XCTAssertEqual(ratio, BrickDimension.fill)
         XCTAssertNotEqual(ratio, BrickDimension.fixed(size: 100))
     }
 
     func testFillWithStartingOriginThatIsTooBig() {
         let ratio = BrickDimension.fill
-        XCTAssertEqual(ratio.value(for: 1000, startingAt: 1001, in: UIView()), 1000)
-        XCTAssertEqual(ratio.dimension(in: UIView()), ratio)
-        XCTAssertFalse(ratio.isEstimate(in: UIView()))
+        XCTAssertEqual(ratio.value(for: 1000, startingAt: 1001), 1000)
+        XCTAssertEqual(ratio.dimension, ratio)
+        XCTAssertFalse(ratio.isEstimate)
         XCTAssertEqual(ratio, BrickDimension.fill)
         XCTAssertNotEqual(ratio, BrickDimension.fixed(size: 100))
     }
 
     func testAutoFixed() {
         let autoFixed = BrickDimension.auto(estimate: BrickDimension.fixed(size: 50))
-        XCTAssertEqual(autoFixed.value(for: 1000, startingAt: 0, in: UIView()), 50)
-        XCTAssertEqual(autoFixed.dimension(in: UIView()), autoFixed)
-        XCTAssertTrue(autoFixed.isEstimate(in: UIView()))
+        XCTAssertEqual(autoFixed.value(for: 1000, startingAt: 0), 50)
+        XCTAssertEqual(autoFixed.dimension, autoFixed)
+        XCTAssertTrue(autoFixed.isEstimate)
         XCTAssertEqual(autoFixed, BrickDimension.auto(estimate: BrickDimension.fixed(size: 50)))
     }
 
     func testAutoRatio() {
         let autoRatio = BrickDimension.auto(estimate: BrickDimension.ratio(ratio: 0.5))
-        XCTAssertEqual(autoRatio.value(for: 1000, startingAt: 0, in: UIView()), 500)
-        XCTAssertEqual(autoRatio.dimension(in: UIView()), autoRatio)
-        XCTAssertTrue(autoRatio.isEstimate(in: UIView()))
+        XCTAssertEqual(autoRatio.value(for: 1000, startingAt: 0), 500)
+        XCTAssertEqual(autoRatio.dimension, autoRatio)
+        XCTAssertTrue(autoRatio.isEstimate)
         XCTAssertEqual(autoRatio, BrickDimension.auto(estimate: BrickDimension.ratio(ratio: 0.5)))
     }
 
     func testOrientationPortrait() {
         setupScreen(isPortrait: true, horizontalSizeClass: .compact, verticalSizeClass: .compact)
         let orientation = BrickDimension.orientation(landscape: BrickDimension.fixed(size: 100), portrait: BrickDimension.fixed(size: 50))
-        XCTAssertEqual(orientation.value(for: 1000, startingAt: 0, in: view), 50)
-        XCTAssertEqual(orientation.dimension(in: view), BrickDimension.fixed(size: 50))
+        XCTAssertEqual(orientation.value(for: 1000, startingAt: 0), 50)
+        XCTAssertEqual(orientation.dimension, BrickDimension.fixed(size: 50))
         XCTAssertEqual(orientation, BrickDimension.orientation(landscape: BrickDimension.fixed(size: 100), portrait: BrickDimension.fixed(size: 50)))
     }
 
     func testOrientationLandscape() {
         setupScreen(isPortrait: false, horizontalSizeClass: .compact, verticalSizeClass: .compact)
         let orientation = BrickDimension.orientation(landscape: BrickDimension.fixed(size: 100), portrait: BrickDimension.fixed(size: 50))
-        XCTAssertEqual(orientation.value(for: 1000, startingAt: 0, in: view), 100)
-        XCTAssertEqual(orientation.dimension(in: view), BrickDimension.fixed(size: 100))
+        XCTAssertEqual(orientation.value(for: 1000, startingAt: 0), 100)
+        XCTAssertEqual(orientation.dimension, BrickDimension.fixed(size: 100))
         XCTAssertEqual(orientation, BrickDimension.orientation(landscape: BrickDimension.fixed(size: 100), portrait: BrickDimension.fixed(size: 50)))
     }
 
     func testHorizontalSizeClassCompact() {
         setupScreen(isPortrait: true, horizontalSizeClass: .compact, verticalSizeClass: .regular)
         let sizeClass = BrickDimension.horizontalSizeClass(regular: BrickDimension.fixed(size: 100), compact: BrickDimension.fixed(size: 50))
-        XCTAssertEqual(sizeClass.value(for: 1000, startingAt: 0, in: view), 50)
-        XCTAssertEqual(sizeClass.dimension(in: view), BrickDimension.fixed(size: 50))
+        XCTAssertEqual(sizeClass.value(for: 1000, startingAt: 0), 50)
+        XCTAssertEqual(sizeClass.dimension, BrickDimension.fixed(size: 50))
         XCTAssertEqual(sizeClass, BrickDimension.horizontalSizeClass(regular: BrickDimension.fixed(size: 100), compact: BrickDimension.fixed(size: 50)))
 
     }
@@ -134,24 +134,24 @@ class BrickDimensionTests: XCTestCase {
     func testHorizontalSizeClassRegular() {
         setupScreen(isPortrait: true, horizontalSizeClass: .regular, verticalSizeClass: .compact)
         let sizeClass = BrickDimension.horizontalSizeClass(regular: BrickDimension.fixed(size: 100), compact: BrickDimension.fixed(size: 50))
-        XCTAssertEqual(sizeClass.value(for: 1000, startingAt: 0, in: view), 100)
-        XCTAssertEqual(sizeClass.dimension(in: view), BrickDimension.fixed(size: 100))
+        XCTAssertEqual(sizeClass.value(for: 1000, startingAt: 0), 100)
+        XCTAssertEqual(sizeClass.dimension, BrickDimension.fixed(size: 100))
         XCTAssertEqual(sizeClass, BrickDimension.horizontalSizeClass(regular: BrickDimension.fixed(size: 100), compact: BrickDimension.fixed(size: 50)))
     }
 
     func testVerticalSizeClassCompact() {
         setupScreen(isPortrait: true, horizontalSizeClass: .regular, verticalSizeClass: .compact)
         let sizeClass = BrickDimension.verticalSizeClass(regular: BrickDimension.fixed(size: 100), compact: BrickDimension.fixed(size: 50))
-        XCTAssertEqual(sizeClass.value(for: 1000, startingAt: 0, in: view), 50)
-        XCTAssertEqual(sizeClass.dimension(in: view), BrickDimension.fixed(size: 50))
+        XCTAssertEqual(sizeClass.value(for: 1000, startingAt: 0), 50)
+        XCTAssertEqual(sizeClass.dimension, BrickDimension.fixed(size: 50))
         XCTAssertEqual(sizeClass, BrickDimension.verticalSizeClass(regular: BrickDimension.fixed(size: 100), compact: BrickDimension.fixed(size: 50)))
     }
 
     func testVerticalSizeClassRegular() {
         setupScreen(isPortrait: true, horizontalSizeClass: .compact, verticalSizeClass: .regular)
         let sizeClass = BrickDimension.verticalSizeClass(regular: BrickDimension.fixed(size: 100), compact: BrickDimension.fixed(size: 50))
-        XCTAssertEqual(sizeClass.value(for: 1000, startingAt: 0, in: view), 100)
-        XCTAssertEqual(sizeClass.dimension(in: view), BrickDimension.fixed(size: 100))
+        XCTAssertEqual(sizeClass.value(for: 1000, startingAt: 0), 100)
+        XCTAssertEqual(sizeClass.dimension, BrickDimension.fixed(size: 100))
         XCTAssertEqual(sizeClass, BrickDimension.verticalSizeClass(regular: BrickDimension.fixed(size: 100), compact: BrickDimension.fixed(size: 50)))
     }
 
@@ -164,9 +164,9 @@ class BrickDimensionTests: XCTestCase {
                 regular: .auto(estimate: .fixed(size: 100)),
                 compact: .auto(estimate: .fixed(size: 50))
             ))
-        XCTAssertEqual(nested.value(for: 1000, startingAt: 0, in: view), 50)
-        XCTAssertEqual(nested.dimension(in: view), BrickDimension.auto(estimate: BrickDimension.fixed(size: 50)))
-        XCTAssertTrue(nested.isEstimate(in: view))
+        XCTAssertEqual(nested.value(for: 1000, startingAt: 0), 50)
+        XCTAssertEqual(nested.dimension, BrickDimension.auto(estimate: BrickDimension.fixed(size: 50)))
+        XCTAssertTrue(nested.isEstimate)
         XCTAssertEqual(nested, BrickDimension.orientation(
             landscape: .fixed(size: 50),
             portrait: .horizontalSizeClass(
@@ -178,7 +178,7 @@ class BrickDimensionTests: XCTestCase {
     func testRawValue() {
         expectFatalError { 
             let auto = BrickDimension.auto(estimate: .fixed(size: 30))
-            _ = BrickDimension._rawValue(for: 100, startingAt: 0, in: UIView(), with: auto)
+            _ = BrickDimension._rawValue(for: 100, startingAt: 0, with: auto)
         }
     }
 
