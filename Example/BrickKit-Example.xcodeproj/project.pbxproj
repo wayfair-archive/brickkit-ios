@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00575C981E64ED5300B0B6EA /* BrickKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00575C971E64ED5300B0B6EA /* BrickKit.framework */; };
+		00575C991E64ED5300B0B6EA /* BrickKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 00575C971E64ED5300B0B6EA /* BrickKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		00575C9B1E64ED5A00B0B6EA /* BrickKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00575C9A1E64ED5A00B0B6EA /* BrickKit.framework */; };
+		00575C9C1E64ED5A00B0B6EA /* BrickKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 00575C9A1E64ED5A00B0B6EA /* BrickKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4E15F9241DBA570600BBD363 /* CachingImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F91E1DBA570600BBD363 /* CachingImageDownloader.swift */; };
 		4E15F9251DBA570600BBD363 /* CachingImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F91E1DBA570600BBD363 /* CachingImageDownloader.swift */; };
 		4E15F9261DBA570600BBD363 /* CommunicationBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F91F1DBA570600BBD363 /* CommunicationBase.swift */; };
@@ -17,10 +21,6 @@
 		4E15F92B1DBA570600BBD363 /* MockFlickrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F9211DBA570600BBD363 /* MockFlickrViewController.swift */; };
 		4E15F92C1DBA570600BBD363 /* MockTwitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F9231DBA570600BBD363 /* MockTwitterViewController.swift */; };
 		4E15F92D1DBA570600BBD363 /* MockTwitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F9231DBA570600BBD363 /* MockTwitterViewController.swift */; };
-		4E3BD6911DB0097400541900 /* BrickKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E3BD6851DB0095000541900 /* BrickKit.framework */; };
-		4E3BD6921DB0097400541900 /* BrickKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4E3BD6851DB0095000541900 /* BrickKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4E3BD72E1DB0101400541900 /* BrickKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E3BD6891DB0095000541900 /* BrickKit.framework */; };
-		4E3BD72F1DB0101400541900 /* BrickKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4E3BD6891DB0095000541900 /* BrickKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4E3BD7BC1DB1316400541900 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD74A1DB1316400541900 /* AppDelegate.swift */; };
 		4E3BD7BD1DB1316400541900 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD74A1DB1316400541900 /* AppDelegate.swift */; };
 		4E3BD7C61DB1316400541900 /* DailySalesBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7531DB1316400541900 /* DailySalesBrick.swift */; };
@@ -197,51 +197,6 @@
 		FCD401B91E23D2600011173A /* ActivityIndicatorOverrideSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD401B51E203D080011173A /* ActivityIndicatorOverrideSource.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		4E3BD6841DB0095000541900 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4E3BD67D1DB0094F00541900 /* BrickKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 93D9EB931DA4051B00D8C87A;
-			remoteInfo = "BrickKit-iOS";
-		};
-		4E3BD6861DB0095000541900 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4E3BD67D1DB0094F00541900 /* BrickKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 93D9EB9C1DA4051B00D8C87A;
-			remoteInfo = "BrickKitTests-iOS";
-		};
-		4E3BD6881DB0095000541900 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4E3BD67D1DB0094F00541900 /* BrickKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4E9A25031DABEB3400D7EA99;
-			remoteInfo = "BrickKit-tvOS";
-		};
-		4E3BD68A1DB0095000541900 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4E3BD67D1DB0094F00541900 /* BrickKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4E9A250B1DABEB3400D7EA99;
-			remoteInfo = "BrickKit-tvOSTests";
-		};
-		4E3BD6931DB0097400541900 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4E3BD67D1DB0094F00541900 /* BrickKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 93D9EB921DA4051B00D8C87A;
-			remoteInfo = "BrickKit-iOS";
-		};
-		4E3BD7301DB0101400541900 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4E3BD67D1DB0094F00541900 /* BrickKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 4E9A25021DABEB3400D7EA99;
-			remoteInfo = "BrickKit-tvOS";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		4E3BD6951DB0097400541900 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -249,7 +204,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4E3BD6921DB0097400541900 /* BrickKit.framework in Embed Frameworks */,
+				00575C991E64ED5300B0B6EA /* BrickKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,7 +215,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4E3BD72F1DB0101400541900 /* BrickKit.framework in Embed Frameworks */,
+				00575C9C1E64ED5A00B0B6EA /* BrickKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,13 +223,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		00575C971E64ED5300B0B6EA /* BrickKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BrickKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		00575C9A1E64ED5A00B0B6EA /* BrickKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BrickKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E15F91E1DBA570600BBD363 /* CachingImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachingImageDownloader.swift; sourceTree = "<group>"; };
 		4E15F91F1DBA570600BBD363 /* CommunicationBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunicationBase.swift; sourceTree = "<group>"; };
 		4E15F9201DBA570600BBD363 /* ImageRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRequests.swift; sourceTree = "<group>"; };
 		4E15F9211DBA570600BBD363 /* MockFlickrViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockFlickrViewController.swift; sourceTree = "<group>"; };
 		4E15F9231DBA570600BBD363 /* MockTwitterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTwitterViewController.swift; sourceTree = "<group>"; };
 		4E3BD5C71DB008CD00541900 /* BrickApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrickApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4E3BD67D1DB0094F00541900 /* BrickKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BrickKit.xcodeproj; path = ../BrickKit.xcodeproj; sourceTree = "<group>"; };
 		4E3BD6D51DB00F9F00541900 /* BrickApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrickApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E3BD74A1DB1316400541900 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E3BD7531DB1316400541900 /* DailySalesBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailySalesBrick.swift; sourceTree = "<group>"; };
@@ -386,7 +342,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E3BD6911DB0097400541900 /* BrickKit.framework in Frameworks */,
+				00575C981E64ED5300B0B6EA /* BrickKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,13 +350,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E3BD72E1DB0101400541900 /* BrickKit.framework in Frameworks */,
+				00575C9B1E64ED5A00B0B6EA /* BrickKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00575C9D1E64ED6B00B0B6EA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				00575C9A1E64ED5A00B0B6EA /* BrickKit.framework */,
+				00575C971E64ED5300B0B6EA /* BrickKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4E15F91B1DBA570600BBD363 /* Demos */ = {
 			isa = PBXGroup;
 			children = (
@@ -443,7 +408,7 @@
 				4E3BD86E1DB131FA00541900 /* Resources */,
 				4E3BD7491DB1316400541900 /* Source */,
 				4E3BD5C81DB008CD00541900 /* Products */,
-				4E3BD67D1DB0094F00541900 /* BrickKit.xcodeproj */,
+				00575C9D1E64ED6B00B0B6EA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -452,17 +417,6 @@
 			children = (
 				4E3BD5C71DB008CD00541900 /* BrickApp.app */,
 				4E3BD6D51DB00F9F00541900 /* BrickApp.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		4E3BD67E1DB0094F00541900 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				4E3BD6851DB0095000541900 /* BrickKit.framework */,
-				4E3BD6871DB0095000541900 /* BrickKitTests-iOS.xctest */,
-				4E3BD6891DB0095000541900 /* BrickKit.framework */,
-				4E3BD68B1DB0095000541900 /* BrickKit-tvOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -824,7 +778,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				4E3BD6941DB0097400541900 /* PBXTargetDependency */,
 			);
 			name = "BrickApp-iOS";
 			productName = "BrickKit-Example";
@@ -843,7 +796,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				4E3BD7311DB0101400541900 /* PBXTargetDependency */,
 			);
 			name = "BrickApp-tvOS";
 			productName = "BrickApp-tvOS";
@@ -882,12 +834,6 @@
 			mainGroup = 4E3BD5BE1DB008CD00541900;
 			productRefGroup = 4E3BD5C81DB008CD00541900 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 4E3BD67E1DB0094F00541900 /* Products */;
-					ProjectRef = 4E3BD67D1DB0094F00541900 /* BrickKit.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				4E3BD5C61DB008CD00541900 /* BrickApp-iOS */,
@@ -895,37 +841,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		4E3BD6851DB0095000541900 /* BrickKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BrickKit.framework;
-			remoteRef = 4E3BD6841DB0095000541900 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4E3BD6871DB0095000541900 /* BrickKitTests-iOS.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "BrickKitTests-iOS.xctest";
-			remoteRef = 4E3BD6861DB0095000541900 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4E3BD6891DB0095000541900 /* BrickKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = BrickKit.framework;
-			remoteRef = 4E3BD6881DB0095000541900 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		4E3BD68B1DB0095000541900 /* BrickKit-tvOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "BrickKit-tvOSTests.xctest";
-			remoteRef = 4E3BD68A1DB0095000541900 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4E3BD5C51DB008CD00541900 /* Resources */ = {
@@ -1144,19 +1059,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		4E3BD6941DB0097400541900 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "BrickKit-iOS";
-			targetProxy = 4E3BD6931DB0097400541900 /* PBXContainerItemProxy */;
-		};
-		4E3BD7311DB0101400541900 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "BrickKit-tvOS";
-			targetProxy = 4E3BD7301DB0101400541900 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4E3BD5D71DB008CD00541900 /* Debug */ = {
