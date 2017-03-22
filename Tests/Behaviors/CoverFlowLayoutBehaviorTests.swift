@@ -110,5 +110,23 @@ class CoverFlowLayoutBehaviorTests: XCTestCase {
     func testIfContentSizeIsCalculatedCorrectly() {
         XCTAssertEqual(brickView.contentSize, CGSize(width: 2000, height: 50))
     }
+
+    func testIfLayoutAttributesAreCalculatedCorrectly() {
+        brickView.contentOffset.x = brickView.frame.width / 6
+        brickView.layoutIfNeeded()
+
+        let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1)) as! BrickCell
+
+        guard let layoutAttributes = brickView.layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1)) else {
+            XCTFail("layoutAttributes should not be nil")
+            return
+        }
+        let heightBefore = layoutAttributes.frame.size.height
+
+        let newLayout = cell1.preferredLayoutAttributesFittingAttributes(layoutAttributes)
+        let heightAfter = newLayout.frame.size.height
+
+        XCTAssertTrue(heightBefore == heightAfter)
+    }
 }
 
