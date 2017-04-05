@@ -18,15 +18,15 @@ public struct BrickSize {
     }
 }
 
-public indirect enum BrickDimension {
+public enum BrickDimension {
     case Ratio(ratio: CGFloat)
     case Fixed(size: CGFloat)
     case Fill
 
-    case Auto(estimate: BrickDimension)
-    case Orientation(landscape: BrickDimension, portrait: BrickDimension)
-    case HorizontalSizeClass(regular: BrickDimension, compact: BrickDimension)
-    case VerticalSizeClass(regular: BrickDimension, compact: BrickDimension)
+    indirect case Auto(estimate: BrickDimension)
+    indirect case Orientation(landscape: BrickDimension, portrait: BrickDimension)
+    indirect case HorizontalSizeClass(regular: BrickDimension, compact: BrickDimension)
+    indirect case VerticalSizeClass(regular: BrickDimension, compact: BrickDimension)
 
     public var isEstimate: Bool {
         switch self.dimension {
