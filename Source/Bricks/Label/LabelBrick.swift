@@ -174,6 +174,7 @@ public class LabelBrickCell: GenericBrickCell, Bricklike {
     @IBOutlet weak public var horizontalRuleLeft: UIView?
     @IBOutlet weak public var horizontalRuleRight: UIView?
     @IBOutlet weak public var imageView: UIImageView?
+    @IBOutlet weak public var accessoryImageView: UIImageView?
 
     override public func updateContent() {
         horizontalRuleLeft?.hidden = true
