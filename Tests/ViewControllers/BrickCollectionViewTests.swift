@@ -682,6 +682,4 @@ class BrickCollectionViewTests: XCTestCase {
         XCTAssertEqual(section.brickCollectionView, brickView)
         XCTAssertEqual(innerSection.brickCollectionView, brickView)
     }
-
-
 }
