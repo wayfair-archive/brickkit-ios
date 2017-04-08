@@ -684,7 +684,7 @@ class BrickCollectionViewTests: XCTestCase {
         XCTAssertEqual(section.brickCollectionView, brickView)
         XCTAssertEqual(innerSection.brickCollectionView, brickView)
     }
-    
+  
     func testThatBrickCollectionViewDoesNotCreateARetainCycleWithAsyncrhonousResizableCells() {
 
         expectation(forNotification: "DeinitNotifyingAsyncBrickCell.deinit", object: nil, handler: nil)
@@ -696,5 +696,4 @@ class BrickCollectionViewTests: XCTestCase {
         
         waitForExpectations(timeout: 5, handler: nil)
     }
-
 }

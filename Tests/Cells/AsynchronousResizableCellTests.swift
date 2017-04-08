@@ -210,7 +210,6 @@ class AsynchronousResizableCellTests: XCTestCase {
     func testResizingInCollectionBrickScrolling() {
         brickView.registerBrickClass(CollectionBrick.self)
 
-
         let collectionSection = BrickSection(bricks: [
             DummyBrick(width: .ratio(ratio: 1/2)),
             DummyBrick(width: .ratio(ratio: 1/2)),
@@ -253,4 +252,107 @@ class AsynchronousResizableCellTests: XCTestCase {
         XCTAssertEqual(brickView.collectionViewLayout.collectionViewContentSize, CGSize(width: 320, height: 640))
     }
 
-}
+    func testResizingInCollectionBrickNested() {
+        brickView.registerBrickClass(CollectionBrick.self)
+        
+        let expectation1 = expectation(description: "Async")
+        
+        let resizableBrick = AsynchronousResizableBrick()
+        resizableBrick.size.height = .auto(estimate: .fixed(size: 50))
+        resizableBrick.newHeight = 100
+        resizableBrick.didChangeSizeCallBack = {
+            expectation1.fulfill()
+        }
+        
+        let innerCollectionSection = BrickSection(bricks: [
+            resizableBrick
+            ])
+        
+        var innerBrickCollectionView: BrickCollectionView = BrickCollectionView()
+        
+        let innerSection = BrickSection(bricks: [
+            CollectionBrick(scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: innerCollectionSection, configureHandler: { (cell) in
+                innerBrickCollectionView = cell.brickCollectionView
+                innerBrickCollectionView.layoutSubviews()
+                }), brickTypes: [AsynchronousResizableBrick.self])])
+
+        let outerCollectionSection = BrickSection(bricks: [
+            innerSection
+            ])
+        
+        let outerSection = BrickSection(bricks: [
+            CollectionBrick(height: .fixed(size: 300), scrollDirection: .vertical, dataSource: CollectionBrickCellModel(section: outerCollectionSection), brickTypes: [AsynchronousResizableBrick.self])])
+        
+        brickView.setSection(outerSection)
+        brickView.layoutSubviews()
+        
+        let outerExpectedResultBefore = [
+            0 : [
+                CGRect(x: 0, y: 0, width: 320, height: 300),
+            ],
+            1 : [
+                CGRect(x: 0, y: 0, width: 320, height: 300),
+            ]
+        ]
+        
+        let attributesBefore = brickView.collectionViewLayout.layoutAttributesForElements(in: brickView.frame)
+        let framesBefore = brickView.visibleCells.map({ $0.frame })
+        let expectedFramesBefore = Array(outerExpectedResultBefore.values).flatMap({$0})
+        
+        XCTAssertNotNil(attributesBefore)
+        XCTAssertTrue(verifyAttributesToExpectedResult(attributesBefore!, expectedResult: outerExpectedResultBefore))
+        XCTAssertEqual(framesBefore, expectedFramesBefore)
+        
+        XCTAssertEqual(brickView.collectionViewLayout.collectionViewContentSize, CGSize(width: 320, height: 300))
+        
+        let innerAttributesBefore = innerBrickCollectionView.collectionViewLayout.layoutAttributesForElements(in: innerBrickCollectionView.frame)
+        let innerFramesBefore = innerBrickCollectionView.visibleCells.map({ $0.frame })
+        
+        XCTAssertNotNil(innerAttributesBefore)
+        XCTAssertTrue(verifyAttributesToExpectedResult(innerAttributesBefore!, expectedResult: [:]))
+        XCTAssertEqual(innerFramesBefore, [])
+        
+        XCTAssertEqual(CGSize(width: 0, height: 1), innerBrickCollectionView.collectionViewLayout.collectionViewContentSize)
+        
+        brickView.layoutIfNeeded()
+
+        waitForExpectations(timeout: 5, handler: nil)
+        
+        let outerExpectedResult = [
+            0 : [
+                CGRect(x: 0, y: 0, width: 320, height: 300),
+            ],
+            1 : [
+                CGRect(x: 0, y: 0, width: 320, height: 300),
+            ]
+        ]
+        
+        let innerExpectedResult = [
+            0 : [
+                CGRect(x: 0, y: 0, width: 320, height: 100),
+            ],
+            1 : [
+                CGRect(x: 0, y: 0, width: 320, height: 100),
+            ]
+        ]
+                
+        let attributes = brickView.collectionViewLayout.layoutAttributesForElements(in: brickView.frame)
+        let frames = brickView.visibleCells.map({ $0.frame })
+        let expectedFrames = Array(outerExpectedResult.values).flatMap({$0})
+        
+        XCTAssertNotNil(attributes)
+        XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: outerExpectedResult))
+        XCTAssertEqual(frames, expectedFrames)
+
+        XCTAssertEqual(brickView.collectionViewLayout.collectionViewContentSize, CGSize(width: 320, height: 300))
+        
+        let innerAttributes = innerBrickCollectionView.collectionViewLayout.layoutAttributesForElements(in: innerBrickCollectionView.frame)
+        let innerFrames = innerBrickCollectionView.visibleCells.map({ $0.frame })
+        let innerExpectedFrames = Array(innerExpectedResult.values).flatMap({$0})
+        
+        XCTAssertNotNil(innerAttributes)
+        XCTAssertTrue(verifyAttributesToExpectedResult(innerAttributes!, expectedResult: innerExpectedResult))
+        XCTAssertEqual(innerFrames, innerExpectedFrames)
+        
+        XCTAssertEqual(innerBrickCollectionView.collectionViewLayout.collectionViewContentSize, CGSize(width: 320, height: 100))
+    }}

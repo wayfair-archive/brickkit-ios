@@ -145,6 +145,10 @@ open class CollectionBrickCell: BrickCell, Bricklike, AsynchronousResizableCell 
             return super.preferredLayoutAttributesFitting(layoutAttributes)
         }
         
+        guard self._brick.size.height.isEstimate(in: self) else {
+            return layoutAttributes
+        }
+        
         isCalculatingHeight = true
 
         brickCollectionView.frame = layoutAttributes.bounds
