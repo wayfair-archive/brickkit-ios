@@ -115,7 +115,6 @@ class CoverFlowLayoutBehaviorTests: XCTestCase {
         brickView.contentOffset.x = brickView.frame.width / 6
         brickView.layoutIfNeeded()
 
-
         let cell1 = brickView.cellForItem(at: IndexPath(item: 1, section: 1)) as! BrickCell
 
         guard let layoutAttributes = brickView.layout.layoutAttributesForItem(at: IndexPath(item: 1, section: 1)) else {
