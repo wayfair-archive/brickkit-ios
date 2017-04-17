@@ -1,5 +1,20 @@
 # Change Log
 
+## [1.3.2](https://github.com/wayfair/brickkit-ios/tree/1.3.2) (2017-04-05)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.3.1...1.3.2)
+
+**Closed issues:**
+
+- CollectionBrick issues with height sizing [\#109](https://github.com/wayfair/brickkit-ios/issues/109)
+- Flickr Example Crash app [\#48](https://github.com/wayfair/brickkit-ios/issues/48)
+- Brick Dimension Size Classes Issue on iPad pro device [\#27](https://github.com/wayfair/brickkit-ios/issues/27)
+
+**Merged pull requests:**
+
+- Fixed memory leak with BrickDimension [\#119](https://github.com/wayfair/brickkit-ios/pull/119) ([jay18001](https://github.com/jay18001))
+- Removed Flickr example [\#114](https://github.com/wayfair/brickkit-ios/pull/114) ([jay18001](https://github.com/jay18001))
+- Collection bricks with fixed heights were infinitely resizing. [\#113](https://github.com/wayfair/brickkit-ios/pull/113) ([thevwu](https://github.com/thevwu))
+
 ## [1.3.1](https://github.com/wayfair/brickkit-ios/tree/1.3.1) (2017-03-22)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.3.0...1.3.1)
 
