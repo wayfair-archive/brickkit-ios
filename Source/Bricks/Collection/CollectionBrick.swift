@@ -109,7 +109,7 @@ public class CollectionBrickCellModel: CollectionBrickCellDataSource {
 public class CollectionBrickCell: BrickCell, Bricklike, AsynchronousResizableCell {
     public typealias BrickType = CollectionBrick
 
-    public var sizeChangedHandler: CellSizeChangedHandler?
+    public weak var resizeDelegate: AsynchronousResizableDelegate?
 
     /// Flag that indicates if the CollectionBrick is calculating its height
     // This is introduced because otherwise the sizeChangedHandler might get called while calculating.
@@ -208,8 +208,9 @@ extension CollectionBrickCell: BrickLayoutDelegate {
             return
         }
 
-        sizeChangedHandler?(cell: self)
-        brickCollectionView.layoutSubviews()
+        self.resizeDelegate?.performResize(self, completion: { [weak self] (completed: Bool) in
+            self?.brickCollectionView.layoutSubviews()
+        })
     }
 
 }

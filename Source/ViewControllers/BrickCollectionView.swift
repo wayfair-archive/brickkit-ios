@@ -95,7 +95,7 @@ public class BrickCollectionView: UICollectionView {
         registerClass(BrickSectionCell.self, forCellWithReuseIdentifier: BrickSection.nibName)
     }
 
-// MARK: - Setting up the models
+    // MARK: - Setting up the models
 
     /// Sets the section for the BrickCollectionView
     ///
@@ -139,11 +139,11 @@ public class BrickCollectionView: UICollectionView {
         } else {
             fatalError("Nib or cell class not found")
         }
-        
+
         if isConfiguringCollectionBrick {
             print("calling `registerBrickClass` in `configure(for cell: CollectionBrickCell)` is deprecated. Use `registerBricks(for cell: CollectionBrickCell)` or `CollectionBrickCell(brickTypes: [Brick.Type])`. This will be a fatalError in a future release")
         }
-        
+
         registeredBricks[identifier] = cellIdentifier
     }
 
@@ -153,11 +153,11 @@ public class BrickCollectionView: UICollectionView {
     public func registerNib(nib: UINib, forBrickWithIdentifier identifier: String) {
         let cellIdentifier = String(nib.hashValue)
         self.registerNib(nib, forCellWithReuseIdentifier: cellIdentifier)
-        
+
         if isConfiguringCollectionBrick {
             print("calling `registerNib` in `configure(for cell: CollectionBrickCell)` is deprecated. Use `registerBricks(for cell: CollectionBrickCell)`. This will be a fatalError in a future release")
         }
-        
+
         registeredBricks[CustomNibPrefix + identifier] = cellIdentifier
     }
 
@@ -195,7 +195,7 @@ public class BrickCollectionView: UICollectionView {
         return identifier
     }
 
-// MARK: - Invalidation
+    // MARK: - Invalidation
 
     /// Invalidate the layout properties and recalculate sizes
     ///
@@ -204,9 +204,9 @@ public class BrickCollectionView: UICollectionView {
     public func invalidateBricks(reloadSections: Bool = true, completion: ((Bool) -> Void)? = nil) {
         self.invalidateRepeatCountsWithoutPerformBatchUpdates(reloadSections)
         self.performBatchUpdates({
-                if reloadSections {
-                    self.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.numberOfSections())))
-                }
+            if reloadSections {
+                self.reloadSections(NSIndexSet(indexesInRange: NSMakeRange(0, self.numberOfSections())))
+            }
             self.collectionViewLayout.invalidateLayoutWithContext(BrickLayoutInvalidationContext(type: .Invalidate))
             }, completion: { completed in
                 completion?(completed)
@@ -230,8 +230,8 @@ public class BrickCollectionView: UICollectionView {
             self.collectionViewLayout.invalidateLayoutWithContext(self.collectionViewLayout.invalidationContextForBoundsChange(self.bounds))
         }
     }
-    
-// MARK: - Reloading
+
+    // MARK: - Reloading
 
     /// Reload bricks in a collectionbrick
     ///
@@ -505,6 +505,22 @@ public class BrickCollectionView: UICollectionView {
     }
 }
 
+extension BrickCollectionView: AsynchronousResizableDelegate {
+
+    public func performResize(cell: BrickCell, completion: ((Bool) -> Void)? = nil) {
+        guard let indexPath = self.indexPathForCell(cell) else {
+            completion?(true)
+            return
+        }
+        let newHeight = cell.heightForBrickView(withWidth: cell.frame.width)
+        weak var weakLayout = self.layout
+        self.performBatchUpdates({
+            weakLayout?.updateHeight(indexPath, newHeight: newHeight)
+            }, completion: completion)
+    }
+}
+
+
 // MARK: - UICollectionViewDataSource
 extension BrickCollectionView: UICollectionViewDataSource {
 
@@ -517,6 +533,7 @@ extension BrickCollectionView: UICollectionViewDataSource {
     }
 
     public func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        assert(collectionView == self, "This UICollectionViewDataSource must use it's own BrickCollectionView instance")
         guard let brickCollectionView = collectionView as? BrickCollectionView else {
             fatalError("Only BrickCollectionViews are supported")
         }
@@ -530,16 +547,8 @@ extension BrickCollectionView: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! BaseBrickCell
 
         if let brickCell = cell as? BrickCell {
-            if var resizable = brickCell as? AsynchronousResizableCell {
-                resizable.sizeChangedHandler = { [weak brickCollectionView] resizedCell in
-                    guard let brickCollectionView = brickCollectionView else {
-                        return
-                    }
-                    let height = resizedCell.heightForBrickView(withWidth: resizedCell.frame.width)
-                    brickCollectionView.performBatchUpdates({
-                        brickCollectionView.layout.updateHeight(indexPath, newHeight: height)
-                        }, completion: nil)
-                }
+            if let resizable = brickCell as? AsynchronousResizableCell {
+                resizable.resizeDelegate = self
             }
 
             if var downloadable = brickCell as? ImageDownloaderCell {

@@ -10,10 +10,12 @@ import UIKit
 
 // Mark: - Resizeable cells
 
-public typealias CellSizeChangedHandler = ((cell: BrickCell) -> Void)
+public protocol AsynchronousResizableCell: class  {
+    weak var resizeDelegate: AsynchronousResizableDelegate? { get set }
+}
 
-public protocol AsynchronousResizableCell {
-    var sizeChangedHandler: CellSizeChangedHandler? { get set }
+public protocol AsynchronousResizableDelegate: class {
+    func performResize(cell: BrickCell, completion: ((Bool) -> Void)?)
 }
 
 public protocol ImageDownloaderCell {

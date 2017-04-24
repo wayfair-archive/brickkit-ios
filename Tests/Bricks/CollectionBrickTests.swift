@@ -156,7 +156,43 @@ class CollectionBrickTests: XCTestCase {
         cell1?.preferredLayoutAttributesFittingAttributes(mockAttributes) // if the function returns the test passes
     }
 
+
+    func testThatCollectionBrickPerformsResizeWhileDealloc() {
+        let expectation = expectationWithDescription("CollectionBrick contains Async bricks that release after calling sizeChangedHandler")
+
+        let resizableBrick = DeinitNotifyingAsyncBrick(size: BrickSize(width: .Fill, height: .Fill))
+
+        let collectionSection = BrickSection(bricks: [
+            resizableBrick
+            ])
+
+        let section = BrickSection(bricks: [
+            CollectionBrick(scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: collectionSection), brickTypes: [DeinitNotifyingAsyncBrick.self])
+            ])
+
+        brickView.setSection(section)
+        brickView.layoutSubviews()
+
+        var cell = self.brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
+        XCTAssertNotNil(cell)
+        XCTAssertNotNil(cell?.resizeDelegate)
+        XCTAssertTrue(cell?.resizeDelegate === brickView)
+
+        cell?.resizeDelegate?.performResize(cell!, completion: { (completion: Bool) in
+            expectation.fulfill()
+        })
+
+        cell?.brickCollectionView = nil
+        cell = nil
+        brickView = nil
+
+        XCTAssertNil(brickView)
+        XCTAssertNil(cell)
+
+        waitForExpectationsWithTimeout(3, handler: nil)
+    }
 }
+
 
 class FixedBrickLayoutDelegate: BrickLayoutDelegate {
     var count = 0
