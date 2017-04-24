@@ -1,5 +1,12 @@
 # Change Log
 
+## [1.4.0](https://github.com/wayfair/brickkit-ios/tree/1.4.0) (2017-04-24)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.3.2...1.4.0)
+
+**Merged pull requests:**
+
+- Addresses an issue when using multiple BrickCollectionViews as Cells… [\#122](https://github.com/wayfair/brickkit-ios/pull/122) ([ablokker](https://github.com/ablokker))
+
 ## [1.3.2](https://github.com/wayfair/brickkit-ios/tree/1.3.2) (2017-04-05)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.3.1...1.3.2)
 
