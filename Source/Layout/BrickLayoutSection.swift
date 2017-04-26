@@ -45,7 +45,7 @@ protocol BrickLayoutSectionDataSource: class {
     func width(for index: Int, totalWidth: CGFloat, startingAt origin: CGFloat, in section: BrickLayoutSection) -> CGFloat
 
     /// Returns the size for attributes at a given index
-    func size(for attributes: BrickLayoutAttributes, containedIn width: CGFloat, in section: BrickLayoutSection) -> CGSize
+    func size(for attributes: BrickLayoutAttributes, containedIn size: CGSize, in section: BrickLayoutSection) -> CGSize
 
 
     /// Returns the identifier for attributes at a given index
@@ -85,6 +85,10 @@ internal class BrickLayoutSection {
     /// Width of the section. Can be set by `setSectionWidth`
     /// This is not a calculated property of the frame because in case of horizontal scrolling, the values will be different
     internal private(set) var sectionWidth: CGFloat
+    
+    /// Estimated height of the section.
+    /// This is not a calculated property of the frame because in case of vertical scrolling, the values will be different
+    internal private(set) var sectionHeight: CGFloat?
 
     /// Origin of the frame. Can be set by `setOrigin`
     internal var origin: CGPoint {
@@ -112,18 +116,20 @@ internal class BrickLayoutSection {
     /// - parameter numberOfItems:     Initial number of items in this section
     /// - parameter origin:            Origin of the section
     /// - parameter sectionWidth:      Width of the section
+    /// - parameter sectionHeight:     Height of the section, may be nil
     /// - parameter dataSource:        DataSource
     ///
     /// - returns: instance of the BrickLayoutSection
-    init(sectionIndex: Int, sectionAttributes: BrickLayoutAttributes?, numberOfItems: Int, origin: CGPoint, sectionWidth: CGFloat, dataSource: BrickLayoutSectionDataSource, delegate: BrickLayoutSectionDelegate? = nil) {
+    init(sectionIndex: Int, sectionAttributes: BrickLayoutAttributes?, numberOfItems: Int, origin: CGPoint, sectionWidth: CGFloat, sectionHeight: CGFloat? = nil, dataSource: BrickLayoutSectionDataSource, delegate: BrickLayoutSectionDelegate? = nil) {
         self.dataSource = dataSource
         self.delegate = delegate
         self.sectionIndex = sectionIndex
         self.numberOfItems = numberOfItems
         self.sectionAttributes = sectionAttributes
         self.sectionWidth = sectionWidth
+        self.sectionHeight = sectionHeight
 
-        initializeFrameWithOrigin(origin, sectionWidth: sectionWidth)
+        initializeFrameWithOrigin(origin, sectionWidth: sectionWidth, sectionHeight: sectionHeight)
     }
 
 
@@ -132,9 +138,12 @@ internal class BrickLayoutSection {
     /// - parameter sectionOrigin: origin
     /// - parameter sectionWidth:  width
     ///
-    private func initializeFrameWithOrigin(origin: CGPoint, sectionWidth: CGFloat) {
+    private func initializeFrameWithOrigin(origin: CGPoint, sectionWidth: CGFloat, sectionHeight: CGFloat?) {
         frame.origin = origin
         frame.size.width = sectionWidth
+        if let sectionHeight = sectionHeight {
+            frame.size.height = sectionHeight
+        }
     }
 
     /// Set the number of items for this BrickLayoutSection
@@ -248,7 +257,7 @@ internal class BrickLayoutSection {
         invalidateAttributes(brickAttributes)
 
         let width = widthAtIndex(index, startingAt: brickAttributes.originalFrame.minX - _dataSource.edgeInsets(in: self).left, dataSource: _dataSource)
-        let size = _dataSource.size(for: brickAttributes, containedIn: width, in: self)
+        let size = _dataSource.size(for: brickAttributes, containedIn: CGSize(width: width, height: 0), in: self)
         brickAttributes.originalFrame.size = size
         brickAttributes.frame.size = size
 
@@ -669,7 +678,7 @@ internal class BrickLayoutSection {
             height = brickFrame.height
             width = brickFrame.width
         } else {
-            let size = dataSource.size(for: brickAttributes, containedIn: width, in: self)
+            let size = dataSource.size(for: brickAttributes, containedIn: CGSize(width: width, height: self.sectionHeight ?? 0), in: self)
             height = size.height
             width = size.width
         }

@@ -689,8 +689,8 @@ class BrickCollectionViewTests: XCTestCase {
         expectationForNotification("DeinitNotifyingAsyncBrickCell.deinit", object: nil, handler: nil)
 
         autoreleasepool {
-            let brick = DeinitNotifyingAsyncBrick(size: BrickSize(width: .Fill, height: .Fill))
-            brickView.setupSingleBrickAndLayout(brick)
+            let brick = BrickSection(height: .Fixed(size:10), bricks: [DeinitNotifyingAsyncBrick(size: BrickSize(width: .Fill, height: .Fill))])
+            brickView.setupSectionAndLayout(brick)
             brickView = nil
         }
 

@@ -35,14 +35,18 @@ extension BrickCollectionView: BrickLayoutDataSource {
         return brick.size.height.isEstimate
     }
 
-    public func brickLayout(layout: BrickLayout, estimatedHeightForItemAtIndexPath indexPath: NSIndexPath, containedInWidth width: CGFloat) -> CGFloat {
+    public func brickLayout(layout: BrickLayout, estimatedHeightForItemAtIndexPath indexPath: NSIndexPath, containedInWidth width: CGFloat, containedInHeight height: CGFloat) -> CGFloat {
         let brick = self.brick(at: indexPath)
-        if brick is BrickSection {
+        if brick is BrickSection && brick.size.height.isEstimate {
             return 0
         }
 
         let heightDimension = brick.size.height
-        return heightDimension.value(for: width, startingAt: 0)
+        if heightDimension == .Fill {
+            return heightDimension.value(for: height, startingAt: 0)
+        } else {
+            return heightDimension.value(for: width, startingAt: 0)
+        }
     }
 
     public func brickLayout(layout: BrickLayout, edgeInsetsForSection section: Int) -> UIEdgeInsets {
