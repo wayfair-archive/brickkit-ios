@@ -196,7 +196,16 @@ public class BrickFlowLayout: UICollectionViewLayout, BrickLayout {
         guard _collectionView.numberOfSections() > sectionIndex else {
             fatalError("The section is not found")
         }
-        let section = BrickLayoutSection(sectionIndex: sectionIndex, sectionAttributes: sectionAttributes, numberOfItems: _collectionView.numberOfItemsInSection(sectionIndex), origin: origin, sectionWidth: width, dataSource: self, delegate: self)
+        
+        let height: CGFloat?
+        
+        if let attributes = sectionAttributes {
+            height = _dataSource.brickLayout(self, estimatedHeightForItemAtIndexPath: attributes.indexPath, containedInWidth: width, containedInHeight: 0)
+        } else {
+            height = nil
+        }
+        
+        let section = BrickLayoutSection(sectionIndex: sectionIndex, sectionAttributes: sectionAttributes, numberOfItems: _collectionView.numberOfItemsInSection(sectionIndex), origin: origin, sectionWidth: width, sectionHeight: height, dataSource: self, delegate: self)
         section.invalidateAttributes { (attributes, oldFrame) in
         }
         sections?[sectionIndex] = section
@@ -445,7 +454,7 @@ extension BrickFlowLayout: BrickLayoutSectionDataSource {
         }
     }
 
-    func size(for attributes: BrickLayoutAttributes, containedIn width: CGFloat, in section: BrickLayoutSection) -> CGSize {
+    func size(for attributes: BrickLayoutAttributes, containedIn containedSize: CGSize, in section: BrickLayoutSection) -> CGSize {
         let indexPath = attributes.indexPath
 
         let type = _dataSource.brickLayout(self, brickLayoutTypeForItemAtIndexPath: indexPath)
@@ -455,17 +464,17 @@ extension BrickFlowLayout: BrickLayoutSectionDataSource {
             // Check if the attributes already had a height. If so, use that height
             if attributes.frame.height != 0 && _dataSource.brickLayout(self, isEstimatedHeightForIndexPath: indexPath) {
                 let height = attributes.frame.size.height
-                size = CGSize(width: width, height: height)
+                size = CGSize(width: containedSize.width, height: height)
             } else {
-                let height = _dataSource.brickLayout(self, estimatedHeightForItemAtIndexPath: indexPath, containedInWidth: width)
-                size = CGSize(width: width, height: height)
+                let height = _dataSource.brickLayout(self, estimatedHeightForItemAtIndexPath: indexPath, containedInWidth: containedSize.width, containedInHeight: containedSize.height)
+                size = CGSize(width: containedSize.width, height: height)
             }
         case .Section(let section):
-            let height = _dataSource.brickLayout(self, estimatedHeightForItemAtIndexPath: indexPath, containedInWidth: width)
+            let height = _dataSource.brickLayout(self, estimatedHeightForItemAtIndexPath: indexPath, containedInWidth: containedSize.width, containedInHeight: containedSize.height)
             if height == 0 {
                 size = sections?[section]?.frame.size ?? .zero
             } else {
-                size = CGSize(width: width, height: height)
+                size = CGSize(width: containedSize.width, height: height)
             }
         }
 

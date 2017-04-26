@@ -30,8 +30,8 @@ class FillBrickViewController: BrickViewController {
             LabelBrick(width: .Fill, backgroundColor: .brickGray3, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
             LabelBrick(width: .Fill, backgroundColor: .brickGray5, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
             LabelBrick(width: .Fixed(size: 100), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
-            BrickSection(width: .Fill, backgroundColor: .brickGray4, bricks: [
-                LabelBrick(width: .Ratio(ratio: 1/3), backgroundColor: .brickGray1, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
+            BrickSection(width: .Fill, height: .Fixed(size: 50), backgroundColor: .brickGray4, bricks: [
+                LabelBrick(width: .Ratio(ratio: 1/3), height: .Fill, backgroundColor: .brickGray1, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
                 LabelBrick(width: .Fill, backgroundColor: .brickGray3, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
                 ])
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10))

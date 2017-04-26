@@ -80,7 +80,37 @@ class BaseBrickCellTests: XCTestCase {
         XCTAssertEqual(cell?.topSeparatorLine.backgroundColor, .blueColor())
         XCTAssertNil(cell?.bottomSeparatorLine.superview)
     }
-
+    
+    func testSectionFixedHeight() {
+        brickView.registerBrickClass(LabelBrick.self)
+        
+        let section = BrickSection(height: .Fixed(size: 100), bricks: [
+            LabelBrick(height: .Fixed(size: 50), text: "HELLO WORLD", configureCellBlock: { (cell) in })
+            ])
+        brickView.setupSectionAndLayout(section)
+        
+        let cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)) as? BrickSectionCell
+        XCTAssertEqual(cell?.frame.height, 100)
+        let labelCell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? BrickCell
+        XCTAssertEqual(labelCell?.frame.height, 50)
+    }
+    
+    func testFillHeight() {
+        brickView.registerBrickClass(LabelBrick.self)
+        
+        let section = BrickSection(width: .Fixed(size: 200), height: .Ratio(ratio: 1/2), bricks: [
+            LabelBrick(height: .Fill, text: "HELLO WORLD", configureCellBlock: { (cell) in })
+            ])
+        brickView.setupSectionAndLayout(section)
+        
+        let sectionCell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0)) as? BrickSectionCell
+        XCTAssertEqual(sectionCell?.frame.height, 100)
+        
+        let cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? BrickCell
+        XCTAssertEqual(cell?.frame.height, 100)
+        
+    }
+    
     func testAddBoth() {
         brickView.registerBrickClass(LabelBrick.self)
 

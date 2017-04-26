@@ -43,7 +43,6 @@ class CollectionBrickTests: XCTestCase {
             ])
         brickView.setSection(section)
         brickView.layoutSubviews()
-        brickView.layoutIfNeeded()
 
         let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? CollectionBrickCell
         XCTAssertEqual(cell1?.brickCollectionView.visibleCells().count, 2)

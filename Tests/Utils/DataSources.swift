@@ -67,7 +67,7 @@ class SectionsLayoutDataSource: NSObject, BrickLayoutDataSource {
         return BrickUtils.calculateWidth(for: ratio, widthRatio: widthRatio, totalWidth: totalWidth, inset: self.brickLayout(layout, insetForSection: indexPath.section))
     }
 
-    func brickLayout(layout: BrickLayout, estimatedHeightForItemAtIndexPath indexPath: NSIndexPath, containedInWidth width: CGFloat) -> CGFloat {
+    func brickLayout(layout: BrickLayout, estimatedHeightForItemAtIndexPath indexPath: NSIndexPath, containedInWidth width: CGFloat, containedInHeight height: CGFloat) -> CGFloat {
         let sectionHeights = heights[indexPath.section]
         if sectionHeights.count <= indexPath.item {
             return sectionHeights.last ?? 0
@@ -161,8 +161,8 @@ class FixedBrickLayoutSectionDataSource: NSObject, BrickLayoutSectionDataSource 
     func prepareForSizeCalculation(for attributes: BrickLayoutAttributes, containedIn width: CGFloat, origin: CGPoint, invalidate: Bool, in section: BrickLayoutSection, updatedAttributes: OnAttributesUpdatedHandler?) {
     }
     
-    func size(for attributes: BrickLayoutAttributes, containedIn width: CGFloat, in section: BrickLayoutSection) -> CGSize {
-        return CGSize(width: width, height: heights[attributes.indexPath.item])
+    func size(for attributes: BrickLayoutAttributes, containedIn containedSize: CGSize, in section: BrickLayoutSection) -> CGSize {
+        return CGSize(width: containedSize.width, height: heights[attributes.indexPath.item])
     }
 
     func identifier(for index: Int, in skeleton: BrickLayoutSection) -> String {
@@ -215,8 +215,8 @@ class FixedBrickLayoutDataSource: NSObject, BrickLayoutDataSource {
         return BrickUtils.calculateWidth(for: self.widthRatio, widthRatio: widthRatio, totalWidth: totalWidth, inset: inset)
     }
 
-    func brickLayout(layout: BrickLayout, estimatedHeightForItemAtIndexPath indexPath: NSIndexPath, containedInWidth width: CGFloat) -> CGFloat {
-        return height
+    func brickLayout(layout: BrickLayout, estimatedHeightForItemAtIndexPath indexPath: NSIndexPath, containedInWidth width: CGFloat, containedInHeight height: CGFloat) -> CGFloat {
+        return self.height
     }
 
     func brickLayout(layout: BrickLayout, edgeInsetsForSection section: Int) -> UIEdgeInsets {
