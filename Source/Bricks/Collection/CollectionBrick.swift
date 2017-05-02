@@ -145,7 +145,7 @@ open class CollectionBrickCell: BrickCell, Bricklike, AsynchronousResizableCell 
             return super.preferredLayoutAttributesFitting(layoutAttributes)
         }
         
-        guard self._brick.size.height.isEstimate(in: self) else {
+        guard self._brick.size.height.isEstimate else {
             return layoutAttributes
         }
         

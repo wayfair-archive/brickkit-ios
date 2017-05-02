@@ -10,10 +10,8 @@ import UIKit
 import BrickKit
 
 class AsynchronousResizableBrick: Brick {
-
     var didChangeSizeCallBack: (() -> Void)?
     var newHeight: CGFloat = 200
-
 }
 
 class AsynchronousResizableBrickCell: BrickCell, Bricklike, AsynchronousResizableCell {
@@ -35,5 +33,20 @@ class AsynchronousResizableBrickCell: BrickCell, Bricklike, AsynchronousResizabl
         sizeChangedHandler?(self)
         brick.didChangeSizeCallBack?()
     }
+}
 
+class DeinitNotifyingAsyncBrickCell: BrickCell, Bricklike, AsynchronousResizableCell {
+    typealias BrickType = DeinitNotifyingAsyncBrick
+    
+    var sizeChangedHandler: CellSizeChangedHandler?
+    
+    deinit {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "DeinitNotifyingAsyncBrickCell.deinit"), object: nil)
+    }
+}
+
+class DeinitNotifyingAsyncBrick: Brick {
+    override class var cellClass: UICollectionViewCell.Type? {
+        return DeinitNotifyingAsyncBrickCell.self
+    }
 }
