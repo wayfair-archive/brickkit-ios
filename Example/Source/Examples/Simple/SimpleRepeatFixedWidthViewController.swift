@@ -11,7 +11,7 @@ import BrickKit
 
 class SimpleRepeatFixedWidthViewController: BaseRepeatBrickViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Fixed Width"
     }
     override class var subTitle: String {

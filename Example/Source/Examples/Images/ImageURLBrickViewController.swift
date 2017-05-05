@@ -11,7 +11,7 @@ import BrickKit
 
 class ImageURLBrickViewController: BrickViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Image URL Example"
     }
     override class var subTitle: String {

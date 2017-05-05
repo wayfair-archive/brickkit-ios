@@ -10,7 +10,7 @@ import BrickKit
 
 class SectionStickingViewController: BaseSectionBrickViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Sticking Section"
     }
     override class var subTitle: String {

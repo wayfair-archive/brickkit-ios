@@ -12,7 +12,7 @@ import BrickKit
 class SimpleCollectionBrickViewController: BrickApp.BaseBrickController {
     let image = UIImage(named: "wayfair")!
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Simple CollectionBrick"
     }
     override class var subTitle: String {

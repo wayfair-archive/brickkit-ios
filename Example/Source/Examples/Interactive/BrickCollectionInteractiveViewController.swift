@@ -22,7 +22,7 @@ private let RepeatLabel2 = "RepeatLabel2"
 
 class BrickCollectionInteractiveViewController: BrickViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "CollectionBrick"
     }
     

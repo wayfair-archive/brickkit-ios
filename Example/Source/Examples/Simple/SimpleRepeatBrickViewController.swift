@@ -11,7 +11,7 @@ import BrickKit
 
 class SimpleRepeatBrickViewController: BrickViewController, LabelBrickCellDataSource, BrickRepeatCountDataSource {
     
-    override class var title: String {
+    override class var brickTitle: String {
         return "Simple Repeat"
     }
     override class var subTitle: String {

@@ -31,7 +31,7 @@ class ScaleAppearBehavior: BrickAppearBehavior {
 
 class InteractiveAlignViewController: BrickViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Interactive Align"
     }
 

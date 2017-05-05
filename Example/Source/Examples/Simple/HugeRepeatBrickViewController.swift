@@ -11,7 +11,7 @@ import BrickKit
 
 class HugeRepeatBrickViewController: BrickViewController, LabelBrickCellDataSource, BrickRepeatCountDataSource {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Huge Repeat"
     }
     override class var subTitle: String {

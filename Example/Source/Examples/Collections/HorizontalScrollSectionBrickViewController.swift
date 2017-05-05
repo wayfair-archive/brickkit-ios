@@ -14,7 +14,7 @@ private let rightLabel = "leftLabel"
 
 class HorizontalScrollSectionBrickViewController: BrickApp.BaseBrickController, BrickRepeatCountDataSource {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Horizontal Scroll"
     }
     override class var subTitle: String {

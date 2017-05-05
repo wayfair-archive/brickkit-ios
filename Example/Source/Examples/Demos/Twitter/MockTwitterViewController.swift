@@ -30,7 +30,7 @@ class TwitterDataProvider {
 
 class MockTwitterViewController: BrickViewController {
     
-    override class var title: String {
+    override class var brickTitle: String {
         return "Twitter"
     }
     override class var subTitle: String {

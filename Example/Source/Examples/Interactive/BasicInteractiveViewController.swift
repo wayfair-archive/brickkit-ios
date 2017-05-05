@@ -15,7 +15,7 @@ private let Section = "Section"
 
 class BasicInteractiveViewController: BrickViewController, LabelBrickCellDataSource, BrickRepeatCountDataSource {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Basic Interaction"
     }
 

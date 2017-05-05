@@ -9,7 +9,7 @@
 import BrickKit
 
 class SpotlightScrollingViewController: BaseScrollingViewController {
-    override class var title: String {
+    override class var brickTitle: String {
         return "Spotlight"
     }
     override class var subTitle: String {

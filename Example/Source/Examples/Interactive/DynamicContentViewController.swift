@@ -18,7 +18,7 @@ class DynamicContentViewController: BrickViewController {
         static let HideableSectionContentImage = "HideableSectionContentImage"
     }
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Dynamic Resizing Content"
     }
 

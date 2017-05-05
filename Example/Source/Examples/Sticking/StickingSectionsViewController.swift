@@ -13,7 +13,7 @@ private let StickySection = "Sticky Section"
 
 class StickingSectionsViewController: BrickApp.BaseBrickController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Sticky Sections"
     }
 
