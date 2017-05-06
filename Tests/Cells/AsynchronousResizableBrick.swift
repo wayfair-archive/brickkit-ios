@@ -19,8 +19,7 @@ class AsynchronousResizableBrick: Brick {
 class AsynchronousResizableBrickCell: BrickCell, Bricklike, AsynchronousResizableCell {
     typealias BrickType = AsynchronousResizableBrick
 
-    var sizeChangedHandler: CellSizeChangedHandler?
-
+    weak var resizeDelegate: AsynchronousResizableDelegate?
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     var timer: Timer?
 
@@ -32,8 +31,30 @@ class AsynchronousResizableBrickCell: BrickCell, Bricklike, AsynchronousResizabl
 
     func fireTimer() {
         self.heightConstraint.constant = brick.newHeight
-        sizeChangedHandler?(self)
-        brick.didChangeSizeCallBack?()
+        self.resizeDelegate?.performResize(cell: self, completion: { [weak self] (completed: Bool) in
+            self?.brick.didChangeSizeCallBack?()
+        })
+    }
+}
+
+class DeinitNotifyingAsyncBrickCell: BrickCell, Bricklike, AsynchronousResizableCell {
+
+    typealias BrickType = DeinitNotifyingAsyncBrick
+
+    weak var resizeDelegate: AsynchronousResizableDelegate?
+
+    override func updateContent() {
+        super.updateContent()
+        self.resizeDelegate?.performResize(cell: self, completion: nil)
     }
 
+    deinit {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "DeinitNotifyingAsyncBrickCell.deinit"), object: nil)
+    }
+}
+
+class DeinitNotifyingAsyncBrick: Brick {
+    override class var cellClass: UICollectionViewCell.Type? {
+        return DeinitNotifyingAsyncBrickCell.self
+    }
 }

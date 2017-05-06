@@ -142,7 +142,7 @@ open class ImageURLBrickModel: ImageBrickDataSource {
 open class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableCell, ImageDownloaderCell {
     public typealias BrickType = ImageBrick
 
-    open var sizeChangedHandler: CellSizeChangedHandler?
+    public weak var resizeDelegate: AsynchronousResizableDelegate?
 
     open weak var imageDownloader: ImageDownloader?
 
@@ -213,7 +213,7 @@ open class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableCel
     fileprivate func resize(image: UIImage) {
         if self.brick.size.height.isEstimate(in: self) {
             self.setRatioConstraint(for: image)
-            self.sizeChangedHandler?(self)
+            self.resizeDelegate?.performResize(cell: self, completion: nil)
         }
     }
 
