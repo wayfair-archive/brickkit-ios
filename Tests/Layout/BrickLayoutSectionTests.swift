@@ -374,7 +374,55 @@ class BrickLayoutSectionTests: XCTestCase {
 
         section.invalidate(at: 0, updatedAttributes: nil)
     }
-
-
-
+    
+    func testThatSetOriginUpdatesAttributesOrigin() {
+        // setup ipad sized collection view
+        let brickView: BrickCollectionView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 768, height: 968))
+        
+        // setup brick section
+        let topLeftHalf = BrickSection(width: .ratio(ratio: 0.5), bricks: [
+            DummyBrick("BrickLeft", height: .fixed(size: 300)),
+            ])
+        topLeftHalf.isHidden = true
+        
+        // Fixed width section
+        let fixedWidthSection: Brick = BrickSection("fixedWidthSection", bricks: [
+            DummyBrick("BrickFixed1", width: .fixed(size: 89), height: .fixed(size: 40)),
+            DummyBrick("BrickFixed2", width: .fixed(size: 200), height: .fixed(size: 40))
+            ])
+        
+        let nonFixedWidthSection: Brick = BrickSection("nonFixedWidthSection", bricks: [
+            DummyBrick("BrickNonFixed1", height: .fixed(size: 41)),
+            ])
+        
+        let topRightHalf = BrickSection("topRightHalf", width: .ratio(ratio: 0.5), bricks: [
+            fixedWidthSection,
+            nonFixedWidthSection,
+            ])
+        
+        let brickSection = BrickSection("topSection", bricks: [
+            topLeftHalf,
+            topRightHalf
+            ], edgeInsets: UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8))
+        
+        // hide left half and layout brick section
+        brickView.setupSectionAndLayout(brickSection)
+        
+        let topRightHalfIndexPath = brickView.indexPathsForBricksWithIdentifier(topRightHalf.identifier).first!
+        let topRightHalfCell = brickView.cellForItem(at: topRightHalfIndexPath)
+        XCTAssertEqual(topRightHalfCell?.frame.width, 376)
+        
+        // show left half
+        topLeftHalf.isHidden = false
+        brickView.invalidateVisibility()
+        brickView.layoutIfNeeded()
+        
+        let fixedWidthSectionIndexPath = brickView.indexPathsForBricksWithIdentifier(fixedWidthSection.identifier).first!
+        let fixedWidthSectionCell = brickView.cellForItem(at: fixedWidthSectionIndexPath)
+        XCTAssertEqual(fixedWidthSectionCell?.frame.origin.x, 384)
+        
+        let nonFixedWidthSectionIndexPath = brickView.indexPathsForBricksWithIdentifier(nonFixedWidthSection.identifier).first!
+        let nonFixedWidthSectionCell = brickView.cellForItem(at: nonFixedWidthSectionIndexPath)
+        XCTAssertEqual(nonFixedWidthSectionCell?.frame.origin.x, 384)
+    }
 }

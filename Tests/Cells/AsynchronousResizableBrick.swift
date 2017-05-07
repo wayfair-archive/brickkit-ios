@@ -10,10 +10,8 @@ import UIKit
 import BrickKit
 
 class AsynchronousResizableBrick: Brick {
-
     var didChangeSizeCallBack: (() -> Void)?
     var newHeight: CGFloat = 200
-
 }
 
 class AsynchronousResizableBrickCell: BrickCell, Bricklike, AsynchronousResizableCell {
