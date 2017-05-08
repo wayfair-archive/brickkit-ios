@@ -20,7 +20,7 @@ private let nib2 = UINib(nibName: "CustomLabel", bundle: nil)
 
 class ChangeNibBrickViewController: BrickViewController, LabelBrickCellDataSource, BrickRepeatCountDataSource {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Change Nib"
     }
 

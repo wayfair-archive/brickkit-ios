@@ -10,7 +10,7 @@
 import BrickKit
 
 class HorizontalSnapToPointViewController: SimpleHorizontalScrollBrickViewController {
-    override class var title: String {
+    override class var brickTitle: String {
         return "Horizontal Snap-To-Point"
     }
     override class var subTitle: String {

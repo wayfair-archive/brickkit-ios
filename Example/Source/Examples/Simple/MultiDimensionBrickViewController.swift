@@ -11,7 +11,7 @@ import BrickKit
 
 class MultiDimensionBrickViewController: BrickViewController, LabelBrickCellDataSource, BrickRepeatCountDataSource {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Multi Dimension"
     }
     

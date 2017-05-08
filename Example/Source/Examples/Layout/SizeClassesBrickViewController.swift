@@ -11,7 +11,7 @@ import BrickKit
 
 class SizeClassesBrickViewController: BrickViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Size Classes"
     }
 

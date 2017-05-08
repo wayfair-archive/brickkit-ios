@@ -13,7 +13,7 @@ private let Section = "Section"
 
 class InsertBrickViewController: BrickApp.BaseBrickController {
     
-    override class var title: String {
+    override class var brickTitle: String {
         return "Insert Brick"
     }
 

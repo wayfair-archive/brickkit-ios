@@ -13,7 +13,7 @@ private let reuseIdentifier = "Cell"
 
 class HugeRepeatCollectionViewController: UICollectionViewController, LabelBrickCellDataSource {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Huge Repeat CollectionView"
     }
     override class var subTitle: String {

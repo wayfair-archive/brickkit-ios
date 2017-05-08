@@ -10,7 +10,7 @@ import UIKit
 import BrickKit
 
 class OffsetBrickViewController: BaseRepeatBrickViewController {
-    override class var title: String {
+    override class var brickTitle: String {
         return "Offset Behavior"
     }
     override class var subTitle: String {

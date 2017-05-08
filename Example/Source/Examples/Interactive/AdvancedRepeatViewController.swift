@@ -22,7 +22,7 @@ private let WholeSection = "WholeSection"
 
 class AdvancedRepeatViewController: BrickApp.BaseBrickController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Advanced Repeat"
     }
     override class var subTitle: String {

@@ -19,7 +19,7 @@ class RepeatCollectionBrickViewController: BrickApp.BaseBrickController, BrickRe
         static let subTitleLabel = "subTitleLabel"
     }
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Repeat CollectionBrick"
     }
     override class var subTitle: String {

@@ -9,7 +9,7 @@
 import BrickKit
 
 class CoverFlowScrollingViewController: BrickViewController {
-    override class var title: String {
+    override class var brickTitle: String {
         return "Cover Flow"
     }
     

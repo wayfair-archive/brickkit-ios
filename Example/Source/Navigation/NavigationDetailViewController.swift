@@ -99,7 +99,7 @@ extension NavigationDetailViewController: BrickCellTapDelegate {
         let index = brickCell.index
         let detailType = navItem.viewControllers[index]
         let detail = detailType.init()
-        detail.navigationItem.title = detailType.title.uppercased()
+        detail.navigationItem.title = detailType.brickTitle.uppercased()
         self.navigationController?.pushViewController(detail, animated: true)
     }
 
@@ -118,7 +118,7 @@ extension NavigationDetailViewController: LabelBrickCellDataSource {
         #else
             twoLabel.label.font = UIFont.brickSemiBoldFont(size: 15)
         #endif
-        twoLabel.label.text = navItem.viewControllers[cell.index].title
+        twoLabel.label.text = navItem.viewControllers[cell.index].brickTitle
         twoLabel.label.textColor = .brickPurple1
 
         twoLabel.subLabel.text = navItem.viewControllers[cell.index].subTitle

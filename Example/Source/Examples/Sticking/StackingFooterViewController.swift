@@ -15,7 +15,7 @@ private let TotalLabel = "TotalLabel"
 
 class StackingFooterViewController: BrickApp.BaseBrickController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Stacking Footers"
     }
     override class var subTitle: String {

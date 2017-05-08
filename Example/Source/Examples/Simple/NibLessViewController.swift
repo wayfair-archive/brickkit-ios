@@ -12,7 +12,7 @@ import BrickKit
 
 class NibLessViewController: BrickViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Nibless Brick"
     }
 

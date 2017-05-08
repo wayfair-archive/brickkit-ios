@@ -11,7 +11,7 @@ import BrickKit
 
 class InvalidateHeightViewController: BrickViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Invalidate Height"
     }
 

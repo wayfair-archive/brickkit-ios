@@ -10,7 +10,7 @@ import BrickKit
 
 class SimpleHorizontalScrollBrickViewController: BrickApp.BaseBrickController, BrickRepeatCountDataSource, LabelBrickCellDataSource {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Basic Horizontal Scroll"
     }
     override class var subTitle: String {

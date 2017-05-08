@@ -10,7 +10,7 @@ import BrickKit
 
 class PopoverBrickViewController: UIViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Popover"
     }
 

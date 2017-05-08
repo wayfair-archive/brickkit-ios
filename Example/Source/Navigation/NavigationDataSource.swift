@@ -92,8 +92,7 @@ class NavigationDataSource {
             ImagesInCollectionBrickHorizontalViewController.self
             ]),
         NavigationItem(title: "Demo", subTitle: "Example Of Using BrickKit in Real Case", viewControllers: [
-            MockTwitterViewController.self,
-            MockFlickrViewController.self])
+            MockTwitterViewController.self])
         ]
 
 
@@ -151,9 +150,10 @@ struct NavigationIdentifiers {
 // MARK: - title / subTitle extension
 extension UIViewController {
 
-    class var title: String {
+    class var brickTitle: String {
         return "Title"
     }
+    
     class var subTitle: String {
         return "Sub Title"
     }

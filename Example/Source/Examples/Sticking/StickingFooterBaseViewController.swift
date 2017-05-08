@@ -13,7 +13,7 @@ private let FooterTitle = "FooterTitle"
 
 class StickingFooterBaseViewController: BrickApp.BaseBrickController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Sticking Footer"
     }
 

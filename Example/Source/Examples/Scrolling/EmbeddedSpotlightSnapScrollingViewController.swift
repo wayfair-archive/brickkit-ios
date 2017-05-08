@@ -10,7 +10,7 @@ import BrickKit
 
 private let spotlightBrick = "SpotlightBrick"
 class EmbeddedSpotlightSnapScrollingViewController: BaseScrollingViewController {
-    override class var title: String {
+    override class var brickTitle: String {
         return "Snap Spotlight"
     }
     override class var subTitle: String {

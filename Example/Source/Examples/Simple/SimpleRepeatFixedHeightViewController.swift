@@ -10,7 +10,7 @@ import UIKit
 
 class SimpleRepeatFixedHeightViewController: BaseRepeatBrickViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Fixed Height"
     }
     override class var subTitle: String {

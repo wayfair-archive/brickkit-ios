@@ -9,7 +9,7 @@
 import BrickKit
 
 class CardScrollingViewController: BaseScrollingViewController {
-    override class var title: String {
+    override class var brickTitle: String {
         return "Cards"
     }
     override class var subTitle: String {

@@ -10,7 +10,7 @@ import UIKit
 import BrickKit
 
 class StackedStickingViewController: BaseRepeatBrickViewController {
-    override class var title: String {
+    override class var brickTitle: String {
         return "Stacked Headers"
     }
     override class var subTitle: String {

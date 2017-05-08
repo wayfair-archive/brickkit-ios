@@ -11,7 +11,7 @@ import BrickKit
 
 class HorizontalCollectionViewController: BrickViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Collection Horizontal Scroll"
     }
 

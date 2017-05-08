@@ -10,7 +10,7 @@ import BrickKit
 
 class BlockHorizontalViewController: BrickViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "1:1 Horizontal Scroll"
     }
     override class var subTitle: String {

@@ -11,7 +11,7 @@ import BrickKit
 
 class SimpleBrickViewController: BrickApp.BaseBrickController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Simple Example"
     }
     

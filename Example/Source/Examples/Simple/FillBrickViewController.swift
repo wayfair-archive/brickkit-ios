@@ -10,7 +10,7 @@ import UIKit
 import BrickKit
 
 class FillBrickViewController: BrickViewController {
-    override class var title: String {
+    override class var brickTitle: String {
         return "Fill Example"
     }
 

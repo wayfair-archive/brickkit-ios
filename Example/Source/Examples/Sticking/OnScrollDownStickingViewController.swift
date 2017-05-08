@@ -11,7 +11,7 @@ import BrickKit
 
 class OnScrollDownStickingViewController: BaseSectionBrickViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "On Scroll Down"
     }
     override class var subTitle: String {
