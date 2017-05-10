@@ -205,7 +205,7 @@ open class BrickCollectionView: UICollectionView {
         _ = self.invalidateRepeatCountsWithoutPerformBatchUpdates(reloadSections)
         self.performBatchUpdates({
             if reloadSections {
-                self.reloadSections(IndexSet(integersIn: NSMakeRange(0, self.numberOfSections).toRange()!))
+                self.reloadSections(IndexSet(integersIn: 0..<self.numberOfSections))
             }
             self.collectionViewLayout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .invalidate))
             }, completion: { completed in
