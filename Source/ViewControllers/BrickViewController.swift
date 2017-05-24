@@ -14,7 +14,10 @@ open class BrickViewController: UIViewController, UICollectionViewDelegate {
     // MARK: - Public members
 
     open var layout: BrickFlowLayout {
-        return collectionViewLayout as! BrickFlowLayout
+        guard let flowlayout = collectionViewLayout as? BrickFlowLayout else {
+            fatalError("collectionViewLayout is not BrickFlowLayout, is \(type(of: collectionViewLayout))")
+        }
+        return flowlayout
     }
 
     open var collectionViewLayout: UICollectionViewLayout {
@@ -24,7 +27,10 @@ open class BrickViewController: UIViewController, UICollectionViewDelegate {
     open var collectionView: UICollectionView?
 
     open var brickCollectionView: BrickCollectionView {
-        return self.collectionView as! BrickCollectionView
+        guard let collectionView = self.collectionView as? BrickCollectionView else {
+            fatalError("collectionView is not BrickCollectionView, is \(type(of: self.collectionView))")
+        }
+        return collectionView
     }
 
     #if os(iOS)

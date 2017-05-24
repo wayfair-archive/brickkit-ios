@@ -24,7 +24,10 @@ open class BrickCollectionView: UICollectionView {
 
     /// The brick layout
     open var layout: BrickFlowLayout {
-        return collectionViewLayout as! BrickFlowLayout
+        guard let flowlayout = collectionViewLayout as? BrickFlowLayout else {
+            fatalError("collectionViewLayout is not BrickFlowLayout, is \(type(of: collectionViewLayout))")
+        }
+        return flowlayout
     }
 
     /// Override to check if the layout is a BrickLayout
