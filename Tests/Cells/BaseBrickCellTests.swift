@@ -22,20 +22,20 @@ class BaseBrickCellTests: XCTestCase {
         brickView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(bricks: [
-            LabelBrick(height: .Fixed(size: 100), text: "HELLO WORLD", configureCellBlock: { (cell) in
+            LabelBrick(height: .fixed(size: 100), text: "HELLO WORLD", configureCellBlock: { (cell) in
                 cell.addSeparatorLine(100)
             })
             ])
         brickView.setSection(section)
         brickView.layoutSubviews()
 
-        let cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? BaseBrickCell
+        let cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? BaseBrickCell
         XCTAssertNotNil(cell?.bottomSeparatorLine.superview)
         XCTAssertEqual(cell?.bottomSeparatorLine.frame.width, 100)
         XCTAssertEqual(cell?.bottomSeparatorLine.frame.height, 0.5)
         XCTAssertEqual(cell?.bottomSeparatorLine.frame.origin.x, 0)
         XCTAssertEqual(cell?.bottomSeparatorLine.frame.origin.y, 99.5)
-        XCTAssertEqual(cell?.bottomSeparatorLine.backgroundColor, .lightGrayColor())
+        XCTAssertEqual(cell?.bottomSeparatorLine.backgroundColor, UIColor.lightGray)
         XCTAssertNil(cell?.topSeparatorLine.superview)
     }
 
@@ -43,41 +43,42 @@ class BaseBrickCellTests: XCTestCase {
         brickView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(bricks: [
-            LabelBrick(height: .Fixed(size: 100), text: "HELLO WORLD", configureCellBlock: { (cell) in
-                cell.addSeparatorLine(100, onTop: false, xOrigin: 10, backgroundColor: .blueColor(), height: 1)
+            LabelBrick(height: .fixed(size: 100), text: "HELLO WORLD", configureCellBlock: { (cell) in
+                cell.addSeparatorLine(100, onTop: false, xOrigin: 10, backgroundColor: UIColor.blue, height: 1)
             })
             ])
         brickView.setSection(section)
         brickView.layoutSubviews()
 
-        let cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? BaseBrickCell
+        let cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? BaseBrickCell
         XCTAssertNotNil(cell?.bottomSeparatorLine.superview)
         XCTAssertEqual(cell?.bottomSeparatorLine.frame.width, 100)
         XCTAssertEqual(cell?.bottomSeparatorLine.frame.height, 1)
         XCTAssertEqual(cell?.bottomSeparatorLine.frame.origin.x, 10)
         XCTAssertEqual(cell?.bottomSeparatorLine.frame.origin.y, 99)
-        XCTAssertEqual(cell?.bottomSeparatorLine.backgroundColor, .blueColor())
+        XCTAssertEqual(cell?.bottomSeparatorLine.backgroundColor, UIColor.blue)
         XCTAssertNil(cell?.topSeparatorLine.superview)
     }
 
     func testSeparatorTopCustom() {
         brickView.registerBrickClass(LabelBrick.self)
 
+        
         let section = BrickSection(bricks: [
             LabelBrick(text: "HELLO WORLD", configureCellBlock: { (cell) in
-                cell.addSeparatorLine(100, onTop: true, xOrigin: 10, backgroundColor: .blueColor(), height: 1)
+                cell.addSeparatorLine(100, onTop: true, xOrigin: 10, backgroundColor: UIColor.blue, height: 1)
             })
             ])
         brickView.setSection(section)
         brickView.layoutSubviews()
 
-        let cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? BaseBrickCell
+        let cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? BaseBrickCell
         XCTAssertNotNil(cell?.topSeparatorLine.superview)
         XCTAssertEqual(cell?.topSeparatorLine.frame.width, 100)
         XCTAssertEqual(cell?.topSeparatorLine.frame.height, 1)
         XCTAssertEqual(cell?.topSeparatorLine.frame.origin.x, 10)
         XCTAssertEqual(cell?.topSeparatorLine.frame.origin.y, 0)
-        XCTAssertEqual(cell?.topSeparatorLine.backgroundColor, .blueColor())
+        XCTAssertEqual(cell?.topSeparatorLine.backgroundColor, UIColor.blue)
         XCTAssertNil(cell?.bottomSeparatorLine.superview)
     }
 
@@ -85,7 +86,7 @@ class BaseBrickCellTests: XCTestCase {
         brickView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(bricks: [
-            LabelBrick(height: .Fixed(size: 100), text: "HELLO WORLD", configureCellBlock: { (cell) in
+            LabelBrick(height: .fixed(size: 100), text: "HELLO WORLD", configureCellBlock: { (cell) in
                 cell.addSeparatorLine(100, onTop: false)
                 cell.addSeparatorLine(100, onTop: true)
             })
@@ -93,7 +94,7 @@ class BaseBrickCellTests: XCTestCase {
         brickView.setSection(section)
         brickView.layoutSubviews()
 
-        let cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? BaseBrickCell
+        let cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? BaseBrickCell
         XCTAssertNotNil(cell?.bottomSeparatorLine.superview)
         XCTAssertNotNil(cell?.topSeparatorLine.superview)
     }
@@ -102,7 +103,7 @@ class BaseBrickCellTests: XCTestCase {
         brickView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(bricks: [
-            LabelBrick(height: .Fixed(size: 100), text: "HELLO WORLD", configureCellBlock: { (cell) in
+            LabelBrick(height: .fixed(size: 100), text: "HELLO WORLD", configureCellBlock: { (cell) in
                 cell.addSeparatorLine(100, xOrigin: 200)
                 cell.addSeparatorLine(200)
                 cell.addSeparatorLine(300)
@@ -111,7 +112,7 @@ class BaseBrickCellTests: XCTestCase {
         brickView.setSection(section)
         brickView.layoutSubviews()
 
-        let cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? BaseBrickCell
+        let cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? BaseBrickCell
         XCTAssertEqual(cell?.bottomSeparatorLine.frame.width, 300)
         XCTAssertEqual(cell?.bottomSeparatorLine.frame.origin.x, 0)
     }
@@ -120,7 +121,7 @@ class BaseBrickCellTests: XCTestCase {
         brickView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(bricks: [
-            LabelBrick(height: .Fixed(size: 100), text: "HELLO WORLD", configureCellBlock: { (cell) in
+            LabelBrick(height: .fixed(size: 100), text: "HELLO WORLD", configureCellBlock: { (cell) in
                 cell.addSeparatorLine(100, onTop: false)
                 cell.addSeparatorLine(100, onTop: true)
                 cell.removeSeparators()
@@ -129,7 +130,7 @@ class BaseBrickCellTests: XCTestCase {
         brickView.setSection(section)
         brickView.layoutSubviews()
 
-        let cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? BaseBrickCell
+        let cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? BaseBrickCell
         XCTAssertNil(cell?.bottomSeparatorLine.superview)
         XCTAssertNil(cell?.topSeparatorLine.superview)
         
@@ -137,24 +138,24 @@ class BaseBrickCellTests: XCTestCase {
 
     func testBackgroundView() {
         let backgroundView1 = UIView()
-        backgroundView1.backgroundColor = .orangeColor()
+        backgroundView1.backgroundColor = UIColor.orange
         backgroundView1.tag = 21
 
         let backgroundView2 = UIView()
-        backgroundView2.backgroundColor = .orangeColor()
+        backgroundView2.backgroundColor = UIColor.orange
         backgroundView2.tag = 22
 
         let backgroundView3 = UIView()
-        backgroundView3.backgroundColor = .orangeColor()
+        backgroundView3.backgroundColor = UIColor.orange
         backgroundView3.tag = 23
 
         brickView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection(bricks: [
-            DummyBrick("Brick", height: .Fixed(size: 200), backgroundView: backgroundView1),
-            DummyBrick("Brick", height: .Fixed(size: 2000), backgroundView: backgroundView2),
-            DummyBrick("Brick", height: .Fixed(size: 100), backgroundView: backgroundView3),
-            DummyBrick("Brick1", height: .Fixed(size: 100), backgroundView: backgroundView1),
+            DummyBrick("Brick", height: .fixed(size: 200), backgroundView: backgroundView1),
+            DummyBrick("Brick", height: .fixed(size: 2000), backgroundView: backgroundView2),
+            DummyBrick("Brick", height: .fixed(size: 100), backgroundView: backgroundView3),
+            DummyBrick("Brick1", height: .fixed(size: 100), backgroundView: backgroundView1),
             ])
         let repeatCount = 20
         let repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick1": repeatCount])
@@ -163,12 +164,12 @@ class BaseBrickCellTests: XCTestCase {
         brickView.setSection(section)
         brickView.layoutSubviews()
 
-        let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? BaseBrickCell
+        let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? BaseBrickCell
         XCTAssertNotNil(cell1?.contentView.viewWithTag(21))
         XCTAssertEqual(cell1?.contentView.subviews.first, backgroundView1)
 
 
-        let cell2 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1)) as? BaseBrickCell
+        let cell2 = brickView.cellForItem(at: IndexPath(item: 1, section: 1)) as? BaseBrickCell
         XCTAssertNotNil(cell2?.contentView.viewWithTag(22))
         XCTAssertEqual(cell2?.contentView.subviews.first, backgroundView2)
 
@@ -178,17 +179,17 @@ class BaseBrickCellTests: XCTestCase {
             brickView.layoutSubviews()
         }
 
-        let cell3 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: repeatCount + 2, inSection: 1)) as? BaseBrickCell
+        let cell3 = brickView.cellForItem(at: IndexPath(item: repeatCount + 2, section: 1)) as? BaseBrickCell
         XCTAssertNotNil(cell3?.contentView.viewWithTag(21))
         XCTAssertEqual(cell3?.contentView.subviews.first, backgroundView1)
     }
 
     // Mark: - BrickCell
     func testEdgeInsets() {
-        brickView.registerNib(UINib(nibName: "LabelWithEdgeInsets", bundle: NSBundle(forClass: self.classForCoder)), forBrickWithIdentifier: "Brick")
+        brickView.registerNib(UINib(nibName: "LabelWithEdgeInsets", bundle: Bundle(for: self.classForCoder)), forBrickWithIdentifier: "Brick")
 
         let section = BrickSection(bricks: [
-            LabelBrick("Brick", height: .Fixed(size: 100), text: "HELLO WORLD", configureCellBlock: { (cell) in
+            LabelBrick("Brick", height: .fixed(size: 100), text: "HELLO WORLD", configureCellBlock: { (cell) in
                 XCTAssertEqual(cell.defaultEdgeInsets, UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
 
                 cell.topSpaceConstraint = nil
@@ -209,7 +210,7 @@ class BaseBrickCellTests: XCTestCase {
         let section = BrickSection(bricks: [dummyBrick])
         brickView.setSection(section)
         brickView.layoutSubviews()
-        let dummyCell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickCell
+        let dummyCell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
         XCTAssertEqual(dummyBrick.identifier, "BrickIdentifierThatIsDefaultAccessibilityIdentifier")
         XCTAssertNil(dummyCell?.accessibilityHint)
         XCTAssertNil(dummyCell?.accessibilityLabel)
@@ -222,7 +223,7 @@ class BaseBrickCellTests: XCTestCase {
         let section = BrickSection(bricks: [dummyBrick])
         brickView.setSection(section)
         brickView.layoutSubviews()
-        let dummyCell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickCell
+        let dummyCell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
         XCTAssertEqual(dummyCell?.accessibilityIdentifier, "AccessibilityIdentifierForDummyBrickCell")
         XCTAssertNil(dummyCell?.accessibilityHint)
         XCTAssertNil(dummyCell?.accessibilityLabel)
@@ -236,7 +237,7 @@ class BaseBrickCellTests: XCTestCase {
         let section = BrickSection(bricks: [dummyBrick])
         brickView.setSection(section)
         brickView.layoutSubviews()
-        let dummyCell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? DummyBrickCell
+        let dummyCell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
         XCTAssertEqual(dummyCell?.accessibilityHint, "Accessibility Hint")
         XCTAssertEqual(dummyCell?.accessibilityLabel, "Accessibility Label")
     }

@@ -19,31 +19,31 @@ public struct BrickSize {
 }
 
 public enum BrickDimension {
-    case Ratio(ratio: CGFloat)
-    case Fixed(size: CGFloat)
-    case Fill
+    case ratio(ratio: CGFloat)
+    case fixed(size: CGFloat)
+    case fill
 
-    indirect case Auto(estimate: BrickDimension)
-    indirect case Orientation(landscape: BrickDimension, portrait: BrickDimension)
-    indirect case HorizontalSizeClass(regular: BrickDimension, compact: BrickDimension)
-    indirect case VerticalSizeClass(regular: BrickDimension, compact: BrickDimension)
+    indirect case auto(estimate: BrickDimension)
+    indirect case orientation(landscape: BrickDimension, portrait: BrickDimension)
+    indirect case horizontalSizeClass(regular: BrickDimension, compact: BrickDimension)
+    indirect case verticalSizeClass(regular: BrickDimension, compact: BrickDimension)
 
     public var isEstimate: Bool {
         switch self.dimension {
-        case .Auto(_): return true
+        case .auto(_): return true
         default: return false
         }
     }
 
     var dimension: BrickDimension {
         switch self {
-        case .Orientation(let landScape, let portrait):
+        case .orientation(let landScape, let portrait):
             return (BrickDimension.isPortrait ? portrait : landScape).dimension
-        case .HorizontalSizeClass(let regular, let compact):
-            let isRegular = BrickDimension.horizontalSizeClass == .Regular
+        case .horizontalSizeClass(let regular, let compact):
+            let isRegular = BrickDimension.horizontalInterfaceSizeClass == .regular
             return (isRegular ? regular : compact).dimension
-        case .VerticalSizeClass(let regular, let compact):
-            let isRegular = BrickDimension.verticalSizeClass == .Regular
+        case .verticalSizeClass(let regular, let compact):
+            let isRegular = BrickDimension.verticalInterfaceSizeClass == .regular
             return (isRegular ? regular : compact).dimension
         default: return self
         }
@@ -51,9 +51,9 @@ public enum BrickDimension {
 
     func value(for otherDimension: CGFloat, startingAt origin: CGFloat) -> CGFloat {
         let actualDimension = dimension
-
+        
         switch actualDimension {
-        case .Auto(let dimension): return dimension.value(for: otherDimension, startingAt: origin)
+        case .auto(let dimension): return dimension.value(for: otherDimension, startingAt: origin)
         default: return BrickDimension._rawValue(for: otherDimension, startingAt: origin, with: actualDimension)
         }
     }
@@ -61,9 +61,9 @@ public enum BrickDimension {
     /// Function that gets the raw value of a BrickDimension. As of right now, only Ratio, Fixed and Fill are allowed
     static func _rawValue(for otherDimension: CGFloat, startingAt origin: CGFloat, with dimension: BrickDimension) -> CGFloat {
         switch dimension {
-        case .Ratio(let ratio): return ratio * otherDimension
-        case .Fixed(let size): return size
-        case .Fill:
+        case .ratio(let ratio): return ratio * otherDimension
+        case .fixed(let size): return size
+        case .fill:
             guard otherDimension > origin else {
                 // If the origin is bigger than the actual dimension, just return the whole dimension
                 return otherDimension
@@ -72,23 +72,23 @@ public enum BrickDimension {
         default: fatalError("Only Ratio, Fixed and Fill are allowed")
         }
     }
-
+    
 }
 
 extension BrickDimension {
-
+    
     static var isPortrait: Bool {
-        return UIScreen.mainScreen().bounds.width <= UIScreen.mainScreen().bounds.height
+        return UIScreen.main.bounds.width <= UIScreen.main.bounds.height
     }
-
-    static var horizontalSizeClass: UIUserInterfaceSizeClass {
-        return UIScreen.mainScreen().traitCollection.horizontalSizeClass
+    
+    static var horizontalInterfaceSizeClass: UIUserInterfaceSizeClass {
+        return UIScreen.main.traitCollection.horizontalSizeClass
     }
-
-    static var verticalSizeClass: UIUserInterfaceSizeClass {
-        return UIScreen.mainScreen().traitCollection.verticalSizeClass
+    
+    static var verticalInterfaceSizeClass: UIUserInterfaceSizeClass {
+        return UIScreen.main.traitCollection.verticalSizeClass
     }
-
+    
 }
 
 extension BrickDimension: Equatable {
@@ -96,25 +96,25 @@ extension BrickDimension: Equatable {
 
 public func ==(lhs: BrickDimension, rhs: BrickDimension) -> Bool {
     switch (lhs, rhs) {
-    case (let .Auto(estimate1), let .Auto(estimate2)):
+    case (let .auto(estimate1), let .auto(estimate2)):
         return estimate1 == estimate2
 
-    case (let .Ratio(ratio1), let .Ratio(ratio2)):
+    case (let .ratio(ratio1), let .ratio(ratio2)):
         return ratio1 == ratio2
 
-    case (let .Fixed(size1), let .Fixed(size2)):
+    case (let .fixed(size1), let .fixed(size2)):
         return size1 == size2
 
-    case (let .Orientation(landscape1, portrait1), let .Orientation(landscape2, portrait2)):
+    case (let .orientation(landscape1, portrait1), let .orientation(landscape2, portrait2)):
         return landscape1 == landscape2 && portrait1 == portrait2
 
-    case (let .HorizontalSizeClass(regular1, compact1), let .HorizontalSizeClass(regular2, compact2)):
+    case (let .horizontalSizeClass(regular1, compact1), let .horizontalSizeClass(regular2, compact2)):
         return regular1 == regular2 && compact1 == compact2
 
-    case (let .VerticalSizeClass(regular1, compact1), let .VerticalSizeClass(regular2, compact2)):
+    case (let .verticalSizeClass(regular1, compact1), let .verticalSizeClass(regular2, compact2)):
         return regular1 == regular2 && compact1 == compact2
 
-    case (.Fill, .Fill):
+    case (.fill, .fill):
         return true
 
     default:

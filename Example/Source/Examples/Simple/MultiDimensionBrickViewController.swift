@@ -11,7 +11,7 @@ import BrickKit
 
 class MultiDimensionBrickViewController: BrickViewController, LabelBrickCellDataSource, BrickRepeatCountDataSource {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Multi Dimension"
     }
     
@@ -29,26 +29,26 @@ class MultiDimensionBrickViewController: BrickViewController, LabelBrickCellData
         self.brickCollectionView.registerBrickClass(LabelBrick.self)
 
         let width: BrickDimension =
-            .HorizontalSizeClass(
-                regular: .Orientation(
-                    landscape: .Ratio(ratio: 1/3),
-                    portrait: .Ratio(ratio: 1/2)
+            .horizontalSizeClass(
+                regular: .orientation(
+                    landscape: .ratio(ratio: 1/3),
+                    portrait: .ratio(ratio: 1/2)
                 ),
-                compact: .Orientation(
-                    landscape: .Ratio(ratio: 1/8),
-                    portrait: .Ratio(ratio: 1/2)
+                compact: .orientation(
+                    landscape: .ratio(ratio: 1/8),
+                    portrait: .ratio(ratio: 1/2)
                 )
         )
 
         let height: BrickDimension =
-            .HorizontalSizeClass(
-                regular: .Orientation(
-                    landscape: .Fixed(size: 200),
-                    portrait: .Fixed(size: 100)
+            .horizontalSizeClass(
+                regular: .orientation(
+                    landscape: .fixed(size: 200),
+                    portrait: .fixed(size: 100)
                 ),
-                compact: .Orientation(
-                    landscape: .Fixed(size: 100),
-                    portrait: .Fixed(size: 50)
+                compact: .orientation(
+                    landscape: .fixed(size: 100),
+                    portrait: .fixed(size: 50)
                 )
         )
 
@@ -72,8 +72,8 @@ class MultiDimensionBrickViewController: BrickViewController, LabelBrickCellData
         }
     }
 
-    func configureLabelBrickCell(cell: LabelBrickCell) {
-        let text = "BRICK \(cell.index + 1)".uppercaseString
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
+        let text = "BRICK \(cell.index + 1)".uppercased()
         cell.label.text = text
         cell.configure()
     }

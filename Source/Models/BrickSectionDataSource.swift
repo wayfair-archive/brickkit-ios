@@ -14,7 +14,7 @@ extension BrickSection {
 
     /// Number Of Sections
     func numberOfSections(in collection: CollectionInfo) -> Int {
-        invalidateIfNeeded(in: collection)
+        _ = invalidateIfNeeded(in: collection)
         return sectionCount
     }
 
@@ -22,7 +22,7 @@ extension BrickSection {
         return bricks.reduce(0) { $0.0 + $0.1.count(for: collection) }
     }
 
-    private func brickSection(for section: Int, in collection: CollectionInfo) -> BrickSection? {
+    fileprivate func brickSection(for section: Int, in collection: CollectionInfo) -> BrickSection? {
         if let indexPath = sectionIndexPaths[collection]?[section] {
             return brick(at: indexPath, in: collection) as? BrickSection
         }
@@ -36,7 +36,7 @@ extension BrickSection {
     ///
     /// - returns: The number of items in the given section
     func numberOfItems(in section: Int, in collection: CollectionInfo) -> Int {
-        invalidateIfNeeded(in: collection)
+        _ = invalidateIfNeeded(in: collection)
 
         guard section > 0 else {
             return 1
@@ -49,8 +49,8 @@ extension BrickSection {
         return brickSection.numberOfBricks(in: collection)
     }
 
-    internal func brickAndIndex(at indexPath: NSIndexPath, in collection: CollectionInfo) -> (Brick, Int)? {
-        invalidateIfNeeded(in: collection)
+    internal func brickAndIndex(at indexPath: IndexPath, in collection: CollectionInfo) -> (Brick, Int)? {
+        _ = invalidateIfNeeded(in: collection)
 
         if indexPath.section == 0 {
             return (self, 0)
@@ -71,15 +71,15 @@ extension BrickSection {
         return nil
     }
 
-    func brick(at indexPath: NSIndexPath, in collection: CollectionInfo) -> Brick? {
+    func brick(at indexPath: IndexPath, in collection: CollectionInfo) -> Brick? {
         return brickAndIndex(at: indexPath, in: collection)?.0
     }
 
-    func index(at indexPath: NSIndexPath, in collection: CollectionInfo) -> Int? {
+    func index(at indexPath: IndexPath, in collection: CollectionInfo) -> Int? {
         return brickAndIndex(at: indexPath, in: collection)?.1
     }
 
-    func indexPathForSection(section: Int, in collection: CollectionInfo) -> NSIndexPath? {
+    func indexPathFor(_ section: Int, in collection: CollectionInfo) -> IndexPath? {
         return sectionIndexPaths[collection]?[section]
     }
 
@@ -89,15 +89,15 @@ extension BrickSection {
     /// - parameter index:      Index
     ///
     /// - returns: an array of identifiers
-    func indexPathsForBricksWithIdentifier(identifier: String, index: Int? = nil, in collection: CollectionInfo) -> [NSIndexPath] {
-        var indexPaths: [NSIndexPath] = []
+    func indexPathsForBricksWithIdentifier(_ identifier: String, index: Int? = nil, in collection: CollectionInfo) -> [IndexPath] {
+        var indexPaths: [IndexPath] = []
 
         for section in 0..<numberOfSections(in: collection) {
             for item in 0..<numberOfItems(in: section, in: collection) {
-                let indexPath = NSIndexPath(forItem: item, inSection: section)
+                let indexPath = IndexPath(item: item, section: section)
                 let foundBrickWithIndex = brickAndIndex(at: indexPath, in: collection)! //We can safely unwrap, because this indexPath must exist
                 if foundBrickWithIndex.0.identifier == identifier {
-                    if let index = index where foundBrickWithIndex.1 != index {
+                    if let index = index , foundBrickWithIndex.1 != index {
                         continue
                     }
                     indexPaths.append(indexPath)
@@ -113,7 +113,7 @@ extension BrickSection {
     /// - parameter indexPath: IndexPath
     ///
     /// - returns: Optional index
-    func sectionIndexForSectionAtIndexPath(indexPath: NSIndexPath, in collection: CollectionInfo) -> Int? {
+    func sectionIndexForSectionAtIndexPath(_ indexPath: IndexPath, in collection: CollectionInfo) -> Int? {
         let sectionIndexPaths = invalidateIfNeeded(in: collection)
 
         guard let section = sectionIndexPaths.allKeysForValue(indexPath).first else {

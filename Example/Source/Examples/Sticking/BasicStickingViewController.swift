@@ -10,7 +10,7 @@ import UIKit
 import BrickKit
 
 class BasicStickingViewController: BaseRepeatBrickViewController {
-    override class var title: String {
+    override class var brickTitle: String {
         return "Sticky Header"
     }
     override class var subTitle: String {
@@ -26,13 +26,13 @@ class BasicStickingViewController: BaseRepeatBrickViewController {
 }
 
 extension BasicStickingViewController: StickyLayoutBehaviorDataSource {
-    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func stickyLayoutBehavior(_ stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         return identifier == BrickIdentifiers.titleLabel
     }
 }
 
 extension BasicStickingViewController: StickyLayoutBehaviorDelegate {
-    func stickyLayoutBehavior(behavior: StickyLayoutBehavior, brickIsStickingWithPercentage percentage: CGFloat, forItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
+    func stickyLayoutBehavior(_ behavior: StickyLayoutBehavior, brickIsStickingWithPercentage percentage: CGFloat, forItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
         let format = String(format: "%.3f", Double(percentage))
         titleLabelModel.text = "\(format)%"
         self.reloadBricksWithIdentifiers([BrickIdentifiers.titleLabel])

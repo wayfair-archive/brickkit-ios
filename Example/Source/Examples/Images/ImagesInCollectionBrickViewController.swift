@@ -11,7 +11,7 @@ import BrickKit
 
 class ImagesInCollectionBrickViewController: BrickViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Images in CollectionBrick"
     }
     override class var subTitle: String {
@@ -59,6 +59,6 @@ extension ImagesInCollectionBrickViewController: ImageBrickDataSource {
     }
 
     func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIViewContentMode {
-        return .ScaleAspectFill
+        return .scaleAspectFill
     }
 }

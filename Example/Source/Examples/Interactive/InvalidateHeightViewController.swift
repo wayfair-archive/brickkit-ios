@@ -11,7 +11,7 @@ import BrickKit
 
 class InvalidateHeightViewController: BrickViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Invalidate Height"
     }
 
@@ -46,18 +46,18 @@ class InvalidateHeightViewController: BrickViewController {
     func updateNavigationItem() {
         let title: String
         switch brick.height {
-        case .Fixed(_): title = "Auto"
+        case .fixed(_): title = "Auto"
         default: title = "Fixed Height"
         }
 
         let selector: Selector = #selector(InvalidateHeightViewController.toggleHeights)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: title, style: .Plain, target: self, action: selector)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: selector)
     }
 
     func toggleHeights() {
         switch brick.height {
-        case .Fixed(_): brick.height = .Auto(estimate: .Fixed(size: 100))
-        default: brick.height = .Fixed(size: 200)
+        case .fixed(_): brick.height = .auto(estimate: .fixed(size: 100))
+        default: brick.height = .fixed(size: 200)
         }
 
         self.brickCollectionView.invalidateBricks(false)

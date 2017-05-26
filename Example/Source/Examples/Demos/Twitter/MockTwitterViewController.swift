@@ -30,7 +30,7 @@ class TwitterDataProvider {
 
 class MockTwitterViewController: BrickViewController {
     
-    override class var title: String {
+    override class var brickTitle: String {
         return "Twitter"
     }
     override class var subTitle: String {
@@ -69,14 +69,14 @@ class MockTwitterViewController: BrickViewController {
         setupTitleView()
         registerBricks()
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "AddFriend"), style: .Plain, target: self, action: #selector(MockTwitterViewController.backAction))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "AddFriend"), style: .plain, target: self, action: #selector(MockTwitterViewController.backAction))
 
         brickCollectionView.layout.behaviors.insert(stickyBehavior)
         brickCollectionView.layout.behaviors.insert(minimumStickyBehavior)
 
         let mainSection = BrickSection(bricks: [
             setUpProfileHeaderSection(),
-            SegmentHeaderBrick(MockTwitterViewController.Identifiers.segmentHeaderBrick, backgroundColor: .whiteColor()),
+            SegmentHeaderBrick(MockTwitterViewController.Identifiers.segmentHeaderBrick, backgroundColor: UIColor.white),
             setupTextAndImageSection(),
             setWhotoFollowSection(),
             setupTextAndImageSection(),
@@ -89,14 +89,14 @@ class MockTwitterViewController: BrickViewController {
 
     func setupTitleView() {
         titleView = UIView(frame: self.navigationController?.navigationBar.frame ?? .zero)
-        titleView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        titleView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         titleView.clipsToBounds = true
 
         titleLabel = UILabel(frame: titleView.frame)
         titleLabel.text = "Wayfair"
-        titleLabel.textAlignment = .Center
-        titleLabel.hidden = true
-        titleLabel.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        titleLabel.textAlignment = .center
+        titleLabel.isHidden = true
+        titleLabel.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
         titleView.addSubview(titleLabel)
         self.navigationItem.titleView = titleView
@@ -113,7 +113,7 @@ class MockTwitterViewController: BrickViewController {
         registerBrickClass(SegmentHeaderBrick.self)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
@@ -130,15 +130,15 @@ class MockTwitterViewController: BrickViewController {
     }
     
     func setupTextAndImageSection() -> BrickSection {
-        postBrick = PostBrick(MockTwitterViewController.Identifiers.postBrick, backgroundColor: UIColor.whiteColor(), dataSource: self)
-        let section = BrickSection(backgroundColor: .lightGrayColor(), bricks: [postBrick], edgeInsets: UIEdgeInsets(top: 0, left: 0, bottom: 2, right: 0), inset: 1)
+        postBrick = PostBrick(MockTwitterViewController.Identifiers.postBrick, backgroundColor: UIColor.white, dataSource: self)
+        let section = BrickSection(backgroundColor: UIColor.lightGray, bricks: [postBrick], inset: 1, edgeInsets: UIEdgeInsets(top: 0, left: 0, bottom: 2, right: 0))
         section.repeatCountDataSource = self
 
         return section
     }
   
     func setupHorizontalScrollSection() -> BrickSection {
-        let friendsRefBrick = DailySalesBrick(MockTwitterViewController.Identifiers.dailySalesBrick, width: .Fixed(size: 140), height: .Fixed(size: 140), backgroundColor: .whiteColor(), dataSource: self)
+        let friendsRefBrick = DailySalesBrick(MockTwitterViewController.Identifiers.dailySalesBrick, width: .fixed(size: 140), height: .fixed(size: 140), backgroundColor: UIColor.white, dataSource: self)
         
         collectionBrickDataSource = BrickCollectionViewDataSource()
         let salesSection = BrickSection(bricks: [
@@ -147,12 +147,12 @@ class MockTwitterViewController: BrickViewController {
         salesSection.repeatCountDataSource = self
         collectionBrickDataSource!.setSection(salesSection)
         
-        let section = BrickSection(backgroundColor: .lightGrayColor(), width: .Ratio(ratio: 1), bricks: [
-            HeaderAndFooterBrick(MockTwitterViewController.Identifiers.dailySalesHeader, width: .Ratio(ratio: 1), /*height: .Fixed(size: 40),*/ backgroundColor: .whiteColor(), backgroundView: nil){ cell in
+        let section = BrickSection(width: .ratio(ratio: 1), backgroundColor: UIColor.lightGray, bricks: [
+            HeaderAndFooterBrick(MockTwitterViewController.Identifiers.dailySalesHeader, width: .ratio(ratio: 1), /*height: .fixed(size: 40),*/ backgroundColor: UIColor.white, backgroundView: nil){ cell in
                 cell.textLabel.text = "Daily Sales"
             },
-            CollectionBrick(/*height: .Fixed(size: 140), */scrollDirection: .Horizontal, dataSource: self, brickTypes: [DailySalesBrick.self])
-            ], edgeInsets: UIEdgeInsets(top: 0, left: 0, bottom: 2, right: 0), inset: 1)
+            CollectionBrick(/*height: .fixed(size: 140), */scrollDirection: .horizontal, dataSource: self, brickTypes: [DailySalesBrick.self])
+            ], inset: 1, edgeInsets: UIEdgeInsets(top: 0, left: 0, bottom: 2, right: 0))
         section.repeatCountDataSource = self
 
 
@@ -160,20 +160,20 @@ class MockTwitterViewController: BrickViewController {
     }
     
     func setWhotoFollowSection() -> BrickSection {
-        let whoToFollowBrick = WhoToFollowBrick(MockTwitterViewController.Identifiers.whoToFollowBrick, backgroundColor: .whiteColor(), dataSource: self)
+        let whoToFollowBrick = WhoToFollowBrick(MockTwitterViewController.Identifiers.whoToFollowBrick, backgroundColor: UIColor.white, dataSource: self)
         
-        let headerAndFooterBrick = HeaderAndFooterBrick(MockTwitterViewController.Identifiers.whoToFollowHeaderBrick, backgroundColor: .whiteColor()) { cell in
+        let headerAndFooterBrick = HeaderAndFooterBrick(MockTwitterViewController.Identifiers.whoToFollowHeaderBrick, backgroundColor: UIColor.white) { cell in
             cell.textLabel.text = "Who To Follow"
         }
         
-        let section = BrickSection(backgroundColor: .lightGrayColor(), bricks: [headerAndFooterBrick, whoToFollowBrick], edgeInsets: UIEdgeInsets(top: 0, left: 0, bottom: 2, right: 0), inset: 1)
+        let section = BrickSection(backgroundColor: UIColor.lightGray, bricks: [headerAndFooterBrick, whoToFollowBrick], inset: 1, edgeInsets: UIEdgeInsets(top: 0, left: 0, bottom: 2, right: 0))
         section.repeatCountDataSource = self
 
         return section
     }
     
     func backAction() {
-        self.navigationController?.popViewControllerAnimated(true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
 }
 
@@ -254,13 +254,13 @@ extension MockTwitterViewController: BrickRepeatCountDataSource {
 }
 
 extension MockTwitterViewController: MinimumStickyLayoutBehaviorDataSource {
-    func stickyLayoutBehavior(behavior: StickyLayoutBehavior, minimumStickingHeightForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
+    func stickyLayoutBehavior(_ behavior: StickyLayoutBehavior, minimumStickingHeightForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
         return 30
     }
 }
 
 extension MockTwitterViewController: StickyLayoutBehaviorDataSource {
-    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func stickyLayoutBehavior(_ stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         if stickyLayoutBehavior == minimumStickyBehavior {
             return identifier == MockTwitterViewController.Identifiers.profileImageBrick
         } else {
@@ -274,7 +274,7 @@ extension MockTwitterViewController: StickyLayoutBehaviorDataSource {
 }
 
 extension MockTwitterViewController: StickyLayoutBehaviorDelegate {
-    func stickyLayoutBehavior(behavior: StickyLayoutBehavior, brickIsStickingWithPercentage percentage: CGFloat, forItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
+    func stickyLayoutBehavior(_ behavior: StickyLayoutBehavior, brickIsStickingWithPercentage percentage: CGFloat, forItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
         print(percentage)
     }
 }
@@ -289,19 +289,19 @@ extension MockTwitterViewController {
             return
         }
 
-        guard let cell = brickCollectionView.cellForItemAtIndexPath(indexPath) as? ProfileHeaderBrickCell else {
+        guard let cell = brickCollectionView.cellForItem(at: indexPath) as? ProfileHeaderBrickCell else {
             return
         }
 
 
-        let frame = cell.nameLabel.superview!.convertRect(cell.nameLabel.frame, toView: self.brickCollectionView)
+        let frame = cell.nameLabel.superview!.convert(cell.nameLabel.frame, to: self.brickCollectionView)
 
         let difference = brickCollectionView.contentOffset.y + brickCollectionView.contentInset.top - frame.origin.y
 
         if difference < 0 {
-            titleLabel.hidden = true
+            titleLabel.isHidden = true
         } else {
-            titleLabel.hidden = false
+            titleLabel.isHidden = false
             titleLabel.frame.size.height = cell.nameLabel.frame.size.height
             titleLabel.font = cell.nameLabel.font
             titleLabel.text = cell.nameLabel.text

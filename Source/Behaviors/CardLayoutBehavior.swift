@@ -12,12 +12,12 @@ public protocol CardLayoutBehaviorDataSource: class {
     /// If not nil, the small height is used to scroll the card layout
     ///
     /// - returns: small height for the brick
-    func cardLayoutBehavior(behavior: CardLayoutBehavior, smallHeightForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat?
+    func cardLayoutBehavior(_ behavior: CardLayoutBehavior, smallHeightForItemAt indexPath: IndexPath, with identifier: String, in collectionViewLayout: UICollectionViewLayout) -> CGFloat?
 }
 
 /// A CardLayoutBehavior organizes bricks on top of eachother, with the top one full height and the other ones are staggered behind
 /// - see CardLayoutBehaviorDataSource: The way to determine which bricks need to show
-public class CardLayoutBehavior: BrickLayoutBehavior {
+open class CardLayoutBehavior: BrickLayoutBehavior {
     weak var dataSource: CardLayoutBehaviorDataSource?
     var scrollLastBrickToTop = true
     var scrollAttributes: [BrickLayoutAttributes] = []
@@ -26,20 +26,20 @@ public class CardLayoutBehavior: BrickLayoutBehavior {
         self.dataSource = dataSource
     }
 
-    public override func resetRegisteredAttributes(collectionViewLayout: UICollectionViewLayout) {
+    open override func resetRegisteredAttributes(_ collectionViewLayout: UICollectionViewLayout) {
         super.resetRegisteredAttributes(collectionViewLayout)
         scrollAttributes = []
     }
 
-    public override func registerAttributes(attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
-        if let _ = dataSource?.cardLayoutBehavior(self, smallHeightForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
+    open override func registerAttributes(_ attributes: BrickLayoutAttributes, for collectionViewLayout: UICollectionViewLayout) {
+        if let _ = dataSource?.cardLayoutBehavior(self, smallHeightForItemAt: attributes.indexPath, with: attributes.identifier, in: collectionViewLayout) {
             scrollAttributes.append(attributes) // Only use the attributes that have a small-height
         }
     }
     
-    public override func invalidateInCollectionViewLayout(collectionViewLayout: UICollectionViewLayout, inout contentSize: CGSize, attributesDidUpdate: (attributes: BrickLayoutAttributes, oldFrame: CGRect?) -> Void) {
+    open override func invalidateInCollectionViewLayout(_ collectionViewLayout: UICollectionViewLayout, contentSize: inout CGSize, attributesDidUpdate: (_ attributes: BrickLayoutAttributes, _ oldFrame: CGRect?) -> Void) {
 
-        guard let collectionView = collectionViewLayout.collectionView where !scrollAttributes.isEmpty else {
+        guard let collectionView = collectionViewLayout.collectionView , !scrollAttributes.isEmpty else {
             return
         }
 
@@ -49,12 +49,12 @@ public class CardLayoutBehavior: BrickLayoutBehavior {
 
         var currentScrollOffset: CGFloat = 0
 
-        for (index, attributes) in scrollAttributes.enumerate() {
+        for (index, attributes) in scrollAttributes.enumerated() {
             let isAbove = attributes.originalFrame.maxY <= offsetY
             let isBelow = attributes.originalFrame.minY > offsetY
             let isInSpotlight = !isAbove && !isBelow
 
-            guard let height = dataSource?.cardLayoutBehavior(self, smallHeightForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) else {
+            guard let height = dataSource?.cardLayoutBehavior(self, smallHeightForItemAt: attributes.indexPath, with: attributes.identifier, in: collectionViewLayout) else {
                 continue // Only use the attributes that have a small-height
             }
 
@@ -78,12 +78,12 @@ public class CardLayoutBehavior: BrickLayoutBehavior {
                 }
             }
 
-            if offsetY > scrollAttributes.last?.originalFrame.origin.y {
+            if offsetY > (scrollAttributes.last?.originalFrame.origin.y)! {
                 frame.origin.y = min(offsetY, attributes.originalFrame.minY)
             }
 
             attributes.frame = frame
-            attributesDidUpdate(attributes: attributes, oldFrame: attributesOldFrame)
+            attributesDidUpdate(attributes, attributesOldFrame)
 
             previousAttributeWasInSpotlight = isInSpotlight && offsetY >= 0
         }

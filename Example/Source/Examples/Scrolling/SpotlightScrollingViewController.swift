@@ -9,7 +9,7 @@
 import BrickKit
 
 class SpotlightScrollingViewController: BaseScrollingViewController {
-    override class var title: String {
+    override class var brickTitle: String {
         return "Spotlight"
     }
     override class var subTitle: String {
@@ -23,7 +23,7 @@ class SpotlightScrollingViewController: BaseScrollingViewController {
 }
 
 extension SpotlightScrollingViewController: SpotlightLayoutBehaviorDataSource {
-    func spotlightLayoutBehavior(behavior: SpotlightLayoutBehavior, smallHeightForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
+    func spotlightLayoutBehavior(_ behavior: SpotlightLayoutBehavior, smallHeightForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
         return identifier == BrickIdentifiers.repeatLabel ? 50 : nil
     }
 }

@@ -15,7 +15,7 @@ private let TotalLabel = "TotalLabel"
 
 class StackingFooterViewController: BrickApp.BaseBrickController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Stacking Footers"
     }
     override class var subTitle: String {
@@ -32,7 +32,7 @@ class StackingFooterViewController: BrickApp.BaseBrickController {
         self.view.backgroundColor = .brickBackground
 
         let layout = self.brickCollectionView.layout
-        layout.zIndexBehavior = .BottomUp
+        layout.zIndexBehavior = .bottomUp
 
         self.brickCollectionView.registerBrickClass(ButtonBrick.self)
         self.brickCollectionView.registerBrickClass(LabelBrick.self)
@@ -51,7 +51,7 @@ class StackingFooterViewController: BrickApp.BaseBrickController {
 
         let section = BrickSection(bricks: [
             BrickSection(bricks: [
-                LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), height: .Auto(estimate: .Fixed(size: 200)), backgroundColor: .lightGrayColor(), dataSource: self),
+                LabelBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 0.5), height: .auto(estimate: .fixed(size: 200)), backgroundColor: UIColor.lightGray, dataSource: self),
                 totalLabel
                 ], inset: 10, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)),
             BrickSection(BuySection, bricks: [
@@ -72,10 +72,11 @@ extension StackingFooterViewController: BrickRepeatCountDataSource {
             return 1
         }
     }
+    
 }
 
 extension StackingFooterViewController: LabelBrickCellDataSource {
-    func configureLabelBrickCell(cell: LabelBrickCell) {
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
         cell.label.text = "BRICK \(cell.index + 1)"
         cell.configure()
     }
@@ -83,7 +84,7 @@ extension StackingFooterViewController: LabelBrickCellDataSource {
 
 
 extension StackingFooterViewController: StickyLayoutBehaviorDataSource {
-    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func stickyLayoutBehavior(_ stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         return identifier == BuySection || identifier == TotalLabel
     }
 }

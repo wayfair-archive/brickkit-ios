@@ -15,7 +15,7 @@ private let Section = "Section"
 
 class BasicInteractiveViewController: BrickViewController, LabelBrickCellDataSource, BrickRepeatCountDataSource {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Basic Interaction"
     }
 
@@ -25,7 +25,7 @@ class BasicInteractiveViewController: BrickViewController, LabelBrickCellDataSou
 
     var stepperModel = StepperBrickModel(count: 1)
     
-    var titleModel = LabelBrickCellModel(text: "There are no values".uppercaseString) { cell in
+    var titleModel = LabelBrickCellModel(text: "There are no values".uppercased()) { cell in
         cell.configure()
     }
 
@@ -39,15 +39,15 @@ class BasicInteractiveViewController: BrickViewController, LabelBrickCellDataSou
         self.brickCollectionView.registerBrickClass(StepperBrick.self)
         self.brickCollectionView.registerBrickClass(SegmentHeaderBrick.self)
 
-        self.layout.zIndexBehavior = .BottomUp
+        self.layout.zIndexBehavior = .bottomUp
 
         let stickyBehavior = StickyFooterLayoutBehavior(dataSource: self)
         self.layout.behaviors.insert(stickyBehavior)
         
         let section = BrickSection(Section, bricks: [
-            StepperBrick(Stepper, height: .Auto(estimate: .Fixed(size: 50)), backgroundColor: .brickGray1, dataSource: stepperModel, delegate: self),
+            StepperBrick(Stepper, height: .auto(estimate: .fixed(size: 50)), backgroundColor: .brickGray1, dataSource: stepperModel, delegate: self),
             BrickSection(RepeatSection, bricks: [
-                LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 0.5), height: .Auto(estimate: .Fixed(size: 50)), backgroundColor: .brickGray3, dataSource: self)
+                LabelBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 0.5), height: .auto(estimate: .fixed(size: 50)), backgroundColor: .brickGray3, dataSource: self)
                 ]),
             LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray5, dataSource: titleModel),
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
@@ -61,7 +61,7 @@ class BasicInteractiveViewController: BrickViewController, LabelBrickCellDataSou
     }
 
     func updateTitle() {
-            titleModel.text = "There are \(stepperModel.count) label(s)".uppercaseString
+            titleModel.text = "There are \(stepperModel.count) label(s)".uppercased()
         self.brickCollectionView.reloadBricksWithIdentifiers([BrickIdentifiers.titleLabel])
     }
 
@@ -73,7 +73,7 @@ class BasicInteractiveViewController: BrickViewController, LabelBrickCellDataSou
         }
     }
 
-    func configureLabelBrickCell(cell: LabelBrickCell) {
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
         let text = "BRICK \(cell.index + 1)"
         cell.label.text = text
         cell.configure()
@@ -94,7 +94,7 @@ extension BasicInteractiveViewController: StepperBrickCellDelegate {
 }
 
 extension BasicInteractiveViewController: StickyLayoutBehaviorDataSource {
-    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func stickyLayoutBehavior(_ stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         return identifier == BrickIdentifiers.titleLabel
     }
 }

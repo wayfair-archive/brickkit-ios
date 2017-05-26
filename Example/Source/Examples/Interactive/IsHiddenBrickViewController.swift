@@ -10,7 +10,7 @@ import BrickKit
 
 class IsHiddenBrickViewController: BrickApp.BaseBrickController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Hide Bricks with isHidden flag"
     }
     override class var subTitle: String {
@@ -39,8 +39,8 @@ class IsHiddenBrickViewController: BrickApp.BaseBrickController {
         }
 
         hiddenSection = BrickSection(HideBrickViewController.Identifiers.SimpleSection, backgroundColor: .brickGray3, bricks: [
-            LabelBrick(width: .Ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: LabelBrickCellModel(text: "BRICK", configureCellBlock: LabelBrickCell.configure)),
-            LabelBrick(width: .Ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: LabelBrickCellModel(text: "BRICK", configureCellBlock: LabelBrickCell.configure)),
+            LabelBrick(width: .ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: LabelBrickCellModel(text: "BRICK", configureCellBlock: LabelBrickCell.configure)),
+            LabelBrick(width: .ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: LabelBrickCellModel(text: "BRICK", configureCellBlock: LabelBrickCell.configure)),
             ])
         hideSectionButton = ButtonBrick(HideBrickViewController.Identifiers.HideSectionButton, backgroundColor: .brickGray1, title: titleForHideSectionButton) { [weak self] _ in
             self?.hideSection()
@@ -59,11 +59,11 @@ class IsHiddenBrickViewController: BrickApp.BaseBrickController {
     }
 
     var titleForHideBrickButton: String {
-        return "\(hiddenBrick.isHidden ? "Show" : "Hide") Brick".uppercaseString
+        return "\(hiddenBrick.isHidden ? "Show" : "Hide") Brick".uppercased()
     }
 
     var titleForHideSectionButton: String {
-        return "\(hiddenSection.isHidden ? "Show" : "Hide") Section".uppercaseString
+        return "\(hiddenSection.isHidden ? "Show" : "Hide") Section".uppercased()
     }
 
     func hideBrick() {
@@ -79,6 +79,6 @@ class IsHiddenBrickViewController: BrickApp.BaseBrickController {
         brickCollectionView.invalidateVisibility()
         reloadBricksWithIdentifiers([HideBrickViewController.Identifiers.HideSectionButton])
     }
-
+    
 }
 

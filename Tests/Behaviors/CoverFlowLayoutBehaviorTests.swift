@@ -30,10 +30,10 @@ class CoverFlowLayoutBehaviorTests: XCTestCase {
         brickView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 300, height: 480))
 
         brickView.layout.behaviors.insert(coverFlowBehavior)
-        brickView.layout.scrollDirection = .Horizontal
+        brickView.layout.scrollDirection = .horizontal
         brickView.registerBrickClass(DummyBrick.self)
         let section = BrickSection(bricks: [
-            DummyBrick("Brick", width: .Ratio(ratio: 1/3), height: .Fixed(size: 50))
+            DummyBrick("Brick", width: .ratio(ratio: 1/3), height: .fixed(size: 50))
             ])
         repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick": 20])
         section.repeatCountDataSource = repeatCountDataSource
@@ -43,10 +43,10 @@ class CoverFlowLayoutBehaviorTests: XCTestCase {
 
     func testCoverFlowBehaviorBase() {
 
-        let cellBase = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0))
-        let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
-        let cell2 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
-        let cell3 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 2, inSection: 1))
+        let cellBase = brickView.cellForItem(at: IndexPath(item: 0, section: 0))
+        let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1))
+        let cell2 = brickView.cellForItem(at: IndexPath(item: 1, section: 1))
+        let cell3 = brickView.cellForItem(at: IndexPath(item: 2, section: 1))
 
         XCTAssertEqualWithAccuracy(cellBase!.transform.scaleX, 1, accuracy: 0.01)
         XCTAssertEqualWithAccuracy(cellBase!.transform.scaleY, 1, accuracy: 0.01)
@@ -63,9 +63,9 @@ class CoverFlowLayoutBehaviorTests: XCTestCase {
         brickView.contentOffset.x = brickView.frame.width / 6
         brickView.layoutIfNeeded()
 
-        let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
-        let cell2 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
-        let cell3 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 2, inSection: 1))
+        let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1))
+        let cell2 = brickView.cellForItem(at: IndexPath(item: 1, section: 1))
+        let cell3 = brickView.cellForItem(at: IndexPath(item: 2, section: 1))
 
         XCTAssertEqualWithAccuracy(cell1!.transform.scaleX, 0.5, accuracy: 0.01)
         XCTAssertEqualWithAccuracy(cell1!.transform.scaleY, 0.5, accuracy: 0.01)
@@ -79,9 +79,9 @@ class CoverFlowLayoutBehaviorTests: XCTestCase {
         brickView.contentOffset.x = brickView.contentSize.width - brickView.frame.width
         brickView.layoutSubviews()
 
-        let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 17, inSection: 1))
-        let cell2 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 18, inSection: 1))
-        let cell3 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 19, inSection: 1))
+        let cell1 = brickView.cellForItem(at: IndexPath(item: 17, section: 1))
+        let cell2 = brickView.cellForItem(at: IndexPath(item: 18, section: 1))
+        let cell3 = brickView.cellForItem(at: IndexPath(item: 19, section: 1))
 
         XCTAssertEqualWithAccuracy(cell1!.transform.scaleX, 2/3, accuracy: 0.01)
         XCTAssertEqualWithAccuracy(cell1!.transform.scaleY, 2/3, accuracy: 0.01)
@@ -95,9 +95,9 @@ class CoverFlowLayoutBehaviorTests: XCTestCase {
         brickView.contentOffset.x = -(brickView.frame.width / 6)
         brickView.layoutIfNeeded()
 
-        let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1))
-        let cell2 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1))
-        let cell3 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 2, inSection: 1))
+        let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1))
+        let cell2 = brickView.cellForItem(at: IndexPath(item: 1, section: 1))
+        let cell3 = brickView.cellForItem(at: IndexPath(item: 2, section: 1))
 
         XCTAssertEqualWithAccuracy(cell1!.transform.scaleX, 5/6, accuracy: 0.01)
         XCTAssertEqualWithAccuracy(cell1!.transform.scaleY, 5/6, accuracy: 0.01)
@@ -115,15 +115,15 @@ class CoverFlowLayoutBehaviorTests: XCTestCase {
         brickView.contentOffset.x = brickView.frame.width / 6
         brickView.layoutIfNeeded()
 
-        let cell1 = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1)) as! BrickCell
+        let cell1 = brickView.cellForItem(at: IndexPath(item: 1, section: 1)) as! BrickCell
 
-        guard let layoutAttributes = brickView.layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 1, inSection: 1)) else {
+        guard let layoutAttributes = brickView.layout.layoutAttributesForItem(at: IndexPath(item: 1, section: 1)) else {
             XCTFail("layoutAttributes should not be nil")
             return
         }
         let heightBefore = layoutAttributes.frame.size.height
 
-        let newLayout = cell1.preferredLayoutAttributesFittingAttributes(layoutAttributes)
+        let newLayout = cell1.preferredLayoutAttributesFitting(layoutAttributes)
         let heightAfter = newLayout.frame.size.height
 
         XCTAssertTrue(heightBefore == heightAfter)

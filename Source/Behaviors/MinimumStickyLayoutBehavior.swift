@@ -7,14 +7,14 @@
 //
 
 public protocol MinimumStickyLayoutBehaviorDataSource: StickyLayoutBehaviorDataSource {
-    func stickyLayoutBehavior(behavior: StickyLayoutBehavior, minimumStickingHeightForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat?
+    func stickyLayoutBehavior(_ behavior: StickyLayoutBehavior, minimumStickingHeightForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat?
 }
 
 /// Allows the brick to stick, but will shrink to a minimum height first
-public class MinimumStickyLayoutBehavior: StickyLayoutBehavior {
+open class MinimumStickyLayoutBehavior: StickyLayoutBehavior {
 
-    override func updateFrameForAttribute(inout attributes:BrickLayoutAttributes, sectionAttributes: BrickLayoutAttributes?, lastStickyFrame: CGRect, contentBounds: CGRect, collectionViewLayout: UICollectionViewLayout) -> Bool {
-        super.updateFrameForAttribute(&attributes, sectionAttributes: sectionAttributes, lastStickyFrame: lastStickyFrame, contentBounds: contentBounds, collectionViewLayout: collectionViewLayout)
+    override func updateFrameForAttribute(_ attributes:inout BrickLayoutAttributes, sectionAttributes: BrickLayoutAttributes?, lastStickyFrame: CGRect, contentBounds: CGRect, collectionViewLayout: UICollectionViewLayout) -> Bool {
+        _ = super.updateFrameForAttribute(&attributes, sectionAttributes: sectionAttributes, lastStickyFrame: lastStickyFrame, contentBounds: contentBounds, collectionViewLayout: collectionViewLayout)
 
         guard let minimumDataSource = dataSource as? MinimumStickyLayoutBehaviorDataSource else {
             return true

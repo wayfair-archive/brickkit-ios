@@ -6,15 +6,15 @@
 //  Copyright © 2016 Wayfair. All rights reserved.
 //
 
-public class BrickCollectionViewDataSource: NSObject {
+open class BrickCollectionViewDataSource: NSObject {
 
     /// Section model. Starts with an empty brick section
-    public private(set) var section: BrickSection = BrickSection(bricks: [])
+    open fileprivate(set) var section: BrickSection = BrickSection(bricks: [])
 
     /// Set the section of the datasource
     ///
     /// - parameter section: section
-    public func setSection(section: BrickSection) {
+    open func setSection(_ section: BrickSection) {
         self.section = section
     }
 }

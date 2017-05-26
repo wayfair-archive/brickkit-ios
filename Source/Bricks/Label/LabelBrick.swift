@@ -8,7 +8,7 @@
 
 import UIKit
 
-public typealias ConfigureLabelBlock = ((cell: LabelBrickCell) -> Void)
+public typealias ConfigureLabelBlock = ((_ cell: LabelBrickCell) -> Void)
 
 // MARK: - Nibs
 
@@ -21,23 +21,23 @@ public struct LabelBrickNibs {
 
 // MARK: - Brick
 
-public class LabelBrick: GenericBrick<UILabel> {
+open class LabelBrick: GenericBrick<UILabel> {
     weak var dataSource: LabelBrickCellDataSource?
     weak var delegate: LabelBrickCellDelegate?
 
-    public override class var internalIdentifier: String {
+    open override class var internalIdentifier: String {
         return self.nibName
     }
 
-    public override class var cellClass: UICollectionViewCell.Type? {
+    open override class var cellClass: UICollectionViewCell.Type? {
         return LabelBrickCell.self
     }
 
-    public override class var bundle: NSBundle {
-        return NSBundle(forClass: Brick.self)
+    open override class var bundle: Bundle {
+        return Bundle(for: Brick.self)
     }
 
-    public var text: String? {
+    open var text: String? {
         set {
             if let model = dataSource as? LabelBrickCellModel {
                 model.text = newValue ?? ""
@@ -54,7 +54,7 @@ public class LabelBrick: GenericBrick<UILabel> {
         }
     }
 
-    public var configureCellBlock: ConfigureLabelBlock? {
+    open var configureCellBlock: ConfigureLabelBlock? {
         set {
             if let model = dataSource as? LabelBrickCellModel {
                 model.configureCellBlock = newValue
@@ -71,38 +71,38 @@ public class LabelBrick: GenericBrick<UILabel> {
         }
     }
     
-    private var dataSourceModel: LabelBrickCellModel?
-    private var delegateModel: LabelBrickCellModel?
+    fileprivate var dataSourceModel: LabelBrickCellModel?
+    fileprivate var delegateModel: LabelBrickCellModel?
     
-    public convenience init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, text: String, configureCellBlock: ConfigureLabelBlock? = nil) {
+    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, text: String, configureCellBlock: ConfigureLabelBlock? = nil) {
         let model = LabelBrickCellModel(text: text, configureCellBlock: configureCellBlock)
         self.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView, dataSource: model)
     }
 
-    public convenience init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, dataSource: LabelBrickCellDataSource, delegate: LabelBrickCellDelegate? = nil) {
+    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, dataSource: LabelBrickCellDataSource, delegate: LabelBrickCellDelegate? = nil) {
         self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView, dataSource: dataSource, delegate: delegate)
     }
     
-    public convenience init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, text: String, configureCellBlock: ConfigureLabelBlock? = nil) {
+    public convenience init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, text: String, configureCellBlock: ConfigureLabelBlock? = nil) {
         let model = LabelBrickCellModel(text: text, configureCellBlock: configureCellBlock)
         self.init(identifier, size: size, backgroundColor: backgroundColor, backgroundView: backgroundView, dataSource: model)
     }
 
-    public init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, dataSource: LabelBrickCellDataSource, delegate: LabelBrickCellDelegate? = nil) {
+    public init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, dataSource: LabelBrickCellDataSource, delegate: LabelBrickCellDelegate? = nil) {
 
     
         self.dataSource = dataSource
         self.delegate = delegate
         super.init(identifier, size: size, backgroundColor: backgroundColor, backgroundView: backgroundView, configureView: { (label: UILabel, cell: BrickCell) in
             label.numberOfLines = 0
-            label.font = UIFont.systemFontOfSize(14)
+            label.font = UIFont.systemFont(ofSize: 14)
         })
 
         if let delegateModel = delegate as? LabelBrickCellModel {
             self.delegateModel = delegateModel
         }
         
-        if let dataSourceModel = dataSource as? LabelBrickCellModel where delegate !== dataSource {
+        if let dataSourceModel = dataSource as? LabelBrickCellModel , delegate !== dataSource {
             self.dataSourceModel = dataSourceModel
         }
 
@@ -114,21 +114,21 @@ public class LabelBrick: GenericBrick<UILabel> {
 
 /// An object that adopts the `LabelBrickCellDataSource` protocol is responsible for providing the data required by a `LabelBrick`.
 public protocol LabelBrickCellDataSource: class {
-    func configureLabelBrickCell(cell: LabelBrickCell)
+    func configureLabelBrickCell(_ cell: LabelBrickCell)
 }
 
 // MARK: - Delegate
 
 public protocol LabelBrickCellDelegate: class {
-    func buttonTouchedForLabelBrickCell(cell: LabelBrickCell)
+    func buttonTouchedForLabelBrickCell(_ cell: LabelBrickCell)
 }
 
 // MARK: - Models
 
-public class LabelBrickCellModel: LabelBrickCellDataSource {
-    public var text: String
-    public var configureCellBlock: ConfigureLabelBlock?
-    public var textColor: UIColor?
+open class LabelBrickCellModel: LabelBrickCellDataSource {
+    open var text: String
+    open var configureCellBlock: ConfigureLabelBlock?
+    open var textColor: UIColor?
 
     public init(text:String, textColor:UIColor? = nil, configureCellBlock: ConfigureLabelBlock? = nil){
         self.text = text
@@ -136,26 +136,26 @@ public class LabelBrickCellModel: LabelBrickCellDataSource {
         self.configureCellBlock = configureCellBlock
     }
 
-    public func configureLabelBrickCell(cell: LabelBrickCell) {
+    open func configureLabelBrickCell(_ cell: LabelBrickCell) {
         let label = cell.label
-        label.text = text
+        label?.text = text
         if let color = textColor {
-            label.textColor = color
+            label?.textColor = color
         }
-        configureCellBlock?(cell: cell)
+        configureCellBlock?(cell)
 
     }
 }
 
-public class LabelWithDecorationImageBrickCellModel: LabelBrickCellModel {
-    public var image: UIImage
+open class LabelWithDecorationImageBrickCellModel: LabelBrickCellModel {
+    open var image: UIImage
 
     public init(text:String, textColor:UIColor? = nil, image:UIImage, configureCellBlock: ConfigureLabelBlock? = nil) {
         self.image = image
         super.init(text: text, textColor: textColor, configureCellBlock: configureCellBlock)
     }
 
-    override public func configureLabelBrickCell(cell: LabelBrickCell) {
+    override open func configureLabelBrickCell(_ cell: LabelBrickCell) {
         if let imageView = cell.imageView {
             imageView.image = image
         }
@@ -166,18 +166,18 @@ public class LabelWithDecorationImageBrickCellModel: LabelBrickCellModel {
 
 // MARK: - Cell
 
-public class LabelBrickCell: GenericBrickCell, Bricklike {
+open class LabelBrickCell: GenericBrickCell, Bricklike {
     public typealias BrickType = LabelBrick
 
-    @IBOutlet weak public var label: UILabel!
-    @IBOutlet weak public var button: UIButton?
-    @IBOutlet weak public var horizontalRuleLeft: UIView?
-    @IBOutlet weak public var horizontalRuleRight: UIView?
-    @IBOutlet weak public var imageView: UIImageView?
+    @IBOutlet weak open var label: UILabel!
+    @IBOutlet weak open var button: UIButton?
+    @IBOutlet weak open var horizontalRuleLeft: UIView?
+    @IBOutlet weak open var horizontalRuleRight: UIView?
+    @IBOutlet weak open var imageView: UIImageView?
 
-    override public func updateContent() {
-        horizontalRuleLeft?.hidden = true
-        horizontalRuleRight?.hidden = true
+    override open func updateContent() {
+        horizontalRuleLeft?.isHidden = true
+        horizontalRuleRight?.isHidden = true
 
         super.updateContent()
 
@@ -187,7 +187,7 @@ public class LabelBrickCell: GenericBrickCell, Bricklike {
         brick.dataSource?.configureLabelBrickCell(self)
     }
 
-    @IBAction func buttonTapped(sender: UIButton) {
+    @IBAction func buttonTapped(_ sender: UIButton) {
         brick.delegate?.buttonTouchedForLabelBrickCell(self)
     }
 }

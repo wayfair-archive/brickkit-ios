@@ -10,7 +10,7 @@ import UIKit
 
 class SimpleRepeatHeightRatioViewController: BaseRepeatBrickViewController {
     
-    override class var title: String {
+    override class var brickTitle: String {
         return "Height Ratio"
     }
 
@@ -21,8 +21,8 @@ class SimpleRepeatHeightRatioViewController: BaseRepeatBrickViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        repeatLabel.width = .Ratio(ratio: 1 / 4)
-        repeatLabel.height = .Ratio(ratio: 1)
+        repeatLabel.width = .ratio(ratio: 1 / 4)
+        repeatLabel.height = .ratio(ratio: 1)
     }
 
 }

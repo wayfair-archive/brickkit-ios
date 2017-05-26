@@ -17,15 +17,15 @@ class SectionsCollectionViewDataSource: NSObject, UICollectionViewDataSource {
         self.sections = sections
     }
 
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return sections.count
     }
 
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return sections[section]
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return UICollectionViewCell()
     }
     
@@ -39,7 +39,7 @@ class SectionsLayoutDataSource: NSObject, BrickLayoutDataSource {
     let insets: [CGFloat]
     let types: [[BrickLayoutType]]
 
-    init(widthRatios: [[CGFloat]] = [[1]], heights: [[CGFloat]] = [[0]], edgeInsets: [UIEdgeInsets] = [UIEdgeInsetsZero], insets: [CGFloat] = [0], types: [[BrickLayoutType]] = [[.Brick]]) {
+    init(widthRatios: [[CGFloat]] = [[1]], heights: [[CGFloat]] = [[0]], edgeInsets: [UIEdgeInsets] = [UIEdgeInsets.zero], insets: [CGFloat] = [0], types: [[BrickLayoutType]] = [[.brick]]) {
         self.widthRatios = widthRatios
         self.heights = heights
         self.edgeInsets = edgeInsets
@@ -47,7 +47,7 @@ class SectionsLayoutDataSource: NSObject, BrickLayoutDataSource {
         self.types = types
     }
 
-    func brickLayout(layout: BrickLayout, widthRatioForItemAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func brickLayout(_ layout: BrickLayout, widthRatioForItemAtIndexPath indexPath: IndexPath) -> CGFloat {
         let sectionWidthRatios = widthRatios[indexPath.section]
         if sectionWidthRatios.count <= indexPath.item {
             return sectionWidthRatios.last ?? 0
@@ -56,7 +56,7 @@ class SectionsLayoutDataSource: NSObject, BrickLayoutDataSource {
         }
     }
 
-    func brickLayout(layout: BrickLayout, widthForItemAtIndexPath indexPath: NSIndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat {
+    func brickLayout(_ layout: BrickLayout, widthForItemAt indexPath: IndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat {
         let ratio: CGFloat
         let sectionWidthRatios = widthRatios[indexPath.section]
         if sectionWidthRatios.count <= indexPath.item {
@@ -64,10 +64,10 @@ class SectionsLayoutDataSource: NSObject, BrickLayoutDataSource {
         } else {
             ratio = sectionWidthRatios[indexPath.item]
         }
-        return BrickUtils.calculateWidth(for: ratio, widthRatio: widthRatio, totalWidth: totalWidth, inset: self.brickLayout(layout, insetForSection: indexPath.section))
+        return BrickUtils.calculateWidth(for: ratio, widthRatio: widthRatio, totalWidth: totalWidth, inset: self.brickLayout(layout, insetFor: indexPath.section))
     }
 
-    func brickLayout(layout: BrickLayout, estimatedHeightForItemAtIndexPath indexPath: NSIndexPath, containedInWidth width: CGFloat) -> CGFloat {
+    func brickLayout(_ layout: BrickLayout, estimatedHeightForItemAt indexPath: IndexPath, containedIn width: CGFloat) -> CGFloat {
         let sectionHeights = heights[indexPath.section]
         if sectionHeights.count <= indexPath.item {
             return sectionHeights.last ?? 0
@@ -76,15 +76,15 @@ class SectionsLayoutDataSource: NSObject, BrickLayoutDataSource {
         }
     }
 
-    func brickLayout(layout: BrickLayout, edgeInsetsForSection section: Int) -> UIEdgeInsets {
+    func brickLayout(_ layout: BrickLayout, edgeInsetsFor section: Int) -> UIEdgeInsets {
         if edgeInsets.count <= section {
-            return edgeInsets.last ?? UIEdgeInsetsZero
+            return edgeInsets.last ?? UIEdgeInsets.zero
         } else {
             return edgeInsets[section]
         }
     }
 
-    func brickLayout(layout: BrickLayout, insetForSection section: Int) -> CGFloat {
+    func brickLayout(_ layout: BrickLayout, insetFor section: Int) -> CGFloat {
         if insets.count <= section {
             return insets.last ?? 0
         } else {
@@ -92,26 +92,26 @@ class SectionsLayoutDataSource: NSObject, BrickLayoutDataSource {
         }
     }
 
-    func brickLayout(layout: BrickLayout, brickLayoutTypeForItemAtIndexPath indexPath: NSIndexPath) -> BrickLayoutType {
+    func brickLayout(_ layout: BrickLayout, brickLayoutTypeForItemAt indexPath: IndexPath) -> BrickLayoutType {
         let sectionTypes = types[indexPath.section]
         if sectionTypes.count <= indexPath.item {
-            return sectionTypes.last ?? .Brick
+            return sectionTypes.last ?? .brick
         } else {
             return sectionTypes[indexPath.item]
         }
     }
 
-    func brickLayout(layout: BrickLayout, identifierForIndexPath indexPath: NSIndexPath) -> String {
+    func brickLayout(_ layout: BrickLayout, identifierFor indexPath: IndexPath) -> String {
         return ""
     }
 
-    func brickLayout(layout: BrickLayout, indexPathForSection section: Int) -> NSIndexPath? {
-        for (sectionIndex, type) in types.enumerate() {
-            for (itemIndex, t) in type.enumerate() {
+    func brickLayout(_ layout: BrickLayout, indexPathFor section: Int) -> IndexPath? {
+        for (sectionIndex, type) in types.enumerated() {
+            for (itemIndex, t) in type.enumerated() {
                 switch t {
-                case .Section(let sIndex):
+                case .section(let sIndex):
                     if sIndex == section {
-                        return NSIndexPath(forItem: itemIndex, inSection: sectionIndex)
+                        return IndexPath(item: itemIndex, section: sectionIndex)
                     }
                 default:
                     break
@@ -133,7 +133,7 @@ class FixedBrickLayoutSectionDataSource: NSObject, BrickLayoutSectionDataSource 
     var widthRatio: CGFloat = 1
     var frameOfInterest: CGRect = CGRect(x: 0, y: 0, width: 320, height: CGFloat.infinity) // Infinite frame height
 
-    var downStreamIndexPaths: [NSIndexPath] = []
+    var downStreamIndexPaths: [IndexPath] = []
     
     init(widthRatios: [CGFloat], heights: [CGFloat], edgeInsets: UIEdgeInsets, inset: CGFloat) {
         self.widthRatios = widthRatios
@@ -174,14 +174,14 @@ class FixedBrickLayoutSectionDataSource: NSObject, BrickLayoutSectionDataSource 
     }
 
     var zIndexBehavior: BrickLayoutZIndexBehavior {
-        return .BottomUp
+        return .bottomUp
     }
 
     func isEstimate(for attributes: BrickLayoutAttributes, in section: BrickLayoutSection) -> Bool {
         return true
     }
 
-    func downStreamIndexPaths(in section: BrickLayoutSection) -> [NSIndexPath] {
+    func downStreamIndexPaths(in section: BrickLayoutSection) -> [IndexPath] {
         return downStreamIndexPaths
     }
 
@@ -190,10 +190,10 @@ class FixedBrickLayoutSectionDataSource: NSObject, BrickLayoutSectionDataSource 
     }
 
     func aligment(in section: BrickLayoutSection) -> BrickAlignment {
-        return BrickAlignment(horizontal: .Left, vertical: .Top)
+        return BrickAlignment(horizontal: .left, vertical: .top)
     }
 
-    var scrollDirection: UICollectionViewScrollDirection = .Vertical
+    var scrollDirection: UICollectionViewScrollDirection = .vertical
 }
 
 class FixedBrickLayoutDataSource: NSObject, BrickLayoutDataSource {
@@ -203,7 +203,7 @@ class FixedBrickLayoutDataSource: NSObject, BrickLayoutDataSource {
     let inset: CGFloat
     let type: BrickLayoutType
 
-    init(widthRatio: CGFloat = 1, height: CGFloat = 0, edgeInsets: UIEdgeInsets = UIEdgeInsetsZero, inset: CGFloat = 0, type: BrickLayoutType = .Brick) {
+    init(widthRatio: CGFloat = 1, height: CGFloat = 0, edgeInsets: UIEdgeInsets = UIEdgeInsets.zero, inset: CGFloat = 0, type: BrickLayoutType = .brick) {
         self.widthRatio = widthRatio
         self.height = height
         self.edgeInsets = edgeInsets
@@ -211,31 +211,31 @@ class FixedBrickLayoutDataSource: NSObject, BrickLayoutDataSource {
         self.type = type
     }
 
-    func brickLayout(layout: BrickLayout, widthForItemAtIndexPath indexPath: NSIndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat {
+    func brickLayout(_ layout: BrickLayout, widthForItemAt indexPath: IndexPath, totalWidth: CGFloat, widthRatio: CGFloat, startingAt origin: CGFloat) -> CGFloat {
         return BrickUtils.calculateWidth(for: self.widthRatio, widthRatio: widthRatio, totalWidth: totalWidth, inset: inset)
     }
 
-    func brickLayout(layout: BrickLayout, estimatedHeightForItemAtIndexPath indexPath: NSIndexPath, containedInWidth width: CGFloat) -> CGFloat {
+    func brickLayout(_ layout: BrickLayout, estimatedHeightForItemAt indexPath: IndexPath, containedIn width: CGFloat) -> CGFloat {
         return height
     }
 
-    func brickLayout(layout: BrickLayout, edgeInsetsForSection section: Int) -> UIEdgeInsets {
+    func brickLayout(_ layout: BrickLayout, edgeInsetsFor section: Int) -> UIEdgeInsets {
         return edgeInsets
     }
 
-    func brickLayout(layout: BrickLayout, insetForSection section: Int) -> CGFloat {
+    func brickLayout(_ layout: BrickLayout, insetFor section: Int) -> CGFloat {
         return inset
     }
 
-    func brickLayout(layout: BrickLayout, brickLayoutTypeForItemAtIndexPath indexPath: NSIndexPath) -> BrickLayoutType {
+    func brickLayout(_ layout: BrickLayout, brickLayoutTypeForItemAt indexPath: IndexPath) -> BrickLayoutType {
         return type
     }
 
-    func brickLayout(layout: BrickLayout, isBrickHiddenAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func brickLayout(_ layout: BrickLayout, isBrickHiddenAtIndexPath indexPath: IndexPath) -> Bool {
         return false
     }
 
-    func brickLayout(layout: BrickLayout, identifierForIndexPath indexPath: NSIndexPath) -> String {
+    func brickLayout(_ layout: BrickLayout, identifierFor indexPath: IndexPath) -> String {
         return ""
     }
 }
@@ -249,7 +249,7 @@ class FixedSpotlightLayoutBehaviorDataSource: SpotlightLayoutBehaviorDataSource 
         self.identifiers = identifiers
     }
 
-    func spotlightLayoutBehavior(behavior: SpotlightLayoutBehavior, smallHeightForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
+    func spotlightLayoutBehavior(_ behavior: SpotlightLayoutBehavior, smallHeightForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
         if let identifiers = identifiers {
             return identifiers.contains(identifier) ? height : nil
         } else {
@@ -265,7 +265,7 @@ class FixedCardLayoutBehaviorDataSource: CardLayoutBehaviorDataSource {
         self.height = height
     }
 
-    func cardLayoutBehavior(behavior: CardLayoutBehavior, smallHeightForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
+    func cardLayoutBehavior(_ behavior: CardLayoutBehavior, smallHeightForItemAt indexPath: IndexPath, with identifier: String, in collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
         return height
     }
 }
@@ -273,15 +273,15 @@ class FixedCardLayoutBehaviorDataSource: CardLayoutBehaviorDataSource {
 class FixedOffsetLayoutBehaviorDataSource: OffsetLayoutBehaviorDataSource {
     var originOffset: CGSize?
     var sizeOffset: CGSize?
-    var indexPaths: [NSIndexPath]?
+    var indexPaths: [IndexPath]?
 
-    init(originOffset: CGSize?, sizeOffset: CGSize?, indexPaths: [NSIndexPath]? = nil) {
+    init(originOffset: CGSize?, sizeOffset: CGSize?, indexPaths: [IndexPath]? = nil) {
         self.originOffset = originOffset
         self.sizeOffset = sizeOffset
         self.indexPaths = indexPaths
     }
 
-    func offsetLayoutBehavior(behavior: OffsetLayoutBehavior, originOffsetForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
+    func offsetLayoutBehaviorWithOrigin(_ behavior: OffsetLayoutBehavior, originOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
         if let indexPaths = self.indexPaths {
             if !indexPaths.contains(indexPath) {
                 return nil
@@ -290,7 +290,7 @@ class FixedOffsetLayoutBehaviorDataSource: OffsetLayoutBehaviorDataSource {
         return originOffset
     }
 
-    func offsetLayoutBehavior(behavior: OffsetLayoutBehavior, sizeOffsetForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
+    func offsetLayoutBehavior(_ behavior: OffsetLayoutBehavior, sizeOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
         if let indexPaths = self.indexPaths {
             if !indexPaths.contains(indexPath) {
                 return nil
@@ -309,11 +309,11 @@ class FixedMultipleOffsetLayoutBehaviorDataSource: OffsetLayoutBehaviorDataSourc
         self.sizeOffsets = sizeOffsets
     }
 
-    func offsetLayoutBehavior(behavior: OffsetLayoutBehavior, originOffsetForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
+    func offsetLayoutBehaviorWithOrigin(_ behavior: OffsetLayoutBehavior, originOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
         return originOffsets?[identifier]
     }
 
-    func offsetLayoutBehavior(behavior: OffsetLayoutBehavior, sizeOffsetForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
+    func offsetLayoutBehavior(_ behavior: OffsetLayoutBehavior, sizeOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
         return sizeOffsets?[identifier]
     }
 }

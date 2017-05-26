@@ -11,7 +11,7 @@ import BrickKit
 
 class OnScrollDownStickingViewController: BaseSectionBrickViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "On Scroll Down"
     }
     override class var subTitle: String {
@@ -27,7 +27,7 @@ class OnScrollDownStickingViewController: BaseSectionBrickViewController {
 }
 
 extension OnScrollDownStickingViewController: StickyLayoutBehaviorDataSource {
-    func stickyLayoutBehavior(behavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func stickyLayoutBehavior(_ behavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         return identifier == BrickIdentifiers.titleLabel
     }
 }

@@ -11,6 +11,6 @@ import BrickKit
 
 class CustomBrickCollectionView: BrickCollectionView {
     deinit {
-        NSNotificationCenter.defaultCenter().postNotificationName("CustomBrickCollectionView.deinit", object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "CustomBrickCollectionView.deinit"), object: nil)
     }
 }

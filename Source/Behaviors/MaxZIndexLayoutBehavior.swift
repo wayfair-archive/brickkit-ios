@@ -9,10 +9,10 @@
 import UIKit
 
 public protocol MaxZIndexLayoutBehaviorDataSource: class {
-    func maxZIndexLayoutBehavior(behavior: MaxZIndexLayoutBehavior, shouldHaveMaxZIndexAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool
+    func maxZIndexLayoutBehavior(_ behavior: MaxZIndexLayoutBehavior, shouldHaveMaxZIndexAt indexPath: IndexPath, with identifier: String, in collectionViewLayout: UICollectionViewLayout) -> Bool
 }
 
-public class MaxZIndexLayoutBehavior: BrickLayoutBehavior {
+open class MaxZIndexLayoutBehavior: BrickLayoutBehavior {
     weak var dataSource: MaxZIndexLayoutBehaviorDataSource?
 
     var currentZIndex: Int = 0
@@ -21,12 +21,12 @@ public class MaxZIndexLayoutBehavior: BrickLayoutBehavior {
         self.dataSource = dataSource
     }
 
-    public override func resetRegisteredAttributes(collectionViewLayout: UICollectionViewLayout) {
+    open override func resetRegisteredAttributes(_ collectionViewLayout: UICollectionViewLayout) {
         super.resetRegisteredAttributes(collectionViewLayout)
         currentZIndex = 0
     }
 
-    public override func registerAttributes(attributes: BrickLayoutAttributes, forCollectionViewLayout collectionViewLayout: UICollectionViewLayout) {
+    open override func registerAttributes(_ attributes: BrickLayoutAttributes, for collectionViewLayout: UICollectionViewLayout) {
         let maxZIndex: Int
 
         if let layout = collectionViewLayout as? BrickLayout {
@@ -35,7 +35,7 @@ public class MaxZIndexLayoutBehavior: BrickLayoutBehavior {
            maxZIndex = 0
         }
         
-        if dataSource?.maxZIndexLayoutBehavior(self, shouldHaveMaxZIndexAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) == true {
+        if dataSource?.maxZIndexLayoutBehavior(self, shouldHaveMaxZIndexAt: attributes.indexPath, with: attributes.identifier, in: collectionViewLayout) == true {
             attributes.zIndex = maxZIndex + currentZIndex
             currentZIndex += 1
         }

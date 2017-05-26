@@ -1,3 +1,4 @@
+
 //
 //  AlignmentBrickViewController.swift
 //  BrickKit-Example
@@ -32,7 +33,7 @@ class VerticalSegmentedControl: SegmentHeaderBrickDataSource {
 
 class AlignmentBrickViewController: BrickViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Alignment"
     }
     override class var subTitle: String {
@@ -54,17 +55,17 @@ class AlignmentBrickViewController: BrickViewController {
     func updateAligments() {
         let horizontalAlignment: BrickHorizontalAlignment
         switch horizontalSegmentedControl.selectedSegmentIndex {
-        case 1: horizontalAlignment = .Center
-        case 2: horizontalAlignment = .Right
-        case 3: horizontalAlignment = .Justified
-        default: horizontalAlignment = .Left
+        case 1: horizontalAlignment = .center
+        case 2: horizontalAlignment = .right
+        case 3: horizontalAlignment = .justified
+        default: horizontalAlignment = .left
         }
 
         let verticalAlignment: BrickVerticalAlignment
         switch verticalSegmentedControl.selectedSegmentIndex {
-        case 1: verticalAlignment = .Center
-        case 2: verticalAlignment = .Bottom
-        default: verticalAlignment = .Top
+        case 1: verticalAlignment = .center
+        case 2: verticalAlignment = .bottom
+        default: verticalAlignment = .top
         }
 
         let alignment = BrickAlignment(horizontal: horizontalAlignment, vertical: verticalAlignment)
@@ -84,18 +85,18 @@ class AlignmentBrickViewController: BrickViewController {
         self.brickCollectionView.registerBrickClass(SegmentHeaderBrick.self)
 
         brickSection1 = BrickSection(backgroundColor: .brickGray1, bricks: [
-            LabelBrick(width: .Fixed(size: 70), height: .Fixed(size: 100), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
-            LabelBrick(width: .Fixed(size: 70), height: .Fixed(size: 50), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
-            LabelBrick(width: .Fixed(size: 70), height: .Fixed(size: 75), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
+            LabelBrick(width: .fixed(size: 70), height: .fixed(size: 100), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
+            LabelBrick(width: .fixed(size: 70), height: .fixed(size: 50), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
+            LabelBrick(width: .fixed(size: 70), height: .fixed(size: 75), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
             ], inset: 10)
 
         brickSection2 = BrickSection(backgroundColor: .brickGray1, bricks: [
-            LabelBrick(width: .Ratio(ratio: 1/3), height: .Fixed(size: 100), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
-            LabelBrick(width: .Ratio(ratio: 1/3), height: .Fixed(size: 50), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
+            LabelBrick(width: .ratio(ratio: 1/3), height: .fixed(size: 100), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
+            LabelBrick(width: .ratio(ratio: 1/3), height: .fixed(size: 50), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
             ], inset: 10)
 
         brickSection3 = BrickSection(backgroundColor: .brickGray1, bricks: [
-            LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: 1/3), height: .Fixed(size: 100), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
+            LabelBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 1/3), height: .fixed(size: 100), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
             ], inset: 10)
 
         brickSection3.repeatCountDataSource = self

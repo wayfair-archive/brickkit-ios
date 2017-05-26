@@ -11,7 +11,7 @@ import BrickKit
 
 class MultiSectionBrickViewController: BrickApp.BaseBrickController {
     
-    override class var title: String {
+    override class var brickTitle: String {
         return "Multi Sections"
     }
     
@@ -25,40 +25,32 @@ class MultiSectionBrickViewController: BrickApp.BaseBrickController {
         self.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(bricks: [
-            LabelBrick(width: .Ratio(ratio: 0.5), backgroundColor: .brickGray1, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
-            BrickSection(width: .Ratio(ratio: 0.5) , backgroundColor: .brickGray1, bricks: [
+            LabelBrick(width: .ratio(ratio: 0.5), backgroundColor: .brickGray1, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
+            BrickSection(width: .ratio(ratio: 0.5) , backgroundColor: .brickGray1, bricks: [
                 LabelBrick(backgroundColor: .brickGray3, text: "BRICK\nBRICK", configureCellBlock: LabelBrickCell.configure),
                 LabelBrick(backgroundColor: .brickGray3, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
                 LabelBrick(backgroundColor: .brickGray3, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
                 ], inset: 10),
             BrickSection(backgroundColor: .brickGray1, bricks: [
-                BrickSection(width: .Ratio(ratio: 1/3), backgroundColor: .brickGray3, bricks: [
+                BrickSection(width: .ratio(ratio: 1/3), backgroundColor: .brickGray3, bricks: [
                     LabelBrick(backgroundColor: .brickGray5, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
                     LabelBrick(backgroundColor: .brickGray5, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
                     ], inset: 5),
-                BrickSection(width: .Ratio(ratio: 2/3), backgroundColor: .brickGray3, bricks: [
+                BrickSection(width: .ratio(ratio: 2/3), backgroundColor: .brickGray3, bricks: [
                     LabelBrick(backgroundColor: .brickGray5, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
                     LabelBrick(backgroundColor: .brickGray5, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
                     LabelBrick(backgroundColor: .brickGray5, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
                     ], inset: 15),
                 ], inset: 5, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)),
-            BrickSection(width: .Ratio(ratio: 0.5) , backgroundColor: .brickGray1, bricks: [
+            BrickSection(width: .ratio(ratio: 0.5) , backgroundColor: .brickGray1, bricks: [
                 LabelBrick(backgroundColor: .brickGray3, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
                 LabelBrick(backgroundColor: .brickGray3, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
                 ], inset: 10),
-            LabelBrick(width: .Ratio(ratio: 0.5), backgroundColor: .brickGray1, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
+            LabelBrick(width: .ratio(ratio: 0.5), backgroundColor: .brickGray1, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
             LabelBrick(backgroundColor: .brickGray1, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
 
         self.setSection(section)
-    }
-
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-
-        for indexPath in brickCollectionView.indexPathsForVisibleItems() {
-            print(brickCollectionView.layoutAttributesForItemAtIndexPath(indexPath))
-        }
     }
     
 }

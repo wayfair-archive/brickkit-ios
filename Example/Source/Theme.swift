@@ -13,13 +13,13 @@ class Theme {
     class func applyTheme() {
 
         //Tint Color
-        UIApplication.sharedApplication().windows.first?.tintColor = .brickPurple1
+        UIApplication.shared.windows.first?.tintColor = .brickPurple1
 
         // UILabel
         #if os(tvOS)
-            UILabel.appearance().font = UIFont.brickLightFont(25)
+            UILabel.appearance().font = UIFont.brickLightFont(size: 25)
         #else
-            UILabel.appearance().font = UIFont.brickLightFont(15)
+            UILabel.appearance().font = UIFont.brickLightFont(size: 15)
         #endif
 
         // Navigation
@@ -36,14 +36,14 @@ class Theme {
     }
 
     class var textColorForNavigationTitle: UIColor {
-        return .whiteColor()
+        return UIColor.white
     }
 
     class var fontForNavigationTitle: UIFont {
         #if os(tvOS)
-            return UIFont.brickSemiBoldFont(25)
+            return UIFont.brickSemiBoldFont(size: 25)
         #else
-            return UIFont.brickSemiBoldFont(15)
+            return UIFont.brickSemiBoldFont(size: 15)
         #endif
     }
 
@@ -113,7 +113,7 @@ struct Constants {
         #if os(tvOS)
             return .AppleTV
         #else
-        let size = UIDevice.currentDevice().orientation.isPortrait ? UIScreen.mainScreen().bounds.width : UIScreen.mainScreen().bounds.height
+        let size = UIDevice.current.orientation.isPortrait ? UIScreen.main.bounds.width : UIScreen.main.bounds.height
         switch size {
         case 0...320: return .iPhone320
         case 321...375: return .iPhone375
@@ -177,7 +177,7 @@ private var brickPatternImage: UIImage = {
     let brickSize = CGSize(width: Constants.brickWidth, height: Constants.brickHeight)
     let frame = CGRect(x: 0, y: 0, width: (brickSize.width * 2) + (inset * 2), height: (brickSize.height * 2) + (inset * 2))
     let view = UIView(frame: frame)
-    view.backgroundColor = .clearColor()
+    view.backgroundColor = UIColor.clear
 
     let startY = -brickSize.height / 2
     for i in 0..<9 {
@@ -185,7 +185,7 @@ private var brickPatternImage: UIImage = {
         let column = CGFloat(i % 3)
 
         let startX: CGFloat
-        if row % 2 == 0 {
+        if Int(row) % 2 == 0 {
             startX = -brickSize.width * 3 / 4
         } else {
             startX = -brickSize.width / 2
@@ -199,8 +199,8 @@ private var brickPatternImage: UIImage = {
         view.addSubview(subview)
     }
 
-    UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.mainScreen().scale)
-    view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+    UIGraphicsBeginImageContextWithOptions(frame.size, false, UIScreen.main.scale)
+    view.layer.render(in: UIGraphicsGetCurrentContext()!)
     let image = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
     
@@ -272,35 +272,9 @@ extension UIColor {
         case UIColor.brickGray3: return .brickGray1
         case UIColor.brickGray4: return .brickGray1
         case UIColor.brickGray5: return .brickGray1
-        default: return .whiteColor()
+        default: return UIColor.white
         }
     }
 }
 
-#if os(tvOS)
-extension LabelBrickCell: FocusableBrickCell {
 
-    dynamic override public var allowsFocus: Bool {
-        get {
-            return true
-        }
-        set {
-            super.allowsFocus = true
-        }
-    }
-
-    public func willFocus() -> Bool {
-        self.contentView.layer.borderWidth = 5
-        self.contentView.layer.borderColor = UIColor.brickGray2.CGColor
-        
-        return true
-    }
-    
-    public func willUnfocus() -> Bool {
-        self.contentView.layer.borderWidth = 0
-        self.contentView.layer.borderColor = UIColor.clearColor().CGColor
-        
-        return true
-    }
-}
-#endif

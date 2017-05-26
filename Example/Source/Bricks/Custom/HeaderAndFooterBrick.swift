@@ -12,7 +12,7 @@ import BrickKit
 class HeaderAndFooterBrick: Brick {
     weak var dataSource: HeaderAndFooterBrickModel?
     
-    init(_ identifier: String, width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: ((HeaderAndFooterBrickCell) -> Void)) {
+    init(_ identifier: String, width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, dataSource: @escaping ((HeaderAndFooterBrickCell) -> Void)) {
         self.dataSource = HeaderAndFooterBrickModel(configureCell: dataSource)
         super.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView)
     }
@@ -25,7 +25,7 @@ protocol HeaderAndFooterBrickDataSource {
 class HeaderAndFooterBrickModel: HeaderAndFooterBrickDataSource {
     let configureCell: (HeaderAndFooterBrickCell) ->Void
     
-    init(configureCell: ((HeaderAndFooterBrickCell) ->Void)) {
+    init(configureCell: @escaping ((HeaderAndFooterBrickCell) ->Void)) {
         self.configureCell = configureCell
     }
     
@@ -41,7 +41,7 @@ class HeaderAndFooterBrickCell: BrickCell, Bricklike {
     
     override func updateContent() {
         super.updateContent()
-        brick.dataSource?.text(self)
+        brick.dataSource?.text(cell: self)
     }
     
 }

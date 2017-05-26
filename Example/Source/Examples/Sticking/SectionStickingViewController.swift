@@ -10,7 +10,7 @@ import BrickKit
 
 class SectionStickingViewController: BaseSectionBrickViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Sticking Section"
     }
     override class var subTitle: String {
@@ -25,7 +25,7 @@ class SectionStickingViewController: BaseSectionBrickViewController {
 }
 
 extension SectionStickingViewController: StickyLayoutBehaviorDataSource {
-    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func stickyLayoutBehavior(_ stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         return identifier == BrickIdentifiers.titleLabel
     }
 }

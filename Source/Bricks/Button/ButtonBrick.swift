@@ -8,8 +8,8 @@
 
 import UIKit
 
-public typealias ConfigureButtonBlock = ((cell: ButtonBrickCell) -> Void)
-public typealias ButtonTappedBlock = ((cell: ButtonBrickCell) -> Void)
+public typealias ConfigureButtonBlock = ((_ cell: ButtonBrickCell) -> Void)
+public typealias ButtonTappedBlock = ((_ cell: ButtonBrickCell) -> Void)
 
 // MARK: - Nibs
 
@@ -19,23 +19,23 @@ public struct ButtonBrickNibs {
 
 // MARK: - Brick
 
-public class ButtonBrick: GenericBrick<UIButton> {
-    public weak var dataSource: ButtonBrickCellDataSource?
-    public weak var delegate: ButtonBrickCellDelegate?
+open class ButtonBrick: GenericBrick<UIButton> {
+    open weak var dataSource: ButtonBrickCellDataSource?
+    open weak var delegate: ButtonBrickCellDelegate?
 
-    public override class var internalIdentifier: String {
+    open override class var internalIdentifier: String {
         return self.nibName
     }
 
-    public override class var cellClass: UICollectionViewCell.Type? {
+    open override class var cellClass: UICollectionViewCell.Type? {
         return ButtonBrickCell.self
     }
 
-    public override class var bundle: NSBundle {
-        return NSBundle(forClass: Brick.self)
+    open override class var bundle: Bundle {
+        return Bundle(for: Brick.self)
     }
 
-    public var title: String? {
+    open var title: String? {
         set {
             if let model = dataSource as? ButtonBrickCellModel {
                 model.title = newValue ?? ""
@@ -52,7 +52,7 @@ public class ButtonBrick: GenericBrick<UIButton> {
         }
     }
 
-    public var configureButtonBlock: ConfigureButtonBlock? {
+    open var configureButtonBlock: ConfigureButtonBlock? {
         set {
             if let model = dataSource as? ButtonBrickCellModel {
                 model.configureButtonBlock = newValue
@@ -69,35 +69,35 @@ public class ButtonBrick: GenericBrick<UIButton> {
         }
     }
 
-    private var dataSourceModel: ButtonBrickCellModel?
-    private var delegateModel: ButtonBrickCellModel?
+    fileprivate var dataSourceModel: ButtonBrickCellModel?
+    fileprivate var delegateModel: ButtonBrickCellModel?
 
-    public convenience init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, title: String, configureButtonBlock: ConfigureButtonBlock? = nil, onButtonTappedHandler: ButtonTappedBlock? = nil) {
+    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, title: String, configureButtonBlock: ConfigureButtonBlock? = nil, onButtonTappedHandler: ButtonTappedBlock? = nil) {
         let model = ButtonBrickCellModel(title: title, configureButtonBlock: configureButtonBlock, onButtonTappedHandler: onButtonTappedHandler)
         self.init(identifier, width: width, height: height, backgroundColor: backgroundColor, backgroundView: backgroundView, dataSource: model, delegate: model)
     }
 
-    public convenience init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: ButtonBrickCellDataSource, delegate: ButtonBrickCellDelegate? = nil) {
+    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, dataSource: ButtonBrickCellDataSource, delegate: ButtonBrickCellDelegate? = nil) {
         self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: dataSource, delegate: delegate)
     }
     
-    public convenience init(_ identifier: String, size: BrickSize, backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, title: String, configureButtonBlock: ConfigureButtonBlock? = nil, onButtonTappedHandler: ButtonTappedBlock? = nil) {
+    public convenience init(_ identifier: String, size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, title: String, configureButtonBlock: ConfigureButtonBlock? = nil, onButtonTappedHandler: ButtonTappedBlock? = nil) {
         let model = ButtonBrickCellModel(title: title, configureButtonBlock: configureButtonBlock, onButtonTappedHandler: onButtonTappedHandler)
         self.init(identifier, size: size, backgroundColor: backgroundColor, backgroundView: backgroundView, dataSource: model, delegate: model)
     }
     
-    public init(_ identifier: String, size: BrickSize, backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: ButtonBrickCellDataSource, delegate: ButtonBrickCellDelegate? = nil) {
+    public init(_ identifier: String, size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, dataSource: ButtonBrickCellDataSource, delegate: ButtonBrickCellDelegate? = nil) {
         self.dataSource = dataSource
         self.delegate = delegate
         super.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView, configureView: { (button, cell) in
-            button.titleLabel?.font = UIFont.systemFontOfSize(15)
+            button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         })
         
         if let delegateModel = delegate as? ButtonBrickCellModel {
             self.delegateModel = delegateModel
         }
         
-        if let dataSourceModel = dataSource as? ButtonBrickCellModel where delegate !== dataSource {
+        if let dataSourceModel = dataSource as? ButtonBrickCellModel , delegate !== dataSource {
             self.dataSourceModel = dataSourceModel
         }
     }
@@ -107,21 +107,21 @@ public class ButtonBrick: GenericBrick<UIButton> {
 // MARK: - DataSource
 
 public protocol ButtonBrickCellDataSource: class {
-    func configureButtonBrick(cell: ButtonBrickCell)
+    func configureButtonBrick(_ cell: ButtonBrickCell)
 }
 
 // MARK: - Delegate
 
 public protocol ButtonBrickCellDelegate: class {
-    func didTapOnButtonForButtonBrickCell(cell: ButtonBrickCell)
+    func didTapOnButtonForButtonBrickCell(_ cell: ButtonBrickCell)
 }
 
 // MARK: - Models
 
-public class ButtonBrickCellModel: ButtonBrickCellDataSource, ButtonBrickCellDelegate {
-    public var title: String
-    public var configureButtonBlock: ConfigureButtonBlock?
-    public var onButtonTappedHandler: ButtonTappedBlock?
+open class ButtonBrickCellModel: ButtonBrickCellDataSource, ButtonBrickCellDelegate {
+    open var title: String
+    open var configureButtonBlock: ConfigureButtonBlock?
+    open var onButtonTappedHandler: ButtonTappedBlock?
 
     public init(title: String, configureButtonBlock: ConfigureButtonBlock? = nil, onButtonTappedHandler: ButtonTappedBlock? = nil){
         self.title = title
@@ -129,36 +129,36 @@ public class ButtonBrickCellModel: ButtonBrickCellDataSource, ButtonBrickCellDel
         self.onButtonTappedHandler = onButtonTappedHandler
     }
 
-    public func configureButtonBrick(cell: ButtonBrickCell) {
-        cell.button.setTitle(title, forState: .Normal)
-        configureButtonBlock?(cell: cell)
+    open func configureButtonBrick(_ cell: ButtonBrickCell) {
+        cell.button.setTitle(title, for: UIControlState())
+        configureButtonBlock?(cell)
     }
 
-    public func didTapOnButtonForButtonBrickCell(cell: ButtonBrickCell) {
-        onButtonTappedHandler?(cell: cell)
+    open func didTapOnButtonForButtonBrickCell(_ cell: ButtonBrickCell) {
+        onButtonTappedHandler?(cell)
     }
 }
 
 // MARK: - Cell
 
-public class ButtonBrickCell: GenericBrickCell, Bricklike {
+open class ButtonBrickCell: GenericBrickCell, Bricklike {
     public typealias BrickType = ButtonBrick
 
-    @IBOutlet weak public var button: UIButton!
-    @IBOutlet weak public var rightImage: UIImageView?
+    @IBOutlet weak open var button: UIButton!
+    @IBOutlet weak open var rightImage: UIImageView?
 
-    override public func updateContent() {
+    override open func updateContent() {
         super.updateContent()
 
         if !fromNib {
             self.button = self.genericContentView as! UIButton
-            self.button.addTarget(self, action: #selector(didTapButton(_:)), forControlEvents: .TouchUpInside)
+            self.button.addTarget(self, action: #selector(didTapButton(_:)), for: .touchUpInside)
         }
 
         brick.dataSource?.configureButtonBrick(self)
     }
 
-    @IBAction public func didTapButton(sender: AnyObject) {
+    @IBAction open func didTapButton(_ sender: AnyObject) {
         brick.delegate?.didTapOnButtonForButtonBrickCell(self)
     }
 }

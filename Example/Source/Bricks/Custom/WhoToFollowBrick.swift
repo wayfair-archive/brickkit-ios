@@ -12,7 +12,7 @@ import BrickKit
 class WhoToFollowBrick: Brick {
     weak var dataSource: WhoToFollowBrickDataSource?
     
-    init(_ identifier: String, width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, dataSource: WhoToFollowBrickDataSource) {
+    init(_ identifier: String, width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, dataSource: WhoToFollowBrickDataSource) {
         self.dataSource = dataSource
         super.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView)
     }
@@ -39,14 +39,14 @@ class WhoToFollowBrickCell: BrickCell, Bricklike {
         
         followButton.layer.cornerRadius = 5.0
         followButton.layer.borderWidth = 1.0
-        followButton.layer.borderColor = self.tintColor.CGColor
+        followButton.layer.borderColor = self.tintColor.cgColor
         imageView.layer.cornerRadius = 4
         imageView.clipsToBounds = true
         
-        imageView.image = brick.dataSource?.whoToFollowImage(self)
-        titleLabel.text = brick.dataSource?.whoToFollowTitle(self)
-        descriptionLabel.text = brick.dataSource?.whoToFollowDescription(self)
-        atTag.text = brick.dataSource?.whoToFollowAtTag(self)
+        imageView.image = brick.dataSource?.whoToFollowImage(cell: self)
+        titleLabel.text = brick.dataSource?.whoToFollowTitle(cell: self)
+        descriptionLabel.text = brick.dataSource?.whoToFollowDescription(cell: self)
+        atTag.text = brick.dataSource?.whoToFollowAtTag(cell: self)
         
     }
 }

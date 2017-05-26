@@ -1,3 +1,4 @@
+
 //
 //  NibLessViewController.swift
 //  BrickKit-Example
@@ -11,7 +12,7 @@ import BrickKit
 
 class NibLessViewController: BrickViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Nibless Brick"
     }
 
@@ -28,14 +29,14 @@ class NibLessViewController: BrickViewController {
 
         let section = BrickSection(bricks: [
             NiblessBrick(backgroundColor: .brickGray1, text: "BRICK", image: UIImage(named: "logo_splash")!, configureCell: NibLessViewController.configureCell),
-            NiblessBrick(width: .Ratio(ratio: 1/2), backgroundColor: .brickGray3, text: "BRICK", image: UIImage(named: "logo_inapp")!, configureCell: NibLessViewController.configureCell),
-            NiblessBrick(width: .Ratio(ratio: 1/2), backgroundColor: .brickGray3, text: "BRICK", image: UIImage(named: "logo_inapp")!, configureCell: NibLessViewController.configureCell)
+            NiblessBrick(width: .ratio(ratio: 1/2), backgroundColor: .brickGray3, text: "BRICK", image: UIImage(named: "logo_inapp")!, configureCell: NibLessViewController.configureCell),
+            NiblessBrick(width: .ratio(ratio: 1/2), backgroundColor: .brickGray3, text: "BRICK", image: UIImage(named: "logo_inapp")!, configureCell: NibLessViewController.configureCell)
             ], inset: 10)
         setSection(section)
     }
 
     static func configureCell(cell: NiblessBrickCell) {
-        cell.label.textAlignment = .Center
+        cell.label.textAlignment = .center
         cell.label.textColor = cell.brick.backgroundColor.complemetaryColor
     }
 

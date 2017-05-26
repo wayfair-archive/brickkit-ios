@@ -20,13 +20,13 @@ class BaseBrickController: BrickViewController {
         }
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.backgroundColor = .brickBackground
         updateBehavior()
 
         if self.presentingViewController != nil {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(BaseBrickController.close))
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(BaseBrickController.close))
         }
     }
 
@@ -36,10 +36,10 @@ class BaseBrickController: BrickViewController {
         }
         let selector = #selector(BaseBrickController.toggleBehavior)
         if self.isBehaviorEnabled {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Disable", style: .Plain, target: self, action: selector)
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Disable", style: .plain, target: self, action: selector)
             self.layout.behaviors.insert(behavior)
         } else {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Enable", style: .Plain, target: self, action: selector)
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Enable", style: .plain, target: self, action: selector)
             self.layout.behaviors.remove(behavior)
         }
     }
@@ -49,7 +49,7 @@ class BaseBrickController: BrickViewController {
     }
 
     func close() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -60,7 +60,7 @@ extension LabelBrickCell {
     }
 
     func configure() {
-        label.textAlignment = .Center
+        label.textAlignment = .center
         label.textColor = brick.backgroundColor.complemetaryColor
     }
 }
@@ -68,7 +68,7 @@ extension LabelBrickCell {
 extension ButtonBrickCell {
 
     func configure() {
-        button.titleLabel?.textAlignment = .Center
-        button.setTitleColor(brick.backgroundColor.complemetaryColor, forState: .Normal)
+        button.titleLabel?.textAlignment = .center
+        button.setTitleColor(brick.backgroundColor.complemetaryColor, for: .normal)
     }
 }

@@ -13,7 +13,7 @@ private let reuseIdentifier = "Cell"
 
 class HugeRepeatCollectionViewController: UICollectionViewController, LabelBrickCellDataSource {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Huge Repeat CollectionView"
     }
     override class var subTitle: String {
@@ -24,7 +24,7 @@ class HugeRepeatCollectionViewController: UICollectionViewController, LabelBrick
 
     init() {
         let flow = UICollectionViewFlowLayout()
-        let width = (UIScreen.mainScreen().bounds.width - 20) / 2
+        let width = (UIScreen.main.bounds.width - 20) / 2
         flow.estimatedItemSize = CGSize(width: width, height: 50)
         flow.minimumLineSpacing = 10
         flow.minimumInteritemSpacing = 10
@@ -40,17 +40,17 @@ class HugeRepeatCollectionViewController: UICollectionViewController, LabelBrick
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .brickBackground
-        self.collectionView!.backgroundColor = .clearColor()
-        self.collectionView!.registerNib(LabelBrickNibs.Default, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.backgroundColor = UIColor.clear
+        self.collectionView!.register(LabelBrickNibs.Default, forCellWithReuseIdentifier: reuseIdentifier)
     }
 
     // MARK: UICollectionViewDataSource
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return numberOfLabels
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! LabelBrickCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! LabelBrickCell
 
         let brick = LabelBrick(backgroundColor: .brickGray1, dataSource: self)
         cell.setContent(brick, index: indexPath.item, collectionIndex: 0, collectionIdentifier: nil)
@@ -59,7 +59,7 @@ class HugeRepeatCollectionViewController: UICollectionViewController, LabelBrick
         return cell
     }
 
-    func configureLabelBrickCell(cell: LabelBrickCell) {
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
         var text = ""
 
         for _ in 0...min(cell.index, 5) {

@@ -19,7 +19,7 @@ class BrickSelfsizingFlowLayoutTests: XCTestCase {
 
         // Put setup code here. This method is called before the invocation of each test method in the class.
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .Vertical
+        flowLayout.scrollDirection = .vertical
         flowLayout.itemSize = CGSize(width: 20, height: 20)
         flowLayout.itemSize = frame.size
         flowLayout.minimumLineSpacing = 0
@@ -27,10 +27,10 @@ class BrickSelfsizingFlowLayoutTests: XCTestCase {
 
         collectionView = UICollectionView(frame: frame, collectionViewLayout: flowLayout)
         collectionView.dataSource = self
-        collectionView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
 
-    private func framesForCollectionView() -> [CGRect] {
+    fileprivate func framesForCollectionView() -> [CGRect] {
         collectionView.layoutSubviews()
         let frames = collectionView.subviews.map { $0.frame }
         return frames
@@ -39,12 +39,12 @@ class BrickSelfsizingFlowLayoutTests: XCTestCase {
 }
 
 extension BrickSelfsizingFlowLayoutTests: UICollectionViewDataSource {
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 50
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         return cell
     }
 }

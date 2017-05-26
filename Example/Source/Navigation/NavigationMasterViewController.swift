@@ -21,19 +21,19 @@ class NavigationMasterViewController: BrickViewController {
     var indexOfSelectedBrick: Int? {
         didSet {
             if indexOfSelectedBrick != nil {
-                brickCollectionView.section.edgeInsets = UIEdgeInsetsZero
-                navItemBrick.width = .Ratio(ratio: 1)
+                brickCollectionView.section.edgeInsets = UIEdgeInsets.zero
+                navItemBrick.width = .ratio(ratio: 1)
 
                 #if os(iOS)
-                let height = navigationController!.navigationBar.frame.height + UIApplication.sharedApplication().statusBarFrame.size.height
+                let height = navigationController!.navigationBar.frame.height + UIApplication.shared.statusBarFrame.size.height
                 #else
                 let height = navigationController!.navigationBar.frame.height
                 #endif
-                navItemBrick.height = .Fixed(size: height)
+                navItemBrick.height = .fixed(size: height)
             } else {
                 brickCollectionView.section.edgeInsets = Constants.brickPatternEdgeInsets
-                navItemBrick.width = .Fixed(size: Constants.brickWidth)
-                navItemBrick.height = .Fixed(size: Constants.brickHeight)
+                navItemBrick.width = .fixed(size: Constants.brickWidth)
+                navItemBrick.height = .fixed(size: Constants.brickHeight)
             }
         }
     }
@@ -44,7 +44,7 @@ class NavigationMasterViewController: BrickViewController {
         super.viewDidLoad()
 
         // Status bar should be above the title bar brick
-        let imageView = UIImageView(image: Constants.inAppLogo.imageWithRenderingMode(.AlwaysTemplate))
+        let imageView = UIImageView(image: Constants.inAppLogo.withRenderingMode(.alwaysTemplate))
         #if os(tvOS)
             imageView.tintColor = .brickPurple3
             
@@ -57,11 +57,11 @@ class NavigationMasterViewController: BrickViewController {
 
         #if os(iOS)
         // Set the backbar button to empty string
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         #endif
 
         // Setup background
-        self.view.backgroundColor = .whiteColor()
+        self.view.backgroundColor = UIColor.white
         collectionView?.backgroundColor = .brickPattern
 
         // Setup hide behavior
@@ -75,7 +75,7 @@ class NavigationMasterViewController: BrickViewController {
         let offsetBehavior = OffsetLayoutBehavior(dataSource: self)
         self.layout.behaviors.insert(offsetBehavior)
 
-        navItemBrick = LabelBrick(NavigationIdentifiers.navItemBrick, width: .Fixed(size: Constants.brickWidth), height: .Fixed(size: Constants.brickHeight), backgroundColor: .brickPurple3, dataSource: self)
+        navItemBrick = LabelBrick(NavigationIdentifiers.navItemBrick, width: .fixed(size: Constants.brickWidth), height: .fixed(size: Constants.brickHeight), backgroundColor: .brickPurple3, dataSource: self)
 
         navItemBrick.brickCellTapDelegate = self
 
@@ -94,12 +94,12 @@ class NavigationMasterViewController: BrickViewController {
 #if os(tvOS)
 //MARK: - UICollectionViewDelegate
 extension NavigationMasterViewController {
-    func indexPathForPreferredFocusedViewInCollectionView(collectionView: UICollectionView) -> NSIndexPath? {
+    func indexPathForPreferredFocusedViewInCollectionView(collectionView: UICollectionView) -> IndexPath? {
         
-        let index = NSIndexPath(forItem: 0, inSection: 1)
+        let index = IndexPath(item: 0, section: 1)
         
-        if let cell = brickCollectionView.cellForItemAtIndexPath(index) as? FocusableBrickCell {
-            cell.willFocus()
+        if let cell = brickCollectionView.cellForItem(at: index) as? FocusableBrickCell {
+            _ = cell.willFocus()
         }
         
         return index
@@ -110,7 +110,7 @@ extension NavigationMasterViewController {
 // Mark: - BrickCellTapDelegate
 extension NavigationMasterViewController: BrickCellTapDelegate {
 
-    func didTapBrickCell(brickCell: BrickCell) {
+    func didTapBrickCell(_ brickCell: BrickCell) {
         let index = brickCell.index
         dataSource.selectedItem = self.dataSource.item(for: index)
 
@@ -124,15 +124,15 @@ extension NavigationMasterViewController: BrickCellTapDelegate {
 // MARK: - LabelBrickCellDataSource
 extension NavigationMasterViewController: LabelBrickCellDataSource {
 
-    func configureLabelBrickCell(cell: LabelBrickCell) {
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
         let text = dataSource.item(for: cell.index).title
 
-        cell.label.text = text.uppercaseString
+        cell.label.text = text.uppercased()
         cell.label.textColor = Theme.textColorForNavigationTitle
         cell.label.font = Theme.fontForNavigationTitle
-        cell.label.textAlignment = .Left
+        cell.label.textAlignment = .left
 
-        cell.imageView?.tintColor = .whiteColor()
+        cell.imageView?.tintColor = UIColor.white
 
         cell.edgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
     }
@@ -154,19 +154,19 @@ extension NavigationMasterViewController: BrickRepeatCountDataSource {
 // MARK: - OffsetLayoutBehaviorDataSource
 extension NavigationMasterViewController: OffsetLayoutBehaviorDataSource {
 
-    func offsetLayoutBehavior(behavior: OffsetLayoutBehavior, sizeOffsetForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
+    func offsetLayoutBehavior(_ behavior: OffsetLayoutBehavior, sizeOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
         return nil
     }
 
-    func offsetLayoutBehavior(behavior: OffsetLayoutBehavior, originOffsetForItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
+    func offsetLayoutBehaviorWithOrigin(_ behavior: OffsetLayoutBehavior, originOffsetForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGSize? {
 
         guard identifier == NavigationIdentifiers.navItemBrick else {
             return nil
         }
 
-        guard indexOfSelectedBrick == nil  else {
+        guard indexOfSelectedBrick == nil else {
             #if os(iOS)
-                let height = navigationController!.navigationBar.frame.height + UIApplication.sharedApplication().statusBarFrame.size.height
+                let height = navigationController!.navigationBar.frame.height + UIApplication.shared.statusBarFrame.size.height
             #else
                 let height = navigationController!.navigationBar.frame.height
             #endif
@@ -191,7 +191,7 @@ extension NavigationMasterViewController: OffsetLayoutBehaviorDataSource {
 // MARK: - HideBehavior
 extension NavigationMasterViewController: HideBehaviorDataSource {
 
-    func hideBehaviorDataSource(shouldHideItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func hideBehaviorDataSource(shouldHideItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
 
         switch identifier {
         case NavigationIdentifiers.navItemBrick:

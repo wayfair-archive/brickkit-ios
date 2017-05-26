@@ -19,34 +19,35 @@ class AsynchronousResizableBrickCell: BrickCell, Bricklike, AsynchronousResizabl
 
     weak var resizeDelegate: AsynchronousResizableDelegate?
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
-    var timer: NSTimer?
+    var timer: Timer?
 
     override func updateContent() {
         super.updateContent()
 
-        timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(AsynchronousResizableBrickCell.fireTimer), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(AsynchronousResizableBrickCell.fireTimer), userInfo: nil, repeats: false)
     }
 
     func fireTimer() {
         self.heightConstraint.constant = brick.newHeight
-        self.resizeDelegate?.performResize(self, completion: { [weak self] (completed: Bool) in
+        self.resizeDelegate?.performResize(cell: self, completion: { [weak self] (_: Bool) in
             self?.brick.didChangeSizeCallBack?()
         })
     }
 }
 
 class DeinitNotifyingAsyncBrickCell: BrickCell, Bricklike, AsynchronousResizableCell {
+
     typealias BrickType = DeinitNotifyingAsyncBrick
 
     weak var resizeDelegate: AsynchronousResizableDelegate?
 
     override func updateContent() {
         super.updateContent()
-        self.resizeDelegate?.performResize(self, completion: nil)
+        self.resizeDelegate?.performResize(cell: self, completion: nil)
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().postNotificationName("DeinitNotifyingAsyncBrickCell.deinit", object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "DeinitNotifyingAsyncBrickCell.deinit"), object: nil)
     }
 }
 

@@ -11,7 +11,7 @@ import XCTest
 
 class BrickFlowLayoutBaseTests: XCTestCase {
 
-    let collectionViewFrame = CGRectMake(0, 0, 320, 480)
+    let collectionViewFrame = CGRect(x: 0, y: 0, width: 320, height: 480)
     let hugeFrame = CGRect(x: 0, y: 0, width: 320, height: CGFloat.infinity)
 
     var layout: BrickFlowLayout!
@@ -37,13 +37,13 @@ class BrickFlowLayoutBaseTests: XCTestCase {
         collectionView = nil
     }
 
-    func setDataSources(collectionViewDataSource: UICollectionViewDataSource?, brickLayoutDataSource: BrickLayoutDataSource?) {
+    func setDataSources(_ collectionViewDataSource: UICollectionViewDataSource?, brickLayoutDataSource: BrickLayoutDataSource?) {
         self.brickLayoutDataSource = brickLayoutDataSource
         self.dataSource = collectionViewDataSource
 
         layout.dataSource = brickLayoutDataSource
         collectionView.dataSource = self.dataSource
         collectionView.reloadData()
-        layout.calculateSectionsIfNeeded(hugeFrame)
+        _ = layout.calculateSectionsIfNeeded(hugeFrame)
     }
 }

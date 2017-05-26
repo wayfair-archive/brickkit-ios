@@ -10,7 +10,7 @@ import UIKit
 import BrickKit
 
 class HideSectionsViewController: BrickViewController {
-    override class var title: String {
+    override class var brickTitle: String {
         return "Hiding Sections"
     }
     override class var subTitle: String {
@@ -113,7 +113,7 @@ class HideSectionsViewController: BrickViewController {
         }
 
         let selector: Selector = #selector(HideSectionsViewController.toggleHidden)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: title, style: .Plain, target: self, action: selector)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: selector)
     }
 
     func toggleHidden() {
@@ -125,7 +125,7 @@ class HideSectionsViewController: BrickViewController {
 }
 
 extension HideSectionsViewController: HideBehaviorDataSource {
-    func hideBehaviorDataSource(shouldHideItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func hideBehaviorDataSource(shouldHideItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         guard let _ = collectionViewLayout.collectionView as? BrickCollectionView else {
             return false
         }

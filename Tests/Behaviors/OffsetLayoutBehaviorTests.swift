@@ -15,7 +15,7 @@ class OffsetLayoutBehaviorTests: BrickFlowLayoutBaseTests {
 
     override func setUp() {
         super.setUp()
-        layout.zIndexBehavior = .BottomUp
+        layout.zIndexBehavior = .bottomUp
     }
 
     func testEmptyCollectionView() {
@@ -23,7 +23,7 @@ class OffsetLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         self.layout.behaviors.insert(behavior)
         setDataSources(SectionsCollectionViewDataSource(sections: []), brickLayoutDataSource: FixedBrickLayoutDataSource(widthRatio: 1, height: 300))
 
-        let attributes = layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0))
+        let attributes = layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 0))
         XCTAssertNil(attributes?.frame)
     }
 
@@ -34,7 +34,7 @@ class OffsetLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         self.layout.behaviors.insert(behavior)
         setDataSources(SectionsCollectionViewDataSource(sections: [1]), brickLayoutDataSource: FixedBrickLayoutDataSource(widthRatio: 1, height: 300))
 
-        let attributes = layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0))
+        let attributes = layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 0))
         XCTAssertEqual(attributes?.frame, CGRect(x: 20, y: -40, width: 320, height: 300))
     }
 
@@ -44,7 +44,7 @@ class OffsetLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         self.layout.behaviors.insert(behavior)
         setDataSources(SectionsCollectionViewDataSource(sections: [1]), brickLayoutDataSource: FixedBrickLayoutDataSource(widthRatio: 1, height: 300))
 
-        let attributes = layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0))
+        let attributes = layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 0))
         XCTAssertEqual(attributes?.frame, CGRect(x: 0, y: 0, width: 280, height: 320))
     }
 
@@ -54,7 +54,7 @@ class OffsetLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         self.layout.behaviors.insert(behavior)
         setDataSources(SectionsCollectionViewDataSource(sections: [1]), brickLayoutDataSource: FixedBrickLayoutDataSource(widthRatio: 1, height: 300))
 
-        let attributes = layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0))
+        let attributes = layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 0))
         XCTAssertEqual(attributes?.frame, CGRect(x: 20, y: -40, width: 280, height: 320))
     }
 
@@ -64,11 +64,11 @@ class OffsetLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         self.layout.behaviors.insert(behavior)
         setDataSources(SectionsCollectionViewDataSource(sections: [1]), brickLayoutDataSource: FixedBrickLayoutDataSource(widthRatio: 1, height: 300))
 
-        let attributes = layout.layoutAttributesForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0))
+        let attributes = layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 0))
         XCTAssertEqual(attributes?.frame, CGRect(x: 20, y: -40, width: 280, height: 320))
 
         layout.collectionView?.contentOffset.y = 60
-        layout.invalidateLayoutWithContext(BrickLayoutInvalidationContext(type: .Scrolling))
+        layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
         XCTAssertEqual(attributes?.frame, CGRect(x: 20, y: -40, width: 280, height: 320))
     }
 }

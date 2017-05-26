@@ -10,7 +10,7 @@ import UIKit
 
 class SimpleRepeatFixedHeightViewController: BaseRepeatBrickViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Fixed Height"
     }
     override class var subTitle: String {
@@ -20,8 +20,8 @@ class SimpleRepeatFixedHeightViewController: BaseRepeatBrickViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        repeatLabel.width = .Ratio(ratio: 1/4)
-        repeatLabel.height = .Fixed(size: 80)
+        repeatLabel.width = .ratio(ratio: 1/4)
+        repeatLabel.height = .fixed(size: 80)
     }
 
 }

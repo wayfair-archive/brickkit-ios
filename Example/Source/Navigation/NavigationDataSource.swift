@@ -38,7 +38,7 @@ class NavigationDataSource {
         guard let selectedItem = self.selectedItem else {
             return nil
         }
-        return sections.indexOf(selectedItem)
+        return sections.index(of: selectedItem)
     }
 
     lazy var sections: [ NavigationItem ] = [
@@ -150,9 +150,10 @@ struct NavigationIdentifiers {
 // MARK: - title / subTitle extension
 extension UIViewController {
 
-    class var title: String {
+    class var brickTitle: String {
         return "Title"
     }
+    
     class var subTitle: String {
         return "Sub Title"
     }

@@ -11,7 +11,7 @@ import BrickKit
 
 class ImagesInCollectionBrickHorizontalViewController: BrickViewController {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Horizontal Images in CollectionBrick"
     }
     override class var subTitle: String {
@@ -33,7 +33,7 @@ class ImagesInCollectionBrickHorizontalViewController: BrickViewController {
         collectionSection.repeatCountDataSource = self
 
         let section = BrickSection(bricks: [
-            CollectionBrick(scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: collectionSection), brickTypes: [ImageBrick.self])
+            CollectionBrick(scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: collectionSection), brickTypes: [ImageBrick.self])
             ])
 
         self.setSection(section)
@@ -59,6 +59,6 @@ extension ImagesInCollectionBrickHorizontalViewController: ImageBrickDataSource 
     }
 
     func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIViewContentMode {
-        return .ScaleAspectFill
+        return .scaleAspectFill
     }
 }

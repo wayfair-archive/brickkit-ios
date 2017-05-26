@@ -1,3 +1,5 @@
+
+
 //
 //  ChangeNibBrickViewController.swift
 //  BrickKit
@@ -18,7 +20,7 @@ private let nib2 = UINib(nibName: "CustomLabel", bundle: nil)
 
 class ChangeNibBrickViewController: BrickViewController, LabelBrickCellDataSource, BrickRepeatCountDataSource {
 
-    override class var title: String {
+    override class var brickTitle: String {
         return "Change Nib"
     }
 
@@ -49,18 +51,18 @@ class ChangeNibBrickViewController: BrickViewController, LabelBrickCellDataSourc
             cell.configure()
         }
 
-        repeatBrick = LabelBrick(BrickIdentifiers.repeatLabel, width: .Ratio(ratio: widthRatio), height: .Auto(estimate: .Fixed(size: 50)), backgroundColor: .brickGray5, dataSource: self)
+        repeatBrick = LabelBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio: widthRatio), height: .auto(estimate: .fixed(size: 50)), backgroundColor: .brickGray5, dataSource: self)
 
         let section = BrickSection(bricks: [
-            BrickSection(Buttons, backgroundColor: .whiteColor(), bricks: [
-                LabelBrick(ChangeButton, backgroundColor: .brickGray3, text: "Change".uppercaseString, configureCellBlock: LabelBrickCell.configure),
-                ButtonBrick(Button2, width: .Ratio(ratio: 1/3), backgroundColor: .brickGray1, title: "Width".uppercaseString, configureButtonBlock: configureButton, onButtonTappedHandler:{_ in
+            BrickSection(Buttons, backgroundColor: UIColor.white, bricks: [
+                LabelBrick(ChangeButton, backgroundColor: .brickGray3, text: "Change".uppercased(), configureCellBlock: LabelBrickCell.configure),
+                ButtonBrick(Button2, width: .ratio(ratio: 1/3), backgroundColor: .brickGray1, title: "Width".uppercased(), configureButtonBlock: configureButton, onButtonTappedHandler:{_ in
                     self.changeWidth()
                 }),
-                ButtonBrick(Button1, width: .Ratio(ratio: 1/3), backgroundColor: .brickGray1, title: "Nib".uppercaseString, configureButtonBlock: configureButton, onButtonTappedHandler:{_ in
+                ButtonBrick(Button1, width: .ratio(ratio: 1/3), backgroundColor: .brickGray1, title: "Nib".uppercased(), configureButtonBlock: configureButton, onButtonTappedHandler:{_ in
                     self.changeNib()
                 }),
-                ButtonBrick(Button2, width: .Ratio(ratio: 1/3), backgroundColor: .brickGray1, title: "Nib + Width".uppercaseString, configureButtonBlock: configureButton, onButtonTappedHandler:{_ in
+                ButtonBrick(Button2, width: .ratio(ratio: 1/3), backgroundColor: .brickGray1, title: "Nib + Width".uppercased(), configureButtonBlock: configureButton, onButtonTappedHandler:{_ in
                     self.changeNibAndWidth()
                 }),
                 ]),
@@ -79,7 +81,7 @@ class ChangeNibBrickViewController: BrickViewController, LabelBrickCellDataSourc
         }
     }
 
-    func configureLabelBrickCell(cell: LabelBrickCell) {
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
         cell.label.text = "BRICK \(cell.index + 1)"
         cell.configure()
     }
@@ -96,7 +98,7 @@ class ChangeNibBrickViewController: BrickViewController, LabelBrickCellDataSourc
 
     func changeWidth(reload: Bool = true) {
         widthRatio = widthRatio == 1 ? 0.5 : 1
-        repeatBrick.width = .Ratio(ratio: widthRatio)
+        repeatBrick.width = .ratio(ratio: widthRatio)
 
         if reload {
             brickCollectionView.invalidateBricks(false)
@@ -104,15 +106,15 @@ class ChangeNibBrickViewController: BrickViewController, LabelBrickCellDataSourc
     }
     
     func changeNibAndWidth() {
-        changeWidth(false)
-        changeNib(false)
+        changeWidth(reload: false)
+        changeNib(reload: false)
         brickCollectionView.reloadData()
     }
 
 }
 
 extension ChangeNibBrickViewController: StickyLayoutBehaviorDataSource {
-    func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: NSIndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
+    func stickyLayoutBehavior(_ stickyLayoutBehavior: StickyLayoutBehavior, shouldStickItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> Bool {
         return identifier == Buttons
     }
 }

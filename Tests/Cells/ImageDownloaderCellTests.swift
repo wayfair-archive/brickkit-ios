@@ -17,13 +17,13 @@ class ImageDownloaderCellTests: XCTestCase {
         brickView.registerBrickClass(ImageDownloaderBrick.self)
 
         let section = BrickSection(bricks: [
-            ImageDownloaderBrick(height: .Fixed(size: 100))
+            ImageDownloaderBrick(height: .fixed(size: 100))
             ])
 
         brickView.setSection(section)
         brickView.layoutSubviews()
 
-        let cell = brickView.cellForItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 1)) as? ImageDownloaderCell
+        let cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageDownloaderCell
         XCTAssertNotNil(cell?.imageDownloader)
     }
 }

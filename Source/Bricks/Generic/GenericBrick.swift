@@ -9,83 +9,83 @@
 import UIKit
 
 protocol ViewGenerator {
-    func generateView(frame: CGRect, in cell: GenericBrickCell) -> UIView
-    func configureView(view: UIView, cell: GenericBrickCell)
+    func generateView(_ frame: CGRect, in cell: GenericBrickCell) -> UIView
+    func configure(view: UIView, cell: GenericBrickCell)
 }
 
-public class GenericBrick<T: UIView>: Brick, ViewGenerator {
-    public typealias ConfigureView = (view: T, cell: GenericBrickCell) -> Void
+open class GenericBrick<T: UIView>: Brick, ViewGenerator {
+    public typealias ConfigureView = (_ view: T, _ cell: GenericBrickCell) -> Void
 
-    public var configureView: ConfigureView
+    open var configureView: ConfigureView
 
-    public convenience init(_ identifier: String = "", width: BrickDimension = .Ratio(ratio: 1), height: BrickDimension = .Auto(estimate: .Fixed(size: 50)), backgroundColor: UIColor = UIColor.clearColor(), backgroundView: UIView? = nil, configureView: ConfigureView) {
+    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, configureView: @escaping ConfigureView) {
         self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView, configureView: configureView)
     }
 
-    public init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = .clearColor(), backgroundView: UIView? = nil, configureView: ConfigureView) {
+    public init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, configureView: @escaping ConfigureView) {
         self.configureView = configureView
         super.init(identifier, size: size, backgroundColor: backgroundColor, backgroundView: backgroundView)
     }
 
     // Override this property to ensure that the identifier is correctly set (as it uses generics, `NSStringForClass` isn't reliable)
-    public override class var internalIdentifier: String {
+    open override class var internalIdentifier: String {
         let generic = NSStringFromClass(T.self)
         return "GenericBrick[\(generic)]"
     }
 
-    public class override var cellClass: UICollectionViewCell.Type? {
+    open class override var cellClass: UICollectionViewCell.Type? {
         return GenericBrickCell.self
     }
 
-    public func generateView(frame: CGRect, in cell: GenericBrickCell) -> UIView {
+    open func generateView(_ frame: CGRect, in cell: GenericBrickCell) -> UIView {
         let view = T(frame: frame)
 
-        view.backgroundColor = .clearColor()
+        view.backgroundColor = UIColor.clear
 
         return view
     }
 
-    func configureView(view: UIView, cell: GenericBrickCell) {
-        self.configureView(view: view as! T, cell: cell)
+    func configure(view: UIView, cell: GenericBrickCell) {
+        self.configureView(view as! T, cell)
     }
 
 }
 
-public class GenericBrickCell: BrickCell {
+open class GenericBrickCell: BrickCell {
 
     var genericContentView: UIView?
 
     var fromNib: Bool = false
 
-    public override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
         fromNib = true
     }
 
-    public override func updateContent() {
+    open override func updateContent() {
         super.updateContent()
 
         guard !fromNib else {
             return
         }
 
-        backgroundColor = .clearColor()
-        contentView.backgroundColor = .clearColor()
+        backgroundColor = UIColor.clear
+        contentView.backgroundColor = UIColor.clear
 
         if let generic = self._brick as? ViewGenerator {
             if let genericContentView = self.genericContentView {
-                generic.configureView(genericContentView, cell: self)
+                generic.configure(view: genericContentView, cell: self)
             } else {
                 let genericContentView = generic.generateView(self.frame, in: self)
-                generic.configureView(genericContentView, cell: self)
+                generic.configure(view: genericContentView, cell: self)
                 genericContentView.translatesAutoresizingMaskIntoConstraints = false
 
                 self.contentView.addSubview(genericContentView)
 
-                let topSpaceConstraint = genericContentView.topAnchor.constraintEqualToAnchor(self.contentView.topAnchor, constant: edgeInsets.top)
-                let bottomSpaceConstraint = self.contentView.bottomAnchor.constraintEqualToAnchor(genericContentView.bottomAnchor, constant: edgeInsets.bottom)
-                let leftSpaceConstraint = genericContentView.leftAnchor.constraintEqualToAnchor(self.contentView.leftAnchor, constant: edgeInsets.left)
-                let rightSpaceConstraint = self.contentView.rightAnchor.constraintEqualToAnchor(genericContentView.rightAnchor, constant: edgeInsets.right)
+                let topSpaceConstraint = genericContentView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: edgeInsets.top)
+                let bottomSpaceConstraint = self.contentView.bottomAnchor.constraint(equalTo: genericContentView.bottomAnchor, constant: edgeInsets.bottom)
+                let leftSpaceConstraint = genericContentView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: edgeInsets.left)
+                let rightSpaceConstraint = self.contentView.rightAnchor.constraint(equalTo: genericContentView.rightAnchor, constant: edgeInsets.right)
 
                 self.contentView.addConstraints([topSpaceConstraint, bottomSpaceConstraint, leftSpaceConstraint, rightSpaceConstraint])
                 self.contentView.setNeedsUpdateConstraints()
@@ -100,10 +100,9 @@ public class GenericBrickCell: BrickCell {
         } else {
             clearContentViewAndConstraints()
         }
-
     }
 
-    private func clearContentViewAndConstraints() {
+    fileprivate func clearContentViewAndConstraints() {
         genericContentView?.removeFromSuperview()
         genericContentView = nil
 
