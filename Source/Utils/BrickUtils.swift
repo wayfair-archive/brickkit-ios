@@ -9,11 +9,6 @@
 import Foundation
 
 let brickDebug = false
-public func print(_ message: String) {
-    if brickDebug {
-        Swift.print(message)
-    }
-}
 
 enum BrickUtils {
 
@@ -31,5 +26,10 @@ enum BrickUtils {
         return width
     }
 
+    public static func print(_ message: String) {
+        if brickDebug {
+            Swift.print(message)
+        }
+    }
 }
 

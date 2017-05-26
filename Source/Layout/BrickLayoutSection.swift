@@ -564,13 +564,13 @@ internal class BrickLayoutSection {
             // Prevent that the "Huge" test aren't taking forever to complete
             return
         }
-        print("\n")
-        print("Attributes for section \(sectionIndex) in \(dataSource)")
-        print("Number of attributes: \(attributes.count) in \(_dataSource.frameOfInterest)")
-        print("Frame: \(self.frame)")
+        BrickUtils.print("\n")
+        BrickUtils.print("Attributes for section \(sectionIndex) in \(String(describing: dataSource))")
+        BrickUtils.print("Number of attributes: \(attributes.count) in \(_dataSource.frameOfInterest)")
+        BrickUtils.print("Frame: \(self.frame)")
         let keys = attributes.keys.sorted(by: <)
         for key in keys {
-            print("\(key): \(attributes[key]!)")
+            BrickUtils.print("\(key): \(attributes[key]!)")
         }
     }
 
