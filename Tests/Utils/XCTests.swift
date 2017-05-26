@@ -55,12 +55,12 @@ extension XCTest {
     func verifyAttributesToExpectedResult<T: Equatable>(_ attributes: [UICollectionViewLayoutAttributes], map: @escaping ((_ attribute: UICollectionViewLayoutAttributes) -> T), expectedResult: [Int: [T]], sort: ((T, T) -> Bool)? = nil) -> Bool {
 
         let array = simpleArrayWithFramesForCollectionViewAttributes(attributes, map: map)
-        BrickKit.print("Actual: \(array)")
-        BrickKit.print("Expected: \(expectedResult)")
+        BrickUtils.print("Actual: \(array)")
+        BrickUtils.print("Expected: \(expectedResult)")
         guard Array(expectedResult.keys.sorted()) == Array(array.keys.sorted()) else {
-            BrickKit.print("Keys are not the same")
-            BrickKit.print("Keys: \(Array(array.keys.sorted()))")
-            BrickKit.print("Expected Keys: \(Array(expectedResult.keys.sorted()))")
+            BrickUtils.print("Keys are not the same")
+            BrickUtils.print("Keys: \(Array(array.keys.sorted()))")
+            BrickUtils.print("Expected Keys: \(Array(expectedResult.keys.sorted()))")
             return false
         }
 
@@ -74,12 +74,12 @@ extension XCTest {
             }
 
             if frames != expectedFrames {
-                BrickKit.print("\(section) not equal")
-                BrickKit.print("Frames: \(frames)")
-                BrickKit.print("ExpectedFrames: \(expectedFrames)")
+                BrickUtils.print("\(section) not equal")
+                BrickUtils.print("Frames: \(frames)")
+                BrickUtils.print("ExpectedFrames: \(expectedFrames)")
                 return false
             } else {
-                BrickKit.print("\(section) equal")
+                BrickUtils.print("\(section) equal")
             }
         }
         return true
