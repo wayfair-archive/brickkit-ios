@@ -1,11 +1,33 @@
 # Change Log
 
+## [2.0.0](https://github.com/wayfair/brickkit-ios/tree/2.0.0) (2017-05-26)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.4.0...2.0.0)
+
+**Swift 3**
+
+**Closed issues:**
+
+- Title used within its own type [\#123](https://github.com/wayfair/brickkit-ios/issues/123)
+- Do you have plan for supporting swift 3 ? [\#121](https://github.com/wayfair/brickkit-ios/issues/121)
+-  compiled with older version of Swift language  [\#21](https://github.com/wayfair/brickkit-ios/issues/21)
+
+**Merged pull requests:**
+
+- Replaced some force unwraping with a guard [\#127](https://github.com/wayfair/brickkit-ios/pull/127) ([jay18001](https://github.com/jay18001))
+- Addresses an issue when using multiple BrickCollectionViews as Cells … [\#125](https://github.com/wayfair/brickkit-ios/pull/125) ([ablokker](https://github.com/ablokker))
+- Fixed Example app on swift 3 [\#124](https://github.com/wayfair/brickkit-ios/pull/124) ([jay18001](https://github.com/jay18001))
+- Updated swift 3 branch with master [\#108](https://github.com/wayfair/brickkit-ios/pull/108) ([jay18001](https://github.com/jay18001))
+- Swift3 Conversion [\#99](https://github.com/wayfair/brickkit-ios/pull/99) ([rubencagnie](https://github.com/rubencagnie))
+
 ## [1.4.0](https://github.com/wayfair/brickkit-ios/tree/1.4.0) (2017-04-24)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.3.2...1.4.0)
 
 **Merged pull requests:**
 
-- Addresses an issue when using multiple BrickCollectionViews as Cells… [\#122](https://github.com/wayfair/brickkit-ios/pull/122) ([ablokker](https://github.com/ablokker))
+- -Addresses an issue when using multiple BrickCollectionViews as Cells… [\#122](https://github.com/wayfair/brickkit-ios/pull/122) ([ablokker](https://github.com/ablokker))
+- Collection bricks with a fixed height would infinitely resize. [\#116](https://github.com/wayfair/brickkit-ios/pull/116) ([thevwu](https://github.com/thevwu))
+- Added a test for the preferred layout attributes height [\#115](https://github.com/wayfair/brickkit-ios/pull/115) ([willspurgeon](https://github.com/willspurgeon))
+- Move image brick delegate change over to swift 3 branch [\#107](https://github.com/wayfair/brickkit-ios/pull/107) ([butkis93](https://github.com/butkis93))
 
 ## [1.3.2](https://github.com/wayfair/brickkit-ios/tree/1.3.2) (2017-04-05)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.3.1...1.3.2)
@@ -137,7 +159,7 @@
 - Added changing the default nib [\#62](https://github.com/wayfair/brickkit-ios/pull/62) ([jay18001](https://github.com/jay18001))
 
 ## [0.9.7](https://github.com/wayfair/brickkit-ios/tree/0.9.7) (2017-01-12)
-[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/0.9.6...0.9.7)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/list...0.9.7)
 
 **Closed issues:**
 
@@ -148,6 +170,9 @@
 - Add UIAccessibility properties to Brick class to pass along to BrickC… [\#61](https://github.com/wayfair/brickkit-ios/pull/61) ([joleary1987](https://github.com/joleary1987))
 - Provide a way to override brick cell content after the updateContent [\#58](https://github.com/wayfair/brickkit-ios/pull/58) ([wfsttam](https://github.com/wfsttam))
 - Fixed Image brick when the readding it to the section [\#54](https://github.com/wayfair/brickkit-ios/pull/54) ([jay18001](https://github.com/jay18001))
+
+## [list](https://github.com/wayfair/brickkit-ios/tree/list) (2016-12-19)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/0.9.6...list)
 
 ## [0.9.6](https://github.com/wayfair/brickkit-ios/tree/0.9.6) (2016-12-19)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/0.9.5...0.9.6)
