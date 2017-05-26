@@ -1,11 +1,99 @@
 # Change Log
 
+## [1.4.0](https://github.com/wayfair/brickkit-ios/tree/1.4.0) (2017-04-24)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.3.2...1.4.0)
+
+**Merged pull requests:**
+
+- Addresses an issue when using multiple BrickCollectionViews as Cells… [\#122](https://github.com/wayfair/brickkit-ios/pull/122) ([ablokker](https://github.com/ablokker))
+
+## [1.3.2](https://github.com/wayfair/brickkit-ios/tree/1.3.2) (2017-04-05)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.3.1...1.3.2)
+
+**Closed issues:**
+
+- CollectionBrick issues with height sizing [\#109](https://github.com/wayfair/brickkit-ios/issues/109)
+- Flickr Example Crash app [\#48](https://github.com/wayfair/brickkit-ios/issues/48)
+- Brick Dimension Size Classes Issue on iPad pro device [\#27](https://github.com/wayfair/brickkit-ios/issues/27)
+
+**Merged pull requests:**
+
+- Fixed memory leak with BrickDimension [\#119](https://github.com/wayfair/brickkit-ios/pull/119) ([jay18001](https://github.com/jay18001))
+- Removed Flickr example [\#114](https://github.com/wayfair/brickkit-ios/pull/114) ([jay18001](https://github.com/jay18001))
+- Collection bricks with fixed heights were infinitely resizing. [\#113](https://github.com/wayfair/brickkit-ios/pull/113) ([thevwu](https://github.com/thevwu))
+
+## [1.3.1](https://github.com/wayfair/brickkit-ios/tree/1.3.1) (2017-03-22)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.3.0...1.3.1)
+
+**Closed issues:**
+
+- Bricks are offscreen [\#104](https://github.com/wayfair/brickkit-ios/issues/104)
+
+**Merged pull requests:**
+
+- Removed a line that modified an attribute’s height [\#112](https://github.com/wayfair/brickkit-ios/pull/112) ([willspurgeon](https://github.com/willspurgeon))
+
+## [1.3.0](https://github.com/wayfair/brickkit-ios/tree/1.3.0) (2017-03-09)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.2.1...1.3.0)
+
+**Closed issues:**
+
+- Brick's height is not updated correctly when invalidating repeat count [\#101](https://github.com/wayfair/brickkit-ios/issues/101)
+
+**Merged pull requests:**
+
+- SectionAttributes weren’t updated [\#105](https://github.com/wayfair/brickkit-ios/pull/105) ([rubencagnie](https://github.com/rubencagnie))
+- Fix severe memory leak when using async resizable cells [\#103](https://github.com/wayfair/brickkit-ios/pull/103) ([klundberg](https://github.com/klundberg))
+- Fixed invalidateRepeatCounts [\#102](https://github.com/wayfair/brickkit-ios/pull/102) ([rubencagnie](https://github.com/rubencagnie))
+
+## [1.2.1](https://github.com/wayfair/brickkit-ios/tree/1.2.1) (2017-03-02)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.2.0...1.2.1)
+
+**Closed issues:**
+
+- Bricks get unexpected heights [\#97](https://github.com/wayfair/brickkit-ios/issues/97)
+
+**Merged pull requests:**
+
+- Fix imagebrick closure [\#100](https://github.com/wayfair/brickkit-ios/pull/100) ([butkis93](https://github.com/butkis93))
+
+## [1.2.0](https://github.com/wayfair/brickkit-ios/tree/1.2.0) (2017-03-02)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.1.3...1.2.0)
+
+**Closed issues:**
+
+- Allow a Brick to hide individually [\#93](https://github.com/wayfair/brickkit-ios/issues/93)
+- BrickSection should know what bricks/nibs to register [\#90](https://github.com/wayfair/brickkit-ios/issues/90)
+- ImageView goes blank [\#88](https://github.com/wayfair/brickkit-ios/issues/88)
+- Content offset for scrolling bricks upward needed [\#84](https://github.com/wayfair/brickkit-ios/issues/84)
+- SnapToPointLayoutBehavior does not always ignore the overall CollectionBrick section [\#82](https://github.com/wayfair/brickkit-ios/issues/82)
+
+**Merged pull requests:**
+
+- Removed customHeightProvider [\#98](https://github.com/wayfair/brickkit-ios/pull/98) ([rubencagnie](https://github.com/rubencagnie))
+- Update image brick delegate to pass back the corresponding image bric… [\#96](https://github.com/wayfair/brickkit-ios/pull/96) ([butkis93](https://github.com/butkis93))
+- isHidden property on Brick [\#94](https://github.com/wayfair/brickkit-ios/pull/94) ([rubencagnie](https://github.com/rubencagnie))
+- contentOffsetAdjustment on height change [\#92](https://github.com/wayfair/brickkit-ios/pull/92) ([rubencagnie](https://github.com/rubencagnie))
+- Add `nibIdentifiers` to the BrickSection [\#91](https://github.com/wayfair/brickkit-ios/pull/91) ([rubencagnie](https://github.com/rubencagnie))
+- Fixes GenericBrickCell by reusing view [\#89](https://github.com/wayfair/brickkit-ios/pull/89) ([rubencagnie](https://github.com/rubencagnie))
+- Fixed generic brick [\#86](https://github.com/wayfair/brickkit-ios/pull/86) ([butkis93](https://github.com/butkis93))
+- Fixed a bug that prevented the SnapToPointLayoutBehavior from filteri… [\#83](https://github.com/wayfair/brickkit-ios/pull/83) ([willspurgeon](https://github.com/willspurgeon))
+
+## [1.1.3](https://github.com/wayfair/brickkit-ios/tree/1.1.3) (2017-02-14)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.1.2...1.1.3)
+
+## [1.1.2](https://github.com/wayfair/brickkit-ios/tree/1.1.2) (2017-02-14)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.1.1...1.1.2)
+
+**Closed issues:**
+
+- GenericBrickCell is setting `backgroundColor` wrong [\#80](https://github.com/wayfair/brickkit-ios/issues/80)
+
 ## [1.1.1](https://github.com/wayfair/brickkit-ios/tree/1.1.1) (2017-02-13)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.1.0...1.1.1)
 
 **Closed issues:**
 
-- GenericBrickCell is setting `backgroundColor` wrong [\#80](https://github.com/wayfair/brickkit-ios/issues/80)
 - invalidateRepeatCounts causes duplicate loading of newly added bricks [\#55](https://github.com/wayfair/brickkit-ios/issues/55)
 
 **Merged pull requests:**

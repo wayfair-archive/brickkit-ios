@@ -211,8 +211,8 @@ open class BrickCollectionView: UICollectionView {
                 self.reloadSections(IndexSet(integersIn: 0..<self.numberOfSections))
             }
             self.collectionViewLayout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .invalidate))
-            }, completion: { completed in
-                completion?(completed)
+        }, completion: { completed in
+            completion?(completed)
         })
     }
 

@@ -555,7 +555,7 @@ class InteractiveTests: XCTestCase {
         let attributes = brickView.layout.layoutAttributesForItem(at: IndexPath(item: 1, section: 1)) as? BrickLayoutAttributes
         XCTAssertEqual(attributes?.identifier, "Brick1")
     }
-    
+
     func testThatInvalidateRepeatCountsHasCorrectValues() {
         continueAfterFailure = true
         

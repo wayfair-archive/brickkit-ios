@@ -169,13 +169,11 @@ internal class BrickLayoutSection {
         }
     }
 
-    
     /// Update the identifiers for the attributes
     ///
     /// - Parameter targetStartIndex: The index that should start invalidating bricks
     func updateAttributeIdentifiers(targetStartIndex: inout Int) {
         for (index, attribute) in attributes {
-            
             let identifier = _dataSource.identifier(for: index, in: self)
             if attribute.identifier != identifier {
                 targetStartIndex = min(index, targetStartIndex)
