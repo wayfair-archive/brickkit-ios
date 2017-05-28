@@ -53,9 +53,23 @@ open class GenericBrick<T: UIView>: Brick, ViewGenerator {
 
 open class GenericBrickCell: BrickCell {
 
-    var genericContentView: UIView?
+    open private(set) var genericContentView: UIView?
+    open var accessoryView: UIView? {
+        didSet {
+            oldValue?.removeFromSuperview()
 
-    var fromNib: Bool = false
+            if let accessoryView = self.accessoryView {
+                accessoryView.translatesAutoresizingMaskIntoConstraints = false
+                self.contentView.addSubview(accessoryView)
+            }
+
+            if let genericContentView = self.genericContentView {
+                reconfigureConstraints(genericContentView: genericContentView)
+            }
+        }
+    }
+
+    internal private(set) var fromNib: Bool = false
 
     open override func awakeFromNib() {
         super.awakeFromNib()
@@ -76,30 +90,63 @@ open class GenericBrickCell: BrickCell {
             if let genericContentView = self.genericContentView {
                 generic.configure(view: genericContentView, cell: self)
             } else {
+
+                // Setup generic content view
                 let genericContentView = generic.generateView(self.frame, in: self)
                 generic.configure(view: genericContentView, cell: self)
                 genericContentView.translatesAutoresizingMaskIntoConstraints = false
-
                 self.contentView.addSubview(genericContentView)
 
-                let topSpaceConstraint = genericContentView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: edgeInsets.top)
-                let bottomSpaceConstraint = self.contentView.bottomAnchor.constraint(equalTo: genericContentView.bottomAnchor, constant: edgeInsets.bottom)
-                let leftSpaceConstraint = genericContentView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: edgeInsets.left)
-                let rightSpaceConstraint = self.contentView.rightAnchor.constraint(equalTo: genericContentView.rightAnchor, constant: edgeInsets.right)
-
-                self.contentView.addConstraints([topSpaceConstraint, bottomSpaceConstraint, leftSpaceConstraint, rightSpaceConstraint])
-                self.contentView.setNeedsUpdateConstraints()
+                reconfigureConstraints(genericContentView: genericContentView)
 
                 // Assign to instance
                 self.genericContentView = genericContentView
-                self.topSpaceConstraint = topSpaceConstraint
-                self.bottomSpaceConstraint = bottomSpaceConstraint
-                self.leftSpaceConstraint = leftSpaceConstraint
-                self.rightSpaceConstraint = rightSpaceConstraint
             }
         } else {
             clearContentViewAndConstraints()
         }
+    }
+
+    fileprivate func reconfigureConstraints(genericContentView: UIView) {
+        // Remove previous constraints
+        self.contentView.removeConstraints(self.contentView.constraints)
+
+        // Setup constraints
+        let topSpaceConstraint = genericContentView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: edgeInsets.top)
+        let bottomSpaceConstraint = self.contentView.bottomAnchor.constraint(equalTo: genericContentView.bottomAnchor, constant: edgeInsets.bottom)
+        let leftSpaceConstraint = genericContentView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: edgeInsets.left)
+
+
+        let rightSpaceConstraint: NSLayoutConstraint
+        if let accessoryView = self.accessoryView {
+            rightSpaceConstraint = self.contentView.rightAnchor.constraint(equalTo: accessoryView.rightAnchor, constant: edgeInsets.right)
+            accessoryView.setContentHuggingPriority(UILayoutPriorityDefaultHigh, for: .horizontal)
+            genericContentView.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .horizontal)
+
+            accessoryView.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .horizontal)
+            genericContentView.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .horizontal)
+
+            self.contentView.addConstraints([
+                accessoryView.centerYAnchor.constraint(equalTo: genericContentView.centerYAnchor),
+                accessoryView.leftAnchor.constraint(equalTo: genericContentView.rightAnchor, constant: 0),
+                ])
+
+        } else {
+            rightSpaceConstraint = self.contentView.rightAnchor.constraint(equalTo: genericContentView.rightAnchor, constant: edgeInsets.right)
+        }
+
+        self.contentView.addConstraints([
+            topSpaceConstraint,
+            bottomSpaceConstraint,
+            leftSpaceConstraint,
+            rightSpaceConstraint
+            ])
+        self.contentView.setNeedsUpdateConstraints()
+
+        self.topSpaceConstraint = topSpaceConstraint
+        self.bottomSpaceConstraint = bottomSpaceConstraint
+        self.leftSpaceConstraint = leftSpaceConstraint
+        self.rightSpaceConstraint = rightSpaceConstraint
     }
 
     fileprivate func clearContentViewAndConstraints() {

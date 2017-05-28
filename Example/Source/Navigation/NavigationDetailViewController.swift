@@ -37,10 +37,10 @@ class NavigationDetailViewController: BrickViewController {
         // Setup appear behavior
         brickCollectionView.layout.appearBehavior = BrickAppearTopBehavior()
 
-        // Register Bricks
-        registerBrickClass(TwoLabelBrick.self)
-
-        let labelBrick = TwoLabelBrick(NavigationIdentifiers.subItemBrick, width: .ratio(ratio: 1), height: .fixed(size: Constants.brickHeight), backgroundColor: UIColor.white, dataSource: self)
+        // Define brick
+        let labelBrick = GenericBrick<TwoLabelView>(NavigationIdentifiers.subItemBrick, width: .ratio(ratio: 1), height: .fixed(size: Constants.brickHeight), backgroundColor: UIColor.white) { [weak self] twoLabel, cell in
+            self?.configure(twoLabel: twoLabel, cell: cell)
+        }
         labelBrick.brickCellTapDelegate = self
 
         let section = BrickSection(NavigationIdentifiers.subItemSection, bricks: [
@@ -50,6 +50,28 @@ class NavigationDetailViewController: BrickViewController {
         section.repeatCountDataSource = self
 
         setSection(section)
+    }
+
+    fileprivate func configure(twoLabel: TwoLabelView, cell: GenericBrickCell) {
+        cell.edgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+        
+        #if os(tvOS)
+            twoLabel.label.font = UIFont.brickSemiBoldFont(size: 25)
+        #else
+            twoLabel.label.font = UIFont.brickSemiBoldFont(size: 15)
+        #endif
+        twoLabel.label.text = navItem.viewControllers[cell.index].brickTitle
+        twoLabel.label.textColor = .brickPurple1
+
+        twoLabel.subLabel.text = navItem.viewControllers[cell.index].subTitle
+
+        // Only set accessory once if needed
+        if cell.accessoryView == nil {
+            let image = UIImage(named: "chevron", in: LabelBrick.bundle, compatibleWith: nil)
+            let imageView = UIImageView(image: image!)
+            cell.accessoryView = imageView
+        }
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -101,27 +123,6 @@ extension NavigationDetailViewController: BrickCellTapDelegate {
         let detail = detailType.init()
         detail.navigationItem.title = detailType.brickTitle.uppercased()
         self.navigationController?.pushViewController(detail, animated: true)
-    }
-
-}
-
-// MARK: - LabelBrickCellDataSource
-extension NavigationDetailViewController: LabelBrickCellDataSource {
-
-    func configureLabelBrickCell(_ cell: LabelBrickCell) {
-        guard let twoLabel = cell as? TwoLabelBrickCell else {
-            return
-        }
-
-        #if os(tvOS)
-            twoLabel.label.font = UIFont.brickSemiBoldFont(size: 25)
-        #else
-            twoLabel.label.font = UIFont.brickSemiBoldFont(size: 15)
-        #endif
-        twoLabel.label.text = navItem.viewControllers[cell.index].brickTitle
-        twoLabel.label.textColor = .brickPurple1
-
-        twoLabel.subLabel.text = navItem.viewControllers[cell.index].subTitle
     }
 
 }

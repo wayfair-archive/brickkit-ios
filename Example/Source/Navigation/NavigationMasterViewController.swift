@@ -11,7 +11,7 @@ import BrickKit
 class NavigationMasterViewController: BrickViewController {
 
     /// Reference to the label brick used for a navigation item
-    var navItemBrick: LabelBrick!
+    var navItemBrick: GenericBrick<UILabel>!
 
     var dataSource: NavigationDataSource {
         return (self.navigationController as! NavigationViewController).dataSource
@@ -67,15 +67,17 @@ class NavigationMasterViewController: BrickViewController {
         // Setup hide behavior
         brickCollectionView.layout.hideBehaviorDataSource = self
 
-        // Register Bricks
-        registerNib(LabelBrickNibs.Chevron, forBrickWithIdentifier: NavigationIdentifiers.navItemBrick)
-        registerBrickClass(LabelBrick.self)
-
         // Behaviors
         let offsetBehavior = OffsetLayoutBehavior(dataSource: self)
         self.layout.behaviors.insert(offsetBehavior)
 
-        navItemBrick = LabelBrick(NavigationIdentifiers.navItemBrick, width: .fixed(size: Constants.brickWidth), height: .fixed(size: Constants.brickHeight), backgroundColor: .brickPurple3, dataSource: self)
+        navItemBrick = GenericBrick<UILabel>(NavigationIdentifiers.navItemBrick,
+                                             width: .fixed(size: Constants.brickWidth),
+                                             height: .fixed(size: Constants.brickHeight),
+                                             backgroundColor: .brickPurple3) { [weak self] label, cell in
+            self?.configure(label: label, cell: cell)
+        }
+        navItemBrick.repeatCount = dataSource.numberOfItems
 
         navItemBrick.brickCellTapDelegate = self
 
@@ -83,8 +85,6 @@ class NavigationMasterViewController: BrickViewController {
             navItemBrick,
             ], inset: Constants.brickInset, edgeInsets: Constants.brickPatternEdgeInsets
         )
-
-        section.repeatCountDataSource = self
 
         setSection(section)
     }
@@ -121,34 +121,29 @@ extension NavigationMasterViewController: BrickCellTapDelegate {
 
 }
 
-// MARK: - LabelBrickCellDataSource
-extension NavigationMasterViewController: LabelBrickCellDataSource {
+// MARK: - Setup label
+extension NavigationMasterViewController {
 
-    func configureLabelBrickCell(_ cell: LabelBrickCell) {
+    func configure(label: UILabel, cell: GenericBrickCell) {
         let text = dataSource.item(for: cell.index).title
 
-        cell.label.text = text.uppercased()
-        cell.label.textColor = Theme.textColorForNavigationTitle
-        cell.label.font = Theme.fontForNavigationTitle
-        cell.label.textAlignment = .left
-
-        cell.imageView?.tintColor = UIColor.white
+        label.text = text.uppercased()
+        label.textColor = Theme.textColorForNavigationTitle
+        label.font = Theme.fontForNavigationTitle
+        label.textAlignment = .left
+        label.numberOfLines = 0
 
         cell.edgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-    }
 
-}
-
-// MARK: - BrickRepeatCountDataSource
-extension NavigationMasterViewController: BrickRepeatCountDataSource {
-
-    func repeatCount(for identifier: String, with collectionIndex: Int, collectionIdentifier: String) -> Int {
-        switch identifier {
-        case NavigationIdentifiers.navItemBrick: return dataSource.numberOfItems
-        default: return 1
+        // Only set accessory once if needed
+        if cell.accessoryView == nil {
+            let image = UIImage(named: "chevron", in: LabelBrick.bundle, compatibleWith: nil)
+            let imageView = UIImageView(image: image!)
+            imageView.tintColor = Theme.textColorForNavigationTitle
+            cell.accessoryView = imageView
         }
     }
-    
+
 }
 
 // MARK: - OffsetLayoutBehaviorDataSource
