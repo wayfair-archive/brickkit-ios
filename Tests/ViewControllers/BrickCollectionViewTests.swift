@@ -106,6 +106,30 @@ class BrickCollectionViewTests: XCTestCase {
 
     func testBrickInfoRepeatCount() {
         brickView.registerBrickClass(DummyBrick.self)
+        let brick1 = DummyBrick("Brick1")
+        brick1.repeatCount = 5
+        let brick2 = DummyBrick("Brick2")
+        brick2.repeatCount = 5
+
+        let section = BrickSection(bricks: [
+            brick1,
+            brick2,
+            ])
+        brickView.setSection(section)
+
+        let brickInfo1 = brickView.brickInfo(at: IndexPath(item: 3, section: 1))
+        XCTAssertEqual(brickInfo1.brick.identifier, "Brick1")
+        XCTAssertEqual(brickInfo1.index, 3)
+        XCTAssertEqual(brickInfo1.collectionIndex, 0)
+
+        let brickInfo2 = brickView.brickInfo(at: IndexPath(item: 8, section: 1))
+        XCTAssertEqual(brickInfo2.brick.identifier, "Brick2")
+        XCTAssertEqual(brickInfo2.index, 3)
+        XCTAssertEqual(brickInfo2.collectionIndex, 0)
+    }
+    
+    func testBrickInfoRepeatCountDataSource() {
+        brickView.registerBrickClass(DummyBrick.self)
         let section = BrickSection(bricks: [
             DummyBrick("Brick1"),
             DummyBrick("Brick2"),
@@ -124,7 +148,7 @@ class BrickCollectionViewTests: XCTestCase {
         XCTAssertEqual(brickInfo2.index, 3)
         XCTAssertEqual(brickInfo2.collectionIndex, 0)
     }
-
+    
     func testBrickInfoCollectionBrick() {
         let collectionSection = BrickSection(bricks: [
             DummyBrick("Brick1")

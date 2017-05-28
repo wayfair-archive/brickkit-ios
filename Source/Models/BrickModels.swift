@@ -64,6 +64,10 @@ open class Brick: CustomStringConvertible {
     /// Used to override content. Defaults to nil
     open weak var overrideContentSource: OverrideContentSource?
 
+    /// Repeat Count for the brick. 
+    /// This will be overwritten if there is a repeatCountDataSource specified
+    open var repeatCount: Int = 1
+
     /// Initialize a Brick
     ///
     /// - parameter identifier:      Identifier of the brick. Defaults to empty string
@@ -91,7 +95,7 @@ open class Brick: CustomStringConvertible {
 
     /// Get the count for a given collection info
     func count(for collection: CollectionInfo) -> Int {
-        return counts[collection] ?? 1
+        return counts[collection] ?? self.repeatCount
     }
 
     // Mark: - Loading nibs/cells
