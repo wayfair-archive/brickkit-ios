@@ -29,8 +29,6 @@
 		4E3BD7DF1DB1316400541900 /* SegmentHeaderBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7601DB1316400541900 /* SegmentHeaderBrick.swift */; };
 		4E3BD7EE1DB1316400541900 /* WhoToFollowBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7691DB1316400541900 /* WhoToFollowBrick.swift */; };
 		4E3BD7EF1DB1316400541900 /* WhoToFollowBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7691DB1316400541900 /* WhoToFollowBrick.swift */; };
-		4E3BD7F81DB1316400541900 /* TwoLabelBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7711DB1316400541900 /* TwoLabelBrick.swift */; };
-		4E3BD7F91DB1316400541900 /* TwoLabelBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7711DB1316400541900 /* TwoLabelBrick.swift */; };
 		4E3BD7FA1DB1316400541900 /* StepperBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7731DB1316400541900 /* StepperBrick.swift */; };
 		4E3BD7FE1DB1316400541900 /* BaseBrickController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7761DB1316400541900 /* BaseBrickController.swift */; };
 		4E3BD7FF1DB1316400541900 /* BaseBrickController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7761DB1316400541900 /* BaseBrickController.swift */; };
@@ -125,9 +123,7 @@
 		4E3BD86D1DB1316400541900 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7BB1DB1316400541900 /* ViewController.swift */; };
 		4E3BD88D1DB131FA00541900 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD86F1DB131FA00541900 /* Assets.xcassets */; };
 		4E3BD8AA1DB131FA00541900 /* CustomLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8841DB131FA00541900 /* CustomLabel.xib */; };
-		4E3BD8AC1DB131FA00541900 /* TwoLabelBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8851DB131FA00541900 /* TwoLabelBrick.xib */; };
 		4E3BD8AF1DB131FA00541900 /* CustomLabel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8871DB131FA00541900 /* CustomLabel.xib */; };
-		4E3BD8B11DB131FA00541900 /* TwoLabelBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD8881DB131FA00541900 /* TwoLabelBrick.xib */; };
 		4E3BD8B21DB131FA00541900 /* StepperBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD88B1DB131FA00541900 /* StepperBrick.xib */; };
 		4E3BD8B41DB1321100541900 /* DailySalesBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD87B1DB131FA00541900 /* DailySalesBrick.xib */; };
 		4E3BD8B51DB1321100541900 /* HeaderAndFooterBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3BD87C1DB131FA00541900 /* HeaderAndFooterBrick.xib */; };
@@ -166,6 +162,8 @@
 		9327D03F1DB94A9500D65BCB /* NibLessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327D03D1DB94A9500D65BCB /* NibLessViewController.swift */; };
 		9327D0431DB94AB300D65BCB /* NiblessBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327D0421DB94AB300D65BCB /* NiblessBrick.swift */; };
 		9327D0441DB94AB300D65BCB /* NiblessBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327D0421DB94AB300D65BCB /* NiblessBrick.swift */; };
+		9357E7F61EDB4CAB0085AFFA /* TwoLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9357E7F51EDB4CAB0085AFFA /* TwoLabelView.swift */; };
+		9357E7F71EDB4CAB0085AFFA /* TwoLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9357E7F51EDB4CAB0085AFFA /* TwoLabelView.swift */; };
 		935D48901DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D488F1DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift */; };
 		935D48911DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D488F1DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift */; };
 		935D489B1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D489A1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift */; };
@@ -272,7 +270,6 @@
 		4E3BD75F1DB1316400541900 /* ProfileImageBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileImageBrick.swift; sourceTree = "<group>"; };
 		4E3BD7601DB1316400541900 /* SegmentHeaderBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentHeaderBrick.swift; sourceTree = "<group>"; };
 		4E3BD7691DB1316400541900 /* WhoToFollowBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoToFollowBrick.swift; sourceTree = "<group>"; };
-		4E3BD7711DB1316400541900 /* TwoLabelBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoLabelBrick.swift; sourceTree = "<group>"; };
 		4E3BD7731DB1316400541900 /* StepperBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepperBrick.swift; sourceTree = "<group>"; };
 		4E3BD7761DB1316400541900 /* BaseBrickController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseBrickController.swift; sourceTree = "<group>"; };
 		4E3BD7771DB1316400541900 /* BaseRepeatBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseRepeatBrickViewController.swift; sourceTree = "<group>"; };
@@ -340,9 +337,7 @@
 		4E3BD8801DB131FA00541900 /* SegmentHeaderBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentHeaderBrick.xib; sourceTree = "<group>"; };
 		4E3BD8811DB131FA00541900 /* WhoToFollowBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WhoToFollowBrick.xib; sourceTree = "<group>"; };
 		4E3BD8841DB131FA00541900 /* CustomLabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomLabel.xib; sourceTree = "<group>"; };
-		4E3BD8851DB131FA00541900 /* TwoLabelBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoLabelBrick.xib; sourceTree = "<group>"; };
 		4E3BD8871DB131FA00541900 /* CustomLabel.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomLabel.xib; sourceTree = "<group>"; };
-		4E3BD8881DB131FA00541900 /* TwoLabelBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoLabelBrick.xib; sourceTree = "<group>"; };
 		4E3BD88B1DB131FA00541900 /* StepperBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepperBrick.xib; sourceTree = "<group>"; };
 		4E3BD8C41DB1334100541900 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4E3BD8C51DB1334100541900 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -357,6 +352,7 @@
 		932365661DF449A500BE5183 /* FillBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillBrickViewController.swift; sourceTree = "<group>"; };
 		9327D03D1DB94A9500D65BCB /* NibLessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLessViewController.swift; sourceTree = "<group>"; };
 		9327D0421DB94AB300D65BCB /* NiblessBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NiblessBrick.swift; sourceTree = "<group>"; };
+		9357E7F51EDB4CAB0085AFFA /* TwoLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoLabelView.swift; sourceTree = "<group>"; };
 		935D488F1DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesInCollectionBrickViewController.swift; sourceTree = "<group>"; };
 		935D489A1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesInCollectionBrickHorizontalViewController.swift; sourceTree = "<group>"; };
 		938996A41DF77A3200E0F4F1 /* AlignmentBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlignmentBrickViewController.swift; sourceTree = "<group>"; };
@@ -478,7 +474,7 @@
 		4E3BD76A1DB1316400541900 /* Label */ = {
 			isa = PBXGroup;
 			children = (
-				4E3BD7711DB1316400541900 /* TwoLabelBrick.swift */,
+				9357E7F51EDB4CAB0085AFFA /* TwoLabelView.swift */,
 			);
 			path = Label;
 			sourceTree = "<group>";
@@ -721,7 +717,6 @@
 			isa = PBXGroup;
 			children = (
 				4E3BD8841DB131FA00541900 /* CustomLabel.xib */,
-				4E3BD8851DB131FA00541900 /* TwoLabelBrick.xib */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -730,7 +725,6 @@
 			isa = PBXGroup;
 			children = (
 				4E3BD8871DB131FA00541900 /* CustomLabel.xib */,
-				4E3BD8881DB131FA00541900 /* TwoLabelBrick.xib */,
 			);
 			path = tvOS;
 			sourceTree = "<group>";
@@ -902,7 +896,6 @@
 			files = (
 				4E3BD8C01DB1321B00541900 /* SegmentHeaderBrick.xib in Resources */,
 				4E3BD8BE1DB1321B00541900 /* ProfileHeaderBrick.xib in Resources */,
-				4E3BD8AC1DB131FA00541900 /* TwoLabelBrick.xib in Resources */,
 				4E3BD8C11DB1321B00541900 /* WhoToFollowBrick.xib in Resources */,
 				4E3BD8BF1DB1321B00541900 /* ProfileImageBrick.xib in Resources */,
 				4E3BD82C1DB1316400541900 /* SizeClassBrick.xib in Resources */,
@@ -923,7 +916,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E3BD83D1DB1316400541900 /* TestBrick.xib in Resources */,
-				4E3BD8B11DB131FA00541900 /* TwoLabelBrick.xib in Resources */,
 				4E3BD8B61DB1321100541900 /* PostBrick.xib in Resources */,
 				4E3BD8AF1DB131FA00541900 /* CustomLabel.xib in Resources */,
 				4E3BD8BA1DB1321100541900 /* WhoToFollowBrick.xib in Resources */,
@@ -978,7 +970,6 @@
 				4E3BD81C1DB1316400541900 /* BasicInteractiveViewController.swift in Sources */,
 				4E3BD82A1DB1316400541900 /* InvalidateHeightViewController.swift in Sources */,
 				4E3BD8421DB1316400541900 /* SpotlightScrollingViewController.swift in Sources */,
-				4E3BD7F81DB1316400541900 /* TwoLabelBrick.swift in Sources */,
 				9327D0431DB94AB300D65BCB /* NiblessBrick.swift in Sources */,
 				4E3BD81A1DB1316400541900 /* AdvancedRepeatViewController.swift in Sources */,
 				4E3BD8681DB1316400541900 /* NavigationDataSource.swift in Sources */,
@@ -997,6 +988,7 @@
 				4E3BD7BC1DB1316400541900 /* AppDelegate.swift in Sources */,
 				935D48901DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift in Sources */,
 				93186B031DDE89610095C849 /* HugeRepeatBrickViewController.swift in Sources */,
+				9357E7F61EDB4CAB0085AFFA /* TwoLabelView.swift in Sources */,
 				4E3BD8441DB1316400541900 /* MultiDimensionBrickViewController.swift in Sources */,
 				4E15F92C1DBA570600BBD363 /* MockTwitterViewController.swift in Sources */,
 				4E3BD7DE1DB1316400541900 /* SegmentHeaderBrick.swift in Sources */,
@@ -1070,7 +1062,6 @@
 				4E3BD82B1DB1316400541900 /* InvalidateHeightViewController.swift in Sources */,
 				4E3BD8431DB1316400541900 /* SpotlightScrollingViewController.swift in Sources */,
 				93DE8B4A1DF744BB00324EC8 /* FillBrickViewController.swift in Sources */,
-				4E3BD7F91DB1316400541900 /* TwoLabelBrick.swift in Sources */,
 				4E3BD81B1DB1316400541900 /* AdvancedRepeatViewController.swift in Sources */,
 				93EAFE311DB57D6B0036331C /* NavigationDetailViewController.swift in Sources */,
 				4E3BD8D41DB1373C00541900 /* HorizontalCollectionViewController.swift in Sources */,
@@ -1099,6 +1090,7 @@
 				4E3BD86B1DB1316400541900 /* Theme.swift in Sources */,
 				935D489C1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift in Sources */,
 				4E3BD8231DB1316400541900 /* DynamicContentViewController.swift in Sources */,
+				9357E7F71EDB4CAB0085AFFA /* TwoLabelView.swift in Sources */,
 				4E3BD8351DB1316400541900 /* SizeClassBrick.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
