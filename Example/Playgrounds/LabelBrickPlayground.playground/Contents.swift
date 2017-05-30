@@ -4,22 +4,18 @@ import UIKit
 import BrickKit
 import PlaygroundSupport
 
-PlaygroundPage.current.needsIndefiniteExecution = true
+let brickView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 500, height: 500))
+brickView.backgroundColor = UIColor.white
 
-let brickViewContoller = BrickViewController()
-brickViewContoller.view.backgroundColor = UIColor.white
+let configureBlock: ((LabelBrickCell) -> Void) = { cell in
+    cell.label.textAlignment = .center
+}
+
+let section = BrickSection(backgroundColor: .lightGray, bricks: [
+    LabelBrick(text: "LABEL BRICK", configureCellBlock: configureBlock)
+], edgeInsets: UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16))
+
+brickView.setSection(section)
 
 //Add the set the live view
-PlaygroundPage.current.liveView = brickViewContoller
-
-let section = BrickSection(bricks: [
-    LabelBrick(text: "BRICK 1"),
-    LabelBrick(text: "MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK"),
-    LabelBrick(width: .ratio(ratio: 1/2), text: "1/2 BRICK"),
-    LabelBrick(width: .ratio(ratio: 1/2), text: "1/2 BRICK"),
-    LabelBrick(width: .ratio(ratio: 1/3), text: "1/3 BRICK"),
-    LabelBrick(width: .ratio(ratio: 1/3), text: "1/3 BRICK"),
-    LabelBrick(width: .ratio(ratio: 1/3), text: "1/3 BRICK"),
-    ], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
-
-brickViewContoller.setSection(section)
+PlaygroundPage.current.liveView = brickView

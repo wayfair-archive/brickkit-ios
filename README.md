@@ -347,9 +347,6 @@ class ViewController: BrickViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		// Register the bricks you are going to use
-        self.registerBrickClass(LabelBrick.self)
-
         let section = BrickSection(bricks: [
             LabelBrick(text: "LABEL BRICK")
             ])
@@ -374,7 +371,7 @@ let section = BrickSection(bricks: [
 	LabelBrick(text: "LABEL BRICK LABEL BRICK LABEL BRICK LABEL BRICK")
 ])
 ```
-
+Try it in the LabelBrickPlayground.
 
 ### BrickDimension
 To setup the dimensions of a brick, please refer to [BRICK_DIMENSION.md](Docs\BRICK_DIMENSION.md).
@@ -388,21 +385,18 @@ import BrickKit
 
 class ViewController: BrickViewController {
 
-	var fruits = Array<Fruit>()
+	var fruits: [Fruit] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        products.append(Fruit("Apple"))
-        products.append(Fruit("Banana"))
-        products.append(Fruit("Cherry"))
-
-        // Register the bricks you are going to use
-        self.registerBrickClass(LabelBrick.self)
+        fruits.append(Fruit(name: "Apple"))
+        fruits.append(Fruit(name: "Banana"))
+        fruits.append(Fruit(name: "Cherry"))
 
         let section = BrickSection(bricks: [
             LabelBrick("FRUIT", text: "BRICK 1")
-            ])
+        ])
 
         section.repeatCountDataSource = self
 
@@ -418,6 +412,7 @@ extension ViewController: BrickRepeatCountDataSource {
     }
 }
 ```
+Try it in the BrickRepeatCountPlayground.
 
 ## Layout
 
