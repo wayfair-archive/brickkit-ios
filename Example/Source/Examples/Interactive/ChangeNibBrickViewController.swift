@@ -18,13 +18,13 @@ private let ChangeButton = "Change"
 private let nib1 = LabelBrickNibs.Default
 private let nib2 = UINib(nibName: "CustomLabel", bundle: nil)
 
-class ChangeNibBrickViewController: BrickViewController, LabelBrickCellDataSource, BrickRepeatCountDataSource {
+class ChangeNibBrickViewController: BrickViewController, LabelBrickCellDataSource, BrickRepeatCountDataSource, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Change Nib"
     }
 
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Change nibs interactively"
     }
     

@@ -12,17 +12,17 @@ import BrickKit
 private let AllSections = "AllSections"
 
 
-class DynamicContentViewController: BrickViewController {
+class DynamicContentViewController: BrickViewController, HasTitle {
 
     struct Identifiers {
         static let HideableSectionContentImage = "HideableSectionContentImage"
     }
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Dynamic Resizing Content"
     }
 
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Resizing content after loading a section"
     }
 
@@ -55,7 +55,7 @@ class DynamicContentViewController: BrickViewController {
         self.overrideContentSource.shouldOverride = true
     }
 
-    func timerFired() {
+    @objc func timerFired() {
         self.overrideContentSource.shouldOverride = false
         imageURLs = []
         for _ in 1...5 {

@@ -9,13 +9,13 @@
 import UIKit
 import BrickKit
 
-class MultiDimensionBrickViewController: BrickViewController, LabelBrickCellDataSource, BrickRepeatCountDataSource {
+class MultiDimensionBrickViewController: BrickViewController, LabelBrickCellDataSource, BrickRepeatCountDataSource, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Multi Dimension"
     }
     
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Different way of setting dimensions"
     }
 

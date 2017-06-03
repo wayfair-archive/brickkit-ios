@@ -8,12 +8,12 @@
 import UIKit
 import BrickKit
 
-class SectionStickingViewController: BaseSectionBrickViewController {
+class SectionStickingViewController: BaseSectionBrickViewController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Sticking Section"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Example of a Sticking Section"
     }
 

@@ -8,13 +8,13 @@
 
 import UIKit
 
-class SimpleRepeatHeightRatioViewController: BaseRepeatBrickViewController {
+class SimpleRepeatHeightRatioViewController: BaseRepeatBrickViewController, HasTitle {
     
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Height Ratio"
     }
 
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Example how to setup bricks using a height ratio"
     }
 

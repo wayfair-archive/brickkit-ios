@@ -9,12 +9,12 @@
 import UIKit
 import BrickKit
 
-class ImageViewBrickViewController: BrickViewController {
+class ImageViewBrickViewController: BrickViewController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Image URL Example"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "ImageBrick using UIImage"
     }
 

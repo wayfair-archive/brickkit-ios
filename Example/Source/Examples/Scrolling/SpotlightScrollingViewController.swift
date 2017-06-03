@@ -8,11 +8,11 @@
 
 import BrickKit
 
-class SpotlightScrollingViewController: BaseScrollingViewController {
-    override class var brickTitle: String {
+class SpotlightScrollingViewController: BaseScrollingViewController, HasTitle {
+    class var brickTitle: String {
         return "Spotlight"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Have a brick in the spotlight"
     }
 

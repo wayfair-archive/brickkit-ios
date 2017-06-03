@@ -26,7 +26,7 @@ class HorizontalSnapToPointViewController: SimpleHorizontalScrollBrickViewContro
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Location", style: .plain, target: self, action: #selector(HorizontalSnapToPointViewController.changeLocation))
     }
 
-    func changeLocation() {
+    @objc func changeLocation() {
         let alert = UIAlertController(title: "Change location", message: "Change the location of the snap to point", preferredStyle: .actionSheet)
 
         alert.addAction(UIAlertAction(title: "Left", style: .default, handler: { (action) in

@@ -112,7 +112,7 @@ class InteractiveTests: XCTestCase {
         fixedCount.repeatCountHash = ["Brick1": 2, "Brick2": 2, "Brick3": 2]
 
         let addedExpectation = expectation(description: "Added Bricks")
-        self.brickView.invalidateRepeatCounts { (completed) in
+        self.brickView.invalidateRepeatCounts { (_, _, _) in
             addedExpectation.fulfill()
         }
 
@@ -152,7 +152,7 @@ class InteractiveTests: XCTestCase {
         fixed.repeatCountHash["Brick4"] = 0
 
         let repeatCountExpectation = expectation(description: "RepeatCount")
-        self.brickView.invalidateRepeatCounts { (completed) in
+        self.brickView.invalidateRepeatCounts { (_, _, _) in
             repeatCountExpectation.fulfill()
         }
 

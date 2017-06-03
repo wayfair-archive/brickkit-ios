@@ -11,7 +11,7 @@ import BrickKit
 
 
 
-class RepeatCollectionBrickViewController: BrickApp.BaseBrickController, BrickRepeatCountDataSource {
+class RepeatCollectionBrickViewController: BrickApp.BaseBrickController, BrickRepeatCountDataSource, HasTitle {
 
     struct Identifiers {
         static let collectionBrick = "collectionBrick"
@@ -19,10 +19,10 @@ class RepeatCollectionBrickViewController: BrickApp.BaseBrickController, BrickRe
         static let subTitleLabel = "subTitleLabel"
     }
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Repeat CollectionBrick"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "How to repeat a CollectionBrick"
     }
 

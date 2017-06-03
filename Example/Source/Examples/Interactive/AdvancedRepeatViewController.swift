@@ -20,12 +20,12 @@ private let LoadButtonSection = "LoadButtonSection"
 
 private let WholeSection = "WholeSection"
 
-class AdvancedRepeatViewController: BrickApp.BaseBrickController {
+class AdvancedRepeatViewController: BrickApp.BaseBrickController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Advanced Repeat"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "How to repeat bricks in bulk"
     }
 

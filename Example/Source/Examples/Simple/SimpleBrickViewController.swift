@@ -9,13 +9,13 @@
 import UIKit
 import BrickKit
 
-class SimpleBrickViewController: BrickApp.BaseBrickController {
+class SimpleBrickViewController: BrickApp.BaseBrickController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Simple Example"
     }
     
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Basic example of using different brick widths and dynamic heights"
     }
 

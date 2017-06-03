@@ -146,17 +146,7 @@ struct NavigationIdentifiers {
     static let subItemBrick = "SubItemBrick"
 }
 
-
-// MARK: - title / subTitle extension
-extension UIViewController {
-
-    class var brickTitle: String {
-        return "Title"
-    }
-    
-    class var subTitle: String {
-        return "Sub Title"
-    }
-
+protocol HasTitle: class {
+    static var brickTitle: String { get }
+    static var subTitle: String { get }
 }
-

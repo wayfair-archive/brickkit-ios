@@ -28,12 +28,12 @@ class TwitterDataProvider {
 }
 
 
-class MockTwitterViewController: BrickViewController {
+class MockTwitterViewController: BrickViewController, HasTitle {
     
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Twitter"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Wayfair Twitter HomePage"
     }
 
@@ -172,7 +172,7 @@ class MockTwitterViewController: BrickViewController {
         return section
     }
     
-    func backAction() {
+    @objc func backAction() {
         _ = self.navigationController?.popViewController(animated: true)
     }
 }

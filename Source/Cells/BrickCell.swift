@@ -130,7 +130,7 @@ open class BrickCell: BaseBrickCell {
     open fileprivate(set) var collectionIdentifier: String?
 
     #if os(tvOS)
-    public var allowsFocus: Bool = true
+    @objc public var allowsFocus: Bool = true
     #endif
 
     @IBOutlet weak internal var topSpaceConstraint: NSLayoutConstraint? {
@@ -155,7 +155,7 @@ open class BrickCell: BaseBrickCell {
         return UIEdgeInsetsMake(defaultTopConstraintConstant, defaultLeftConstraintConstant, defaultBottomConstraintConstant, defaultRightConstraintConstant)
     }
 
-    open dynamic var edgeInsets: UIEdgeInsets = UIEdgeInsets.zero {
+    @objc open dynamic var edgeInsets: UIEdgeInsets = UIEdgeInsets.zero {
         didSet {
             self.topSpaceConstraint?.constant = edgeInsets.top
             self.bottomSpaceConstraint?.constant = edgeInsets.bottom
@@ -195,7 +195,7 @@ open class BrickCell: BaseBrickCell {
         self._brick.overrideContentSource?.overrideContent(for: self)
     }
 
-    func didTapCell() {
+    @objc func didTapCell() {
         _brick.brickCellTapDelegate?.didTapBrickCell(self)
     }
 

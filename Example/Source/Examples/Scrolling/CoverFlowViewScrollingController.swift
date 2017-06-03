@@ -8,12 +8,12 @@
 
 import BrickKit
 
-class CoverFlowScrollingViewController: BrickViewController {
-    override class var brickTitle: String {
+class CoverFlowScrollingViewController: BrickViewController, HasTitle {
+    class var brickTitle: String {
         return "Cover Flow"
     }
     
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Cover Flow layout behavior"
     }
 

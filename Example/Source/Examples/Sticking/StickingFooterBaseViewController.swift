@@ -11,13 +11,13 @@ import BrickKit
 private let StickySection = "Sticky Section"
 private let FooterTitle = "FooterTitle"
 
-class StickingFooterBaseViewController: BrickApp.BaseBrickController {
+class StickingFooterBaseViewController: BrickApp.BaseBrickController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Sticking Footer"
     }
 
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Example of Sticking Footers"
     }
 

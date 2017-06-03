@@ -8,12 +8,12 @@
 
 import BrickKit
 
-class BlockHorizontalViewController: BrickViewController {
+class BlockHorizontalViewController: BrickViewController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "1:1 Horizontal Scroll"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Scroll images as cubes"
     }
 

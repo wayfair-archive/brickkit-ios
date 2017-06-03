@@ -9,12 +9,12 @@
 import UIKit
 import BrickKit
 
-class SimpleRepeatBrickViewController: BrickViewController, LabelBrickCellDataSource, BrickRepeatCountDataSource {
+class SimpleRepeatBrickViewController: BrickViewController, LabelBrickCellDataSource, BrickRepeatCountDataSource, HasTitle {
     
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Simple Repeat"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Example how to use the repeatCountDataSource"
     }
 
@@ -43,7 +43,7 @@ class SimpleRepeatBrickViewController: BrickViewController, LabelBrickCellDataSo
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: selector)
     }
 
-    func toggleAlignBehavior() {
+    @objc func toggleAlignBehavior() {
         self.brickCollectionView.section.alignRowHeights = !self.brickCollectionView.section.alignRowHeights
         brickCollectionView.reloadData()
         updateNavigationItem()

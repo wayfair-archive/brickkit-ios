@@ -9,12 +9,12 @@
 import UIKit
 import BrickKit
 
-class HugeRepeatBrickViewController: BrickViewController, LabelBrickCellDataSource, BrickRepeatCountDataSource {
+class HugeRepeatBrickViewController: BrickViewController, LabelBrickCellDataSource, BrickRepeatCountDataSource, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Huge Repeat"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Example how to repeat a huge amount of bricks"
     }
 

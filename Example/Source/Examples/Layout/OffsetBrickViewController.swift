@@ -9,11 +9,11 @@
 import UIKit
 import BrickKit
 
-class OffsetBrickViewController: BaseRepeatBrickViewController {
-    override class var brickTitle: String {
+class OffsetBrickViewController: BaseRepeatBrickViewController, HasTitle {
+    class var brickTitle: String {
         return "Offset Behavior"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Shows how an offset behavior can be used"
     }
 

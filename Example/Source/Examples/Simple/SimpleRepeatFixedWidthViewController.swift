@@ -9,12 +9,12 @@
 import UIKit
 import BrickKit
 
-class SimpleRepeatFixedWidthViewController: BaseRepeatBrickViewController {
+class SimpleRepeatFixedWidthViewController: BaseRepeatBrickViewController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Fixed Width"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Example how to setup bricks using a fixed width"
     }
     
