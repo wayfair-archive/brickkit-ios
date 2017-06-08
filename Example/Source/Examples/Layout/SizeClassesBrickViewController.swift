@@ -9,13 +9,13 @@
 import UIKit
 import BrickKit
 
-class SizeClassesBrickViewController: BrickViewController {
+class SizeClassesBrickViewController: BrickViewController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Size Classes"
     }
 
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Example for size classes"
     }
 

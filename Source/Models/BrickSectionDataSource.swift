@@ -19,7 +19,7 @@ extension BrickSection {
     }
 
     func numberOfBricks(in collection: CollectionInfo) -> Int {
-        return bricks.reduce(0) { $0.0 + $0.1.count(for: collection) }
+        return bricks.reduce(0) { count, brick in count + brick.count(for: collection) }
     }
 
     fileprivate func brickSection(for section: Int, in collection: CollectionInfo) -> BrickSection? {

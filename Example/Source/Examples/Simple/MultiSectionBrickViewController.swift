@@ -9,13 +9,13 @@
 import UIKit
 import BrickKit
 
-class MultiSectionBrickViewController: BrickApp.BaseBrickController {
+class MultiSectionBrickViewController: BrickApp.BaseBrickController, HasTitle {
     
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Multi Sections"
     }
     
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Example that shows the power of using sections in sections"
     }
 

@@ -60,7 +60,8 @@ open class OffsetLayoutBehavior: BrickLayoutBehavior {
             let oldFrame = attributes.frame
             var currentFrame = attributes.originalFrame
             if let sizeOffset = dataSource?.offsetLayoutBehavior(self, sizeOffsetForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {
-                currentFrame?.size = CGSize(width: (currentFrame?.size.width)! + sizeOffset.width, height: (currentFrame?.size.height)! + sizeOffset.height)
+                let frame = currentFrame
+                currentFrame?.size = CGSize(width: (frame?.size.width)! + sizeOffset.width, height: (frame?.size.height)! + sizeOffset.height)
             }
 
             if let originOffset = dataSource?.offsetLayoutBehaviorWithOrigin(self, originOffsetForItemAtIndexPath: attributes.indexPath, withIdentifier: attributes.identifier, inCollectionViewLayout: collectionViewLayout) {

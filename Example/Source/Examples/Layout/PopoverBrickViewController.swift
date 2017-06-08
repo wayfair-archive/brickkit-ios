@@ -8,13 +8,13 @@
 
 import BrickKit
 
-class PopoverBrickViewController: UIViewController {
+class PopoverBrickViewController: UIViewController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Popover"
     }
 
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Example for size classes"
     }
 
@@ -28,7 +28,7 @@ class PopoverBrickViewController: UIViewController {
 
     }
 
-    func showPopover(sender: UIBarButtonItem) {
+    @objc func showPopover(sender: UIBarButtonItem) {
         let brickController = SimpleRepeatBrickViewController()
 
         brickController.modalPresentationStyle = .popover

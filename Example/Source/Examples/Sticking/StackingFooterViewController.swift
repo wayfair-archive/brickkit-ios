@@ -13,12 +13,12 @@ private let BuyButton = "BuyButton"
 private let BuySection = "BuySection"
 private let TotalLabel = "TotalLabel"
 
-class StackingFooterViewController: BrickApp.BaseBrickController {
+class StackingFooterViewController: BrickApp.BaseBrickController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Stacking Footers"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Example how to stack footers"
     }
     

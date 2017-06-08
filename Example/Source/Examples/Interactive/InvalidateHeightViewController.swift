@@ -9,13 +9,13 @@
 import UIKit
 import BrickKit
 
-class InvalidateHeightViewController: BrickViewController {
+class InvalidateHeightViewController: BrickViewController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Invalidate Height"
     }
 
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Change height dynamically"
     }
     
@@ -54,7 +54,7 @@ class InvalidateHeightViewController: BrickViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: selector)
     }
 
-    func toggleHeights() {
+    @objc func toggleHeights() {
         switch brick.height {
         case .fixed(_): brick.height = .auto(estimate: .fixed(size: 100))
         default: brick.height = .fixed(size: 200)

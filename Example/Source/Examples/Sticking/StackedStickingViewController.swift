@@ -9,11 +9,11 @@
 import UIKit
 import BrickKit
 
-class StackedStickingViewController: BaseRepeatBrickViewController {
-    override class var brickTitle: String {
+class StackedStickingViewController: BaseRepeatBrickViewController, HasTitle {
+    class var brickTitle: String {
         return "Stacked Headers"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Example how headers stack while scrolling"
     }
 

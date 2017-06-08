@@ -9,12 +9,12 @@
 import UIKit
 import BrickKit
 
-class ImagesInCollectionBrickHorizontalViewController: BrickViewController {
+class ImagesInCollectionBrickHorizontalViewController: BrickViewController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Horizontal Images in CollectionBrick"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Shows how to use images in a CollectionBrick"
     }
 

@@ -27,7 +27,7 @@ class AsynchronousResizableBrickCell: BrickCell, Bricklike, AsynchronousResizabl
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(AsynchronousResizableBrickCell.fireTimer), userInfo: nil, repeats: false)
     }
 
-    func fireTimer() {
+    @objc func fireTimer() {
         self.heightConstraint.constant = brick.newHeight
         self.resizeDelegate?.performResize(cell: self, completion: { [weak self] (_: Bool) in
             self?.brick.didChangeSizeCallBack?()

@@ -9,13 +9,13 @@
 import UIKit
 import BrickKit
 
-class SimpleCollectionBrickViewController: BrickApp.BaseBrickController {
+class SimpleCollectionBrickViewController: BrickApp.BaseBrickController, HasTitle {
     let image = UIImage(named: "wayfair")!
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Simple CollectionBrick"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "How to use a CollectionBrick"
     }
 

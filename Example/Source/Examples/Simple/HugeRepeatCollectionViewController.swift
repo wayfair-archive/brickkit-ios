@@ -11,12 +11,12 @@ import BrickKit
 
 private let reuseIdentifier = "Cell"
 
-class HugeRepeatCollectionViewController: UICollectionViewController, LabelBrickCellDataSource {
+class HugeRepeatCollectionViewController: UICollectionViewController, LabelBrickCellDataSource, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Huge Repeat CollectionView"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Example how to repeat a huge amount of bricks"
     }
 

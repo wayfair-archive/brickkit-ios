@@ -9,12 +9,12 @@
 import UIKit
 import BrickKit
 
-class FillBrickViewController: BrickViewController {
-    override class var brickTitle: String {
+class FillBrickViewController: BrickViewController, HasTitle {
+    class var brickTitle: String {
         return "Fill Example"
     }
 
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Example of using the Fill BrickDimension"
     }
 

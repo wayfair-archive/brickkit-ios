@@ -9,11 +9,11 @@
 import UIKit
 import BrickKit
 
-class HideSectionsViewController: BrickViewController {
-    override class var brickTitle: String {
+class HideSectionsViewController: BrickViewController, HasTitle {
+    class var brickTitle: String {
         return "Hiding Sections"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Showing the power of the hide section layout behavior"
     }
 
@@ -116,7 +116,7 @@ class HideSectionsViewController: BrickViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: selector)
     }
 
-    func toggleHidden() {
+    @objc func toggleHidden() {
         self.hidden = !self.hidden
         updateNavigationItem()
 

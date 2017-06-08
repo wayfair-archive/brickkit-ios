@@ -8,12 +8,12 @@
 
 import BrickKit
 
-class HideBrickViewController: BrickApp.BaseBrickController {
+class HideBrickViewController: BrickApp.BaseBrickController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Hide Bricks"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Example of hiding bricks"
     }
 

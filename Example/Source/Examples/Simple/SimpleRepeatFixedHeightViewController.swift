@@ -8,12 +8,12 @@
 
 import UIKit
 
-class SimpleRepeatFixedHeightViewController: BaseRepeatBrickViewController {
+class SimpleRepeatFixedHeightViewController: BaseRepeatBrickViewController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Fixed Height"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Example how to setup bricks using a fixed height"
     }
     

@@ -9,11 +9,11 @@
 import UIKit
 import BrickKit
 
-class BasicStickingViewController: BaseRepeatBrickViewController {
-    override class var brickTitle: String {
+class BasicStickingViewController: BaseRepeatBrickViewController, HasTitle {
+    class var brickTitle: String {
         return "Sticky Header"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Sticking headers"
     }
 

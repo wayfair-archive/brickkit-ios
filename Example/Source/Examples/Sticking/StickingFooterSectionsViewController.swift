@@ -10,12 +10,12 @@ import BrickKit
 
 private let StickySection = "Sticky Section"
 
-class StickingFooterSectionsViewController: BrickApp.BaseBrickController {
+class StickingFooterSectionsViewController: BrickApp.BaseBrickController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Sticking Footer Sections"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Example of sticking footer sections"
     }
 

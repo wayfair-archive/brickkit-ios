@@ -11,13 +11,13 @@ import BrickKit
 
 private let Section = "Section"
 
-class InsertBrickViewController: BrickApp.BaseBrickController {
+class InsertBrickViewController: BrickApp.BaseBrickController, HasTitle {
     
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Insert Brick"
     }
 
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Shows different ways of inserting a brick"
     }
 
@@ -62,7 +62,7 @@ class InsertBrickViewController: BrickApp.BaseBrickController {
         self.scrollToBottom()
     }
 
-    func insertBrick() {
+    @objc func insertBrick() {
         numberOfLabels += 1
         updateRepeatCounts()
     }

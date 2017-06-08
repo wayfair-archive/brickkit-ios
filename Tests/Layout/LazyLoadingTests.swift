@@ -140,7 +140,7 @@ class LazyLoadingTests: XCTestCase {
         brickView.section.inset = 10
         brickView.section.alignRowHeights = true
 
-        let attributes = brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 320, height: 500))?.sorted(by: {$0.0.indexPath.item < $0.1.indexPath.item})
+        let attributes = brickView.collectionViewLayout.layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 320, height: 500))?.sorted(by: { first, second in first.indexPath.item < second.indexPath.item})
         let lastAttributes = attributes?.last
         XCTAssertEqual(lastAttributes?.frame, CGRect(x: 0.0, y: 440.0, width: 320.0, height: 100.0))
     }

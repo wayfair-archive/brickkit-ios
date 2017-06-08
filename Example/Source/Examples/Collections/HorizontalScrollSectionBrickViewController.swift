@@ -12,12 +12,12 @@ import BrickKit
 private let leftLabel = "leftLabel"
 private let rightLabel = "leftLabel"
 
-class HorizontalScrollSectionBrickViewController: BrickApp.BaseBrickController, BrickRepeatCountDataSource {
+class HorizontalScrollSectionBrickViewController: BrickApp.BaseBrickController, BrickRepeatCountDataSource, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Horizontal Scroll"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "How to use horizontal scroll with a CollectionBrick"
     }
 

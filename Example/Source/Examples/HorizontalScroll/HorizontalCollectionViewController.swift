@@ -9,13 +9,13 @@
 import UIKit
 import BrickKit
 
-class HorizontalCollectionViewController: BrickViewController {
+class HorizontalCollectionViewController: BrickViewController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Collection Horizontal Scroll"
     }
 
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Horizontally scrolling of CollectionBricks"
     }
 

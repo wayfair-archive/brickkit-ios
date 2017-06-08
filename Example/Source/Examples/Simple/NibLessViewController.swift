@@ -10,13 +10,13 @@
 import UIKit
 import BrickKit
 
-class NibLessViewController: BrickViewController {
+class NibLessViewController: BrickViewController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Nibless Brick"
     }
 
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Example of using a Brick without a nib"
     }
 

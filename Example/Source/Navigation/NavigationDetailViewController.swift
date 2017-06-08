@@ -60,10 +60,12 @@ class NavigationDetailViewController: BrickViewController {
         #else
             twoLabel.label.font = UIFont.brickSemiBoldFont(size: 15)
         #endif
-        twoLabel.label.text = navItem.viewControllers[cell.index].brickTitle
-        twoLabel.label.textColor = .brickPurple1
+        if let titledControllerType = navItem.viewControllers[cell.index] as? HasTitle.Type {
+            twoLabel.label.text = titledControllerType.brickTitle
+            twoLabel.subLabel.text = titledControllerType.subTitle
+        }
 
-        twoLabel.subLabel.text = navItem.viewControllers[cell.index].subTitle
+        twoLabel.label.textColor = .brickPurple1
 
         // Only set accessory once if needed
         if cell.accessoryView == nil {
@@ -121,7 +123,7 @@ extension NavigationDetailViewController: BrickCellTapDelegate {
         let index = brickCell.index
         let detailType = navItem.viewControllers[index]
         let detail = detailType.init()
-        detail.navigationItem.title = detailType.brickTitle.uppercased()
+        detail.navigationItem.title = (detailType as? HasTitle.Type)?.brickTitle.uppercased()
         self.navigationController?.pushViewController(detail, animated: true)
     }
 

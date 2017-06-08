@@ -190,4 +190,16 @@ open class LabelBrickCell: GenericBrickCell, Bricklike {
     @IBAction func buttonTapped(_ sender: UIButton) {
         brick.delegate?.buttonTouchedForLabelBrickCell(self)
     }
+
+#if os(tvOS)
+    override public var allowsFocus: Bool {
+        get {
+            return true
+        }
+        set {
+            super.allowsFocus = true
+        }
+    }
+#endif
+
 }

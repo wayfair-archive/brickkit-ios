@@ -9,12 +9,12 @@
 import UIKit
 import BrickKit
 
-class OnScrollDownStickingViewController: BaseSectionBrickViewController {
+class OnScrollDownStickingViewController: BaseSectionBrickViewController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "On Scroll Down"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Reveal the sticky header on scroll down"
     }
 

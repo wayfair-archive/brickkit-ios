@@ -29,13 +29,13 @@ class ScaleAppearBehavior: BrickAppearBehavior {
 
 }
 
-class InteractiveAlignViewController: BrickViewController {
+class InteractiveAlignViewController: BrickViewController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Interactive Align"
     }
 
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Change height dynamically"
     }
 
@@ -61,7 +61,7 @@ class InteractiveAlignViewController: BrickViewController {
         setSection(section)
     }
 
-    func add() {
+    @objc func add() {
         numberOfItems += 1
         updateCounts()
     }

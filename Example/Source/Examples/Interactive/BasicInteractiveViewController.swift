@@ -13,13 +13,13 @@ private let RepeatSection = "RepeatSection"
 private let Stepper = "Stepper"
 private let Section = "Section"
 
-class BasicInteractiveViewController: BrickViewController, LabelBrickCellDataSource, BrickRepeatCountDataSource {
+class BasicInteractiveViewController: BrickViewController, LabelBrickCellDataSource, BrickRepeatCountDataSource, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Basic Interaction"
     }
 
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Shows how to add and remove bricks in an interactive way"
     }
 

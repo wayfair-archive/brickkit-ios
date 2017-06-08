@@ -44,11 +44,11 @@ class BaseBrickController: BrickViewController {
         }
     }
 
-    func toggleBehavior() {
+    @objc func toggleBehavior() {
         isBehaviorEnabled = !isBehaviorEnabled
     }
 
-    func close() {
+    @objc func close() {
         self.dismiss(animated: true, completion: nil)
     }
 }

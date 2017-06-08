@@ -31,12 +31,12 @@ class VerticalSegmentedControl: SegmentHeaderBrickDataSource {
     
 }
 
-class AlignmentBrickViewController: BrickViewController {
+class AlignmentBrickViewController: BrickViewController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "Alignment"
     }
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Example how to use BrickAlignment"
     }
 

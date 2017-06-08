@@ -20,13 +20,13 @@ private let RepeatTitleLabel = "RepeatTitleLabel"
 private let RepeatLabel1 = "RepeatLabel1"
 private let RepeatLabel2 = "RepeatLabel2"
 
-class BrickCollectionInteractiveViewController: BrickViewController {
+class BrickCollectionInteractiveViewController: BrickViewController, HasTitle {
 
-    override class var brickTitle: String {
+    class var brickTitle: String {
         return "CollectionBrick"
     }
     
-    override class var subTitle: String {
+    class var subTitle: String {
         return "Shows how to add and remove CollectionBricks in an interactive way"
     }
 
