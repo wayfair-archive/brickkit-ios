@@ -1,9 +1,27 @@
 # Change Log
 
+## [2.1.0](https://github.com/wayfair/brickkit-ios/tree/2.1.0) (2017-06-08)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/2.0.0...2.1.0)
+
+**Closed issues:**
+
+- Swift 4 support [\#135](https://github.com/wayfair/brickkit-ios/issues/135)
+- Playground examples [\#133](https://github.com/wayfair/brickkit-ios/issues/133)
+- `repeatCount` on Brick [\#130](https://github.com/wayfair/brickkit-ios/issues/130)
+- Remove print override [\#128](https://github.com/wayfair/brickkit-ios/issues/128)
+- AccessoryView for a brick [\#126](https://github.com/wayfair/brickkit-ios/issues/126)
+- Migrate over image brick delegate to swift 3 [\#106](https://github.com/wayfair/brickkit-ios/issues/106)
+
+**Merged pull requests:**
+
+- Swift 4 compatibility fixes [\#136](https://github.com/wayfair/brickkit-ios/pull/136) ([klundberg](https://github.com/klundberg))
+- Playground examples [\#134](https://github.com/wayfair/brickkit-ios/pull/134) ([jay18001](https://github.com/jay18001))
+- Support for accessoryView on GenericBrickCell [\#132](https://github.com/wayfair/brickkit-ios/pull/132) ([rubencagnie](https://github.com/rubencagnie))
+- Support for repeatCount on Brick-level [\#131](https://github.com/wayfair/brickkit-ios/pull/131) ([rubencagnie](https://github.com/rubencagnie))
+- \#128 Moved print override to BrickUtils [\#129](https://github.com/wayfair/brickkit-ios/pull/129) ([jay18001](https://github.com/jay18001))
+
 ## [2.0.0](https://github.com/wayfair/brickkit-ios/tree/2.0.0) (2017-05-26)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/1.4.0...2.0.0)
-
-**Swift 3**
 
 **Closed issues:**
 
