@@ -27,7 +27,9 @@ public struct BrickRangeDimention {
     public init(minimum dimension: BrickDimension, additionalRangePairs: [RangeDimensionPair]?) {
         dimensionPairs = [(dimension, 0)]
         if let additionalRangePairs = additionalRangePairs {
-            dimensionPairs.append(contentsOf: additionalRangePairs)
+            dimensionPairs.append(contentsOf: additionalRangePairs.sorted {
+                $0.minimumLength < $1.minimumLength
+            })
         }
     }
     
