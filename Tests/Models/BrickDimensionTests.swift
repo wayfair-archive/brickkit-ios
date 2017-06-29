@@ -175,12 +175,12 @@ class BrickDimensionTests: XCTestCase {
             )))
     }
     
-    func testBrickRangeDimention() {
+    func testBrickRangeDimension() {
         setupScreen(isPortrait: true, horizontalSizeClass: .compact, verticalSizeClass: .regular)
         
         let additionalRangePairs: [RangeDimensionPair] = [(dimension: .ratio(ratio: 0.25), minimumLength: CGFloat(700)),
                                                           (dimension: .ratio(ratio: 0.5), minimumLength: CGFloat(350))] // Intentionally out of order
-        let regularDimensionRange : BrickDimension = .dimensionRange(range: BrickRangeDimention(minimum: .ratio(ratio: 1.0), additionalRangePairs: additionalRangePairs))
+        let regularDimensionRange : BrickDimension = .dimensionRange(minimum: .ratio(ratio: 1.0), additionalRangePairs: additionalRangePairs)
         XCTAssertEqual(regularDimensionRange.value(for: 320, startingAt: 0), 320)
         setupScreen(isPortrait: true, horizontalSizeClass: .regular, verticalSizeClass: .regular)
         XCTAssertEqual(regularDimensionRange.value(for: 350, startingAt: 0), 175)
@@ -190,15 +190,15 @@ class BrickDimensionTests: XCTestCase {
     
     func testVariableDimensionEquality() {
         let additionalRangePairs1: [RangeDimensionPair] = [(dimension: .ratio(ratio: 1/2), minimumLength: CGFloat(350))]
-        let dimensionRange1: BrickDimension = .dimensionRange(range: BrickRangeDimention(minimum: .ratio(ratio: 1.0), additionalRangePairs: additionalRangePairs1))
+        let dimensionRange1: BrickDimension = .dimensionRange(minimum: .ratio(ratio: 1.0), additionalRangePairs: additionalRangePairs1)
         let additionalRangePairs2: [RangeDimensionPair] = [(dimension: .ratio(ratio: 0.5), minimumLength: CGFloat(350))]
-        let dimensionRange2: BrickDimension = .dimensionRange(range: BrickRangeDimention(minimum: .ratio(ratio: 0.5 + 0.5), additionalRangePairs: additionalRangePairs2))
+        let dimensionRange2: BrickDimension = .dimensionRange(minimum: .ratio(ratio: 0.5 + 0.5), additionalRangePairs: additionalRangePairs2)
         let additionalRangePairs3: [RangeDimensionPair] = [(dimension: .ratio(ratio: 1/3), minimumLength: CGFloat(350))]
-        let dimensionRange3: BrickDimension = .dimensionRange(range: BrickRangeDimention(minimum: .ratio(ratio: 1.0), additionalRangePairs: additionalRangePairs3))
+        let dimensionRange3: BrickDimension = .dimensionRange(minimum: .ratio(ratio: 1.0), additionalRangePairs: additionalRangePairs3)
         let additionalRangePairs4: [RangeDimensionPair] = [(dimension: .ratio(ratio: 1/2), minimumLength: CGFloat(350))]
-        let dimensionRange4: BrickDimension = .dimensionRange(range: BrickRangeDimention(minimum: .ratio(ratio: 1.5), additionalRangePairs: additionalRangePairs4))
+        let dimensionRange4: BrickDimension = .dimensionRange(minimum: .ratio(ratio: 1.5), additionalRangePairs: additionalRangePairs4)
         let additionalRangePairs5: [RangeDimensionPair] = [(dimension: .ratio(ratio: 1/2), minimumLength: CGFloat(350)), (dimension: .ratio(ratio: 1/3), minimumLength: CGFloat(500))]
-        let dimensionRange5: BrickDimension = .dimensionRange(range: BrickRangeDimention(minimum: .ratio(ratio: 1.5), additionalRangePairs: additionalRangePairs5))
+        let dimensionRange5: BrickDimension = .dimensionRange(minimum: .ratio(ratio: 1.5), additionalRangePairs: additionalRangePairs5)
         XCTAssertEqual(dimensionRange1, dimensionRange2)
         XCTAssertNotEqual(dimensionRange1, dimensionRange3)
         XCTAssertNotEqual(dimensionRange1, dimensionRange4)
@@ -212,14 +212,14 @@ class BrickDimensionTests: XCTestCase {
         XCTAssertTrue(dimensionPair2 == dimensionPair1)
         XCTAssertFalse(dimensionPair1 == dimensionPair3)
         XCTAssertFalse(dimensionPair1 == dimensionPair4)
-        XCTAssertFalse(almostEqualRelative(A: 350, B: 350.001)) // Needed for code coverage completeness.
+        XCTAssertFalse(almostEqualRelative(first: 350, second: 350.001)) // Needed for code coverage completeness.
     }
     
-    func testNestedBrickRangeDimention() {
+    func testNestedBrickRangeDimension() {
         let additionalRangePairs: [RangeDimensionPair] = [(dimension: .ratio(ratio: 1/2), minimumLength: CGFloat(350)),
                                                      (dimension: .ratio(ratio: 0.25), minimumLength: CGFloat(700))]
-        let nestedDimensionRange : BrickDimension = .dimensionRange(range: BrickRangeDimention(minimum: .ratio(ratio: 0.5), additionalRangePairs: additionalRangePairs))
-        let regularDimensionRange : BrickDimension = .dimensionRange(range: BrickRangeDimention(minimum: nestedDimensionRange, additionalRangePairs: nil))
+        let nestedDimensionRange : BrickDimension = .dimensionRange(minimum: .ratio(ratio: 0.5), additionalRangePairs: additionalRangePairs)
+        let regularDimensionRange : BrickDimension = .dimensionRange(minimum: nestedDimensionRange, additionalRangePairs: nil)
         XCTAssertEqual(regularDimensionRange.dimension(withValue: 200).value(for: 200, startingAt: 0), 100);
         XCTAssertEqual(regularDimensionRange.dimension(withValue: 400).value(for: 400, startingAt: 0), 200);
         XCTAssertEqual(regularDimensionRange.dimension(withValue: 800).value(for: 800, startingAt: 0), 200);

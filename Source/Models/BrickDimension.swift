@@ -20,7 +20,7 @@ public struct BrickSize {
 
 public typealias RangeDimensionPair = (dimension: BrickDimension, minimumLength: CGFloat)
 
-public struct BrickRangeDimention {
+public struct BrickRangeDimension {
     
     internal var dimensionPairs : [RangeDimensionPair]
     
@@ -50,12 +50,12 @@ public struct BrickRangeDimention {
     }
 }
 
-internal func almostEqualRelative(A: CGFloat, B: CGFloat, maxRelDiff: CGFloat = CGFloat.ulpOfOne) -> Bool
+internal func almostEqualRelative(first: CGFloat, second: CGFloat, maxRelDiff: CGFloat = CGFloat.ulpOfOne) -> Bool
 {
     // Calculate the difference.
-    let diff = fabs(A - B);
-    let a = fabs(A)
-    let b = fabs(B)
+    let diff = fabs(first - second);
+    let a = fabs(first)
+    let b = fabs(second)
     // Find the largest
     let largest = (b > a) ? b : a
     
@@ -66,10 +66,10 @@ internal func almostEqualRelative(A: CGFloat, B: CGFloat, maxRelDiff: CGFloat = 
 }
 
 public func ==(lhs: RangeDimensionPair, rhs: RangeDimensionPair) -> Bool {
-    return lhs.dimension == rhs.dimension && almostEqualRelative(A: lhs.minimumLength, B: rhs.minimumLength)
+    return lhs.dimension == rhs.dimension && almostEqualRelative(first: lhs.minimumLength, second: rhs.minimumLength)
 }
 
-public func ==(lhs: BrickRangeDimention, rhs: BrickRangeDimention) -> Bool {
+public func ==(lhs: BrickRangeDimension, rhs: BrickRangeDimension) -> Bool {
     if lhs.dimensionPairs.count != rhs.dimensionPairs.count {
         return false
     }
@@ -91,7 +91,7 @@ public enum BrickDimension {
     indirect case orientation(landscape: BrickDimension, portrait: BrickDimension)
     indirect case horizontalSizeClass(regular: BrickDimension, compact: BrickDimension)
     indirect case verticalSizeClass(regular: BrickDimension, compact: BrickDimension)
-    indirect case dimensionRange(range: BrickRangeDimention)
+    indirect case dimensionRange(minimum: BrickDimension, additionalRangePairs: [RangeDimensionPair]?)
     
     public var isEstimate: Bool {
         switch self.dimension(withValue: nil) {
@@ -110,8 +110,8 @@ public enum BrickDimension {
         case .verticalSizeClass(let regular, let compact):
             let isRegular = BrickDimension.verticalInterfaceSizeClass == .regular
             return (isRegular ? regular : compact).dimension(withValue: value)
-        case .dimensionRange(let dimensionRange):
-            return dimensionRange.dimension(forWidth: value).dimension(withValue: value)
+        case .dimensionRange(let minimum, let additionalRanges):
+            return BrickRangeDimension(minimum: minimum, additionalRangePairs: additionalRanges).dimension(forWidth:value)
         default: return self
         }
     }
@@ -184,8 +184,18 @@ public func ==(lhs: BrickDimension, rhs: BrickDimension) -> Bool {
     case (.fill, .fill):
         return true
         
-    case (let .dimensionRange(range1), let .dimensionRange(range2)):
-        return range1 == range2
+    case (let .dimensionRange(range1, addtionalRanges1), let .dimensionRange(range2, addtionalRanges2)):
+        if range1 != range2 || addtionalRanges1?.count != addtionalRanges2?.count {
+            return false
+        }
+        if let addtionalRanges1 = addtionalRanges1, let addtionalRanges2 = addtionalRanges2 {
+            for (index, value) in addtionalRanges1.enumerated() {
+                if addtionalRanges2[index] != value {
+                    return false
+                }
+            }
+        }
+        return true
 
     default:
         return false

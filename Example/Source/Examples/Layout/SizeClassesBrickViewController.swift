@@ -43,7 +43,7 @@ class SizeClassesBrickViewController: BrickViewController, HasTitle {
                                                       (dimension: .ratio(ratio: 1/4), minimumLength: CGFloat(700)),
                                                       (dimension: .ratio(ratio: 1/5), minimumLength: CGFloat(1100)),
                                                       (dimension: .ratio(ratio: 1/6), minimumLength: CGFloat(1300))]
-        let regularDimensionRange : BrickDimension = .dimensionRange(range: BrickRangeDimention(minimum: .ratio(ratio: 1.0), additionalRangePairs: additionalRangePairs))
+        let regularDimensionRange : BrickDimension = .dimensionRange(range: BrickRangeDimension(minimum: .ratio(ratio: 1.0), additionalRangePairs: additionalRangePairs))
         let horizontalWidth: BrickDimension = .horizontalSizeClass(regular: regularDimensionRange, compact: .ratio(ratio: 0.5))
         
         variableWidthBrick = SizeClassBrick("Variable", width: horizontalWidth, backgroundColor: .brickSection)
