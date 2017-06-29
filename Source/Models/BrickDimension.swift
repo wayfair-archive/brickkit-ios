@@ -18,39 +18,104 @@ public struct BrickSize {
     }
 }
 
+public typealias RangeDimensionPair = (dimension: BrickDimension, minimumLength: CGFloat)
+
+public struct BrickRangeDimention {
+    
+    internal var dimensionPairs : [RangeDimensionPair]
+    
+    public init(minimum dimension: BrickDimension, additionalRangePairs: [RangeDimensionPair]?) {
+        dimensionPairs = [(dimension, 0)]
+        if let additionalRangePairs = additionalRangePairs {
+            dimensionPairs.append(contentsOf: additionalRangePairs)
+        }
+    }
+    
+    public func dimension(forWidth width: CGFloat?) -> BrickDimension {
+        guard let width = width  else {
+            return dimensionPairs.first!.dimension
+        }
+        var dimension = dimensionPairs.first?.dimension
+        for RangeDimensionPair in dimensionPairs {
+            if RangeDimensionPair.minimumLength > width {
+                break
+            }
+            else {
+                dimension = RangeDimensionPair.dimension
+            }
+        }
+        return dimension!
+    }
+}
+
+internal func almostEqualRelative(A: CGFloat, B: CGFloat, maxRelDiff: CGFloat = CGFloat.ulpOfOne) -> Bool
+{
+    // Calculate the difference.
+    let diff = fabs(A - B);
+    let a = fabs(A)
+    let b = fabs(B)
+    // Find the largest
+    let largest = (b > a) ? b : a
+    
+    if diff <= largest * maxRelDiff {
+        return true
+    }
+    return false
+}
+
+public func ==(lhs: RangeDimensionPair, rhs: RangeDimensionPair) -> Bool {
+    return lhs.dimension == rhs.dimension && almostEqualRelative(A: lhs.minimumLength, B: rhs.minimumLength)
+}
+
+public func ==(lhs: BrickRangeDimention, rhs: BrickRangeDimention) -> Bool {
+    if lhs.dimensionPairs.count != rhs.dimensionPairs.count {
+        return false
+    }
+    for (index, value) in lhs.dimensionPairs.enumerated() {
+        if value != rhs.dimensionPairs[index] {
+            return false
+        }
+    }
+    return true
+}
+
+
 public enum BrickDimension {
     case ratio(ratio: CGFloat)
     case fixed(size: CGFloat)
     case fill
-
+    
     indirect case auto(estimate: BrickDimension)
     indirect case orientation(landscape: BrickDimension, portrait: BrickDimension)
     indirect case horizontalSizeClass(regular: BrickDimension, compact: BrickDimension)
     indirect case verticalSizeClass(regular: BrickDimension, compact: BrickDimension)
-
+    indirect case dimensionRange(range: BrickRangeDimention)
+    
     public var isEstimate: Bool {
-        switch self.dimension {
+        switch self.dimension(withValue: nil) {
         case .auto(_): return true
         default: return false
         }
     }
 
-    var dimension: BrickDimension {
+    func dimension(withValue value: CGFloat? = nil) -> BrickDimension {
         switch self {
         case .orientation(let landScape, let portrait):
-            return (BrickDimension.isPortrait ? portrait : landScape).dimension
+            return (BrickDimension.isPortrait ? portrait : landScape).dimension(withValue: value)
         case .horizontalSizeClass(let regular, let compact):
             let isRegular = BrickDimension.horizontalInterfaceSizeClass == .regular
-            return (isRegular ? regular : compact).dimension
+            return (isRegular ? regular : compact).dimension(withValue: value)
         case .verticalSizeClass(let regular, let compact):
             let isRegular = BrickDimension.verticalInterfaceSizeClass == .regular
-            return (isRegular ? regular : compact).dimension
+            return (isRegular ? regular : compact).dimension(withValue: value)
+        case .dimensionRange(let dimensionRange):
+            return dimensionRange.dimension(forWidth: value).dimension(withValue: value)
         default: return self
         }
     }
 
     func value(for otherDimension: CGFloat, startingAt origin: CGFloat) -> CGFloat {
-        let actualDimension = dimension
+        let actualDimension: BrickDimension = dimension(withValue: otherDimension)
         
         switch actualDimension {
         case .auto(let dimension): return dimension.value(for: otherDimension, startingAt: origin)
@@ -116,6 +181,9 @@ public func ==(lhs: BrickDimension, rhs: BrickDimension) -> Bool {
 
     case (.fill, .fill):
         return true
+        
+    case (let .dimensionRange(range1), let .dimensionRange(range2)):
+        return range1 == range2
 
     default:
         return false

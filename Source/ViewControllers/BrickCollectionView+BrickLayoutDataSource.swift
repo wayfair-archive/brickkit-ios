@@ -14,7 +14,7 @@ extension BrickCollectionView: BrickLayoutDataSource {
         let inset = self.brickLayout(layout, insetFor: indexPath.section)
         let widthDimension = self.brick(at: indexPath).size.width
 
-        let dimension = widthDimension.dimension
+        let dimension = widthDimension.dimension(withValue: totalWidth)
 
         switch dimension {
         case .ratio(let ratio): return BrickUtils.calculateWidth(for: ratio, widthRatio: widthRatio, totalWidth: totalWidth, inset: inset)

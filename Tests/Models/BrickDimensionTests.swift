@@ -48,7 +48,7 @@ class BrickDimensionTests: XCTestCase {
     func testFixed() {
         let fixed = BrickDimension.fixed(size: 50)
         XCTAssertEqual(fixed.value(for: 1000, startingAt: 0), 50)
-        XCTAssertEqual(fixed.dimension, fixed)
+        XCTAssertEqual(fixed.dimension(withValue: nil), fixed)
         XCTAssertFalse(fixed.isEstimate)
         XCTAssertEqual(fixed, BrickDimension.fixed(size: 50))
         XCTAssertNotEqual(fixed, BrickDimension.fixed(size: 100))
@@ -57,7 +57,7 @@ class BrickDimensionTests: XCTestCase {
     func testRatio() {
         let ratio = BrickDimension.ratio(ratio: 0.5)
         XCTAssertEqual(ratio.value(for: 1000, startingAt: 0), 500)
-        XCTAssertEqual(ratio.dimension, ratio)
+        XCTAssertEqual(ratio.dimension(withValue: nil), ratio)
         XCTAssertFalse(ratio.isEstimate)
         XCTAssertEqual(ratio, BrickDimension.ratio(ratio: 0.5))
         XCTAssertNotEqual(ratio, BrickDimension.fixed(size: 100))
@@ -66,7 +66,7 @@ class BrickDimensionTests: XCTestCase {
     func testFill() {
         let ratio = BrickDimension.fill
         XCTAssertEqual(ratio.value(for: 1000, startingAt: 0), 1000)
-        XCTAssertEqual(ratio.dimension, ratio)
+        XCTAssertEqual(ratio.dimension(withValue: nil), ratio)
         XCTAssertFalse(ratio.isEstimate)
         XCTAssertEqual(ratio, BrickDimension.fill)
         XCTAssertNotEqual(ratio, BrickDimension.fixed(size: 100))
@@ -75,7 +75,7 @@ class BrickDimensionTests: XCTestCase {
     func testFillWithStartingOrigin() {
         let ratio = BrickDimension.fill
         XCTAssertEqual(ratio.value(for: 1000, startingAt: 500), 500)
-        XCTAssertEqual(ratio.dimension, ratio)
+        XCTAssertEqual(ratio.dimension(withValue: nil), ratio)
         XCTAssertFalse(ratio.isEstimate)
         XCTAssertEqual(ratio, BrickDimension.fill)
         XCTAssertNotEqual(ratio, BrickDimension.fixed(size: 100))
@@ -84,7 +84,7 @@ class BrickDimensionTests: XCTestCase {
     func testFillWithStartingOriginThatIsTooBig() {
         let ratio = BrickDimension.fill
         XCTAssertEqual(ratio.value(for: 1000, startingAt: 1001), 1000)
-        XCTAssertEqual(ratio.dimension, ratio)
+        XCTAssertEqual(ratio.dimension(withValue: nil), ratio)
         XCTAssertFalse(ratio.isEstimate)
         XCTAssertEqual(ratio, BrickDimension.fill)
         XCTAssertNotEqual(ratio, BrickDimension.fixed(size: 100))
@@ -93,7 +93,7 @@ class BrickDimensionTests: XCTestCase {
     func testAutoFixed() {
         let autoFixed = BrickDimension.auto(estimate: BrickDimension.fixed(size: 50))
         XCTAssertEqual(autoFixed.value(for: 1000, startingAt: 0), 50)
-        XCTAssertEqual(autoFixed.dimension, autoFixed)
+        XCTAssertEqual(autoFixed.dimension(withValue: nil), autoFixed)
         XCTAssertTrue(autoFixed.isEstimate)
         XCTAssertEqual(autoFixed, BrickDimension.auto(estimate: BrickDimension.fixed(size: 50)))
     }
@@ -101,7 +101,7 @@ class BrickDimensionTests: XCTestCase {
     func testAutoRatio() {
         let autoRatio = BrickDimension.auto(estimate: BrickDimension.ratio(ratio: 0.5))
         XCTAssertEqual(autoRatio.value(for: 1000, startingAt: 0), 500)
-        XCTAssertEqual(autoRatio.dimension, autoRatio)
+        XCTAssertEqual(autoRatio.dimension(withValue: nil), autoRatio)
         XCTAssertTrue(autoRatio.isEstimate)
         XCTAssertEqual(autoRatio, BrickDimension.auto(estimate: BrickDimension.ratio(ratio: 0.5)))
     }
@@ -110,7 +110,7 @@ class BrickDimensionTests: XCTestCase {
         setupScreen(isPortrait: true, horizontalSizeClass: .compact, verticalSizeClass: .compact)
         let orientation = BrickDimension.orientation(landscape: BrickDimension.fixed(size: 100), portrait: BrickDimension.fixed(size: 50))
         XCTAssertEqual(orientation.value(for: 1000, startingAt: 0), 50)
-        XCTAssertEqual(orientation.dimension, BrickDimension.fixed(size: 50))
+        XCTAssertEqual(orientation.dimension(withValue: nil), BrickDimension.fixed(size: 50))
         XCTAssertEqual(orientation, BrickDimension.orientation(landscape: BrickDimension.fixed(size: 100), portrait: BrickDimension.fixed(size: 50)))
     }
 
@@ -118,7 +118,7 @@ class BrickDimensionTests: XCTestCase {
         setupScreen(isPortrait: false, horizontalSizeClass: .compact, verticalSizeClass: .compact)
         let orientation = BrickDimension.orientation(landscape: BrickDimension.fixed(size: 100), portrait: BrickDimension.fixed(size: 50))
         XCTAssertEqual(orientation.value(for: 1000, startingAt: 0), 100)
-        XCTAssertEqual(orientation.dimension, BrickDimension.fixed(size: 100))
+        XCTAssertEqual(orientation.dimension(withValue: nil), BrickDimension.fixed(size: 100))
         XCTAssertEqual(orientation, BrickDimension.orientation(landscape: BrickDimension.fixed(size: 100), portrait: BrickDimension.fixed(size: 50)))
     }
 
@@ -126,7 +126,7 @@ class BrickDimensionTests: XCTestCase {
         setupScreen(isPortrait: true, horizontalSizeClass: .compact, verticalSizeClass: .regular)
         let sizeClass = BrickDimension.horizontalSizeClass(regular: BrickDimension.fixed(size: 100), compact: BrickDimension.fixed(size: 50))
         XCTAssertEqual(sizeClass.value(for: 1000, startingAt: 0), 50)
-        XCTAssertEqual(sizeClass.dimension, BrickDimension.fixed(size: 50))
+        XCTAssertEqual(sizeClass.dimension(withValue: nil), BrickDimension.fixed(size: 50))
         XCTAssertEqual(sizeClass, BrickDimension.horizontalSizeClass(regular: BrickDimension.fixed(size: 100), compact: BrickDimension.fixed(size: 50)))
 
     }
@@ -135,7 +135,7 @@ class BrickDimensionTests: XCTestCase {
         setupScreen(isPortrait: true, horizontalSizeClass: .regular, verticalSizeClass: .compact)
         let sizeClass = BrickDimension.horizontalSizeClass(regular: BrickDimension.fixed(size: 100), compact: BrickDimension.fixed(size: 50))
         XCTAssertEqual(sizeClass.value(for: 1000, startingAt: 0), 100)
-        XCTAssertEqual(sizeClass.dimension, BrickDimension.fixed(size: 100))
+        XCTAssertEqual(sizeClass.dimension(withValue: nil), BrickDimension.fixed(size: 100))
         XCTAssertEqual(sizeClass, BrickDimension.horizontalSizeClass(regular: BrickDimension.fixed(size: 100), compact: BrickDimension.fixed(size: 50)))
     }
 
@@ -143,7 +143,7 @@ class BrickDimensionTests: XCTestCase {
         setupScreen(isPortrait: true, horizontalSizeClass: .regular, verticalSizeClass: .compact)
         let sizeClass = BrickDimension.verticalSizeClass(regular: BrickDimension.fixed(size: 100), compact: BrickDimension.fixed(size: 50))
         XCTAssertEqual(sizeClass.value(for: 1000, startingAt: 0), 50)
-        XCTAssertEqual(sizeClass.dimension, BrickDimension.fixed(size: 50))
+        XCTAssertEqual(sizeClass.dimension(withValue: nil), BrickDimension.fixed(size: 50))
         XCTAssertEqual(sizeClass, BrickDimension.verticalSizeClass(regular: BrickDimension.fixed(size: 100), compact: BrickDimension.fixed(size: 50)))
     }
 
@@ -151,7 +151,7 @@ class BrickDimensionTests: XCTestCase {
         setupScreen(isPortrait: true, horizontalSizeClass: .compact, verticalSizeClass: .regular)
         let sizeClass = BrickDimension.verticalSizeClass(regular: BrickDimension.fixed(size: 100), compact: BrickDimension.fixed(size: 50))
         XCTAssertEqual(sizeClass.value(for: 1000, startingAt: 0), 100)
-        XCTAssertEqual(sizeClass.dimension, BrickDimension.fixed(size: 100))
+        XCTAssertEqual(sizeClass.dimension(withValue: nil), BrickDimension.fixed(size: 100))
         XCTAssertEqual(sizeClass, BrickDimension.verticalSizeClass(regular: BrickDimension.fixed(size: 100), compact: BrickDimension.fixed(size: 50)))
     }
 
@@ -165,7 +165,7 @@ class BrickDimensionTests: XCTestCase {
                 compact: .auto(estimate: .fixed(size: 50))
             ))
         XCTAssertEqual(nested.value(for: 1000, startingAt: 0), 50)
-        XCTAssertEqual(nested.dimension, BrickDimension.auto(estimate: BrickDimension.fixed(size: 50)))
+        XCTAssertEqual(nested.dimension(withValue: nil), BrickDimension.auto(estimate: BrickDimension.fixed(size: 50)))
         XCTAssertTrue(nested.isEstimate)
         XCTAssertEqual(nested, BrickDimension.orientation(
             landscape: .fixed(size: 50),
@@ -173,6 +173,56 @@ class BrickDimensionTests: XCTestCase {
                 regular: .auto(estimate: .fixed(size: 100)),
                 compact: .auto(estimate: .fixed(size: 50))
             )))
+    }
+    
+    func testBrickRangeDimention() {
+        setupScreen(isPortrait: true, horizontalSizeClass: .compact, verticalSizeClass: .regular)
+        
+        let additionalRangePairs: [RangeDimensionPair] = [(dimension: .ratio(ratio: 0.5), minimumLength: CGFloat(350)),
+                                                     (dimension: .ratio(ratio: 0.25), minimumLength: CGFloat(700))]
+        let regularDimensionRange : BrickDimension = .dimensionRange(range: BrickRangeDimention(minimum: .ratio(ratio: 1.0), additionalRangePairs: additionalRangePairs))
+        XCTAssertEqual(regularDimensionRange.value(for: 320, startingAt: 0), 320)
+        setupScreen(isPortrait: true, horizontalSizeClass: .regular, verticalSizeClass: .regular)
+        XCTAssertEqual(regularDimensionRange.value(for: 350, startingAt: 0), 175)
+        XCTAssertEqual(regularDimensionRange.value(for: 768, startingAt: 0), 192)
+        XCTAssertEqual(regularDimensionRange.dimension(withValue: nil).value(for: 400, startingAt: 0), 400)
+    }
+    
+    func testVariableDimensionEquality() {
+        let additionalRangePairs1: [RangeDimensionPair] = [(dimension: .ratio(ratio: 1/2), minimumLength: CGFloat(350))]
+        let dimensionRange1: BrickDimension = .dimensionRange(range: BrickRangeDimention(minimum: .ratio(ratio: 1.0), additionalRangePairs: additionalRangePairs1))
+        let additionalRangePairs2: [RangeDimensionPair] = [(dimension: .ratio(ratio: 0.5), minimumLength: CGFloat(350))]
+        let dimensionRange2: BrickDimension = .dimensionRange(range: BrickRangeDimention(minimum: .ratio(ratio: 0.5 + 0.5), additionalRangePairs: additionalRangePairs2))
+        let additionalRangePairs3: [RangeDimensionPair] = [(dimension: .ratio(ratio: 1/3), minimumLength: CGFloat(350))]
+        let dimensionRange3: BrickDimension = .dimensionRange(range: BrickRangeDimention(minimum: .ratio(ratio: 1.0), additionalRangePairs: additionalRangePairs3))
+        let additionalRangePairs4: [RangeDimensionPair] = [(dimension: .ratio(ratio: 1/2), minimumLength: CGFloat(350))]
+        let dimensionRange4: BrickDimension = .dimensionRange(range: BrickRangeDimention(minimum: .ratio(ratio: 1.5), additionalRangePairs: additionalRangePairs4))
+        let additionalRangePairs5: [RangeDimensionPair] = [(dimension: .ratio(ratio: 1/2), minimumLength: CGFloat(350)), (dimension: .ratio(ratio: 1/3), minimumLength: CGFloat(500))]
+        let dimensionRange5: BrickDimension = .dimensionRange(range: BrickRangeDimention(minimum: .ratio(ratio: 1.5), additionalRangePairs: additionalRangePairs5))
+        XCTAssertEqual(dimensionRange1, dimensionRange2)
+        XCTAssertNotEqual(dimensionRange1, dimensionRange3)
+        XCTAssertNotEqual(dimensionRange1, dimensionRange4)
+        XCTAssertNotEqual(dimensionRange1, dimensionRange5)
+        
+        let dimensionPair1: RangeDimensionPair = (dimension: .ratio(ratio: 1/2), minimumLength: CGFloat(350))
+        let dimensionPair2: RangeDimensionPair = (dimension: .ratio(ratio: 0.25 * 2), minimumLength: (300.01 + 49.99))
+        let dimensionPair3: RangeDimensionPair = (dimension: .ratio(ratio: 0.25 * 2), minimumLength: (300.01 + 49.98))
+        let dimensionPair4: RangeDimensionPair = (dimension: .ratio(ratio: 1.5), minimumLength: CGFloat(350))
+        XCTAssertTrue(dimensionPair1 == dimensionPair2)
+        XCTAssertTrue(dimensionPair2 == dimensionPair1)
+        XCTAssertFalse(dimensionPair1 == dimensionPair3)
+        XCTAssertFalse(dimensionPair1 == dimensionPair4)
+        XCTAssertFalse(almostEqualRelative(A: 350, B: 350.001)) // Needed for code coverage completeness.
+    }
+    
+    func testNestedBrickRangeDimention() {
+        let additionalRangePairs: [RangeDimensionPair] = [(dimension: .ratio(ratio: 1/2), minimumLength: CGFloat(350)),
+                                                     (dimension: .ratio(ratio: 0.25), minimumLength: CGFloat(700))]
+        let nestedDimensionRange : BrickDimension = .dimensionRange(range: BrickRangeDimention(minimum: .ratio(ratio: 0.5), additionalRangePairs: additionalRangePairs))
+        let regularDimensionRange : BrickDimension = .dimensionRange(range: BrickRangeDimention(minimum: nestedDimensionRange, additionalRangePairs: nil))
+        XCTAssertEqual(regularDimensionRange.dimension(withValue: 200).value(for: 200, startingAt: 0), 100);
+        XCTAssertEqual(regularDimensionRange.dimension(withValue: 400).value(for: 400, startingAt: 0), 200);
+        XCTAssertEqual(regularDimensionRange.dimension(withValue: 800).value(for: 800, startingAt: 0), 200);
     }
 
     func testRawValue() {
