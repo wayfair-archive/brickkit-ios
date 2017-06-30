@@ -18,19 +18,17 @@ public struct BrickSize {
     }
 }
 
-public typealias RangeDimensionPair = (dimension: BrickDimension, minimumLength: CGFloat)
+public typealias RangeDimensionPair = (dimension: BrickDimension, minimumSize: CGFloat)
 
 public struct BrickRangeDimension {
     
     internal var dimensionPairs : [RangeDimensionPair]
     
-    public init(minimum dimension: BrickDimension, additionalRangePairs: [RangeDimensionPair]?) {
+    public init(default dimension: BrickDimension, additionalRangePairs: [RangeDimensionPair] = []) {
         dimensionPairs = [(dimension, 0)]
-        if let additionalRangePairs = additionalRangePairs {
-            dimensionPairs.append(contentsOf: additionalRangePairs.sorted {
-                $0.minimumLength < $1.minimumLength
-            })
-        }
+        dimensionPairs.append(contentsOf: additionalRangePairs.sorted {
+            $0.minimumSize < $1.minimumSize
+        })
     }
     
     public func dimension(forWidth width: CGFloat?) -> BrickDimension {
@@ -39,7 +37,7 @@ public struct BrickRangeDimension {
         }
         var dimension = dimensionPairs.first?.dimension
         for RangeDimensionPair in dimensionPairs {
-            if RangeDimensionPair.minimumLength > width {
+            if RangeDimensionPair.minimumSize > width {
                 break
             }
             else {
@@ -66,7 +64,7 @@ internal func almostEqualRelative(first: CGFloat, second: CGFloat, maxRelDiff: C
 }
 
 public func ==(lhs: RangeDimensionPair, rhs: RangeDimensionPair) -> Bool {
-    return lhs.dimension == rhs.dimension && almostEqualRelative(first: lhs.minimumLength, second: rhs.minimumLength)
+    return lhs.dimension == rhs.dimension && almostEqualRelative(first: lhs.minimumSize, second: rhs.minimumSize)
 }
 
 public func ==(lhs: BrickRangeDimension, rhs: BrickRangeDimension) -> Bool {
@@ -91,10 +89,10 @@ public enum BrickDimension {
     indirect case orientation(landscape: BrickDimension, portrait: BrickDimension)
     indirect case horizontalSizeClass(regular: BrickDimension, compact: BrickDimension)
     indirect case verticalSizeClass(regular: BrickDimension, compact: BrickDimension)
-    indirect case dimensionRange(minimum: BrickDimension, additionalRangePairs: [RangeDimensionPair]?)
+    indirect case dimensionRange(default: BrickDimension, additionalRangePairs: [RangeDimensionPair] )
     
-    public var isEstimate: Bool {
-        switch self.dimension(withValue: nil) {
+    public func isEstimate(withValue value: CGFloat?) -> Bool {
+        switch self.dimension(withValue: value) {
         case .auto(_): return true
         default: return false
         }
@@ -110,8 +108,8 @@ public enum BrickDimension {
         case .verticalSizeClass(let regular, let compact):
             let isRegular = BrickDimension.verticalInterfaceSizeClass == .regular
             return (isRegular ? regular : compact).dimension(withValue: value)
-        case .dimensionRange(let minimum, let additionalRanges):
-            return BrickRangeDimension(minimum: minimum, additionalRangePairs: additionalRanges).dimension(forWidth:value)
+        case .dimensionRange(let defaultValue, let additionalRanges):
+            return BrickRangeDimension(default: defaultValue, additionalRangePairs: additionalRanges).dimension(forWidth:value)
         default: return self
         }
     }
@@ -185,14 +183,12 @@ public func ==(lhs: BrickDimension, rhs: BrickDimension) -> Bool {
         return true
         
     case (let .dimensionRange(range1, addtionalRanges1), let .dimensionRange(range2, addtionalRanges2)):
-        if range1 != range2 || addtionalRanges1?.count != addtionalRanges2?.count {
+        if range1 != range2 || addtionalRanges1.count != addtionalRanges2.count {
             return false
         }
-        if let addtionalRanges1 = addtionalRanges1, let addtionalRanges2 = addtionalRanges2 {
-            for (index, value) in addtionalRanges1.enumerated() {
-                if addtionalRanges2[index] != value {
-                    return false
-                }
+        for (index, value) in addtionalRanges1.enumerated() {
+            if addtionalRanges2[index] != value {
+                return false
             }
         }
         return true

@@ -32,7 +32,7 @@ extension BrickCollectionView: BrickLayoutDataSource {
             return false
         }
 
-        return brick.size.height.isEstimate
+        return brick.size.height.isEstimate(withValue: nil)
     }
 
     public func brickLayout(_ layout: BrickLayout, estimatedHeightForItemAt indexPath: IndexPath, containedIn width: CGFloat) -> CGFloat {

@@ -145,11 +145,11 @@ open class CollectionBrickCell: BrickCell, Bricklike, AsynchronousResizableCell 
             return super.preferredLayoutAttributesFitting(layoutAttributes)
         }
         
-        guard self._brick.size.height.isEstimate else {
+        guard self._brick.size.height.isEstimate(withValue: nil) else {
             return layoutAttributes
         }
         
-        guard self._brick.height.isEstimate else {
+        guard self._brick.height.isEstimate(withValue: nil) else {
             layoutAttributes.frame.size.height = self._brick.height.value(for: layoutAttributes.frame.width, startingAt: 0)
             return layoutAttributes
         }

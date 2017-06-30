@@ -38,12 +38,12 @@ class SizeClassesBrickViewController: BrickViewController, HasTitle {
         sizeClassHalf = SizeClassBrick("Half", width: .ratio(ratio: 0.5), backgroundColor: .brickSection)
         sizeClassHalf.color = .brickGray5
         
-        let additionalRangePairs : [RangeDimensionPair] = [(dimension: .ratio(ratio: 1/2), minimumLength: CGFloat(300)),
-                                                      (dimension: .ratio(ratio: 1/3), minimumLength: CGFloat(580)),
-                                                      (dimension: .ratio(ratio: 1/4), minimumLength: CGFloat(700)),
-                                                      (dimension: .ratio(ratio: 1/5), minimumLength: CGFloat(1100)),
-                                                      (dimension: .ratio(ratio: 1/6), minimumLength: CGFloat(1300))]
-        let regularDimensionRange : BrickDimension = .dimensionRange(minimum: .ratio(ratio: 1.0), additionalRangePairs: additionalRangePairs)
+        let additionalRangePairs : [RangeDimensionPair] = [(dimension: .ratio(ratio: 1/2), minimumSize: CGFloat(300)),
+                                                      (dimension: .ratio(ratio: 1/3), minimumSize: CGFloat(580)),
+                                                      (dimension: .ratio(ratio: 1/4), minimumSize: CGFloat(700)),
+                                                      (dimension: .ratio(ratio: 1/5), minimumSize: CGFloat(1100)),
+                                                      (dimension: .ratio(ratio: 1/6), minimumSize: CGFloat(1300))]
+        let regularDimensionRange : BrickDimension = .dimensionRange(default: .ratio(ratio: 1.0), additionalRangePairs: additionalRangePairs)
         let horizontalWidth: BrickDimension = .horizontalSizeClass(regular: regularDimensionRange, compact: .ratio(ratio: 0.5))
         
         variableWidthBrick = SizeClassBrick("Variable", width: horizontalWidth, backgroundColor: .brickSection)
