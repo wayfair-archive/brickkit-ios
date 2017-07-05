@@ -211,9 +211,7 @@ open class BrickCollectionView: UICollectionView {
                 self.reloadSections(IndexSet(integersIn: 0..<self.numberOfSections))
             }
             self.collectionViewLayout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .invalidate))
-        }, completion: { completed in
-            completion?(completed)
-        })
+        }, completion: completion)
     }
 
     /// Invalidate the visibility
@@ -222,7 +220,7 @@ open class BrickCollectionView: UICollectionView {
     open func invalidateVisibility(_ completion: ((Bool) -> Void)? = nil) {
         self.performBatchUpdates({
             self.collectionViewLayout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .updateVisibility))
-            }, completion: completion)
+        }, completion: completion)
     }
 
     // MARK: - Private methods
@@ -364,7 +362,7 @@ open class BrickCollectionView: UICollectionView {
         if shouldReloadCell {
             self.performBatchUpdates({
                 self._reloadBricksWithIdentifiers(identifiers, shouldReloadCell: shouldReloadCell)
-                }, completion: completion)
+            }, completion: completion)
         } else {
             self._reloadBricksWithIdentifiers(identifiers, shouldReloadCell: shouldReloadCell)
             completion?(true)
@@ -501,7 +499,11 @@ extension BrickCollectionView: AsynchronousResizableDelegate {
         weak var weakLayout = self.layout
         self.performBatchUpdates({
             weakLayout?.updateHeight(indexPath, newHeight: newHeight)
-            }, completion: completion)
+        }, completion: { completed in
+            // we create a strong reference to self here so that self is not accidentally deallocated while an update is in flight
+            let _ = self
+            completion?(completed)
+        })
     }
 }
 
