@@ -115,7 +115,7 @@ public enum BrickDimension {
     }
 
     func value(for otherDimension: CGFloat, startingAt origin: CGFloat) -> CGFloat {
-        let actualDimension: BrickDimension = dimension(withValue: otherDimension)
+        let actualDimension = dimension(withValue: otherDimension)
         
         switch actualDimension {
         case .auto(let dimension): return dimension.value(for: otherDimension, startingAt: origin)
