@@ -459,7 +459,7 @@ BrickKit comes with a few behaviors built in:
 
 - iOS 9.1+ / tvOS 9.0+
 - Xcode 8.0+
-- Swift 2.3 (Swift 3.0 is not yet supported)
+- Swift 3.0 (Swift 3.2 compatible)
 
 ## Communication
 
