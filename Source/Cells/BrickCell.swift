@@ -200,7 +200,7 @@ open class BrickCell: BaseBrickCell {
     }
 
     open override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        guard self._brick.height.isEstimate else {
+        guard self._brick.height.isEstimate(withValue: nil) else {
             return layoutAttributes
         }
 

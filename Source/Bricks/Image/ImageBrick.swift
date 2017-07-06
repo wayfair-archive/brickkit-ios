@@ -174,7 +174,7 @@ open class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableCel
         imageView.contentMode = dataSource.contentModeForImageBrickCell(self)
 
         if let image = dataSource.imageForImageBrickCell(self) {
-            if self.brick.size.height.isEstimate {
+            if self.brick.size.height.isEstimate(withValue: nil) {
                 self.setRatioConstraint(for: image)
             }
             imageView.image = image
@@ -211,7 +211,7 @@ open class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableCel
 
 
     fileprivate func resize(image: UIImage) {
-        if self.brick.size.height.isEstimate {
+        if self.brick.size.height.isEstimate(withValue: nil) {
             self.setRatioConstraint(for: image)
             self.resizeDelegate?.performResize(cell: self, completion: nil)
         }
