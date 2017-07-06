@@ -1,5 +1,13 @@
 # Change Log
 
+## [2.2.0](https://github.com/wayfair/brickkit-ios/tree/2.2.0) (2017-07-06)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/2.1.0...2.2.0)
+
+**Merged pull requests:**
+
+- Varadic range support [\#140](https://github.com/wayfair/brickkit-ios/pull/140) ([vlozko](https://github.com/vlozko))
+- Preventing self from deallocating during performPatchUpdates. [\#137](https://github.com/wayfair/brickkit-ios/pull/137) ([ethan-riback](https://github.com/ethan-riback))
+
 ## [2.1.0](https://github.com/wayfair/brickkit-ios/tree/2.1.0) (2017-06-08)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/2.0.0...2.1.0)
 
