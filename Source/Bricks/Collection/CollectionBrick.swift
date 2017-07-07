@@ -177,7 +177,7 @@ open class CollectionBrickCell: BrickCell, Bricklike, AsynchronousResizableCell 
     }
 
     open override func heightForBrickView(withWidth width: CGFloat) -> CGFloat {
-        return brickCollectionView.collectionViewLayout.collectionViewContentSize.height
+        return brickCollectionView.layout.collectionViewContentSize.height
     }
 
     open override func updateContent() {

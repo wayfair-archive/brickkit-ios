@@ -45,6 +45,7 @@ class NavigationDataSource {
         NavigationItem(title: "Simple", subTitle: "Simple Examples", viewControllers: [
             SimpleBrickViewController.self,
             SimpleRepeatBrickViewController.self,
+            ReverseBrickViewController.self,
             HugeRepeatBrickViewController.self,
             HugeRepeatCollectionViewController.self,
             NibLessViewController.self,

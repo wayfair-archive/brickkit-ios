@@ -54,11 +54,11 @@ extension ImagesInCollectionBrickViewController: BrickRepeatCountDataSource {
 }
 
 extension ImagesInCollectionBrickViewController: ImageBrickDataSource {
-    func imageForImageBrickCell(cell: ImageBrickCell) -> UIImage? {
+    func imageForImageBrickCell(_ cell: ImageBrickCell) -> UIImage? {
         return UIImage(named: "image\(cell.index)")
     }
 
-    func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIViewContentMode {
+    func contentModeForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIViewContentMode {
         return .scaleAspectFill
     }
 }

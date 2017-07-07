@@ -26,7 +26,7 @@ enum BrickLayoutInvalidationContextType {
      */
     var shouldInvalidateAllAttributes: Bool {
         switch self {
-        case .rotation, .invalidate, .creation, .updateVisibility, .invalidateDataSourceCounts(_)/*, .UpdateHeight(_)*/: return true
+        case .rotation, .invalidate, .creation, .updateVisibility, .invalidateDataSourceCounts(_), .updateHeight(_): return true
         default: return false
         }
     }
