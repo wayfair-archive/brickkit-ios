@@ -70,18 +70,18 @@ extension HorizontalCollectionViewController: BrickRepeatCountDataSource {
 
 extension HorizontalCollectionViewController: CollectionBrickCellDataSource {
 
-    func sectionForCollectionBrickCell(cell: CollectionBrickCell) -> BrickSection {
+    func sectionForCollectionBrickCell(_ cell: CollectionBrickCell) -> BrickSection {
         return collectionSection
     }
 
 }
 
 extension HorizontalCollectionViewController: ImageBrickDataSource {
-    func imageForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIImage? {
+    func imageForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIImage? {
         return UIImage(named: "image\(imageBrickCell.collectionIndex)")
     }
 
-    func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIViewContentMode {
+    func contentModeForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIViewContentMode {
         return .scaleAspectFill
     }
 }

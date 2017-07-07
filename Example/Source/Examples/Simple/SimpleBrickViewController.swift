@@ -22,8 +22,6 @@ class SimpleBrickViewController: BrickApp.BaseBrickController, HasTitle {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.registerBrickClass(LabelBrick.self)
-
         self.view.backgroundColor = .brickBackground
 
         let section = BrickSection(bricks: [

@@ -168,8 +168,10 @@
 		935D48911DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D488F1DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift */; };
 		935D489B1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D489A1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift */; };
 		935D489C1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935D489A1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift */; };
+		937C9C281F0F2F66008F47CD /* ReverseBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937C9C271F0F2F66008F47CD /* ReverseBrickViewController.swift */; };
 		938996A51DF77A3200E0F4F1 /* AlignmentBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938996A41DF77A3200E0F4F1 /* AlignmentBrickViewController.swift */; };
 		938996A61DF77A3200E0F4F1 /* AlignmentBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938996A41DF77A3200E0F4F1 /* AlignmentBrickViewController.swift */; };
+		93A0A1A51F0F36E5000ED3D4 /* ReverseBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 937C9C271F0F2F66008F47CD /* ReverseBrickViewController.swift */; };
 		93AB641D1E67AA4800395CAA /* IsHiddenBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AB641C1E67AA4800395CAA /* IsHiddenBrickViewController.swift */; };
 		93AB641E1E67AA4800395CAA /* IsHiddenBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93AB641C1E67AA4800395CAA /* IsHiddenBrickViewController.swift */; };
 		93D7E8691DFB52830031A6C2 /* InteractiveAlignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D7E8681DFB52830031A6C2 /* InteractiveAlignViewController.swift */; };
@@ -355,6 +357,7 @@
 		9357E7F51EDB4CAB0085AFFA /* TwoLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoLabelView.swift; sourceTree = "<group>"; };
 		935D488F1DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesInCollectionBrickViewController.swift; sourceTree = "<group>"; };
 		935D489A1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesInCollectionBrickHorizontalViewController.swift; sourceTree = "<group>"; };
+		937C9C271F0F2F66008F47CD /* ReverseBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReverseBrickViewController.swift; sourceTree = "<group>"; };
 		938996A41DF77A3200E0F4F1 /* AlignmentBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlignmentBrickViewController.swift; sourceTree = "<group>"; };
 		93AB641C1E67AA4800395CAA /* IsHiddenBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IsHiddenBrickViewController.swift; sourceTree = "<group>"; };
 		93D7E8681DFB52830031A6C2 /* InteractiveAlignViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractiveAlignViewController.swift; sourceTree = "<group>"; };
@@ -604,6 +607,7 @@
 		4E3BD7A31DB1316400541900 /* Simple */ = {
 			isa = PBXGroup;
 			children = (
+				937C9C271F0F2F66008F47CD /* ReverseBrickViewController.swift */,
 				4E3BD7A41DB1316400541900 /* MultiDimensionBrickViewController.swift */,
 				4E3BD7A51DB1316400541900 /* MultiSectionBrickViewController.swift */,
 				4E3BD7A61DB1316400541900 /* SimpleBrickViewController.swift */,
@@ -993,6 +997,7 @@
 				4E15F92C1DBA570600BBD363 /* MockTwitterViewController.swift in Sources */,
 				4E3BD7DE1DB1316400541900 /* SegmentHeaderBrick.swift in Sources */,
 				4E3BD8261DB1316400541900 /* HideSectionsViewController.swift in Sources */,
+				937C9C281F0F2F66008F47CD /* ReverseBrickViewController.swift in Sources */,
 				932365671DF449A500BE5183 /* FillBrickViewController.swift in Sources */,
 				4E3BD8241DB1316400541900 /* HideBrickViewController.swift in Sources */,
 				93EAFE2F1DB57D680036331C /* NavigationTransition.swift in Sources */,
@@ -1057,6 +1062,7 @@
 				4E3BD8551DB1316400541900 /* OnScrollDownStickingViewController.swift in Sources */,
 				4E3BD8E81DB51E1200541900 /* BrickIdentifiers.swift in Sources */,
 				4E3BD81F1DB1316400541900 /* BrickCollectionInteractiveViewController.swift in Sources */,
+				93A0A1A51F0F36E5000ED3D4 /* ReverseBrickViewController.swift in Sources */,
 				4E3BD7C91DB1316400541900 /* HeaderAndFooterBrick.swift in Sources */,
 				4E3BD84B1DB1316400541900 /* SimpleRepeatBrickViewController.swift in Sources */,
 				4E3BD82B1DB1316400541900 /* InvalidateHeightViewController.swift in Sources */,

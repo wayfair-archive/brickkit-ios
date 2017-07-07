@@ -43,7 +43,6 @@ class RepeatCollectionBrickViewController: BrickApp.BaseBrickController, BrickRe
                 ])
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
 
-        self.registerBrickClass(CollectionBrick.self)
 
         let section = BrickSection(bricks: [
             CollectionBrick(RepeatCollectionBrickViewController.Identifiers.collectionBrick, dataSource: self, brickTypes: [LabelBrick.self, ImageBrick.self])
@@ -67,7 +66,7 @@ class RepeatCollectionBrickViewController: BrickApp.BaseBrickController, BrickRe
 
 extension RepeatCollectionBrickViewController: CollectionBrickCellDataSource {
 
-    func sectionForCollectionBrickCell(cell: CollectionBrickCell) -> BrickSection {
+    func sectionForCollectionBrickCell(_ cell: CollectionBrickCell) -> BrickSection {
         return collectionSection
     }
     
@@ -78,7 +77,7 @@ extension RepeatCollectionBrickViewController: CollectionBrickCellDataSource {
 }
 
 extension RepeatCollectionBrickViewController: ImageBrickDataSource {
-    func imageForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIImage? {
+    func imageForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIImage? {
         return UIImage(named: "image\(imageBrickCell.collectionIndex)")
     }
 

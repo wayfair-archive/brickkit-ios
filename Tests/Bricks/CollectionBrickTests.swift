@@ -58,8 +58,6 @@ class CollectionBrickTests: XCTestCase {
     }
 
     func testCollectionViewFrame() {
-        brickView.registerBrickClass(CollectionBrick.self)
-
         let collectionSection = BrickSection(bricks: [
             DummyBrick(height: .fixed(size: 200))
             ])
@@ -72,6 +70,8 @@ class CollectionBrickTests: XCTestCase {
         brickView.layoutSubviews()
 
         let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? CollectionBrickCell
+        XCTAssertEqual(cell1?.frame, CGRect(x: 0, y: 300, width: 320, height: 200))
+        cell1?.layoutIfNeeded()
         XCTAssertEqual(cell1?.brickCollectionView.frame, CGRect(x: 0, y: 0, width: 320, height: 200))
 
         XCTAssertFalse(brickView.layout.isInCollectionBrick)

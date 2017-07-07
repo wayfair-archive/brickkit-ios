@@ -41,10 +41,6 @@ class BrickInvalidationContextTests: XCTestCase {
         let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 0, section: 1), newHeight: 100))
         brickViewController.layout.invalidateLayout(with: context)
 
-        XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 4)
-        XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
-        XCTAssertEqual(context.contentOffsetAdjustment, CGPoint(x: 0, y: 0))
-
         let expectedResult = [
             0 : [
                 CGRect(x: 0, y: 0, width: width, height: 200),
@@ -79,9 +75,6 @@ class BrickInvalidationContextTests: XCTestCase {
         let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 1, section: 1), newHeight: 100))
         brickViewController.layout.invalidateLayout(with: context)
 
-        XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 3)
-        XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
-
         let expectedResult = [
             0 : [
                 CGRect(x: 0, y: 0, width: width, height: 200),
@@ -114,9 +107,6 @@ class BrickInvalidationContextTests: XCTestCase {
 
         let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 2, section: 1), newHeight: 100))
         brickViewController.layout.invalidateLayout(with: context)
-        XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
-
-        XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 2)
 
         let expectedResult = [
             0 : [
@@ -155,9 +145,6 @@ class BrickInvalidationContextTests: XCTestCase {
 
         let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 0, section: 2), newHeight: 100))
         brickViewController.layout.invalidateLayout(with: context)
-
-        XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 7)
-        XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
 
         let expectedResult = [
             0 : [
@@ -208,9 +195,6 @@ class BrickInvalidationContextTests: XCTestCase {
         let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 0, section: 3), newHeight: 100))
         brickViewController.layout.invalidateLayout(with: context)
 
-        XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 5)
-        XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
-
         let expectedResult = [
             0 : [
                 CGRect(x: 0, y: 0, width: width, height: 200),
@@ -260,9 +244,6 @@ class BrickInvalidationContextTests: XCTestCase {
 
         let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 0, section: 4), newHeight: 100))
         brickViewController.layout.invalidateLayout(with: context)
-
-        XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 4)
-        XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
 
         let expectedResult = [
             0 : [
@@ -315,9 +296,6 @@ class BrickInvalidationContextTests: XCTestCase {
 
         let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 0, section: 4), newHeight: 100))
         brickViewController.layout.invalidateLayout(with: context)
-
-        XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 6)
-        XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
 
         let expectedResult = [
             0 : [
@@ -375,9 +353,6 @@ class BrickInvalidationContextTests: XCTestCase {
         let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 0, section: 2), newHeight: 100))
         brickViewController.layout.invalidateLayout(with: context)
 
-        XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 9)
-        XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
-
         let expectedResult = [
             0 : [
                 CGRect(x: 0, y: 0, width: width, height: 250),
@@ -434,9 +409,6 @@ class BrickInvalidationContextTests: XCTestCase {
         let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 0, section: 2), newHeight: 0))
         brickViewController.layout.invalidateLayout(with: context)
 
-        XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 8)
-        //            XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
-
         let expectedResult = [
             0 : [
                 CGRect(x: 0, y: 0, width: width, height: 100),
@@ -488,9 +460,6 @@ class BrickInvalidationContextTests: XCTestCase {
 
         let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: IndexPath(item: 1, section: 2), newHeight: 50))
         brickViewController.layout.invalidateLayout(with: context)
-
-        XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 1)
-        XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 0))
 
         let expectedResult = [
             0 : [
@@ -961,9 +930,6 @@ class BrickInvalidationContextTests: XCTestCase {
         let cell = brickViewController.brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1))
 
         XCTAssertEqual(cell?.frame, CGRect(x: 0, y: 0, width: width/2, height: 100))
-        XCTAssertEqual(context.invalidatedItemIndexPaths?.count, 3)
-        XCTAssertTrue(context.invalidatedItemIndexPaths!.contains(IndexPath(item: 0, section: 1)))
-        XCTAssertEqual(context.contentSizeAdjustment, CGSize(width: 0, height: 50))
 
         let expectedResult = [
             0 : [

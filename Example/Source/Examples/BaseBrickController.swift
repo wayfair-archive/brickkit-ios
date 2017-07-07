@@ -53,6 +53,16 @@ class BaseBrickController: BrickViewController {
     }
 }
 
+extension UILabel {
+
+    func configure(textColor: UIColor?) {
+        self.textAlignment = .center
+        self.textColor = textColor
+        self.numberOfLines = 0
+    }
+
+}
+
 extension LabelBrickCell {
 
     static func configure(cell: LabelBrickCell) {
@@ -60,8 +70,7 @@ extension LabelBrickCell {
     }
 
     func configure() {
-        label.textAlignment = .center
-        label.textColor = brick.backgroundColor.complemetaryColor
+        label.configure(textColor: brick.backgroundColor.complemetaryColor)
     }
 }
 
