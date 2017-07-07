@@ -157,6 +157,8 @@
 		93186B041DDE89610095C849 /* HugeRepeatBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93186B021DDE89610095C849 /* HugeRepeatBrickViewController.swift */; };
 		93186B081DDE8A580095C849 /* HugeRepeatCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93186B071DDE8A580095C849 /* HugeRepeatCollectionViewController.swift */; };
 		93186B091DDE8A580095C849 /* HugeRepeatCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93186B071DDE8A580095C849 /* HugeRepeatCollectionViewController.swift */; };
+		931A52F31F0D5B9300AB0BDF /* ReorderableBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931A52F21F0D5B9300AB0BDF /* ReorderableBrickViewController.swift */; };
+		931A52F41F0D5B9300AB0BDF /* ReorderableBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931A52F21F0D5B9300AB0BDF /* ReorderableBrickViewController.swift */; };
 		932365671DF449A500BE5183 /* FillBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932365661DF449A500BE5183 /* FillBrickViewController.swift */; };
 		9327D03E1DB94A9500D65BCB /* NibLessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327D03D1DB94A9500D65BCB /* NibLessViewController.swift */; };
 		9327D03F1DB94A9500D65BCB /* NibLessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9327D03D1DB94A9500D65BCB /* NibLessViewController.swift */; };
@@ -349,6 +351,7 @@
 		4E8E10F31DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbeddedSpotlightSnapScrollingViewController.swift; sourceTree = "<group>"; };
 		93186B021DDE89610095C849 /* HugeRepeatBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HugeRepeatBrickViewController.swift; sourceTree = "<group>"; };
 		93186B071DDE8A580095C849 /* HugeRepeatCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HugeRepeatCollectionViewController.swift; sourceTree = "<group>"; };
+		931A52F21F0D5B9300AB0BDF /* ReorderableBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReorderableBrickViewController.swift; sourceTree = "<group>"; };
 		932365661DF449A500BE5183 /* FillBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FillBrickViewController.swift; sourceTree = "<group>"; };
 		9327D03D1DB94A9500D65BCB /* NibLessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NibLessViewController.swift; sourceTree = "<group>"; };
 		9327D0421DB94AB300D65BCB /* NiblessBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NiblessBrick.swift; sourceTree = "<group>"; };
@@ -616,6 +619,7 @@
 				93186B021DDE89610095C849 /* HugeRepeatBrickViewController.swift */,
 				93186B071DDE8A580095C849 /* HugeRepeatCollectionViewController.swift */,
 				938996A41DF77A3200E0F4F1 /* AlignmentBrickViewController.swift */,
+				931A52F21F0D5B9300AB0BDF /* ReorderableBrickViewController.swift */,
 			);
 			path = Simple;
 			sourceTree = "<group>";
@@ -997,6 +1001,7 @@
 				4E3BD8241DB1316400541900 /* HideBrickViewController.swift in Sources */,
 				93EAFE2F1DB57D680036331C /* NavigationTransition.swift in Sources */,
 				4E3BD7D81DB1316400541900 /* PostBrick.swift in Sources */,
+				931A52F31F0D5B9300AB0BDF /* ReorderableBrickViewController.swift in Sources */,
 				4E3BD8281DB1316400541900 /* InsertBrickViewController.swift in Sources */,
 				4E3BD8361DB1316400541900 /* SizeClassesBrickViewController.swift in Sources */,
 				4E3BD8321DB1316400541900 /* PopoverBrickViewController.swift in Sources */,
@@ -1025,6 +1030,7 @@
 				4E3BD8011DB1316400541900 /* BaseRepeatBrickViewController.swift in Sources */,
 				4E3BD85D1DB1316400541900 /* StickingFooterBaseViewController.swift in Sources */,
 				4E3BD84F1DB1316400541900 /* SimpleRepeatFixedWidthViewController.swift in Sources */,
+				931A52F41F0D5B9300AB0BDF /* ReorderableBrickViewController.swift in Sources */,
 				938996A61DF77A3200E0F4F1 /* AlignmentBrickViewController.swift in Sources */,
 				4E3BD7EF1DB1316400541900 /* WhoToFollowBrick.swift in Sources */,
 				4E3BD7C71DB1316400541900 /* DailySalesBrick.swift in Sources */,

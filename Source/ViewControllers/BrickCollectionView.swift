@@ -170,7 +170,7 @@ open class BrickCollectionView: UICollectionView {
     ///
     /// - returns: BrickInfo
     open func brickInfo(at indexPath: IndexPath) -> BrickInfo {
-        guard let brickAndIndex = section.brickAndIndex(at: indexPath, in: collectionInfo) else {
+        guard let brickAndIndex = section.brickAndIndex(atIndexPath: indexPath, in: collectionInfo) else {
             fatalError("Brick and index not found at indexPath: SECTION - \(indexPath.section) - ITEM: \(indexPath.item). This should never happen")
         }
         return (brickAndIndex.0, brickAndIndex.1, collectionInfo.index, collectionInfo.identifier)
