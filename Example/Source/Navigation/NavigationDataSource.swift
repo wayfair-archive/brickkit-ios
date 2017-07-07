@@ -52,6 +52,7 @@ class NavigationDataSource {
             SimpleRepeatFixedWidthViewController.self,
             SimpleRepeatFixedHeightViewController.self,
             SimpleRepeatHeightRatioViewController.self,
+            ReorderableBrickViewController.self,
             FillBrickViewController.self,
             MultiSectionBrickViewController.self,
             MultiDimensionBrickViewController.self,

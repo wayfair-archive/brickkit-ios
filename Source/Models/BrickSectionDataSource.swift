@@ -49,7 +49,7 @@ extension BrickSection {
         return brickSection.numberOfBricks(in: collection)
     }
 
-    internal func brickAndIndex(at indexPath: IndexPath, in collection: CollectionInfo) -> (Brick, Int)? {
+    internal func brickAndIndex(atIndexPath indexPath: IndexPath, in collection: CollectionInfo) -> (Brick, Int)? {
         _ = invalidateIfNeeded(in: collection)
 
         if indexPath.section == 0 {
@@ -60,23 +60,15 @@ extension BrickSection {
             return nil
         }
 
-        var index = 0
-        for brick in section.bricks {
-            if indexPath.item < index + brick.count(for: collection) {
-                return (brick, indexPath.item - index)
-            }
-            index += brick.count(for: collection)
-        }
-
-        return nil
+        return section.brickAndIndex(atIndex: indexPath.item, in: collection)
     }
 
     func brick(at indexPath: IndexPath, in collection: CollectionInfo) -> Brick? {
-        return brickAndIndex(at: indexPath, in: collection)?.0
+        return brickAndIndex(atIndexPath: indexPath, in: collection)?.0
     }
 
     func index(at indexPath: IndexPath, in collection: CollectionInfo) -> Int? {
-        return brickAndIndex(at: indexPath, in: collection)?.1
+        return brickAndIndex(atIndexPath: indexPath, in: collection)?.1
     }
 
     func indexPathFor(_ section: Int, in collection: CollectionInfo) -> IndexPath? {
@@ -95,7 +87,7 @@ extension BrickSection {
         for section in 0..<numberOfSections(in: collection) {
             for item in 0..<numberOfItems(in: section, in: collection) {
                 let indexPath = IndexPath(item: item, section: section)
-                let foundBrickWithIndex = brickAndIndex(at: indexPath, in: collection)! //We can safely unwrap, because this indexPath must exist
+                let foundBrickWithIndex = brickAndIndex(atIndexPath: indexPath, in: collection)! //We can safely unwrap, because this indexPath must exist
                 if foundBrickWithIndex.0.identifier == identifier {
                     if let index = index , foundBrickWithIndex.1 != index {
                         continue

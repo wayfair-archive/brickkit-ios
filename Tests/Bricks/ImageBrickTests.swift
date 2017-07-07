@@ -279,7 +279,7 @@ class ImageBrickTests: XCTestCase {
             invalidateExpectation.fulfill()
         }
         
-        waitForExpectations(timeout: 1, handler: nil)
+        waitForExpectations(timeout: 2, handler: nil)
         
         let cell2 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell
         cell2?.layoutIfNeeded()

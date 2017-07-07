@@ -57,4 +57,9 @@ class BrickModelsTests: XCTestCase {
 
         XCTAssertEqual(section.description, expectedResult)
     }
+
+    func testSettingAndGettingWidth() {
+        let brick = Brick(size: BrickSize(width: .fixed(size: 50), height: .auto(estimate: .fixed(size: 50))))
+        XCTAssertEqual(brick.width, .fixed(size: 50))
+    }
 }
