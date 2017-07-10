@@ -1,4 +1,4 @@
-//: Playground - noun: a place where people can play
+//: [Previous](@previous)
 
 import UIKit
 import BrickKit
@@ -28,6 +28,8 @@ let labelBrick = GenericBrick<UILabel>("FRUIT", configureView: { view, cell in
 let section = BrickSection(backgroundColor: .lightGray, bricks: [
     labelBrick
     ], inset: 8, edgeInsets: UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16))
-    
+
 labelBrick.repeatCount = fruits.count
 brickView.setSection(section)
+
+//: [Next](@next)

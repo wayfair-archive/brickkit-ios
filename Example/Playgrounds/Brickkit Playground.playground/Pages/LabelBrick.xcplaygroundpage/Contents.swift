@@ -1,4 +1,4 @@
-//: Playground - noun: a place where people can play
+//: [Previous](@previous)
 
 import UIKit
 import BrickKit
@@ -13,9 +13,11 @@ let configureBlock: ((LabelBrickCell) -> Void) = { cell in
 
 let section = BrickSection(backgroundColor: .lightGray, bricks: [
     LabelBrick(text: "LABEL BRICK", configureCellBlock: configureBlock)
-], edgeInsets: UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16))
+    ], edgeInsets: UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16))
 
 brickView.setSection(section)
 
 //Add the set the live view
 PlaygroundPage.current.liveView = brickView
+
+//: [Next](@next)
