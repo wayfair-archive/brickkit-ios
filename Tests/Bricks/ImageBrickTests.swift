@@ -213,7 +213,7 @@ class ImageBrickTests: XCTestCase {
 
         let section = BrickSection(bricks: [
             ImageBrick("imageBrick", dataSource: ImageURLBrickModel(url: imageURL, contentMode: .scaleAspectFill)),
-            ])
+        ])
         brickView.setupSectionAndLayout(section)
 
         waitForExpectations(timeout: 2, handler: nil)
