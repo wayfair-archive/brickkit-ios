@@ -189,6 +189,10 @@ open class BrickCell: BaseBrickCell {
 
     }
 
+    open func willDisplay() {
+
+    }
+
     internal func reloadContent() {
         self._brick.overrideContentSource?.resetContent(for: self)
         updateContent()

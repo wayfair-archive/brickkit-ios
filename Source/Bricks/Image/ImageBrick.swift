@@ -184,7 +184,17 @@ open class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableCel
             }
             
             imageLoaded = true
-        } else if let imageURL = dataSource.imageURLForImageBrickCell(self) {
+        }
+    }
+
+    override open func willDisplay() {
+        super.willDisplay()
+
+        guard let dataSource = brick.dataSource, imageLoaded == false else {
+            return
+        }
+
+        if let imageURL = dataSource.imageURLForImageBrickCell(self) {
             guard currentImageURL != imageURL else {
                 if let image = self.imageView.image {
                     self.resize(image: image)
