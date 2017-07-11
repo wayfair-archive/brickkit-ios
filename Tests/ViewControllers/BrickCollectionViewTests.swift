@@ -720,4 +720,79 @@ class BrickCollectionViewTests: XCTestCase {
         
         waitForExpectations(timeout: 5, handler: nil)
     }
+
+    func testInsertAt() {
+        let dataSource = MockLabelBrickCellDataSource()
+
+        let section = BrickSection(bricks: [
+            LabelBrick("Test", dataSource: dataSource)
+        ])
+        section.repeatCountDataSource = dataSource
+        brickView.setupSectionAndLayout(section)
+
+        let indexPath = IndexPath(item: 1, section: 1)
+
+        guard let oldCell = brickView.cellForItem(at: indexPath) as? LabelBrickCell else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(oldCell.label.text, "Brick 2")
+
+        dataSource.data.insert("Brick 3", at: 1)
+        brickView.updateAt(insertedIndexPaths: [indexPath])
+
+        guard let newCell = brickView.cellForItem(at: indexPath) as? LabelBrickCell else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(newCell.label.text, "Brick 3")
+    }
+
+    func testDeleteAt() {
+        let dataSource = MockLabelBrickCellDataSource()
+        dataSource.data.append("Brick 3")
+
+        let section = BrickSection(bricks: [
+            LabelBrick("Test", dataSource: dataSource)
+        ])
+        section.repeatCountDataSource = dataSource
+        brickView.setupSectionAndLayout(section)
+
+        let indexPath = IndexPath(item: 1, section: 1)
+
+        guard let oldCell = brickView.cellForItem(at: indexPath) as? LabelBrickCell else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(oldCell.label.text, "Brick 2")
+
+        dataSource.data.remove(at: 1)
+        brickView.updateAt(deletedIndexPaths: [indexPath])
+
+        guard let newCell = brickView.cellForItem(at: indexPath) as? LabelBrickCell else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(newCell.label.text, "Brick 3")
+    }
+}
+
+fileprivate class MockLabelBrickCellDataSource: LabelBrickCellDataSource, BrickRepeatCountDataSource {
+    var data: [String] = ["Brick 1", "Brick 2"]
+
+    func configureLabelBrickCell(_ cell: LabelBrickCell) {
+        cell.label.text = data[cell.index]
+    }
+
+    func repeatCount(for identifier: String, with collectionIndex: Int, collectionIdentifier: String) -> Int {
+        if identifier == "Test" {
+            return data.count
+        } else {
+            return 1
+        }
+    }
 }

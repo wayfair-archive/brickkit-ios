@@ -267,6 +267,27 @@ open class BrickCollectionView: UICollectionView {
         }
     }
 
+    /// Update items that have been inserted or deleted at specific index paths
+    ///
+    /// - parameter insertedIndexPaths: Array of index paths where data was inserted
+    /// - parameter deletedIndexPaths: Array of index paths where data was deleted
+    /// - parameter completion: Completion Block
+    open func updateAt(insertedIndexPaths: [IndexPath] = [], deletedIndexPaths: [IndexPath] = [], completion: ((_ completed: Bool, _ insertedIndexPaths: [IndexPath], _ deletedIndexPaths: [IndexPath]) -> Void)? = nil) {
+        self.performBatchUpdates({
+            self.section.invalidateCounts(in: self.collectionInfo)
+
+            if !insertedIndexPaths.isEmpty {
+                self.insertItems(at: insertedIndexPaths)
+            }
+
+            if !deletedIndexPaths.isEmpty {
+                self.deleteItems(at: deletedIndexPaths)
+            }
+        }) { (completed) in
+            completion?(completed, insertedIndexPaths, deletedIndexPaths)
+        }
+    }
+
     /// Invalidate all the repeat counts of the given
     ///
     /// - parameter completion: Completion Block

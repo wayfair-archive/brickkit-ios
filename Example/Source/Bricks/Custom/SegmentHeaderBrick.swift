@@ -29,6 +29,8 @@ class SegmentHeaderBrickCell: BrickCell, Bricklike {
             return
         }
 
+        dataSource.configure(cell: self)
+
         self.segmentControl.removeAllSegments()
         for (index, title) in dataSource.titles.enumerated() {
             self.segmentControl.insertSegment(withTitle: title, at: index, animated: false)
@@ -40,6 +42,12 @@ class SegmentHeaderBrickCell: BrickCell, Bricklike {
 protocol SegmentHeaderBrickDataSource: class {
     var titles: [String] { get }
     var selectedSegmentIndex: Int { get }
+
+    func configure(cell: SegmentHeaderBrickCell)
+}
+
+extension SegmentHeaderBrickDataSource {
+    func configure(cell: SegmentHeaderBrickCell) {/*Optional*/}
 }
 
 protocol SegmentHeaderBrickDelegate: class {

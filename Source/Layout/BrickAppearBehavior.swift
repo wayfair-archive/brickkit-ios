@@ -45,3 +45,19 @@ open class BrickAppearBottomBehavior: BrickAppearBehavior {
     }
 
 }
+
+open class BrickAppearFadeBehavior: BrickAppearBehavior {
+
+    public init() {
+
+    }
+
+    open func configureAttributesForAppearing(_ attributes: UICollectionViewLayoutAttributes, in collectionView: UICollectionView) {
+        attributes.alpha = 0
+    }
+
+    open func configureAttributesForDisappearing(_ attributes: UICollectionViewLayoutAttributes, in collectionView: UICollectionView) {
+        self.configureAttributesForAppearing(attributes, in: collectionView)
+    }
+    
+}
