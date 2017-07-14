@@ -115,8 +115,29 @@ open class BrickCollectionView: UICollectionView {
         return brick
     }
 
+    open func indexPathsForVisibleBricksWithIdentifier(_ identifier: String, index: Int? = nil) -> [IndexPath] {
+        let cells = self.visibleCells.filter { (cell) -> Bool in
+            let brickCell = cell as! BaseBrickCell // It's ok to force unwrap because BrickKit only uses BaseBrickCell
+            if brickCell._brick.identifier == identifier {
+                if let index = index {
+                    return brickCell.index == index
+                }
+                return true
+            } else {
+                return false
+            }
+        }
+        return cells.flatMap({ (cell) -> IndexPath? in
+            return self.indexPath(for: cell)
+        })
+    }
+
     open func indexPathsForBricksWithIdentifier(_ identifier: String, index: Int? = nil) -> [IndexPath] {
-        return self.section.indexPathsForBricksWithIdentifier(identifier, index: index, in: collectionInfo)
+        var attributes = indexPathsForVisibleBricksWithIdentifier(identifier, index: index)
+        if attributes.isEmpty {
+            attributes = self.section.indexPathsForBricksWithIdentifier(identifier, index: index, in: collectionInfo)
+        }
+        return attributes
     }
 
     /// Register a brick class.
@@ -589,10 +610,9 @@ extension BrickCollectionView: UICollectionViewDataSource {
             if var downloadable = brickCell as? ImageDownloaderCell {
                 downloadable.imageDownloader = BrickCollectionView.imageDownloader
             }
-
-            brickCell.setContent(brick, index: info.index, collectionIndex: info.collectionIndex, collectionIdentifier: info.collectionIdentifier)
         }
 
+        cell.setContent(brick, index: info.index, collectionIndex: info.collectionIndex, collectionIdentifier: info.collectionIdentifier)
         cell.contentView.backgroundColor = brick.backgroundColor
 
         //  http://stackoverflow.com/questions/23059811/is-uicollectionview-backgroundview-broken
