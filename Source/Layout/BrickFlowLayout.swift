@@ -749,6 +749,8 @@ extension BrickFlowLayout {
             }
         } else if let copy = self.layoutAttributesForItem(at: itemIndexPath)?.copy() as? BrickLayoutAttributes {
             attributes = copy
+        } else {
+            attributes = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath)?.copy() as? BrickLayoutAttributes
         }
 
         attributes?.setAutoZIndex(zIndexer.zIndex(for: itemIndexPath))

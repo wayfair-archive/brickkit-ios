@@ -267,6 +267,54 @@ open class BrickCollectionView: UICollectionView {
         }
     }
 
+    fileprivate func updateItems(at index: Int, for identifier: String, itemCount: Int, updateAction: @escaping (_ indexPaths: [IndexPath]) -> Void, completion: ((_ completed: Bool, _ indexPaths: [IndexPath]) -> Void)? = nil) {
+        guard let originIndexPath = indexPathsForBricksWithIdentifier(identifier, index: index).first else {
+            invalidateRepeatCounts()
+            return
+        }
+
+        var indexPaths: [IndexPath] = []
+        for i in 0..<itemCount {
+            indexPaths.append(IndexPath(item: originIndexPath.item + i, section: originIndexPath.section))
+        }
+
+        self.performBatchUpdates({
+            self.section.invalidateCounts(in: self.collectionInfo)
+
+            updateAction(indexPaths)
+        }) { (completed) in
+            completion?(completed, indexPaths)
+        }
+    }
+
+    /// Insert items at a given index for a brick identifier
+    ///
+    /// - parameter index: Index where items will be inserted
+    /// - parameter identifier: Brick identifier where items will be inserted
+    /// - parameter itemCount: Amount of items being inserted
+    /// - parameter completion: Completion Block
+    open func insertItems(at index: Int, for identifier: String, itemCount: Int, completion: ((_ completed: Bool, _ insertedIndexPaths: [IndexPath]) -> Void)? = nil) {
+        updateItems(at: index, for: identifier, itemCount: itemCount, updateAction: { insertedIndexPaths in
+            if !insertedIndexPaths.isEmpty {
+                self.insertItems(at: insertedIndexPaths)
+            }
+        }, completion: completion)
+    }
+
+    /// Delete items at a given index for a brick identifier
+    ///
+    /// - parameter index: Index where items will be deleted
+    /// - parameter identifier: Brick identifier where items will be deleted
+    /// - parameter itemCount: Amount of items being deleted
+    /// - parameter completion: Completion Block
+    open func deleteItems(at index: Int, for identifier: String, itemCount: Int, completion: ((_ completed: Bool, _ deletedIndexPaths: [IndexPath]) -> Void)? = nil) {
+        updateItems(at: index, for: identifier, itemCount: itemCount, updateAction: { deletedIndexPaths in
+            if !deletedIndexPaths.isEmpty {
+                self.deleteItems(at: deletedIndexPaths)
+            }
+        }, completion: completion)
+    }
+
     /// Invalidate all the repeat counts of the given
     ///
     /// - parameter completion: Completion Block
