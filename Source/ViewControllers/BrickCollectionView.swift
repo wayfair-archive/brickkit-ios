@@ -205,12 +205,12 @@ open class BrickCollectionView: UICollectionView {
     /// - paramter reloadSections: A flag that indicates if the sections need to be reloaded
     /// - parameter completion: A completion handler block to execute when all of the operations are finished. This block takes a single Boolean parameter that contains the value true if all of the related animations completed successfully or false if they were interrupted. This parameter may be nil.
     open func invalidateBricks(_ reloadSections: Bool = true, completion: ((Bool) -> Void)? = nil) {
-        _ = self.invalidateRepeatCountsWithoutPerformBatchUpdates(reloadSections)
         self.performBatchUpdates({
+            _ = self.invalidateRepeatCountsWithoutPerformBatchUpdates(reloadSections)
             if reloadSections {
                 self.reloadSections(IndexSet(integersIn: 0..<self.numberOfSections))
             }
-            self.collectionViewLayout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .invalidate))
+//            self.collectionViewLayout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .invalidate))
         }, completion: completion)
     }
 

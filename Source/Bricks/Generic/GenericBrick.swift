@@ -71,9 +71,30 @@ open class GenericBrickCell: BrickCell {
 
     internal private(set) var fromNib: Bool = false
 
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        backgroundColor = UIColor.clear
+        contentView.backgroundColor = UIColor.clear
+    }
+
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        clearBackgroundColors()
+    }
+
     open override func awakeFromNib() {
         super.awakeFromNib()
         fromNib = true
+    }
+
+    open override func prepareForReuse() {
+        super.prepareForReuse()
+        clearBackgroundColors()
+    }
+
+    fileprivate func clearBackgroundColors() {
+        backgroundColor = UIColor.clear
+        contentView.backgroundColor = UIColor.clear
     }
 
     open override func updateContent() {
@@ -82,9 +103,6 @@ open class GenericBrickCell: BrickCell {
         guard !fromNib else {
             return
         }
-
-        backgroundColor = UIColor.clear
-        contentView.backgroundColor = UIColor.clear
 
         if let generic = self._brick as? ViewGenerator {
             if let genericContentView = self.genericContentView {

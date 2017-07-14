@@ -109,9 +109,6 @@ open class BrickFlowLayout: UICollectionViewLayout, BrickLayout {
     /// Sections
     internal fileprivate(set) var sections: [Int: BrickLayoutSection]?
 
-    /// Flag to indicate that an update cycle is happening
-    var isUpdating: Bool = false
-
     /// IndexPaths being added
     var insertedIndexPaths: [IndexPath] = []
 
@@ -140,7 +137,7 @@ open class BrickFlowLayout: UICollectionViewLayout, BrickLayout {
         if let sections = sections {
 
             //Only continue calculating if the new frame of interest is further than the old frame
-            let shouldContinueCalculating = scrollDirection == .vertical ? oldRect.maxY <= frameOfInterest.maxY : oldRect.maxX <= frameOfInterest.maxX
+            let shouldContinueCalculating = scrollDirection == .vertical ? oldRect.maxY < frameOfInterest.maxY : oldRect.maxX < frameOfInterest.maxX
 
             if shouldContinueCalculating {
                 let currentSections = sections.values
@@ -223,9 +220,9 @@ open class BrickFlowLayout: UICollectionViewLayout, BrickLayout {
     }
 
     internal func updateNumberOfItems(_ brickSection: BrickLayoutSection, numberOfItems: Int? = nil) {
-        brickSection.setNumberOfItems(numberOfItems ?? _collectionView.numberOfItems(inSection: brickSection.sectionIndex), addedAttributes: { (attributes, oldFrame) in
-            }, removedAttributes: { (attributes, oldFrame) in
-        })
+//        brickSection.setNumberOfItems(numberOfItems ?? _collectionView.numberOfItems(inSection: brickSection.sectionIndex), addedAttributes: { (attributes, oldFrame) in
+//            }, removedAttributes: { (attributes, oldFrame) in
+//        })
     }
 
     internal func updateNumberOfItemsInSection(_ section: Int, numberOfItems: Int, updatedAttributes: @escaping OnAttributesUpdatedHandler) {
@@ -310,31 +307,32 @@ extension BrickFlowLayout {
             default: break
             }
         } else if context.invalidateDataSourceCounts {
-            invalidateDataCounts(context)
+//            invalidateDataCounts(context)
         } else {
-            return
+//            return
+            invalidateLayout(with: BrickLayoutInvalidationContext(type: .invalidate))
         }
 
         super.invalidateLayout(with: context)
     }
 
-    func invalidateDataCounts(_ context: UICollectionViewLayoutInvalidationContext) {
-        zIndexer.reset(for: self)
-
-        var changedSections = [Int: Int]()
-        for section in 0..<_collectionView.numberOfSections {
-            if let brickSection = sections?[section] {
-                let numberOfItems = _collectionView.numberOfItems(inSection: section)
-                if brickSection.numberOfItems != numberOfItems {
-                    changedSections[section] = numberOfItems
-                }
-            }
-        }
-        if !changedSections.isEmpty {
-            _ = BrickLayoutInvalidationContext(type: .invalidateDataSourceCounts(sections: changedSections)).invalidateWithLayout(self, context: context)
-        }
-
-    }
+//    func invalidateDataCounts(_ context: UICollectionViewLayoutInvalidationContext) {
+//        zIndexer.reset(for: self)
+//
+//        var changedSections = [Int: Int]()
+//        for section in 0..<_collectionView.numberOfSections {
+//            if let brickSection = sections?[section] {
+//                let numberOfItems = _collectionView.numberOfItems(inSection: section)
+//                if brickSection.numberOfItems != numberOfItems {
+//                    changedSections[section] = numberOfItems
+//                }
+//            }
+//        }
+//        if !changedSections.isEmpty {
+//            _ = BrickLayoutInvalidationContext(type: .invalidateDataSourceCounts(sections: changedSections)).invalidateWithLayout(self, context: context)
+//        }
+//
+//    }
 
     open override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         if !isCalculating {
@@ -346,8 +344,8 @@ extension BrickFlowLayout {
         }
 
         var attributes: [UICollectionViewLayoutAttributes] = []
-        for (_, section) in sections {
-            attributes += section.layoutAttributesForElementsInRect(rect, with: zIndexer)
+        for (sectionIndex, section) in sections {
+            attributes += section.layoutAttributesForElementsInRect(rect, with: zIndexer, maxIndex: _collectionView.numberOfItems(inSection: sectionIndex) - 1)
         }
 
         return attributes
@@ -447,8 +445,14 @@ extension BrickFlowLayout: BrickLayoutSectionDataSource {
         let type = _dataSource.brickLayout(self, brickLayoutTypeForItemAt: indexPath)
         switch type {
         case .brick: break
-        case .section(let section):
-            if let brickSection = sections?[section] {
+        case .section(let sectionIndex):
+//            section.section
+//            if let indexPath = dataSource?.brickLayout(self, indexPathFor: section.sectionIndex) {
+//                section.sectionAttributes = self.layoutAttributesForItem(at: indexPath) as? BrickLayoutAttributes
+//            }
+            if let brickSection = sections?[sectionIndex] {
+                brickSection.sectionAttributes = attributes
+
                 updateNumberOfItems(brickSection)
                 if brickSection.sectionWidth != width {
                     brickSection.setSectionWidth(width, updatedAttributes: updatedAttributes)
@@ -460,7 +464,7 @@ extension BrickFlowLayout: BrickLayoutSectionDataSource {
                     brickSection.invalidateAttributes(updatedAttributes)
                 }
             } else {
-                calculateSection(for: section, with: attributes, containedInWidth: width, at: origin)
+                calculateSection(for: sectionIndex, with: attributes, containedInWidth: width, at: origin)
             }
         }
     }
@@ -693,9 +697,23 @@ extension BrickFlowLayout {
             }
         }
 
-        isUpdating = true
+        if (insertedIndexPaths.count + deletedIndexPaths.count) > 0 {
+            zIndexer.reset(for: self)
+            for (sectionIndex, section) in sections! {
+                let inserted = insertedIndexPaths.filter({ (indexPath) -> Bool in
+                    return indexPath.section == sectionIndex
+                })
+
+                let deleted = deletedIndexPaths.filter({ (indexPath) -> Bool in
+                    return indexPath.section == sectionIndex
+                })
+
+                section.updateNumberOfItems(inserted: inserted.map({$0.item}), deleted: deleted.map({$0.item}))
+            }
+        }
 
         reloadItems(at: reloadIndexPaths)
+        invalidateLayout(with: BrickLayoutInvalidationContext(type: .invalidate))
     }
 
     fileprivate func reloadItems(at indexPaths: [IndexPath]) {
@@ -706,7 +724,7 @@ extension BrickFlowLayout {
 
             switch _dataSource.brickLayout(self, brickLayoutTypeForItemAt: indexPath) {
             case .brick:
-                invalidateLayout(with: BrickLayoutInvalidationContext(type: .invalidateHeight(indexPath: indexPath)))
+                BrickLayoutInvalidationContext(type: .invalidateHeight(indexPath: indexPath)).invalidateWithLayout(self)
             default: break
             }
         }
@@ -717,14 +735,13 @@ extension BrickFlowLayout {
         insertedIndexPaths = []
         deletedIndexPaths = []
         reloadIndexPaths = []
-        isUpdating = false
     }
 
 
     override open func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
 
         var attributes: BrickLayoutAttributes?
-
+        
         if insertedIndexPaths.contains(itemIndexPath) {
             if let copy = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)?.copy() as? BrickLayoutAttributes {
                 appearBehavior?.configureAttributesForAppearing(copy, in: _collectionView)
@@ -749,6 +766,8 @@ extension BrickFlowLayout {
             }
         } else if let copy = self.layoutAttributesForItem(at: itemIndexPath)?.copy() as? BrickLayoutAttributes {
             attributes = copy
+        } else {
+            attributes = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath) as? BrickLayoutAttributes
         }
 
         attributes?.setAutoZIndex(zIndexer.zIndex(for: itemIndexPath))

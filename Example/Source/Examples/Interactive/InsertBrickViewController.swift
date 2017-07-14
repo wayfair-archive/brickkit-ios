@@ -32,7 +32,7 @@ class InsertBrickViewController: BrickApp.BaseBrickController, HasTitle {
             switch selectedAppearSegmentIndex {
             case 1: appearBehavior = BrickAppearTopBehavior()
             case 2: appearBehavior = BrickAppearBottomBehavior()
-            case 3: appearBehavior = BrickAppearFadeBehavior()
+            case 3: appearBehavior = ScaleAppearBehavior(scale: 0.5)
             default: appearBehavior = nil
             }
             self.layout.appearBehavior = appearBehavior
@@ -69,7 +69,7 @@ class InsertBrickViewController: BrickApp.BaseBrickController, HasTitle {
         let section = BrickSection(Section, bricks: [
             BrickSection(bricks: [SegmentHeaderBrick("AppearSegmentHeaderBrick", dataSource: self, delegate: self),
                                   SegmentHeaderBrick("InsertSegmentHeaderBrick", dataSource: self, delegate: self)]),
-            LabelBrick(BrickIdentifiers.repeatLabel, height: .fixed(size: 37), backgroundColor: UIColor.lightGray, dataSource: self)
+            LabelBrick(BrickIdentifiers.repeatLabel, height: .auto(estimate:  .fixed(size: 150)), backgroundColor: UIColor.lightGray, dataSource: self)
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
         section.repeatCountDataSource = self
 
@@ -93,7 +93,7 @@ class InsertBrickViewController: BrickApp.BaseBrickController, HasTitle {
     }
 
     func updateRepeatCounts(fixedInsertedIndexPaths: [IndexPath] = [], fixedDeletedIndexPaths: [IndexPath] = []) {
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 1 /*, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn*/, animations: {
             self.brickCollectionView.updateAt(insertedIndexPaths: fixedInsertedIndexPaths, deletedIndexPaths: fixedDeletedIndexPaths)
         })
     }

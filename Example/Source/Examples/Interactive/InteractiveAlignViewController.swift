@@ -49,10 +49,15 @@ class InteractiveAlignViewController: BrickViewController, HasTitle {
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(InteractiveAlignViewController.add))
 
-        self.registerBrickClass(LabelBrick.self)
         self.brickCollectionView.layout.appearBehavior = ScaleAppearBehavior(scale: 0.5)
 
-        let labelBrick = LabelBrick("Label", width: .ratio(ratio: 1/3), height: .fixed(size: 100), backgroundColor: UIColor.lightGray.withAlphaComponent(0.3), dataSource: self)
+        let labelBrick = GenericBrick<UILabel>("Label", width: .ratio(ratio: 1), /*height: .fixed(size: 100),*/ backgroundColor: .brickGray1) { label, cell in
+            label.text = "BRICK \(cell.index)"
+            label.configure(textColor: UIColor.brickGray1.complemetaryColor)
+            cell.edgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        }
+
+//        let labelBrick = LabelBrick("Label", width: .ratio(ratio: 1), /*height: .fixed(size: 100),*/ backgroundColor: UIColor.lightGray.withAlphaComponent(0.3), dataSource: self)
 
         let section = BrickSection(bricks: [
             labelBrick,
@@ -72,7 +77,7 @@ class InteractiveAlignViewController: BrickViewController, HasTitle {
     }
 
     func updateCounts(fixedDeletedIndexPaths: [IndexPath]? = nil) {
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
             self.brickCollectionView.invalidateRepeatCounts(reloadAllSections: false)
             }, completion: nil)
     }
