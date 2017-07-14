@@ -205,16 +205,16 @@ class BrickCollectionViewTests: XCTestCase {
 
     func testIndexPathsForBricksWithIdentifier() {
         let section = BrickSection("Section1", bricks: [
-            DummyBrick("Brick1"),
+            DummyBrick("Brick1", height: .fixed(size: 50)),
             BrickSection("Section2", bricks: [
-                DummyBrick("Brick1"),
-                DummyBrick("Brick2")
+                DummyBrick("Brick1", height: .fixed(size: 50)),
+                DummyBrick("Brick2", height: .fixed(size: 50))
                 ])
             ])
         brickView.setupSectionAndLayout(section)
         XCTAssertEqual(brickView.indexPathsForVisibleBricksWithIdentifier("Section1"), [IndexPath(item: 0, section: 0)])
         XCTAssertEqual(brickView.indexPathsForVisibleBricksWithIdentifier("Section2"), [IndexPath(item: 1, section: 1)])
-        XCTAssertEqual(brickView.indexPathsForVisibleBricksWithIdentifier("Brick1"), [IndexPath(item: 0, section: 1), IndexPath(item: 0, section: 2)])
+        XCTAssertEqual(brickView.indexPathsForVisibleBricksWithIdentifier("Brick1").sorted(by: { $0.0.section < $0.1.section || $0.0.item < $0.1.item}), [IndexPath(item: 0, section: 1), IndexPath(item: 0, section: 2)])
         XCTAssertEqual(brickView.indexPathsForVisibleBricksWithIdentifier("Brick2"), [IndexPath(item: 1, section: 2)])
         XCTAssertEqual(brickView.indexPathsForVisibleBricksWithIdentifier("Brick3"), [])
     }

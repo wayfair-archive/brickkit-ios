@@ -1,3 +1,4 @@
+
 //
 //  BrickCollectionView.swift
 //  BrickApp
@@ -234,7 +235,7 @@ open class BrickCollectionView: UICollectionView {
 
     open func indexPathsForVisibleBricksWithIdentifier(_ identifier: String, index: Int? = nil) -> [IndexPath] {
         let cells = self.visibleCells.filter { (cell) -> Bool in
-            guard let cell = cell as? BrickCell else {
+            guard let cell = cell as? BaseBrickCell else {
                 return false
             }
             if cell._brick.identifier == identifier {
@@ -560,9 +561,8 @@ extension BrickCollectionView: UICollectionViewDataSource {
             if var downloadable = brickCell as? ImageDownloaderCell {
                 downloadable.imageDownloader = BrickCollectionView.imageDownloader
             }
-
-            brickCell.setContent(brick, index: info.index, collectionIndex: info.collectionIndex, collectionIdentifier: info.collectionIdentifier)
         }
+        cell.setContent(brick, index: info.index, collectionIndex: info.collectionIndex, collectionIdentifier: info.collectionIdentifier)
 
         cell.contentView.backgroundColor = brick.backgroundColor
 
