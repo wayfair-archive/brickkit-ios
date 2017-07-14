@@ -215,6 +215,12 @@ class GenericBrickTestBackgroundColor: GenericBrickTests {
         XCTAssertEqual(cell.contentView.backgroundColor, UIColor.orange)
     }
 
+    func testThatWhenReloadingTheBackgroundColorIsStillOrange() {
+        brickCollectionView.reloadBricksWithIdentifiers([GenericLabelBrickIdentifier])
+        cell = firstCellForIdentifier(GenericLabelBrickIdentifier)
+        XCTAssertEqual(cell.contentView.backgroundColor, UIColor.orange)
+    }
+
 }
 
 /// Test to verify adding an `accessoryView`
