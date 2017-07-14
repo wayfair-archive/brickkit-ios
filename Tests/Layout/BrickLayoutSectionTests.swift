@@ -408,7 +408,7 @@ class BrickLayoutSectionTests: XCTestCase {
         // hide left half and layout brick section
         brickView.setupSectionAndLayout(brickSection)
         
-        let topRightHalfIndexPath = brickView.indexPathsForBricksWithIdentifier(topRightHalf.identifier).first!
+        let topRightHalfIndexPath = brickView.indexPathsForVisibleBricksWithIdentifier(topRightHalf.identifier).first!
         let topRightHalfCell = brickView.cellForItem(at: topRightHalfIndexPath)
         XCTAssertEqual(topRightHalfCell?.frame.width, 376)
         
@@ -417,11 +417,11 @@ class BrickLayoutSectionTests: XCTestCase {
         brickView.invalidateVisibility()
         brickView.layoutIfNeeded()
         
-        let fixedWidthSectionIndexPath = brickView.indexPathsForBricksWithIdentifier(fixedWidthSection.identifier).first!
+        let fixedWidthSectionIndexPath = brickView.indexPathsForVisibleBricksWithIdentifier(fixedWidthSection.identifier).first!
         let fixedWidthSectionCell = brickView.cellForItem(at: fixedWidthSectionIndexPath)
         XCTAssertEqual(fixedWidthSectionCell?.frame.origin.x, 384)
         
-        let nonFixedWidthSectionIndexPath = brickView.indexPathsForBricksWithIdentifier(nonFixedWidthSection.identifier).first!
+        let nonFixedWidthSectionIndexPath = brickView.indexPathsForVisibleBricksWithIdentifier(nonFixedWidthSection.identifier).first!
         let nonFixedWidthSectionCell = brickView.cellForItem(at: nonFixedWidthSectionIndexPath)
         XCTAssertEqual(nonFixedWidthSectionCell?.frame.origin.x, 384)
     }

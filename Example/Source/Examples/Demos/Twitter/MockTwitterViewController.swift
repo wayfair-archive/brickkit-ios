@@ -285,7 +285,7 @@ extension MockTwitterViewController {
             return
         }
 
-        guard let indexPath = brickCollectionView.indexPathsForBricksWithIdentifier(MockTwitterViewController.Identifiers.profileHeaderBrick).first else {
+        guard let indexPath = brickCollectionView.indexPathsForVisibleBricksWithIdentifier(MockTwitterViewController.Identifiers.profileHeaderBrick).first else {
             return
         }
 

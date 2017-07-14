@@ -40,7 +40,7 @@ class BrickSectionOrderDataSourceTests: XCTestCase {
     }
 
     fileprivate func indexesForBrick(withIdentifier identifier: String) -> [Int] {
-        return brickCollectionView.indexPathsForBricksWithIdentifier(identifier).map({$0.item}).sorted(by: <)
+        return brickCollectionView.indexPathsForVisibleBricksWithIdentifier(identifier).map({$0.item}).sorted(by: <)
     }
 
 }

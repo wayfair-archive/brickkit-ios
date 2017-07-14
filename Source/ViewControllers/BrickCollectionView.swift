@@ -115,9 +115,9 @@ open class BrickCollectionView: UICollectionView {
         return brick
     }
 
-    open func indexPathsForBricksWithIdentifier(_ identifier: String, index: Int? = nil) -> [IndexPath] {
-        return self.section.indexPathsForBricksWithIdentifier(identifier, index: index, in: collectionInfo)
-    }
+//    open func indexPathsForBricksWithIdentifier(_ identifier: String, index: Int? = nil) -> [IndexPath] {
+//        return self.section.indexPathsForBricksWithIdentifier(identifier, index: index, in: collectionInfo)
+//    }
 
     /// Register a brick class.
     /// If there is a class (`cellClass`) registered to this Brick, this will be registered to the UICollectionView.
@@ -232,6 +232,25 @@ open class BrickCollectionView: UICollectionView {
         }
     }
 
+    open func indexPathsForVisibleBricksWithIdentifier(_ identifier: String, index: Int? = nil) -> [IndexPath] {
+        let cells = self.visibleCells.filter { (cell) -> Bool in
+            guard let cell = cell as? BrickCell else {
+                return false
+            }
+            if cell._brick.identifier == identifier {
+                if let index = index {
+                    return cell.index == index
+                }
+                return true
+            } else {
+                return false
+            }
+        }
+        return cells.map({ (cell) -> IndexPath in
+            return self.indexPath(for: cell)!
+        })
+    }
+
     // MARK: - Reloading
 
     /// Reload bricks in a collectionbrick
@@ -240,7 +259,7 @@ open class BrickCollectionView: UICollectionView {
     /// - parameter collectionBrickIdentifier: CollectionBrick identifier
     /// - parameter index:                     CollectionBrick Index
     open func reloadBricksWithIdentifiers(_ identifiers: [String], inCollectionBrickWithIdentifier collectionBrickIdentifier: String, andIndex index: Int? = nil) {
-        let indexPaths = section.indexPathsForBricksWithIdentifier(collectionBrickIdentifier, index: index, in: collectionInfo)
+        let indexPaths = indexPathsForVisibleBricksWithIdentifier(collectionBrickIdentifier, index: index)
 
         for indexPath in indexPaths {
             //Reload the brick cell itself
@@ -257,7 +276,7 @@ open class BrickCollectionView: UICollectionView {
     /// - parameter invalidate: Flag that indicates if the function should also invalidate the layout
     /// Default to true, but could be set to false if it's part of a bigger invalidation
     open func reloadBrickWithIdentifier(_ identifier: String, andIndex index: Int, invalidate: Bool = true) {
-        let indexPaths = section.indexPathsForBricksWithIdentifier(identifier, index: index, in: collectionInfo)
+        let indexPaths = indexPathsForVisibleBricksWithIdentifier(identifier, index: index)
         self.reloadItems(at: indexPaths)
 
         if invalidate {
@@ -376,7 +395,7 @@ open class BrickCollectionView: UICollectionView {
         let sectionsToReload = NSMutableIndexSet()
 
         for identifier in identifiers {
-            let indexPaths = self.section.indexPathsForBricksWithIdentifier(identifier, in: collectionInfo)
+            let indexPaths = self.indexPathsForVisibleBricksWithIdentifier(identifier)
             for indexPath in indexPaths {
                 let brick = self.section.brick(at:indexPath, in: collectionInfo)!
 

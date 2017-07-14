@@ -103,11 +103,11 @@ class ReorderableBrickViewController: BrickViewController, HasTitle {
         for section in 0..<self.brickCollectionView.section.bricks.count {
             print("Section: \(section)")
             for i in 0..<repeatCount {
-                let indexPaths = self.brickCollectionView.indexPathsForBricksWithIdentifier(label1.identifier, index: i)
+                let indexPaths = self.brickCollectionView.indexPathsForVisibleBricksWithIdentifier(label1.identifier, index: i)
                 print("Label 1 Index \(i): \(indexPaths[section].item)")
             }
             for i in 0..<repeatCount {
-                let indexPaths = self.brickCollectionView.indexPathsForBricksWithIdentifier(label2.identifier, index: i)
+                let indexPaths = self.brickCollectionView.indexPathsForVisibleBricksWithIdentifier(label2.identifier, index: i)
                 print("Label 2 Index \(i): \(indexPaths[section].item)")
             }
             print("\n\n")

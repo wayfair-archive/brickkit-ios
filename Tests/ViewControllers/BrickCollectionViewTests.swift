@@ -212,11 +212,11 @@ class BrickCollectionViewTests: XCTestCase {
                 ])
             ])
         brickView.setupSectionAndLayout(section)
-        XCTAssertEqual(brickView.indexPathsForBricksWithIdentifier("Section1"), [IndexPath(item: 0, section: 0)])
-        XCTAssertEqual(brickView.indexPathsForBricksWithIdentifier("Section2"), [IndexPath(item: 1, section: 1)])
-        XCTAssertEqual(brickView.indexPathsForBricksWithIdentifier("Brick1"), [IndexPath(item: 0, section: 1), IndexPath(item: 0, section: 2)])
-        XCTAssertEqual(brickView.indexPathsForBricksWithIdentifier("Brick2"), [IndexPath(item: 1, section: 2)])
-        XCTAssertEqual(brickView.indexPathsForBricksWithIdentifier("Brick3"), [])
+        XCTAssertEqual(brickView.indexPathsForVisibleBricksWithIdentifier("Section1"), [IndexPath(item: 0, section: 0)])
+        XCTAssertEqual(brickView.indexPathsForVisibleBricksWithIdentifier("Section2"), [IndexPath(item: 1, section: 1)])
+        XCTAssertEqual(brickView.indexPathsForVisibleBricksWithIdentifier("Brick1"), [IndexPath(item: 0, section: 1), IndexPath(item: 0, section: 2)])
+        XCTAssertEqual(brickView.indexPathsForVisibleBricksWithIdentifier("Brick2"), [IndexPath(item: 1, section: 2)])
+        XCTAssertEqual(brickView.indexPathsForVisibleBricksWithIdentifier("Brick3"), [])
     }
 
     func testFatalErrorForBrickInfo() {
@@ -659,7 +659,7 @@ class BrickCollectionViewTests: XCTestCase {
         ]
         brickView.setupSectionAndLayout(section)
 
-        let cell = brickView.cellForItem(at: brickView.indexPathsForBricksWithIdentifier("Label").first!) as? LabelBrickCell
+        let cell = brickView.cellForItem(at: brickView.indexPathsForVisibleBricksWithIdentifier("Label").first!) as? LabelBrickCell
         XCTAssertNotNil(cell?.imageView)
     }
 
@@ -671,7 +671,7 @@ class BrickCollectionViewTests: XCTestCase {
         ]
         brickView.setupSectionAndLayout(section)
 
-        let cell = brickView.cellForItem(at: brickView.indexPathsForBricksWithIdentifier("Label").first!) as? LabelBrickCell
+        let cell = brickView.cellForItem(at: brickView.indexPathsForVisibleBricksWithIdentifier("Label").first!) as? LabelBrickCell
         XCTAssertNotNil(cell?.imageView)
     }
 
@@ -681,7 +681,7 @@ class BrickCollectionViewTests: XCTestCase {
         let section = BrickSection(bricks: [brick])
         brickView.setupSectionAndLayout(section)
 
-        let cell = brickView.cellForItem(at: brickView.indexPathsForBricksWithIdentifier("Label").first!) as? LabelBrickCell
+        let cell = brickView.cellForItem(at: brickView.indexPathsForVisibleBricksWithIdentifier("Label").first!) as? LabelBrickCell
         XCTAssertNotNil(cell?.imageView)
     }
 

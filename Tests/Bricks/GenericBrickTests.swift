@@ -24,7 +24,7 @@ class GenericBrickTests: XCTestCase {
     }
 
     fileprivate func firstCellForIdentifier<T: BrickCell>(_ identifier: String) -> T? {
-        guard let indexPath = brickCollectionView.indexPathsForBricksWithIdentifier(identifier).first else {
+        guard let indexPath = brickCollectionView.indexPathsForVisibleBricksWithIdentifier(identifier).first else {
             return nil
         }
         return brickCollectionView.cellForItem(at: indexPath) as? T
@@ -160,7 +160,7 @@ class GenericBrickTestRepeatCount: GenericBrickTests {
         section.repeatCountDataSource = repeatCount
         brickCollectionView.setupSectionAndLayout(section)
 
-        indexPaths = brickCollectionView.indexPathsForBricksWithIdentifier(GenericLabelBrickIdentifier)
+        indexPaths = brickCollectionView.indexPathsForVisibleBricksWithIdentifier(GenericLabelBrickIdentifier)
     }
 
     func testThatTheIndexPathCountIsTheSameAsTheRepeatCount() {
