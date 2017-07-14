@@ -49,19 +49,19 @@ open class BaseBrickCell: UICollectionViewCell {
     // Especially when reusing cells, the backgroundView might disappear and reappear when scrolling up or down
     // The suspicion is that the `removeFromSuperview()` is called, even if the view is no longer part of the cell
     // http://stackoverflow.com/questions/23059811/is-uicollectionview-backgroundview-broken
-    var brickBackgroundView: UIView? {
-        didSet {
-            if oldValue?.superview == self.contentView {
-                //Make sure not to remove the oldValue from its current superview if it's not this contentview (reusability)
-                oldValue?.removeFromSuperview()
-            }
-            if let view = brickBackgroundView {
-                view.frame = self.bounds
-                view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-                self.contentView.insertSubview(view, at: 0)
-            }
-        }
-    }
+//    var brickBackgroundView: UIView? {
+//        didSet {
+//            if oldValue?.superview == self.contentView {
+//                //Make sure not to remove the oldValue from its current superview if it's not this contentview (reusability)
+//                oldValue?.removeFromSuperview()
+//            }
+//            if let view = brickBackgroundView {
+//                view.frame = self.bounds
+//                view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+//                self.contentView.insertSubview(view, at: 0)
+//            }
+//        }
+//    }
 
     open lazy var bottomSeparatorLine: UIView = {
         return UIView()
@@ -71,19 +71,19 @@ open class BaseBrickCell: UICollectionViewCell {
         return UIView()
     }()
 
-    open override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
-        super.apply(layoutAttributes)
-
-        // Setting zPosition instead of relaying on
-        // UICollectionView zIndex management 'fixes' the issue
-        // http://stackoverflow.com/questions/12659301/uicollectionview-setlayoutanimated-not-preserving-zindex
-        self.layer.zPosition = CGFloat(layoutAttributes.zIndex)
-    }
-
-    open override func layoutSubviews() {
-        super.layoutSubviews()
-        brickBackgroundView?.frame = self.bounds
-    }
+//    open override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+//        super.apply(layoutAttributes)
+//
+//        // Setting zPosition instead of relaying on
+//        // UICollectionView zIndex management 'fixes' the issue
+//        // http://stackoverflow.com/questions/12659301/uicollectionview-setlayoutanimated-not-preserving-zindex
+//        self.layer.zPosition = CGFloat(layoutAttributes.zIndex)
+//    }
+//
+//    open override func layoutSubviews() {
+//        super.layoutSubviews()
+//        brickBackgroundView?.frame = self.bounds
+//    }
 }
 
 // MARK: UI Convenience Methods
@@ -189,6 +189,26 @@ open class BrickCell: BaseBrickCell {
 
     }
 
+    open override var frame: CGRect {
+        didSet {
+            print(frame)
+        }
+    }
+
+    open override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        print("apply for \(layoutAttributes.indexPath.item): \(layoutAttributes.frame.height)")
+        print("before apply for \(layoutAttributes.indexPath.item): \(frame.height)")
+        super.apply(layoutAttributes)
+        print("after apply for \(layoutAttributes.indexPath.item): \(frame.height)")
+    }
+
+    open override func layoutSubviews() {
+        print("before layoutSubviews: \(frame.height)")
+        super.layoutSubviews()
+        print("after layoutSubviews: \(frame.height)")
+
+    }
+
     internal func reloadContent() {
         self._brick.overrideContentSource?.resetContent(for: self)
         updateContent()
@@ -212,6 +232,10 @@ open class BrickCell: BaseBrickCell {
     }
 
     open func heightForBrickView(withWidth width: CGFloat) -> CGFloat {
+
+        guard self._brick.height.isEstimate(withValue: nil) else {
+            return self._brick.height.value(for: width, startingAt: 0)
+        }
         self.layoutIfNeeded()
 
         let size = self.systemLayoutSizeFitting(CGSize(width: width, height: 0), withHorizontalFittingPriority: 1000, verticalFittingPriority: 10)

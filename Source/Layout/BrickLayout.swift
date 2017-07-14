@@ -47,20 +47,20 @@ open class BrickLayoutAttributes: UICollectionViewLayoutAttributes {
     fileprivate var fixedZIndex: Bool = false
 
     /// zIndex
-    open override var zIndex: Int {
-        didSet {
-            fixedZIndex = true
-        }
-    }
+//    open override var zIndex: Int {
+//        didSet {
+//            fixedZIndex = true
+//        }
+//    }
 
     /// Set a zIndex that is calculated automatically. If the zIndex was set manually, the given zIndex will be ignored
     ///
     /// - Parameter zIndex: The zIndex that is intended to be set
     func setAutoZIndex(_ zIndex: Int) {
-        if !fixedZIndex {
+//        if !fixedZIndex {
             self.zIndex = zIndex
             self.fixedZIndex = false
-        }
+//        }
     }
 
     /// Copy the attributes with all custom attributes. This is needed as UICollectionView will make copies of the attributes for height calculation etc

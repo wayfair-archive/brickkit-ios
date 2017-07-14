@@ -42,6 +42,9 @@ open class BrickFlowLayout: UICollectionViewLayout, BrickLayout {
         return collectionView?.superview?.superview is CollectionBrickCell
     }
 
+    open var cacheThings: Bool = false
+    var cachedAttributes: [UICollectionViewLayoutAttributes]?
+
     open var behaviors: Set<BrickLayoutBehavior> = [] {
         didSet {
             for behavior in behaviors {
@@ -250,10 +253,30 @@ open class BrickFlowLayout: UICollectionViewLayout, BrickLayout {
     }
 
     internal func updateHeight(_ indexPath: IndexPath, newHeight: CGFloat) {
-        if _dataSource.brickLayout(self, isEstimatedHeightFor: indexPath) {
+
+        if let attributes = cachedAttributes {
+            if let theAttributes = attributes.filter({ $0.indexPath == indexPath }).first {
+                theAttributes.frame.size.height = newHeight
+            }
+        } else {
+            //        if _dataSource.brickLayout(self, isEstimatedHeightFor: indexPath) {
             let context = BrickLayoutInvalidationContext(type: .updateHeight(indexPath: indexPath, newHeight: newHeight))
-            invalidateLayout(with: context)
+            //        self.invalidateLayout(with: context)
+            //        context.
+            //            invalidateLayout(with: context)
+            _ = context.invalidateWithLayout(self)
+            //self.invalidateLayout()
+            //        switch context.type {
+            //        case .updateHeight(let indexPath, _): delegate?.brickLayout(self, didUpdateHeightForItemAtIndexPath: indexPath)
+            //        default: break
+            //        }
+            
+            //        }
+
         }
+        
+
+
     }
 
 }
@@ -300,6 +323,7 @@ extension BrickFlowLayout {
             return
         }
 
+
         if context.invalidateEverything {
             self.removeAllCachedSections()
         } else if let context = context as? BrickLayoutInvalidationContext {
@@ -312,8 +336,14 @@ extension BrickFlowLayout {
         } else if context.invalidateDataSourceCounts {
             invalidateDataCounts(context)
         } else {
-            return
+//            return
         }
+
+        print("invalidateLayout \(context)")
+        print("  - invalidateEverything \(context.invalidateEverything)")
+        print("  - invalidatedItemIndexPaths \(context.invalidatedItemIndexPaths)")
+        print("  - invalidateDataSourceCounts \(context.invalidateDataSourceCounts)")
+
 
         super.invalidateLayout(with: context)
     }
@@ -337,6 +367,7 @@ extension BrickFlowLayout {
     }
 
     open override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+
         if !isCalculating {
             _ = calculateSectionsIfNeeded(rect)
         }
@@ -345,9 +376,19 @@ extension BrickFlowLayout {
             return nil
         }
 
+        if cacheThings, let attributes = cachedAttributes {
+            return attributes
+        }
+
         var attributes: [UICollectionViewLayoutAttributes] = []
         for (_, section) in sections {
             attributes += section.layoutAttributesForElementsInRect(rect, with: zIndexer)
+        }
+
+        print("layoutAttributesForElements: \(attributes)")
+
+        if cacheThings {
+            cachedAttributes = attributes
         }
 
         return attributes
@@ -357,6 +398,8 @@ extension BrickFlowLayout {
 
         if let attributes = sections?[indexPath.section]?.attributes[indexPath.item] {
             attributes.setAutoZIndex(zIndexer.zIndex(for: indexPath))
+            print("layoutAttributesForItem: \(indexPath.item) - \(attributes.frame.height)")
+
             return attributes
         } else if indexPath.section < _collectionView.numberOfSections && indexPath.item < _collectionView.numberOfItems(inSection: indexPath.section) {
 
@@ -514,20 +557,20 @@ extension BrickFlowLayout: BrickLayoutInvalidationProvider {
 
     @discardableResult
     func updateHeight(for indexPath: IndexPath, with height: CGFloat, updatedAttributes: @escaping OnAttributesUpdatedHandler) -> CGPoint {
-        guard let section = sections?[indexPath.section], let firstAttributes = layoutAttributesForItem(at: indexPath) else {
+        guard let section = sections?[indexPath.section] /*, let firstAttributes = layoutAttributesForItem(at: indexPath) */ else {
             return .zero
         }
 
-        let shouldAdjustContentOffset = _collectionView.contentOffset.y > firstAttributes.frame.origin.y
-        let contentOffsetAdjustment = shouldAdjustContentOffset ? height - firstAttributes.frame.height : 0
+//        let shouldAdjustContentOffset = _collectionView.contentOffset.y > firstAttributes.frame.origin.y
+//        let contentOffsetAdjustment = shouldAdjustContentOffset ? height - firstAttributes.frame.height : 0
 
         updateSection(section, updatedAttributes: updatedAttributes) {
             section.update(height: height, at: indexPath.item, updatedAttributes: { attributes, oldFrame in
-                updatedAttributes(attributes, oldFrame)
-                self.attributesWereUpdated(attributes, oldFrame: oldFrame, fromBehaviors: false, updatedAttributes: updatedAttributes)
+//                updatedAttributes(attributes, oldFrame)
+//                self.attributesWereUpdated(attributes, oldFrame: oldFrame, fromBehaviors: false, updatedAttributes: updatedAttributes)
             })
         }
-        return CGPoint(x: 0, y: contentOffsetAdjustment)
+        return CGPoint(x: 0, y: 0)
     }
 
     fileprivate func updateSection(_ section: BrickLayoutSection, updatedAttributes: @escaping OnAttributesUpdatedHandler, action: (() -> Void)) {
@@ -672,88 +715,101 @@ extension BrickFlowLayout: BrickLayoutInvalidationProvider {
 }
 
 extension BrickFlowLayout {
-    open override func prepare(forCollectionViewUpdates updateItems: [UICollectionViewUpdateItem]) {
-        insertedIndexPaths = []
-        deletedIndexPaths = []
-        reloadIndexPaths = []
 
-        for item in updateItems {
-            if item.updateAction == .insert {
-                if let indexPath = item.indexPathAfterUpdate {
-                    insertedIndexPaths.append(indexPath)
-                }
-            } else if item.updateAction == .delete {
-                if let indexPath = item.indexPathBeforeUpdate {
-                    deletedIndexPaths.append(indexPath)
-                }
-            } else if item.updateAction == .reload {
-                if let indexPath = item.indexPathBeforeUpdate {
-                    reloadIndexPaths.append(indexPath)
-                }
-            }
-        }
+//    override open func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+//        let attributes = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)
+//        attributes?.alpha = 1
+//        return attributes
+//    }
+//
+//    override open func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+//        let attributes = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath)
+//        attributes?.alpha = 1
+//        return attributes
+//    }
 
-        isUpdating = true
+//    open override func prepare(forCollectionViewUpdates updateItems: [UICollectionViewUpdateItem]) {
+//        insertedIndexPaths = []
+//        deletedIndexPaths = []
+//        reloadIndexPaths = []
+//
+//        for item in updateItems {
+//            if item.updateAction == .insert {
+//                if let indexPath = item.indexPathAfterUpdate {
+//                    insertedIndexPaths.append(indexPath)
+//                }
+//            } else if item.updateAction == .delete {
+//                if let indexPath = item.indexPathBeforeUpdate {
+//                    deletedIndexPaths.append(indexPath)
+//                }
+//            } else if item.updateAction == .reload {
+//                if let indexPath = item.indexPathBeforeUpdate {
+//                    reloadIndexPaths.append(indexPath)
+//                }
+//            }
+//        }
+//
+//        isUpdating = true
+//
+//        reloadItems(at: reloadIndexPaths)
+//    }
+//
+//    fileprivate func reloadItems(at indexPaths: [IndexPath]) {
+//        for indexPath in indexPaths {
+//            if indexPath.item >= collectionView?.numberOfItems(inSection: indexPath.section)  {
+//                continue
+//            }
+//
+//            switch _dataSource.brickLayout(self, brickLayoutTypeForItemAt: indexPath) {
+//            case .brick:
+//                invalidateLayout(with: BrickLayoutInvalidationContext(type: .invalidateHeight(indexPath: indexPath)))
+//            default: break
+//            }
+//        }
+//    }
+//
+//    open override func finalizeCollectionViewUpdates() { // called inside an animation block after the update
+//
+//        insertedIndexPaths = []
+//        deletedIndexPaths = []
+//        reloadIndexPaths = []
+//        isUpdating = false
+//    }
 
-        reloadItems(at: reloadIndexPaths)
-    }
 
-    fileprivate func reloadItems(at indexPaths: [IndexPath]) {
-        for indexPath in indexPaths {
-            if indexPath.item >= collectionView?.numberOfItems(inSection: indexPath.section)  {
-                continue
-            }
-
-            switch _dataSource.brickLayout(self, brickLayoutTypeForItemAt: indexPath) {
-            case .brick:
-                invalidateLayout(with: BrickLayoutInvalidationContext(type: .invalidateHeight(indexPath: indexPath)))
-            default: break
-            }
-        }
-    }
-
-    open override func finalizeCollectionViewUpdates() { // called inside an animation block after the update
-
-        insertedIndexPaths = []
-        deletedIndexPaths = []
-        reloadIndexPaths = []
-        isUpdating = false
-    }
-
-
-    override open func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-
-        var attributes: BrickLayoutAttributes?
-
-        if insertedIndexPaths.contains(itemIndexPath) {
-            if let copy = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)?.copy() as? BrickLayoutAttributes {
-                appearBehavior?.configureAttributesForAppearing(copy, in: _collectionView)
-                attributes = copy
-            }
-        } else if let copy = self.layoutAttributesForItem(at: itemIndexPath)?.copy() as? BrickLayoutAttributes {
-            attributes = copy
-        }
-
-        attributes?.setAutoZIndex(zIndexer.zIndex(for: itemIndexPath))
-
-        return attributes
-    }
-    
-    override open func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        var attributes: BrickLayoutAttributes?
-
-        if deletedIndexPaths.contains(itemIndexPath) {
-            if let copy = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath)?.copy() as? BrickLayoutAttributes {
-                appearBehavior?.configureAttributesForDisappearing(copy, in: _collectionView)
-                attributes = copy
-            }
-        } else if let copy = self.layoutAttributesForItem(at: itemIndexPath)?.copy() as? BrickLayoutAttributes {
-            attributes = copy
-        }
-
-        attributes?.setAutoZIndex(zIndexer.zIndex(for: itemIndexPath))
-
-        return attributes
-    }
+//    override open func initialLayoutAttributesForAppearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+//
+//        var attributes: BrickLayoutAttributes?
+//
+//        if insertedIndexPaths.contains(itemIndexPath) {
+//            if let copy = super.initialLayoutAttributesForAppearingItem(at: itemIndexPath)?.copy() as? BrickLayoutAttributes {
+//                appearBehavior?.configureAttributesForAppearing(copy, in: _collectionView)
+//                attributes = copy
+//            }
+//        } else if let copy = self.layoutAttributesForItem(at: itemIndexPath)?.copy() as? BrickLayoutAttributes {
+//            attributes = copy
+//        }
+//
+//        attributes?.setAutoZIndex(zIndexer.zIndex(for: itemIndexPath))
+//
+//        return attributes
+//    }
+//    
+//    override open func finalLayoutAttributesForDisappearingItem(at itemIndexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+//        var attributes: BrickLayoutAttributes?
+//
+//        if deletedIndexPaths.contains(itemIndexPath) {
+//            if let copy = super.finalLayoutAttributesForDisappearingItem(at: itemIndexPath)?.copy() as? BrickLayoutAttributes {
+//                appearBehavior?.configureAttributesForDisappearing(copy, in: _collectionView)
+//                attributes = copy
+//            }
+//        } else if let copy = self.layoutAttributesForItem(at: itemIndexPath)?.copy() as? BrickLayoutAttributes {
+//            attributes = copy
+//        }
+//
+//        attributes?.setAutoZIndex(zIndexer.zIndex(for: itemIndexPath))
+//
+//        return attributes
+//    }
 }
 

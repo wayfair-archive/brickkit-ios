@@ -213,7 +213,13 @@ open class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableCel
     fileprivate func resize(image: UIImage) {
         if self.brick.size.height.isEstimate(withValue: nil) {
             self.setRatioConstraint(for: image)
-            self.resizeDelegate?.performResize(cell: self, completion: nil)
+            if #available(iOS 10.0, *) {
+                Timer.scheduledTimer(withTimeInterval: 2, repeats: false, block: { (timer) in
+                    self.resizeDelegate?.performResize(cell: self, completion: nil)
+                })
+            } else {
+                // Fallback on earlier versions
+            }
         }
     }
 

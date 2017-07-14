@@ -17,6 +17,14 @@ private let CustomNibPrefix = "CustomNib."
 /// The BrickCollectionView class manages the views of bricks that a BrickSection represents
 open class BrickCollectionView: UICollectionView {
 
+    override open func layoutSubviews() {
+        print("before COLLECTIONVIEW layoutSubviews: \(self.subviews.map({$0.frame.height}))")
+        print("visible: \(self.visibleCells))")
+        super.layoutSubviews()
+        print("after COLLECTIONVIEW layoutSubviews: \(self.subviews.map({$0.frame.height}))")
+        print("visible: \(self.visibleCells))")
+    }
+
     // MARK: - Public Properties
 
     /// Static reference to initialize all images that need to be downloaded
@@ -205,13 +213,25 @@ open class BrickCollectionView: UICollectionView {
     /// - paramter reloadSections: A flag that indicates if the sections need to be reloaded
     /// - parameter completion: A completion handler block to execute when all of the operations are finished. This block takes a single Boolean parameter that contains the value true if all of the related animations completed successfully or false if they were interrupted. This parameter may be nil.
     open func invalidateBricks(_ reloadSections: Bool = true, completion: ((Bool) -> Void)? = nil) {
-        _ = self.invalidateRepeatCountsWithoutPerformBatchUpdates(reloadSections)
-        self.performBatchUpdates({
+//        self.invalidateRepeatCounts(reloadAllSections: reloadSections, performBatchUpdatesBlock: { 
+//            if reloadSections {
+//                self.reloadSections(IndexSet(integersIn: 0..<self.numberOfSections))
+//            }
+//            self.collectionViewLayout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .invalidate))
+//        }, completion: {
+//        })
+
+        self.invalidateRepeatCounts(reloadAllSections: reloadSections, performBatchUpdatesBlock: { 
             if reloadSections {
                 self.reloadSections(IndexSet(integersIn: 0..<self.numberOfSections))
             }
             self.collectionViewLayout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .invalidate))
-        }, completion: completion)
+        }) { (completed, inserted, deleted) in
+            completion?(completed)
+        }
+//        _ = self.invalidateRepeatCountsWithoutPerformBatchUpdates(reloadSections)
+//        self.performBatchUpdates({
+//        }, completion: completion)
     }
 
     /// Invalidate the visibility
@@ -270,7 +290,7 @@ open class BrickCollectionView: UICollectionView {
     /// Invalidate all the repeat counts of the given
     ///
     /// - parameter completion: Completion Block
-    open func invalidateRepeatCounts(reloadAllSections: Bool = false, completion: ((_ completed: Bool, _ insertedIndexPaths: [IndexPath], _ deletedIndexPaths: [IndexPath]) -> Void)? = nil) {
+    open func invalidateRepeatCounts(reloadAllSections: Bool = false, performBatchUpdatesBlock: (() -> Void)? = nil, completion: ((_ completed: Bool, _ insertedIndexPaths: [IndexPath], _ deletedIndexPaths: [IndexPath]) -> Void)? = nil) {
         var insertedIndexPaths: [IndexPath]!
         var deletedIndexPaths: [IndexPath]!
 
@@ -278,6 +298,7 @@ open class BrickCollectionView: UICollectionView {
             let result = self.invalidateRepeatCountsWithoutPerformBatchUpdates(reloadAllSections)
             insertedIndexPaths = result.insertedIndexPaths
             deletedIndexPaths = result.deletedIndexPaths
+            performBatchUpdatesBlock?()
             }) { (completed) in
                 completion?(completed, insertedIndexPaths, deletedIndexPaths)
         }
@@ -351,6 +372,22 @@ open class BrickCollectionView: UICollectionView {
         }
 
         return (insertedIndexPaths, deletedIndexPaths)
+    }
+
+    open override func reloadSections(_ sections: IndexSet) {
+        super.reloadSections(sections)
+    }
+
+    open override func reloadItems(at indexPaths: [IndexPath]) {
+        super.reloadItems(at: indexPaths)
+    }
+
+    open override func insertItems(at indexPaths: [IndexPath]) {
+        super.insertItems(at: indexPaths)
+    }
+
+    open override func deleteItems(at indexPaths: [IndexPath]) {
+        super.deleteItems(at: indexPaths)
     }
 
     /// Reload the bricks that have the given identifiers
@@ -497,13 +534,15 @@ extension BrickCollectionView: AsynchronousResizableDelegate {
         }
         let newHeight = cell.heightForBrickView(withWidth: cell.frame.width)
         weak var weakLayout = self.layout
-        self.performBatchUpdates({
+//        self.performBatchUpdates({
             weakLayout?.updateHeight(indexPath, newHeight: newHeight)
-        }, completion: { completed in
+        self.collectionViewLayout.invalidateLayout()
+//        }, completion: { completed in
+//            print("Completed!!!")
             // we create a strong reference to self here so that self is not accidentally deallocated while an update is in flight
-            let _ = self
-            completion?(completed)
-        })
+//            let _ = self
+//            completion?(completed)
+//        })
     }
 }
 
@@ -520,6 +559,8 @@ extension BrickCollectionView: UICollectionViewDataSource {
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        print("cellForItemAt: \(indexPath.item)")
         assert(collectionView == self, "This UICollectionViewDataSource must use it's own BrickCollectionView instance")
         guard let brickCollectionView = collectionView as? BrickCollectionView else {
             fatalError("Only BrickCollectionViews are supported")
@@ -548,7 +589,7 @@ extension BrickCollectionView: UICollectionViewDataSource {
         cell.contentView.backgroundColor = brick.backgroundColor
 
         //  http://stackoverflow.com/questions/23059811/is-uicollectionview-backgroundview-broken
-        cell.brickBackgroundView = brick.backgroundView
+//        cell.brickBackgroundView = brick.backgroundView
         
         return cell
     }

@@ -107,6 +107,7 @@ class NavigationDataSource {
     
     #if os(iOS)
     var InteractiveExamples = NavigationItem(title: "Interactive", subTitle: "Interactive Examples", viewControllers: [
+        InvalidateTestCollectionViewController.self,
         BasicInteractiveViewController.self,
         BrickCollectionInteractiveViewController.self,
         HideBrickViewController.self,
