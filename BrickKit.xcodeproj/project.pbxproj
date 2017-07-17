@@ -155,8 +155,14 @@
 		93739BB61DA454AB00DD4B81 /* LabelBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93739BB01DA454AB00DD4B81 /* LabelBrick.swift */; };
 		93739BB71DA454AB00DD4B81 /* ImageBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93739BB21DA454AB00DD4B81 /* ImageBrick.swift */; };
 		93739BB81DA454AB00DD4B81 /* ButtonBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93739BB41DA454AB00DD4B81 /* ButtonBrick.swift */; };
+		938471A11F1D3E4900B2E526 /* FrameInfoBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9384719F1F1D3E4900B2E526 /* FrameInfoBrick.xib */; };
+		938471A31F1D3E5E00B2E526 /* FrameInfoBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938471A21F1D3E5E00B2E526 /* FrameInfoBrick.swift */; };
+		938471A51F1D3EB700B2E526 /* FrameCalculationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938471A41F1D3EB700B2E526 /* FrameCalculationTests.swift */; };
+		938471A61F1D3EB700B2E526 /* FrameCalculationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938471A41F1D3EB700B2E526 /* FrameCalculationTests.swift */; };
 		93902D391DA4726900BC3BA1 /* image0.png in Resources */ = {isa = PBXBuildFile; fileRef = 93902D381DA4726900BC3BA1 /* image0.png */; };
 		93902D3B1DA4728C00BC3BA1 /* ImageBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93902D3A1DA4728C00BC3BA1 /* ImageBrickTests.swift */; };
+		93C72DFD1F1D5EA20095D878 /* FrameInfoBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93C72DFB1F1D5D160095D878 /* FrameInfoBrick.xib */; };
+		93C72DFE1F1D5EA60095D878 /* FrameInfoBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 938471A21F1D3E5E00B2E526 /* FrameInfoBrick.swift */; };
 		93D9EB9D1DA4051B00D8C87A /* BrickKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D9EB931DA4051B00D8C87A /* BrickKit.framework */; };
 		93D9EBE81DA4057000D8C87A /* BrickLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBAF1DA4057000D8C87A /* BrickLayoutBehavior.swift */; };
 		93D9EBE91DA4057000D8C87A /* CardLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB01DA4057000D8C87A /* CardLayoutBehavior.swift */; };
@@ -313,8 +319,12 @@
 		93739BB01DA454AB00DD4B81 /* LabelBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelBrick.swift; sourceTree = "<group>"; };
 		93739BB21DA454AB00DD4B81 /* ImageBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBrick.swift; sourceTree = "<group>"; };
 		93739BB41DA454AB00DD4B81 /* ButtonBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonBrick.swift; sourceTree = "<group>"; };
+		9384719F1F1D3E4900B2E526 /* FrameInfoBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FrameInfoBrick.xib; sourceTree = "<group>"; };
+		938471A21F1D3E5E00B2E526 /* FrameInfoBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameInfoBrick.swift; sourceTree = "<group>"; };
+		938471A41F1D3EB700B2E526 /* FrameCalculationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrameCalculationTests.swift; sourceTree = "<group>"; };
 		93902D381DA4726900BC3BA1 /* image0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image0.png; sourceTree = "<group>"; };
 		93902D3A1DA4728C00BC3BA1 /* ImageBrickTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBrickTests.swift; sourceTree = "<group>"; };
+		93C72DFB1F1D5D160095D878 /* FrameInfoBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FrameInfoBrick.xib; sourceTree = "<group>"; };
 		93D9EB931DA4051B00D8C87A /* BrickKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BrickKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		93D9EB9C1DA4051B00D8C87A /* BrickKitTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BrickKitTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93D9EBAF1DA4057000D8C87A /* BrickLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickLayoutBehavior.swift; sourceTree = "<group>"; };
@@ -510,6 +520,7 @@
 				4E9A25CA1DAC2ADF00D7EA99 /* DummyBrick150.xib */,
 				4E9A25CB1DAC2ADF00D7EA99 /* ImageDownloaderBrick.xib */,
 				4E9A25CC1DAC2ADF00D7EA99 /* LabelWithEdgeInsets.xib */,
+				9384719F1F1D3E4900B2E526 /* FrameInfoBrick.xib */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -524,6 +535,7 @@
 				4E9A25F21DAC2E8D00D7EA99 /* LabelWithEdgeInsets.xib */,
 				4E3BD8E31DB51A9700541900 /* DummyFocusableBrick.xib */,
 				4E9A25EE1DAC2D7500D7EA99 /* DummyBrick.xib */,
+				93C72DFB1F1D5D160095D878 /* FrameInfoBrick.xib */,
 			);
 			path = tvOS;
 			sourceTree = "<group>";
@@ -809,15 +821,17 @@
 		93D9EC281DA4057900D8C87A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				4E9A25C51DAC2ADF00D7EA99 /* nibs */,
 				93D9EC291DA4057900D8C87A /* AsynchronousResizableBrick.swift */,
 				93D9EC2B1DA4057900D8C87A /* AsynchronousResizableCellTests.swift */,
+				930054041DA7D8A000239A13 /* BaseBrickCellTests.swift */,
 				93D9EC2C1DA4057900D8C87A /* DummyBrick.swift */,
-				4E3BD8E01DB5190100541900 /* DummyFocusableBrick.swift */,
 				93D9EC301DA4057900D8C87A /* DummyBrickWithoutNib.swift */,
+				4E3BD8E01DB5190100541900 /* DummyFocusableBrick.swift */,
+				938471A41F1D3EB700B2E526 /* FrameCalculationTests.swift */,
+				938471A21F1D3E5E00B2E526 /* FrameInfoBrick.swift */,
 				93D9EC311DA4057900D8C87A /* ImageDownloaderBrick.swift */,
 				93D9EC331DA4057900D8C87A /* ImageDownloaderCellTests.swift */,
-				930054041DA7D8A000239A13 /* BaseBrickCellTests.swift */,
+				4E9A25C51DAC2ADF00D7EA99 /* nibs */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1062,6 +1076,7 @@
 				4E9A256A1DABED0600D7EA99 /* TestBrickViewController.storyboard in Resources */,
 				4E9A25FF1DAC312F00D7EA99 /* DummyBrick150.xib in Resources */,
 				4E9A25FD1DAC312F00D7EA99 /* AsynchronousResizableBrick.xib in Resources */,
+				93C72DFD1F1D5EA20095D878 /* FrameInfoBrick.xib in Resources */,
 				4E9A26011DAC312F00D7EA99 /* DummyBrick.xib in Resources */,
 				4E9A26051DAD323400D7EA99 /* LabelWithEdgeInsets.xib in Resources */,
 				4E9A26021DAC31A300D7EA99 /* image0.png in Resources */,
@@ -1098,6 +1113,7 @@
 				4E9A26111DAD33F800D7EA99 /* LabelWithEdgeInsets.xib in Resources */,
 				4E9A26101DAD33F800D7EA99 /* ImageDownloaderBrick.xib in Resources */,
 				4E9A260C1DAD33F800D7EA99 /* AsynchronousResizableBrick.xib in Resources */,
+				938471A11F1D3E4900B2E526 /* FrameInfoBrick.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1163,6 +1179,7 @@
 				4E9A25441DABECDF00D7EA99 /* CardLayoutBehaviorTests.swift in Sources */,
 				4E9A25621DABECFF00D7EA99 /* BrickExtensionsTests.swift in Sources */,
 				4E9A25E51DAC2AF400D7EA99 /* ImageDownloaderCellTests.swift in Sources */,
+				93C72DFE1F1D5EA60095D878 /* FrameInfoBrick.swift in Sources */,
 				4E9A25551DABECF500D7EA99 /* BrickFlowLayoutBaseTests.swift in Sources */,
 				4E9A25521DABECF000D7EA99 /* InteractiveTests.swift in Sources */,
 				4E9A25481DABECDF00D7EA99 /* OffsetLayoutBehaviorTests.swift in Sources */,
@@ -1208,6 +1225,7 @@
 				933FF95F1DC1207900E0B80E /* Swizzle.swift in Sources */,
 				4E9A25691DABED0600D7EA99 /* BrickViewControllerTests.swift in Sources */,
 				93EEFF981DC2B2E600FDFFFB /* BrickLayoutSectionBinarySearchTests.swift in Sources */,
+				938471A61F1D3EB700B2E526 /* FrameCalculationTests.swift in Sources */,
 				4E9A25E21DAC2AF400D7EA99 /* DummyBrick.swift in Sources */,
 				4E9A255D1DABECFB00D7EA99 /* BrickCollectionViewDataSourceTests.swift in Sources */,
 				9328EEA71DC19ACE007F2562 /* LazyLoadingTests.swift in Sources */,
@@ -1307,6 +1325,7 @@
 				93D9EC781DA4057900D8C87A /* BrickLayoutSectionTests.swift in Sources */,
 				93902D3B1DA4728C00BC3BA1 /* ImageBrickTests.swift in Sources */,
 				93D9EC851DA4057900D8C87A /* BrickViewControllerTests.swift in Sources */,
+				938471A31F1D3E5E00B2E526 /* FrameInfoBrick.swift in Sources */,
 				93D9EC871DA4057900D8C87A /* TestBrickViewController.swift in Sources */,
 				93D9EC601DA4057900D8C87A /* BrickKitTests.swift in Sources */,
 				93D9EC831DA4057900D8C87A /* XCTests.swift in Sources */,
@@ -1318,6 +1337,7 @@
 				93D9EC6F1DA4057900D8C87A /* InteractiveTests.swift in Sources */,
 				93D9EC811DA4057900D8C87A /* CollectionViewDataSource.swift in Sources */,
 				93F9B4D41DAD690400927BE6 /* BrickAppearBehaviorTests.swift in Sources */,
+				938471A51F1D3EB700B2E526 /* FrameCalculationTests.swift in Sources */,
 				93D9EC5E1DA4057900D8C87A /* StickyFooterLayoutBehaviorTests.swift in Sources */,
 				932365721DF4FE1F00BE5183 /* BrickAlignmentTests.swift in Sources */,
 				93D9EC801DA4057900D8C87A /* BrickUtilsTests.swift in Sources */,
