@@ -1,5 +1,25 @@
 # Change Log
 
+## [2.2.1](https://github.com/wayfair/brickkit-ios/tree/2.2.1) (2017-07-17)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/2.2.0...2.2.1)
+
+**Closed issues:**
+
+- GenericBrick background color gets set to `clear` when reloading the brick [\#154](https://github.com/wayfair/brickkit-ios/issues/154)
+- Playgrounds Pages [\#147](https://github.com/wayfair/brickkit-ios/issues/147)
+- App Extension API [\#146](https://github.com/wayfair/brickkit-ios/issues/146)
+- Cleanup sample app and sometimes it looks like bricks are disappearing [\#142](https://github.com/wayfair/brickkit-ios/issues/142)
+- Add support for adding a second brick section inside of an existing brick section [\#139](https://github.com/wayfair/brickkit-ios/issues/139)
+- Height Calculation Issue using CollectionBrick for a carousel [\#118](https://github.com/wayfair/brickkit-ios/issues/118)
+
+**Merged pull requests:**
+
+- GenericBrick background color won’t reset to clear [\#155](https://github.com/wayfair/brickkit-ios/pull/155) ([rubencagnie](https://github.com/rubencagnie))
+- Inserting/deleting items from middle of a brickCollectionView [\#149](https://github.com/wayfair/brickkit-ios/pull/149) ([ethan-riback](https://github.com/ethan-riback))
+- Moved playgrounds to pages and checked App Extension API only setting [\#148](https://github.com/wayfair/brickkit-ios/pull/148) ([jay18001](https://github.com/jay18001))
+- Cleanup Sample App + Fixed “disapearing bricks” [\#144](https://github.com/wayfair/brickkit-ios/pull/144) ([rubencagnie](https://github.com/rubencagnie))
+- Support for ordering bricks within a section [\#143](https://github.com/wayfair/brickkit-ios/pull/143) ([rubencagnie](https://github.com/rubencagnie))
+
 ## [2.2.0](https://github.com/wayfair/brickkit-ios/tree/2.2.0) (2017-07-06)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/2.1.0...2.2.0)
 
