@@ -316,10 +316,11 @@ class FixedNSURLSessionImageDownloaderWithCustomSetter: NSURLSessionImageDownloa
             guard imageURL == url else {
                 return
             }
-
-            imageView.image = image
-            completionHandler(image, url)
-            self.callback?(false)
+            DispatchQueue.main.async {
+                imageView.image = image
+                completionHandler(image, url)
+                self.callback?(false)
+            }
         }
     }
 }
