@@ -30,7 +30,7 @@ class DynamicContentViewController: BrickViewController, HasTitle {
     var hidden: Bool = false
     var reload: Bool = false
 
-    var imageURLs: [NSURL]?
+    var imageURLs: [URL]?
     let placeholderCount = 5
     let overrideContentSource = ActivityIndicatorOverrideSource()
     
@@ -59,7 +59,7 @@ class DynamicContentViewController: BrickViewController, HasTitle {
         self.overrideContentSource.shouldOverride = false
         imageURLs = []
         for _ in 1...5 {
-            self.imageURLs?.append(NSURL(string:"https://secure.img2.wfrcdn.com/lf/8/hash/2664/10628031/1/custom_image.jpg")!)
+            self.imageURLs?.append(URL(string:"https://secure.img2.wfrcdn.com/lf/8/hash/2664/10628031/1/custom_image.jpg")!)
         }
         self.brickCollectionView.reloadBricksWithIdentifiers([DynamicContentViewController.Identifiers.HideableSectionContentImage])
     }
@@ -116,11 +116,11 @@ extension DynamicContentViewController: BrickRepeatCountDataSource {
 
 extension DynamicContentViewController: ImageBrickDataSource {
 
-    func imageURLForImageBrickCell(imageBrickCell: ImageBrickCell) -> NSURL? {
+    func imageURLForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> URL? {
         return imageURLs?[imageBrickCell.index]
     }
 
-    func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIViewContentMode {
+    func contentModeForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIViewContentMode {
         return .scaleAspectFit
     }
 }

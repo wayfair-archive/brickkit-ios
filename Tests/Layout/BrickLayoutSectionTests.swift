@@ -231,40 +231,10 @@ class BrickLayoutSectionTests: XCTestCase {
         dataSource.widthRatios = [1, 1, 1, 1, 1, 1]
         dataSource.heights = [50, 50, 50, 50, 50, 50]
 
-        var addedAttributes = [BrickLayoutAttributes]()
-        section.setNumberOfItems(6, addedAttributes: { (attributes, oldFrame) in
-            addedAttributes.append(attributes)
-            }, removedAttributes: nil)
-        XCTAssertEqual(addedAttributes.count, 6)
+        section.updateNumberOfItems(inserted: [0,1,2,3,4,5], deleted: [])
 
-        let frames = section.orderedAttributeFrames
-        XCTAssertEqual(frames.count, 6)
-        XCTAssertEqual(frames[0], CGRect(x: 5, y: 10, width: 310, height: 50))
-        XCTAssertEqual(frames[1], CGRect(x: 5, y: 65, width: 310, height: 50))
-        XCTAssertEqual(frames[2], CGRect(x: 5, y: 120, width: 310, height: 50))
-        XCTAssertEqual(frames[3], CGRect(x: 5, y: 175, width: 310, height: 50))
-        XCTAssertEqual(frames[4], CGRect(x: 5, y: 230, width: 310, height: 50))
-        XCTAssertEqual(frames[5], CGRect(x: 5, y: 285, width: 310, height: 50))
 
-        XCTAssertEqual(section.frame, CGRect(x: 0, y: 0, width: 320, height: 345))
-    }
-
-    func testNoItems() {
-        let dataSource = FixedBrickLayoutSectionDataSource(widthRatios: [1, 1, 1, 1, 1, 1], heights: [50, 50, 50, 50, 50, 50], edgeInsets: UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5), inset: 5)
-        let section = BrickLayoutSection(
-            sectionIndex: 0,
-            sectionAttributes: nil,
-            numberOfItems: 6,
-            origin: CGPoint.zero,
-            sectionWidth: 320,
-            dataSource: dataSource)
         section.invalidateAttributes(nil)
-
-        var addedAttributes = [BrickLayoutAttributes]()
-        section.setNumberOfItems(6, addedAttributes: { (attributes, oldFrame) in
-            addedAttributes.append(attributes)
-            }, removedAttributes: nil)
-        XCTAssertEqual(addedAttributes.count, 0)
 
         let frames = section.orderedAttributeFrames
         XCTAssertEqual(frames.count, 6)
@@ -325,11 +295,8 @@ class BrickLayoutSectionTests: XCTestCase {
         dataSource.heights.removeLast()
         dataSource.heights.removeLast()
 
-        var deletedAttributes = [BrickLayoutAttributes]()
-        section.setNumberOfItems(3, addedAttributes: nil, removedAttributes: { (attributes, oldFrame) in
-            deletedAttributes.append(attributes)
-        })
-        XCTAssertEqual(deletedAttributes.count, 2)
+        section.updateNumberOfItems(inserted: [], deleted: [3, 4])
+        section.invalidateAttributes(nil)
 
         let frames = section.orderedAttributeFrames
         XCTAssertEqual(frames.count, 3)

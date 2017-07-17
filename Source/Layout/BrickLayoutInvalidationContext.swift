@@ -15,7 +15,6 @@ enum BrickLayoutInvalidationContextType {
     case scrolling
     case rotation
     case behaviorsChanged
-    case invalidateDataSourceCounts(sections: [Int: Int]) // Key: section Value: numberOfItems
     case invalidate
     case updateVisibility
 
@@ -26,7 +25,7 @@ enum BrickLayoutInvalidationContextType {
      */
     var shouldInvalidateAllAttributes: Bool {
         switch self {
-        case .rotation, .invalidate, .creation, .updateVisibility, .invalidateDataSourceCounts(_), .updateHeight(_): return true
+        case .rotation, .invalidate, .creation, .updateVisibility, .updateHeight(_): return true
         default: return false
         }
     }
@@ -43,7 +42,6 @@ protocol BrickLayoutInvalidationProvider: class {
     func recalculateContentSize() -> CGSize
     func invalidateContent(_ updatedAttributes: @escaping OnAttributesUpdatedHandler)
     func registerUpdatedAttributes(_ attributes: BrickLayoutAttributes, oldFrame: CGRect?, fromBehaviors: Bool, updatedAttributes: @escaping OnAttributesUpdatedHandler)
-    func updateNumberOfItemsInSection(_ section: Int, numberOfItems: Int, updatedAttributes: @escaping OnAttributesUpdatedHandler)
     func applyHideBehavior(updatedAttributes: @escaping OnAttributesUpdatedHandler)
     func updateContentSize(_ contentSize: CGSize)
 }
@@ -64,10 +62,12 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
         self.type = type
     }
 
+    @discardableResult
     func invalidateWithLayout(_ layout: UICollectionViewLayout) -> Bool {
         return self.invalidateWithLayout(layout, context: self)
     }
 
+    @discardableResult
     func invalidateWithLayout(_ layout: UICollectionViewLayout, context: UICollectionViewLayoutInvalidationContext) -> Bool {
         guard
             let provider = layout as? BrickLayoutInvalidationProvider
@@ -105,14 +105,6 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
             self.invalidateSections(provider, layout: layout)
         case .updateVisibility:
             self.applyHideBehaviors(provider, updatedAttributes: updateAttributes)
-        case .invalidateDataSourceCounts(let sections):
-            let keys = Array(sections.keys).sorted(by: <) // We need to sort the keys first so the updates are done in the correct order
-            for section in keys {
-                let numberOfItems = sections[section]!
-                provider.updateNumberOfItemsInSection(section, numberOfItems: numberOfItems, updatedAttributes: { attributes, olfFrame in
-                })
-            }
-            applyHideBehaviors(provider, updatedAttributes: updateAttributes)
         default: break
         }
 
