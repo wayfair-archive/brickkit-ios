@@ -206,8 +206,16 @@ open class BrickCell: BaseBrickCell {
 
         let preferred = layoutAttributes.copy() as! UICollectionViewLayoutAttributes
 
-        let size = CGSize(width: layoutAttributes.frame.width, height: self.heightForBrickView(withWidth: layoutAttributes.frame.width))
-        preferred.frame.size = size
+        // We're inverting the frame because the given frame is already transformed
+        var invertedFrame = layoutAttributes.frame.applying(layoutAttributes.transform.inverted())
+        let size = CGSize(width: layoutAttributes.frame.width, height: self.heightForBrickView(withWidth: invertedFrame.width))
+
+        // Setting the size of the frame will return the "transformed" size
+        invertedFrame.size = size
+
+        // We need to invert the frame again, because UILayoutAttributes will transform the frame again
+        preferred.frame = invertedFrame.applying(layoutAttributes.transform.inverted())
+
         return preferred
     }
 

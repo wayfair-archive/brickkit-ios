@@ -137,36 +137,49 @@ internal class BrickLayoutSection {
         frame.size.width = sectionWidth
     }
 
-    /// Set the number of items for this BrickLayoutSection
-    ///
-    /// - Parameters:
-    ///   - addedAttributes: callback for the added attributes
-    ///   - removedAttributes: callback for the removed attributes
-    func setNumberOfItems(_ numberOfItems: Int, addedAttributes: OnAttributesUpdatedHandler?, removedAttributes: OnAttributesUpdatedHandler?) {
-        guard numberOfItems != self.numberOfItems else {
+    /// Update the number of items for this BrickLayoutSection
+    func updateNumberOfItems(inserted: [Int], deleted: [Int]) {
+        guard inserted.count + deleted.count > 0 else {
             return
         }
 
-        let difference = numberOfItems - self.numberOfItems
+        var startIndexToUpdate: Int = numberOfItems - 1
 
-        if difference > 0 {
-            self.numberOfItems = numberOfItems
-            var startIndex = attributes.count
-            updateAttributeIdentifiers(targetStartIndex: &startIndex)
-            createOrUpdateCells(from: startIndex, invalidate: true, updatedAttributes: addedAttributes)
-        } else {
-            self.numberOfItems = numberOfItems
-            while attributes.count > numberOfItems {
-                let lastIndex = attributes.keys.max()! // Max Element will always be available based on this logic (difference is smaller than 0, so there are values available)
-                let last = attributes[lastIndex]!
-                removedAttributes?(last, last.frame)
-                
-                attributes.removeValue(forKey: lastIndex)
+        let sortedDeleted = deleted.sorted(by: >)
+
+        for index in sortedDeleted {
+            attributes[index] = nil
+
+            // Move every index with 1
+            for i in (index+1)..<numberOfItems {
+                if let attribute = attributes[i] {
+                    attribute.indexPath.item = i-1
+                    attributes[i-1] = attribute
+                    attributes[i] = nil
+                }
             }
-            var startIndex = attributes.count
-            updateAttributeIdentifiers(targetStartIndex: &startIndex)
-            createOrUpdateCells(from: startIndex, invalidate: true, updatedAttributes: nil)
+
+            startIndexToUpdate = min(index, startIndexToUpdate)
         }
+
+
+        let sortedInserted = inserted.sorted(by: <)
+
+        for index in sortedInserted {
+            // Move every index with 1
+            for i in stride(from: numberOfItems, to: index, by: -1) {
+                if let attribute = attributes[i-1] {
+                    attribute.indexPath.item = i
+                    attributes[i] = attribute
+                    attributes[i-1] = nil
+                }
+            }
+            startIndexToUpdate = min(index, startIndexToUpdate)
+        }
+
+        
+        numberOfItems += inserted.count
+        numberOfItems -= deleted.count
     }
 
     /// Update the identifiers for the attributes
@@ -720,8 +733,9 @@ extension BrickLayoutSection {
         }
     }
 
-    func layoutAttributesForElementsInRect(_ rect: CGRect, with zIndexer: BrickZIndexer) -> [UICollectionViewLayoutAttributes] {
+    func layoutAttributesForElementsInRect(_ rect: CGRect, with zIndexer: BrickZIndexer, maxIndex: Int? = nil) -> [UICollectionViewLayoutAttributes] {
         var attributes = [UICollectionViewLayoutAttributes]()
+        let actualMaxIndex = maxIndex ?? (numberOfItems - 1)
 
         if self.attributes.isEmpty {
             return attributes
@@ -737,7 +751,7 @@ extension BrickLayoutSection {
         // Closure that checks if an attribute is within the rect and adds it to the attributes to return
         // Returns true if the frame is within the rect
         let frameCheck: (_ index: Int) -> Bool = { index in
-            guard let brickAttributes = self.attributes[index] else {
+            guard let brickAttributes = self.attributes[index], index <= actualMaxIndex else {
                 return false
             }
             if rect.intersects(brickAttributes.frame) {

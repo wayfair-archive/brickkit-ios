@@ -134,7 +134,7 @@ class BrickCollectionInteractiveViewController: BrickViewController, HasTitle {
 
 extension BrickCollectionInteractiveViewController {
 
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let brickInfo = brickCollectionView.brickInfo(at:indexPath)
         if brickInfo.brick.identifier == BrickIdentifiers.titleLabel {
             even = !even
@@ -192,7 +192,7 @@ extension BrickCollectionInteractiveViewController: CollectionBrickCellDataSourc
         layout.hideBehaviorDataSource = self
     }
 
-    func dataSourceForCollectionBrickCell(cell: CollectionBrickCell) -> BrickCollectionViewDataSource {
+    func dataSourceForCollectionBrickCell(_ cell: CollectionBrickCell) -> BrickCollectionViewDataSource {
         return dataSources[cell.index]
     }
 }
