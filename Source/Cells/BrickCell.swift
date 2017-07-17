@@ -45,6 +45,29 @@ extension Bricklike where Self : BrickCell {
 
 open class BaseBrickCell: UICollectionViewCell {
 
+    open fileprivate(set) var index: Int = 0
+    open fileprivate(set) var collectionIndex: Int = 0
+    open fileprivate(set) var collectionIdentifier: String?
+
+    internal fileprivate(set) var _brick: Brick! {
+        didSet {
+            self.accessibilityIdentifier = _brick.accessibilityIdentifier
+            self.accessibilityLabel = _brick.accessibilityLabel
+            self.accessibilityHint = _brick.accessibilityHint
+        }
+    }
+
+    open var identifier: String {
+        return _brick.identifier
+    }
+
+    open func setContent(_ brick: Brick, index: Int, collectionIndex: Int, collectionIdentifier: String?) {
+        self._brick = brick
+        self.index = index
+        self.collectionIndex = collectionIndex
+        self.collectionIdentifier = collectionIdentifier
+    }
+
     // Using the UICollectionViewCell.backgroundView is not really stable
     // Especially when reusing cells, the backgroundView might disappear and reappear when scrolling up or down
     // The suspicion is that the `removeFromSuperview()` is called, even if the view is no longer part of the cell
@@ -112,22 +135,7 @@ extension BaseBrickCell {
 
 open class BrickCell: BaseBrickCell {
 
-    internal var _brick: Brick! {
-        didSet {
-            self.accessibilityIdentifier = _brick.accessibilityIdentifier
-            self.accessibilityLabel = _brick.accessibilityLabel
-            self.accessibilityHint = _brick.accessibilityHint
-        }
-    }
     open var tapGesture: UITapGestureRecognizer?
-
-    open var identifier: String {
-        return _brick.identifier
-    }
-
-    open fileprivate(set) var index: Int = 0
-    open fileprivate(set) var collectionIndex: Int = 0
-    open fileprivate(set) var collectionIdentifier: String?
 
     #if os(tvOS)
     @objc public var allowsFocus: Bool = true
@@ -164,11 +172,8 @@ open class BrickCell: BaseBrickCell {
         }
     }
 
-    open func setContent(_ brick: Brick, index: Int, collectionIndex: Int, collectionIdentifier: String?) {
-        self._brick = brick
-        self.index = index
-        self.collectionIndex = collectionIndex
-        self.collectionIdentifier = collectionIdentifier
+    open override func setContent(_ brick: Brick, index: Int, collectionIndex: Int, collectionIdentifier: String?) {
+        super.setContent(brick, index: index, collectionIndex: collectionIndex, collectionIdentifier: collectionIdentifier)
 
         self.isUserInteractionEnabled = true
         if let gesture = self.tapGesture {
