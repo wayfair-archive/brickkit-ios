@@ -1,20 +1,34 @@
 language: objective-c
-osx_image: xcode8
+os: osx
 env:
   global:
   - WORKSPACE=BrickKit.xcworkspace
   - IOS_FRAMEWORK_SCHEME="BrickKit"
   - TVOS_FRAMEWORK_SCHEME="BrickKit-tvOS"
-  - IOS_SDK=iphonesimulator10.0
-  - TVOS_SDK=appletvsimulator10.0
+  - IOS_SDK=iphonesimulator10.3
+  - IOS_BETA_SDK=iphonesimulator11.0
+  - TVOS_SDK=appletvsimulator10.2
   - IOS_EXAMPLE_SCHEME="BrickApp-iOS"
   - TVOS_EXAMPLE_SCHEME="BrickApp-tvOS"
-  matrix:
-    - DESTINATION="OS=9.0,name=iPhone 5"           SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"    EXAMPLE_SCHEME="$IOS_EXAMPLE_SCHEME"
-    - DESTINATION="OS=10.0,name=iPhone 7 Plus"     SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"    EXAMPLE_SCHEME="$IOS_EXAMPLE_SCHEME"
 
-    - DESTINATION="OS=9.0,name=Apple TV 1080p"     SCHEME="$TVOS_FRAMEWORK_SCHEME"    SDK="$TVOS_SDK"   EXAMPLE_SCHEME="$TVOS_EXAMPLE_SCHEME"
-    - DESTINATION="OS=10.0,name=Apple TV 1080p"    SCHEME="$TVOS_FRAMEWORK_SCHEME"    SDK="$TVOS_SDK"   EXAMPLE_SCHEME="$TVOS_EXAMPLE_SCHEME"
+matrix:
+  include:
+    - osx_image: xcode8.3
+      env:
+        - DESTINATION="OS=9.0,name=iPhone 5"           SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"    EXAMPLE_SCHEME="$IOS_EXAMPLE_SCHEME"
+    - osx_image: xcode8.3
+      env:
+        - DESTINATION="OS=10.0,name=iPhone 7 Plus"     SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"    EXAMPLE_SCHEME="$IOS_EXAMPLE_SCHEME"
+    - osx_image: xcode9
+      env:
+        - DESTINATION="OS=11.0,name=iPhone 7 Plus"     SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_BETA_SDK"    EXAMPLE_SCHEME="$IOS_EXAMPLE_SCHEME"
+
+    - osx_image: xcode8.3
+      env:
+        - DESTINATION="OS=9.0,name=Apple TV 1080p"     SCHEME="$TVOS_FRAMEWORK_SCHEME"    SDK="$TVOS_SDK"   EXAMPLE_SCHEME="$TVOS_EXAMPLE_SCHEME"
+    - osx_image: xcode8.3
+      env:
+        - DESTINATION="OS=10.0,name=Apple TV 1080p"    SCHEME="$TVOS_FRAMEWORK_SCHEME"    SDK="$TVOS_SDK"   EXAMPLE_SCHEME="$TVOS_EXAMPLE_SCHEME"
 script:
   - set -o pipefail
   - xcodebuild -version
@@ -27,4 +41,4 @@ script:
   - travis_retry xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty;
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -J 'BrickKit'
+  - bash <(curl -s https://codecov.io/bash) -J 'BrickKit' -X xcodeplist
