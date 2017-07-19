@@ -13,6 +13,10 @@ protocol ViewGenerator {
     func configure(view: UIView, cell: GenericBrickCell)
 }
 
+public protocol UpdateFramesListener {
+    func didUpdateFrames()
+}
+
 open class GenericBrick<T: UIView>: Brick, ViewGenerator {
     public typealias ConfigureView = (_ view: T, _ cell: GenericBrickCell) -> Void
 
@@ -174,6 +178,14 @@ open class GenericBrickCell: BrickCell {
         bottomSpaceConstraint = nil
         leftSpaceConstraint = nil
         rightSpaceConstraint = nil
+    }
+
+    open override func framesDidLayout() {
+        super.framesDidLayout()
+
+        if let genericContentView = genericContentView as? UpdateFramesListener {
+            genericContentView.didUpdateFrames()
+        }
     }
 
 }

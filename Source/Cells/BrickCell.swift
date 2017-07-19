@@ -61,6 +61,9 @@ open class BaseBrickCell: UICollectionViewCell {
         return _brick.identifier
     }
 
+    // This value stores the expected width, so we can identify when this is met
+    private var requestedWidth: CGFloat = 0
+
     open func setContent(_ brick: Brick, index: Int, collectionIndex: Int, collectionIdentifier: String?) {
         self._brick = brick
         self.index = index
@@ -97,6 +100,8 @@ open class BaseBrickCell: UICollectionViewCell {
     open override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
 
+        self.requestedWidth = layoutAttributes.frame.width
+
         // Setting zPosition instead of relaying on
         // UICollectionView zIndex management 'fixes' the issue
         // http://stackoverflow.com/questions/12659301/uicollectionview-setlayoutanimated-not-preserving-zindex
@@ -106,6 +111,15 @@ open class BaseBrickCell: UICollectionViewCell {
     open override func layoutSubviews() {
         super.layoutSubviews()
         brickBackgroundView?.frame = self.bounds
+
+        if frame.width == requestedWidth {
+            self.layoutIfNeeded() // This layoutIfNeeded is added to make sure that the subviews are laid out correctly
+            framesDidLayout()
+        }
+    }
+
+    open func framesDidLayout() {
+        // No-op - available for others to implement
     }
 }
 
