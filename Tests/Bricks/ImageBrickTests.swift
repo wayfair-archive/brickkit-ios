@@ -44,8 +44,18 @@ class SimpleActionImageBrickDelegate: ImageBrickDelegate {
     }
 }
 
+class MockCollectionViewDelegate: NSObject, UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cell = cell as? BrickCell {
+            cell.willDisplay()
+        }
+    }
+}
+
 class ImageBrickTests: XCTestCase {
     var brickView: BrickCollectionView!
+    var mockDelegate = MockCollectionViewDelegate()
     var image: UIImage!
     var imageURL: URL!
     var imageRatio: CGFloat!
@@ -54,6 +64,7 @@ class ImageBrickTests: XCTestCase {
         super.setUp()
 
         brickView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
+        brickView.delegate = mockDelegate
         image = UIImage(named: "image0", in: Bundle(for: self.classForCoder), compatibleWith: nil)!
         imageRatio = image.size.width / image.size.height
         imageURL = URL(fileURLWithPath: Bundle(for: self.classForCoder).path(forResource: "image0", ofType: "png")!)
@@ -61,6 +72,7 @@ class ImageBrickTests: XCTestCase {
 
     override func tearDown() {
         super.tearDown()
+        brickView.delegate = nil
         BrickCollectionView.imageDownloader = NSURLSessionImageDownloader() // Reset the image downloader back to the default one (if a test had overwritten this)
     }
 

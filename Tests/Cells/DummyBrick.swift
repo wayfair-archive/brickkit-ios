@@ -17,10 +17,17 @@ class DummyBrickCell: BrickCell, Bricklike {
 
     var isCurrentlyFocused = false
 
+    var didCallUpdateContent = false
     override func updateContent() {
         super.updateContent()
 
         self.contentView.layer.borderWidth = brick.border
+        self.didCallUpdateContent = true
     }
 
+    var didCallWillDisplay = false
+    override func willDisplay() {
+        super.willDisplay()
+        self.didCallWillDisplay = true
+    }
 }

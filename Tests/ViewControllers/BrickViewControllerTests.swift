@@ -564,34 +564,19 @@ class BrickViewControllerTests: XCTestCase {
         XCTAssertEqual(refreshControl.layer.zPosition, 2)
     }
     #endif
-    
-    func testReloadBricks() {
-        let width = brickViewController.brickCollectionView.frame.size.width
 
-        let brick = DummyBrick(width: .ratio(ratio: 1/10))
-        let section = BrickSection(bricks: [
-            brick
+    func testWillDisplayCell() {
+
+        let section = BrickSection("Test Section", bricks: [
+            DummyBrick("Brick 1")
             ])
         brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
-        var cell: DummyBrickCell?
-        cell = brickViewController.brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
-        XCTAssertEqualWithAccuracy(cell!.frame.width, width / 10, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell?.frame.height ?? 0, (width / 10) * 2, accuracy: 0.5)
+        let index = brickViewController.brickCollectionView.indexPathsForBricksWithIdentifier("Brick 1").first
+        let cell = brickViewController.brickCollectionView.cellForItem(at: index!) as! DummyBrickCell
 
-        brick.size.width = .ratio(ratio: 1/5)
-
-        let expectation = self.expectation(description: "Invalidate Bricks")
-
-        brickViewController.brickCollectionView.invalidateBricks(true) { completed in
-            expectation.fulfill()
-        }
-
-        waitForExpectations(timeout: 5, handler: nil)
-
-        cell = brickViewController.brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
-        XCTAssertEqualWithAccuracy(cell?.frame.width ?? 0, width / 5, accuracy: 0.1)
-        XCTAssertEqualWithAccuracy(cell?.frame.height ?? 0 , (width / 5) * 2, accuracy: 0.1)
+        XCTAssertTrue(cell.didCallUpdateContent)
+        XCTAssertTrue(cell.didCallWillDisplay)
     }
 
     #if os(tvOS)
