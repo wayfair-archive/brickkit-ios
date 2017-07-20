@@ -26,9 +26,7 @@ class InvalidateHeightViewController: BrickViewController, HasTitle {
 
         self.view.backgroundColor = .brickBackground
 
-        self.registerBrickClass(LabelBrick.self)
-
-        brick = LabelBrick(BrickIdentifiers.repeatLabel, backgroundColor: .brickGray1, dataSource: LabelBrickCellModel(text: "BRICK") { cell in
+        brick = LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray1, dataSource: LabelBrickCellModel(text: "BRICK") { cell in
             cell.configure()
             })
 
@@ -55,12 +53,15 @@ class InvalidateHeightViewController: BrickViewController, HasTitle {
     }
 
     @objc func toggleHeights() {
+        let newHeight: BrickDimension
         switch brick.height {
-        case .fixed(_): brick.height = .auto(estimate: .fixed(size: 100))
-        default: brick.height = .fixed(size: 200)
+        case .fixed(_): newHeight = .auto(estimate: .fixed(size: 100))
+        default: newHeight = .fixed(size: 200)
         }
+        
+        let size = BrickSize(width: .ratio(ratio: 1), height: newHeight)
+        self.brickCollectionView.resizeBrick(with: BrickIdentifiers.titleLabel, newSize: size)
 
-        self.brickCollectionView.invalidateBricks(false)
         self.updateNavigationItem()
     }
 
