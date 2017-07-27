@@ -271,13 +271,15 @@ class BrickCollectionViewTests: XCTestCase {
         XCTAssertEqual(cell?.frame.height, 64)
         
         let size = BrickSize(width: .ratio(ratio: 1/5), height: .fixed(size: 200))
+        brick.size = size
         let expectation = self.expectation(description: "Invalidate Bricks")
 
-        brickView.resizeBrick(with: "Brick", newSize: size) { completed in
+
+        brickView.invalidateBricks(true) { (completed) in
             expectation.fulfill()
         }
-        
-        waitForExpectations(timeout: 500, handler: nil)
+
+        waitForExpectations(timeout: 5, handler: nil)
         
         brickView.layoutSubviews()
         
@@ -300,13 +302,14 @@ class BrickCollectionViewTests: XCTestCase {
         XCTAssertEqual(cell?.frame.height, 128)
         
         let size = BrickSize(width: .ratio(ratio: 1/10), height: .fixed(size: 20))
+        brick.size = size
         let expectation = self.expectation(description: "Invalidate Bricks")
-        
-        brickView.resizeBrick(with: "Brick", newSize: size) { completed in
+
+        brickView.invalidateBricks(true) { (completed) in
             expectation.fulfill()
         }
-        
-        waitForExpectations(timeout: 500, handler: nil)
+
+        waitForExpectations(timeout: 5, handler: nil)
         
         brickView.layoutSubviews()
         

@@ -32,7 +32,8 @@ class InvalidateHeightViewController: BrickViewController, HasTitle {
 
         let section = BrickSection(bricks: [
             brick,
-            LabelBrick(BrickIdentifiers.repeatLabel, backgroundColor: .brickGray2, dataSource: LabelBrickCellModel(text: "BRICK", configureCellBlock: LabelBrickCell.configure))
+            LabelBrick(BrickIdentifiers.repeatLabel, backgroundColor: .brickGray2, dataSource: LabelBrickCellModel(text: "BRICK", configureCellBlock: LabelBrickCell.configure)),
+            brick,
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
 
         self.setSection(section)
@@ -55,12 +56,18 @@ class InvalidateHeightViewController: BrickViewController, HasTitle {
     @objc func toggleHeights() {
         let newHeight: BrickDimension
         switch brick.height {
-        case .fixed(_): newHeight = .auto(estimate: .fixed(size: 100))
-        default: newHeight = .fixed(size: 200)
+        case .fixed(_):
+            newHeight = .auto(estimate: .fixed(size: 100))
+        default:
+            newHeight = .fixed(size: 200)
         }
         
         let size = BrickSize(width: .ratio(ratio: 1), height: newHeight)
-        self.brickCollectionView.resizeBrick(with: BrickIdentifiers.titleLabel, newSize: size)
+        brick.size = size
+
+        self.brickCollectionView.invalidateBricks(false)
+
+//        self.brickCollectionView.resizeBrick(with: BrickIdentifiers.titleLabel, newSize: size)
 
         self.updateNavigationItem()
     }

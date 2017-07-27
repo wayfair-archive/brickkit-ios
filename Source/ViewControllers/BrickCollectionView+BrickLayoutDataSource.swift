@@ -41,6 +41,12 @@ extension BrickCollectionView: BrickLayoutDataSource {
             return 0
         }
 
+        // If the brick height is an estimate, check if the cell is on screen
+        // If so, calculate the height directly, so the estimation is correct from the get-go
+        if brick.size.height.isEstimate(withValue: nil), let brickCell = self.cellForItem(at: indexPath) as? BrickCell {
+            return brickCell.heightForBrickView(withWidth: width)
+        }
+
         let heightDimension = brick.size.height
         return heightDimension.value(for: width, startingAt: 0)
     }

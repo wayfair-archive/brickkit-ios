@@ -231,21 +231,9 @@ open class BrickCollectionView: UICollectionView {
             if reloadSections {
                 self.reloadSections(IndexSet(integersIn: 0..<self.numberOfSections))
             }
-            self.collectionViewLayout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .invalidate))
         }, completion: completion)
     }
-    
-    open func resizeBrick(with identifier: String, index: Int? = nil, newSize: BrickSize, completion: ((Bool) -> Void)? = nil)  {
-        self.performBatchUpdates({
-            if let indexPath = self.indexPathsForBricksWithIdentifier(identifier, index: index).first,
-                let cell = self.cellForItem(at: indexPath) as? BrickCell {
-                self.brick(at: indexPath).size = newSize
-                let newHeight = cell.heightForBrickView(withWidth: cell.frame.width)
-                self.layout.updateHeight(indexPath, newHeight: newHeight)
-            }
-        }, completion: completion)
-    }
-    
+        
     /// Invalidate the visibility
     ///
     /// - parameter completion: A completion handler block to execute when all of the operations are finished. This block takes a single Boolean parameter that contains the value true if all of the related animations completed successfully or false if they were interrupted. This parameter may be nil.
