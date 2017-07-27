@@ -149,7 +149,7 @@ open class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableCel
     fileprivate var imageLoaded = false
     fileprivate var currentImageURL: URL? = nil
 
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet public weak var imageView: UIImageView!
     var heightRatioConstraint: NSLayoutConstraint?
 
     open override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
