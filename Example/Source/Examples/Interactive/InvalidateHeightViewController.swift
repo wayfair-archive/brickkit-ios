@@ -26,15 +26,14 @@ class InvalidateHeightViewController: BrickViewController, HasTitle {
 
         self.view.backgroundColor = .brickBackground
 
-        self.registerBrickClass(LabelBrick.self)
-
-        brick = LabelBrick(BrickIdentifiers.repeatLabel, backgroundColor: .brickGray1, dataSource: LabelBrickCellModel(text: "BRICK") { cell in
+        brick = LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray1, dataSource: LabelBrickCellModel(text: "BRICK") { cell in
             cell.configure()
             })
 
         let section = BrickSection(bricks: [
             brick,
-            LabelBrick(BrickIdentifiers.repeatLabel, backgroundColor: .brickGray2, dataSource: LabelBrickCellModel(text: "BRICK", configureCellBlock: LabelBrickCell.configure))
+            LabelBrick(BrickIdentifiers.repeatLabel, backgroundColor: .brickGray2, dataSource: LabelBrickCellModel(text: "BRICK", configureCellBlock: LabelBrickCell.configure)),
+            brick,
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
 
         self.setSection(section)
@@ -55,12 +54,21 @@ class InvalidateHeightViewController: BrickViewController, HasTitle {
     }
 
     @objc func toggleHeights() {
+        let newHeight: BrickDimension
         switch brick.height {
-        case .fixed(_): brick.height = .auto(estimate: .fixed(size: 100))
-        default: brick.height = .fixed(size: 200)
+        case .fixed(_):
+            newHeight = .auto(estimate: .fixed(size: 100))
+        default:
+            newHeight = .fixed(size: 200)
         }
-
-        self.brickCollectionView.invalidateBricks(false)
+        
+        let size = BrickSize(width: .ratio(ratio: 1), height: newHeight)
+        brick.size = size
+        
+        UIView.animate(withDuration: 2) {
+            self.brickCollectionView.invalidateBricks(false)
+        }
+        
         self.updateNavigationItem()
     }
 

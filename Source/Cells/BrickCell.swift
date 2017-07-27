@@ -96,7 +96,7 @@ open class BaseBrickCell: UICollectionViewCell {
     open lazy var topSeparatorLine: UIView = {
         return UIView()
     }()
-
+    
     open override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
 
@@ -106,6 +106,7 @@ open class BaseBrickCell: UICollectionViewCell {
         // UICollectionView zIndex management 'fixes' the issue
         // http://stackoverflow.com/questions/12659301/uicollectionview-setlayoutanimated-not-preserving-zindex
         self.layer.zPosition = CGFloat(layoutAttributes.zIndex)
+        self.layoutIfNeeded()
     }
 
     open override func layoutSubviews() {
@@ -200,7 +201,7 @@ open class BrickCell: BaseBrickCell {
             self.tapGesture = gesture
             addGestureRecognizer(gesture)
         }
-
+        
         reloadContent()
     }
 
@@ -213,17 +214,17 @@ open class BrickCell: BaseBrickCell {
         updateContent()
         self._brick.overrideContentSource?.overrideContent(for: self)
     }
-
+    
     @objc func didTapCell() {
         _brick.brickCellTapDelegate?.didTapBrickCell(self)
     }
-
+    
     open override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         guard self._brick.height.isEstimate(withValue: nil) else {
             return layoutAttributes
         }
 
-        let preferred = layoutAttributes.copy() as! UICollectionViewLayoutAttributes
+        let preferred = layoutAttributes
 
         // We're inverting the frame because the given frame is already transformed
         var invertedFrame = layoutAttributes.frame.applying(layoutAttributes.transform.inverted())
@@ -246,4 +247,3 @@ open class BrickCell: BaseBrickCell {
     }
 
 }
-
