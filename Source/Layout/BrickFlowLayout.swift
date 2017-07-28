@@ -443,14 +443,8 @@ extension BrickFlowLayout: BrickLayoutSectionDataSource {
         var size: CGSize = .zero
         switch type {
         case .brick:
-            // Check if the attributes already had a height. If so, use that height
-            if attributes.frame.height != 0 && _dataSource.brickLayout(self, isEstimatedHeightFor: indexPath) {
-                let height = attributes.frame.size.height
-                size = CGSize(width: width, height: height)
-            } else {
-                let height = _dataSource.brickLayout(self, estimatedHeightForItemAt: indexPath, containedIn: width)
-                size = CGSize(width: width, height: height)
-            }
+            let height = _dataSource.brickLayout(self, estimatedHeightForItemAt: indexPath, containedIn: width)
+            size = CGSize(width: width, height: height)
         case .section(let section):
             let height = _dataSource.brickLayout(self, estimatedHeightForItemAt: indexPath, containedIn: width)
             if height == 0 {

@@ -258,6 +258,67 @@ class BrickCollectionViewTests: XCTestCase {
         XCTAssertEqual(cell?.frame.height, 128)
     }
 
+    func testResizeBrickBigger() {
+        let brick = DummyBrick("Brick", width: .ratio(ratio: 1/10))
+        let section = BrickSection(bricks: [
+            brick
+            ])
+        brickView.setupSectionAndLayout(section)
+        
+        var cell: DummyBrickCell?
+        cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
+        XCTAssertEqual(cell?.frame.width, 32)
+        XCTAssertEqual(cell?.frame.height, 64)
+        
+        let size = BrickSize(width: .ratio(ratio: 1/5), height: .fixed(size: 200))
+        brick.size = size
+        let expectation = self.expectation(description: "Invalidate Bricks")
+
+
+        brickView.invalidateBricks(true) { (completed) in
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 5, handler: nil)
+        
+        brickView.layoutSubviews()
+        
+        cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
+        cell?.layoutIfNeeded()
+        XCTAssertEqual(cell?.frame.width, 64)
+        XCTAssertEqual(cell?.frame.height, 200)
+    }
+    
+    func testResizeBrickSmaller() {
+        let brick = DummyBrick("Brick", width: .ratio(ratio: 1/5))
+        let section = BrickSection(bricks: [
+            brick
+            ])
+        brickView.setupSectionAndLayout(section)
+        
+        var cell: DummyBrickCell?
+        cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
+        XCTAssertEqual(cell?.frame.width, 64)
+        XCTAssertEqual(cell?.frame.height, 128)
+        
+        let size = BrickSize(width: .ratio(ratio: 1/10), height: .fixed(size: 20))
+        brick.size = size
+        let expectation = self.expectation(description: "Invalidate Bricks")
+
+        brickView.invalidateBricks(true) { (completed) in
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: 5, handler: nil)
+        
+        brickView.layoutSubviews()
+        
+        cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
+        cell?.layoutIfNeeded()
+        XCTAssertEqual(cell?.frame.width, 32)
+        XCTAssertEqual(cell?.frame.height, 20)
+    }
+    
     func testReloadBricksWithBehaviors() {
         let offsetDataSource = FixedMultipleOffsetLayoutBehaviorDataSource(originOffsets: ["DummyBrick": CGSize(width: 10, height: 10)], sizeOffsets: nil)
         brickView.layout.behaviors.insert(OffsetLayoutBehavior(dataSource: offsetDataSource))

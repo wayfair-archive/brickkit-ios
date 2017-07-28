@@ -201,16 +201,15 @@ class LabelBrickTests: XCTestCase {
 
     func testLabelWithButton() {
         brickCollectionView.registerNib(LabelBrickNibs.Button, forBrickWithIdentifier: LabelBrickIdentifier)
-
         
         let cell = setupLabelBrick("Hello World", configureCellBlock: { cell in
             XCTAssertNotNil(cell.button)
-            cell.button?.setTitle("BUTTON", for: UIControlState())
+            cell.button?.setTitle("Button", for: .normal)
             cell.button?.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 14)
         })
         
         XCTAssertNotNil(cell?.button)
-        XCTAssertEqual(cell?.button?.titleLabel?.text, "BUTTON")
+        XCTAssertEqual(cell?.button?.titleLabel?.text, "Button")
         
         let buttonWidth = cell?.button?.frame.size.width ?? 61
         
@@ -232,7 +231,7 @@ class LabelBrickTests: XCTestCase {
         
         let cell = setupLabelBrick("Hello World", configureCellBlock: { cell in
             XCTAssertNotNil(cell.button)
-            cell.button?.setTitle("BUTTON", for: UIControlState())
+            cell.button?.setTitle("Button", for: UIControlState())
             cell.edgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
             cell.button?.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 14)
         })
@@ -241,7 +240,7 @@ class LabelBrickTests: XCTestCase {
         
         let buttonWidth = cell?.button?.frame.size.width ?? 61
         
-        XCTAssertEqual(cell?.button?.titleLabel?.text, "BUTTON")
+        XCTAssertEqual(cell?.button?.titleLabel?.text, "Button")
         
         #if os(iOS)
             let cellSize = CGSize(width: 320, height: 42)
