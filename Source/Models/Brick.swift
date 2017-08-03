@@ -18,8 +18,11 @@ public protocol BrickPreviewingDelegate: class {
      Any special preview actions to be displayed when the user swipes up during a peek are
      implemented in the class of the returned UIViewController itself, so keep that in mind
      if you aren't subclassing.
-    */
-    var previewViewController: UIViewController? { get }
+     */
+    weak var previewViewController: UIViewController? { get }
+    /**
+     Implement this function to handle committing the preview view controller to the current focus.
+     */
     func commit(viewController: UIViewController)
 }
 #endif

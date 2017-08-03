@@ -9,8 +9,11 @@
 import UIKit
 
 #if os(iOS)
+/**
+ Conform to this delegate on your preview view controller in order to enable UIKit Pop.
+ */
 public protocol BrickViewControllerPreviewing: class {
-    var sourceBrick: Brick? { get set }
+    weak var sourceBrick: Brick? { get set }
 }
 #endif
 
@@ -144,8 +147,11 @@ extension BrickViewController {
         }
     }
     
+    /// Registration/unregistration happens here because the user can disable force touch in their system settings
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if previewingContext == nil && traitCollection.forceTouchCapability == .available {
+            /// We use brickCollectionView as the sourceView for the previewingContext, otherwise the coordinates returned
+            /// in UIViewControllerPreviewing#previewingContext(_:, viewControllerForLocation:) are not in the right system
             previewingContext = registerForPreviewing(with: self, sourceView: brickCollectionView)
         } else if let previewingContext = previewingContext,
             previousTraitCollection?.forceTouchCapability == .available {

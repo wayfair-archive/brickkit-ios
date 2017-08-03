@@ -9,8 +9,6 @@
 import UIKit
 import BrickKit
 
-private let Section = "Section"
-
 extension PreviewingBrickViewController: HasTitle {
     class var brickTitle: String {
         return "Previewing (3D Touch)"
@@ -48,9 +46,25 @@ class PreviewingBrickViewController: BrickViewController {
         return section
     }
     
+    /**
+     This view controller is presented during a peek/pop, known in UIKit as a "preview". In order to support UIKit Pop, the
+     preview view controller must conform to the BrickViewControllerPreviewing delegate.
+     */
     fileprivate class PreviewedViewController: BrickViewController, BrickViewControllerPreviewing {
         
         weak var sourceBrick: Brick?
+        
+        /// Here is an example of setting the preview actions available while previewing this view controller.
+        override var previewActionItems: [UIPreviewActionItem] {
+            let action1 = UIPreviewAction(title: "Default Action", style: .default) { _,_ in
+                print("This is the default action!")
+            }
+            let action2 = UIPreviewAction(title: "Scary Action", style: .destructive) { _,_ in
+                print("This is the scary action!")
+            }
+            let actions = [action1, action2]
+            return actions
+        }
         
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -72,10 +86,6 @@ class PreviewingBrickViewController: BrickViewController {
                            configureCellBlock: LabelBrickCell.configure)
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
             self.setSection(section)
-        }
-        
-        func commit() {
-            navigationController?.show(self, sender: nil)
         }
     }
 }

@@ -516,9 +516,10 @@ class BrickViewControllerTests: XCTestCase {
         XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: 400, height: 50))
     }
 
+    // MARK: iOS-only tests
     #if os(iOS)
     //These tests aren't applicable to tvOS because tvOS doesn't have UIRefreshControl
-    
+    // MARK: Refresh Control
     func testRefreshControl() {
         let refreshControl = UIRefreshControl()
 
@@ -563,6 +564,19 @@ class BrickViewControllerTests: XCTestCase {
 
         XCTAssertEqual(refreshControl.layer.zPosition, 2)
     }
+    
+    // MARK: 3D Touch
+    func testTraitChangeAltersForceTouchRegistration() {
+        
+    }
+    
+    func testForceTouchPeek() {
+        
+    }
+    
+    func testForceTouchPop() {
+        
+    }
     #endif
     
     func testReloadBricks() {
@@ -594,6 +608,7 @@ class BrickViewControllerTests: XCTestCase {
         XCTAssertEqualWithAccuracy(cell?.frame.height ?? 0 , (width / 5) * 2, accuracy: 0.1)
     }
 
+    // MARK: tvOS-only tests
     #if os(tvOS)
     func testCanFocus() {
         brickViewController.brickCollectionView.registerBrickClass(DummyFocusableBrick.self)
