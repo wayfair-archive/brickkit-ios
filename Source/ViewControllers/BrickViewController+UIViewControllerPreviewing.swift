@@ -16,12 +16,19 @@ extension BrickViewController: UIViewControllerPreviewingDelegate {
         }
         let brick = brickCollectionView.brick(at: indexPath)
         let viewController = brick.previewingDelegate?.previewViewController
+        if let previewing = viewController as? BrickViewControllerPreviewing {
+            previewing.sourceBrick = brick
+        }
         return viewController
     }
     
     open func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        // TODO: Handling pop should be on the brick's previewing delegate, and the implementation of pop should be more implementation-blind
-        show(viewControllerToCommit, sender: self)
+        guard let previewViewController = viewControllerToCommit as? BrickViewControllerPreviewing,
+            let sourceBrick = previewViewController.sourceBrick,
+            let previewingDelegate = sourceBrick.previewingDelegate else {
+            return
+        }
+        previewingDelegate.commit(viewController: viewControllerToCommit)
     }
 }
 #endif

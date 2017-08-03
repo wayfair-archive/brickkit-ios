@@ -8,6 +8,12 @@
 
 import UIKit
 
+#if os(iOS)
+public protocol BrickViewControllerPreviewing: class {
+    var sourceBrick: Brick? { get set }
+}
+#endif
+
 /// A BrickViewController is a UIViewController that contains a BrickCollectionView
 open class BrickViewController: UIViewController, UICollectionViewDelegate {
 
@@ -140,7 +146,7 @@ extension BrickViewController {
     
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         if previewingContext == nil && traitCollection.forceTouchCapability == .available {
-            previewingContext = registerForPreviewing(with: self, sourceView: view)
+            previewingContext = registerForPreviewing(with: self, sourceView: brickCollectionView)
         } else if let previewingContext = previewingContext,
             previousTraitCollection?.forceTouchCapability == .available {
             unregisterForPreviewing(withContext: previewingContext)

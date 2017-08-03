@@ -16,10 +16,11 @@ public protocol BrickPreviewingDelegate: class {
      getter should produce a new view controller whenever possible.
      
      Any special preview actions to be displayed when the user swipes up during a peek are
-     implemented in the class of the returned UIViewController itself, so keep that in mind 
+     implemented in the class of the returned UIViewController itself, so keep that in mind
      if you aren't subclassing.
     */
     var previewViewController: UIViewController? { get }
+    func commit(viewController: UIViewController)
 }
 #endif
 

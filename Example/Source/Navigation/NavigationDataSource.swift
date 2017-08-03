@@ -119,6 +119,7 @@ class NavigationDataSource {
         DynamicContentViewController.self,
         InvalidateHeightViewController.self,
         InteractiveAlignViewController.self,
+        PreviewingBrickViewController.self,
         ])
     #else
     var InteractiveExamples = NavigationItem(title: "Interactive", subTitle: "Interactive Examples", viewControllers: [
@@ -131,7 +132,7 @@ class NavigationDataSource {
         IsHiddenBrickViewController.self,
         DynamicContentViewController.self,
         InvalidateHeightViewController.self,
-        InteractiveAlignViewController.self
+        InteractiveAlignViewController.self,
         ])
     #endif
 }
