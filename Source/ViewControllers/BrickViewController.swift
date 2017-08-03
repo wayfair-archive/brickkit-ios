@@ -149,6 +149,10 @@ extension BrickViewController {
     
     /// Registration/unregistration happens here because the user can disable force touch in their system settings
     open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        handleTraitCollectionChange(traitCollection, previousTraitCollection)
+    }
+    
+    func handleTraitCollectionChange(_ traitCollection: UITraitCollection, _ previousTraitCollection: UITraitCollection?) {
         if previewingContext == nil && traitCollection.forceTouchCapability == .available {
             /// We use brickCollectionView as the sourceView for the previewingContext, otherwise the coordinates returned
             /// in UIViewControllerPreviewing#previewingContext(_:, viewControllerForLocation:) are not in the right system
@@ -156,6 +160,7 @@ extension BrickViewController {
         } else if let previewingContext = previewingContext,
             previousTraitCollection?.forceTouchCapability == .available {
             unregisterForPreviewing(withContext: previewingContext)
+            self.previewingContext = nil
         }
     }
 }

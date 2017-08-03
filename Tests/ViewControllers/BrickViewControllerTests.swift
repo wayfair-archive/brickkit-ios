@@ -567,15 +567,15 @@ class BrickViewControllerTests: XCTestCase {
     
     // MARK: 3D Touch
     func testTraitChangeAltersForceTouchRegistration() {
+        var mockCurrentTraits = UITraitCollection(forceTouchCapability: .available)
+        var mockPreviousTraits = UITraitCollection(forceTouchCapability: .unavailable)
+        brickViewController.handleTraitCollectionChange(mockCurrentTraits, mockPreviousTraits)
+        XCTAssertNotNil(brickViewController.previewingContext)
         
-    }
-    
-    func testForceTouchPeek() {
-        
-    }
-    
-    func testForceTouchPop() {
-        
+        mockCurrentTraits = UITraitCollection(forceTouchCapability: .unavailable)
+        mockPreviousTraits = UITraitCollection(forceTouchCapability: .available)
+        brickViewController.handleTraitCollectionChange(mockCurrentTraits, mockPreviousTraits)
+        XCTAssertNil(brickViewController.previewingContext)
     }
     #endif
     
