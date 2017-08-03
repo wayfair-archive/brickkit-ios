@@ -42,6 +42,8 @@ open class BrickViewController: UIViewController, UICollectionViewDelegate {
     /// Refresh action, if added
     open internal(set) var refreshAction: ((_ refreshControl: UIRefreshControl) -> Void)?
 
+    /// Previewing context, retained for unregistration in the event of a capability change
+    open internal(set) var previewingContext: UIViewControllerPreviewing?
     #endif
 
     // MARK: - Initializers
@@ -133,6 +135,15 @@ extension BrickViewController {
         refreshControl?.layer.zPosition = (brickCollectionView.backgroundView?.layer.zPosition ?? 0) - 1
         if let refreshControl = self.refreshControl {
             self.refreshAction?(refreshControl)
+        }
+    }
+    
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if previewingContext == nil && traitCollection.forceTouchCapability == .available {
+            previewingContext = registerForPreviewing(with: self, sourceView: view)
+        } else if let previewingContext = previewingContext,
+            previousTraitCollection?.forceTouchCapability == .available {
+            unregisterForPreviewing(withContext: previewingContext)
         }
     }
 }

@@ -9,6 +9,20 @@
 import Foundation
 import UIKit
 
+#if os(iOS)
+public protocol BrickPreviewingDelegate: class {
+    /**
+     The view controller that the brick is intended to peek during a 3D Touch press. This
+     getter should produce a new view controller whenever possible.
+     
+     Any special preview actions to be displayed when the user swipes up during a peek are
+     implemented in the class of the returned UIViewController itself, so keep that in mind 
+     if you aren't subclassing.
+    */
+    var previewViewController: UIViewController? { get }
+}
+#endif
+
 /// A Brick is the model representation of a BrickCell in a BrickCollectionView
 open class Brick: CustomStringConvertible {
 
@@ -143,4 +157,8 @@ open class Brick: CustomStringConvertible {
 
         return description
     }
+    
+    #if os(iOS)
+    open weak var previewingDelegate: BrickPreviewingDelegate?
+    #endif
 }
