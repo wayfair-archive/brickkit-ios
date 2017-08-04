@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-#if os(iOS)
 public protocol BrickPreviewingDelegate: class {
     /**
      The view controller that the brick is intended to peek during a 3D Touch press. This
@@ -25,7 +24,6 @@ public protocol BrickPreviewingDelegate: class {
      */
     func commit(viewController: UIViewController)
 }
-#endif
 
 /// A Brick is the model representation of a BrickCell in a BrickCollectionView
 open class Brick: CustomStringConvertible {
@@ -85,7 +83,9 @@ open class Brick: CustomStringConvertible {
     /// Repeat Count for the brick. 
     /// This will be overwritten if there is a repeatCountDataSource specified
     open var repeatCount: Int = 1
-
+    
+    /// Delegate that handles behavior for how to present other view controllers using 3D Touch
+    open weak var previewingDelegate: BrickPreviewingDelegate?
     /// Initialize a Brick
     ///
     /// - parameter identifier:      Identifier of the brick. Defaults to empty string
@@ -162,7 +162,4 @@ open class Brick: CustomStringConvertible {
         return description
     }
     
-    #if os(iOS)
-    open weak var previewingDelegate: BrickPreviewingDelegate?
-    #endif
 }

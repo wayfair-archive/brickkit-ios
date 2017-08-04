@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3310DFF01F32B97A0058D083 /* BrickViewController+UIViewControllerPreviewing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3310DFEF1F32B97A0058D083 /* BrickViewController+UIViewControllerPreviewing.swift */; };
 		4E387C561DAEAB350087820E /* BrickAppearBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9B4D11DAD686E00927BE6 /* BrickAppearBehavior.swift */; };
 		4E387C571DAEAB380087820E /* BrickAppearBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9B4D31DAD690400927BE6 /* BrickAppearBehaviorTests.swift */; };
 		4E3BD8E21DB5190100541900 /* DummyFocusableBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD8E01DB5190100541900 /* DummyFocusableBrick.swift */; };
@@ -268,7 +267,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3310DFEF1F32B97A0058D083 /* BrickViewController+UIViewControllerPreviewing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BrickViewController+UIViewControllerPreviewing.swift"; sourceTree = "<group>"; };
 		4E3BD8E01DB5190100541900 /* DummyFocusableBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyFocusableBrick.swift; sourceTree = "<group>"; };
 		4E3BD8E31DB51A9700541900 /* DummyFocusableBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DummyFocusableBrick.xib; sourceTree = "<group>"; };
 		4E9A25031DABEB3400D7EA99 /* BrickKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BrickKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -768,7 +766,6 @@
 				93D9EBE51DA4057000D8C87A /* BrickCollectionView+BrickLayoutDataSource.swift */,
 				93D9EBE61DA4057000D8C87A /* BrickCollectionView.swift */,
 				93D9EBE71DA4057000D8C87A /* BrickViewController.swift */,
-				3310DFEF1F32B97A0058D083 /* BrickViewController+UIViewControllerPreviewing.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1245,7 +1242,6 @@
 				93D9EC111DA4057000D8C87A /* BrickSectionDataSource.swift in Sources */,
 				93739BB51DA454AB00DD4B81 /* CollectionBrick.swift in Sources */,
 				9350F0D61DA82A430051235F /* CollectionInfo.swift in Sources */,
-				3310DFF01F32B97A0058D083 /* BrickViewController+UIViewControllerPreviewing.swift in Sources */,
 				93F2CFEA1DDB91D400D5F881 /* BrickZIndexer.swift in Sources */,
 				93739BB61DA454AB00DD4B81 /* LabelBrick.swift in Sources */,
 				93D9EBF21DA4057000D8C87A /* SnapToPointLayoutBehavior.swift in Sources */,

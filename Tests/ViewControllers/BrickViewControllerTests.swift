@@ -9,7 +9,6 @@
 import XCTest
 @testable import BrickKit
 
-#if os(iOS)
 class MockPreviewingDelegate: BrickPreviewingDelegate {
     var successfulPop: Bool = false
     
@@ -25,7 +24,6 @@ class MockPreviewingDelegate: BrickPreviewingDelegate {
 class PreviewViewController: BrickViewController, BrickViewControllerPreviewing {
     var sourceBrick: Brick?
 }
-#endif
 
 class BrickViewControllerTests: XCTestCase {
 
@@ -536,8 +534,8 @@ class BrickViewControllerTests: XCTestCase {
 
     // MARK: iOS-only tests
     #if os(iOS)
-    //These tests aren't applicable to tvOS because tvOS doesn't have UIRefreshControl
     // MARK: Refresh Control
+    // These tests aren't applicable to tvOS because tvOS doesn't have UIRefreshControl
     func testRefreshControl() {
         let refreshControl = UIRefreshControl()
 
@@ -584,6 +582,10 @@ class BrickViewControllerTests: XCTestCase {
     }
     
     // MARK: 3D Touch
+    
+    // These tests aren't applicable to tvOS because while UIViewControllerPreviewingDelegate are available on tvOS,
+    // registering for 3D Touch returns a nil UIViewControllerPreviewing object and you cannot actually receive events. 
+    // Despite this, you can safely use the API on tvOS as you do on iOS without causing any issues.
     func testTraitChangeAltersForceTouchRegistration() {
         var mockCurrentTraits = UITraitCollection(forceTouchCapability: .available)
         var mockPreviousTraits = UITraitCollection(forceTouchCapability: .unavailable)

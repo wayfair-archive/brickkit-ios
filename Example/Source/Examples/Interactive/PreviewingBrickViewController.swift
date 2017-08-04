@@ -30,15 +30,11 @@ class PreviewingBrickViewController: BrickViewController {
         
         self.layout.zIndexBehavior = .bottomUp
         
-        let section = buildLayout()
-        self.setSection(section)
+        self.setSection(buildLayout())
     }
     
     func buildLayout() -> BrickSection {
-        let brick = GenericBrick<UILabel>(BrickIdentifiers.repeatLabel,
-                                          width: .ratio(ratio: 0.5),
-                                          height: .fixed(size: 50),
-                                          backgroundColor: .brickGray1)
+        let brick = GenericBrick<UILabel>(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 0.5), height: .fixed(size: 50), backgroundColor: .brickGray1)
         { label, cell in
             label.text = "BRICK \(cell.index)"
             label.font = .brickLightFont(size: 16)
@@ -48,8 +44,7 @@ class PreviewingBrickViewController: BrickViewController {
         }
         brick.previewingDelegate = self
         brick.repeatCount = brickCount
-        let section = BrickSection(bricks: [brick], inset: Constants.brickInset, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), alignment: BrickAlignment(horizontal: .center, vertical: .top))
-        return section
+        return BrickSection(bricks: [brick], inset: Constants.brickInset, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), alignment: BrickAlignment(horizontal: .center, vertical: .top))
     }
     
     /**
@@ -77,19 +72,19 @@ class PreviewingBrickViewController: BrickViewController {
             self.view.backgroundColor = .brickGray4
             self.layout.zIndexBehavior = .bottomUp
             
-            
-            let brick = GenericBrick<UILabel>(BrickIdentifiers.repeatLabel,
-                                              width: .ratio(ratio: 1),
-                                              height: .fixed(size: 50),
-                                              backgroundColor: .brickGray1) { label, cell in
-                                                label.text = "Peek-a-boo!"
-                                                label.font = .brickLightFont(size: 16)
-                                                label.configure(textColor: UIColor.brickGray1.complemetaryColor)
-                                                label.textAlignment = .center
-                                                cell.edgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+            self.setSection(buildLayout())
+        }
+        
+        func buildLayout() -> BrickSection {
+            let brick = GenericBrick<UILabel>(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 1), height: .fixed(size: 50), backgroundColor: .brickGray1) { label, cell in
+                label.text = "Peek-a-boo!"
+                label.font = .brickLightFont(size: 16)
+                label.configure(textColor: UIColor.brickGray1.complemetaryColor)
+                label.textAlignment = .center
+                cell.edgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
             }
-            let section = BrickSection(bricks: [brick], inset: Constants.brickInset, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), alignment: BrickAlignment(horizontal: .center, vertical: .top))
-            self.setSection(section)
+            
+            return BrickSection(bricks: [brick], inset: Constants.brickInset, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), alignment: BrickAlignment(horizontal: .center, vertical: .top))
         }
     }
 }
