@@ -23,12 +23,12 @@ extension BrickViewController: UIViewControllerPreviewingDelegate {
     }
     
     open func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        guard let previewViewController = viewControllerToCommit as? BrickViewControllerPreviewing,
-            let sourceBrick = previewViewController.sourceBrick,
-            let previewingDelegate = sourceBrick.previewingDelegate else {
+        guard let previewViewController = viewControllerToCommit as? BrickViewControllerPreviewing else {
             return
         }
-        previewingDelegate.commit(viewController: viewControllerToCommit)
+        let sourceBrick = previewViewController.sourceBrick
+        let previewingDelegate = sourceBrick?.previewingDelegate
+        previewingDelegate?.commit(viewController: viewControllerToCommit)
     }
 }
 #endif

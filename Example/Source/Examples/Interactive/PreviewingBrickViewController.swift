@@ -25,10 +25,9 @@ class PreviewingBrickViewController: BrickViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.view.backgroundColor = .brickBackground
-        self.brickCollectionView.registerBrickClass(LabelBrick.self)
-
+        
         self.layout.zIndexBehavior = .bottomUp
         
         let section = buildLayout()
@@ -36,13 +35,20 @@ class PreviewingBrickViewController: BrickViewController {
     }
     
     func buildLayout() -> BrickSection {
-        let brick = LabelBrick(BrickIdentifiers.repeatLabel,
-                              width: .ratio(ratio: 0.5),
-                              backgroundColor: .brickGray1,
-                              dataSource: self)
+        let brick = GenericBrick<UILabel>(BrickIdentifiers.repeatLabel,
+                                          width: .ratio(ratio: 0.5),
+                                          height: .fixed(size: 50),
+                                          backgroundColor: .brickGray1)
+        { label, cell in
+            label.text = "BRICK \(cell.index)"
+            label.font = .brickLightFont(size: 16)
+            label.configure(textColor: UIColor.brickGray1.complemetaryColor)
+            label.textAlignment = .center
+            cell.edgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        }
         brick.previewingDelegate = self
-        let section = BrickSection(bricks: [brick], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
-        section.repeatCountDataSource = self
+        brick.repeatCount = brickCount
+        let section = BrickSection(bricks: [brick], inset: Constants.brickInset, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), alignment: BrickAlignment(horizontal: .center, vertical: .top))
         return section
     }
     
@@ -52,39 +58,37 @@ class PreviewingBrickViewController: BrickViewController {
      */
     fileprivate class PreviewedViewController: BrickViewController, BrickViewControllerPreviewing {
         
-        weak var sourceBrick: Brick?
+        var sourceBrick: Brick?
         
         /// Here is an example of setting the preview actions available while previewing this view controller.
         override var previewActionItems: [UIPreviewActionItem] {
-            let action1 = UIPreviewAction(title: "Default Action", style: .default) { _,_ in
+            let action1 = UIPreviewAction(title: "Default Action", style: .default) { _, _ in
                 print("This is the default action!")
             }
-            let action2 = UIPreviewAction(title: "Scary Action", style: .destructive) { _,_ in
+            let action2 = UIPreviewAction(title: "Scary Action", style: .destructive) { _, _ in
                 print("This is the scary action!")
             }
-            let actions = [action1, action2]
-            return actions
+            return [action1, action2]
         }
         
         override func viewDidLoad() {
             super.viewDidLoad()
             
             self.view.backgroundColor = .brickGray4
-            self.brickCollectionView.registerBrickClass(LabelBrick.self)
             self.layout.zIndexBehavior = .bottomUp
             
-            let labelText: String
-            if let brick = sourceBrick {
-                labelText = "Peek-a-boo from \(brick.identifier)!"
-            } else {
-                labelText = "Peek-a-boo!"
-            }
             
-            let section = BrickSection(bricks: [
-                LabelBrick(backgroundColor: .brickGray1,
-                           text: labelText,
-                           configureCellBlock: LabelBrickCell.configure)
-            ], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+            let brick = GenericBrick<UILabel>(BrickIdentifiers.repeatLabel,
+                                              width: .ratio(ratio: 1),
+                                              height: .fixed(size: 50),
+                                              backgroundColor: .brickGray1) { label, cell in
+                                                label.text = "Peek-a-boo!"
+                                                label.font = .brickLightFont(size: 16)
+                                                label.configure(textColor: UIColor.brickGray1.complemetaryColor)
+                                                label.textAlignment = .center
+                                                cell.edgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+            }
+            let section = BrickSection(bricks: [brick], inset: Constants.brickInset, edgeInsets: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), alignment: BrickAlignment(horizontal: .center, vertical: .top))
             self.setSection(section)
         }
     }
@@ -97,21 +101,5 @@ extension PreviewingBrickViewController: BrickPreviewingDelegate {
     
     func commit(viewController: UIViewController) {
         show(viewController, sender: self)
-    }
-}
-
-extension PreviewingBrickViewController: LabelBrickCellDataSource {
-    func configureLabelBrickCell(_ cell: LabelBrickCell) {
-        cell.label.text = "Brick \(cell.index)"
-        cell.configure()
-    }
-}
-
-extension PreviewingBrickViewController: BrickRepeatCountDataSource {
-    func repeatCount(for identifier: String, with collectionIndex: Int, collectionIdentifier: String) -> Int {
-        guard identifier == BrickIdentifiers.repeatLabel else {
-            return 1
-        }
-        return brickCount
     }
 }

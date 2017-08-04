@@ -13,7 +13,7 @@ import UIKit
  Conform to this delegate on your preview view controller in order to enable UIKit Pop.
  */
 public protocol BrickViewControllerPreviewing: class {
-    weak var sourceBrick: Brick? { get set }
+    var sourceBrick: Brick? { get set }
 }
 #endif
 

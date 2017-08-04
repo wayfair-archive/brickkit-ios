@@ -9,6 +9,22 @@
 import XCTest
 @testable import BrickKit
 
+class MockPreviewingDelegate: BrickPreviewingDelegate {
+    var successfulPop: Bool = false
+    
+    weak var previewViewController: UIViewController? {
+        return PreviewViewController()
+    }
+    
+    func commit(viewController: UIViewController) {
+        successfulPop = true
+    }
+}
+
+class PreviewViewController: BrickViewController, BrickViewControllerPreviewing {
+    var sourceBrick: Brick?
+}
+
 class BrickViewControllerTests: XCTestCase {
 
     var brickViewController: BrickViewController!
@@ -576,6 +592,43 @@ class BrickViewControllerTests: XCTestCase {
         mockPreviousTraits = UITraitCollection(forceTouchCapability: .available)
         brickViewController.handleTraitCollectionChange(mockCurrentTraits, mockPreviousTraits)
         XCTAssertNil(brickViewController.previewingContext)
+    }
+    
+    func testForceTouchPeek() {
+        brickViewController.brickCollectionView.frame.size.width = 320
+        let brick = DummyBrick("Brick 1", width: .ratio(ratio: 1), height: .ratio(ratio: 0.5))
+        let delegate = MockPreviewingDelegate()
+        brick.previewingDelegate = delegate
+        brickViewController.brickCollectionView.setupSingleBrickAndLayout(brick)
+        
+        let mockCurrentTraits = UITraitCollection(forceTouchCapability: .available)
+        let mockPreviousTraits = UITraitCollection(forceTouchCapability: .unavailable)
+        brickViewController.handleTraitCollectionChange(mockCurrentTraits, mockPreviousTraits)
+        
+        let result = brickViewController.previewingContext(brickViewController.previewingContext!, viewControllerForLocation: CGPoint(x: 160, y: 50)) as? PreviewViewController
+        
+        XCTAssertNotNil(result)
+        XCTAssertNotNil(result?.sourceBrick)
+    }
+    
+    func testForceTouchPop() {
+        brickViewController.brickCollectionView.frame.size.width = 320
+        let brick = DummyBrick("Brick 1", width: .ratio(ratio: 1), height: .ratio(ratio: 0.5))
+        let delegate = MockPreviewingDelegate()
+        brick.previewingDelegate = delegate
+        brickViewController.brickCollectionView.setupSingleBrickAndLayout(brick)
+        
+        let mockCurrentTraits = UITraitCollection(forceTouchCapability: .available)
+        let mockPreviousTraits = UITraitCollection(forceTouchCapability: .unavailable)
+        brickViewController.handleTraitCollectionChange(mockCurrentTraits, mockPreviousTraits)
+        
+        guard let result = brickViewController.previewingContext(brickViewController.previewingContext!, viewControllerForLocation: CGPoint(x: 160, y: 50)) else {
+            XCTFail()
+            return
+        }
+        brickViewController.previewingContext(brickViewController.previewingContext!, commit: result)
+        
+        XCTAssertTrue(delegate.successfulPop)
     }
     #endif
     
