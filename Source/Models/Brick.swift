@@ -11,14 +11,11 @@ import UIKit
 
 public protocol BrickPreviewingDelegate: class {
     /**
-     The view controller that the brick is intended to peek during a 3D Touch press. This
-     getter should produce a new view controller whenever possible.
+     Returns a new instance of the view controller that the given brick is intended to peek during a 3D Touch press.
      
-     Any special preview actions to be displayed when the user swipes up during a peek are
-     implemented in the class of the returned UIViewController itself, so keep that in mind
-     if you aren't subclassing.
+     Any special preview actions to be displayed when the user swipes up during a peek are implemented in the class of the returned UIViewController itself, so keep that in mind if you aren't subclassing.
      */
-    weak var previewViewController: UIViewController? { get }
+    func previewViewController(for brick: Brick) -> UIViewController?
     /**
      Implement this function to handle committing the preview view controller to the current focus.
      */

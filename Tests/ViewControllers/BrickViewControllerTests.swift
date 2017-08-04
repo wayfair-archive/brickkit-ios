@@ -12,8 +12,8 @@ import XCTest
 class MockPreviewingDelegate: BrickPreviewingDelegate {
     var successfulPop: Bool = false
     
-    weak var previewViewController: UIViewController? {
-        return PreviewViewController()
+    func previewViewController(for brick: Brick) -> UIViewController? {
+        return PreviewViewController(with: brick)
     }
     
     func commit(viewController: UIViewController) {
@@ -22,7 +22,16 @@ class MockPreviewingDelegate: BrickPreviewingDelegate {
 }
 
 class PreviewViewController: BrickViewController, BrickViewControllerPreviewing {
-    var sourceBrick: Brick?
+    var sourceBrick: Brick
+    
+    required init(with source: Brick) {
+        sourceBrick = source
+        super.init()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 class BrickViewControllerTests: XCTestCase {

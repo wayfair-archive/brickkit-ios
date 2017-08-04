@@ -12,7 +12,8 @@ import UIKit
  Conform to this delegate on your preview view controller in order to enable UIKit Pop.
  */
 public protocol BrickViewControllerPreviewing: class {
-    var sourceBrick: Brick? { get set }
+    var sourceBrick: Brick { get set }
+    init(with source: Brick)
 }
 
 /// A BrickViewController is a UIViewController that contains a BrickCollectionView
@@ -140,20 +141,14 @@ extension BrickViewController: UIViewControllerPreviewingDelegate {
             return nil
         }
         let brick = brickCollectionView.brick(at: indexPath)
-        let viewController = brick.previewingDelegate?.previewViewController
-        if let previewing = viewController as? BrickViewControllerPreviewing {
-            previewing.sourceBrick = brick
-        }
-        return viewController
+        return brick.previewingDelegate?.previewViewController(for: brick)
     }
     
     open func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         guard let previewViewController = viewControllerToCommit as? BrickViewControllerPreviewing else {
             return
         }
-        let sourceBrick = previewViewController.sourceBrick
-        let previewingDelegate = sourceBrick?.previewingDelegate
-        previewingDelegate?.commit(viewController: viewControllerToCommit)
+        previewViewController.sourceBrick.previewingDelegate?.commit(viewController: viewControllerToCommit)
     }
 }
 

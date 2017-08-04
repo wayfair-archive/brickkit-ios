@@ -53,7 +53,7 @@ class PreviewingBrickViewController: BrickViewController {
      */
     fileprivate class PreviewedViewController: BrickViewController, BrickViewControllerPreviewing {
         
-        var sourceBrick: Brick?
+        var sourceBrick: Brick
         
         /// Here is an example of setting the preview actions available while previewing this view controller.
         override var previewActionItems: [UIPreviewActionItem] {
@@ -64,6 +64,15 @@ class PreviewingBrickViewController: BrickViewController {
                 print("This is the scary action!")
             }
             return [action1, action2]
+        }
+        
+        required init(with source: Brick) {
+            sourceBrick = source
+            super.init()
+        }
+        
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
         }
         
         override func viewDidLoad() {
@@ -90,8 +99,8 @@ class PreviewingBrickViewController: BrickViewController {
 }
 
 extension PreviewingBrickViewController: BrickPreviewingDelegate {
-    weak var previewViewController: UIViewController? {
-        return PreviewedViewController()
+    func previewViewController(for brick: Brick) -> UIViewController? {
+        return PreviewedViewController(with: brick)
     }
     
     func commit(viewController: UIViewController) {
