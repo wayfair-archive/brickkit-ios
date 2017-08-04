@@ -9,6 +9,7 @@
 import XCTest
 @testable import BrickKit
 
+#if os(iOS)
 class MockPreviewingDelegate: BrickPreviewingDelegate {
     var successfulPop: Bool = false
     
@@ -24,6 +25,7 @@ class MockPreviewingDelegate: BrickPreviewingDelegate {
 class PreviewViewController: BrickViewController, BrickViewControllerPreviewing {
     var sourceBrick: Brick?
 }
+#endif
 
 class BrickViewControllerTests: XCTestCase {
 
