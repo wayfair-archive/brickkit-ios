@@ -13,7 +13,6 @@ import UIKit
  */
 public protocol BrickViewControllerPreviewing: class {
     var sourceBrick: Brick { get set }
-    init(with source: Brick)
 }
 
 /// A BrickViewController is a UIViewController that contains a BrickCollectionView

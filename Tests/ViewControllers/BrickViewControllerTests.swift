@@ -618,10 +618,13 @@ class BrickViewControllerTests: XCTestCase {
         let mockPreviousTraits = UITraitCollection(forceTouchCapability: .unavailable)
         brickViewController.handleTraitCollectionChange(mockCurrentTraits, mockPreviousTraits)
         
-        let result = brickViewController.previewingContext(brickViewController.previewingContext!, viewControllerForLocation: CGPoint(x: 160, y: 50)) as? PreviewViewController
+        let badResult = brickViewController.previewingContext(brickViewController.previewingContext!, viewControllerForLocation: CGPoint(x: 320, y: 320))
+        XCTAssertNil(badResult)
         
-        XCTAssertNotNil(result)
-        XCTAssertNotNil(result?.sourceBrick)
+        let goodResult = brickViewController.previewingContext(brickViewController.previewingContext!, viewControllerForLocation: CGPoint(x: 160, y: 50)) as? PreviewViewController
+        
+        XCTAssertNotNil(goodResult)
+        XCTAssertNotNil(goodResult?.sourceBrick)
     }
     
     func testForceTouchPop() {
