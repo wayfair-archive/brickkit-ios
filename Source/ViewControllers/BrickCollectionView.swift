@@ -233,7 +233,7 @@ open class BrickCollectionView: UICollectionView {
             }
         }, completion: completion)
     }
-        
+
     /// Invalidate the visibility
     ///
     /// - parameter completion: A completion handler block to execute when all of the operations are finished. This block takes a single Boolean parameter that contains the value true if all of the related animations completed successfully or false if they were interrupted. This parameter may be nil.

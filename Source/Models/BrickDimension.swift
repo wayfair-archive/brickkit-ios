@@ -18,6 +18,11 @@ public struct BrickSize {
     }
 }
 
+public enum RestrictedSize {
+    case minimumSize(size: BrickDimension)
+    case maximumSize(size: BrickDimension)
+}
+
 public typealias RangeDimensionPair = (dimension: BrickDimension, minimumSize: CGFloat)
 
 public struct BrickRangeDimension {
@@ -90,10 +95,12 @@ public enum BrickDimension {
     indirect case horizontalSizeClass(regular: BrickDimension, compact: BrickDimension)
     indirect case verticalSizeClass(regular: BrickDimension, compact: BrickDimension)
     indirect case dimensionRange(default: BrickDimension, additionalRangePairs: [RangeDimensionPair] )
+    indirect case restricted(size: BrickDimension, restrictedSize: RestrictedSize)
     
     public func isEstimate(withValue value: CGFloat?) -> Bool {
         switch self.dimension(withValue: value) {
         case .auto(_): return true
+        case .restricted(let size, _): return size.isEstimate(withValue: value)
         default: return false
         }
     }
@@ -119,6 +126,7 @@ public enum BrickDimension {
         
         switch actualDimension {
         case .auto(let dimension): return dimension.value(for: otherDimension, startingAt: origin)
+        case .restricted(let size, _): return size.value(for: otherDimension, startingAt: origin)
         default: return BrickDimension._rawValue(for: otherDimension, startingAt: origin, with: actualDimension)
         }
     }
@@ -138,6 +146,14 @@ public enum BrickDimension {
         }
     }
     
+    internal static func restrictedValue(for cellHeight: CGFloat, width: CGFloat, restrictedSize: RestrictedSize) -> CGFloat {
+        switch restrictedSize {
+        case .minimumSize(let minimumDimension):
+            return max(cellHeight, minimumDimension.dimension(withValue: cellHeight).value(for: width, startingAt: 0))
+        case .maximumSize(let maximumDimension):
+            return min(cellHeight, maximumDimension.dimension(withValue: cellHeight).value(for: width, startingAt: 0))
+        }
+    }
 }
 
 extension BrickDimension {
@@ -157,44 +173,43 @@ extension BrickDimension {
 }
 
 extension BrickDimension: Equatable {
-}
-
-public func ==(lhs: BrickDimension, rhs: BrickDimension) -> Bool {
-    switch (lhs, rhs) {
-    case (let .auto(estimate1), let .auto(estimate2)):
-        return estimate1 == estimate2
-
-    case (let .ratio(ratio1), let .ratio(ratio2)):
-        return ratio1 == ratio2
-
-    case (let .fixed(size1), let .fixed(size2)):
-        return size1 == size2
-
-    case (let .orientation(landscape1, portrait1), let .orientation(landscape2, portrait2)):
-        return landscape1 == landscape2 && portrait1 == portrait2
-
-    case (let .horizontalSizeClass(regular1, compact1), let .horizontalSizeClass(regular2, compact2)):
-        return regular1 == regular2 && compact1 == compact2
-
-    case (let .verticalSizeClass(regular1, compact1), let .verticalSizeClass(regular2, compact2)):
-        return regular1 == regular2 && compact1 == compact2
-
-    case (.fill, .fill):
-        return true
-        
-    case (let .dimensionRange(range1, addtionalRanges1), let .dimensionRange(range2, addtionalRanges2)):
-        if range1 != range2 || addtionalRanges1.count != addtionalRanges2.count {
-            return false
-        }
-        for (index, value) in addtionalRanges1.enumerated() {
-            if addtionalRanges2[index] != value {
+    public static func ==(lhs: BrickDimension, rhs: BrickDimension) -> Bool {
+        switch (lhs, rhs) {
+        case (let .auto(estimate1), let .auto(estimate2)):
+            return estimate1 == estimate2
+            
+        case (let .ratio(ratio1), let .ratio(ratio2)):
+            return ratio1 == ratio2
+            
+        case (let .fixed(size1), let .fixed(size2)):
+            return size1 == size2
+            
+        case (let .orientation(landscape1, portrait1), let .orientation(landscape2, portrait2)):
+            return landscape1 == landscape2 && portrait1 == portrait2
+            
+        case (let .horizontalSizeClass(regular1, compact1), let .horizontalSizeClass(regular2, compact2)):
+            return regular1 == regular2 && compact1 == compact2
+            
+        case (let .verticalSizeClass(regular1, compact1), let .verticalSizeClass(regular2, compact2)):
+            return regular1 == regular2 && compact1 == compact2
+            
+        case (.fill, .fill):
+            return true
+            
+        case (let .dimensionRange(range1, addtionalRanges1), let .dimensionRange(range2, addtionalRanges2)):
+            if range1 != range2 || addtionalRanges1.count != addtionalRanges2.count {
                 return false
             }
+            for (index, value) in addtionalRanges1.enumerated() {
+                if addtionalRanges2[index] != value {
+                    return false
+                }
+            }
+            return true
+            
+        default:
+            return false
         }
-        return true
-
-    default:
-        return false
     }
 }
 

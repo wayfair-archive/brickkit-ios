@@ -153,6 +153,8 @@
 		4E3BD8ED1DB521C200541900 /* CoverFlowViewScrollingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD8EB1DB521C200541900 /* CoverFlowViewScrollingController.swift */; };
 		4E8E10F41DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8E10F31DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift */; };
 		4E8E10F51DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8E10F31DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift */; };
+		4ED1200D1F2FCEB9009C7D61 /* RestrictedBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1200A1F2FCEB8009C7D61 /* RestrictedBrickViewController.swift */; };
+		4ED1200E1F2FCEB9009C7D61 /* RestrictedBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1200A1F2FCEB8009C7D61 /* RestrictedBrickViewController.swift */; };
 		664A10F61F3359D200DE258B /* PreviewingBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664A10F51F3359D200DE258B /* PreviewingBrickViewController.swift */; };
 		93186B031DDE89610095C849 /* HugeRepeatBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93186B021DDE89610095C849 /* HugeRepeatBrickViewController.swift */; };
 		93186B041DDE89610095C849 /* HugeRepeatBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93186B021DDE89610095C849 /* HugeRepeatBrickViewController.swift */; };
@@ -352,6 +354,7 @@
 		4E3BD8E61DB51E1200541900 /* BrickIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickIdentifiers.swift; sourceTree = "<group>"; };
 		4E3BD8EB1DB521C200541900 /* CoverFlowViewScrollingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverFlowViewScrollingController.swift; sourceTree = "<group>"; };
 		4E8E10F31DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbeddedSpotlightSnapScrollingViewController.swift; sourceTree = "<group>"; };
+		4ED1200A1F2FCEB8009C7D61 /* RestrictedBrickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictedBrickViewController.swift; sourceTree = "<group>"; };
 		664A10F51F3359D200DE258B /* PreviewingBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewingBrickViewController.swift; sourceTree = "<group>"; };
 		93186B021DDE89610095C849 /* HugeRepeatBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HugeRepeatBrickViewController.swift; sourceTree = "<group>"; };
 		93186B071DDE8A580095C849 /* HugeRepeatCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HugeRepeatCollectionViewController.swift; sourceTree = "<group>"; };
@@ -627,6 +630,7 @@
 				93186B071DDE8A580095C849 /* HugeRepeatCollectionViewController.swift */,
 				938996A41DF77A3200E0F4F1 /* AlignmentBrickViewController.swift */,
 				931A52F21F0D5B9300AB0BDF /* ReorderableBrickViewController.swift */,
+				4ED1200A1F2FCEB8009C7D61 /* RestrictedBrickViewController.swift */,
 			);
 			path = Simple;
 			sourceTree = "<group>";
@@ -963,6 +967,7 @@
 				FCD401B61E203D080011173A /* ActivityIndicatorOverrideSource.swift in Sources */,
 				4E3BD8401DB1316400541900 /* CardScrollingViewController.swift in Sources */,
 				4E3BD8121DB1316400541900 /* BlockHorizontalViewController.swift in Sources */,
+				4ED1200E1F2FCEB9009C7D61 /* RestrictedBrickViewController.swift in Sources */,
 				4E3BD85E1DB1316400541900 /* StickingFooterSectionsViewController.swift in Sources */,
 				4E3BD8061DB1316400541900 /* RepeatCollectionBrickViewController.swift in Sources */,
 				4E3BD8021DB1316400541900 /* BaseSectionBrickViewController.swift in Sources */,
@@ -1102,6 +1107,7 @@
 				4E8E10F51DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift in Sources */,
 				4E3BD7FF1DB1316400541900 /* BaseBrickController.swift in Sources */,
 				4E3BD86D1DB1316400541900 /* ViewController.swift in Sources */,
+				4ED1200D1F2FCEB9009C7D61 /* RestrictedBrickViewController.swift in Sources */,
 				4E3BD7DD1DB1316400541900 /* ProfileImageBrick.swift in Sources */,
 				4E3BD86B1DB1316400541900 /* Theme.swift in Sources */,
 				935D489C1DB7D1B10091AA39 /* ImagesInCollectionBrickHorizontalViewController.swift in Sources */,

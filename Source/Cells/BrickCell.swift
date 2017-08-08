@@ -243,7 +243,12 @@ open class BrickCell: BaseBrickCell {
         self.layoutIfNeeded()
 
         let size = self.systemLayoutSizeFitting(CGSize(width: width, height: 0), withHorizontalFittingPriority: 1000, verticalFittingPriority: 10)
-        return size.height
+        switch _brick.size.height.dimension(withValue: size.height) {
+        case .restricted(_, let restriction):
+            return BrickDimension.restrictedValue(for: size.height, width: width, restrictedSize: restriction)
+        default:
+            return size.height
+        }
     }
 
 }
