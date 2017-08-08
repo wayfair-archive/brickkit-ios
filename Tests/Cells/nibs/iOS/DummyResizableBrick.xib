@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13168.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13147.4"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="hYn-La-5Od" customClass="DummyResizableBrickCell" customModule="BrickKitTests_iOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5o-rg-apN">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="REL-t5-TN1"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="g5o-rg-apN" firstAttribute="top" secondItem="hYn-La-5Od" secondAttribute="top" id="OVy-FX-gt6"/>
+                <constraint firstAttribute="bottom" secondItem="g5o-rg-apN" secondAttribute="bottom" priority="750" id="dca-1S-421"/>
+                <constraint firstAttribute="trailing" secondItem="g5o-rg-apN" secondAttribute="trailing" id="fUc-yV-aD4"/>
+                <constraint firstItem="g5o-rg-apN" firstAttribute="leading" secondItem="hYn-La-5Od" secondAttribute="leading" id="xP4-RL-Yys"/>
+            </constraints>
+            <connections>
+                <outlet property="heightConstraint" destination="REL-t5-TN1" id="vEv-by-gLZ"/>
+            </connections>
+            <point key="canvasLocation" x="-2998" y="599"/>
+        </collectionViewCell>
+    </objects>
+</document>

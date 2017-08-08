@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="13168.3" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="appleTV" orientation="landscape">
+        <adaptation id="light"/>
+    </device>
+    <dependencies>
+        <deployment identifier="tvOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13147.4"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" id="2Rd-vt-eHN" customClass="DummyResizableBrickCell" customModule="BrickKit_tvOSTests" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hth-Wm-7GO">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="XTJ-eP-sli"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="Hth-Wm-7GO" firstAttribute="top" secondItem="2Rd-vt-eHN" secondAttribute="top" id="HWV-e0-h9t"/>
+                <constraint firstAttribute="bottom" secondItem="Hth-Wm-7GO" secondAttribute="bottom" priority="750" id="YUg-9L-87H"/>
+                <constraint firstItem="Hth-Wm-7GO" firstAttribute="leading" secondItem="2Rd-vt-eHN" secondAttribute="leading" id="ZUm-kG-8aG"/>
+                <constraint firstAttribute="trailing" secondItem="Hth-Wm-7GO" secondAttribute="trailing" id="mx7-1c-lAq"/>
+            </constraints>
+            <size key="customSize" width="505" height="388"/>
+            <connections>
+                <outlet property="heightConstraint" destination="XTJ-eP-sli" id="xKI-4N-y3o"/>
+            </connections>
+            <point key="canvasLocation" x="-2826.5" y="140"/>
+        </collectionViewCell>
+    </objects>
+</document>
