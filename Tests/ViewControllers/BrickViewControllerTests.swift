@@ -9,6 +9,31 @@
 import XCTest
 @testable import BrickKit
 
+class MockPreviewingDelegate: BrickPreviewingDelegate {
+    var successfulPop: Bool = false
+    
+    func previewViewController(for brick: Brick) -> UIViewController? {
+        return PreviewViewController(with: brick)
+    }
+    
+    func commit(viewController: UIViewController) {
+        successfulPop = true
+    }
+}
+
+class PreviewViewController: BrickViewController, BrickViewControllerPreviewing {
+    var sourceBrick: Brick
+    
+    required init(with source: Brick) {
+        sourceBrick = source
+        super.init()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 class BrickViewControllerTests: XCTestCase {
 
     var brickViewController: BrickViewController!
@@ -516,9 +541,10 @@ class BrickViewControllerTests: XCTestCase {
         XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: 400, height: 50))
     }
 
+    // MARK: iOS-only tests
     #if os(iOS)
-    //These tests aren't applicable to tvOS because tvOS doesn't have UIRefreshControl
-    
+    // MARK: Refresh Control
+    // These tests aren't applicable to tvOS because tvOS doesn't have UIRefreshControl
     func testRefreshControl() {
         let refreshControl = UIRefreshControl()
 
@@ -563,6 +589,63 @@ class BrickViewControllerTests: XCTestCase {
 
         XCTAssertEqual(refreshControl.layer.zPosition, 2)
     }
+    
+    // MARK: 3D Touch
+    
+    // These tests aren't applicable to tvOS because while UIViewControllerPreviewingDelegate are available on tvOS,
+    // registering for 3D Touch returns a nil UIViewControllerPreviewing object and you cannot actually receive events. 
+    // Despite this, you can safely use the API on tvOS as you do on iOS without causing any issues.
+    func testTraitChangeAltersForceTouchRegistration() {
+        var mockCurrentTraits = UITraitCollection(forceTouchCapability: .available)
+        var mockPreviousTraits = UITraitCollection(forceTouchCapability: .unavailable)
+        brickViewController.handleTraitCollectionChange(mockCurrentTraits, mockPreviousTraits)
+        XCTAssertNotNil(brickViewController.previewingContext)
+        
+        mockCurrentTraits = UITraitCollection(forceTouchCapability: .unavailable)
+        mockPreviousTraits = UITraitCollection(forceTouchCapability: .available)
+        brickViewController.handleTraitCollectionChange(mockCurrentTraits, mockPreviousTraits)
+        XCTAssertNil(brickViewController.previewingContext)
+    }
+    
+    func testForceTouchPeek() {
+        brickViewController.brickCollectionView.frame.size.width = 320
+        let brick = DummyBrick("Brick 1", width: .ratio(ratio: 1), height: .ratio(ratio: 0.5))
+        let delegate = MockPreviewingDelegate()
+        brick.previewingDelegate = delegate
+        brickViewController.brickCollectionView.setupSingleBrickAndLayout(brick)
+        
+        let mockCurrentTraits = UITraitCollection(forceTouchCapability: .available)
+        let mockPreviousTraits = UITraitCollection(forceTouchCapability: .unavailable)
+        brickViewController.handleTraitCollectionChange(mockCurrentTraits, mockPreviousTraits)
+        
+        let badResult = brickViewController.previewingContext(brickViewController.previewingContext!, viewControllerForLocation: CGPoint(x: 320, y: 320))
+        XCTAssertNil(badResult)
+        
+        let goodResult = brickViewController.previewingContext(brickViewController.previewingContext!, viewControllerForLocation: CGPoint(x: 160, y: 50)) as? PreviewViewController
+        
+        XCTAssertNotNil(goodResult)
+        XCTAssertNotNil(goodResult?.sourceBrick)
+    }
+    
+    func testForceTouchPop() {
+        brickViewController.brickCollectionView.frame.size.width = 320
+        let brick = DummyBrick("Brick 1", width: .ratio(ratio: 1), height: .ratio(ratio: 0.5))
+        let delegate = MockPreviewingDelegate()
+        brick.previewingDelegate = delegate
+        brickViewController.brickCollectionView.setupSingleBrickAndLayout(brick)
+        
+        let mockCurrentTraits = UITraitCollection(forceTouchCapability: .available)
+        let mockPreviousTraits = UITraitCollection(forceTouchCapability: .unavailable)
+        brickViewController.handleTraitCollectionChange(mockCurrentTraits, mockPreviousTraits)
+        
+        guard let result = brickViewController.previewingContext(brickViewController.previewingContext!, viewControllerForLocation: CGPoint(x: 160, y: 50)) else {
+            XCTFail()
+            return
+        }
+        brickViewController.previewingContext(brickViewController.previewingContext!, commit: result)
+        
+        XCTAssertTrue(delegate.successfulPop)
+    }
     #endif
     
     func testReloadBricks() {
@@ -594,6 +677,7 @@ class BrickViewControllerTests: XCTestCase {
         XCTAssertEqualWithAccuracy(cell?.frame.height ?? 0 , (width / 5) * 2, accuracy: 0.1)
     }
 
+    // MARK: tvOS-only tests
     #if os(tvOS)
     func testCanFocus() {
         brickViewController.brickCollectionView.registerBrickClass(DummyFocusableBrick.self)

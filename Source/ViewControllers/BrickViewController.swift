@@ -8,6 +8,13 @@
 
 import UIKit
 
+/**
+ Conform to this delegate on your preview view controller in order to enable UIKit Pop.
+ */
+public protocol BrickViewControllerPreviewing: class {
+    var sourceBrick: Brick { get set }
+}
+
 /// A BrickViewController is a UIViewController that contains a BrickCollectionView
 open class BrickViewController: UIViewController, UICollectionViewDelegate {
 
@@ -32,7 +39,10 @@ open class BrickViewController: UIViewController, UICollectionViewDelegate {
         }
         return collectionView
     }
-
+    
+    /// Previewing context, retained for unregistration in the event of a capability change
+    open internal(set) var previewingContext: UIViewControllerPreviewing?
+    
     #if os(iOS)
     // MARK: - Internal members
 
@@ -41,7 +51,6 @@ open class BrickViewController: UIViewController, UICollectionViewDelegate {
 
     /// Refresh action, if added
     open internal(set) var refreshAction: ((_ refreshControl: UIRefreshControl) -> Void)?
-
     #endif
 
     // MARK: - Initializers
@@ -68,6 +77,11 @@ open class BrickViewController: UIViewController, UICollectionViewDelegate {
             registrationDataSource.registerBricks()
         }
     }
+    
+    /// Registration/unregistration happens here because the user can disable force touch in their system settings
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        handleTraitCollectionChange(traitCollection, previousTraitCollection)
+    }
 
     // MARK: - Private Methods
 
@@ -81,6 +95,19 @@ open class BrickViewController: UIViewController, UICollectionViewDelegate {
 
             self.collectionView = collectionView
             self.collectionView?.delegate = self
+        }
+    }
+    
+    /// On tvOS, this method accomplishes nothing, despite UIViewControllerPreviewing and its delegate protocol being available
+    func handleTraitCollectionChange(_ traitCollection: UITraitCollection, _ previousTraitCollection: UITraitCollection?) {
+        if previewingContext == nil && traitCollection.forceTouchCapability == .available {
+            // We use brickCollectionView as the sourceView for the previewingContext, otherwise the coordinates returned
+            // in UIViewControllerPreviewing#previewingContext(_:, viewControllerForLocation:) are not in the right system
+            previewingContext = registerForPreviewing(with: self, sourceView: brickCollectionView)
+        } else if let previewingContext = previewingContext,
+            previousTraitCollection?.forceTouchCapability == .available {
+            unregisterForPreviewing(withContext: previewingContext)
+            self.previewingContext = nil
         }
     }
 
@@ -104,7 +131,24 @@ open class BrickViewController: UIViewController, UICollectionViewDelegate {
     open func invalidateLayout() {
         brickCollectionView.invalidateBricks()
     }
+}
 
+// MARK: - UIViewControllerPreviewingDelegate
+extension BrickViewController: UIViewControllerPreviewingDelegate {
+    open func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = brickCollectionView.indexPathForItem(at: location) else {
+            return nil
+        }
+        let brick = brickCollectionView.brick(at: indexPath)
+        return brick.previewingDelegate?.previewViewController(for: brick)
+    }
+    
+    open func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        guard let previewViewController = viewControllerToCommit as? BrickViewControllerPreviewing else {
+            return
+        }
+        previewViewController.sourceBrick.previewingDelegate?.commit(viewController: viewControllerToCommit)
+    }
 }
 
 #if os(iOS)
@@ -140,7 +184,7 @@ extension BrickViewController {
 
 #if os(tvOS)
 extension BrickViewController {
-    
+
     open func collectionViewShouldUpdateFocusIn(context: UICollectionViewFocusUpdateContext) -> Bool {
         
         guard let nextIndex = context.nextFocusedIndexPath else {
