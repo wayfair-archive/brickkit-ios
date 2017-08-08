@@ -384,7 +384,6 @@ class StickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     // This test checks if the originalFrame changes when a section is sticky
     func testStickyShouldNotChangeOriginalFrameForSectionAttributes() {
         let brickView = BrickCollectionView(frame: CGRect(x:0, y:0, width: 320, height: 480))
-        brickView.registerBrickClass(DummyBrick.self)
 
         let brickSection = BrickSection(bricks: [
             BrickSection(bricks: [

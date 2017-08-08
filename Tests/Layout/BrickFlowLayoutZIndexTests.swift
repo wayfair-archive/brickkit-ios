@@ -57,7 +57,6 @@ class BrickFlowLayoutZIndexTests: BrickFlowLayoutBaseTests {
                 ]),
             DummyBrick("ae"),
             ])
-        collectionView.registerBrickClass(DummyBrick.self)
         collectionView.setSection(section)
     }
 
@@ -280,7 +279,6 @@ extension BrickFlowLayoutZIndexTests {
             DummyBrick("ac")
             ])
 
-        collectionView.registerBrickClass(DummyBrick.self)
         collectionView.setSection(section)
         collectionView.layoutSubviews()
 
@@ -318,7 +316,6 @@ extension BrickFlowLayoutZIndexTests {
                 ]),
             DummyBrick("ac")
             ])
-        collectionView.registerBrickClass(DummyBrick.self)
         collectionView.setSection(section)
         collectionView.layoutSubviews()
 
@@ -369,7 +366,6 @@ extension BrickFlowLayoutZIndexTests {
             DummyBrick("ae"),
             ])
 
-        collectionView.registerBrickClass(DummyBrick.self)
         collectionView.setSection(section)
         collectionView.layoutSubviews()
 
@@ -426,7 +422,6 @@ extension BrickFlowLayoutZIndexTests {
             DummyBrick("ac"),
             ])
 
-        collectionView.registerBrickClass(DummyBrick.self)
         collectionView.setSection(section)
         collectionView.layoutSubviews()
 
@@ -490,7 +485,6 @@ extension BrickFlowLayoutZIndexTests {
             DummyBrick("ac"),
             ])
 
-        collectionView.registerBrickClass(DummyBrick.self)
         collectionView.setSection(section)
         collectionView.layoutSubviews()
 
@@ -607,7 +601,6 @@ extension BrickFlowLayoutZIndexTests {
                 ]),
             DummyBrick("ac")
             ])
-        collectionView.registerBrickClass(DummyBrick.self)
         collectionView.setSection(section)
         collectionView.layoutSubviews()
 
@@ -660,7 +653,6 @@ extension BrickFlowLayoutZIndexTests {
 
         layout.zIndexBehavior = .bottomUp
 
-        collectionView.registerBrickClass(DummyBrick.self)
         collectionView.setSection(section)
         collectionView.layoutSubviews()
 
@@ -719,7 +711,6 @@ extension BrickFlowLayoutZIndexTests {
 
         layout.zIndexBehavior = .bottomUp
 
-        collectionView.registerBrickClass(DummyBrick.self)
         collectionView.setSection(section)
         collectionView.layoutSubviews()
 
@@ -785,7 +776,6 @@ extension BrickFlowLayoutZIndexTests {
 
         layout.zIndexBehavior = .bottomUp
 
-        collectionView.registerBrickClass(DummyBrick.self)
         collectionView.setSection(section)
         collectionView.layoutSubviews()
 

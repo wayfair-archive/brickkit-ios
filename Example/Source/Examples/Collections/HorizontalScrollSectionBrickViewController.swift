@@ -27,9 +27,6 @@ class HorizontalScrollSectionBrickViewController: BrickApp.BaseBrickController, 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.registerBrickClass(CollectionBrick.self)
-        self.registerBrickClass(LabelBrick.self)
-
         let section1 = BrickSection(backgroundColor: .brickGray1, bricks: [
             ImageBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 1/4), height: .ratio(ratio: 1), backgroundColor: .brickGray3, dataSource: self),
             ] , inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
@@ -47,11 +44,11 @@ class HorizontalScrollSectionBrickViewController: BrickApp.BaseBrickController, 
 
         let section = BrickSection(backgroundColor: UIColor.white, bricks: [
             LabelBrick(backgroundColor: .brickGray3, text: "1/4 Ratio", configureCellBlock: LabelBrickCell.configure),
-            CollectionBrick("Collection 1", backgroundColor: .brickGray1, scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section1), brickTypes:[ImageBrick.self]),
+            CollectionBrick("Collection 1", backgroundColor: .brickGray1, scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section1)),
             LabelBrick(backgroundColor: .brickGray3, text: "1/2 Ratio", configureCellBlock: LabelBrickCell.configure),
-            CollectionBrick("Collection 2", backgroundColor: .brickGray3, scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section2), brickTypes:[ImageBrick.self]),
+            CollectionBrick("Collection 2", backgroundColor: .brickGray3, scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section2)),
             LabelBrick(backgroundColor: .brickGray3, text: "100px Fixed", configureCellBlock: LabelBrickCell.configure),
-            CollectionBrick("Collection 3", backgroundColor: .brickGray5, scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section3), brickTypes:[ImageBrick.self]),
+            CollectionBrick("Collection 3", backgroundColor: .brickGray5, scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section3)),
             ])
 
         self.setSection(section)

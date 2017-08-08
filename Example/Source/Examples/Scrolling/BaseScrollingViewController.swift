@@ -15,8 +15,6 @@ class BaseScrollingViewController: BrickApp.BaseBrickController {
 
         self.view.backgroundColor = .brickBackground
 
-        self.registerBrickClass(LabelBrick.self)
-
         let height:CGFloat = 300
         let section = BrickSection("Test", bricks: [
             LabelBrick(BrickIdentifiers.repeatLabel, height: .fixed(size: height), backgroundColor: .brickGray1, dataSource: LabelBrickCellModel(text: "Brick 1")),

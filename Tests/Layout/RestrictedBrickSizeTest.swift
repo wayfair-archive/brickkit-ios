@@ -138,19 +138,4 @@ class RestrictedBrickSizeIndirectTests: XCTestCase {
             XCTAssertEqual(cell?.frame.size.height, 200)
         #endif
     }
-    
-    func testBrickSizeGreaterThanMinimumForPortraitRestrictedSizeOrientation() {
-        let brick = DummyResizableBrick("Brick", height: .restricted(size: .auto(estimate: .fixed(size: 100)), restrictedSize: .minimumSize(size: .orientation(landscape: .fixed(size: 100), portrait: .fixed(size: 200)))), setHeight: 50)
-        
-        brickCollectionView.setupSingleBrickAndLayout(brick)
-        let index = brickCollectionView.indexPathsForBricksWithIdentifier("Brick").first!
-        let cell = brickCollectionView.cellForItem(at: index) as? DummyResizableBrickCell
-        cell?.layoutIfNeeded()
-        
-        #if os(tvOS) // Landscape
-            XCTAssertEqual(cell?.frame.size.height, 100)
-        #else // Portrait
-            XCTAssertEqual(cell?.frame.size.height, 200)
-        #endif
-    }
 }

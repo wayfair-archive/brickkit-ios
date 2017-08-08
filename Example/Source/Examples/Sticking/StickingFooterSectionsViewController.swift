@@ -29,8 +29,6 @@ class StickingFooterSectionsViewController: BrickApp.BaseBrickController, HasTit
         let layout = self.brickCollectionView.layout
         layout.zIndexBehavior = .bottomUp
 
-        self.brickCollectionView.registerBrickClass(LabelBrick.self)
-
         behavior = StickyFooterLayoutBehavior(dataSource: self)
 
         repeatLabel = LabelBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio:0.5), backgroundColor:UIColor.lightGray, dataSource:self)

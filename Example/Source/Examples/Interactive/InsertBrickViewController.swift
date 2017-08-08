@@ -60,8 +60,6 @@ class InsertBrickViewController: BrickApp.BaseBrickController, HasTitle {
         super.viewDidLoad()
 
         self.view.backgroundColor = .brickBackground
-        self.brickCollectionView.registerBrickClass(LabelBrick.self)
-        self.brickCollectionView.registerBrickClass(SegmentHeaderBrick.self)
 
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(InsertBrickViewController.insertBrick))
 

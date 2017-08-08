@@ -37,9 +37,6 @@ class AdvancedRepeatViewController: BrickApp.BaseBrickController, HasTitle {
 
         self.collectionView?.backgroundColor = .brickBackground
 
-        registerBrickClass(LabelBrick.self)
-        registerBrickClass(ButtonBrick.self)
-
         loadButton = ButtonBrick(LoadButton, title: "Load Items".uppercased(), configureButtonBlock: { cell in
             cell.configure()
         }) { cell in

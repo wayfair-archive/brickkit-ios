@@ -47,13 +47,6 @@ class BrickCollectionInteractiveViewController: BrickViewController, HasTitle {
 
         let layout = self.brickCollectionView.layout
         layout.zIndexBehavior = .bottomUp
-
-        self.registerBrickClass(LabelBrick.self)
-        self.registerBrickClass(CollectionBrick.self)
-        
-        #if os(iOS)
-        self.registerBrickClass(StepperBrick.self)
-        #endif
         
         self.brickCollectionView.backgroundColor = .brickBackground
 
@@ -78,7 +71,7 @@ class BrickCollectionInteractiveViewController: BrickViewController, HasTitle {
                 StepperBrick(Stepper, backgroundColor: .brickGray1, dataSource: stepperModel, delegate: self),
                 
                 BrickSection(RepeatSection, bricks: [
-                    CollectionBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: self, brickTypes: bricksTypes)
+                    CollectionBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: self)
                     ], inset: 5),
                 footerSection
                 ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
@@ -181,12 +174,7 @@ extension BrickCollectionInteractiveViewController: StepperBrickCellDelegate {
 #endif
 
 extension BrickCollectionInteractiveViewController: CollectionBrickCellDataSource {
-    func registerBricks(for cell: CollectionBrickCell) {
-        #if os(iOS)
-            cell.brickCollectionView.registerBrickClass(StepperBrick.self)
-        #endif
-    }
-    
+
     func configure(for cell: CollectionBrickCell) {
         let layout = cell.brickCollectionView.layout
         layout.hideBehaviorDataSource = self

@@ -34,8 +34,6 @@ class HideSectionsViewController: BrickViewController, HasTitle {
 
         self.view.backgroundColor = .brickBackground
 
-        self.registerBrickClass(LabelBrick.self)
-
         let section = BrickSection(backgroundColor: .brickGray5, bricks: [
             hideSectionNested(),
             hideableSectionLabel(),

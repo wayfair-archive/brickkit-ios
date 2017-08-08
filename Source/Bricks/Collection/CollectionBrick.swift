@@ -17,19 +17,28 @@ open class CollectionBrick: Brick {
     weak var dataSource: CollectionBrickCellDataSource?
     let scrollDirection: UICollectionViewScrollDirection
     var shouldCalculateFullHeight: Bool = true // This flag indicates that the collection brick is small enough to calculate its whole height directly
-    var brickTypes: [Brick.Type]
     
     fileprivate var model: CollectionBrickCellModel?
     
-    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, scrollDirection: UICollectionViewScrollDirection = .vertical, dataSource: CollectionBrickCellDataSource, brickTypes: [Brick.Type] = []) {
+    @available(*, deprecated, message: "brickTypes is handled automatically now")
+    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, scrollDirection: UICollectionViewScrollDirection = .vertical, dataSource: CollectionBrickCellDataSource, brickTypes: [Brick.Type]) {
         self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView, scrollDirection: scrollDirection, dataSource: dataSource, brickTypes: brickTypes)
     }
     
-    public init(_ identifier: String, size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, scrollDirection: UICollectionViewScrollDirection = .vertical, dataSource: CollectionBrickCellDataSource, brickTypes: [Brick.Type] = []) {
+    @available(*, deprecated, message: "brickTypes is handled automatically now")
+    public convenience init(_ identifier: String, size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, scrollDirection: UICollectionViewScrollDirection = .vertical, dataSource: CollectionBrickCellDataSource, brickTypes: [Brick.Type]) {
+        self.init(identifier, size: size, backgroundColor: backgroundColor, backgroundView: backgroundView, scrollDirection: scrollDirection, dataSource: dataSource)
+    }
+    
+
+    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, scrollDirection: UICollectionViewScrollDirection = .vertical, dataSource: CollectionBrickCellDataSource) {
+        self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView, scrollDirection: scrollDirection, dataSource: dataSource)
+    }
+    
+    public init(_ identifier: String, size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, scrollDirection: UICollectionViewScrollDirection = .vertical, dataSource: CollectionBrickCellDataSource) {
         self.dataSource = dataSource
         self.scrollDirection = scrollDirection
-        
-        self.brickTypes = brickTypes
+
         super.init(identifier, size: size, backgroundColor: backgroundColor, backgroundView: backgroundView)
         
         if dataSource is CollectionBrickCellModel {
@@ -45,7 +54,9 @@ public protocol CollectionBrickCellDataSource: class {
    
     func configure(for cell: CollectionBrickCell)
     
+    @available(*, deprecated, message: "This is done automatically now")
     func registerBricks(for cell: CollectionBrickCell)
+    
     func dataSourceForCollectionBrickCell(_ cell: CollectionBrickCell) -> BrickCollectionViewDataSource 
     func sectionForCollectionBrickCell(_ cell: CollectionBrickCell) -> BrickSection
     func currentPageForCollectionBrickCell(_ cell: CollectionBrickCell) -> Int?
@@ -188,10 +199,6 @@ open class CollectionBrickCell: BrickCell, Bricklike, AsynchronousResizableCell 
 
         brickCollectionView.beginConfiguration {
             self.brick.dataSource?.configure(for: self)
-        }
-        
-        brick.brickTypes.forEach {
-            self.brickCollectionView.registerBrickClass($0)
         }
         
         brick.dataSource?.registerBricks(for: self)

@@ -34,9 +34,6 @@ class HideBrickViewController: BrickApp.BaseBrickController, HasTitle {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.registerBrickClass(ButtonBrick.self)
-        self.registerBrickClass(LabelBrick.self)
-
         self.layout.hideBehaviorDataSource = self
 
         hideBrickButton = ButtonBrick(HideBrickViewController.Identifiers.HideBrickButton, backgroundColor: .brickGray1, title: titleForHideBrickButton) { [weak self] _ in

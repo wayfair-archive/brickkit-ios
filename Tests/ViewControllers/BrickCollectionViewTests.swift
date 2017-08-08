@@ -64,10 +64,9 @@ class BrickCollectionViewTests: XCTestCase {
     
     
     func testRegisterBrickWithDefaultNib() {
-        brickView.registerBrickClass(LabelBrick.self, nib: LabelBrickNibs.Button)
-        
+        brickView.registerNib(LabelBrickNibs.Button, forBrickWithIdentifier: "LabelButtonBrick")
         brickView.setSection(BrickSection(bricks: [
-            LabelBrick(text: "TEST")
+            LabelBrick("LabelButtonBrick", text: "TEST")
         ]))
         
         brickView.layoutSubviews()
@@ -78,7 +77,6 @@ class BrickCollectionViewTests: XCTestCase {
     }
 
     func testRegisterBrickWithClass() {
-        brickView.registerBrickClass(DummyBrickWithoutNib.self)
         brickView.setupSectionAndLayout(BrickSection(bricks: [
             DummyBrickWithoutNib()
             ]))
@@ -105,7 +103,6 @@ class BrickCollectionViewTests: XCTestCase {
     }
 
     func testBrickInfoRepeatCount() {
-        brickView.registerBrickClass(DummyBrick.self)
         let brick1 = DummyBrick("Brick1")
         brick1.repeatCount = 5
         let brick2 = DummyBrick("Brick2")
@@ -129,7 +126,6 @@ class BrickCollectionViewTests: XCTestCase {
     }
     
     func testBrickInfoRepeatCountDataSource() {
-        brickView.registerBrickClass(DummyBrick.self)
         let section = BrickSection(bricks: [
             DummyBrick("Brick1"),
             DummyBrick("Brick2"),
@@ -154,9 +150,7 @@ class BrickCollectionViewTests: XCTestCase {
             DummyBrick("Brick1")
             ])
 
-        let collectionBrickCellModel = CollectionBrickCellModel(section: collectionSection) { cell in
-            cell.brickCollectionView.registerBrickClass(DummyBrick.self)
-        }
+        let collectionBrickCellModel = CollectionBrickCellModel(section: collectionSection)
         
         let section = BrickSection(bricks: [
             CollectionBrick("CollectionBrick", dataSource: collectionBrickCellModel)
@@ -180,9 +174,7 @@ class BrickCollectionViewTests: XCTestCase {
             DummyBrick("Brick1", height: .fixed(size: 10))
             ])
 
-        let collectionBrickCellModel = CollectionBrickCellModel(section: collectionSection) { cell in
-            cell.brickCollectionView.registerBrickClass(DummyBrick.self)
-        }
+        let collectionBrickCellModel = CollectionBrickCellModel(section: collectionSection)
 
         let section = BrickSection(bricks: [
             CollectionBrick("CollectionBrick", dataSource: collectionBrickCellModel)
@@ -386,9 +378,7 @@ class BrickCollectionViewTests: XCTestCase {
         let fixed = FixedRepeatCountDataSource(repeatCountHash: ["Brick1": 0])
         collectionSection.repeatCountDataSource = fixed
 
-        let collectionBrickCellModel = CollectionBrickCellModel(section: collectionSection) { cell in
-            cell.brickCollectionView.registerBrickClass(DummyBrick.self)
-        }
+        let collectionBrickCellModel = CollectionBrickCellModel(section: collectionSection)
 
         let section = BrickSection(bricks: [
             CollectionBrick("CollectionBrick", dataSource: collectionBrickCellModel)
@@ -454,7 +444,7 @@ class BrickCollectionViewTests: XCTestCase {
             ])
 
         let section = BrickSection(backgroundColor: UIColor.white, bricks: [
-            CollectionBrick("Collection 1", backgroundColor: UIColor.orange, scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section1), brickTypes: [ImageBrick.self]),
+            CollectionBrick("Collection 1", backgroundColor: UIColor.orange, scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section1)),
             ])
         brickView.setupSectionAndLayout(section)
 
@@ -474,8 +464,8 @@ class BrickCollectionViewTests: XCTestCase {
             ])
 
         let section = BrickSection(backgroundColor: UIColor.white, bricks: [
-            CollectionBrick("Collection 1", backgroundColor: UIColor.orange, scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section1), brickTypes: [ImageBrick.self]),
-            CollectionBrick("Collection 2", backgroundColor: UIColor.orange, scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section2), brickTypes: [ImageBrick.self]),
+            CollectionBrick("Collection 1", backgroundColor: UIColor.orange, scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section1)),
+            CollectionBrick("Collection 2", backgroundColor: UIColor.orange, scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section2)),
             ])
         brickView.setupSectionAndLayout(section)
 
@@ -677,7 +667,7 @@ class BrickCollectionViewTests: XCTestCase {
 
     func testThatDescriptionIsCorrectWithCollectionBrick() {
         let section = BrickSection(bricks: [
-            CollectionBrick(dataSource: CollectionBrickCellModel(section: BrickSection(bricks:[DummyBrick()])), brickTypes: [DummyBrick.self])
+            CollectionBrick(dataSource: CollectionBrickCellModel(section: BrickSection(bricks:[DummyBrick()])))
             ])
         brickView.setupSectionAndLayout(section)
         let collectionBrickCell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? CollectionBrickCell
@@ -738,7 +728,7 @@ class BrickCollectionViewTests: XCTestCase {
 
     func testClassNibIdentifiers() {
         let brick = LabelBrick("Label", text: "Hello")
-        brickView.registerBrickClass(LabelBrick.self, nib: LabelBrickNibs.Image)
+        brickView.registerNib(LabelBrickNibs.Image, forBrickWithIdentifier: "Label")
         let section = BrickSection(bricks: [brick])
         brickView.setupSectionAndLayout(section)
 

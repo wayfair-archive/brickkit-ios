@@ -18,7 +18,6 @@ class TestBrickViewController: BrickViewController, BrickRegistrationDataSource 
         brickRegistered = true
         
         if labelTest {
-            self.brickCollectionView.registerBrickClass(LabelBrick.self)
             self.brickCollectionView.setSection(BrickSection(bricks: [LabelBrick(text: "This is a Test")]))
         }
     }

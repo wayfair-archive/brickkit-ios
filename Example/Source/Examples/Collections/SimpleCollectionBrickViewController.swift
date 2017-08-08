@@ -28,8 +28,6 @@ class SimpleCollectionBrickViewController: BrickApp.BaseBrickController, HasTitl
 
         self.view.backgroundColor = .brickBackground
 
-        self.registerBrickClass(CollectionBrick.self)
-
         let collectionSection = BrickSection(bricks: [
             ImageBrick(width: .ratio(ratio: 1/2), height: .ratio(ratio: 1), dataSource: ImageBrickModel(image: image, contentMode: .scaleAspectFit)),
             BrickSection(width: .ratio(ratio: 1/2), bricks: [
@@ -39,8 +37,8 @@ class SimpleCollectionBrickViewController: BrickApp.BaseBrickController, HasTitl
         ])
 
         let section = BrickSection(bricks: [
-            CollectionBrick(backgroundColor: .brickSection, dataSource: CollectionBrickCellModel(section: collectionSection), brickTypes: [LabelBrick.self, ImageBrick.self]),
-            CollectionBrick(backgroundColor: .brickSection, dataSource: self, brickTypes: [LabelBrick.self, ImageBrick.self]),
+            CollectionBrick(backgroundColor: .brickSection, dataSource: CollectionBrickCellModel(section: collectionSection)),
+            CollectionBrick(backgroundColor: .brickSection, dataSource: self),
             ], inset: 50)
 
         self.setSection(section)

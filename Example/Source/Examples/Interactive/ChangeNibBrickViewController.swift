@@ -42,9 +42,6 @@ class ChangeNibBrickViewController: BrickViewController, LabelBrickCellDataSourc
 
         let behavior = StickyLayoutBehavior(dataSource: self)
         self.layout.behaviors.insert(behavior)
-
-        registerBrickClass(ButtonBrick.self)
-        registerBrickClass(LabelBrick.self)
         registerNib(nib, forBrickWithIdentifier: BrickIdentifiers.repeatLabel)
 
         let configureButton: ConfigureButtonBlock = { cell in

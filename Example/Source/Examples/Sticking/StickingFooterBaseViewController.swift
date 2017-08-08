@@ -31,8 +31,6 @@ class StickingFooterBaseViewController: BrickApp.BaseBrickController, HasTitle {
         let layout = self.brickCollectionView.layout
         layout.zIndexBehavior = .bottomUp
 
-        self.brickCollectionView.registerBrickClass(LabelBrick.self)
-
         let behavior = StickyFooterLayoutBehavior(dataSource: self)
         self.brickCollectionView.layout.behaviors.insert(behavior)
 

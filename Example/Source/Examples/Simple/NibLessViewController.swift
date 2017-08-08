@@ -25,8 +25,6 @@ class NibLessViewController: BrickViewController, HasTitle {
 
         view.backgroundColor = .brickBackground
 
-        registerBrickClass(NiblessBrick.self)
-
         let section = BrickSection(bricks: [
             NiblessBrick(backgroundColor: .brickGray1, text: "BRICK", image: UIImage(named: "logo_splash")!, configureCell: NibLessViewController.configureCell),
             NiblessBrick(width: .ratio(ratio: 1/2), backgroundColor: .brickGray3, text: "BRICK", image: UIImage(named: "logo_inapp")!, configureCell: NibLessViewController.configureCell),

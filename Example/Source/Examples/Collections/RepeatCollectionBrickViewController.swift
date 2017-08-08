@@ -45,7 +45,7 @@ class RepeatCollectionBrickViewController: BrickApp.BaseBrickController, BrickRe
 
 
         let section = BrickSection(bricks: [
-            CollectionBrick(RepeatCollectionBrickViewController.Identifiers.collectionBrick, dataSource: self, brickTypes: [LabelBrick.self, ImageBrick.self])
+            CollectionBrick(RepeatCollectionBrickViewController.Identifiers.collectionBrick, dataSource: self)
             ], inset: 20)
         section.repeatCountDataSource = self
 

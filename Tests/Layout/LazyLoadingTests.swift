@@ -25,7 +25,6 @@ class LazyLoadingTests: XCTestCase {
     }
 
     func setupSection(_ repeatCount: Int = 100, widthRatio: CGFloat = 1, height: CGFloat = 100) {
-        brickView.registerBrickClass(DummyBrick.self)
 
         repeatBrick = DummyBrick(BrickIdentifier, width: .ratio(ratio: widthRatio), height: .fixed(size: height))
         let section = BrickSection(bricks: [
@@ -65,7 +64,6 @@ class LazyLoadingTests: XCTestCase {
     }
 
     func testThatOnlyNecessaryAttributesAreCreatedAndOrigin() {
-        brickView.registerBrickClass(DummyBrick.self)
 
         repeatBrick = DummyBrick(BrickIdentifier, height: .fixed(size: 100))
         let section = BrickSection(bricks: [
@@ -184,8 +182,6 @@ extension LazyLoadingTests {
         let repeatCount = 1000
         let height: CGFloat = 50
 
-        brickView.registerBrickClass(DummyBrick.self)
-
         repeatBrick = DummyBrick(BrickIdentifier, height: .fixed(size: height))
         let section = BrickSection(bricks: [
             BrickSection(bricks: [repeatBrick]),
@@ -219,8 +215,6 @@ extension LazyLoadingTests {
     func testFrameOfInterestWithStickyFooterSectionWithBricks() {
         let repeatCount = 1000
         let height: CGFloat = 50
-
-        brickView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection(bricks: [
             BrickSection(bricks: [
@@ -262,8 +256,6 @@ extension LazyLoadingTests {
     func testFrameOfInterestWithStickyFooterSectionWithBricks2() {
         let repeatCount = 5
         let height: CGFloat = 50
-
-        brickView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection(bricks: [
             BrickSection(bricks: [
@@ -328,7 +320,6 @@ extension LazyLoadingTests {
     }
 
     func testThatHorizontalScrollingCalculatesCorrectlyWithMultipleBricks() {
-        brickView.registerBrickClass(DummyBrick.self)
         brickView.layout.scrollDirection = .horizontal
         
         let section = BrickSection(bricks: [
@@ -374,7 +365,6 @@ extension LazyLoadingTests {
     }
 
     func testThatADummyCellIsReturnedIfNotYetCalculated() {
-        brickView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection(bricks: [
             DummyBrick("Brick"),

@@ -23,8 +23,6 @@ class HugeRepeatBrickViewController: BrickViewController, LabelBrickCellDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.brickCollectionView.registerBrickClass(LabelBrick.self)
-
         self.view.backgroundColor = .brickBackground
 
         let section = BrickSection(bricks: [

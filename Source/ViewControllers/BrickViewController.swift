@@ -116,6 +116,7 @@ open class BrickViewController: UIViewController, UICollectionViewDelegate {
         brickCollectionView.setSection(section)
     }
 
+    @available(*, deprecated, message: "This is done automatically now")
     open func registerBrickClass(_ brickClass: Brick.Type, nib: UINib? = nil) {
         brickCollectionView.registerBrickClass(brickClass, nib: nib)
     }

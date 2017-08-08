@@ -23,9 +23,6 @@ class ImageURLBrickViewController: BrickViewController, HasTitle {
 
         self.view.backgroundColor = .brickBackground
 
-        registerBrickClass(ImageBrick.self)
-        registerBrickClass(LabelBrick.self)
-
         let imageURL = URL(string:"https://secure.img2.wfrcdn.com/lf/8/hash/2664/10628031/1/custom_image.jpg")!
 
         let section = BrickSection("RootSection", bricks: [

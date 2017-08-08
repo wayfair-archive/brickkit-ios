@@ -66,7 +66,6 @@ class ImageBrickTests: XCTestCase {
 
     // Mark: - UIImage
     func testImageBrickDelegate() {
-        brickView.registerBrickClass(ImageBrick.self)
 
         let brick = ImageBrick(dataSource: ImageBrickModel(image: image, contentMode: .scaleAspectFill))
         let brickDelegate = SimpleActionImageBrickDelegate()
@@ -83,7 +82,6 @@ class ImageBrickTests: XCTestCase {
     }
 
     func testUIImageScaleAspectFill() {
-        brickView.registerBrickClass(ImageBrick.self)
 
         let section = BrickSection(bricks: [
             ImageBrick(dataSource: ImageBrickModel(image: image, contentMode: .scaleAspectFill)),
@@ -99,9 +97,7 @@ class ImageBrickTests: XCTestCase {
     }
 
     func testUIImageScaleAspectFit() {
-        brickView.registerBrickClass(ImageBrick.self)
-
-
+        
         let section = BrickSection(bricks: [
             ImageBrick(dataSource: ImageBrickModel(image: image, contentMode: .scaleAspectFit)),
             ])
@@ -115,8 +111,6 @@ class ImageBrickTests: XCTestCase {
     }
 
     func testUIImageScaleToFill() {
-        brickView.registerBrickClass(ImageBrick.self)
-
 
         let section = BrickSection(bricks: [
             ImageBrick(dataSource: ImageBrickModel(image: image, contentMode: .scaleToFill)),
@@ -132,9 +126,6 @@ class ImageBrickTests: XCTestCase {
     }
 
     func testUIImageFixedSize() {
-        brickView.registerBrickClass(ImageBrick.self)
-
-
         let section = BrickSection(bricks: [
             ImageBrick(width: .ratio(ratio: 1/4), height: .ratio(ratio: 1), dataSource: ImageBrickModel(image: image, contentMode: .scaleAspectFill)),
             ])
@@ -146,7 +137,6 @@ class ImageBrickTests: XCTestCase {
     }
 
     func testShouldBeNilIfDataSourceReturnsNil() {
-        brickView.registerBrickClass(ImageBrick.self)
 
         let section = BrickSection(bricks: [
             ImageBrick("Brick1", height: .fixed(size: 480), dataSource: FixedUIImageBrickDataSource(images: ["Brick1": image])),
@@ -176,8 +166,6 @@ class ImageBrickTests: XCTestCase {
                 expectation = nil
             }
         }
-
-        brickView.registerBrickClass(ImageBrick.self)
 
         let section = BrickSection(bricks: [
             ImageBrick("imageBrick", dataSource: ImageURLBrickModel(url: imageURL, contentMode: .scaleAspectFill)),
@@ -253,8 +241,6 @@ class ImageBrickTests: XCTestCase {
         
         let delegate = FixedDelegate()
         brickView.layout.delegate = delegate
-        
-        brickView.registerBrickClass(ImageBrick.self)
         
         let section = BrickSection(bricks: [
             ImageBrick("imageBrick", dataSource: ImageURLBrickModel(url: imageURL, contentMode: .scaleAspectFill)),

@@ -13,8 +13,6 @@ class AlignRowHeightTests: BrickFlowLayoutBaseTests {
 
     func testAlignRowHeightsSingleRow() {
 
-        collectionView.registerBrickClass(DummyBrick.self)
-
         let section = BrickSection(bricks: [
             DummyBrick(width: .ratio(ratio: 1/2), height: .fixed(size: 100)),
             DummyBrick(width: .ratio(ratio: 1/2), height: .fixed(size: 200))
@@ -29,7 +27,6 @@ class AlignRowHeightTests: BrickFlowLayoutBaseTests {
     }
 
     func testAlignRowHeightsSingleRowFirstRowHighest() {
-        collectionView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection(bricks: [
             DummyBrick(width: .ratio(ratio: 1/2), height: .fixed(size: 200)),
@@ -45,7 +42,6 @@ class AlignRowHeightTests: BrickFlowLayoutBaseTests {
     }
 
     func testAlignRowHeightsMultipleRows() {
-        collectionView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection(bricks: [
             DummyBrick(width: .ratio(ratio: 1/2), height: .fixed(size: 100)),

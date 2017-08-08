@@ -18,8 +18,6 @@ class BaseSectionBrickViewController: BrickApp.BaseBrickController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.brickCollectionView.registerBrickClass(LabelBrick.self)
-
         let section = BrickSection(bricks: [
             BrickSection(Group, bricks: [
                 LabelBrick(BrickIdentifiers.titleLabel, backgroundColor: .brickGray2, text: "SECTION 1", configureCellBlock: LabelBrickCell.configure),

@@ -22,8 +22,6 @@ class MultiSectionBrickViewController: BrickApp.BaseBrickController, HasTitle {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.registerBrickClass(LabelBrick.self)
-
         let section = BrickSection(bricks: [
             LabelBrick(width: .ratio(ratio: 0.5), backgroundColor: .brickGray1, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
             BrickSection(width: .ratio(ratio: 0.5) , backgroundColor: .brickGray1, bricks: [

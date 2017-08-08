@@ -39,9 +39,6 @@ class DynamicContentViewController: BrickViewController, HasTitle {
 
         self.view.backgroundColor = .brickBackground
 
-        self.registerBrickClass(LabelBrick.self)
-        self.registerBrickClass(ImageBrick.self)
-
         let section = BrickSection(bricks: [
             hideSectionNested(),
             hideableSection(),

@@ -34,9 +34,6 @@ class StackingFooterViewController: BrickApp.BaseBrickController, HasTitle {
         let layout = self.brickCollectionView.layout
         layout.zIndexBehavior = .bottomUp
 
-        self.brickCollectionView.registerBrickClass(ButtonBrick.self)
-        self.brickCollectionView.registerBrickClass(LabelBrick.self)
-
         let sticky = StickyFooterLayoutBehavior(dataSource: self)
         sticky.canStackWithOtherSections = true
         behavior = sticky

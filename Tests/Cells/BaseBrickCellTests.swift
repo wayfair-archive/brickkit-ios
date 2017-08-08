@@ -19,7 +19,6 @@ class BaseBrickCellTests: XCTestCase {
     }
 
     func testSeparatorDefault() {
-        brickView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(bricks: [
             LabelBrick(height: .fixed(size: 100), text: "HELLO WORLD", configureCellBlock: { (cell) in
@@ -40,7 +39,6 @@ class BaseBrickCellTests: XCTestCase {
     }
 
     func testSeparatorBottomCustom() {
-        brickView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(bricks: [
             LabelBrick(height: .fixed(size: 100), text: "HELLO WORLD", configureCellBlock: { (cell) in
@@ -61,8 +59,6 @@ class BaseBrickCellTests: XCTestCase {
     }
 
     func testSeparatorTopCustom() {
-        brickView.registerBrickClass(LabelBrick.self)
-
         
         let section = BrickSection(bricks: [
             LabelBrick(text: "HELLO WORLD", configureCellBlock: { (cell) in
@@ -83,7 +79,6 @@ class BaseBrickCellTests: XCTestCase {
     }
 
     func testAddBoth() {
-        brickView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(bricks: [
             LabelBrick(height: .fixed(size: 100), text: "HELLO WORLD", configureCellBlock: { (cell) in
@@ -100,7 +95,6 @@ class BaseBrickCellTests: XCTestCase {
     }
 
     func testMultiple() {
-        brickView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(bricks: [
             LabelBrick(height: .fixed(size: 100), text: "HELLO WORLD", configureCellBlock: { (cell) in
@@ -118,7 +112,6 @@ class BaseBrickCellTests: XCTestCase {
     }
 
     func testRemoveSeparators() {
-        brickView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(bricks: [
             LabelBrick(height: .fixed(size: 100), text: "HELLO WORLD", configureCellBlock: { (cell) in
@@ -148,8 +141,6 @@ class BaseBrickCellTests: XCTestCase {
         let backgroundView3 = UIView()
         backgroundView3.backgroundColor = UIColor.orange
         backgroundView3.tag = 23
-
-        brickView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection(bricks: [
             DummyBrick("Brick", height: .fixed(size: 200), backgroundView: backgroundView1),
@@ -205,7 +196,6 @@ class BaseBrickCellTests: XCTestCase {
     }
 
     func testDefaultAccessibilityIdentifierSetFromBrickIdentifier() {
-        brickView.registerBrickClass(DummyBrick.self)
         let dummyBrick = DummyBrick("BrickIdentifierThatIsDefaultAccessibilityIdentifier")
         let section = BrickSection(bricks: [dummyBrick])
         brickView.setSection(section)
@@ -217,7 +207,6 @@ class BaseBrickCellTests: XCTestCase {
     }
 
     func testSetAccessibilityIdentifier() {
-        brickView.registerBrickClass(DummyBrick.self)
         let dummyBrick = DummyBrick("BrickIdentifierThatIsDefaultAccessibilityIdentifier")
         dummyBrick.accessibilityIdentifier = "AccessibilityIdentifierForDummyBrickCell"
         let section = BrickSection(bricks: [dummyBrick])
@@ -230,7 +219,6 @@ class BaseBrickCellTests: XCTestCase {
     }
 
     func testSetAccessibilityHintAndLabel() {
-        brickView.registerBrickClass(DummyBrick.self)
         let dummyBrick = DummyBrick("BrickIdentifierThatIsDefaultAccessibilityIdentifier")
         dummyBrick.accessibilityHint = "Accessibility Hint"
         dummyBrick.accessibilityLabel = "Accessibility Label"

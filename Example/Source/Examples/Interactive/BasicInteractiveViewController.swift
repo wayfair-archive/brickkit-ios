@@ -33,12 +33,6 @@ class BasicInteractiveViewController: BrickViewController, LabelBrickCellDataSou
         super.viewDidLoad()
 
         self.view.backgroundColor = .brickBackground
-
-
-        self.brickCollectionView.registerBrickClass(LabelBrick.self)
-        self.brickCollectionView.registerBrickClass(StepperBrick.self)
-        self.brickCollectionView.registerBrickClass(SegmentHeaderBrick.self)
-
         self.layout.zIndexBehavior = .bottomUp
 
         let stickyBehavior = StickyFooterLayoutBehavior(dataSource: self)

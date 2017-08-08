@@ -31,7 +31,6 @@ class HorizontalCollectionViewController: BrickViewController, HasTitle {
 
         self.view.backgroundColor = .brickBackground
         self.layout.scrollDirection = .horizontal
-        self.brickCollectionView.registerBrickClass(ImageBrick.self)
 
         self.view.backgroundColor = .brickBackground
 
@@ -43,10 +42,8 @@ class HorizontalCollectionViewController: BrickViewController, HasTitle {
                 ])
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5), alignRowHeights: true)
 
-        self.registerBrickClass(CollectionBrick.self)
-
         let section = BrickSection(bricks: [
-            CollectionBrick(HorizontalCollectionViewController.Identifiers.collectionBrick, width: .ratio(ratio: 1/2), backgroundColor: .brickSection, dataSource: self, brickTypes: [LabelBrick.self, ImageBrick.self])
+            CollectionBrick(HorizontalCollectionViewController.Identifiers.collectionBrick, width: .ratio(ratio: 1/2), backgroundColor: .brickSection, dataSource: self)
             ], inset: 20)
         section.repeatCountDataSource = self
 

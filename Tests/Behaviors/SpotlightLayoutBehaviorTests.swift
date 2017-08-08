@@ -172,8 +172,6 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
 
         self.layout.behaviors.insert(behavior)
 
-        collectionView.registerBrickClass(LabelBrick.self)
-
         let section = BrickSection(bricks: [
             LabelBrick(height:.fixed(size: 80), text: "BRICK1"),
             LabelBrick(height:.fixed(size: 80), text: "BRICK2"),
@@ -299,7 +297,6 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     }
 
     func testThatLastBrickIsShowing() {
-        collectionView.registerBrickClass(DummyBrick.self)
 
         let height:CGFloat = 300
         let section = BrickSection(bricks: [

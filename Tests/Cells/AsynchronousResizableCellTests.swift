@@ -20,7 +20,6 @@ class AsynchronousResizableCellTests: XCTestCase {
     }
 
     func setupSectionWithOneResizableCell() -> AsynchronousResizableBrick {
-        brickView.registerBrickClass(AsynchronousResizableBrick.self)
 
         let resizableBrick = AsynchronousResizableBrick()
         let expectation = self.expectation(description: "Async")
@@ -97,7 +96,6 @@ class AsynchronousResizableCellTests: XCTestCase {
     }
 
     func testResizingFixedHeightAndDynamicHeight() {
-        brickView.registerBrickClass(AsynchronousResizableBrick.self)
 
         let resizableBrick1 = AsynchronousResizableBrick()
         resizableBrick1.newHeight = 100
@@ -160,7 +158,6 @@ class AsynchronousResizableCellTests: XCTestCase {
     }
 
     func testResizingInCollectionBrick() {
-        brickView.registerBrickClass(CollectionBrick.self)
 
         let expectation = self.expectation(description: "Async")
 
@@ -177,7 +174,7 @@ class AsynchronousResizableCellTests: XCTestCase {
             ])
 
         let section = BrickSection(bricks: [
-            CollectionBrick(dataSource: CollectionBrickCellModel(section: collectionSection), brickTypes: [AsynchronousResizableBrick.self])])
+            CollectionBrick(dataSource: CollectionBrickCellModel(section: collectionSection))])
 
 
         brickView.setSection(section)
@@ -208,7 +205,6 @@ class AsynchronousResizableCellTests: XCTestCase {
     }
 
     func testResizingInCollectionBrickScrolling() {
-        brickView.registerBrickClass(CollectionBrick.self)
 
         let collectionSection = BrickSection(bricks: [
             DummyBrick(width: .ratio(ratio: 1/2)),
@@ -219,11 +215,8 @@ class AsynchronousResizableCellTests: XCTestCase {
             ])
 
         let section = BrickSection(bricks: [
-            CollectionBrick(scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { (cell) in
-                cell.brickCollectionView.registerBrickClass(DummyBrick.self)
-            }))
+            CollectionBrick(scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: collectionSection))
             ])
-
 
         brickView.setSection(section)
         brickView.layoutSubviews()
@@ -253,7 +246,6 @@ class AsynchronousResizableCellTests: XCTestCase {
     }
 
     func testResizingInCollectionBrickNested() {
-        brickView.registerBrickClass(CollectionBrick.self)
         
         let expectation1 = expectation(description: "Async")
         
@@ -274,14 +266,14 @@ class AsynchronousResizableCellTests: XCTestCase {
             CollectionBrick(scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: innerCollectionSection, configureHandler: { (cell) in
                 innerBrickCollectionView = cell.brickCollectionView
                 innerBrickCollectionView.layoutSubviews()
-                }), brickTypes: [AsynchronousResizableBrick.self])])
+                }))])
 
         let outerCollectionSection = BrickSection(bricks: [
             innerSection
             ])
         
         let outerSection = BrickSection(bricks: [
-            CollectionBrick(height: .fixed(size: 300), scrollDirection: .vertical, dataSource: CollectionBrickCellModel(section: outerCollectionSection), brickTypes: [AsynchronousResizableBrick.self])])
+            CollectionBrick(height: .fixed(size: 300), scrollDirection: .vertical, dataSource: CollectionBrickCellModel(section: outerCollectionSection))])
         
         brickView.setSection(outerSection)
         brickView.layoutSubviews()

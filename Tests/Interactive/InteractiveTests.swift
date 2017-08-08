@@ -31,7 +31,6 @@ class InteractiveTests: XCTestCase {
     //MARK: invalidateRepeatCounts
 
     func testInvalidateRepeatCounts() {
-        brickView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(bricks: [
             LabelBrick(LabelBrickIdentifier, height: .fixed(size: 10), dataSource: labelModel)
@@ -90,7 +89,6 @@ class InteractiveTests: XCTestCase {
     }
 
     func testInvalidateRepeatCountsLess() {
-        brickView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(bricks: [
             BrickSection(bricks: [
@@ -124,7 +122,6 @@ class InteractiveTests: XCTestCase {
     }
 
     func testInvalidateRepeatCountsMultiSections() {
-        brickView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection(bricks: [
             DummyBrick("Brick1", height: .fixed(size: 10)),
@@ -166,8 +163,6 @@ class InteractiveTests: XCTestCase {
 
     func testReloadBricksWithIdentifiersNotReloadCell() {
 
-        brickView.registerBrickClass(LabelBrick.self)
-
         let section = BrickSection(bricks: [
             LabelBrick(LabelBrickIdentifier, dataSource: labelModel)
             ])
@@ -190,8 +185,6 @@ class InteractiveTests: XCTestCase {
     }
 
     func testReloadBricksWithIdentifiersNotReloadCellOffScreen() {
-
-        brickView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(bricks: [
             LabelBrick(LabelBrickIdentifier, dataSource: labelModel)
@@ -222,8 +215,6 @@ class InteractiveTests: XCTestCase {
 
     func testReloadBricksWithIdentifiersReloadCell() {
 
-        brickView.registerBrickClass(LabelBrick.self)
-
         let section = BrickSection(bricks: [
             LabelBrick(LabelBrickIdentifier, dataSource: labelModel)
             ])
@@ -246,8 +237,6 @@ class InteractiveTests: XCTestCase {
     }
 
     func testReloadBricksWithIdentifiersReloadCellMultiSectionAdd() {
-
-        brickView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(RootSectionIdentifier, bricks: [
             LabelBrick(LabelBrickIdentifier, height: .fixed(size: 10), dataSource: labelModel)
@@ -272,8 +261,6 @@ class InteractiveTests: XCTestCase {
     }
 
     func testReloadBricksWithIdentifiersReloadCellMultiSectionRemove() {
-
-        brickView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(RootSectionIdentifier, bricks: [
             LabelBrick(LabelBrickIdentifier, height: .fixed(size: 10), dataSource: labelModel)
@@ -300,8 +287,6 @@ class InteractiveTests: XCTestCase {
     // Mark: - ReloadBricksWithIdentifier
     func testReloadBricksWithIdentifier() {
 
-        brickView.registerBrickClass(LabelBrick.self)
-
         let section = BrickSection(bricks: [
             LabelBrick(LabelBrickIdentifier, dataSource: labelModel)
             ])
@@ -320,8 +305,6 @@ class InteractiveTests: XCTestCase {
     }
 
     func testReloadBricksWithIdentifierChangeWidth() {
-
-        brickView.registerBrickClass(LabelBrick.self)
 
         let brick = LabelBrick(LabelBrickIdentifier, height: .fixed(size: 100), dataSource: labelModel)
         let section = BrickSection(bricks: [
@@ -361,16 +344,13 @@ class InteractiveTests: XCTestCase {
     //MARK: reloadBricksWithIdentifiers
 
     func testReloadBricksWithIdentifiersCollectionBrick() {
-        brickView.registerBrickClass(CollectionBrick.self)
 
         let collectionSection = BrickSection(bricks: [
             LabelBrick(LabelBrickIdentifier, dataSource: labelModel)
             ])
 
         let section = BrickSection(bricks: [
-            CollectionBrick(CollectionBrickIdentifier, dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { (cell) in
-                cell.brickCollectionView.registerBrickClass(LabelBrick.self)
-            }))
+            CollectionBrick(CollectionBrickIdentifier, dataSource: CollectionBrickCellModel(section: collectionSection))
             ])
         brickView.setSection(section)
         brickView.layoutIfNeeded()
@@ -389,16 +369,13 @@ class InteractiveTests: XCTestCase {
     }
 
     func testReloadBricksWithIdentifiersCollectionBrickOffscreen() {
-        brickView.registerBrickClass(CollectionBrick.self)
 
         let collectionSection = BrickSection(bricks: [
             LabelBrick(LabelBrickIdentifier, dataSource: labelModel)
             ])
 
         let section = BrickSection(bricks: [
-            CollectionBrick(CollectionBrickIdentifier, dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { (cell) in
-                cell.brickCollectionView.registerBrickClass(LabelBrick.self)
-            }))
+            CollectionBrick(CollectionBrickIdentifier, dataSource: CollectionBrickCellModel(section: collectionSection))
             ], edgeInsets: UIEdgeInsets(top: 1000, left: 0, bottom: 0, right: 0))
         brickView.setSection(section)
         brickView.layoutIfNeeded()
@@ -421,16 +398,13 @@ class InteractiveTests: XCTestCase {
     }
 
     func testReloadBricksWithIdentifiersCollectionBrickAtIndex() {
-        brickView.registerBrickClass(CollectionBrick.self)
 
         let collectionSection = BrickSection(bricks: [
             LabelBrick(LabelBrickIdentifier, dataSource: labelModel)
             ])
 
         let section = BrickSection(bricks: [
-            CollectionBrick(CollectionBrickIdentifier, dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { (cell) in
-                cell.brickCollectionView.registerBrickClass(LabelBrick.self)
-            }))
+            CollectionBrick(CollectionBrickIdentifier, dataSource: CollectionBrickCellModel(section: collectionSection))
             ])
         let repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: [CollectionBrickIdentifier: 5])
         section.repeatCountDataSource = repeatCountDataSource
@@ -462,8 +436,6 @@ class InteractiveTests: XCTestCase {
     // Mark: - Invalidate while sticky
 
     func testInvalidateWhileSticky() {
-        brickView.registerBrickClass(DummyBrick.self)
-        brickView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(bricks: [
             DummyBrick(height: .fixed(size: 50)),
@@ -500,7 +472,6 @@ class InteractiveTests: XCTestCase {
     // Mark: - Shouldn't crash
     func testShouldNotCrashOnReloadBricks() {
         // we should check if the indexpath exists before adding it...
-        brickView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection(bricks: [
             BrickSection("Section", bricks: [

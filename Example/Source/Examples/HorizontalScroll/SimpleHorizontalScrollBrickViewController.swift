@@ -25,7 +25,6 @@ class SimpleHorizontalScrollBrickViewController: BrickApp.BaseBrickController, B
         self.view.backgroundColor = .brickBackground
 
         self.layout.scrollDirection = .horizontal
-        self.brickCollectionView.registerBrickClass(LabelBrick.self)
 
         let section = BrickSection(backgroundColor: .brickSection, bricks: [
             LabelBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 0.5), backgroundColor: .brickGray5, dataSource: self),

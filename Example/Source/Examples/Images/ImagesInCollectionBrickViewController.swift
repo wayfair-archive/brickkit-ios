@@ -25,15 +25,13 @@ class ImagesInCollectionBrickViewController: BrickViewController, HasTitle {
 
         self.view.backgroundColor = .brickBackground
 
-        registerBrickClass(CollectionBrick.self)
-
         let collectionSection = BrickSection(backgroundColor: .brickGray1, bricks: [
             ImageBrick(BrickIdentifiers.repeatLabel, dataSource: self),
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
         collectionSection.repeatCountDataSource = self
 
         let section = BrickSection(bricks: [
-            CollectionBrick(dataSource: CollectionBrickCellModel(section: collectionSection), brickTypes: [ImageBrick.self])
+            CollectionBrick(dataSource: CollectionBrickCellModel(section: collectionSection))
             ])
 
         self.setSection(section)

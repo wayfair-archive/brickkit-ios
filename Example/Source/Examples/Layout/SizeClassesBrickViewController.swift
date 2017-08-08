@@ -28,9 +28,6 @@ class SizeClassesBrickViewController: BrickViewController, HasTitle {
 
         self.view.backgroundColor = .brickBackground
 
-        self.registerBrickClass(SizeClassBrick.self)
-        self.registerBrickClass(TestBrick.self)
-
         sizeClassFull = SizeClassBrick("Full", width: .ratio(ratio: 1), backgroundColor: .brickSection)
         sizeClassFull.color = .brickGray3
         sizeClassFull.text = "Should be 100px Height"

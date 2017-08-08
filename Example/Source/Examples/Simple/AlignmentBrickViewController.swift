@@ -81,9 +81,6 @@ class AlignmentBrickViewController: BrickViewController, HasTitle {
 
         self.view.backgroundColor = .brickBackground
 
-        self.brickCollectionView.registerBrickClass(LabelBrick.self)
-        self.brickCollectionView.registerBrickClass(SegmentHeaderBrick.self)
-
         brickSection1 = BrickSection(backgroundColor: .brickGray1, bricks: [
             LabelBrick(width: .fixed(size: 70), height: .fixed(size: 100), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),
             LabelBrick(width: .fixed(size: 70), height: .fixed(size: 50), backgroundColor: .brickGray2, text: "BRICK", configureCellBlock: LabelBrickCell.configure),

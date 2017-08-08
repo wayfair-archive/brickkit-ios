@@ -17,9 +17,7 @@ class BaseRepeatBrickViewController: BrickApp.BaseBrickController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.brickCollectionView.registerBrickClass(LabelBrick.self)
-
+        
         repeatLabel = LabelBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 0.5), height: .auto(estimate: .fixed(size: 50)), backgroundColor: .brickGray3, dataSource: self)
 
         titleLabelModel = LabelBrickCellModel(text: "HEADER", configureCellBlock: LabelBrickCell.configure)

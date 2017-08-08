@@ -143,7 +143,6 @@ class OnScrollDownStickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
     }
 
     func testThatOnScrollDownWorksWithBrickViewSameContentHeight() {
-        collectionView.registerBrickClass(DummyBrick.self)
 
         let section = BrickSection(bricks: [
             DummyBrick(height: .fixed(size: 50)),

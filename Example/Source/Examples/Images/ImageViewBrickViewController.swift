@@ -23,9 +23,6 @@ class ImageViewBrickViewController: BrickViewController, HasTitle {
 
         self.view.backgroundColor = .brickBackground
 
-        registerBrickClass(ImageBrick.self)
-        registerBrickClass(LabelBrick.self)
-
         let section = BrickSection("RootSection", bricks: [
             LabelBrick("L1", height: .fixed(size: 38), backgroundColor: .brickGray1, text: "Fixed height with ScaleAspectFit", configureCellBlock: LabelBrickCell.configure),
             ImageBrick("I1", width: .ratio(ratio: 1), height: .fixed(size: 50), backgroundColor: .brickGray3, dataSource: ImageBrickModel(image: UIImage(named: "image0")!, contentMode: .scaleAspectFit)),

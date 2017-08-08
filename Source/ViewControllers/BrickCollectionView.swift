@@ -146,6 +146,7 @@ open class BrickCollectionView: UICollectionView {
     ///
     /// - parameter brickClass: The brick class to register
     /// - parameter nib: The nib to register. This only needs to be set if the nib is different then the default
+    @available(*, deprecated, message: "This is done automatically now")
     open func registerBrickClass(_ brickClass: Brick.Type, nib: UINib? = nil) {
         let identifier = brickClass.internalIdentifier
         let cellIdentifier: String
@@ -545,6 +546,7 @@ open class BrickCollectionView: UICollectionView {
                 if let nib = nibIdentifiers?[brick.identifier] {
                     self.registerNib(nib, forBrickWithIdentifier: brick.identifier)
                 } else  {
+                    //This warning is fine because this is where it is done automatically
                     self.registerBrickClass(type(of: brick))
                 }
             }

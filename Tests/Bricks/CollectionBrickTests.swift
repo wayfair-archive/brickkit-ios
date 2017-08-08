@@ -20,7 +20,6 @@ class CollectionBrickTests: XCTestCase {
     }
 
     func testCollectionBrickRepeatCount() {
-        brickView.registerBrickClass(CollectionBrick.self)
 
         let repeatDataSource = CollectionViewRepeatDataSource(repeatCounts: [
             "Collection1": 1,
@@ -33,13 +32,9 @@ class CollectionBrickTests: XCTestCase {
         collectionSection.repeatCountDataSource = repeatDataSource
 
         let section = BrickSection(bricks: [
-            CollectionBrick("Collection1", height: .fixed(size: 10), dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { cell in
-                cell.brickCollectionView.registerBrickClass(DummyBrick.self)
-            })),
-            CollectionBrick("Collection2", height: .fixed(size: 10), dataSource: CollectionBrickCellModel(section: collectionSection, registerBricksHandler: { cell in
-                cell.brickCollectionView.registerBrickClass(DummyBrick.self)
-            })),
-            CollectionBrick("Collection3", height: .fixed(size: 10), dataSource: CollectionBrickCellModel(section: collectionSection), brickTypes: [DummyBrick.self])
+            CollectionBrick("Collection1", height: .fixed(size: 10), dataSource: CollectionBrickCellModel(section: collectionSection)),
+            CollectionBrick("Collection2", height: .fixed(size: 10), dataSource: CollectionBrickCellModel(section: collectionSection)),
+            CollectionBrick("Collection3", height: .fixed(size: 10), dataSource: CollectionBrickCellModel(section: collectionSection))
             ])
         brickView.setSection(section)
         brickView.layoutSubviews()
@@ -62,9 +57,7 @@ class CollectionBrickTests: XCTestCase {
             DummyBrick(height: .fixed(size: 200))
             ])
         let section = BrickSection(bricks: [
-            CollectionBrick("Collection1", dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { cell in
-                cell.brickCollectionView.registerBrickClass(DummyBrick.self)
-            }))
+            CollectionBrick("Collection1", dataSource: CollectionBrickCellModel(section: collectionSection))
             ], edgeInsets: UIEdgeInsets(top: 300, left: 0, bottom: 0, right: 0))
         brickView.setSection(section)
         brickView.layoutSubviews()
@@ -79,7 +72,6 @@ class CollectionBrickTests: XCTestCase {
     }
 
     func testCollectionViewLargeFrame() {
-        brickView.registerBrickClass(CollectionBrick.self)
 
         let collectionSection = BrickSection("CollectionSection", bricks: [
             DummyBrick("1", height: .auto(estimate: .fixed(size: 1000))),
@@ -89,9 +81,7 @@ class CollectionBrickTests: XCTestCase {
             ])
 
         let section = BrickSection("RootSection", bricks: [
-            CollectionBrick("Collection1", dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { cell in
-                cell.brickCollectionView.registerBrickClass(DummyBrick.self)
-            }))
+            CollectionBrick("Collection1", dataSource: CollectionBrickCellModel(section: collectionSection))
             ])
         brickView.setSection(section)
         brickView.layoutSubviews()
@@ -110,16 +100,13 @@ class CollectionBrickTests: XCTestCase {
     }
 
     func testThatCollectionBrickDoesNotSendOutUpdatesDuringLayoutSubviews() {
-        brickView.registerBrickClass(CollectionBrick.self)
 
         let collectionSection = BrickSection("CollectionSection", bricks: [
             LabelBrick(text: "a")
             ])
 
         let section = BrickSection("RootSection", bricks: [
-            CollectionBrick("Collection1", dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { cell in
-                cell.brickCollectionView.registerBrickClass(LabelBrick.self)
-            }))
+            CollectionBrick("Collection1", dataSource: CollectionBrickCellModel(section: collectionSection))
             ])
 
         let delegate = FixedBrickLayoutDelegate()
@@ -131,7 +118,6 @@ class CollectionBrickTests: XCTestCase {
     }
 
     func testThatCollectionViewZeroFrameHeight() {
-        brickView.registerBrickClass(CollectionBrick.self)
 
         let collectionSection = BrickSection("CollectionSection", bricks: [
             DummyBrick("1", height: .auto(estimate: .fixed(size: 1000))),
@@ -141,7 +127,7 @@ class CollectionBrickTests: XCTestCase {
             ])
 
         let section = BrickSection("RootSection", bricks: [
-            CollectionBrick("Collection1", dataSource: CollectionBrickCellModel(section: collectionSection), brickTypes: [DummyBrick.self])
+            CollectionBrick("Collection1", dataSource: CollectionBrickCellModel(section: collectionSection))
             ])
 
         brickView.setupSectionAndLayout(section)
@@ -167,7 +153,7 @@ class CollectionBrickTests: XCTestCase {
             ])
 
         let section = BrickSection(bricks: [
-            CollectionBrick(scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: collectionSection), brickTypes: [DeinitNotifyingAsyncBrick.self])
+            CollectionBrick(scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: collectionSection))
             ])
 
         brickView.setSection(section)

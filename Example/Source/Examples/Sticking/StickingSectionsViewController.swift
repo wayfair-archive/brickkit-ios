@@ -30,8 +30,6 @@ class StickingSectionsViewController: BrickApp.BaseBrickController, HasTitle {
 
         self.view.backgroundColor = .brickBackground
 
-        self.brickCollectionView.registerBrickClass(LabelBrick.self)
-
         behavior = StickyLayoutBehavior(dataSource: self)
 
         repeatLabel = LabelBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 0.5), backgroundColor: .brickGray1, dataSource: self)

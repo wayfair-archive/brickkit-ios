@@ -103,14 +103,8 @@ class MockTwitterViewController: BrickViewController, HasTitle {
     }
     
     func registerBricks() {
-        self.brickCollectionView.registerBrickClass(CollectionBrick.self)
-        self.brickCollectionView.registerBrickClass(PostBrick.self)
-        self.brickCollectionView.registerBrickClass(DailySalesBrick.self)
-        self.brickCollectionView.registerBrickClass(WhoToFollowBrick.self)
-        self.brickCollectionView.registerBrickClass(HeaderAndFooterBrick.self)
         self.brickCollectionView.registerNib(UINib(nibName: "ProfileHeaderBrick", bundle: nil), forBrickWithIdentifier: MockTwitterViewController.Identifiers.profileHeaderBrick)
         self.brickCollectionView.registerNib(UINib(nibName: "ProfileImageBrick", bundle: nil), forBrickWithIdentifier: MockTwitterViewController.Identifiers.profileImageBrick)
-        registerBrickClass(SegmentHeaderBrick.self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -151,7 +145,7 @@ class MockTwitterViewController: BrickViewController, HasTitle {
             HeaderAndFooterBrick(MockTwitterViewController.Identifiers.dailySalesHeader, width: .ratio(ratio: 1), /*height: .fixed(size: 40),*/ backgroundColor: UIColor.white, backgroundView: nil){ cell in
                 cell.textLabel.text = "Daily Sales"
             },
-            CollectionBrick(/*height: .fixed(size: 140), */scrollDirection: .horizontal, dataSource: self, brickTypes: [DailySalesBrick.self])
+            CollectionBrick(/*height: .fixed(size: 140), */scrollDirection: .horizontal, dataSource: self)
             ], inset: 1, edgeInsets: UIEdgeInsets(top: 0, left: 0, bottom: 2, right: 0))
         section.repeatCountDataSource = self
 

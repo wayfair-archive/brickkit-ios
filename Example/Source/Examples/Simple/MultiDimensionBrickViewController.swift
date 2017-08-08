@@ -26,8 +26,6 @@ class MultiDimensionBrickViewController: BrickViewController, LabelBrickCellData
 
         self.view.backgroundColor = .brickBackground
 
-        self.brickCollectionView.registerBrickClass(LabelBrick.self)
-
         let width: BrickDimension =
             .horizontalSizeClass(
                 regular: .orientation(

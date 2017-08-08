@@ -24,7 +24,6 @@ class BlockHorizontalViewController: BrickViewController, HasTitle {
 
         self.view.backgroundColor = .brickBackground
         self.layout.scrollDirection = .horizontal
-        self.brickCollectionView.registerBrickClass(ImageBrick.self)
 
         let section = BrickSection(backgroundColor: .brickGray1, bricks: [
             ImageBrick(BrickIdentifiers.repeatLabel, width: .ratio(ratio: 1/4), height: .ratio(ratio: 1), backgroundColor: .brickGray3, dataSource: self),

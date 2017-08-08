@@ -52,8 +52,7 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
 
     func setupHorizontalScroll(_ repeatCount: Int = 20, width: BrickDimension = .fixed(size: 50), inset: CGFloat = 10) {
         brickView.layout.scrollDirection = .horizontal
-
-        brickView.registerBrickClass(DummyBrick.self)
+        
         let section = BrickSection(bricks: [
             DummyBrick("Brick", width: width, height: .fixed(size: 50))
             ], inset: inset)
@@ -194,7 +193,6 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
     func setupVerticalScroll(_ repeatCount: Int = 20) {
         brickView.layout.scrollDirection = .vertical
 
-        brickView.registerBrickClass(DummyBrick.self)
         let section = BrickSection(bricks: [
             DummyBrick("Brick", height: .fixed(size: 50))
             ], inset: 10)
@@ -337,8 +335,6 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
         brickView.layout.behaviors.insert(snapBehavior)
 
         brickView.layout.scrollDirection = .horizontal
-
-        brickView.registerBrickClass(DummyBrick.self)
         let section = BrickSection(bricks: [
             DummyBrick("Brick", width: .ratio(ratio: 0.5), height: .fixed(size: 50))
             ])
