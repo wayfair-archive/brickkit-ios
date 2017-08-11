@@ -52,6 +52,7 @@ open class BrickCollectionView: UICollectionView {
     open fileprivate(set) var section: BrickSection = BrickSection(bricks: []) {
         didSet {
             self.registerBricks(for: section, nibIdentifiers: section.nibIdentifiers)
+            self.registerBricks(for: section, classIdentifiers: section.classIdentifiers)
             section.invalidateCounts(in: collectionInfo)
             self.reloadData()
         }
@@ -205,6 +206,11 @@ open class BrickCollectionView: UICollectionView {
 
     internal func identifier(for brick: Brick) -> String? {
         let identifier: String
+
+        if let brickIdentifier = registeredBricks[brick.identifier] {
+            return brickIdentifier
+        }
+
         if brick is BrickSection {
             //Safeguard to never load the wrong nib for a BrickSection,
             //eventhough the identifier is actually in the registeredNibs
@@ -546,6 +552,20 @@ open class BrickCollectionView: UICollectionView {
                     self.registerNib(nib, forBrickWithIdentifier: brick.identifier)
                 } else  {
                     self.registerBrickClass(type(of: brick))
+                }
+            }
+        }
+    }
+
+    private func registerBricks(for section: BrickSection, classIdentifiers: [String: AnyClass]?) {
+        section.brickCollectionView = self
+        for brick in section.bricks {
+            if let brickSection = brick as? BrickSection {
+                registerBricks(for: brickSection, classIdentifiers: brickSection.classIdentifiers ?? classIdentifiers)
+            } else {
+                if let cellClass = classIdentifiers?[brick.identifier] {
+                    self.register(cellClass, forCellWithReuseIdentifier: brick.identifier)
+                    registeredBricks[brick.identifier] = brick.identifier
                 }
             }
         }

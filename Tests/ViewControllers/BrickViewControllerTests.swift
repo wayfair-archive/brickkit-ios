@@ -346,6 +346,53 @@ class BrickViewControllerTests: XCTestCase {
 
     }
 
+    func testClassIdentifiersOnMultipleLabelBricks() {
+        let height:CGFloat = brickViewController.brickCollectionView.frame.height
+        let section = BrickSection("Test", bricks: [
+            LabelBrick("Brick1", height: .fixed(size: height), dataSource: LabelBrickCellModel(text: "Brick 1")),
+            LabelBrick("Brick2", height: .fixed(size: height), dataSource: LabelBrickCellModel(text: "Brick 2")),
+            LabelBrick("Brick3", height: .fixed(size: height), dataSource: LabelBrickCellModel(text: "Brick 3")),
+            LabelBrick("Brick4", height: .fixed(size: height), dataSource: LabelBrickCellModel(text: "Brick 4")),
+            LabelBrick("Brick5", height: .fixed(size: height), dataSource: LabelBrickCellModel(text: "Brick 5")),
+            LabelBrick("Brick6", height: .fixed(size: height), dataSource: LabelBrickCellModel(text: "Brick 6", configureCellBlock: {
+                (cell: LabelBrickCell) -> Void in
+                cell.accessoryView = UIImageView(image: UIImage(named: "image0"))
+            })),
+            LabelBrick("Brick7", height: .fixed(size: height), dataSource: LabelBrickCellModel(text: "Brick 5")),
+            LabelBrick("Brick8", height: .fixed(size: height), dataSource: LabelBrickCellModel(text: "Brick 5")),
+            LabelBrick("Brick9", height: .fixed(size: height), dataSource: LabelBrickCellModel(text: "Brick 5")),
+            LabelBrick("Brick10", height: .fixed(size: height), dataSource: LabelBrickCellModel(text: "Brick 5")),
+            LabelBrick("Brick11", height: .fixed(size: height), dataSource: LabelBrickCellModel(text: "Brick 5"))
+        ])
+        section.classIdentifiers = ["Brick1" : LabelBrickCell.self, "Brick2" : LabelBrickCell.self , "Brick3" : LabelBrickCell.self, "Brick4" : LabelBrickCell.self, "Brick5" : LabelBrickCell.self, "Brick6" : LabelBrickCell.self, "Brick7" : LabelBrickCell.self, "Brick8" : LabelBrickCell.self, "Brick9" : LabelBrickCell.self, "Brick10" : LabelBrickCell.self, "Brick11" : LabelBrickCell.self]
+
+        brickViewController.brickCollectionView.setupSectionAndLayout(section)
+
+        if let indexPath6 = brickViewController.brickCollectionView.indexPathsForBricksWithIdentifier("Brick6").first {
+
+            brickViewController.brickCollectionView.contentOffset.y += height * 5
+            brickViewController.brickCollectionView.layoutSubviews()
+
+            guard let labelBrick6 = brickViewController.brickCollectionView.cellForItem(at: indexPath6) as? LabelBrickCell else {
+                XCTFail("LabelBrickCell should not be nil")
+                return
+            }
+
+            XCTAssertNotNil(labelBrick6.accessoryView)
+
+            brickViewController.brickCollectionView.contentOffset.y += height * 4
+            brickViewController.brickCollectionView.layoutSubviews()
+
+            brickViewController.brickCollectionView.contentOffset.y -= height * 9
+            brickViewController.brickCollectionView.layoutSubviews()
+
+            for cell in brickViewController.brickCollectionView.visibleCells where brickViewController.brickCollectionView.cellForItem(at: indexPath6) == nil {
+                if let cell = cell as? LabelBrickCell {
+                    XCTAssertNil(cell.accessoryView)
+                }
+            }
+        }
+    }
 
     func testInsets() {
         let size = CGSize(width: 100, height: 100)
