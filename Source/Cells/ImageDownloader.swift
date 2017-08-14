@@ -9,18 +9,17 @@
 import UIKit
 
 private func _downloadImageAndSet(_ imageDownloader: ImageDownloader, on imageView: UIImageView, with imageURL: URL, onCompletion completionHandler: @escaping ((_ image: UIImage, _ url: URL) -> Void)) {
-    
-    imageDownloader.downloadImage(with: imageURL) { (image, url) in
+
+    imageDownloader.downloadImage(with: imageURL) { (image: UIImage, url: URL) in
         guard imageURL == url else {
             return
         }
 
-        OperationQueue.main.addOperation {
+        DispatchQueue.main.async {
             imageView.image = image
             completionHandler(image, url)
         }
     }
-
 }
 
 // Mark: - Image Downloader
