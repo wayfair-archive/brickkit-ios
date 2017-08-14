@@ -1,5 +1,28 @@
 # Change Log
 
+## [2.3.0](https://github.com/wayfair/brickkit-ios/tree/2.3.0) (2017-08-14)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/2.2.1...2.3.0)
+
+**Closed issues:**
+
+- Support for 3D Touch [\#169](https://github.com/wayfair/brickkit-ios/issues/169)
+- Callback when frames have layout correctly [\#161](https://github.com/wayfair/brickkit-ios/issues/161)
+- Wrong indexPaths are called when inserting/deleting items [\#158](https://github.com/wayfair/brickkit-ios/issues/158)
+- Invalidating heights is not animated correctly [\#153](https://github.com/wayfair/brickkit-ios/issues/153)
+- Indexpath searching is slow for UI Updates [\#152](https://github.com/wayfair/brickkit-ios/issues/152)
+- Support for latest xcode and iOS [\#145](https://github.com/wayfair/brickkit-ios/issues/145)
+
+**Merged pull requests:**
+
+- Support for 3D Touch [\#170](https://github.com/wayfair/brickkit-ios/pull/170) ([aaronsky](https://github.com/aaronsky))
+- Added Restricted Brick Size [\#168](https://github.com/wayfair/brickkit-ios/pull/168) ([jay18001](https://github.com/jay18001))
+- Make imageView public so subclasses can use it [\#167](https://github.com/wayfair/brickkit-ios/pull/167) ([jeffoleary1987](https://github.com/jeffoleary1987))
+- Fixed the invalidating heights animation [\#164](https://github.com/wayfair/brickkit-ios/pull/164) ([jay18001](https://github.com/jay18001))
+- BrickCell width provider [\#162](https://github.com/wayfair/brickkit-ios/pull/162) ([rubencagnie](https://github.com/rubencagnie))
+- Update travis to run iOS 11 tests [\#160](https://github.com/wayfair/brickkit-ios/pull/160) ([jay18001](https://github.com/jay18001))
+- Properly insert/delete items [\#159](https://github.com/wayfair/brickkit-ios/pull/159) ([rubencagnie](https://github.com/rubencagnie))
+- Optimize indexPath search using visible cells [\#157](https://github.com/wayfair/brickkit-ios/pull/157) ([rubencagnie](https://github.com/rubencagnie))
+
 ## [2.2.1](https://github.com/wayfair/brickkit-ios/tree/2.2.1) (2017-07-17)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/2.2.0...2.2.1)
 
