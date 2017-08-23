@@ -208,6 +208,13 @@ open class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableCel
             imageView.image = nil
         }
     }
+    
+    override open func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+        currentImageURL = nil
+        imageLoaded = false
+    }
 
 
     fileprivate func resize(image: UIImage) {
