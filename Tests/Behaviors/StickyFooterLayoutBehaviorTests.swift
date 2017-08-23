@@ -248,8 +248,7 @@ class StickyFooterLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         let repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["BRICK" : 50])
         section.repeatCountDataSource = repeatCountDataSource
         
-        collectionView.setSection(section)
-        collectionView.layoutSubviews()
+        collectionView.setupSectionAndLayout(section)
 
         let attributes = collectionView.collectionViewLayout.layoutAttributesForItem(at: IndexPath(item: 50, section: 1))
         XCTAssertEqual(attributes?.frame, CGRect(x: 0, y: 404, width: 320, height: 76))

@@ -8,8 +8,6 @@
 
 import Foundation
 
-let brickDebug = false
-
 enum BrickUtils {
 
     /// Calculates a width, based on the total width and its inset
@@ -24,12 +22,6 @@ enum BrickUtils {
         let rowWidth = totalWidth - CGFloat((widthRatio / ratio) - 1) * inset
         let width = rowWidth * (ratio / widthRatio)
         return width
-    }
-
-    public static func print(_ message: String) {
-        if brickDebug {
-            Swift.print(message)
-        }
     }
 }
 

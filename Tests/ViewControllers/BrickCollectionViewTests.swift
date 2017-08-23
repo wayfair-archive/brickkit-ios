@@ -407,6 +407,7 @@ class BrickCollectionViewTests: XCTestCase {
             }
         waitForExpectations(timeout: 5, handler: nil)
         brickView.layoutSubviews()
+        brickView.layoutIfNeeded()
 
         cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? CollectionBrickCell
         XCTAssertEqual(cell?.frame, CGRect(x: 0, y: 0, width: 320, height: 100))
