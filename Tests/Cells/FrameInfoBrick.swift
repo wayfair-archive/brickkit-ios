@@ -20,6 +20,7 @@ class FrameInfoBrickCell: BrickCell, Bricklike {
     var firstReportedImageViewFrame: CGRect?
 
     override open func framesDidLayout() {
+        super.framesDidLayout()
         if firstReportedImageViewFrame == nil {
             firstReportedImageViewFrame = self.imageView.frame
         }

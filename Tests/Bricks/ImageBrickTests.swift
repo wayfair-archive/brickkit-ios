@@ -9,31 +9,22 @@
 import XCTest
 @testable import BrickKit
 
-class FixedUIImageBrickDataSource: ImageBrickDataSource {
-    var images: [String: UIImage]
+class FixedImageBrickDataSource: ImageBrickDataSource {
+    var imageURLs: [Int : URL]?
+    var images: [String : UIImage]?
 
-    init(images: [String: UIImage]) {
+    init(imageURLs: [Int: URL]?, images: [String: UIImage]?) {
+        self.imageURLs = imageURLs
         self.images = images
     }
 
     func imageForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIImage? {
-        return images[imageBrickCell.brick.identifier]
+        return images?[imageBrickCell.brick.identifier]
     }
-    
-}
-
-class FixedURLImageBrickDataSource: ImageBrickDataSource {
-    var imageURLs: [Int: URL]
-
-    init(imageURLs: [Int: URL]) {
-        self.imageURLs = imageURLs
-    }
-
 
     func imageURLForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> URL? {
-        return imageURLs[imageBrickCell.index]
+        return imageURLs?[imageBrickCell.index]
     }
-
 }
 
 class SimpleActionImageBrickDelegate: ImageBrickDelegate {
@@ -46,6 +37,7 @@ class SimpleActionImageBrickDelegate: ImageBrickDelegate {
 
 class ImageBrickTests: XCTestCase {
     var brickView: BrickCollectionView!
+    var dataSource: FixedImageBrickDataSource?
     var image: UIImage!
     var imageURL: URL!
     var imageRatio: CGFloat!
@@ -149,8 +141,8 @@ class ImageBrickTests: XCTestCase {
         brickView.registerBrickClass(ImageBrick.self)
 
         let section = BrickSection(bricks: [
-            ImageBrick("Brick1", height: .fixed(size: 480), dataSource: FixedUIImageBrickDataSource(images: ["Brick1": image])),
-            ImageBrick("Brick2", height: .fixed(size: 480), dataSource: FixedUIImageBrickDataSource(images: [:])),
+            ImageBrick("Brick1", height: .fixed(size: 480), dataSource: FixedImageBrickDataSource(imageURLs: nil, images: ["Brick1": image])),
+            ImageBrick("Brick2", height: .fixed(size: 480), dataSource: FixedImageBrickDataSource(imageURLs: nil, images: [:])),
             ])
         section.repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick1": 5])
         brickView.setSection(section)
@@ -166,15 +158,67 @@ class ImageBrickTests: XCTestCase {
         XCTAssertNil(cell?.imageView.image)
     }
 
+    func testShouldNotBeNilIfDataSourceSetWithImage() {
+        self.dataSource = FixedImageBrickDataSource(imageURLs: nil, images: ["Brick1": image])
+        brickView.registerBrickClass(ImageBrick.self)
+
+        let brick = ImageBrick("Brick1", height: .fixed(size: 200), dataSource: self.dataSource!)
+        let brickDelegate = SimpleActionImageBrickDelegate()
+        brick.delegate = brickDelegate
+
+        let section = BrickSection(bricks: [brick])
+        section.repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick1": 5])
+        brickView.setSection(section)
+        brickView.layoutSubviews()
+
+        let cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell
+        cell?.layoutIfNeeded()
+        XCTAssertNotNil(cell?.imageView.image)
+        XCTAssertTrue(brickDelegate.imageSet)
+    }
+
+    func testShouldNotBeNilIfDataSourceSetWithURL() {
+        let expectation: XCTestExpectation = self.expectation(description: "testURLSetOnOtherQueue - Wait for image to download")
+
+        self.dataSource = FixedImageBrickDataSource(imageURLs: [0 : imageURL], images: nil)
+        brickView.registerBrickClass(ImageBrick.self)
+
+        let brick = ImageBrick("Brick1", height: .fixed(size: 200), dataSource: self.dataSource!)
+        let brickDelegate = SimpleActionImageBrickDelegate()
+        brick.delegate = brickDelegate
+
+        var cell: ImageBrickCell?
+
+        BrickCollectionView.imageDownloader = FixedNSURLSessionImageDownloader { (success) in
+            DispatchQueue.main.async {
+                XCTAssertNotNil(cell?.imageView.image)
+                expectation.fulfill()
+            }
+        }
+
+        let section = BrickSection(bricks: [brick])
+        section.repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick1": 5])
+        brickView.setSection(section)
+        brickView.layoutSubviews()
+
+        cell = self.brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell
+        XCTAssertNotNil(cell)
+        cell!.layoutIfNeeded()
+
+        XCTAssertNil(cell?.imageView.image)
+        XCTAssertFalse(brickDelegate.imageSet)
+
+        self.waitForExpectations(timeout: 2, handler: nil)
+    }
+
     // Mark: - UIImage
 
     func testURLImageScaleAspectFill() {
         var expectation: XCTestExpectation? = self.expectation(description: "testURLImageScaleAspectFill - Wait for image to download")
         BrickCollectionView.imageDownloader = FixedNSURLSessionImageDownloader { (success) in
-            DispatchQueue.main.async {
-                expectation?.fulfill()
-                expectation = nil
-            }
+            XCTAssertFalse(Thread.isMainThread)
+            expectation?.fulfill()
+            expectation = nil
         }
 
         brickView.registerBrickClass(ImageBrick.self)
@@ -201,12 +245,11 @@ class ImageBrickTests: XCTestCase {
 
     func testURLSetOnMainQueue() {
         var expectation: XCTestExpectation? = self.expectation(description: "testURLSetOnMainQueue - Wait for image to download")
+
         let fixedImageDownloader = FixedNSURLSessionImageDownloader { (success) in
-            XCTAssertEqual(OperationQueue.main.operationCount, 1)
-            DispatchQueue.main.async {
-                expectation?.fulfill()
-                expectation = nil
-            }
+            XCTAssertFalse(Thread.isMainThread)
+            expectation?.fulfill()
+            expectation = nil
         }
 
         BrickCollectionView.imageDownloader = fixedImageDownloader
@@ -215,6 +258,10 @@ class ImageBrickTests: XCTestCase {
             ImageBrick("imageBrick", dataSource: ImageURLBrickModel(url: imageURL, contentMode: .scaleAspectFill)),
         ])
         brickView.setupSectionAndLayout(section)
+        let expectationInvalidate: XCTestExpectation = self.expectation(description: "testURLSetOnOtherQueue - Wait for invalidateBricks")
+        brickView.invalidateBricks(true) { (completed: Bool) in
+            expectationInvalidate.fulfill()
+        }
 
         waitForExpectations(timeout: 2, handler: nil)
     }
@@ -235,18 +282,19 @@ class ImageBrickTests: XCTestCase {
             ImageBrick("imageBrick", dataSource: ImageURLBrickModel(url: imageURL, contentMode: .scaleAspectFill)),
             ])
         brickView.setupSectionAndLayout(section)
+        let expectationInvalidate: XCTestExpectation = self.expectation(description: "testURLSetOnOtherQueue - Wait InvalidateBricks to complete")
+        brickView.invalidateBricks(true) { (completed: Bool) in
+            expectationInvalidate.fulfill()
+        }
 
         waitForExpectations(timeout: 2, handler: nil)
     }
 
     func testURLImageScaleResetSection() {
-        var expectation: XCTestExpectation? = self.expectation(description: "testURLImageScaleResetSection - Wait for image to download for the first time")
+        let expectation: XCTestExpectation = self.expectation(description: "testURLImageScaleResetSection - Wait for image to download for the first time")
 
         let fixedImageDownloader = FixedNSURLSessionImageDownloader { (success) in
-            DispatchQueue.main.async {
-                expectation?.fulfill()
-                expectation = nil
-            }
+            expectation.fulfill()
         }
 
         BrickCollectionView.imageDownloader = fixedImageDownloader
@@ -266,27 +314,25 @@ class ImageBrickTests: XCTestCase {
         cell1?.layoutIfNeeded()
         XCTAssertEqual(cell1?.frame, CGRect(x: 0, y: 0, width: 320, height: 50))
         XCTAssertEqual(cell1?.imageView.frame, CGRect(x: 0, y: 0, width: 320, height: 50))
-        
-        waitForExpectations(timeout: 2, handler: nil)
-        
-        fixedImageDownloader.callback = nil
-        
-        let invalidateExpectation = self.expectation(description: "Wait for layout to update")
-        
+
         brickView.setSection(section)
         brickView.layoutIfNeeded()
-        delegate.didUpdateHandler = {
-            invalidateExpectation.fulfill()
-        }
-        
-        waitForExpectations(timeout: 2, handler: nil)
-        
+
         let cell2 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell
         cell2?.layoutIfNeeded()
-        let ratio:CGFloat = 378.0 / 659.0
-        XCTAssertTrue(delegate.didUpdateCalled)
-        XCTAssertEqualWithAccuracy(cell2!.frame.height, 320 * ratio, accuracy: 0.5)
-        XCTAssertEqualWithAccuracy(cell2!.imageView.frame.height, 320 * ratio, accuracy: 0.5)
+
+        let expectationDidUpdate: XCTestExpectation = self.expectation(description: "testURLSetOnOtherQueue - Wait for image to download")
+        delegate.didUpdateHandler = {
+            DispatchQueue.main.async {
+                let ratio:CGFloat = 378.0 / 659.0
+                XCTAssertTrue(delegate.didUpdateCalled)
+                XCTAssertEqualWithAccuracy(cell2!.frame.height, 320 * ratio, accuracy: 0.5)
+                XCTAssertEqualWithAccuracy(cell2!.imageView.frame.height, 320 * ratio, accuracy: 0.5)
+                expectationDidUpdate.fulfill()
+            }
+        }
+
+        wait(for: [expectation, expectationDidUpdate], timeout: 2)
     }
 }
 
