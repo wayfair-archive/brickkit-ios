@@ -55,12 +55,12 @@ extension XCTest {
     func verifyAttributesToExpectedResult<T: Equatable>(_ attributes: [UICollectionViewLayoutAttributes], map: @escaping ((_ attribute: UICollectionViewLayoutAttributes) -> T), expectedResult: [Int: [T]], sort: ((T, T) -> Bool)? = nil) -> Bool {
 
         let array = simpleArrayWithFramesForCollectionViewAttributes(attributes, map: map)
-        BrickLogger.logVerbose(message: "Actual: \(array)")
-        BrickLogger.logVerbose(message: "Expected: \(expectedResult)")
+        BrickUtils.print("Actual: \(array)")
+        BrickUtils.print("Expected: \(expectedResult)")
         guard Array(expectedResult.keys.sorted()) == Array(array.keys.sorted()) else {
-            BrickLogger.logVerbose(message: "Keys are not the same")
-            BrickLogger.logVerbose(message: "Keys: \(Array(array.keys.sorted()))")
-            BrickLogger.logVerbose(message: "Expected Keys: \(Array(expectedResult.keys.sorted()))")
+            BrickUtils.print("Keys are not the same")
+            BrickUtils.print("Keys: \(Array(array.keys.sorted()))")
+            BrickUtils.print("Expected Keys: \(Array(expectedResult.keys.sorted()))")
             return false
         }
 
@@ -74,12 +74,12 @@ extension XCTest {
             }
 
             if frames != expectedFrames {
-                BrickLogger.logVerbose(message: "\(section) not equal")
-                BrickLogger.logVerbose(message: "Frames: \(frames)")
-                BrickLogger.logVerbose(message: "ExpectedFrames: \(expectedFrames)")
+                BrickUtils.print("\(section) not equal")
+                BrickUtils.print("Frames: \(frames)")
+                BrickUtils.print("ExpectedFrames: \(expectedFrames)")
                 return false
             } else {
-                BrickLogger.logVerbose(message: "\(section) equal")
+                BrickUtils.print("\(section) equal")
             }
         }
         return true
@@ -131,6 +131,5 @@ extension BrickCollectionView {
     func setupSectionAndLayout(_ section: BrickSection) {
         self.setSection(section)
         self.layoutSubviews()
-        self.layoutIfNeeded() // We need to do this layoutIfNeeded, because of the new invalidation on height calculation
     }
 }

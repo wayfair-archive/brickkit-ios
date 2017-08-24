@@ -62,7 +62,7 @@ open class BaseBrickCell: UICollectionViewCell {
     }
 
     // This value stores the expected width, so we can identify when this is met
-    private var requestedSize: CGSize = .zero
+    private var requestedWidth: CGFloat = 0
 
     open func setContent(_ brick: Brick, index: Int, collectionIndex: Int, collectionIdentifier: String?) {
         self._brick = brick
@@ -100,19 +100,23 @@ open class BaseBrickCell: UICollectionViewCell {
     open override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         super.apply(layoutAttributes)
 
-        self.requestedSize = layoutAttributes.frame.size
+        self.requestedWidth = layoutAttributes.frame.width
 
         // Setting zPosition instead of relaying on
         // UICollectionView zIndex management 'fixes' the issue
         // http://stackoverflow.com/questions/12659301/uicollectionview-setlayoutanimated-not-preserving-zindex
         self.layer.zPosition = CGFloat(layoutAttributes.zIndex)
+
+        if self is AsynchronousResizableCell {
+            self.layoutIfNeeded()
+        }
     }
 
     open override func layoutSubviews() {
         super.layoutSubviews()
         brickBackgroundView?.frame = self.bounds
 
-        if _brick != nil && frame.width == requestedSize.width {
+        if _brick != nil && frame.width == requestedWidth {
             self.layoutIfNeeded() // This layoutIfNeeded is added to make sure that the subviews are laid out correctly
             self.framesDidLayout()
         }
@@ -177,17 +181,12 @@ open class BrickCell: BaseBrickCell {
         return UIEdgeInsetsMake(defaultTopConstraintConstant, defaultLeftConstraintConstant, defaultBottomConstraintConstant, defaultRightConstraintConstant)
     }
 
-    private var didUpdateEdgeInsets: Bool = false
     @objc open dynamic var edgeInsets: UIEdgeInsets = UIEdgeInsets.zero {
         didSet {
-            if edgeInsets == oldValue {
-                return
-            }
             self.topSpaceConstraint?.constant = edgeInsets.top
             self.bottomSpaceConstraint?.constant = edgeInsets.bottom
             self.leftSpaceConstraint?.constant = edgeInsets.left
             self.rightSpaceConstraint?.constant = edgeInsets.right
-            didUpdateEdgeInsets = true
         }
     }
 
@@ -227,13 +226,6 @@ open class BrickCell: BaseBrickCell {
         guard self._brick.height.isEstimate(withValue: nil) else {
             return layoutAttributes
         }
-
-        if !didUpdateEdgeInsets {
-            guard let brickAttributes = layoutAttributes as? BrickLayoutAttributes, brickAttributes.isEstimateSize else {
-                return layoutAttributes
-            }
-        }
-        didUpdateEdgeInsets = false
 
         let preferred = layoutAttributes
 
