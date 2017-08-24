@@ -80,8 +80,7 @@ class ImageBrickTests: XCTestCase {
         let section = BrickSection(bricks: [
             ImageBrick(dataSource: ImageBrickModel(image: image, contentMode: .scaleAspectFill)),
             ])
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
 
         let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell
         cell1?.layoutIfNeeded()
@@ -97,8 +96,7 @@ class ImageBrickTests: XCTestCase {
         let section = BrickSection(bricks: [
             ImageBrick(dataSource: ImageBrickModel(image: image, contentMode: .scaleAspectFit)),
             ])
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
 
         let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell
         cell1?.layoutIfNeeded()
@@ -113,8 +111,7 @@ class ImageBrickTests: XCTestCase {
         let section = BrickSection(bricks: [
             ImageBrick(dataSource: ImageBrickModel(image: image, contentMode: .scaleToFill)),
             ])
-        brickView.setSection(section)
-        brickView.layoutSubviews()
+        brickView.setupSectionAndLayout(section)
 
         let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell
         cell1?.layoutIfNeeded()
@@ -324,6 +321,7 @@ class ImageBrickTests: XCTestCase {
         let expectationDidUpdate: XCTestExpectation = self.expectation(description: "testURLSetOnOtherQueue - Wait for image to download")
         delegate.didUpdateHandler = {
             DispatchQueue.main.async {
+                self.brickView.layoutIfNeeded()
                 let ratio:CGFloat = 378.0 / 659.0
                 XCTAssertTrue(delegate.didUpdateCalled)
                 XCTAssertEqualWithAccuracy(cell2!.frame.height, 320 * ratio, accuracy: 0.5)
