@@ -327,7 +327,8 @@ class BrickFlowLayoutSectionTests: BrickFlowLayoutBaseTests {
             LabelBrick(width: .ratio(ratio: 0.5), text: "BRICK"),
             LabelBrick("THIS ONE", text: "BRICK"),
             ], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
-        collectionView.setupSectionAndLayout(section)
+        collectionView.setSection(section)
+        collectionView.layoutSubviews()
 
         XCTAssertEqual(layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 1))?.frame, CGRect(x: 20, y: 20, width: 135, height: 17))
 

@@ -239,20 +239,18 @@ internal class BrickLayoutSection {
         attributes.frame.size.width = 0
     }
 
-    func update(height: CGFloat, at index: Int, continueCalculation: Bool, updatedAttributes: OnAttributesUpdatedHandler?) {
+    func update(height: CGFloat, at index: Int, updatedAttributes: OnAttributesUpdatedHandler?) {
         guard let brickAttributes = attributes[index] else {
             return
         }
         brickAttributes.isEstimateSize = false
 
-//        guard brickAttributes.originalFrame.height != height else {
-//            return
-//        }
+        guard brickAttributes.originalFrame.height != height else {
+            return
+        }
 
         brickAttributes.originalFrame.size.height = height
-        if continueCalculation {
-            createOrUpdateCells(from: index, invalidate: false, updatedAttributes: updatedAttributes)
-        }
+        createOrUpdateCells(from: index, invalidate: false, updatedAttributes: updatedAttributes)
     }
 
     func invalidate(at index: Int, updatedAttributes: OnAttributesUpdatedHandler?) {
@@ -309,7 +307,7 @@ internal class BrickLayoutSection {
     ///   - firstIndex: The index the calculation needs to start from (the main reason is to just calculate the next cells
     ///   - invalidate: Identifies if the attributes need to be invalidated (reset height etc)
     ///   - updatedAttributes: Callback for the attributes that have been updated
-    public func createOrUpdateCells(from firstIndex: Int, invalidate: Bool, updatedAttributes: OnAttributesUpdatedHandler?) {
+    fileprivate func createOrUpdateCells(from firstIndex: Int, invalidate: Bool, updatedAttributes: OnAttributesUpdatedHandler?) {
 
         guard let dataSource = dataSource else {
             return
@@ -403,10 +401,10 @@ internal class BrickLayoutSection {
             frame.size.width = x + edgeInsets.right
         }
 
-//        if attributes.count < 100 {
-//            // Prevent that the "Huge" test aren't taking forever to complete
-//            BrickLogger.logVerbose(message: self.printAttributes())
-//        }
+
+        if brickDebug {
+            printAttributes()
+        }
     }
 
     /// To continue calculating, it needs to start from a certain origin. To make sure that the rows are
@@ -574,21 +572,19 @@ internal class BrickLayoutSection {
         return rowAttributes
     }
 
-    func printAttributes() -> String {
-        var debugString = ""
-        debugString += "\n"
-        debugString += "Attributes for section \(sectionIndex) in \(dataSource!)"
-        debugString += "\n"
-        debugString += "Number of attributes: \(attributes.count) in frameOfInterest \(_dataSource.frameOfInterest)"
-        debugString += "\n"
-        debugString += "Total Frame: \(self.frame)"
-        debugString += "\n"
+    func printAttributes() {
+        guard attributes.count < 100 else {
+            // Prevent that the "Huge" test aren't taking forever to complete
+            return
+        }
+        BrickUtils.print("\n")
+        BrickUtils.print("Attributes for section \(sectionIndex) in \(String(describing: dataSource))")
+        BrickUtils.print("Number of attributes: \(attributes.count) in \(_dataSource.frameOfInterest)")
+        BrickUtils.print("Frame: \(self.frame)")
         let keys = attributes.keys.sorted(by: <)
         for key in keys {
-            debugString += "\(key): \(attributes[key]!)"
-            debugString += "\n"
+            BrickUtils.print("\(key): \(attributes[key]!)")
         }
-        return debugString
     }
 
     /// Create or update 1 cell
@@ -765,10 +761,11 @@ extension BrickLayoutSection {
                     attributes.append(brickAttributes)
                 }
                 return true
+            } else {
+                // if the frame is not the same as the originalFrame, continue checking because the attribute could be offscreen
+                return brickAttributes.frame != brickAttributes.originalFrame
             }
 
-            // if the frame is not the same as the originalFrame, continue checking because the attribute could be offscreen
-            return brickAttributes.frame != brickAttributes.originalFrame
         }
 
         // Go back to see if previous attributes are not closer

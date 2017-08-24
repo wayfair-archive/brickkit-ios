@@ -34,11 +34,13 @@ class LabelBrickTests: XCTestCase {
     }
 
     func setupSection(_ labelBrick: LabelBrick) -> LabelBrickCell? {
+        brickCollectionView.registerBrickClass(LabelBrick.self)
         self.labelBrick = labelBrick
         let section = BrickSection(bricks: [
             labelBrick
             ])
-        brickCollectionView.setupSectionAndLayout(section)
+        brickCollectionView.setSection(section)
+        brickCollectionView.layoutSubviews()
 
         return labelCell
     }
