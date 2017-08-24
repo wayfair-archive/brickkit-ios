@@ -32,6 +32,20 @@ fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 /// BrickFlowLayoutiis a UICollectionViewLayout that    can handle behaviors
 open class BrickFlowLayout: UICollectionViewLayout, BrickLayout {
 
+    var isDirty: Bool {
+        get {
+            return !dirtyMap.isEmpty
+        }
+        set {
+            if !newValue {
+                dirtyMap.removeAll()
+                dirtyIndexPaths.removeAll()
+            }
+        }
+    }
+    var dirtyMap: [Int: Int] = [:]
+    var dirtyIndexPaths: [IndexPath] = []
+
     // Mark: - Public members
 
     open override var description: String {
@@ -284,7 +298,25 @@ extension BrickFlowLayout {
         return contentSize
     }
 
+    func updateDirtyBricks(updatedAttributes: @escaping OnAttributesUpdatedHandler) {
+        for (section, item) in dirtyMap {
+            let layoutSection = sections![section]!
+            layoutSection.createOrUpdateCells(from: item, invalidate: false, updatedAttributes: updatedAttributes)
+            if let sectionAttributes = layoutSection.sectionAttributes {
+                invalidateHeight(for: sectionAttributes.indexPath, updatedAttributes: updatedAttributes)
+            }
+        }
+
+        recalculateContentSize()
+        dirtyIndexPaths.forEach { indexPath in
+            delegate?.brickLayout(self, didUpdateHeightForItemAtIndexPath: indexPath)
+        }
+
+        isDirty = false
+    }
+
     open override func invalidateLayout(with context: UICollectionViewLayoutInvalidationContext) {
+        BrickLogger.logVerbose(message: "Invalidate layout with context \(context)")
         guard sections != nil else { // No need to invalidate if there are no sections
             super.invalidateLayout(with: context)
             return
@@ -352,7 +384,21 @@ extension BrickFlowLayout {
         }
         let shouldInvalidate = preferredAttributes.frame.height != brickAttribute.originalFrame.height
         brickAttribute.isEstimateSize = false
-        return shouldInvalidate
+
+//        return shouldInvalidate
+        if shouldInvalidate {
+            let indexPath = preferredAttributes.indexPath
+            sections![indexPath.section]?.update(height: preferredAttributes.frame.height, at: indexPath.item, continueCalculation: false, updatedAttributes: nil)
+            if let current = dirtyMap[indexPath.section] {
+                if indexPath.item < current {
+                    dirtyMap[indexPath.section] = indexPath.item
+                }
+            } else {
+                dirtyMap[indexPath.section] = indexPath.item
+            }
+            dirtyIndexPaths.append(indexPath)
+        }
+        return false
     }
 
     open override func invalidationContext(forPreferredLayoutAttributes preferredAttributes: UICollectionViewLayoutAttributes, withOriginalAttributes originalAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutInvalidationContext {
@@ -487,7 +533,7 @@ extension BrickFlowLayout: BrickLayoutInvalidationProvider {
         let contentOffsetAdjustment = shouldAdjustContentOffset ? height - firstAttributes.frame.height : 0
 
         updateSection(section, updatedAttributes: updatedAttributes) {
-            section.update(height: height, at: indexPath.item, updatedAttributes: { attributes, oldFrame in
+            section.update(height: height, at: indexPath.item, continueCalculation: true, updatedAttributes: { attributes, oldFrame in
                 updatedAttributes(attributes, oldFrame)
                 self.attributesWereUpdated(attributes, oldFrame: oldFrame, fromBehaviors: false, updatedAttributes: updatedAttributes)
             })
@@ -544,6 +590,7 @@ extension BrickFlowLayout: BrickLayoutInvalidationProvider {
         self.contentSize = contentSize
     }
 
+    @discardableResult
     func recalculateContentSize() -> CGSize {
         let oldContentSize = self.contentSize
         contentSize = sections?[0]?.frame.size ?? CGSize.zero

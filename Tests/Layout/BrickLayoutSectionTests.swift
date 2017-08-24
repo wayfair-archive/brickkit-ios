@@ -125,7 +125,7 @@ class BrickLayoutSectionTests: XCTestCase {
 
         XCTAssertEqual(createdIndexPaths.count, 4)
 
-        section.update(height: 20, at: 0, updatedAttributes: { attributes, _ in
+        section.update(height: 20, at: 0, continueCalculation: true, updatedAttributes: { attributes, _ in
             updatedIndexPaths.append(attributes.indexPath)
         })
 
@@ -146,7 +146,7 @@ class BrickLayoutSectionTests: XCTestCase {
         let section = createSection([third, third, third, third, third], heights: [50, 50, 50, 50, 50], edgeInsets: UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5), inset: 5, sectionWidth: 320)
 
         var updatedIndexPaths: [IndexPath] = []
-        section.update(height: 20, at: 2, updatedAttributes: { attributes, _ in
+        section.update(height: 20, at: 2, continueCalculation: true, updatedAttributes: { attributes, _ in
             updatedIndexPaths.append(attributes.indexPath)
         })
         XCTAssertEqual(updatedIndexPaths.count, 3)
@@ -166,7 +166,7 @@ class BrickLayoutSectionTests: XCTestCase {
         let section = createSection([third, third, third, third, third], heights: [50, 50, 50, 50, 50], edgeInsets: UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5), inset: 5, sectionWidth: 320)
 
         var updatedIndexPaths: [IndexPath] = []
-        section.update(height: 80, at: 2, updatedAttributes: { attributes, _ in
+        section.update(height: 80, at: 2, continueCalculation: true, updatedAttributes: { attributes, _ in
             updatedIndexPaths.append(attributes.indexPath)
         })
         XCTAssertEqual(updatedIndexPaths.count, 3)
@@ -186,7 +186,7 @@ class BrickLayoutSectionTests: XCTestCase {
         let section = createSection([third, third, third, third, third], heights: [50, 50, 50, 50, 50], edgeInsets: UIEdgeInsets(top: 10, left: 5, bottom: 10, right: 5), inset: 5, sectionWidth: 320)
 
         var updatedIndexPaths: [IndexPath] = []
-        section.update(height: 80, at: 5, updatedAttributes: { attributes, _ in
+        section.update(height: 80, at: 5, continueCalculation: true, updatedAttributes: { attributes, _ in
             updatedIndexPaths.append(attributes.indexPath)
         })
         XCTAssertEqual(updatedIndexPaths.count, 0)

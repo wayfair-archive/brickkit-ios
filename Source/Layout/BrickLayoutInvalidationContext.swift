@@ -17,6 +17,7 @@ enum BrickLayoutInvalidationContextType {
     case behaviorsChanged
     case invalidate
     case updateVisibility
+    case updateDirtyBricks
 
     /**
      Flag that indicates if all attributes should be invalidated.
@@ -25,7 +26,7 @@ enum BrickLayoutInvalidationContextType {
      */
     var shouldInvalidateAllAttributes: Bool {
         switch self {
-        case .rotation, .invalidate, .creation, .updateVisibility, .updateHeight(_): return true
+        case .rotation, .invalidate, .creation, .updateVisibility, .updateDirtyBricks /*, .updateHeight(_) */: return true
         default: return false
         }
     }
@@ -44,6 +45,7 @@ protocol BrickLayoutInvalidationProvider: class {
     func registerUpdatedAttributes(_ attributes: BrickLayoutAttributes, oldFrame: CGRect?, fromBehaviors: Bool, updatedAttributes: @escaping OnAttributesUpdatedHandler)
     func applyHideBehavior(updatedAttributes: @escaping OnAttributesUpdatedHandler)
     func updateContentSize(_ contentSize: CGSize)
+    func updateDirtyBricks(updatedAttributes: @escaping OnAttributesUpdatedHandler)
 }
 
 extension BrickLayoutInvalidationContext {
@@ -105,6 +107,8 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
             self.invalidateSections(provider, layout: layout)
         case .updateVisibility:
             self.applyHideBehaviors(provider, updatedAttributes: updateAttributes)
+        case .updateDirtyBricks:
+            provider.updateDirtyBricks(updatedAttributes: updateAttributes)
         default: break
         }
 
@@ -156,14 +160,17 @@ class BrickLayoutInvalidationContext: UICollectionViewLayoutInvalidationContext 
     }
 
     func handleAttributes(_ attributes: BrickLayoutAttributes, oldFrame: CGRect?, provider: BrickLayoutInvalidationProvider, layout: UICollectionViewLayout, fromBehaviors: Bool) {
-
-        if !updatedAttributes.contains(attributes) {
-            updatedAttributes.append(attributes)
+        if !type.shouldInvalidateAllAttributes {
+            if !updatedAttributes.contains(attributes) {
+                updatedAttributes.append(attributes)
+            }
         }
-        
+
         provider.registerUpdatedAttributes(attributes, oldFrame: oldFrame, fromBehaviors: fromBehaviors, updatedAttributes: { attributes, oldFrame in
-            if !self.updatedAttributes.contains(attributes) {
-                self.updatedAttributes.append(attributes)
+            if !self.type.shouldInvalidateAllAttributes {
+                if !self.updatedAttributes.contains(attributes) {
+                    self.updatedAttributes.append(attributes)
+                }
             }
         })
     }

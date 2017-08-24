@@ -32,13 +32,11 @@ class ButtonBrickTests: XCTestCase {
     }
 
     func setupSection(_ buttonBrick: ButtonBrick) -> ButtonBrickCell? {
-        brickCollectionView.registerBrickClass(ButtonBrick.self)
         self.buttonBrick = buttonBrick
         let section = BrickSection(bricks: [
             buttonBrick
             ])
-        brickCollectionView.setSection(section)
-        brickCollectionView.layoutSubviews()
+        brickCollectionView.setupSectionAndLayout(section)
 
         return buttonCell
     }
