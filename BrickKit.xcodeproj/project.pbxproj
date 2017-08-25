@@ -316,7 +316,7 @@
 		9333538D1E36A37F003CEC85 /* GenericBrickTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericBrickTests.swift; sourceTree = "<group>"; };
 		933FF95D1DC1207900E0B80E /* Swizzle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swizzle.swift; sourceTree = "<group>"; };
 		9340B6B11F4DBC2A005C28F0 /* BrickLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickLogger.swift; sourceTree = "<group>"; };
-		9340B6B41F4DE8F4005C28F0 /* BrickLoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickLoggerTests.swift; sourceTree = "<group>"; };
+		9340B6B41F4DE8F4005C28F0 /* BrickLoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BrickLoggerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		934ADA971E53B48200C36587 /* ButtonBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonBrick.xib; sourceTree = "<group>"; };
 		934ADA991E53B48C00C36587 /* LabelBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBrick.xib; sourceTree = "<group>"; };
 		934ADA9C1E53B49300C36587 /* ImageBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageBrick.xib; sourceTree = "<group>"; };
@@ -360,10 +360,10 @@
 		93D9EBCF1DA4057000D8C87A /* BrickSectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickSectionCell.swift; sourceTree = "<group>"; };
 		93D9EBD21DA4057000D8C87A /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		93D9EBD31DA4057000D8C87A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		93D9EBD51DA4057000D8C87A /* BrickFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickFlowLayout.swift; sourceTree = "<group>"; };
+		93D9EBD51DA4057000D8C87A /* BrickFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BrickFlowLayout.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		93D9EBD61DA4057000D8C87A /* BrickLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickLayout.swift; sourceTree = "<group>"; };
 		93D9EBD71DA4057000D8C87A /* BrickLayoutInvalidationContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickLayoutInvalidationContext.swift; sourceTree = "<group>"; };
-		93D9EBD81DA4057000D8C87A /* BrickLayoutSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickLayoutSection.swift; sourceTree = "<group>"; };
+		93D9EBD81DA4057000D8C87A /* BrickLayoutSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BrickLayoutSection.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		93D9EBDB1DA4057000D8C87A /* BrickCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		93D9EBDC1DA4057000D8C87A /* BrickDimension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickDimension.swift; sourceTree = "<group>"; };
 		93D9EBDD1DA4057000D8C87A /* Brick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brick.swift; sourceTree = "<group>"; };
@@ -373,7 +373,7 @@
 		93D9EBE21DA4057000D8C87A /* BrickUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickUtils.swift; sourceTree = "<group>"; };
 		93D9EBE31DA4057000D8C87A /* FatalError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FatalError.swift; sourceTree = "<group>"; };
 		93D9EBE51DA4057000D8C87A /* BrickCollectionView+BrickLayoutDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BrickCollectionView+BrickLayoutDataSource.swift"; sourceTree = "<group>"; };
-		93D9EBE61DA4057000D8C87A /* BrickCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickCollectionView.swift; sourceTree = "<group>"; };
+		93D9EBE61DA4057000D8C87A /* BrickCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BrickCollectionView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		93D9EBE71DA4057000D8C87A /* BrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickViewController.swift; sourceTree = "<group>"; };
 		93D9EC1A1DA4057900D8C87A /* CardLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardLayoutBehaviorTests.swift; sourceTree = "<group>"; };
 		93D9EC1C1DA4057900D8C87A /* HideLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HideLayoutBehaviorTests.swift; sourceTree = "<group>"; };
@@ -413,7 +413,7 @@
 		93D9EC4B1DA4057900D8C87A /* BrickUtilsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickUtilsTests.swift; sourceTree = "<group>"; };
 		93D9EC4C1DA4057900D8C87A /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
 		93D9EC4D1DA4057900D8C87A /* DataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSources.swift; sourceTree = "<group>"; };
-		93D9EC4E1DA4057900D8C87A /* XCTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTests.swift; sourceTree = "<group>"; };
+		93D9EC4E1DA4057900D8C87A /* XCTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = XCTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		93D9EC501DA4057900D8C87A /* BrickCollectionViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickCollectionViewTests.swift; sourceTree = "<group>"; };
 		93D9EC511DA4057900D8C87A /* BrickViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickViewControllerTests.swift; sourceTree = "<group>"; };
 		93D9EC521DA4057900D8C87A /* TestBrickViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TestBrickViewController.storyboard; sourceTree = "<group>"; };

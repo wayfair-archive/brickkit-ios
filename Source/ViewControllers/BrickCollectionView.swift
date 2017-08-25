@@ -172,7 +172,7 @@ open class BrickCollectionView: UICollectionView {
         }
 
         if isConfiguringCollectionBrick {
-            BrickLogger.logWarning(message: "calling `registerBrickClass` in `configure(for cell: CollectionBrickCell)` is deprecated. Use `registerBricks(for cell: CollectionBrickCell)` or `CollectionBrickCell(brickTypes: [Brick.Type])`. This will be a fatalError in a future release")
+            BrickLogger.logWarning("calling `registerBrickClass` in `configure(for cell: CollectionBrickCell)` is deprecated. Use `registerBricks(for cell: CollectionBrickCell)` or `CollectionBrickCell(brickTypes: [Brick.Type])`. This will be a fatalError in a future release")
         }
 
         registeredBricks[identifier] = cellIdentifier
@@ -186,7 +186,7 @@ open class BrickCollectionView: UICollectionView {
         self.register(nib, forCellWithReuseIdentifier: cellIdentifier)
 
         if isConfiguringCollectionBrick {
-            BrickLogger.logWarning(message: "calling `registerNib` in `configure(for cell: CollectionBrickCell)` is deprecated. Use `registerBricks(for cell: CollectionBrickCell)`. This will be a fatalError in a future release")
+            BrickLogger.logWarning("calling `registerNib` in `configure(for cell: CollectionBrickCell)` is deprecated. Use `registerBricks(for cell: CollectionBrickCell)`. This will be a fatalError in a future release")
         }
 
         registeredBricks[CustomNibPrefix + identifier] = cellIdentifier

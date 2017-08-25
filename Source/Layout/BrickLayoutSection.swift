@@ -405,7 +405,7 @@ internal class BrickLayoutSection {
 
         if attributes.count < 100 {
             // Prevent that the "Huge" test aren't taking forever to complete
-            BrickLogger.logVerbose(message: self.printAttributes())
+            BrickLogger.logVerbose(self.printAttributes())
         }
     }
 

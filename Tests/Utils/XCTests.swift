@@ -55,12 +55,12 @@ extension XCTest {
     func verifyAttributesToExpectedResult<T: Equatable>(_ attributes: [UICollectionViewLayoutAttributes], map: @escaping ((_ attribute: UICollectionViewLayoutAttributes) -> T), expectedResult: [Int: [T]], sort: ((T, T) -> Bool)? = nil) -> Bool {
 
         let array = simpleArrayWithFramesForCollectionViewAttributes(attributes, map: map)
-        BrickLogger.logVerbose(message: "Actual: \(array)")
-        BrickLogger.logVerbose(message: "Expected: \(expectedResult)")
+        BrickLogger.logVerbose("Actual: \(array)")
+        BrickLogger.logVerbose("Expected: \(expectedResult)")
         guard Array(expectedResult.keys.sorted()) == Array(array.keys.sorted()) else {
-            BrickLogger.logVerbose(message: "Keys are not the same")
-            BrickLogger.logVerbose(message: "Keys: \(Array(array.keys.sorted()))")
-            BrickLogger.logVerbose(message: "Expected Keys: \(Array(expectedResult.keys.sorted()))")
+            BrickLogger.logVerbose("Keys are not the same")
+            BrickLogger.logVerbose("Keys: \(Array(array.keys.sorted()))")
+            BrickLogger.logVerbose("Expected Keys: \(Array(expectedResult.keys.sorted()))")
             return false
         }
 
@@ -74,12 +74,12 @@ extension XCTest {
             }
 
             if frames != expectedFrames {
-                BrickLogger.logVerbose(message: "\(section) not equal")
-                BrickLogger.logVerbose(message: "Frames: \(frames)")
-                BrickLogger.logVerbose(message: "ExpectedFrames: \(expectedFrames)")
+                BrickLogger.logVerbose("\(section) not equal")
+                BrickLogger.logVerbose("Frames: \(frames)")
+                BrickLogger.logVerbose("ExpectedFrames: \(expectedFrames)")
                 return false
             } else {
-                BrickLogger.logVerbose(message: "\(section) equal")
+                BrickLogger.logVerbose("\(section) equal")
             }
         }
         return true

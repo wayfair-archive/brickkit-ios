@@ -14,15 +14,15 @@ class TestLogger: BrickLoggable {
     var didPrintVerbose: Bool = false
     var didPrintError: Bool = false
 
-    public func logError(message: @escaping @autoclosure() -> String, file: String, lineNumber: Int, function: String) {
+    public func logError(_ message: @escaping @autoclosure() -> String, file: String, lineNumber: Int, function: String) {
         didPrintError = true
     }
 
-    public func logVerbose(message: @escaping @autoclosure() -> String, file: String, lineNumber: Int, function: String) {
+    public func logVerbose(_ message: @escaping @autoclosure() -> String, file: String, lineNumber: Int, function: String) {
         didPrintVerbose = true
     }
 
-    public func logWarning(message: @escaping @autoclosure() -> String, file: String, lineNumber: Int, function: String) {
+    public func logWarning(_ message: @escaping @autoclosure() -> String, file: String, lineNumber: Int, function: String) {
         didPrintWarning = true
     }
 
@@ -45,17 +45,17 @@ class BrickLoggerTests: XCTestCase {
     }
 
     func testThatErrorGetsLogged() {
-        BrickLogger.logError(message: "Some error")
+        BrickLogger.logError("Some error")
         XCTAssertTrue(testLogger.didPrintError)
     }
 
     func testThatWarningGetsLogged() {
-        BrickLogger.logWarning(message: "Some warning")
+        BrickLogger.logWarning("Some warning")
         XCTAssertTrue(testLogger.didPrintWarning)
     }
 
     func testThatVerboseGetsLogged() {
-        BrickLogger.logVerbose(message: "Some verbose")
+        BrickLogger.logVerbose("Some verbose")
         XCTAssertTrue(testLogger.didPrintVerbose)
     }
     
@@ -82,17 +82,17 @@ class BrickConsoleLoggerTests: XCTestCase {
     }
 
     func testThatErrorGetsLogged() {
-        BrickLogger.logError(message: "Some error")
+        BrickLogger.logError("Some error")
         XCTAssertNotNil(receivedMessage)
     }
 
     func testThatWarningGetsLogged() {
-        BrickLogger.logWarning(message: "Some warning")
+        BrickLogger.logWarning("Some warning")
         XCTAssertNotNil(receivedMessage)
     }
 
     func testThatVerboseGetsLogged() {
-        BrickLogger.logVerbose(message: "Some verbose")
+        BrickLogger.logVerbose("Some verbose")
         XCTAssertNotNil(receivedMessage)
     }
 
@@ -102,7 +102,7 @@ class BrickConsoleLoggerTests: XCTestCase {
         })
         BrickLogger.logger = testLogger
 
-        BrickLogger.logVerbose(message: "Some verbose")
+        BrickLogger.logVerbose("Some verbose")
         XCTAssertNil(receivedMessage)
     }
 

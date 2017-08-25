@@ -310,15 +310,18 @@ extension BrickFlowLayout {
         }
 
         recalculateContentSize()
-        dirtyIndexPaths.forEach { indexPath in
-            delegate?.brickLayout(self, didUpdateHeightForItemAtIndexPath: indexPath)
-        }
+
+        let cachedDirtyIndexPaths = self.dirtyIndexPaths
 
         isDirty = false
+
+        cachedDirtyIndexPaths.forEach { indexPath in
+            delegate?.brickLayout(self, didUpdateHeightForItemAtIndexPath: indexPath)
+        }
     }
 
     open override func invalidateLayout(with context: UICollectionViewLayoutInvalidationContext) {
-        BrickLogger.logVerbose(message: "Invalidate layout with context \(context)")
+        BrickLogger.logVerbose("Invalidate layout with context \(context)")
         guard sections != nil else { // No need to invalidate if there are no sections
             super.invalidateLayout(with: context)
             return
