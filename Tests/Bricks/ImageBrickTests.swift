@@ -332,6 +332,40 @@ class ImageBrickTests: XCTestCase {
 
         wait(for: [expectation, expectationDidUpdate], timeout: 2)
     }
+    
+    func testImageResetsBeforeReusing() {
+        var expectation: XCTestExpectation? = self.expectation(description: "testImageResetsBeforeReusing - Wait for image to download")
+        
+        let fixedImageDownloader = FixedNSURLSessionImageDownloader { (success) in
+            DispatchQueue.main.async {
+                expectation?.fulfill()
+                expectation = nil
+            }
+        }
+        
+        BrickCollectionView.imageDownloader = fixedImageDownloader
+        
+        brickView.registerBrickClass(ImageBrick.self)
+        
+        let section = BrickSection(bricks: [
+            ImageBrick("imageBrick", dataSource: ImageURLBrickModel(url: imageURL, contentMode: .scaleAspectFill)),
+            ])
+        
+        brickView.setSection(section)
+        brickView.layoutSubviews()
+        
+        let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell
+        cell1?.imageView.image = self.image
+        cell1?.layoutIfNeeded()
+        
+        waitForExpectations(timeout: 10, handler: nil)
+
+        
+        XCTAssertFalse(cell1?.imageView.image == nil)
+        cell1?.prepareForReuse()
+        XCTAssertTrue(cell1?.imageView.image == nil)
+        
+    }
 }
 
 class FixedNSURLSessionImageDownloader: NSURLSessionImageDownloader {
