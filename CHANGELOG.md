@@ -1,5 +1,18 @@
 # Change Log
 
+## [2.4.0](https://github.com/wayfair/brickkit-ios/tree/2.4.0) (2017-08-29)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/2.3.0...2.4.0)
+
+**Closed issues:**
+
+- Better logging [\#63](https://github.com/wayfair/brickkit-ios/issues/63)
+
+**Merged pull requests:**
+
+- Fixed performance of height recalculation [\#180](https://github.com/wayfair/brickkit-ios/pull/180) ([rubencagnie](https://github.com/rubencagnie))
+- Image view now shows the correct image when the cell is reused [\#177](https://github.com/wayfair/brickkit-ios/pull/177) ([logannathanson](https://github.com/logannathanson))
+- Checks if \_brick!=nil before calling framesDidLayout\(\). [\#176](https://github.com/wayfair/brickkit-ios/pull/176) ([ablokker](https://github.com/ablokker))
+
 ## [2.3.0](https://github.com/wayfair/brickkit-ios/tree/2.3.0) (2017-08-14)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/2.2.1...2.3.0)
 
