@@ -22,6 +22,9 @@ open class BrickCollectionView: UICollectionView {
     /// Static reference to initialize all images that need to be downloaded
     open static var imageDownloader: ImageDownloader = NSURLSessionImageDownloader()
 
+    /// Keep track of index paths that we may need to prefetch attributes for
+    open var prefetchAttributeIndexPaths: [Int : [IndexPath]] = [:]
+
     /// The brick layout
     open var layout: BrickFlowLayout {
         guard let flowlayout = collectionViewLayout as? BrickFlowLayout else {
@@ -321,9 +324,26 @@ open class BrickCollectionView: UICollectionView {
     /// - parameter itemCount: Amount of items being inserted
     /// - parameter completion: Completion Block
     open func insertItems(at index: Int, for identifier: String, itemCount: Int, completion: ((_ completed: Bool, _ insertedIndexPaths: [IndexPath]) -> Void)? = nil) {
-        updateItems(at: index, for: identifier, itemCount: itemCount, updateAction: { insertedIndexPaths in
+        updateItems(at: index, for: identifier, itemCount: itemCount, updateAction: { [weak self] insertedIndexPaths in
+
+            // Update any index paths that are offset by the insertion action
+            // `insertItemsAtIndexPaths`. We check to make sure we aren't calculating
+            // downstream attributes for index paths that otherwise wouldn't exist
+            // by checking the number of items in section
+            let lastItem = insertedIndexPaths.last?.item ?? 0
+            let section = insertedIndexPaths.last?.section ?? 0
+
+            var offsetIndexPaths: [IndexPath] = []
+
+            for offset in 1...insertedIndexPaths.count {
+                let offsetIndexPath = IndexPath(item: lastItem + offset, section: section)
+                offsetIndexPaths.append(offsetIndexPath)
+            }
+
+            self?.prefetchAttributeIndexPaths[section] = insertedIndexPaths + offsetIndexPaths
+
             if !insertedIndexPaths.isEmpty {
-                self.insertItems(at: insertedIndexPaths)
+                self?.insertItems(at: insertedIndexPaths)
             }
         }, completion: completion)
     }

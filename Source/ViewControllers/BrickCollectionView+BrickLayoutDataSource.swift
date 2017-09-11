@@ -107,4 +107,8 @@ extension BrickCollectionView: BrickLayoutDataSource {
     public func brickLayout(_ layout: BrickLayout, indexPathFor section: Int) -> IndexPath? {
         return self.section.sectionIndexPaths[collectionInfo]?[section]
     }
+
+    public func brickLayout(_ layout: BrickLayout, prefetchAttributeIndexPathsFor section: Int) -> [IndexPath] {
+        return self.prefetchAttributeIndexPaths[section] ?? []
+    }
 }

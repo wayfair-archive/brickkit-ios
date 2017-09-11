@@ -46,7 +46,7 @@ open class BrickAppearBottomBehavior: BrickAppearBehavior {
 
 }
 
-open class BrickAppearFadeBehavior: BrickAppearBehavior {
+open class BrickAppearScaleBehavior: BrickAppearBehavior {
 
     public init() {
 
@@ -54,6 +54,7 @@ open class BrickAppearFadeBehavior: BrickAppearBehavior {
 
     open func configureAttributesForAppearing(_ attributes: UICollectionViewLayoutAttributes, in collectionView: UICollectionView) {
         attributes.alpha = 0
+        attributes.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
     }
 
     open func configureAttributesForDisappearing(_ attributes: UICollectionViewLayoutAttributes, in collectionView: UICollectionView) {

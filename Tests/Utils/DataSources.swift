@@ -120,7 +120,11 @@ class SectionsLayoutDataSource: NSObject, BrickLayoutDataSource {
         }
         return nil
     }
-    
+
+    func brickLayout(_ layout: BrickLayout, prefetchAttributeIndexPathsFor section: Int) -> [IndexPath] {
+        return []
+    }
+
 }
 
 class FixedBrickLayoutSectionDataSource: NSObject, BrickLayoutSectionDataSource {
@@ -193,10 +197,15 @@ class FixedBrickLayoutSectionDataSource: NSObject, BrickLayoutSectionDataSource 
         return BrickAlignment(horizontal: .left, vertical: .top)
     }
 
+    func prefetchIndexPaths(in section: BrickLayoutSection) -> [IndexPath] {
+        return []
+    }
+
     var scrollDirection: UICollectionViewScrollDirection = .vertical
 }
 
 class FixedBrickLayoutDataSource: NSObject, BrickLayoutDataSource {
+
     let widthRatio: CGFloat
     let height: CGFloat
     let edgeInsets: UIEdgeInsets
@@ -237,6 +246,10 @@ class FixedBrickLayoutDataSource: NSObject, BrickLayoutDataSource {
 
     func brickLayout(_ layout: BrickLayout, identifierFor indexPath: IndexPath) -> String {
         return ""
+    }
+
+    func brickLayout(_ layout: BrickLayout, prefetchAttributeIndexPathsFor section: Int) -> [IndexPath] {
+        return []
     }
 }
 

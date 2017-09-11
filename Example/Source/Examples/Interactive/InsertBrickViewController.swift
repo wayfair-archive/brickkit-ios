@@ -31,7 +31,7 @@ class InsertBrickViewController: BrickApp.BaseBrickController, HasTitle {
             switch selectedAppearSegmentIndex {
             case 1: appearBehavior = BrickAppearTopBehavior()
             case 2: appearBehavior = BrickAppearBottomBehavior()
-            case 3: appearBehavior = BrickAppearFadeBehavior()
+            case 3: appearBehavior = BrickAppearScaleBehavior()
             default: appearBehavior = nil
             }
             self.layout.appearBehavior = appearBehavior
