@@ -241,10 +241,10 @@ class FixedBrickLayoutDataSource: NSObject, BrickLayoutDataSource {
 }
 
 class FixedSpotlightLayoutBehaviorDataSource: SpotlightLayoutBehaviorDataSource {
-    let height: CGFloat
+    let height: CGFloat?
     let identifiers: [String]?
 
-    init(height: CGFloat, identifiers: [String]? = nil) {
+    init(height: CGFloat?, identifiers: [String]? = nil) {
         self.height = height
         self.identifiers = identifiers
     }
@@ -259,9 +259,9 @@ class FixedSpotlightLayoutBehaviorDataSource: SpotlightLayoutBehaviorDataSource 
 }
 
 class FixedCardLayoutBehaviorDataSource: CardLayoutBehaviorDataSource {
-    let height: CGFloat
+    let height: CGFloat?
 
-    init(height: CGFloat) {
+    init(height: CGFloat?) {
         self.height = height
     }
 

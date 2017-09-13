@@ -25,6 +25,11 @@ open class CardLayoutBehavior: BrickLayoutBehavior {
     public init(dataSource: CardLayoutBehaviorDataSource) {
         self.dataSource = dataSource
     }
+    
+    open override func hasInvalidatableAttributes() -> Bool {
+        // Only return true if there is at least one attribute that's not hidden
+        return !scrollAttributes.filter({ !$0.isHidden }).isEmpty
+    }
 
     open override func resetRegisteredAttributes(_ collectionViewLayout: UICollectionViewLayout) {
         super.resetRegisteredAttributes(collectionViewLayout)

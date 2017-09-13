@@ -34,6 +34,11 @@ open class StickyLayoutBehavior: BrickLayoutBehavior {
         self.delegate = delegate
         self.contentOffset = contentOffset
     }
+    
+    open override func hasInvalidatableAttributes() -> Bool {
+        // Only return true if there is at least one attribute that's not hidden
+        return !stickyAttributes.filter({ !$0.isHidden }).isEmpty
+    }
 
     open override func resetRegisteredAttributes(_ collectionViewLayout: UICollectionViewLayout) {
         super.resetRegisteredAttributes(collectionViewLayout)

@@ -25,6 +25,10 @@ open class BrickLayoutBehavior: NSObject {
     open func sectionAttributes(for indexPath: IndexPath, in layout: UICollectionViewLayout) -> BrickLayoutAttributes? {
         return brickFlowLayout?.layoutAttributesForSection(indexPath.section)
     }
+    
+    open func hasInvalidatableAttributes() -> Bool {
+        return true
+    }
 
     open func resetRegisteredAttributes(_ collectionViewLayout: UICollectionViewLayout) {
         //Optional

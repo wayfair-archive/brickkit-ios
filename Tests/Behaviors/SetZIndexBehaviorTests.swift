@@ -26,6 +26,10 @@ class SetZIndexBehaviorTests: BrickFlowLayoutBaseTests {
         let attributes2 = layout.layoutAttributesForItem(at: IndexPath(item: 1, section: 0))
         XCTAssertNotNil(attributes2)
         XCTAssertEqual(attributes2?.zIndex, 22)
+        
+        // Not ideal to always return true but no way to easily determine if there are no index paths given to the datasource 
+        // that would satisfy the behavior for this to be false.
+        XCTAssertTrue(zIndexBehavior.hasInvalidatableAttributes())
     }
 
 }

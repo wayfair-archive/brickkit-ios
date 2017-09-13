@@ -22,7 +22,7 @@ class OffsetLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         behavior = OffsetLayoutBehavior(dataSource: FixedOffsetLayoutBehaviorDataSource(originOffset: CGSize(width: 20, height: -40), sizeOffset: nil))
         self.layout.behaviors.insert(behavior)
         setDataSources(SectionsCollectionViewDataSource(sections: []), brickLayoutDataSource: FixedBrickLayoutDataSource(widthRatio: 1, height: 300))
-
+        XCTAssertFalse(behavior.hasInvalidatableAttributes())
         let attributes = layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 0))
         XCTAssertNil(attributes?.frame)
     }
@@ -68,6 +68,7 @@ class OffsetLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         XCTAssertEqual(attributes?.frame, CGRect(x: 20, y: -40, width: 280, height: 320))
 
         layout.collectionView?.contentOffset.y = 60
+        XCTAssertTrue(behavior.hasInvalidatableAttributes())
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
         XCTAssertEqual(attributes?.frame, CGRect(x: 20, y: -40, width: 280, height: 320))
     }

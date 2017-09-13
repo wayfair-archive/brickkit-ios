@@ -178,8 +178,8 @@ class BrickDimensionTests: XCTestCase {
     func testBrickRangeDimension() {
         setupScreen(isPortrait: true, horizontalSizeClass: .compact, verticalSizeClass: .regular)
         
-        let additionalRangePairs: [RangeDimensionPair] = [(dimension: .ratio(ratio: 0.25), minimumSize: CGFloat(700)),
-                                                          (dimension: .ratio(ratio: 0.5), minimumSize: CGFloat(350))] // Intentionally out of order
+        let additionalRangePairs: [RangeDimensionPair] = [(dimension: .ratio(ratio: 0.5), minimumSize: CGFloat(350)),
+                                                          (dimension: .ratio(ratio: 0.25), minimumSize: CGFloat(700))]
         let regularDimensionRange : BrickDimension = .dimensionRange(default: .ratio(ratio: 1.0), additionalRangePairs: additionalRangePairs)
         XCTAssertEqual(regularDimensionRange.value(for: 320, startingAt: 0), 320)
         setupScreen(isPortrait: true, horizontalSizeClass: .regular, verticalSizeClass: .regular)

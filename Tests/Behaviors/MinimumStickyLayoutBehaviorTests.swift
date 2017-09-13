@@ -146,9 +146,19 @@ class MinimumStickyLayoutBehaviorTests: BrickFlowLayoutBaseTests {
 
         firstAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 0))
         XCTAssertEqual(firstAttributes?.frame, CGRect(x: 0, y: 500, width: 320, height: 100))
+        XCTAssertTrue(stickyBehavior.hasInvalidatableAttributes())
         
     }
     
-
+    func testNoInvalitableAttributes() {
+        let fixedStickyWithMinimumLayoutBehavior = FixedStickyLayoutBehaviorDataSource(indexPaths: [IndexPath(item: 20, section: 0)]) // IndexPath is just out of section count.
+        let stickyBehavior = MinimumStickyLayoutBehavior(dataSource: fixedStickyWithMinimumLayoutBehavior)
+        self.layout.behaviors.insert(stickyBehavior)
+        let sectionCount = 20
+        setDataSources(SectionsCollectionViewDataSource(sections: [sectionCount]), brickLayoutDataSource: FixedBrickLayoutDataSource(widthRatio: 1, height: 100))
+        layout.collectionView?.contentOffset.y = 25
+        layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
+        XCTAssertFalse(stickyBehavior.hasInvalidatableAttributes())
+    }
 
 }

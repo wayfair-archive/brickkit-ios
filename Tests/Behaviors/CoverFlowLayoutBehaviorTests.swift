@@ -56,6 +56,7 @@ class CoverFlowLayoutBehaviorTests: XCTestCase {
         XCTAssertEqualWithAccuracy(cell2!.transform.scaleY, 1, accuracy: 0.01)
         XCTAssertEqualWithAccuracy(cell3!.transform.scaleX, 2/3, accuracy: 0.01)
         XCTAssertEqualWithAccuracy(cell3!.transform.scaleY, 2/3, accuracy: 0.01)
+        XCTAssertTrue(coverFlowBehavior.hasInvalidatableAttributes())
     }
 
 
