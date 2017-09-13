@@ -325,13 +325,16 @@ open class BrickCollectionView: UICollectionView {
     /// - parameter completion: Completion Block
     open func insertItems(at index: Int, for identifier: String, itemCount: Int, completion: ((_ completed: Bool, _ insertedIndexPaths: [IndexPath]) -> Void)? = nil) {
         updateItems(at: index, for: identifier, itemCount: itemCount, updateAction: { [weak self] insertedIndexPaths in
+            guard let lastIndexPath = insertedIndexPaths.last else {
+                return
+            }
 
             // Update any index paths that are offset by the insertion action
             // `insertItemsAtIndexPaths`. We check to make sure we aren't calculating
             // downstream attributes for index paths that otherwise wouldn't exist
             // by checking the number of items in section
-            let lastItem = insertedIndexPaths.last?.item ?? 0
-            let section = insertedIndexPaths.last?.section ?? 0
+            let lastItem = lastIndexPath.item
+            let section = lastIndexPath.section
 
             var offsetIndexPaths: [IndexPath] = []
 
@@ -340,12 +343,54 @@ open class BrickCollectionView: UICollectionView {
                 offsetIndexPaths.append(offsetIndexPath)
             }
 
-            self?.prefetchAttributeIndexPaths[section] = insertedIndexPaths + offsetIndexPaths
+            var extraIndexPaths: [IndexPath] = []
+
+            if let lastOffsetIndexPath = offsetIndexPaths.last {
+                extraIndexPaths = self?.calculateRemainingIndicies(for: lastIndexPath, and: lastOffsetIndexPath, itemCount: itemCount) ?? []
+            }
+
+            self?.prefetchAttributeIndexPaths[section] = insertedIndexPaths + offsetIndexPaths + extraIndexPaths
 
             if !insertedIndexPaths.isEmpty {
                 self?.insertItems(at: insertedIndexPaths)
             }
         }, completion: completion)
+    }
+
+    /// Calculate how many extra index paths we would need to prefetch attributes for
+    /// This mainly pertains to iPad where we need to calculate the last items in the row
+    /// When there could be many items in the row. We want to use the item number in the
+    /// last index path
+    fileprivate func calculateRemainingIndicies(for lastIndexPath: IndexPath, and lastOffsetIndexPath: IndexPath, itemCount: Int) -> [IndexPath] {
+        let brick = self.brick(at: lastIndexPath)
+        let section = lastIndexPath.section
+
+        if brick.width.dimension().isRatio() {
+            // Determine how many items are in each row
+            let numberOfItemsInRow = 1 / BrickDimension._rawValue(for: 1, startingAt: 0, with: brick.width.dimension())
+
+            // Check how many rows then use that number to determine number of items
+            // there will be with complete rows. Once we have this number we can just
+            // subtract the item number from this number giving us how many extra indicies
+            // need to be calculated to complete the row
+            let row = ceil(CGFloat(lastOffsetIndexPath.item + 1) / numberOfItemsInRow)
+            let numberOfExtraIndiciesNeeded = (Int(row * numberOfItemsInRow) - 1) - lastOffsetIndexPath.item
+
+            guard numberOfExtraIndiciesNeeded > 0 else {
+                return []
+            }
+
+            var offsetIndexPaths: [IndexPath] = []
+            let numberOfItemsInSection = self.numberOfItems(inSection: section) + itemCount
+
+            for offset in 1...numberOfExtraIndiciesNeeded where offset + lastOffsetIndexPath.item < numberOfItemsInSection {
+                let offsetIndexPath = IndexPath(item: lastOffsetIndexPath.item + offset, section: lastOffsetIndexPath.section)
+                offsetIndexPaths.append(offsetIndexPath)
+            }
+            
+            return offsetIndexPaths
+        }
+        return []
     }
 
     /// Delete items at a given index for a brick identifier

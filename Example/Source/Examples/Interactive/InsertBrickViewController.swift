@@ -39,7 +39,7 @@ class InsertBrickViewController: BrickApp.BaseBrickController, HasTitle {
     }
 
     var appearTitles: [String] {
-        return ["None", "Above", "Below", "Fade"]
+        return ["None", "Above", "Below", "Scale"]
     }
 
     var insertToIndex: Int {

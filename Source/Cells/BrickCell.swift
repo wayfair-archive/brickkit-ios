@@ -106,6 +106,7 @@ open class BaseBrickCell: UICollectionViewCell {
         // UICollectionView zIndex management 'fixes' the issue
         // http://stackoverflow.com/questions/12659301/uicollectionview-setlayoutanimated-not-preserving-zindex
         self.layer.zPosition = CGFloat(layoutAttributes.zIndex)
+        self.index = layoutAttributes.indexPath.item
     }
 
     open override func layoutSubviews() {

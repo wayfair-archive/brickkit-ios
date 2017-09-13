@@ -27,4 +27,3 @@ extension SpotlightScrollingViewController: SpotlightLayoutBehaviorDataSource {
         return identifier == BrickIdentifiers.repeatLabel ? 50 : nil
     }
 }
-
