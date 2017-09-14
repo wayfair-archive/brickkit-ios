@@ -92,6 +92,7 @@ public protocol BrickLayoutDataSource: class {
     func brickLayout(_ layout: BrickLayout, indexPathFor section: Int) -> IndexPath?
     func brickLayout(_ layout: BrickLayout, isEstimatedHeightFor indexPath: IndexPath) -> Bool
     func brickLayout(_ layout: BrickLayout, isItemHiddenAt indexPath: IndexPath) -> Bool
+    func brickLayout(_ layout: BrickLayout, prefetchAttributeIndexPathsFor section: Int) -> [IndexPath]
 }
 
 extension BrickLayoutDataSource {

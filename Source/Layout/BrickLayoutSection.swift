@@ -57,6 +57,8 @@ protocol BrickLayoutSectionDataSource: class {
     /// Returns the downstream indexpaths for this section
     func downStreamIndexPaths(in section: BrickLayoutSection) -> [IndexPath]
 
+    /// Returns index paths to prefetch/calculate index paths for
+    func prefetchIndexPaths(in section: BrickLayoutSection) -> [IndexPath]
 }
 
 /// BrickLayoutSection manages all the attributes that are in one specific section
@@ -143,7 +145,7 @@ internal class BrickLayoutSection {
             return
         }
 
-        var startIndexToUpdate: Int = numberOfItems - 1
+        var startIndexToUpdate: Int = numberOfItems
 
         let sortedDeleted = deleted.sorted(by: >)
 
@@ -151,7 +153,7 @@ internal class BrickLayoutSection {
             attributes[index] = nil
 
             // Move every index with 1
-            for i in (index+1)..<numberOfItems {
+            for i in (index+1)..<startIndexToUpdate {
                 if let attribute = attributes[i] {
                     attribute.indexPath.item = i-1
                     attributes[i-1] = attribute
@@ -167,7 +169,7 @@ internal class BrickLayoutSection {
 
         for index in sortedInserted {
             // Move every index with 1
-            for i in stride(from: numberOfItems, to: index, by: -1) {
+            for i in stride(from: startIndexToUpdate, to: index, by: -1) {
                 if let attribute = attributes[i-1] {
                     attribute.indexPath.item = i
                     attributes[i] = attribute
@@ -355,6 +357,16 @@ internal class BrickLayoutSection {
                 // create the attribute, so it's available for the behaviors to pick it up
                 _ = createOrUpdateAttribute(at: indexPath.item, with: dataSource, x: &x, y: &y, maxY: &maxY, force: true, invalidate: invalidate, frameOfInterest: frameOfInterest, updatedAttributes: updatedAttributes)
             }
+        }
+
+        let prefetchIndexPaths = dataSource.prefetchIndexPaths(in: self)
+        for indexPath in prefetchIndexPaths {
+            guard indexPath.section == sectionIndex, attributes[indexPath.item] == nil else {
+                continue
+            }
+
+            // create the attribute, so it's available for the behaviors to pick it up
+            _ = createOrUpdateAttribute(at: indexPath.item, with: dataSource, x: &x, y: &y, maxY: &maxY, force: true, invalidate: invalidate, frameOfInterest: frameOfInterest, updatedAttributes: updatedAttributes)
         }
 
         // Frame Height

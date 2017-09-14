@@ -131,6 +131,13 @@ public enum BrickDimension {
         }
     }
 
+    func isRatio() -> Bool {
+        if case BrickDimension.ratio = self.dimension(withValue: nil) {
+            return true
+        }
+        return false
+    }
+
     /// Function that gets the raw value of a BrickDimension. As of right now, only Ratio, Fixed and Fill are allowed
     static func _rawValue(for otherDimension: CGFloat, startingAt origin: CGFloat, with dimension: BrickDimension) -> CGFloat {
         switch dimension {

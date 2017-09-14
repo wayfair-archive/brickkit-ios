@@ -510,6 +510,10 @@ extension BrickFlowLayout: BrickLayoutSectionDataSource {
     func downStreamIndexPaths(in section: BrickLayoutSection) -> [IndexPath] {
         return downStreamBehaviorIndexPaths[section.sectionIndex] ?? []
     }
+
+    func prefetchIndexPaths(in section: BrickLayoutSection) -> [IndexPath] {
+        return _dataSource.brickLayout(self, prefetchAttributeIndexPathsFor: section.sectionIndex)
+    }
 }
 
 extension BrickFlowLayout: BrickLayoutInvalidationProvider {
