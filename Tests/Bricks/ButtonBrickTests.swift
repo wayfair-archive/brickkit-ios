@@ -270,6 +270,54 @@ class ButtonBrickTests: XCTestCase {
 
         XCTAssertTrue(cell?.gestureRecognizers?.count == 1)
     }
+
+    func testButtonResetsBeforeReusing() {
+        brickCollectionView.registerBrickClass(ButtonBrick.self)
+
+        func configureButton(_ cell: ButtonBrickCell) {
+            cell.backgroundColor = .green
+            cell.accessoryView = UIView()
+            cell.rightImage = UIImageView()
+            cell.rightImage?.image = UIImage()
+            cell.backgroundView = UIView()
+
+            cell.button.titleLabel?.textAlignment = .right
+            cell.button.titleLabel?.textColor = .blue
+            cell.button.titleLabel?.backgroundColor = .yellow
+
+            cell.button.backgroundColor = .red
+            cell.edgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        }
+
+        let section = BrickSection(bricks: [
+            ButtonBrick("buttonBrick", title: "TEST", configureButtonBlock: configureButton)
+            ])
+
+        brickCollectionView.setSection(section)
+        brickCollectionView.layoutSubviews()
+
+        let cell = brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ButtonBrickCell
+        cell?.updateContent()
+        cell?.layoutIfNeeded()
+
+        XCTAssertEqual(cell?.button.titleLabel?.numberOfLines, 1)
+        XCTAssertEqual(cell?.button.backgroundColor, .red)
+        XCTAssertEqual(cell?.backgroundColor, .green)
+        XCTAssertNotNil(cell?.accessoryView)
+        XCTAssertNotNil(cell?.button.titleLabel?.attributedText)
+        XCTAssertEqual(cell?.button.titleLabel?.text, "TEST")
+        XCTAssertEqual(cell?.button.titleLabel?.textAlignment, .right)
+
+        cell?.prepareForReuse()
+
+        XCTAssertEqual(cell?.button.titleLabel?.textAlignment, .natural)
+        XCTAssertEqual(cell?.button.titleLabel?.numberOfLines, 0)
+        XCTAssertEqual(cell?.backgroundColor, .white)
+        XCTAssertNil(cell?.accessoryView)
+        XCTAssertNil(cell?.button.titleLabel?.backgroundColor)
+        XCTAssertNil(cell?.button.titleLabel?.attributedText)
+        XCTAssertNil(cell?.button.titleLabel?.text)
+    }
 }
 
 class FixedButtonDataSource: ButtonBrickCellDataSource {

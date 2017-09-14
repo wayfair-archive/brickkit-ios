@@ -158,6 +158,29 @@ open class ButtonBrickCell: GenericBrickCell, Bricklike {
         brick.dataSource?.configureButtonBrick(self)
     }
 
+    override open func prepareForReuse() {
+        super.prepareForReuse()
+
+        self.isHidden = false
+        self.accessoryView = nil
+        self.backgroundView = nil
+        self.backgroundColor = .white
+
+        self.button.isHidden = false
+        self.button.setImage(nil, for: .normal)
+        self.button.setTitle(nil, for: .normal)
+        self.button.setTitleColor(.black, for: .normal)
+        self.button.setBackgroundImage(nil, for: .normal)
+        self.button.titleLabel?.attributedText = nil
+        self.button.titleLabel?.textAlignment = .natural
+        self.button.titleLabel?.numberOfLines = 0
+        self.button.titleLabel?.backgroundColor = nil
+
+        if !fromNib {
+            rightImage?.image = nil
+        }
+    }
+
     @IBAction open func didTapButton(_ sender: AnyObject) {
         brick.delegate?.didTapOnButtonForButtonBrickCell(self)
     }
