@@ -904,6 +904,77 @@ class BrickCollectionViewTests: XCTestCase {
         XCTAssertTrue(brickView.prefetchAttributeIndexPaths[1]?.contains(IndexPath(item: 5, section: 1)) ?? false)
         XCTAssertTrue(brickView.prefetchAttributeIndexPaths[1]?.contains(IndexPath(item: 6, section: 1)) ?? false)
     }
+
+    func testBrickIndexWithRepeatCount() {
+        // Default repeat count is 2
+        let dataSource = MockLabelBrickCellDataSource()
+
+        let section = BrickSection(bricks: [
+            LabelBrick("Test", dataSource: dataSource),
+            LabelBrick("TestNoRepeat", dataSource: LabelBrickCellModel(text: "TestLabel"))
+        ])
+        section.repeatCountDataSource = dataSource
+        brickView.setupSectionAndLayout(section)
+
+        guard let noRepeat: IndexPath = brickView.indexPathsForBricksWithIdentifier("TestNoRepeat").first,
+            let noRepeatBrickCell = brickView.cellForItem(at: noRepeat) as? BrickCell else {
+            XCTFail()
+            return
+        }
+
+        XCTAssertEqual(noRepeatBrickCell.index, 0)
+    }
+
+    func testBrickIndexAfterInsertion() {
+        let dataSource = MockLabelBrickCellDataSource()
+        dataSource.data.append(contentsOf: ["Brick 3", "Brick 4", "Brick 5", "Brick 6"])
+
+        let section = BrickSection(bricks: [
+            LabelBrick("Test", width: .ratio(ratio: 0.3), dataSource: dataSource)
+            ])
+        section.repeatCountDataSource = dataSource
+        brickView.setupSectionAndLayout(section)
+
+        dataSource.data.insert("Inserted Brick1", at: 2)
+        dataSource.data.insert("Inserted Brick2", at: 3)
+        dataSource.data.insert("Inserted Brick3", at: 4)
+        brickView.insertItems(at: 2, for: "Test", itemCount: 3, completion: { [weak self] (completed, paths) in
+
+            guard let indexPaths = self?.brickView.indexPathsForBricksWithIdentifier("Test") else {
+                XCTFail()
+                return
+            }
+
+            for indexPath in indexPaths {
+                guard let labelCell: LabelBrickCell = self?.brickView.cellForItem(at: indexPath) as? LabelBrickCell else {
+                    continue
+                }
+
+                switch labelCell.label.text ?? "" {
+                case "Brick 1":
+                    XCTAssertEqual(labelCell.index, 0)
+                case "Brick 2":
+                    XCTAssertEqual(labelCell.index, 1)
+                case "Inserted Brick1":
+                    XCTAssertEqual(labelCell.index, 2)
+                case "Inserted Brick2":
+                    XCTAssertEqual(labelCell.index, 3)
+                case "Inserted Brick3":
+                    XCTAssertEqual(labelCell.index, 4)
+                case "Brick 3":
+                    XCTAssertEqual(labelCell.index, 5)
+                case "Brick 4":
+                    XCTAssertEqual(labelCell.index, 6)
+                case "Brick 5":
+                    XCTAssertEqual(labelCell.index, 7)
+                case "Brick 6":
+                    XCTAssertEqual(labelCell.index, 8)
+                default:
+                    break
+                }
+            }
+        })
+    }
 }
 
 fileprivate class MockLabelBrickCellDataSource: LabelBrickCellDataSource, BrickRepeatCountDataSource {

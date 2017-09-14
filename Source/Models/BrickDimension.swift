@@ -132,7 +132,7 @@ public enum BrickDimension {
     }
 
     func isRatio() -> Bool {
-        if case BrickDimension.ratio = self {
+        if case BrickDimension.ratio = self.dimension(withValue: nil) {
             return true
         }
         return false

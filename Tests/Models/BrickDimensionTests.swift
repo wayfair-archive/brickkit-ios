@@ -243,6 +243,26 @@ class BrickDimensionTests: XCTestCase {
         }
     }
 
+    func testRatioCheck() {
+        let simpleRatio = BrickDimension.ratio(ratio: 0.3)
+        XCTAssertTrue(simpleRatio.isRatio())
+
+        let nested = BrickDimension.orientation(
+            landscape: .ratio(ratio: 0.3),
+            portrait: .horizontalSizeClass(
+                regular: .auto(estimate: .fixed(size: 100)),
+                compact: .ratio(ratio: 0.3)
+            ))
+
+        setupScreen(isPortrait: false, horizontalSizeClass: .compact, verticalSizeClass: .compact)
+        XCTAssertTrue(nested.isRatio())
+
+        setupScreen(isPortrait: true, horizontalSizeClass: .compact, verticalSizeClass: .compact)
+        XCTAssertTrue(nested.isRatio())
+
+        setupScreen(isPortrait: true, horizontalSizeClass: .regular, verticalSizeClass: .compact)
+        XCTAssertFalse(nested.isRatio())
+    }
 }
 
 // MARK: - Utility methods to `fake` UIScreen.mainScreen

@@ -71,6 +71,10 @@ open class BaseBrickCell: UICollectionViewCell {
         self.collectionIdentifier = collectionIdentifier
     }
 
+    open func setIndex(index: Int) {
+        self.index = index
+    }
+
     // Using the UICollectionViewCell.backgroundView is not really stable
     // Especially when reusing cells, the backgroundView might disappear and reappear when scrolling up or down
     // The suspicion is that the `removeFromSuperview()` is called, even if the view is no longer part of the cell
@@ -106,7 +110,6 @@ open class BaseBrickCell: UICollectionViewCell {
         // UICollectionView zIndex management 'fixes' the issue
         // http://stackoverflow.com/questions/12659301/uicollectionview-setlayoutanimated-not-preserving-zindex
         self.layer.zPosition = CGFloat(layoutAttributes.zIndex)
-        self.index = layoutAttributes.indexPath.item
     }
 
     open override func layoutSubviews() {

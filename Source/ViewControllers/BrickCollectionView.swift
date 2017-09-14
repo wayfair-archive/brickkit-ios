@@ -297,6 +297,18 @@ open class BrickCollectionView: UICollectionView {
         }
     }
 
+    fileprivate func updateIndiciesForVisibleBrickCellsWithIdentifier(identifier: String) {
+        let visibleIndexPaths = self.indexPathsForVisibleBricksWithIdentifier(identifier)
+
+        for indexPath in visibleIndexPaths {
+            let brickIndex = self.brickInfo(at: indexPath).index
+
+            if let brickCell = self.cellForItem(at: indexPath) as? BaseBrickCell {
+                brickCell.setIndex(index: brickIndex)
+            }
+        }
+    }
+
     fileprivate func updateItems(at index: Int, for identifier: String, itemCount: Int, updateAction: @escaping (_ indexPaths: [IndexPath]) -> Void, completion: ((_ completed: Bool, _ indexPaths: [IndexPath]) -> Void)? = nil) {
         guard let originIndexPath = indexPathsForBricksWithIdentifier(identifier, index: index).first else {
             invalidateRepeatCounts()
@@ -312,7 +324,9 @@ open class BrickCollectionView: UICollectionView {
             self.section.invalidateCounts(in: self.collectionInfo)
 
             updateAction(indexPaths)
-        }) { (completed) in
+        }) { [weak self] (completed) in
+
+            self?.updateIndiciesForVisibleBrickCellsWithIdentifier(identifier: identifier)
             completion?(completed, indexPaths)
         }
     }
@@ -365,7 +379,7 @@ open class BrickCollectionView: UICollectionView {
         let brick = self.brick(at: lastIndexPath)
         let section = lastIndexPath.section
 
-        if brick.width.dimension().isRatio() {
+        if brick.width.isRatio() {
             // Determine how many items are in each row
             let numberOfItemsInRow = 1 / BrickDimension._rawValue(for: 1, startingAt: 0, with: brick.width.dimension())
 
