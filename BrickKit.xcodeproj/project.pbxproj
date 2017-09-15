@@ -142,10 +142,6 @@
 		9333538F1E36A37F003CEC85 /* GenericBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9333538D1E36A37F003CEC85 /* GenericBrickTests.swift */; };
 		933FF95E1DC1207900E0B80E /* Swizzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933FF95D1DC1207900E0B80E /* Swizzle.swift */; };
 		933FF95F1DC1207900E0B80E /* Swizzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933FF95D1DC1207900E0B80E /* Swizzle.swift */; };
-		9340B6B21F4DBC2A005C28F0 /* BrickLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9340B6B11F4DBC2A005C28F0 /* BrickLogger.swift */; };
-		9340B6B31F4DBC2A005C28F0 /* BrickLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9340B6B11F4DBC2A005C28F0 /* BrickLogger.swift */; };
-		9340B6B51F4DE8F4005C28F0 /* BrickLoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9340B6B41F4DE8F4005C28F0 /* BrickLoggerTests.swift */; };
-		9340B6B61F4DE8F4005C28F0 /* BrickLoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9340B6B41F4DE8F4005C28F0 /* BrickLoggerTests.swift */; };
 		934ADAA31E53B4B200C36587 /* ButtonBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934ADA971E53B48200C36587 /* ButtonBrick.xib */; };
 		934ADAA41E53B4B200C36587 /* ImageBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934ADA9C1E53B49300C36587 /* ImageBrick.xib */; };
 		934ADAA51E53B4B200C36587 /* LabelBrick.xib in Resources */ = {isa = PBXBuildFile; fileRef = 934ADA991E53B48C00C36587 /* LabelBrick.xib */; };
@@ -315,8 +311,6 @@
 		933353891E368903003CEC85 /* GenericBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenericBrick.swift; path = Generic/GenericBrick.swift; sourceTree = "<group>"; };
 		9333538D1E36A37F003CEC85 /* GenericBrickTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericBrickTests.swift; sourceTree = "<group>"; };
 		933FF95D1DC1207900E0B80E /* Swizzle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swizzle.swift; sourceTree = "<group>"; };
-		9340B6B11F4DBC2A005C28F0 /* BrickLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickLogger.swift; sourceTree = "<group>"; };
-		9340B6B41F4DE8F4005C28F0 /* BrickLoggerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BrickLoggerTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		934ADA971E53B48200C36587 /* ButtonBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonBrick.xib; sourceTree = "<group>"; };
 		934ADA991E53B48C00C36587 /* LabelBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelBrick.xib; sourceTree = "<group>"; };
 		934ADA9C1E53B49300C36587 /* ImageBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageBrick.xib; sourceTree = "<group>"; };
@@ -360,10 +354,10 @@
 		93D9EBCF1DA4057000D8C87A /* BrickSectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickSectionCell.swift; sourceTree = "<group>"; };
 		93D9EBD21DA4057000D8C87A /* ImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		93D9EBD31DA4057000D8C87A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		93D9EBD51DA4057000D8C87A /* BrickFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BrickFlowLayout.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		93D9EBD51DA4057000D8C87A /* BrickFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickFlowLayout.swift; sourceTree = "<group>"; };
 		93D9EBD61DA4057000D8C87A /* BrickLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickLayout.swift; sourceTree = "<group>"; };
 		93D9EBD71DA4057000D8C87A /* BrickLayoutInvalidationContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickLayoutInvalidationContext.swift; sourceTree = "<group>"; };
-		93D9EBD81DA4057000D8C87A /* BrickLayoutSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BrickLayoutSection.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		93D9EBD81DA4057000D8C87A /* BrickLayoutSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickLayoutSection.swift; sourceTree = "<group>"; };
 		93D9EBDB1DA4057000D8C87A /* BrickCollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickCollectionViewDataSource.swift; sourceTree = "<group>"; };
 		93D9EBDC1DA4057000D8C87A /* BrickDimension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickDimension.swift; sourceTree = "<group>"; };
 		93D9EBDD1DA4057000D8C87A /* Brick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Brick.swift; sourceTree = "<group>"; };
@@ -373,7 +367,7 @@
 		93D9EBE21DA4057000D8C87A /* BrickUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickUtils.swift; sourceTree = "<group>"; };
 		93D9EBE31DA4057000D8C87A /* FatalError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FatalError.swift; sourceTree = "<group>"; };
 		93D9EBE51DA4057000D8C87A /* BrickCollectionView+BrickLayoutDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BrickCollectionView+BrickLayoutDataSource.swift"; sourceTree = "<group>"; };
-		93D9EBE61DA4057000D8C87A /* BrickCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BrickCollectionView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		93D9EBE61DA4057000D8C87A /* BrickCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickCollectionView.swift; sourceTree = "<group>"; };
 		93D9EBE71DA4057000D8C87A /* BrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickViewController.swift; sourceTree = "<group>"; };
 		93D9EC1A1DA4057900D8C87A /* CardLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardLayoutBehaviorTests.swift; sourceTree = "<group>"; };
 		93D9EC1C1DA4057900D8C87A /* HideLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HideLayoutBehaviorTests.swift; sourceTree = "<group>"; };
@@ -413,7 +407,7 @@
 		93D9EC4B1DA4057900D8C87A /* BrickUtilsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickUtilsTests.swift; sourceTree = "<group>"; };
 		93D9EC4C1DA4057900D8C87A /* CollectionViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSource.swift; sourceTree = "<group>"; };
 		93D9EC4D1DA4057900D8C87A /* DataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSources.swift; sourceTree = "<group>"; };
-		93D9EC4E1DA4057900D8C87A /* XCTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = XCTests.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		93D9EC4E1DA4057900D8C87A /* XCTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTests.swift; sourceTree = "<group>"; };
 		93D9EC501DA4057900D8C87A /* BrickCollectionViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickCollectionViewTests.swift; sourceTree = "<group>"; };
 		93D9EC511DA4057900D8C87A /* BrickViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickViewControllerTests.swift; sourceTree = "<group>"; };
 		93D9EC521DA4057900D8C87A /* TestBrickViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TestBrickViewController.storyboard; sourceTree = "<group>"; };
@@ -774,7 +768,6 @@
 				93D9EBE11DA4057000D8C87A /* BrickExtensions.swift */,
 				93D9EBE21DA4057000D8C87A /* BrickUtils.swift */,
 				93D9EBE31DA4057000D8C87A /* FatalError.swift */,
-				9340B6B11F4DBC2A005C28F0 /* BrickLogger.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -908,7 +901,6 @@
 				9372C5061DA40735007D7EA1 /* FatalErrorTests.swift */,
 				93D9EC4E1DA4057900D8C87A /* XCTests.swift */,
 				933FF95D1DC1207900E0B80E /* Swizzle.swift */,
-				9340B6B41F4DE8F4005C28F0 /* BrickLoggerTests.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1165,7 +1157,6 @@
 				4E9A253B1DABEB9300D7EA99 /* BrickExtensions.swift in Sources */,
 				4E387C561DAEAB350087820E /* BrickAppearBehavior.swift in Sources */,
 				4E9A25331DABEB8800D7EA99 /* BrickLayoutSection.swift in Sources */,
-				9340B6B31F4DBC2A005C28F0 /* BrickLogger.swift in Sources */,
 				4E9A25311DABEB8800D7EA99 /* BrickLayout.swift in Sources */,
 				4E9A25211DABEB6000D7EA99 /* MinimumStickyLayoutBehavior.swift in Sources */,
 				4E9A25301DABEB8800D7EA99 /* BrickFlowLayout.swift in Sources */,
@@ -1245,7 +1236,6 @@
 				4E9A254C1DABECDF00D7EA99 /* StickyFooterLayoutBehaviorTests.swift in Sources */,
 				4E9A256B1DABED0600D7EA99 /* TestBrickViewController.swift in Sources */,
 				4E9A255C1DABECF500D7EA99 /* BrickSelfsizingFlowLayoutTests.swift in Sources */,
-				9340B6B61F4DE8F4005C28F0 /* BrickLoggerTests.swift in Sources */,
 				4E9A25501DABECE300D7EA99 /* ImageBrickTests.swift in Sources */,
 				932365731DF4FE1F00BE5183 /* BrickAlignmentTests.swift in Sources */,
 				4E387C571DAEAB380087820E /* BrickAppearBehaviorTests.swift in Sources */,
@@ -1282,7 +1272,6 @@
 				93D9EC0A1DA4057000D8C87A /* BrickLayoutInvalidationContext.swift in Sources */,
 				93F9B4D21DAD686E00927BE6 /* BrickAppearBehavior.swift in Sources */,
 				93D9EBF01DA4057000D8C87A /* OnScrollDownStickyLayoutBehavior.swift in Sources */,
-				9340B6B21F4DBC2A005C28F0 /* BrickLogger.swift in Sources */,
 				93D9EC151DA4057000D8C87A /* BrickCollectionView+BrickLayoutDataSource.swift in Sources */,
 				93D9EC121DA4057000D8C87A /* BrickExtensions.swift in Sources */,
 				93D9EBE91DA4057000D8C87A /* CardLayoutBehavior.swift in Sources */,
@@ -1329,7 +1318,6 @@
 				93D9EC821DA4057900D8C87A /* DataSources.swift in Sources */,
 				93D9EC7D1DA4057900D8C87A /* BrickSectionDataSourceTests.swift in Sources */,
 				93D9EC5D1DA4057900D8C87A /* SpotlightLayoutBehaviorTests.swift in Sources */,
-				9340B6B51F4DE8F4005C28F0 /* BrickLoggerTests.swift in Sources */,
 				9361309B1DB83CB7008FFFEF /* CustomBrickCollectionView.swift in Sources */,
 				93D9EC691DA4057900D8C87A /* DummyBrickWithoutNib.swift in Sources */,
 				93D9EC791DA4057900D8C87A /* BrickSelfsizingFlowLayoutTests.swift in Sources */,
