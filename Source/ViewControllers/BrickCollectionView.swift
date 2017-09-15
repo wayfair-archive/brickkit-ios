@@ -101,13 +101,6 @@ open class BrickCollectionView: UICollectionView {
         register(BrickSectionCell.self, forCellWithReuseIdentifier: BrickSection.nibName)
     }
 
-    open override func layoutSubviews() {
-        super.layoutSubviews()
-        if layout.isDirty {
-            self.layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .updateDirtyBricks))
-        }
-    }
-    
     // MARK: - Setting up the models
 
     /// Sets the section for the BrickCollectionView
@@ -175,7 +168,7 @@ open class BrickCollectionView: UICollectionView {
         }
 
         if isConfiguringCollectionBrick {
-            BrickLogger.logWarning("calling `registerBrickClass` in `configure(for cell: CollectionBrickCell)` is deprecated. Use `registerBricks(for cell: CollectionBrickCell)` or `CollectionBrickCell(brickTypes: [Brick.Type])`. This will be a fatalError in a future release")
+            BrickUtils.print("calling `registerBrickClass` in `configure(for cell: CollectionBrickCell)` is deprecated. Use `registerBricks(for cell: CollectionBrickCell)` or `CollectionBrickCell(brickTypes: [Brick.Type])`. This will be a fatalError in a future release")
         }
 
         registeredBricks[identifier] = cellIdentifier
@@ -189,7 +182,7 @@ open class BrickCollectionView: UICollectionView {
         self.register(nib, forCellWithReuseIdentifier: cellIdentifier)
 
         if isConfiguringCollectionBrick {
-            BrickLogger.logWarning("calling `registerNib` in `configure(for cell: CollectionBrickCell)` is deprecated. Use `registerBricks(for cell: CollectionBrickCell)`. This will be a fatalError in a future release")
+            BrickUtils.print("calling `registerNib` in `configure(for cell: CollectionBrickCell)` is deprecated. Use `registerBricks(for cell: CollectionBrickCell)`. This will be a fatalError in a future release")
         }
 
         registeredBricks[CustomNibPrefix + identifier] = cellIdentifier

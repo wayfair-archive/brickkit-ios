@@ -199,6 +199,7 @@ class BrickFlowLayoutTests: BrickFlowLayoutBaseTests {
 
     func testDelegate() {
         let brickView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
+        brickView.registerBrickClass(DummyBrick.self)
 
         let delegate = FixedDelegate()
         brickView.layout.delegate = delegate
@@ -206,7 +207,8 @@ class BrickFlowLayoutTests: BrickFlowLayoutBaseTests {
         let section = BrickSection(bricks: [
             DummyBrick()
             ])
-        brickView.setupSectionAndLayout(section)
+        brickView.setSection(section)
+        brickView.layoutSubviews()
 
         XCTAssertTrue(delegate.didUpdateCalled)
         XCTAssertEqual(delegate.updatedIndexPaths, [IndexPath(item: 0, section: 1)])

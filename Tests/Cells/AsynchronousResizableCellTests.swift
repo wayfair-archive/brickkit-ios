@@ -208,6 +208,7 @@ class AsynchronousResizableCellTests: XCTestCase {
     }
 
     func testResizingInCollectionBrickScrolling() {
+        brickView.registerBrickClass(CollectionBrick.self)
 
         let collectionSection = BrickSection(bricks: [
             DummyBrick(width: .ratio(ratio: 1/2)),
@@ -223,7 +224,9 @@ class AsynchronousResizableCellTests: XCTestCase {
             }))
             ])
 
-        brickView.setupSectionAndLayout(section)
+
+        brickView.setSection(section)
+        brickView.layoutSubviews()
 
         let cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? CollectionBrickCell
         cell?.brickCollectionView.contentOffset.x = 2 * brickView.frame.width

@@ -66,7 +66,8 @@ class CollectionBrickTests: XCTestCase {
                 cell.brickCollectionView.registerBrickClass(DummyBrick.self)
             }))
             ], edgeInsets: UIEdgeInsets(top: 300, left: 0, bottom: 0, right: 0))
-        brickView.setupSectionAndLayout(section)
+        brickView.setSection(section)
+        brickView.layoutSubviews()
 
         let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? CollectionBrickCell
         XCTAssertEqual(cell1?.frame, CGRect(x: 0, y: 300, width: 320, height: 200))
@@ -123,7 +124,8 @@ class CollectionBrickTests: XCTestCase {
 
         let delegate = FixedBrickLayoutDelegate()
         brickView.layout.delegate = delegate
-        brickView.setupSectionAndLayout(section)
+        brickView.setSection(section)
+        brickView.layoutSubviews()
 
         XCTAssertEqual(delegate.count, 1, "The delegate should have only been called 1 time for the updated height of the CollectionBrick")
     }
