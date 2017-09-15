@@ -23,7 +23,7 @@ open class StickyLayoutBehavior: BrickLayoutBehavior {
     weak var dataSource: StickyLayoutBehaviorDataSource?
     weak var delegate: StickyLayoutBehaviorDelegate?
     open var contentOffset: CGFloat
-    var stickyAttributes: [BrickLayoutAttributes]!
+    var stickyAttributes: [BrickLayoutAttributes] = []
 
     fileprivate(set) var stickyZIndex = 1
 
@@ -37,7 +37,7 @@ open class StickyLayoutBehavior: BrickLayoutBehavior {
     
     open override func hasInvalidatableAttributes() -> Bool {
         // Only return true if there is at least one attribute that's not hidden
-        return !stickyAttributes.filter({ !$0.isHidden }).isEmpty
+        return stickyAttributes.contains { !$0.isHidden }
     }
 
     open override func resetRegisteredAttributes(_ collectionViewLayout: UICollectionViewLayout) {
