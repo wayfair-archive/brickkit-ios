@@ -29,6 +29,8 @@ open class BrickSection: Brick {
     /// These nibs will be registered, when setting this BrickSection on a BrickCollectionView
     open var nibIdentifiers: [String: UINib]?
 
+    open var classIdentifiers: [String: AnyClass]?
+
     open internal(set) weak var brickCollectionView: BrickCollectionView?
 
     open weak var orderDataSource: BrickSectionOrderDataSource?
