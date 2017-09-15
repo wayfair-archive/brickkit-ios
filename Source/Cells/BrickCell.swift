@@ -181,17 +181,12 @@ open class BrickCell: BaseBrickCell {
         return UIEdgeInsetsMake(defaultTopConstraintConstant, defaultLeftConstraintConstant, defaultBottomConstraintConstant, defaultRightConstraintConstant)
     }
 
-    private var didUpdateEdgeInsets: Bool = false
     @objc open dynamic var edgeInsets: UIEdgeInsets = UIEdgeInsets.zero {
         didSet {
-            if edgeInsets == oldValue {
-                return
-            }
             self.topSpaceConstraint?.constant = edgeInsets.top
             self.bottomSpaceConstraint?.constant = edgeInsets.bottom
             self.leftSpaceConstraint?.constant = edgeInsets.left
             self.rightSpaceConstraint?.constant = edgeInsets.right
-            didUpdateEdgeInsets = true
         }
     }
 
@@ -231,14 +226,7 @@ open class BrickCell: BaseBrickCell {
         guard self._brick.height.isEstimate(withValue: nil) else {
             return layoutAttributes
         }
-
-        if !didUpdateEdgeInsets {
-            guard let brickAttributes = layoutAttributes as? BrickLayoutAttributes, brickAttributes.isEstimateSize else {
-                return layoutAttributes
-            }
-        }
-        didUpdateEdgeInsets = false
-
+        
         let preferred = layoutAttributes
 
         // We're inverting the frame because the given frame is already transformed
