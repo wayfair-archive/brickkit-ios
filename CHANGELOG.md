@@ -1,5 +1,16 @@
 # Change Log
 
+## [2.4.1](https://github.com/wayfair/brickkit-ios/tree/2.4.1) (2017-09-18)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/2.4.0...2.4.1)
+
+**Merged pull requests:**
+
+- Revert change in PR \#164 [\#186](https://github.com/wayfair/brickkit-ios/pull/186) ([wfsttam](https://github.com/wfsttam))
+- Removed code that caused edgeInsets to update incorrectly [\#184](https://github.com/wayfair/brickkit-ios/pull/184) ([pcheung16](https://github.com/pcheung16))
+- Insertion animation clean [\#183](https://github.com/wayfair/brickkit-ios/pull/183) ([butkis93](https://github.com/butkis93))
+- Performance Improvements [\#182](https://github.com/wayfair/brickkit-ios/pull/182) ([vlozko](https://github.com/vlozko))
+- Use Identifiers to register bricks and be able to register cell classes [\#174](https://github.com/wayfair/brickkit-ios/pull/174) ([butkis93](https://github.com/butkis93))
+
 ## [2.4.0](https://github.com/wayfair/brickkit-ios/tree/2.4.0) (2017-08-29)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/2.3.0...2.4.0)
 
@@ -10,6 +21,8 @@
 **Merged pull requests:**
 
 - Fixed performance of height recalculation [\#180](https://github.com/wayfair/brickkit-ios/pull/180) ([rubencagnie](https://github.com/rubencagnie))
+- Revert "Fixed performance of height recalculation" [\#179](https://github.com/wayfair/brickkit-ios/pull/179) ([jay18001](https://github.com/jay18001))
+- Fixed performance of height recalculation [\#178](https://github.com/wayfair/brickkit-ios/pull/178) ([rubencagnie](https://github.com/rubencagnie))
 - Image view now shows the correct image when the cell is reused [\#177](https://github.com/wayfair/brickkit-ios/pull/177) ([logannathanson](https://github.com/logannathanson))
 - Checks if \_brick!=nil before calling framesDidLayout\(\). [\#176](https://github.com/wayfair/brickkit-ios/pull/176) ([ablokker](https://github.com/ablokker))
 
