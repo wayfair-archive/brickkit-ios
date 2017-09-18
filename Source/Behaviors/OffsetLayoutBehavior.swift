@@ -25,6 +25,11 @@ open class OffsetLayoutBehavior: BrickLayoutBehavior {
     public init(dataSource: OffsetLayoutBehaviorDataSource) {
         self.dataSource = dataSource
     }
+    
+    open override func hasInvalidatableAttributes() -> Bool {
+        // Only return true if there is at least one attribute that's not hidden
+        return offsetAttributes.contains { !$0.isHidden }
+    }
 
     open override func resetRegisteredAttributes(_ collectionViewLayout: UICollectionViewLayout) {
         super.resetRegisteredAttributes(collectionViewLayout)

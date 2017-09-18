@@ -27,21 +27,20 @@ public typealias RangeDimensionPair = (dimension: BrickDimension, minimumSize: C
 
 public struct BrickRangeDimension {
     
-    internal var dimensionPairs : [RangeDimensionPair]
+    internal var defaultPair : RangeDimensionPair
+    internal var additionalPairs : [RangeDimensionPair]
     
     public init(default dimension: BrickDimension, additionalRangePairs: [RangeDimensionPair] = []) {
-        dimensionPairs = [(dimension, 0)]
-        dimensionPairs.append(contentsOf: additionalRangePairs.sorted {
-            $0.minimumSize < $1.minimumSize
-        })
+        defaultPair = (dimension, 0)
+        additionalPairs = additionalRangePairs
     }
     
     public func dimension(forWidth width: CGFloat?) -> BrickDimension {
         guard let width = width  else {
-            return dimensionPairs.first!.dimension
+            return defaultPair.dimension
         }
-        var dimension = dimensionPairs.first?.dimension
-        for RangeDimensionPair in dimensionPairs {
+        var dimension = defaultPair.dimension
+        for RangeDimensionPair in additionalPairs {
             if RangeDimensionPair.minimumSize > width {
                 break
             }
@@ -49,7 +48,7 @@ public struct BrickRangeDimension {
                 dimension = RangeDimensionPair.dimension
             }
         }
-        return dimension!
+        return dimension
     }
 }
 
@@ -73,11 +72,14 @@ public func ==(lhs: RangeDimensionPair, rhs: RangeDimensionPair) -> Bool {
 }
 
 public func ==(lhs: BrickRangeDimension, rhs: BrickRangeDimension) -> Bool {
-    if lhs.dimensionPairs.count != rhs.dimensionPairs.count {
+    if lhs.additionalPairs.count != rhs.additionalPairs.count {
         return false
     }
-    for (index, value) in lhs.dimensionPairs.enumerated() {
-        if value != rhs.dimensionPairs[index] {
+    if lhs.defaultPair != rhs.defaultPair {
+        return false
+    }
+    for (index, value) in lhs.additionalPairs.enumerated() {
+        if value != rhs.additionalPairs[index] {
             return false
         }
     }

@@ -46,6 +46,8 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
 
     func testSpotlightBehavior() {
         setupWithDataSources()
+        
+        XCTAssertTrue(behavior.hasInvalidatableAttributes())
 
         firstAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 0))
         XCTAssertEqualWithAccuracy(firstAttributes!.frame, CGRect(x: 0, y: 0, width: 320, height: 300), accuracy: CGRect(x: 1, y: 1, width: 1, height: 1))
@@ -320,5 +322,16 @@ class SpotlightLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         collectionView.layoutSubviews()
 
         XCTAssertEqual(collectionView.visibleCells.count, 6)
+    }
+    
+    func testNoInvalitableAttributes() {
+        layoutBehaviorDataSource = FixedSpotlightLayoutBehaviorDataSource(height: nil) // SpotlightLayoutBehaviorDataSource method returns nil
+        behavior = SpotlightLayoutBehavior(dataSource: layoutBehaviorDataSource)
+        behavior.scrollLastBrickToTop = false
+        self.layout.behaviors.insert(behavior)
+        
+        let sectionCount = 3
+        setDataSources(SectionsCollectionViewDataSource(sections: [sectionCount]), brickLayoutDataSource: FixedBrickLayoutDataSource(widthRatio: 1, height: 300))
+        XCTAssertFalse(behavior.hasInvalidatableAttributes())
     }
 }

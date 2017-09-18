@@ -275,7 +275,9 @@ extension BrickFlowLayout {
             return true
         } else if contentOffset != newBounds.origin {
             contentOffset = newBounds.origin
-            return !behaviors.isEmpty
+            // Don't want to return true if there are behaviors but no attributes assigned
+            // to these behaviors, otherwise the collection view will invalidate every index path.
+            return behaviors.contains { $0.hasInvalidatableAttributes() }
         }
 
         return false

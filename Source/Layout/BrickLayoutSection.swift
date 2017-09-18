@@ -673,7 +673,6 @@ internal class BrickLayoutSection {
         let oldOriginalFrame: CGRect?
 
         if existingAttribute {
-            brickAttributes = attributes[index]
             oldFrame = brickAttributes.frame
             oldOriginalFrame = brickAttributes.originalFrame
 

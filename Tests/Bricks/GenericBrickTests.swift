@@ -65,6 +65,27 @@ class GenericBrickTestUILabel: GenericBrickTests {
     }
 }
 
+class GenericBrickTestHeight: GenericBrickTests, CustomHeightProvider {
+    
+    override func setUp() {
+        super.setUp()
+        // UIView has no intrinsic content size
+        brickCollectionView.setupSingleBrickAndLayout(GenericBrick<UIView>(GenericButtonBrickIdentifier, size: BrickSize(width: .ratio(ratio: 1), height: .fixed(size: 50))) { button, view in
+        })
+        cell = firstCellForIdentifier(GenericButtonBrickIdentifier)
+    }
+    
+    func testHeight() {
+        XCTAssertEqual(CGFloat(0), cell.heightForBrickView(withWidth: 200))
+        cell.customHeightProvider = self
+        XCTAssertEqual(CGFloat(100), cell.heightForBrickView(withWidth: 200))
+    }
+    
+    func customHeight(for view: UIView, constraintedTo width: CGFloat) -> CGFloat {
+        return 100
+    }
+}
+
 class GenericBrickTestUILabelWithEdgeInsets: GenericBrickTests {
 
     override func setUp() {

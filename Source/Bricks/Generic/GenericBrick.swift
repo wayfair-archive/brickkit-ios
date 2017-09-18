@@ -17,6 +17,10 @@ public protocol UpdateFramesListener {
     func didUpdateFrames()
 }
 
+public protocol CustomHeightProvider {
+    func customHeight(for view: UIView, constraintedTo width: CGFloat) -> CGFloat
+}
+
 open class GenericBrick<T: UIView>: Brick, ViewGenerator {
     public typealias ConfigureView = (_ view: T, _ cell: GenericBrickCell) -> Void
 
@@ -72,6 +76,8 @@ open class GenericBrickCell: BrickCell {
             }
         }
     }
+    
+    open var customHeightProvider: CustomHeightProvider?
 
     internal private(set) var fromNib: Bool = false
 
@@ -185,6 +191,15 @@ open class GenericBrickCell: BrickCell {
 
         if let genericContentView = genericContentView as? UpdateFramesListener {
             genericContentView.didUpdateFrames()
+        }
+    }
+    
+    open override func heightForBrickView(withWidth width: CGFloat) -> CGFloat {
+        if let heightProvider = customHeightProvider {
+            let height = heightProvider.customHeight(for: self.genericContentView!, constraintedTo: width)
+            return height
+        } else {
+            return super.heightForBrickView(withWidth: width)
         }
     }
 

@@ -43,6 +43,11 @@ class CardLayoutBehaviorTests: BrickFlowLayoutBaseTests {
 
         super.tearDown()
     }
+    
+    func testEmptyCardLayoutBehaviorDataSource() {
+        let emptyCardLayoutBehavior = CardLayoutBehavior(dataSource: FixedCardLayoutBehaviorDataSource(height: nil))
+        XCTAssertFalse(emptyCardLayoutBehavior.hasInvalidatableAttributes())
+    }
 
     func testCardScrollBehavior() {
 
@@ -61,6 +66,7 @@ class CardLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 1200))
 
         layout.collectionView?.contentOffset.y = 100
+        XCTAssertTrue(behavior.hasInvalidatableAttributes())
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
 
         firstAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 0, section: 0))
