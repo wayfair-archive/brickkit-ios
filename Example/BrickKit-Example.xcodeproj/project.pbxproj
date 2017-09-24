@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33C0F44D1F77E801008D14BF /* DragDropBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C0F44C1F77E801008D14BF /* DragDropBrickViewController.swift */; };
 		4E15F92C1DBA570600BBD363 /* MockTwitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F9231DBA570600BBD363 /* MockTwitterViewController.swift */; };
 		4E15F92D1DBA570600BBD363 /* MockTwitterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E15F9231DBA570600BBD363 /* MockTwitterViewController.swift */; };
 		4E3BD6911DB0097400541900 /* BrickKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E3BD6851DB0095000541900 /* BrickKit.framework */; };
@@ -265,6 +266,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		33C0F44C1F77E801008D14BF /* DragDropBrickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragDropBrickViewController.swift; sourceTree = "<group>"; };
 		4E15F9231DBA570600BBD363 /* MockTwitterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockTwitterViewController.swift; sourceTree = "<group>"; };
 		4E3BD5C71DB008CD00541900 /* BrickApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrickApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E3BD67D1DB0094F00541900 /* BrickKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BrickKit.xcodeproj; path = ../BrickKit.xcodeproj; sourceTree = "<group>"; };
@@ -565,6 +567,7 @@
 				FCD401B51E203D080011173A /* ActivityIndicatorOverrideSource.swift */,
 				93AB641C1E67AA4800395CAA /* IsHiddenBrickViewController.swift */,
 				664A10F51F3359D200DE258B /* PreviewingBrickViewController.swift */,
+				33C0F44C1F77E801008D14BF /* DragDropBrickViewController.swift */,
 			);
 			path = Interactive;
 			sourceTree = "<group>";
@@ -1008,6 +1011,7 @@
 				9357E7F61EDB4CAB0085AFFA /* TwoLabelView.swift in Sources */,
 				4E3BD8441DB1316400541900 /* MultiDimensionBrickViewController.swift in Sources */,
 				4E15F92C1DBA570600BBD363 /* MockTwitterViewController.swift in Sources */,
+				33C0F44D1F77E801008D14BF /* DragDropBrickViewController.swift in Sources */,
 				4E3BD7DE1DB1316400541900 /* SegmentHeaderBrick.swift in Sources */,
 				4E3BD8261DB1316400541900 /* HideSectionsViewController.swift in Sources */,
 				937C9C281F0F2F66008F47CD /* ReverseBrickViewController.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import UIKit
 
-// Mark: - Resizeable cells
+// MARK: - Resizeable cells
 
 public protocol AsynchronousResizableCell: class  {
     weak var resizeDelegate: AsynchronousResizableDelegate? { get set }

@@ -95,6 +95,11 @@ open class BrickViewController: UIViewController, UICollectionViewDelegate {
 
             self.collectionView = collectionView
             self.collectionView?.delegate = self
+            
+            if #available(iOS 11.0, *) {
+                self.collectionView?.dragDelegate = self
+                self.collectionView?.dropDelegate = self
+            }
         }
     }
     

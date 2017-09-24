@@ -121,6 +121,7 @@ class NavigationDataSource {
         InvalidateHeightViewController.self,
         InteractiveAlignViewController.self,
         PreviewingBrickViewController.self,
+        DragDropBrickViewController.self
         ])
     #else
     var InteractiveExamples = NavigationItem(title: "Interactive", subTitle: "Interactive Examples", viewControllers: [

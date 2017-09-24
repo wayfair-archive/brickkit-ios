@@ -115,7 +115,7 @@ open class BrickSection: Brick {
         }
     }
 
-    // Mark: - CustomStringConvertible
+    // MARK: - CustomStringConvertible
 
     /// Convenience method to show description with an indentation
     override internal func descriptionWithIndentationLevel(_ indentationLevel: Int) -> String {
@@ -130,5 +130,20 @@ open class BrickSection: Brick {
         description += brickDescription
         
         return description
+    }
+}
+
+@available(iOS 11.0, *)
+extension BrickSection {
+    func canBricksHandle(_ session: UIDropSession) -> Bool {
+        for brick in bricks {
+            guard let dropDelegate = brick.dragDropDelegate else {
+                continue
+            }
+            if dropDelegate.canHandle(session) {
+                return true
+            }
+        }
+        return false
     }
 }

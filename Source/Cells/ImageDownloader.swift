@@ -23,7 +23,7 @@ private func _downloadImageAndSet(_ imageDownloader: ImageDownloader, on imageVi
     }
 }
 
-// Mark: - Image Downloader
+// MARK: - Image Downloader
 public protocol ImageDownloader: class {
     func downloadImage(with imageURL: URL, onCompletion completionHandler: @escaping ((_ image: UIImage, _ url: URL) -> Void))
     func downloadImageAndSet(on imageView: UIImageView, with imageURL: URL, onCompletion completionHandler: @escaping ((_ image: UIImage, _ url: URL) -> Void))

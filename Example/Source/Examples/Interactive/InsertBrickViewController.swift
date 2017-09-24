@@ -150,9 +150,8 @@ extension InsertBrickViewController: BrickRepeatCountDataSource {
     func repeatCount(for identifier: String, with collectionIndex: Int, collectionIdentifier: String) -> Int {
         if identifier == BrickIdentifiers.repeatLabel {
             return data.count
-        } else {
-            return 1
         }
+        return 1
     }
 }
 

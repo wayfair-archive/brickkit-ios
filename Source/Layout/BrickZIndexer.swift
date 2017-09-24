@@ -136,7 +136,7 @@ public enum BrickLayoutZIndexBehavior {
 
 }
 
-// Mark: - SectionRange
+// MARK: - SectionRange
 
 /// Container object that holds a range and the start zIndex
 struct SectionRange {
@@ -231,7 +231,7 @@ class BrickZIndexer {
         return zIndexBehavior.zIndexFromRanges(ranges, index: indexPath.item) - (withOffset ? maxZIndex : 0)
     }
 
-// Mark: - Private methods
+// MARK: - Private methods
 
     /// Update the count of the ranges to the parent section(s) of an inserted section
     fileprivate func updateRanges(to section: Int, with numberOfItems: Int, dataSource: BrickLayoutDataSource, layout: BrickFlowLayout) {

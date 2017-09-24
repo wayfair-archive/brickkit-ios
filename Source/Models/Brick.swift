@@ -22,10 +22,54 @@ public protocol BrickPreviewingDelegate: class {
     func commit(viewController: UIViewController)
 }
 
+@available(iOS 11.0, *)
+public protocol BrickDragDropDelegate: class {
+    @available(iOS 11.0, *)
+    var itemProviderType: NSItemProviderReading.Type { get }
+    
+    @available(iOS 11.0, *)
+    func dragItems(for session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem]
+    
+    @available(iOS 11.0, *)
+    func previewParameters(for view: UICollectionViewCell, at indexPath: IndexPath) -> UIDragPreviewParameters?
+    
+    @available(iOS 11.0, *)
+    func canHandle(_ session: UIDropSession) -> Bool
+
+    @available(iOS 11.0, *)
+    func willDrop(_ item: Any?) -> Bool
+
+    @available(iOS 11.0, *)
+    func drop(_ item: Any?, to destinationIndex: Int, from sourceIndex: Int?)
+}
+
+@available(iOS 11.0, *)
+extension BrickDragDropDelegate {
+    func dragItems(for session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        return []
+    }
+    
+    func previewParameters(for view: UICollectionViewCell, at indexPath: IndexPath) -> UIDragPreviewParameters? {
+        return nil
+    }
+    
+    func canHandle(_ session: UIDropSession) -> Bool {
+        return false
+    }
+    
+    func willDrop(_ item: Any?) -> Bool {
+        return false
+    }
+
+    func drop(_ item: Any?, to destinationIndex: Int, from sourceIndex: Int? = nil) {
+        // no-op
+    }
+}
+
 /// A Brick is the model representation of a BrickCell in a BrickCollectionView
 open class Brick: CustomStringConvertible {
 
-    // Mark: - Public members
+    // MARK: - Public members
 
     /// Identifier of the brick. Defaults to empty string
     open let identifier: String
@@ -83,6 +127,19 @@ open class Brick: CustomStringConvertible {
     
     /// Delegate that handles behavior for how to present other view controllers using 3D Touch
     open weak var previewingDelegate: BrickPreviewingDelegate?
+    
+    private weak var _dragDropDelegate: AnyObject?
+    @available(iOS 11.0, *)
+    open weak var dragDropDelegate: BrickDragDropDelegate? {
+        get {
+            return _dragDropDelegate as? BrickDragDropDelegate
+        }
+        set(newDelegate) {
+            _dragDropDelegate = newDelegate
+        }
+    }
+    
+    
     /// Initialize a Brick
     ///
     /// - parameter identifier:      Identifier of the brick. Defaults to empty string
@@ -103,7 +160,7 @@ open class Brick: CustomStringConvertible {
         self.accessibilityIdentifier = identifier
     }
 
-    // Mark: - Internal
+    // MARK: - Internal
 
     /// Keeps track of the counts per collection info
     internal var counts: [CollectionInfo:Int] = [:]
@@ -113,7 +170,7 @@ open class Brick: CustomStringConvertible {
         return counts[collection] ?? self.repeatCount
     }
 
-    // Mark: - Loading nibs/cells
+    // MARK: - Loading nibs/cells
 
     /// Instance variable: Name of the nib that should be used to load this brick's cell
     open var nibName: String {
@@ -142,7 +199,7 @@ open class Brick: CustomStringConvertible {
         return Bundle(for: self)
     }
 
-    // Mark: - CustomStringConvertible
+    // MARK: - CustomStringConvertible
 
     open var description: String {
         return descriptionWithIndentationLevel(0)

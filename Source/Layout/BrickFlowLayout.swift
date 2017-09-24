@@ -46,7 +46,7 @@ open class BrickFlowLayout: UICollectionViewLayout, BrickLayout {
     var dirtyMap: [Int: Int] = [:]
     var dirtyIndexPaths: [IndexPath] = []
 
-    // Mark: - Public members
+    // MARK: - Public members
 
     open override var description: String {
         return super.description + " CollectionBrick: \(isInCollectionBrick)"
@@ -85,7 +85,7 @@ open class BrickFlowLayout: UICollectionViewLayout, BrickLayout {
     /// Width Ratio
     open var widthRatio: CGFloat = 1
 
-    // Mark: - Private members
+    // MARK: - Private members
 
     /// Content width that was used to calculate the layout
     fileprivate var contentWidth: CGFloat?
