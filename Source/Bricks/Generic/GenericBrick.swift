@@ -17,6 +17,8 @@ public protocol UpdateFramesListener {
     func didUpdateFrames()
 }
 
+public typealias HeightProviderHandler = ((_ width: CGFloat) -> CGFloat)
+
 open class GenericBrick<T: UIView>: Brick, ViewGenerator {
     public typealias ConfigureView = (_ view: T, _ cell: GenericBrickCell) -> Void
 
@@ -73,7 +75,7 @@ open class GenericBrickCell: BrickCell {
         }
     }
     
-    open var customHeightProvider: ((_ width: CGFloat) -> CGFloat)?
+    open var customHeightProvider: HeightProviderHandler?
 
     internal private(set) var fromNib: Bool = false
 
