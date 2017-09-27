@@ -65,7 +65,7 @@ class GenericBrickTestUILabel: GenericBrickTests {
     }
 }
 
-class GenericBrickTestHeight: GenericBrickTests, CustomHeightProvider {
+class GenericBrickTestHeight: GenericBrickTests {
     
     override func setUp() {
         super.setUp()
@@ -77,12 +77,10 @@ class GenericBrickTestHeight: GenericBrickTests, CustomHeightProvider {
     
     func testHeight() {
         XCTAssertEqual(CGFloat(0), cell.heightForBrickView(withWidth: 200))
-        cell.customHeightProvider = self
+        cell.customHeightProvider = { width in
+            return 100
+        }
         XCTAssertEqual(CGFloat(100), cell.heightForBrickView(withWidth: 200))
-    }
-    
-    func customHeight(for view: UIView, constraintedTo width: CGFloat) -> CGFloat {
-        return 100
     }
 }
 
