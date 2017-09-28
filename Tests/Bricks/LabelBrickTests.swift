@@ -274,6 +274,52 @@ class LabelBrickTests: XCTestCase {
         XCTAssertTrue(overrideSource.didCallResetContent)
         XCTAssertTrue(overrideSource.didCallOverrideContent)
     }
+
+    func testLabelResetsBeforeReusing() {
+        brickCollectionView.registerBrickClass(LabelBrick.self)
+
+        let model = LabelBrickCellModel(text: "TEST", textColor: .red) { cell in
+            cell.label.textAlignment = .right
+            cell.label.isHidden = true
+            cell.label.attributedText = NSAttributedString()
+            cell.label.numberOfLines = 1
+            cell.isHidden = true
+            cell.accessoryView = UIView()
+            cell.backgroundColor = .green
+            cell.label.backgroundColor = .red
+            cell.label.text = "TEST"
+            cell.accessoryView = UIView()
+        }
+
+        let section = BrickSection(bricks: [
+            LabelBrick("labelBrick", dataSource: model),
+            ])
+
+        brickCollectionView.setSection(section)
+        brickCollectionView.layoutSubviews()
+
+        let cell = brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1)) as? LabelBrickCell
+        cell?.updateContent()
+        cell?.layoutIfNeeded()
+
+        XCTAssertEqual(cell?.label.numberOfLines, 1)
+        XCTAssertEqual(cell?.label.backgroundColor, .red)
+        XCTAssertEqual(cell?.backgroundColor, .green)
+        XCTAssertNotNil(cell?.accessoryView)
+        XCTAssertNotNil(cell?.label.attributedText)
+        XCTAssertEqual(cell?.label.text, "TEST")
+        XCTAssertEqual(cell?.label.textAlignment, .right)
+
+        cell?.prepareForReuse()
+
+        XCTAssertEqual(cell?.label.textAlignment, .natural)
+        XCTAssertEqual(cell?.label.numberOfLines, 0)
+        XCTAssertEqual(cell?.label.backgroundColor, .white)
+        XCTAssertEqual(cell?.backgroundColor, .white)
+        XCTAssertNil(cell?.accessoryView)
+        XCTAssertNil(cell?.label.attributedText)
+        XCTAssertNil(cell?.label.text)
+    }
 }
 
 class FixedLabelDataSource: LabelBrickCellDataSource {

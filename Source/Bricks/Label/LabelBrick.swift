@@ -187,6 +187,31 @@ open class LabelBrickCell: GenericBrickCell, Bricklike {
         brick.dataSource?.configureLabelBrickCell(self)
     }
 
+    override open func prepareForReuse() {
+        super.prepareForReuse()
+        self.backgroundColor = .white
+        self.backgroundView = nil
+        self.isHidden = false
+        self.edgeInsets = UIEdgeInsets.zero
+        self.accessoryView = nil
+
+        self.label.text = nil
+        self.label.attributedText = nil
+        self.label.textAlignment = .natural
+        self.label.numberOfLines = 0
+        self.label.textColor = .black
+        self.label.isHidden = false
+        self.label.backgroundColor = .white
+
+        self.horizontalRuleLeft = nil
+        self.horizontalRuleRight = nil
+
+        if !fromNib {
+            self.button = nil
+            self.imageView?.image = nil
+        }
+    }
+
     @IBAction func buttonTapped(_ sender: UIButton) {
         brick.delegate?.buttonTouchedForLabelBrickCell(self)
     }
