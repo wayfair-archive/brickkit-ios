@@ -314,8 +314,8 @@ class LabelBrickTests: XCTestCase {
 
         XCTAssertEqual(cell?.label.textAlignment, .natural)
         XCTAssertEqual(cell?.label.numberOfLines, 0)
-        XCTAssertEqual(cell?.label.backgroundColor, .white)
-        XCTAssertEqual(cell?.backgroundColor, .white)
+        XCTAssertEqual(cell?.label.backgroundColor, .clear)
+        XCTAssertEqual(cell?.backgroundColor, .clear)
         XCTAssertNil(cell?.accessoryView)
         XCTAssertNil(cell?.label.attributedText)
         XCTAssertNil(cell?.label.text)

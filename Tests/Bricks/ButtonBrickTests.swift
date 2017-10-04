@@ -312,7 +312,7 @@ class ButtonBrickTests: XCTestCase {
 
         XCTAssertEqual(cell?.button.titleLabel?.textAlignment, .natural)
         XCTAssertEqual(cell?.button.titleLabel?.numberOfLines, 0)
-        XCTAssertEqual(cell?.backgroundColor, .white)
+        XCTAssertEqual(cell?.backgroundColor, .clear)
         XCTAssertNil(cell?.accessoryView)
         XCTAssertNil(cell?.button.titleLabel?.backgroundColor)
         XCTAssertNil(cell?.button.titleLabel?.attributedText)
