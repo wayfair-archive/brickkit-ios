@@ -164,7 +164,7 @@ open class ButtonBrickCell: GenericBrickCell, Bricklike {
         self.isHidden = false
         self.accessoryView = nil
         self.backgroundView = nil
-        self.backgroundColor = .white
+        self.backgroundColor = .clear
 
         self.button.isHidden = false
         self.button.setImage(nil, for: .normal)

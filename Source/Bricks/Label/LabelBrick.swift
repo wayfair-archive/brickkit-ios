@@ -189,7 +189,7 @@ open class LabelBrickCell: GenericBrickCell, Bricklike {
 
     override open func prepareForReuse() {
         super.prepareForReuse()
-        self.backgroundColor = .white
+        self.backgroundColor = .clear
         self.backgroundView = nil
         self.isHidden = false
         self.edgeInsets = UIEdgeInsets.zero
@@ -201,7 +201,7 @@ open class LabelBrickCell: GenericBrickCell, Bricklike {
         self.label.numberOfLines = 0
         self.label.textColor = .black
         self.label.isHidden = false
-        self.label.backgroundColor = .white
+        self.label.backgroundColor = .clear
 
         self.horizontalRuleLeft = nil
         self.horizontalRuleRight = nil
