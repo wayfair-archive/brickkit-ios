@@ -302,11 +302,9 @@ extension BrickFlowLayout {
 
     func updateDirtyBricks(updatedAttributes: @escaping OnAttributesUpdatedHandler) {
         for (section, item) in dirtyMap {
-            // This can be unwrapped safely
-            // because the sections that are in the dirtyMap should be there
-            let layoutSection = sections![section]!
-            layoutSection.createOrUpdateCells(from: item, invalidate: false, updatedAttributes: updatedAttributes)
-            if let sectionAttributes = layoutSection.sectionAttributes {
+            let layoutSection = sections?[section]
+            layoutSection?.createOrUpdateCells(from: item, invalidate: false, updatedAttributes: updatedAttributes)
+            if let sectionAttributes = layoutSection?.sectionAttributes {
                 invalidateHeight(for: sectionAttributes.indexPath, updatedAttributes: updatedAttributes)
             }
         }
