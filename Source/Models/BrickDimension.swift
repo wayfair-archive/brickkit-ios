@@ -18,6 +18,12 @@ public struct BrickSize {
     }
 }
 
+extension BrickSize: Equatable {
+    public static func ==(lhs: BrickSize, rhs: BrickSize) -> Bool {
+        return lhs.height == rhs.height && lhs.width == rhs.width
+    }
+}
+
 public enum RestrictedSize {
     case minimumSize(size: BrickDimension)
     case maximumSize(size: BrickDimension)
