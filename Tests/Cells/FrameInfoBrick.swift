@@ -21,6 +21,7 @@ class FrameInfoBrickCell: BrickCell, Bricklike {
 
     override open func framesDidLayout() {
         super.framesDidLayout()
+        assert(Thread.isMainThread)
         if firstReportedImageViewFrame == nil {
             firstReportedImageViewFrame = self.imageView.frame
         }

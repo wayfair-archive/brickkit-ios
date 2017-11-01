@@ -29,42 +29,39 @@ open class ImageBrick: GenericBrick<UIImageView> {
     public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, dataSource: ImageBrickDataSource) {
         self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: dataSource)
     }
-    
+
     public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, image: UIImage, contentMode: UIViewContentMode) {
         let model = ImageBrickModel(image: image, contentMode: contentMode)
         self.init(identifier, width: width, height: height, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
     }
-    
+
     public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, imageUrl: URL, contentMode: UIViewContentMode) {
         let model = ImageURLBrickModel(url: imageUrl, contentMode: contentMode)
         self.init(identifier, width: width, height: height, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
     }
-    
-    
+
     public init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, dataSource: ImageBrickDataSource) {
-        
+
         self.dataSource = dataSource
         super.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView, configureView: { imageView, cell in
             imageView.contentMode = .scaleToFill
             imageView.clipsToBounds = true
         })
-        
+
         if dataSource is ImageBrickModel || dataSource is ImageURLBrickModel {
             self.model = dataSource
         }
     }
-    
+
     public convenience init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, image: UIImage, contentMode: UIViewContentMode) {
         let model = ImageBrickModel(image: image, contentMode: contentMode)
         self.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
     }
-    
+
     public convenience init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, imageUrl: URL, contentMode: UIViewContentMode) {
         let model = ImageURLBrickModel(url: imageUrl, contentMode: contentMode)
         self.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
     }
-
-    
 }
 
 // MARK: - DataSource
@@ -174,16 +171,9 @@ open class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableCel
         imageView.contentMode = dataSource.contentModeForImageBrickCell(self)
 
         if let image = dataSource.imageForImageBrickCell(self) {
-            if self.brick.size.height.isEstimate(withValue: nil) {
-                self.setRatioConstraint(for: image)
-            }
-            imageView.image = image
-            
-            if let delegate = brick.delegate {
-                delegate.didSetImage(brickCell: self)
-            }
-            
-            imageLoaded = true
+            self.setImage(image)
+        } else if let _ = dataSource.imageURLForImageBrickCell(self) {
+            self.setNeedsLayout() // calls layoutSubviews on UI pass, which calls framesDidLayout()
         }
     }
 
@@ -194,43 +184,60 @@ open class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableCel
             return
         }
 
-        if let imageURL = dataSource.imageURLForImageBrickCell(self) {
-            guard currentImageURL != imageURL else {
-                if let image = self.imageView.image {
-                    self.resize(image: image)
+        guard let imageURL = dataSource.imageURLForImageBrickCell(self) else {
+            imageView.image = nil
+            return
+        }
+
+        // If the requested url is the same as the existing, and the image is already set, then just resize
+        if let image = self.imageView.image, self.currentImageURL == imageURL {
+            self.setImage(image)
+            return
+        }
+
+        self.currentImageURL = imageURL
+        self.imageDownloader?.downloadImage(with: imageURL, onCompletion: { [weak self] (image: UIImage, url: URL) in
+            // check again that the url we fetched is the same
+            if self?.currentImageURL == url {
+                DispatchQueue.main.async {
+                    self?.setImage(image)
                 }
+            }
+        })
+    }
+
+    fileprivate func setImage(_ image: UIImage) {
+        assert(Thread.isMainThread)
+        self.imageLoaded = true
+        self.resize(image: image, onCompletion: { [weak self] in
+            guard let strongSelf = self else {
                 return
             }
-            
-            imageView.image = nil
-            currentImageURL = imageURL
-
-
-            self.imageDownloader?.downloadImageAndSet(on: self.imageView, with: imageURL, onCompletion: { (image, url) in
-                self.imageLoaded = true
-                self.resize(image: image)
-                
-                if let delegate = self.brick.delegate, let _ = self.imageView.image {
-                    delegate.didSetImage(brickCell: self)
-                }
-            })
-        } else {
-            imageView.image = nil
-        }
+            strongSelf.imageView.image = image
+            strongSelf.brick.delegate?.didSetImage(brickCell: strongSelf)
+        })
     }
-    
+
     override open func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
         currentImageURL = nil
         imageLoaded = false
+        if let constraint = self.heightRatioConstraint {
+            self.imageView.removeConstraint(constraint)
+        }
     }
 
-
-    fileprivate func resize(image: UIImage) {
+    fileprivate func resize(image: UIImage, onCompletion: @escaping (() -> Void)) {
         if self.brick.size.height.isEstimate(withValue: nil) {
             self.setRatioConstraint(for: image)
-            self.resizeDelegate?.performResize(cell: self, completion: nil)
+            guard let resizeDelegate = self.resizeDelegate else {
+                onCompletion()
+                return
+            }
+            resizeDelegate.performResize(cell: self, completion: onCompletion)
+        } else {
+            onCompletion()
         }
     }
 
@@ -238,6 +245,7 @@ open class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableCel
     ///
     /// - parameter image: Image to use to constraint the ratio
     fileprivate func setRatioConstraint(for image: UIImage) {
+        assert(Thread.isMainThread)
         if let constraint = self.heightRatioConstraint {
             self.imageView.removeConstraint(constraint)
         }

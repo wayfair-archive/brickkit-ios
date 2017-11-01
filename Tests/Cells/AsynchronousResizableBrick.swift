@@ -29,7 +29,7 @@ class AsynchronousResizableBrickCell: BrickCell, Bricklike, AsynchronousResizabl
 
     @objc func fireTimer() {
         self.heightConstraint.constant = brick.newHeight
-        self.resizeDelegate?.performResize(cell: self, completion: { [weak self] (_: Bool) in
+        self.resizeDelegate?.performResize(cell: self, completion: { [weak self] in
             self?.brick.didChangeSizeCallBack?()
         })
     }
@@ -43,7 +43,7 @@ class DeinitNotifyingAsyncBrickCell: BrickCell, Bricklike, AsynchronousResizable
 
     override func updateContent() {
         super.updateContent()
-        self.resizeDelegate?.performResize(cell: self, completion: nil)
+        self.resizeDelegate?.performResize(cell: self, completion: {})
     }
 
     deinit {

@@ -176,7 +176,7 @@ class CollectionBrickTests: XCTestCase {
         XCTAssertNotNil(cell?.resizeDelegate)
         XCTAssertTrue(cell?.resizeDelegate === brickView)
 
-        cell?.resizeDelegate?.performResize(cell: cell!, completion: { (completion: Bool) in
+        cell?.resizeDelegate?.performResize(cell: cell!, completion: {
             expect.fulfill()
         })
 

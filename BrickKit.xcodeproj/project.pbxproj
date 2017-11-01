@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36E718501F71907400ADB252 /* banner0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 36E718481F71906200ADB252 /* banner0.jpg */; };
+		36E718511F71907400ADB252 /* banner1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 36E718491F71906200ADB252 /* banner1.jpg */; };
+		36E718521F71907400ADB252 /* square0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 36E7184A1F71906200ADB252 /* square0.jpg */; };
+		36E718531F71907400ADB252 /* square1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 36E7184B1F71906200ADB252 /* square1.jpg */; };
+		36E718541F71907500ADB252 /* banner0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 36E718481F71906200ADB252 /* banner0.jpg */; };
+		36E718551F71907500ADB252 /* banner1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 36E718491F71906200ADB252 /* banner1.jpg */; };
+		36E718561F71907500ADB252 /* square0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 36E7184A1F71906200ADB252 /* square0.jpg */; };
+		36E718571F71907500ADB252 /* square1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 36E7184B1F71906200ADB252 /* square1.jpg */; };
 		4E2882421F2A6BBC0008C157 /* RestrictedBrickSizeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2882411F2A6BBC0008C157 /* RestrictedBrickSizeTest.swift */; };
 		4E2882431F2A6BBC0008C157 /* RestrictedBrickSizeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2882411F2A6BBC0008C157 /* RestrictedBrickSizeTest.swift */; };
 		4E387C561DAEAB350087820E /* BrickAppearBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9B4D11DAD686E00927BE6 /* BrickAppearBehavior.swift */; };
@@ -277,6 +285,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		36E718481F71906200ADB252 /* banner0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = banner0.jpg; path = Assets/banner0.jpg; sourceTree = "<group>"; };
+		36E718491F71906200ADB252 /* banner1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = banner1.jpg; path = Assets/banner1.jpg; sourceTree = "<group>"; };
+		36E7184A1F71906200ADB252 /* square0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = square0.jpg; path = Assets/square0.jpg; sourceTree = "<group>"; };
+		36E7184B1F71906200ADB252 /* square1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = square1.jpg; path = Assets/square1.jpg; sourceTree = "<group>"; };
 		4E2882411F2A6BBC0008C157 /* RestrictedBrickSizeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictedBrickSizeTest.swift; sourceTree = "<group>"; };
 		4E3BD8E01DB5190100541900 /* DummyFocusableBrick.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyFocusableBrick.swift; sourceTree = "<group>"; };
 		4E3BD8E31DB51A9700541900 /* DummyFocusableBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DummyFocusableBrick.xib; sourceTree = "<group>"; };
@@ -461,6 +473,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36E718471F71905000ADB252 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				36E718481F71906200ADB252 /* banner0.jpg */,
+				36E718491F71906200ADB252 /* banner1.jpg */,
+				36E7184A1F71906200ADB252 /* square0.jpg */,
+				36E7184B1F71906200ADB252 /* square1.jpg */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
 		4E9A256F1DAC0EAB00D7EA99 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -792,6 +815,7 @@
 		93D9EC181DA4057900D8C87A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				36E718471F71905000ADB252 /* Assets */,
 				93D9EC351DA4057900D8C87A /* Info.plist */,
 				93D9EC251DA4057900D8C87A /* BrickKitTests.swift */,
 				93D9EC191DA4057900D8C87A /* Behaviors */,
@@ -1092,7 +1116,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36E718541F71907500ADB252 /* banner0.jpg in Resources */,
 				4E9A25FC1DAC312F00D7EA99 /* ImageDownloaderBrick.xib in Resources */,
+				36E718561F71907500ADB252 /* square0.jpg in Resources */,
 				4E3BD8E41DB51A9700541900 /* DummyFocusableBrick.xib in Resources */,
 				4E9A256C1DABED0600D7EA99 /* TestBrickViewController.xib in Resources */,
 				4E9A256A1DABED0600D7EA99 /* TestBrickViewController.storyboard in Resources */,
@@ -1100,7 +1126,9 @@
 				4E9A25FF1DAC312F00D7EA99 /* DummyBrick150.xib in Resources */,
 				4E9A25FD1DAC312F00D7EA99 /* AsynchronousResizableBrick.xib in Resources */,
 				93C72DFD1F1D5EA20095D878 /* FrameInfoBrick.xib in Resources */,
+				36E718551F71907500ADB252 /* banner1.jpg in Resources */,
 				4E9A26011DAC312F00D7EA99 /* DummyBrick.xib in Resources */,
+				36E718571F71907500ADB252 /* square1.jpg in Resources */,
 				4E9A26051DAD323400D7EA99 /* LabelWithEdgeInsets.xib in Resources */,
 				4E9A26021DAC31A300D7EA99 /* image0.png in Resources */,
 				4E9A25FE1DAC312F00D7EA99 /* DummyBrick100.xib in Resources */,
@@ -1131,12 +1159,16 @@
 				4E9A260E1DAD33F800D7EA99 /* DummyBrick100.xib in Resources */,
 				4E9A260D1DAD33F800D7EA99 /* DummyBrick.xib in Resources */,
 				93902D391DA4726900BC3BA1 /* image0.png in Resources */,
+				36E718501F71907400ADB252 /* banner0.jpg in Resources */,
+				36E718521F71907400ADB252 /* square0.jpg in Resources */,
 				93D9EC861DA4057900D8C87A /* TestBrickViewController.storyboard in Resources */,
 				93D9EC881DA4057900D8C87A /* TestBrickViewController.xib in Resources */,
 				4EDA07D41F2FA0ED00BD1D97 /* DummyResizableBrick.xib in Resources */,
 				4E9A26111DAD33F800D7EA99 /* LabelWithEdgeInsets.xib in Resources */,
 				4E9A26101DAD33F800D7EA99 /* ImageDownloaderBrick.xib in Resources */,
+				36E718531F71907400ADB252 /* square1.jpg in Resources */,
 				4E9A260C1DAD33F800D7EA99 /* AsynchronousResizableBrick.xib in Resources */,
+				36E718511F71907400ADB252 /* banner1.jpg in Resources */,
 				938471A11F1D3E4900B2E526 /* FrameInfoBrick.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
