@@ -236,6 +236,7 @@ class FixedDelegate: BrickLayoutDelegate {
         didUpdateCalled = true
         updatedIndexPaths.insert(indexPath)
         didUpdateHandler?()
+        didUpdateHandler = nil
     }
 
 }

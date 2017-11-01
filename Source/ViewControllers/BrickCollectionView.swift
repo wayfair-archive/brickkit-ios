@@ -114,7 +114,8 @@ open class BrickCollectionView: UICollectionView {
     /// Sets the section for the BrickCollectionView
     ///
     /// - parameter section: Section to set
-    open func setSection(_ section: BrickSection) {
+    open func setSection(_ section: BrickSection, offset: CGPoint = .zero) {
+        self.contentOffset = offset
         self.section = section
     }
 
@@ -660,13 +661,25 @@ open class BrickCollectionView: UICollectionView {
     private func isBrickRegistered(brick: Brick) -> Bool {
         return identifier(for: brick) != nil
     }
+
+    open override func setContentOffset(_ contentOffset: CGPoint, animated: Bool) {
+        super.setContentOffset(contentOffset, animated: animated)
+        self.layoutIfNeeded()
+    }
 }
 
 extension BrickCollectionView: AsynchronousResizableDelegate {
 
-    public func performResize(cell: BrickCell, completion: ((Bool) -> Void)? = nil) {
+    public func performResize(cell: BrickCell, completion: (() -> Void)?) {
+        assert(Thread.isMainThread)
         guard let indexPath = self.indexPath(for: cell) else {
-            completion?(true)
+            // If the cell is offscreen, we can force the height by setting the frame
+            let height = cell.heightForBrickView(withWidth: cell.frame.width)
+            if height != cell.frame.height {
+                cell.frame = CGRect(origin: cell.frame.origin, size: CGSize(width: cell.frame.size.width, height: height))
+                self.collectionViewLayout.invalidateLayout()
+            }
+            completion?()
             return
         }
         let newHeight = cell.heightForBrickView(withWidth: cell.frame.width)
@@ -676,7 +689,7 @@ extension BrickCollectionView: AsynchronousResizableDelegate {
         }, completion: { completed in
             // we create a strong reference to self here so that self is not accidentally deallocated while an update is in flight
             let _ = self
-            completion?(completed)
+            completion?()
         })
     }
 }

@@ -436,7 +436,7 @@ class BrickCollectionViewTests: XCTestCase {
 
         cell = brickView.cellForItem(at: IndexPath(item: 1, section: 1))
         XCTAssertEqualWithAccuracy(cell?.frame.height ?? 0, 16.5, accuracy:  0.5)
-        
+
         fixed.repeatCountHash = ["BrickIdentifiers.repeatLabel": 1]
 
         brickView.invalidateRepeatCounts(reloadAllSections: true)
@@ -444,7 +444,7 @@ class BrickCollectionViewTests: XCTestCase {
 
         cell = brickView.cellForItem(at: IndexPath(item: 1, section: 1))
         XCTAssertEqualWithAccuracy(cell?.frame.height ?? 0, 16.5, accuracy:  0.5)
-        
+
     }
 
     func testWithImageInCollectionBrick() {
@@ -974,6 +974,25 @@ class BrickCollectionViewTests: XCTestCase {
                 }
             }
         })
+    }
+
+    func testSetSectionResetsContentOffset() {
+
+        brickView.registerBrickClass(DummyBrick.self)
+        let section = BrickSection(bricks: [
+            DummyBrick("Brick1")
+            ])
+        let repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick1": 25])
+        section.repeatCountDataSource = repeatCountDataSource
+        brickView.setSection(section)
+        brickView.layoutIfNeeded()
+
+        let scrolledOffset = CGPoint(x:0, y: 250)
+        brickView.setContentOffset(scrolledOffset, animated: false)
+        XCTAssertEqual(brickView.contentOffset, scrolledOffset)
+
+        brickView.setSection(section)
+        XCTAssertEqual(brickView.contentOffset, .zero)
     }
 }
 

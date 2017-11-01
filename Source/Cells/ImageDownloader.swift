@@ -10,6 +10,7 @@ import UIKit
 
 private func _downloadImageAndSet(_ imageDownloader: ImageDownloader, on imageView: UIImageView, with imageURL: URL, onCompletion completionHandler: @escaping ((_ image: UIImage, _ url: URL) -> Void)) {
 
+    imageView.image = nil
     imageDownloader.downloadImage(with: imageURL) { (image: UIImage, url: URL) in
         guard imageURL == url else {
             return

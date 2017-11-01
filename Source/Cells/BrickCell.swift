@@ -15,7 +15,7 @@ public protocol AsynchronousResizableCell: class  {
 }
 
 public protocol AsynchronousResizableDelegate: class {
-    func performResize(cell: BrickCell, completion: ((Bool) -> Void)?)
+    func performResize(cell: BrickCell, completion: (() -> Void)?)
 }
 
 public protocol ImageDownloaderCell {
