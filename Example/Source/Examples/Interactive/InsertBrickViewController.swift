@@ -136,11 +136,11 @@ class InsertBrickViewController: BrickApp.BaseBrickController, HasTitle {
         }
     }
 
-    func setAppearIndex(sender: UISegmentedControl) {
+    @objc func setAppearIndex(sender: UISegmentedControl) {
         self.selectedAppearSegmentIndex = sender.selectedSegmentIndex
     }
 
-    func setInsertIndex(sender: UISegmentedControl) {
+    @objc func setInsertIndex(sender: UISegmentedControl) {
         self.selectedInsertSegmentIndex = sender.selectedSegmentIndex
     }
 }

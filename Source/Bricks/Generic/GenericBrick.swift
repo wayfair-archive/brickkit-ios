@@ -145,11 +145,11 @@ open class GenericBrickCell: BrickCell {
         let rightSpaceConstraint: NSLayoutConstraint
         if let accessoryView = self.accessoryView {
             rightSpaceConstraint = self.contentView.rightAnchor.constraint(equalTo: accessoryView.rightAnchor, constant: edgeInsets.right)
-            accessoryView.setContentHuggingPriority(UILayoutPriorityDefaultHigh, for: .horizontal)
-            genericContentView.setContentHuggingPriority(UILayoutPriorityDefaultLow, for: .horizontal)
+            accessoryView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+            genericContentView.setContentHuggingPriority(.defaultLow, for: .horizontal)
 
-            accessoryView.setContentCompressionResistancePriority(UILayoutPriorityDefaultHigh, for: .horizontal)
-            genericContentView.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .horizontal)
+            accessoryView.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+            genericContentView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
 
             self.contentView.addConstraints([
                 accessoryView.centerYAnchor.constraint(equalTo: genericContentView.centerYAnchor),

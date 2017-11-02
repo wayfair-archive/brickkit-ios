@@ -61,8 +61,8 @@ class LabelBrickTests: XCTestCase {
         XCTAssertEqual(cell?.backgroundColor, UIColor.clear)
         XCTAssertEqual(cell?.label.backgroundColor, UIColor.clear)
 
-        XCTAssertEqualWithAccuracy(cell?.frame, CGRect(x: 0, y: 0, width: 320, height: 20), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
-        XCTAssertEqualWithAccuracy(cell?.label.frame, CGRect(x: 0, y: 0, width: 320, height: 20), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
+        XCTAssertEqual(cell?.frame, CGRect(x: 0, y: 0, width: 320, height: 20), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
+        XCTAssertEqual(cell?.label.frame, CGRect(x: 0, y: 0, width: 320, height: 20), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
         
     }
 
@@ -71,8 +71,8 @@ class LabelBrickTests: XCTestCase {
 
         XCTAssertEqual(cell?.label.text, "Hello World\nHello World")
         
-        XCTAssertEqualWithAccuracy(cell?.frame, CGRect(x: 0, y: 0, width: 320, height: 39), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
-        XCTAssertEqualWithAccuracy(cell?.label.frame, CGRect(x: 0, y: 0, width: 320, height: 39), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
+        XCTAssertEqual(cell?.frame, CGRect(x: 0, y: 0, width: 320, height: 39), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
+        XCTAssertEqual(cell?.label.frame, CGRect(x: 0, y: 0, width: 320, height: 39), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
     }
 
     func testLabelBrickEdgeInsets() {
@@ -85,8 +85,8 @@ class LabelBrickTests: XCTestCase {
         XCTAssertEqual(cell?.bottomSpaceConstraint?.constant, 10)
         XCTAssertEqual(cell?.rightSpaceConstraint?.constant, 10)
 
-        XCTAssertEqualWithAccuracy(cell?.frame, CGRect(x: 0, y: 0, width: 320, height: 35), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
-        XCTAssertEqualWithAccuracy(cell?.label.frame, CGRect(x: 5, y: 5, width: 305, height: 20), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
+        XCTAssertEqual(cell?.frame, CGRect(x: 0, y: 0, width: 320, height: 35), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
+        XCTAssertEqual(cell?.label.frame, CGRect(x: 5, y: 5, width: 305, height: 20), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
     }
 
     func testLabelBrickEdgeInsetsMultiLine() {
@@ -100,8 +100,8 @@ class LabelBrickTests: XCTestCase {
             return
         }
         
-        XCTAssertEqualWithAccuracy(cellFrame, CGRect(x: 0, y: 0, width: 320, height: 54), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
-        XCTAssertEqualWithAccuracy(labelFrame, CGRect(x: 5, y: 5, width: 305, height: 39), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
+        XCTAssertEqual(cellFrame, CGRect(x: 0, y: 0, width: 320, height: 54), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
+        XCTAssertEqual(labelFrame, CGRect(x: 5, y: 5, width: 305, height: 39), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
     }
 
     func testChangeText() {
@@ -219,8 +219,8 @@ class LabelBrickTests: XCTestCase {
             let buttonSize = CGSize(width: 320 - buttonWidth, height: 60)
         #endif
         
-        XCTAssertEqualWithAccuracy(cell?.frame, CGRect(origin: CGPoint.zero, size: cellSize), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
-        XCTAssertEqualWithAccuracy(cell?.label.frame, CGRect(origin: CGPoint.zero, size: buttonSize), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
+        XCTAssertEqual(cell?.frame, CGRect(origin: CGPoint.zero, size: cellSize), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
+        XCTAssertEqual(cell?.label.frame, CGRect(origin: CGPoint.zero, size: buttonSize), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
     }
 
     func testLabelWithButtonEdgeInsets() {
@@ -248,8 +248,8 @@ class LabelBrickTests: XCTestCase {
             let buttonSize = CGSize(width: 320 - buttonWidth - 10, height: 60)
         #endif
         
-        XCTAssertEqualWithAccuracy(cell?.frame, CGRect(origin: CGPoint.zero, size: cellSize), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
-        XCTAssertEqualWithAccuracy(cell?.label.frame, CGRect(origin: CGPoint(x: 5.0, y: 5.0), size: buttonSize), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
+        XCTAssertEqual(cell?.frame, CGRect(origin: CGPoint.zero, size: cellSize), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
+        XCTAssertEqual(cell?.label.frame, CGRect(origin: CGPoint(x: 5.0, y: 5.0), size: buttonSize), accuracy: CGRect(x: 0, y: 0, width: 1, height: 1))
     }
 
     func testLabelDelegate() {

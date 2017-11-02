@@ -21,13 +21,13 @@ With BrickKit, you can create complex and responsive layouts in a simple way. It
 ```swift
 
 let section = BrickSection(bricks: [
-    LabelBrick(width: .Ratio(ratio: 1), text: "BRICK 1"),
-    LabelBrick(width: .Ratio(ratio: 1), text: "MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK"),
-    LabelBrick(width: .Ratio(ratio: 1/2), text: "1/2 BRICK"),
-    LabelBrick(width: .Ratio(ratio: 1/2), text: "1/2 BRICK"),
-    LabelBrick(width: .Ratio(ratio: 1/3), text: "1/3 BRICK"),
-    LabelBrick(width: .Ratio(ratio: 1/3), text: "1/3 BRICK"),
-    LabelBrick(width: .Ratio(ratio: 1/3), text: "1/3 BRICK"),
+    LabelBrick(width: .ratio(ratio: 1), text: "BRICK 1"),
+    LabelBrick(width: .ratio(ratio: 1), text: "MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK MULTI-LINE BRICK"),
+    LabelBrick(width: .ratio(ratio: 1/2), text: "1/2 BRICK"),
+    LabelBrick(width: .ratio(ratio: 1/2), text: "1/2 BRICK"),
+    LabelBrick(width: .ratio(ratio: 1/3), text: "1/3 BRICK"),
+    LabelBrick(width: .ratio(ratio: 1/3), text: "1/3 BRICK"),
+    LabelBrick(width: .ratio(ratio: 1/3), text: "1/3 BRICK"),
     ], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
 
 self.setSection(section)
@@ -47,24 +47,24 @@ self.setSection(section)
 ```swift
 
 // Calculate height using auto-layout
-LabelBrick(height: .Auto(estimate: .Fixed(size: 50)), text: "BRICK"),
+LabelBrick(height: .auto(estimate: .fixed(size: 50)), text: "BRICK"),
 
 // Fixed Height
-LabelBrick(height: .Fixed(size: 50), text: "BRICK"),
+LabelBrick(height: .fixed(size: 50), text: "BRICK"),
 
 // Calculate height based on ratio of the width
-LabelBrick(height: .Ratio(ratio: 1), text: "BRICK"),
+LabelBrick(height: .ratio(ratio: 1), text: "BRICK"),
 
 // Complex Rule based on size classes and/or orientation
 let height: BrickDimension =
-    .HorizontalSizeClass(
-        regular: .Orientation(
-            landscape: .Fixed(size: 200),
-            portrait: .Fixed(size: 100)
+    .horizontalSizeClass(
+        regular: .orientation(
+            landscape: .fixed(size: 200),
+            portrait: .fixed(size: 100)
         ),
-        compact: .Orientation(
-            landscape: .Fixed(size: 100),
-            portrait: .Fixed(size: 50)
+        compact: .orientation(
+            landscape: .fixed(size: 100),
+            portrait: .fixed(size: 50)
         )
 )
 
@@ -79,28 +79,28 @@ let height: BrickDimension =
 ```swift
 
 let section = BrickSection(bricks: [
-    LabelBrick(width: .Ratio(ratio: 0.5), text: "BRICK"),
-    BrickSection(width: .Ratio(ratio: 0.5), bricks: [
+    LabelBrick(width: .ratio(ratio: 0.5), text: "BRICK"),
+    BrickSection(width: .ratio(ratio: 0.5), bricks: [
         LabelBrick(text: "BRICK\nBRICK"),
         LabelBrick(text: "BRICK"),
         LabelBrick(text: "BRICK"),
         ], inset: 10),
     BrickSection(bricks: [
-        BrickSection(width: .Ratio(ratio: 1/3), bricks: [
+        BrickSection(width: .ratio(ratio: 1/3), bricks: [
             LabelBrick(text: "BRICK"),
             LabelBrick(text: "BRICK"),
             ], inset: 5),
-        BrickSection(width: .Ratio(ratio: 2/3), backgroundColor: .brickGray3, bricks: [
+        BrickSection(width: .ratio(ratio: 2/3), backgroundColor: .brickGray3, bricks: [
             LabelBrick(text: "BRICK"),
             LabelBrick(text: "BRICK"),
             LabelBrick(text: "BRICK"),
             ], inset: 15),
         ], inset: 5, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)),
-    BrickSection(width: .Ratio(ratio: 0.5), bricks: [
+    BrickSection(width: .ratio(ratio: 0.5), bricks: [
         LabelBrick(text: "BRICK"),
         LabelBrick(text: "BRICK"),
         ], inset: 10),
-    LabelBrick(width: .Ratio(ratio: 0.5), text: "BRICK"),
+    LabelBrick(width: .ratio(ratio: 0.5), text: "BRICK"),
     LabelBrick(text: "BRICK"),
     ], inset: 10, edgeInsets: UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
 
@@ -120,8 +120,8 @@ registerBrickClass(NiblessBrick.self)
 
 let section = BrickSection(bricks: [
     NiblessBrick(text: "BRICK", image: UIImage(named: "logo_splash")!),
-    NiblessBrick(width: .Ratio(ratio: 1/2), text: "BRICK", image: UIImage(named: "logo_inapp")!),
-    NiblessBrick(width: .Ratio(ratio: 1/2), text: "BRICK", image: UIImage(named: "logo_inapp")!)
+    NiblessBrick(width: .ratio(ratio: 1/2), text: "BRICK", image: UIImage(named: "logo_inapp")!),
+    NiblessBrick(width: .ratio(ratio: 1/2), text: "BRICK", image: UIImage(named: "logo_inapp")!)
     ], inset: 10)
 setSection(section)
 
@@ -139,27 +139,27 @@ self.registerBrickClass(CollectionBrick.self)
 self.registerBrickClass(LabelBrick.self)
 
 let section1 = BrickSection(bricks: [
-    ImageBrick(width: .Ratio(ratio: 1/4), height: .Ratio(ratio: 1), dataSource: self),
+    ImageBrick(width: .ratio(ratio: 1/4), height: .ratio(ratio: 1), dataSource: self),
     ] , inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
 section1.repeatCountDataSource = self
 
 let section2 = BrickSection(bricks: [
-    ImageBrick(width: .Ratio(ratio: 1/2), height: .Ratio(ratio: 1), dataSource: self),
+    ImageBrick(width: .ratio(ratio: 1/2), height: .ratio(ratio: 1), dataSource: self),
     ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
 section2.repeatCountDataSource = self
 
 let section3 = BrickSection(bricks: [
-    ImageBrick(width: .Fixed(size: 100), height: .Ratio(ratio: 1), dataSource: self),
+    ImageBrick(width: .fixed(size: 100), height: .ratio(ratio: 1), dataSource: self),
     ], inset: 10, edgeInsets: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
 section3.repeatCountDataSource = self
 
 let section = BrickSection(bricks: [
     LabelBrick(text: "1/4 Ratio"),
-    CollectionBrick(scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section1), brickTypes: [ImageBrick.self]),
+    CollectionBrick(scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section1), brickTypes: [ImageBrick.self]),
     LabelBrick(text: "1/2 Ratio"),
-    CollectionBrick(scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section2), brickTypes: [ImageBrick.self]),
+    CollectionBrick(scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section2), brickTypes: [ImageBrick.self]),
     LabelBrick(text: "100px Fixed"),
-    CollectionBrick(scrollDirection: .Horizontal, dataSource: CollectionBrickCellModel(section: section3), brickTypes: [ImageBrick.self]),
+    CollectionBrick(scrollDirection: .horizontal, dataSource: CollectionBrickCellModel(section: section3), brickTypes: [ImageBrick.self]),
     ])
 setSection(section)
 
@@ -180,11 +180,11 @@ let imageURL = NSURL(string:"https://secure.img2.wfrcdn.com/lf/8/hash/2664/10628
 
 let section = BrickSection("RootSection", bricks: [
     LabelBrick(text: "Below is an image brick with fixed height"),
-    ImageBrick(height: .Fixed(size: 50)dataSource: ImageURLBrickModel(url: imageURL, contentMode: .ScaleAspectFit)),
+    ImageBrick(height: .fixed(size: 50)dataSource: ImageURLBrickModel(url: imageURL, contentMode: .ScaleAspectFit)),
     LabelBrick(text: "Below is an image brick loaded dynamically"),
-    ImageBrick(height: .Auto(estimate: .Fixed(size: 50)), dataSource: ImageURLBrickModel(url: imageURL, contentMode: .ScaleAspectFit)),
+    ImageBrick(height: .auto(estimate: .fixed(size: 50)), dataSource: ImageURLBrickModel(url: imageURL, contentMode: .ScaleAspectFit)),
     LabelBrick(text: "Below is an image brick with fixed height"),
-    ImageBrick(height: .Fixed(size: 50), dataSource: ImageURLBrickModel(url: imageURL, contentMode: .ScaleAspectFill)),
+    ImageBrick(height: .fixed(size: 50), dataSource: ImageURLBrickModel(url: imageURL, contentMode: .scaleAspectFill)),
     ], inset: 10)
 
 self.setSection(section)
@@ -210,9 +210,9 @@ func stickyLayoutBehavior(stickyLayoutBehavior: StickyLayoutBehavior, shouldStic
 
 ```swift
 
-layout.scrollDirection = .Horizontal
+layout.scrollDirection = .horizontal
 
-let snapToBehavior = SnapToPointLayoutBehavior(scrollDirection: .Horizontal(.Center))
+let snapToBehavior = SnapToPointLayoutBehavior(scrollDirection: .horizontal(.Center))
 self.brickCollectionView.layout.behaviors.insert(snapToBehavior)
 self.brickCollectionView.layout.behaviors.insert(CoverFlowLayoutBehavior(minimumScaleFactor: 0.75))
 

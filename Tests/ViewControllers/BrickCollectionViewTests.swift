@@ -33,7 +33,7 @@ class BrickCollectionViewTests: XCTestCase {
         }
 
         brickView = CustomBrickCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
-        expectation(forNotification: "CustomBrickCollectionView.deinit", object: nil, handler: nil)
+        expectation(forNotification: NSNotification.Name(rawValue: "CustomBrickCollectionView.deinit"), object: nil, handler: nil)
         brickView = nil
         waitForExpectations(timeout: 5, handler: nil)
         XCTAssertNil(brickView)
@@ -47,7 +47,7 @@ class BrickCollectionViewTests: XCTestCase {
         brickView = CustomBrickCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
         let snapBehavior = SetZIndexLayoutBehavior(dataSource: FixedSetZIndexLayoutBehaviorDataSource(indexPaths: [:]))
         brickView.layout.behaviors = [snapBehavior]
-        expectation(forNotification: "CustomBrickCollectionView.deinit", object: nil, handler: nil)
+        expectation(forNotification: NSNotification.Name(rawValue: "CustomBrickCollectionView.deinit"), object: nil, handler: nil)
         brickView = nil
         waitForExpectations(timeout: 5, handler: nil)
         XCTAssertNil(brickView)
@@ -214,7 +214,9 @@ class BrickCollectionViewTests: XCTestCase {
         brickView.setupSectionAndLayout(section)
         XCTAssertEqual(brickView.indexPathsForBricksWithIdentifier("Section1"), [IndexPath(item: 0, section: 0)])
         XCTAssertEqual(brickView.indexPathsForBricksWithIdentifier("Section2"), [IndexPath(item: 1, section: 1)])
-        XCTAssertEqual(brickView.indexPathsForBricksWithIdentifier("Brick1").sorted(by: { $0.0.section < $0.1.section || $0.0.item < $0.1.item}), [IndexPath(item: 0, section: 1), IndexPath(item: 0, section: 2)])
+        XCTAssertEqual(brickView.indexPathsForBricksWithIdentifier("Brick1").sorted(by: { (first, other) in
+            return first.section < other.section || first.item < other.item
+        }), [IndexPath(item: 0, section: 1), IndexPath(item: 0, section: 2)])
         XCTAssertEqual(brickView.indexPathsForBricksWithIdentifier("Brick2"), [IndexPath(item: 1, section: 2)])
         XCTAssertEqual(brickView.indexPathsForBricksWithIdentifier("Brick3"), [])
     }
@@ -427,7 +429,7 @@ class BrickCollectionViewTests: XCTestCase {
 
         var cell = brickView.cellForItem(at: IndexPath(item: 1, section: 1))
 
-        XCTAssertEqualWithAccuracy(cell?.frame.height ?? 0, 16.5, accuracy:  0.5)
+        XCTAssertEqual(cell?.frame.height ?? 0, 16.5, accuracy:  0.5)
 
         fixed.repeatCountHash = ["BrickIdentifiers.repeatLabel": 2]
 
@@ -435,7 +437,7 @@ class BrickCollectionViewTests: XCTestCase {
         brickView.layoutIfNeeded()
 
         cell = brickView.cellForItem(at: IndexPath(item: 1, section: 1))
-        XCTAssertEqualWithAccuracy(cell?.frame.height ?? 0, 16.5, accuracy:  0.5)
+        XCTAssertEqual(cell?.frame.height ?? 0, 16.5, accuracy:  0.5)
 
         fixed.repeatCountHash = ["BrickIdentifiers.repeatLabel": 1]
 
@@ -443,7 +445,7 @@ class BrickCollectionViewTests: XCTestCase {
         brickView.layoutIfNeeded()
 
         cell = brickView.cellForItem(at: IndexPath(item: 1, section: 1))
-        XCTAssertEqualWithAccuracy(cell?.frame.height ?? 0, 16.5, accuracy:  0.5)
+        XCTAssertEqual(cell?.frame.height ?? 0, 16.5, accuracy:  0.5)
 
     }
 
@@ -773,7 +775,7 @@ class BrickCollectionViewTests: XCTestCase {
   
     func testThatBrickCollectionViewDoesNotCreateARetainCycleWithAsyncrhonousResizableCells() {
 
-        expectation(forNotification: "DeinitNotifyingAsyncBrickCell.deinit", object: nil, handler: nil)
+        expectation(forNotification: NSNotification.Name(rawValue: "DeinitNotifyingAsyncBrickCell.deinit"), object: nil, handler: nil)
         autoreleasepool {
             let brick = DeinitNotifyingAsyncBrick(size: BrickSize(width: .fill, height: .fill))
             brickView.setupSingleBrickAndLayout(brick)

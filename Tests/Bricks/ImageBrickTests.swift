@@ -112,7 +112,7 @@ class ImageBrickTests: XCTestCase {
         cell1.layoutIfNeeded()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            XCTAssertEqualWithAccuracy(cell1.frame.height, cell1.expectedCellHeight, accuracy: 0.5)
+            XCTAssertEqual(cell1.frame.height, cell1.expectedCellHeight, accuracy: 0.5)
             XCTAssertEqual(cell1.imageView.contentMode, .scaleAspectFill)
             expect.fulfill()
         }
@@ -137,7 +137,7 @@ class ImageBrickTests: XCTestCase {
         cell1.layoutIfNeeded()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            XCTAssertEqualWithAccuracy(cell1.frame.height, cell1.expectedCellHeight, accuracy: 0.5)
+            XCTAssertEqual(cell1.frame.height, cell1.expectedCellHeight, accuracy: 0.5)
             XCTAssertEqual(cell1.imageView.contentMode, .scaleAspectFit)
             expect.fulfill()
         }
@@ -162,7 +162,7 @@ class ImageBrickTests: XCTestCase {
         cell1.layoutIfNeeded()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            XCTAssertEqualWithAccuracy(cell1.frame.height, cell1.expectedCellHeight, accuracy: 0.5)
+            XCTAssertEqual(cell1.frame.height, cell1.expectedCellHeight, accuracy: 0.5)
             expect.fulfill()
         }
 
@@ -289,7 +289,7 @@ class ImageBrickTests: XCTestCase {
         self.brickView.layoutIfNeeded()
         // Allows a layout pass to fetch the image
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            XCTAssertEqualWithAccuracy(cell1.frame.height, cell1.expectedCellHeight, accuracy: 0.5)
+            XCTAssertEqual(cell1.frame.height, cell1.expectedCellHeight, accuracy: 0.5)
             expectation.fulfill()
         }
 
@@ -390,7 +390,7 @@ class ImageBrickTests: XCTestCase {
             self.brickView.layoutIfNeeded()
             // Allows a layout pass to fetch the image
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                XCTAssertEqualWithAccuracy(cell2.frame.height, cell2.expectedCellHeight, accuracy: 0.5)
+                XCTAssertEqual(cell2.frame.height, cell2.expectedCellHeight, accuracy: 0.5)
                 expectationDidUpdate?.fulfill()
                 expectationDidUpdate = nil
             }
@@ -493,7 +493,7 @@ class ImageBrickTests: XCTestCase {
 
     func assertCellHeightCorrect(cells: [ImageBrickCell]) {
         for cell: ImageBrickCell in cells {
-            XCTAssertEqualWithAccuracy(cell.bounds.size.height, cell.expectedCellHeight, accuracy:  0.5, "Cell wasn't resized correctly")
+            XCTAssertEqual(cell.bounds.size.height, cell.expectedCellHeight, accuracy:  0.5, "Cell wasn't resized correctly")
         }
     }
 }

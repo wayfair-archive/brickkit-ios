@@ -48,14 +48,14 @@ class CoverFlowLayoutBehaviorTests: XCTestCase {
         let cell2 = brickView.cellForItem(at: IndexPath(item: 1, section: 1))
         let cell3 = brickView.cellForItem(at: IndexPath(item: 2, section: 1))
 
-        XCTAssertEqualWithAccuracy(cellBase!.transform.scaleX, 1, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cellBase!.transform.scaleY, 1, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell1!.transform.scaleX, 2/3, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell1!.transform.scaleY, 2/3, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell2!.transform.scaleX, 1, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell2!.transform.scaleY, 1, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell3!.transform.scaleX, 2/3, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell3!.transform.scaleY, 2/3, accuracy: 0.01)
+        XCTAssertEqual(cellBase!.transform.scaleX, 1, accuracy: 0.01)
+        XCTAssertEqual(cellBase!.transform.scaleY, 1, accuracy: 0.01)
+        XCTAssertEqual(cell1!.transform.scaleX, 2/3, accuracy: 0.01)
+        XCTAssertEqual(cell1!.transform.scaleY, 2/3, accuracy: 0.01)
+        XCTAssertEqual(cell2!.transform.scaleX, 1, accuracy: 0.01)
+        XCTAssertEqual(cell2!.transform.scaleY, 1, accuracy: 0.01)
+        XCTAssertEqual(cell3!.transform.scaleX, 2/3, accuracy: 0.01)
+        XCTAssertEqual(cell3!.transform.scaleY, 2/3, accuracy: 0.01)
         XCTAssertTrue(coverFlowBehavior.hasInvalidatableAttributes())
     }
 
@@ -68,12 +68,12 @@ class CoverFlowLayoutBehaviorTests: XCTestCase {
         let cell2 = brickView.cellForItem(at: IndexPath(item: 1, section: 1))
         let cell3 = brickView.cellForItem(at: IndexPath(item: 2, section: 1))
 
-        XCTAssertEqualWithAccuracy(cell1!.transform.scaleX, 0.5, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell1!.transform.scaleY, 0.5, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell2!.transform.scaleX, 5/6, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell2!.transform.scaleY, 5/6, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell3!.transform.scaleX, 5/6, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell3!.transform.scaleY, 5/6, accuracy: 0.01)
+        XCTAssertEqual(cell1!.transform.scaleX, 0.5, accuracy: 0.01)
+        XCTAssertEqual(cell1!.transform.scaleY, 0.5, accuracy: 0.01)
+        XCTAssertEqual(cell2!.transform.scaleX, 5/6, accuracy: 0.01)
+        XCTAssertEqual(cell2!.transform.scaleY, 5/6, accuracy: 0.01)
+        XCTAssertEqual(cell3!.transform.scaleX, 5/6, accuracy: 0.01)
+        XCTAssertEqual(cell3!.transform.scaleY, 5/6, accuracy: 0.01)
     }
 
     func testCoverFlowBehaviorScrollToEnd() {
@@ -84,12 +84,12 @@ class CoverFlowLayoutBehaviorTests: XCTestCase {
         let cell2 = brickView.cellForItem(at: IndexPath(item: 18, section: 1))
         let cell3 = brickView.cellForItem(at: IndexPath(item: 19, section: 1))
 
-        XCTAssertEqualWithAccuracy(cell1!.transform.scaleX, 2/3, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell1!.transform.scaleY, 2/3, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell2!.transform.scaleX, 1, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell2!.transform.scaleY, 1, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell3!.transform.scaleX, 2/3, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell3!.transform.scaleY, 2/3, accuracy: 0.01)
+        XCTAssertEqual(cell1!.transform.scaleX, 2/3, accuracy: 0.01)
+        XCTAssertEqual(cell1!.transform.scaleY, 2/3, accuracy: 0.01)
+        XCTAssertEqual(cell2!.transform.scaleX, 1, accuracy: 0.01)
+        XCTAssertEqual(cell2!.transform.scaleY, 1, accuracy: 0.01)
+        XCTAssertEqual(cell3!.transform.scaleX, 2/3, accuracy: 0.01)
+        XCTAssertEqual(cell3!.transform.scaleY, 2/3, accuracy: 0.01)
     }
 
     func testCoverFlowBehaviorScrollNegative() {
@@ -100,12 +100,12 @@ class CoverFlowLayoutBehaviorTests: XCTestCase {
         let cell2 = brickView.cellForItem(at: IndexPath(item: 1, section: 1))
         let cell3 = brickView.cellForItem(at: IndexPath(item: 2, section: 1))
 
-        XCTAssertEqualWithAccuracy(cell1!.transform.scaleX, 5/6, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell1!.transform.scaleY, 5/6, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell2!.transform.scaleX, 5/6, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell2!.transform.scaleY, 5/6, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell3!.transform.scaleX, 0.5, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell3!.transform.scaleY, 0.5, accuracy: 0.01)
+        XCTAssertEqual(cell1!.transform.scaleX, 5/6, accuracy: 0.01)
+        XCTAssertEqual(cell1!.transform.scaleY, 5/6, accuracy: 0.01)
+        XCTAssertEqual(cell2!.transform.scaleX, 5/6, accuracy: 0.01)
+        XCTAssertEqual(cell2!.transform.scaleY, 5/6, accuracy: 0.01)
+        XCTAssertEqual(cell3!.transform.scaleX, 0.5, accuracy: 0.01)
+        XCTAssertEqual(cell3!.transform.scaleY, 0.5, accuracy: 0.01)
     }
 
     func testIfContentSizeIsCalculatedCorrectly() {

@@ -222,7 +222,7 @@ class BrickFlowLayoutTests: BrickFlowLayoutBaseTests {
         brickView.setupSectionAndLayout(section)
 
         let cell = brickView.cellForItem(at: IndexPath(item: 4, section: 1))
-        XCTAssertEqualWithAccuracy(cell?.frame, CGRect(x: 820.8, y: 8, width: 195.2, height: 50), accuracy: CGRect(x: 0.1, y: 0.1, width: 0.1, height: 0.1))
+        XCTAssertEqual(cell?.frame, CGRect(x: 820.8, y: 8, width: 195.2, height: 50), accuracy: CGRect(x: 0.1, y: 0.1, width: 0.1, height: 0.1))
     }
 
 }

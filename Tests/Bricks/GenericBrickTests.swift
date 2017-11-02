@@ -179,7 +179,9 @@ class GenericBrickTestRepeatCount: GenericBrickTests {
         section.repeatCountDataSource = repeatCount
         brickCollectionView.setupSectionAndLayout(section)
 
-        indexPaths = brickCollectionView.indexPathsForBricksWithIdentifier(GenericLabelBrickIdentifier).sorted(by: { $0.0.section < $0.1.section || $0.0.item < $0.1.item})
+        indexPaths = brickCollectionView.indexPathsForBricksWithIdentifier(GenericLabelBrickIdentifier).sorted(by: { (first, other) in
+            return first.section < other.section || first.item < other.item
+        })
     }
 
     func testThatTheIndexPathCountIsTheSameAsTheRepeatCount() {

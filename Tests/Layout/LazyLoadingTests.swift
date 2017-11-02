@@ -53,7 +53,7 @@ class LazyLoadingTests: XCTestCase {
 
         brickView.layoutSubviews()
 
-        XCTAssertEqualWithAccuracy(brickView.contentSize, CGSize(width: 320, height: 10000), accuracy: CGSize(width: 0.01, height: 0.01))
+        XCTAssertEqual(brickView.contentSize, CGSize(width: 320, height: 10000), accuracy: CGSize(width: 0.01, height: 0.01))
     }
     
     func testThatOnlyNecessaryAttributesAreCreated() {
