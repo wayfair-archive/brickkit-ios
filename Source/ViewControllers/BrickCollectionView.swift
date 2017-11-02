@@ -66,6 +66,8 @@ open class BrickCollectionView: UICollectionView {
 
     internal fileprivate(set) var isConfiguringCollectionBrick: Bool = false
 
+    internal fileprivate(set) var sectionsWithInsertion: [Int] = []
+
     // MARK: - Overrides
 
     open override var frame: CGRect {
@@ -356,6 +358,8 @@ open class BrickCollectionView: UICollectionView {
             let lastItem = lastIndexPath.item
             let section = lastIndexPath.section
 
+            self?.sectionsWithInsertion.append(section)
+
             var offsetIndexPaths: [IndexPath] = []
 
             for offset in 1...insertedIndexPaths.count {
@@ -443,9 +447,17 @@ open class BrickCollectionView: UICollectionView {
         }
     }
 
+    fileprivate func clearPrefetchAttributes() {
+        for section in sectionsWithInsertion {
+            self.prefetchAttributeIndexPaths[section]?.removeAll()
+        }
+    }
+
     fileprivate func invalidateRepeatCountsWithoutPerformBatchUpdates(_ reloadAllSections: Bool) -> (insertedIndexPaths: [IndexPath], deletedIndexPaths: [IndexPath]) {
 
         let brickSection = self.section
+
+        clearPrefetchAttributes()
 
         var insertedIndexPaths = [IndexPath]()
         var deletedIndexPaths = [IndexPath]()
