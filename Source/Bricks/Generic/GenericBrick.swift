@@ -13,8 +13,8 @@ protocol ViewGenerator {
     func configure(view: UIView, cell: GenericBrickCell)
 }
 
-public protocol UpdateFramesListener {
-    func didUpdateFrames()
+public protocol FrameLayoutListener: class {
+    func didLayoutFrames(cell: GenericBrickCell)
 }
 
 public typealias HeightProviderHandler = ((_ width: CGFloat) -> CGFloat)
@@ -23,6 +23,7 @@ open class GenericBrick<T: UIView>: Brick, ViewGenerator {
     public typealias ConfigureView = (_ view: T, _ cell: GenericBrickCell) -> Void
 
     open var configureView: ConfigureView
+    open weak var frameLayoutListener: FrameLayoutListener?
 
     public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, configureView: @escaping ConfigureView) {
         self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView, configureView: configureView)
@@ -52,6 +53,7 @@ open class GenericBrick<T: UIView>: Brick, ViewGenerator {
     }
 
     func configure(view: UIView, cell: GenericBrickCell) {
+        cell.frameLayoutListener = (view as? FrameLayoutListener) ?? self.frameLayoutListener
         self.configureView(view as! T, cell)
     }
 
@@ -76,6 +78,7 @@ open class GenericBrickCell: BrickCell {
     }
     
     open var customHeightProvider: HeightProviderHandler?
+    open weak var frameLayoutListener: FrameLayoutListener?
 
     internal private(set) var fromNib: Bool = false
 
@@ -186,12 +189,9 @@ open class GenericBrickCell: BrickCell {
 
     open override func framesDidLayout() {
         super.framesDidLayout()
-
-        if let genericContentView = genericContentView as? UpdateFramesListener {
-            genericContentView.didUpdateFrames()
-        }
+        frameLayoutListener?.didLayoutFrames(cell: self)
     }
-    
+
     open override func heightForBrickView(withWidth width: CGFloat) -> CGFloat {
         if let heightProvider = customHeightProvider {
             let height = heightProvider(width)
