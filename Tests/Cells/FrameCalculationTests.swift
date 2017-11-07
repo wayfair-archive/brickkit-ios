@@ -70,14 +70,40 @@ class FrameCalculationTests: XCTestCase {
         waitForExpectations(timeout: 1.0, handler: nil)
     }
 
+    func testGenericBrickUIImageViewFrameListener() {
+        let expect = expectation(description:"Expect framesDidLayout to get called")
+        let mockFrameChangeListener = MockFrameListener()
+
+        let genericBrick = GenericBrick<UIImageView>("FrameInfo", size: BrickSize(width: .fixed(size: 50), height: .fixed(size: 50))) { (view, cell) in
+        }
+
+        genericBrick.frameLayoutListener = mockFrameChangeListener
+
+        brickView.setupSingleBrickAndLayout(
+            genericBrick
+        )
+        let indexPath = brickView.indexPathsForBricksWithIdentifier("FrameInfo").first!
+        let cell = brickView.cellForItem(at: indexPath) as! GenericBrickCell
+        cell.layoutIfNeeded()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            XCTAssertTrue(mockFrameChangeListener.didUpdateFramesCalled)
+            expect.fulfill()
+        }
+        waitForExpectations(timeout: 1.0, handler: nil)
+    }
 }
 
-class TestView: UIView {
+class TestView: UIView, FrameLayoutListener {
     var didUpdateFramesCalled: Bool = false
+    func didLayoutFrames(cell: GenericBrickCell) {
+        didUpdateFramesCalled = true
+    }
 }
 
-extension TestView: UpdateFramesListener {
-    func didUpdateFrames() {
+class MockFrameListener: FrameLayoutListener {
+    var didUpdateFramesCalled: Bool = false
+    func didLayoutFrames(cell: GenericBrickCell) {
         didUpdateFramesCalled = true
     }
 }
