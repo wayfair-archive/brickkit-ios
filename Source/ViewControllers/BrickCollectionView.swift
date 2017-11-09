@@ -261,6 +261,20 @@ open class BrickCollectionView: UICollectionView {
         }, completion: completion)
     }
 
+    open override func reloadData() {
+        BrickLogger.logVerbose("Reloading all data.")
+        super.reloadData()
+    }
+
+
+    open override func performBatchUpdates(_ updates: (() -> Void)?, completion: ((Bool) -> Void)? = nil) {
+        BrickLogger.logVerbose("Will perform batch updates.")
+        super.performBatchUpdates(updates, completion: { completed in
+            BrickLogger.logVerbose("Did finish perform batch updates.")
+            completion?(completed)
+        })
+    }
+
     // MARK: - Private methods
 
     /// Invalidate the layout for bounds change
@@ -295,6 +309,7 @@ open class BrickCollectionView: UICollectionView {
     /// - parameter invalidate: Flag that indicates if the function should also invalidate the layout
     /// Default to true, but could be set to false if it's part of a bigger invalidation
     open func reloadBrickWithIdentifier(_ identifier: String, andIndex index: Int, invalidate: Bool = true) {
+        BrickLogger.logVerbose("Reload brick with identifier: \(identifier)")
         let indexPaths = section.indexPathsForBricksWithIdentifier(identifier, index: index, in: collectionInfo)
         self.reloadItems(at: indexPaths)
 
@@ -318,6 +333,7 @@ open class BrickCollectionView: UICollectionView {
     }
 
     fileprivate func updateItems(at index: Int, for identifier: String, itemCount: Int, updateAction: @escaping (_ indexPaths: [IndexPath]) -> Void, completion: ((_ completed: Bool, _ indexPaths: [IndexPath]) -> Void)? = nil) {
+        BrickLogger.logVerbose("Update items for identifier: \(identifier)")
         guard let originIndexPath = indexPathsForBricksWithIdentifier(identifier, index: index).first else {
             invalidateRepeatCounts()
             return
@@ -435,6 +451,7 @@ open class BrickCollectionView: UICollectionView {
     ///
     /// - parameter completion: Completion Block
     open func invalidateRepeatCounts(reloadAllSections: Bool = false, completion: ((_ completed: Bool, _ insertedIndexPaths: [IndexPath], _ deletedIndexPaths: [IndexPath]) -> Void)? = nil) {
+        BrickLogger.logVerbose("Invalidate repeat counts.\(reloadAllSections ? " Reloading all sections." : ""))")
         var insertedIndexPaths: [IndexPath]!
         var deletedIndexPaths: [IndexPath]!
 
@@ -587,6 +604,7 @@ open class BrickCollectionView: UICollectionView {
     }
 
     fileprivate func reloadBrickSection(_ brickSection: BrickSection, insertedIndexPaths: inout [IndexPath], removedIndexPaths: inout [IndexPath], sectionsToReload: NSMutableIndexSet) {
+        BrickLogger.logVerbose("Reload brick section: \(brickSection.identifier)")
         let updatedSections = reloadSectionWithIdentifier(brickSection.identifier)
 
         for (section, count) in updatedSections {
