@@ -564,7 +564,7 @@ open class BrickCollectionView: UICollectionView {
         var removedIndexPaths = [IndexPath]()
         var reloadIndexPaths = [IndexPath]()
         let sectionsToReload = NSMutableIndexSet()
-
+        BrickLogger.logVerbose("Reload Bricks with identifiers: \(identifiers).")
         for identifier in identifiers {
             let indexPaths = self.section.indexPathsForBricksWithIdentifier(identifier, in: collectionInfo)
             for indexPath in indexPaths {
@@ -581,10 +581,6 @@ open class BrickCollectionView: UICollectionView {
                     brickCell.reloadContent()
                 }
             }
-        }
-
-        if !shouldReloadCell {
-            return
         }
 
         if !insertedIndexPaths.isEmpty {
@@ -637,7 +633,14 @@ open class BrickCollectionView: UICollectionView {
     /// - returns: A dictionary with the section as the key and the value is the change count
     fileprivate func reloadSectionWithIdentifier(_ identifier: String) -> [Int: Int] {
         let oldCounts = self.section.currentSectionCounts(in: collectionInfo)
-        self.section.invalidateCounts(in: collectionInfo)
+        
+        if let matchingIndex = self.indexPathsForBricksWithIdentifier(identifier).first,
+            let brickSectionCell = cellForItem(at: matchingIndex) as? BrickSectionCell,
+            let brickSection = brickSectionCell._brick as? BrickSection {
+                
+            brickSection.invalidateCounts(in: collectionInfo)
+        }
+
         let newCounts = self.section.currentSectionCounts(in: collectionInfo)
 
         var changedSections: [Int: Int] = [:]
