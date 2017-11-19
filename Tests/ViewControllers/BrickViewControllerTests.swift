@@ -791,8 +791,8 @@ class BrickViewControllerTests: XCTestCase {
 
         var cell: DummyBrickCell?
         cell = brickViewController.brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
-        XCTAssertEqual(cell!.frame.width, width / 10, accuracy: 0.01)
-        XCTAssertEqual(cell?.frame.height ?? 0, (width / 10) * 2, accuracy: 0.5)
+        XCTAssertEqualWithAccuracy(cell!.frame.width, width / 10, accuracy: 0.01)
+        XCTAssertEqualWithAccuracy(cell?.frame.height ?? 0, (width / 10) * 2, accuracy: 0.5)
 
         brick.size.width = .ratio(ratio: 1/5)
 
@@ -805,8 +805,8 @@ class BrickViewControllerTests: XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
 
         cell = brickViewController.brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
-        XCTAssertEqual(cell?.frame.width ?? 0, width / 5, accuracy: 0.1)
-        XCTAssertEqual(cell?.frame.height ?? 0 , (width / 5) * 2, accuracy: 0.1)
+        XCTAssertEqualWithAccuracy(cell?.frame.width ?? 0, width / 5, accuracy: 0.1)
+        XCTAssertEqualWithAccuracy(cell?.frame.height ?? 0 , (width / 5) * 2, accuracy: 0.1)
     }
 
     // MARK: tvOS-only tests
