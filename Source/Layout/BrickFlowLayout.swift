@@ -160,8 +160,13 @@ open class BrickFlowLayout: UICollectionViewLayout, BrickLayout {
 
                 var updated = false
                 for section in currentSections {
+                    // For deletion cases, we don't want to recalculate brick layaout sections for indexes
+                    // that no longer exist in the collection view.
+                    let sectionCount = _collectionView.numberOfItems(inSection: section.sectionIndex)
                     updateSection(section, updatedAttributes: updateAttributes, action: {
-                        updated = section.continueCalculatingCells() || updated
+                        if section.numberOfItems <= sectionCount {
+                            updated = section.continueCalculatingCells() || updated
+                        }
                     })
                 }
 

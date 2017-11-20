@@ -66,6 +66,8 @@ open class BrickCollectionView: UICollectionView {
 
     internal fileprivate(set) var isConfiguringCollectionBrick: Bool = false
 
+    internal fileprivate(set) var sectionsWithInsertion: [Int] = []
+
     // MARK: - Overrides
 
     open override var frame: CGRect {
@@ -260,6 +262,19 @@ open class BrickCollectionView: UICollectionView {
         }, completion: completion)
     }
 
+    open override func reloadData() {
+        BrickLogger.logVerbose("Reloading all data.")
+        super.reloadData()
+    }
+
+    open override func performBatchUpdates(_ updates: (() -> Void)?, completion: ((Bool) -> Void)? = nil) {
+        BrickLogger.logVerbose("Will perform batch updates.")
+        super.performBatchUpdates(updates, completion: { completed in
+            BrickLogger.logVerbose("Did finish perform batch updates.")
+            completion?(completed)
+        })
+    }
+
     // MARK: - Private methods
 
     /// Invalidate the layout for bounds change
@@ -294,6 +309,7 @@ open class BrickCollectionView: UICollectionView {
     /// - parameter invalidate: Flag that indicates if the function should also invalidate the layout
     /// Default to true, but could be set to false if it's part of a bigger invalidation
     open func reloadBrickWithIdentifier(_ identifier: String, andIndex index: Int, invalidate: Bool = true) {
+        BrickLogger.logVerbose("Reload brick with identifier: \(identifier)")
         let indexPaths = section.indexPathsForBricksWithIdentifier(identifier, index: index, in: collectionInfo)
         self.reloadItems(at: indexPaths)
 
@@ -317,6 +333,7 @@ open class BrickCollectionView: UICollectionView {
     }
 
     fileprivate func updateItems(at index: Int, for identifier: String, itemCount: Int, updateAction: @escaping (_ indexPaths: [IndexPath]) -> Void, completion: ((_ completed: Bool, _ indexPaths: [IndexPath]) -> Void)? = nil) {
+        BrickLogger.logVerbose("Update items for identifier: \(identifier)")
         guard let originIndexPath = indexPathsForBricksWithIdentifier(identifier, index: index).first else {
             invalidateRepeatCounts()
             return
@@ -356,6 +373,8 @@ open class BrickCollectionView: UICollectionView {
             // by checking the number of items in section
             let lastItem = lastIndexPath.item
             let section = lastIndexPath.section
+
+            self?.sectionsWithInsertion.append(section)
 
             var offsetIndexPaths: [IndexPath] = []
 
@@ -432,6 +451,7 @@ open class BrickCollectionView: UICollectionView {
     ///
     /// - parameter completion: Completion Block
     open func invalidateRepeatCounts(reloadAllSections: Bool = false, completion: ((_ completed: Bool, _ insertedIndexPaths: [IndexPath], _ deletedIndexPaths: [IndexPath]) -> Void)? = nil) {
+        BrickLogger.logVerbose("Invalidate repeat counts.\(reloadAllSections ? " Reloading all sections." : ""))")
         var insertedIndexPaths: [IndexPath]!
         var deletedIndexPaths: [IndexPath]!
 
@@ -444,9 +464,17 @@ open class BrickCollectionView: UICollectionView {
         }
     }
 
+    fileprivate func clearPrefetchAttributes() {
+        for section in sectionsWithInsertion {
+            self.prefetchAttributeIndexPaths[section]?.removeAll()
+        }
+    }
+
     fileprivate func invalidateRepeatCountsWithoutPerformBatchUpdates(_ reloadAllSections: Bool) -> (insertedIndexPaths: [IndexPath], deletedIndexPaths: [IndexPath]) {
 
         let brickSection = self.section
+
+        clearPrefetchAttributes()
 
         var insertedIndexPaths = [IndexPath]()
         var deletedIndexPaths = [IndexPath]()
@@ -535,7 +563,7 @@ open class BrickCollectionView: UICollectionView {
         var removedIndexPaths = [IndexPath]()
         var reloadIndexPaths = [IndexPath]()
         let sectionsToReload = NSMutableIndexSet()
-
+        BrickLogger.logVerbose("Reload Bricks with identifiers: \(identifiers).")
         for identifier in identifiers {
             let indexPaths = self.section.indexPathsForBricksWithIdentifier(identifier, in: collectionInfo)
             for indexPath in indexPaths {
@@ -552,10 +580,6 @@ open class BrickCollectionView: UICollectionView {
                     brickCell.reloadContent()
                 }
             }
-        }
-
-        if !shouldReloadCell {
-            return
         }
 
         if !insertedIndexPaths.isEmpty {
@@ -576,6 +600,7 @@ open class BrickCollectionView: UICollectionView {
     }
 
     fileprivate func reloadBrickSection(_ brickSection: BrickSection, insertedIndexPaths: inout [IndexPath], removedIndexPaths: inout [IndexPath], sectionsToReload: NSMutableIndexSet) {
+        BrickLogger.logVerbose("Reload brick section: \(brickSection.identifier)")
         let updatedSections = reloadSectionWithIdentifier(brickSection.identifier)
 
         for (section, count) in updatedSections {
@@ -607,7 +632,14 @@ open class BrickCollectionView: UICollectionView {
     /// - returns: A dictionary with the section as the key and the value is the change count
     fileprivate func reloadSectionWithIdentifier(_ identifier: String) -> [Int: Int] {
         let oldCounts = self.section.currentSectionCounts(in: collectionInfo)
-        self.section.invalidateCounts(in: collectionInfo)
+        
+        if let matchingIndex = self.indexPathsForBricksWithIdentifier(identifier).first,
+            let brickSectionCell = cellForItem(at: matchingIndex) as? BrickSectionCell,
+            let brickSection = brickSectionCell._brick as? BrickSection {
+                
+            brickSection.invalidateCounts(in: collectionInfo)
+        }
+
         let newCounts = self.section.currentSectionCounts(in: collectionInfo)
 
         var changedSections: [Int: Int] = [:]

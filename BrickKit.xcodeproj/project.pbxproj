@@ -385,7 +385,7 @@
 		93D9EBE21DA4057000D8C87A /* BrickUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickUtils.swift; sourceTree = "<group>"; };
 		93D9EBE31DA4057000D8C87A /* FatalError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FatalError.swift; sourceTree = "<group>"; };
 		93D9EBE51DA4057000D8C87A /* BrickCollectionView+BrickLayoutDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BrickCollectionView+BrickLayoutDataSource.swift"; sourceTree = "<group>"; };
-		93D9EBE61DA4057000D8C87A /* BrickCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BrickCollectionView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		93D9EBE61DA4057000D8C87A /* BrickCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = BrickCollectionView.swift; sourceTree = "<group>"; };
 		93D9EBE71DA4057000D8C87A /* BrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickViewController.swift; sourceTree = "<group>"; };
 		93D9EC1A1DA4057900D8C87A /* CardLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardLayoutBehaviorTests.swift; sourceTree = "<group>"; };
 		93D9EC1C1DA4057900D8C87A /* HideLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HideLayoutBehaviorTests.swift; sourceTree = "<group>"; };
