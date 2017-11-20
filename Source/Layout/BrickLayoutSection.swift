@@ -330,13 +330,15 @@ internal class BrickLayoutSection {
 
         let numberOfItems = self.numberOfItems
 
-        for index in firstIndex..<numberOfItems {
-            // Create or Update an attribute at an index. If returned true, continue calculating. If not, break
-            if !createOrUpdateAttribute(at: index, with: dataSource, x: &x, y: &y, maxY: &maxY, force: false, invalidate: invalidate, frameOfInterest: frameOfInterest, updatedAttributes: updatedAttributes) {
-                break
+        if firstIndex < numberOfItems {
+            for index in firstIndex..<numberOfItems {
+                // Create or Update an attribute at an index. If returned true, continue calculating. If not, break
+                if !createOrUpdateAttribute(at: index, with: dataSource, x: &x, y: &y, maxY: &maxY, force: false, invalidate: invalidate, frameOfInterest: frameOfInterest, updatedAttributes: updatedAttributes) {
+                    break
+                }
             }
         }
-
+        
         // If rows need to be aligned, make sure the previous lines are checked
         handleRow(for: attributes.count - 1, maxHeight: maxY - y, updatedAttributes: updatedAttributes)
 

@@ -35,6 +35,21 @@ class PreviewViewController: BrickViewController, BrickViewControllerPreviewing 
 }
 
 class BrickViewControllerTests: XCTestCase {
+    private class RepeatCountDelegate: BrickRepeatCountDataSource {
+        var repeatCount = 0
+        var increment = 0
+        
+        init(startingCount: Int, increment: Int) {
+            self.repeatCount = startingCount
+            self.increment = increment
+        }
+        
+        func repeatCount(for identifier: String, with collectionIndex: Int, collectionIdentifier: String) -> Int {
+            let returnValue = repeatCount
+            repeatCount += increment
+            return returnValue
+        }
+    }
 
     var brickViewController: BrickViewController!
     var width:CGFloat!
@@ -564,6 +579,76 @@ class BrickViewControllerTests: XCTestCase {
         XCTAssertEqual(brickViewController.collectionViewLayout.collectionViewContentSize, CGSize(width: width, height: 50))
     }
 
+    func testChangingRepeatCountWhileInvalidatingAndReloading() {
+        let sectionIdentifier = "repeated brick section"
+        let brick = GenericBrick<UIView>("", width: .ratio(ratio: 1.0), height: .fixed(size: 50.0)) { _ in }
+        let sectionWithMultipleBricks = BrickSection(sectionIdentifier, bricks: [brick])
+        let repeatCountDelegate = RepeatCountDelegate(startingCount: 0, increment: 1)
+        sectionWithMultipleBricks.repeatCountDataSource = repeatCountDelegate
+        brickViewController.brickCollectionView.setupSectionAndLayout(BrickSection("", bricks: [sectionWithMultipleBricks]))
+        
+        // Repeat counts incrementing by 1
+        brickViewController.reloadBricksWithIdentifiers([sectionWithMultipleBricks.identifier], shouldReloadCell: false)
+        brickViewController.brickCollectionView.invalidateRepeatCounts()
+        
+        brickViewController.reloadBricksWithIdentifiers([sectionWithMultipleBricks.identifier], shouldReloadCell: true)
+        brickViewController.brickCollectionView.invalidateRepeatCounts()
+
+        XCTAssertEqual(brickViewController.collectionView!.numberOfItems(inSection: 2), 2)
+        XCTAssertEqual(brickViewController.brickCollectionView.numberOfItems(inSection: 2), 2)
+
+        // Repeat counts decrementing by 1
+        repeatCountDelegate.repeatCount = 10
+        repeatCountDelegate.increment = -1
+        
+        brickViewController.reloadBricksWithIdentifiers([sectionWithMultipleBricks.identifier], shouldReloadCell: false)
+        brickViewController.brickCollectionView.invalidateRepeatCounts()
+        
+        brickViewController.reloadBricksWithIdentifiers([sectionWithMultipleBricks.identifier], shouldReloadCell: true)
+        brickViewController.brickCollectionView.invalidateRepeatCounts()
+        
+        XCTAssertEqual(brickViewController.collectionView!.numberOfItems(inSection: 2), 9)
+        XCTAssertEqual(brickViewController.brickCollectionView.numberOfItems(inSection: 2), 9)
+        
+        // Repeat counts incrementing by 5
+        XCTAssertNotNil(brickViewController)
+        
+        repeatCountDelegate.repeatCount = 100
+        repeatCountDelegate.increment = 5
+        
+        brickViewController.reloadBricksWithIdentifiers([sectionWithMultipleBricks.identifier], shouldReloadCell: false)
+        brickViewController.brickCollectionView.invalidateRepeatCounts()
+        
+        brickViewController.reloadBricksWithIdentifiers([sectionWithMultipleBricks.identifier], shouldReloadCell: true)
+        brickViewController.brickCollectionView.invalidateRepeatCounts()
+        
+        XCTAssertEqual(brickViewController.collectionView!.numberOfItems(inSection: 2), 105)
+        XCTAssertEqual(brickViewController.brickCollectionView.numberOfItems(inSection: 2), 105)
+
+        // Repeat counts decrementing by 5
+        XCTAssertNotNil(brickViewController)
+        
+        repeatCountDelegate.repeatCount = 100
+        repeatCountDelegate.increment = -5
+        
+        brickViewController.reloadBricksWithIdentifiers([sectionWithMultipleBricks.identifier], shouldReloadCell: false)
+        brickViewController.brickCollectionView.invalidateRepeatCounts()
+        
+        brickViewController.reloadBricksWithIdentifiers([sectionWithMultipleBricks.identifier], shouldReloadCell: true)
+        brickViewController.brickCollectionView.invalidateRepeatCounts()
+        
+        // If the test method makes it this far, then it didn't crash for NSInternalConsistencyException, which is the main issue this method is testing for.
+        XCTAssertNotNil(brickViewController)
+        XCTAssertEqual(brickViewController.collectionView!.numberOfSections, 3)
+        XCTAssertEqual(brickViewController.collectionView!.numberOfItems(inSection: 0), 1)
+        XCTAssertEqual(brickViewController.collectionView!.numberOfItems(inSection: 1), 1)
+        XCTAssertEqual(brickViewController.collectionView!.numberOfItems(inSection: 2), 95)
+        XCTAssertEqual(brickViewController.brickCollectionView.numberOfSections, 3)
+        XCTAssertEqual(brickViewController.brickCollectionView.numberOfItems(inSection: 0), 1)
+        XCTAssertEqual(brickViewController.brickCollectionView.numberOfItems(inSection: 1), 1)
+        XCTAssertEqual(brickViewController.brickCollectionView.numberOfItems(inSection: 2), 95)
+    }
+    
     func testUpdateFrame() {
         let section = BrickSection("Test Section", bricks: [
             DummyBrick("Brick 1", height: .fixed(size: 50)),
