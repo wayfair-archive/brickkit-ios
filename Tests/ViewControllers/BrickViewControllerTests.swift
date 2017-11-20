@@ -581,7 +581,7 @@ class BrickViewControllerTests: XCTestCase {
 
     func testChangingRepeatCountWhileInvalidatingAndReloading() {
         let sectionIdentifier = "repeated brick section"
-        let brick = GenericBrick<UIView>("", width: .ratio(ratio: 1.0), height: .fixed(size: 50.0)) { _ in }
+        let brick = GenericBrick<UIView>("", width: .ratio(ratio: 1.0), height: .fixed(size: 50.0)) { (_, _) in }
         let sectionWithMultipleBricks = BrickSection(sectionIdentifier, bricks: [brick])
         let repeatCountDelegate = RepeatCountDelegate(startingCount: 0, increment: 1)
         sectionWithMultipleBricks.repeatCountDataSource = repeatCountDelegate
