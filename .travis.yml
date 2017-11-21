@@ -23,7 +23,7 @@ matrix:
         - DESTINATION="OS=10.0,name=Apple TV 1080p"     SCHEME="$TVOS_FRAMEWORK_SCHEME"    SDK="$TVOS_SDK"   EXAMPLE_SCHEME="$TVOS_EXAMPLE_SCHEME"
     - osx_image: xcode9.1
       env:
-        - DESTINATION="OS=11.1,name=Apple TV 1080p"    SCHEME="$TVOS_FRAMEWORK_SCHEME"    SDK="$TVOS_SDK"   EXAMPLE_SCHEME="$TVOS_EXAMPLE_SCHEME"
+        - DESTINATION="OS=11.1, name=Apple TV"    SCHEME="$TVOS_FRAMEWORK_SCHEME"    SDK="$TVOS_SDK"   EXAMPLE_SCHEME="$TVOS_EXAMPLE_SCHEME"
 script:
   - set -o pipefail
   - xcodebuild -version
