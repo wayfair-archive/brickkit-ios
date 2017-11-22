@@ -212,7 +212,7 @@ extension CollectionBrickCell: BrickLayoutDelegate {
             return
         }
 
-        self.resizeDelegate?.performResize(cell: self, completion: { [weak self] _ in
+        self.resizeDelegate?.performResize(cell: self, completion: { [weak self] in
             self?.brickCollectionView.layoutSubviews()
         })
     }

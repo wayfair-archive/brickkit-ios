@@ -66,7 +66,7 @@ class BrickViewControllerTests: XCTestCase {
     func testDeinit() {
         var viewController: BrickViewController? = TestBrickViewController(nibName: "TestBrickViewController", bundle: Bundle(for: type(of: self)))
 
-        expectation(forNotification: "BrickViewController.deinit", object: nil, handler: nil)
+        expectation(forNotification: NSNotification.Name(rawValue: "BrickViewController.deinit"), object: nil, handler: nil)
         viewController?.viewDidLoad()
         viewController = nil
         waitForExpectations(timeout: 5, handler: nil)
@@ -77,7 +77,7 @@ class BrickViewControllerTests: XCTestCase {
         var viewController: TestBrickViewController? = TestBrickViewController(nibName: "TestBrickViewController", bundle: Bundle(for: type(of: self)))
         viewController?.labelTest = true
         
-        expectation(forNotification: "BrickViewController.deinit", object: nil, handler: nil)
+        expectation(forNotification: NSNotification.Name(rawValue: "BrickViewController.deinit"), object: nil, handler: nil)
         viewController?.viewDidLoad()
         viewController = nil
         waitForExpectations(timeout: 5, handler: nil)
@@ -379,7 +379,6 @@ class BrickViewControllerTests: XCTestCase {
             LabelBrick("Brick10", height: .fixed(size: height), dataSource: LabelBrickCellModel(text: "Brick 5")),
             LabelBrick("Brick11", height: .fixed(size: height), dataSource: LabelBrickCellModel(text: "Brick 5"))
         ])
-        section.classIdentifiers = ["Brick1" : LabelBrickCell.self, "Brick2" : LabelBrickCell.self , "Brick3" : LabelBrickCell.self, "Brick4" : LabelBrickCell.self, "Brick5" : LabelBrickCell.self, "Brick6" : LabelBrickCell.self, "Brick7" : LabelBrickCell.self, "Brick8" : LabelBrickCell.self, "Brick9" : LabelBrickCell.self, "Brick10" : LabelBrickCell.self, "Brick11" : LabelBrickCell.self]
 
         brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
@@ -582,7 +581,7 @@ class BrickViewControllerTests: XCTestCase {
 
     func testChangingRepeatCountWhileInvalidatingAndReloading() {
         let sectionIdentifier = "repeated brick section"
-        let brick = GenericBrick<UIView>("", width: .ratio(ratio: 1.0), height: .fixed(size: 50.0)) { _ in }
+        let brick = GenericBrick<UIView>("", width: .ratio(ratio: 1.0), height: .fixed(size: 50.0)) { (_, _) in }
         let sectionWithMultipleBricks = BrickSection(sectionIdentifier, bricks: [brick])
         let repeatCountDelegate = RepeatCountDelegate(startingCount: 0, increment: 1)
         sectionWithMultipleBricks.repeatCountDataSource = repeatCountDelegate
@@ -791,8 +790,8 @@ class BrickViewControllerTests: XCTestCase {
 
         var cell: DummyBrickCell?
         cell = brickViewController.brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
-        XCTAssertEqualWithAccuracy(cell!.frame.width, width / 10, accuracy: 0.01)
-        XCTAssertEqualWithAccuracy(cell?.frame.height ?? 0, (width / 10) * 2, accuracy: 0.5)
+        XCTAssertEqual(cell!.frame.width, width / 10, accuracy: 0.01)
+        XCTAssertEqual(cell?.frame.height ?? 0, (width / 10) * 2, accuracy: 0.5)
 
         brick.size.width = .ratio(ratio: 1/5)
 
@@ -805,8 +804,8 @@ class BrickViewControllerTests: XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
 
         cell = brickViewController.brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1)) as? DummyBrickCell
-        XCTAssertEqualWithAccuracy(cell?.frame.width ?? 0, width / 5, accuracy: 0.1)
-        XCTAssertEqualWithAccuracy(cell?.frame.height ?? 0 , (width / 5) * 2, accuracy: 0.1)
+        XCTAssertEqual(cell?.frame.width ?? 0, width / 5, accuracy: 0.1)
+        XCTAssertEqual(cell?.frame.height ?? 0 , (width / 5) * 2, accuracy: 0.1)
     }
 
     // MARK: tvOS-only tests

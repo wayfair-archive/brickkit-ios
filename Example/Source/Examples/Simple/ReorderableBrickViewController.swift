@@ -95,25 +95,7 @@ class ReorderableBrickViewController: BrickViewController, HasTitle {
             ], inset: 20, edgeInsets: UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10))
 
         self.setSection(section)
-
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(test))
     }
-
-    func test() {
-        for section in 0..<self.brickCollectionView.section.bricks.count {
-            print("Section: \(section)")
-            for i in 0..<repeatCount {
-                let indexPaths = self.brickCollectionView.indexPathsForBricksWithIdentifier(label1.identifier, index: i)
-                print("Label 1 Index \(i): \(indexPaths[section].item)")
-            }
-            for i in 0..<repeatCount {
-                let indexPaths = self.brickCollectionView.indexPathsForBricksWithIdentifier(label2.identifier, index: i)
-                print("Label 2 Index \(i): \(indexPaths[section].item)")
-            }
-            print("\n\n")
-        }
-    }
-
 }
 
 extension ReorderableBrickViewController: BrickSectionOrderDataSource {

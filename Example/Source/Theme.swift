@@ -25,8 +25,8 @@ class Theme {
         // Navigation
         UINavigationBar.appearance().barTintColor = .brickBackground
         UINavigationBar.appearance().titleTextAttributes = [
-            NSForegroundColorAttributeName: Theme.textColorForNavigationTitle,
-            NSFontAttributeName: Theme.fontForNavigationTitle
+            .foregroundColor: Theme.textColorForNavigationTitle,
+            .font: Theme.fontForNavigationTitle
         ]
 
         // EdgeInsets
@@ -52,8 +52,8 @@ class Theme {
             navigationBar.barTintColor = .brickBackground
             navigationBar.tintColor = .brickPurple1
             navigationBar.titleTextAttributes = [
-                NSForegroundColorAttributeName: Theme.textColorForNavigationTitle,
-                NSFontAttributeName: Theme.fontForNavigationTitle
+                .foregroundColor: Theme.textColorForNavigationTitle,
+                .font: Theme.fontForNavigationTitle
             ]
         #endif
     }
@@ -63,8 +63,8 @@ class Theme {
             navigationBar.barTintColor = .brickPurple3
             navigationBar.tintColor = .brickGray1
             navigationBar.titleTextAttributes = [
-                NSForegroundColorAttributeName: UIColor.brickGray1,
-                NSFontAttributeName: Theme.fontForNavigationTitle
+                .foregroundColor: UIColor.brickGray1,
+                .font: Theme.fontForNavigationTitle
             ]
         #endif
     }

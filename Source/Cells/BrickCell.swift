@@ -265,7 +265,7 @@ open class BrickCell: BaseBrickCell {
     open func heightForBrickView(withWidth width: CGFloat) -> CGFloat {
         self.layoutIfNeeded()
 
-        let size = self.systemLayoutSizeFitting(CGSize(width: width, height: 0), withHorizontalFittingPriority: 1000, verticalFittingPriority: 10)
+        let size = self.systemLayoutSizeFitting(CGSize(width: width, height: 0), withHorizontalFittingPriority: .required, verticalFittingPriority: UILayoutPriority(rawValue: 10))
         switch _brick.size.height.dimension(withValue: size.height) {
         case .restricted(_, let restriction):
             return BrickDimension.restrictedValue(for: size.height, width: width, restrictedSize: restriction)

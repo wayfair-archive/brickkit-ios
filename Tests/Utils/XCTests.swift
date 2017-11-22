@@ -21,28 +21,28 @@ let frameSort: (CGRect, CGRect) -> Bool = {
     }
 }
 
-public func XCTAssertEqualWithAccuracy(_ expression1: CGRect?, _ expression2: CGRect?, accuracy: CGRect, _ message: @autoclosure () -> String = "", file: StaticString = #file, line: UInt = #line) {
+public func XCTAssertEqual(_ expression1: CGRect?, _ expression2: CGRect?, accuracy: CGRect, _ message: @autoclosure () -> String = "", file: StaticString = #file, line: UInt = #line) {
 
     guard let argument1 = expression1, let argument2 = expression2 else {
         XCTAssertEqual(expression1, CGRect(x: 0, y: 0, width: 320, height: 54), message, file: file, line: line)
         XCTAssertEqual(expression2, CGRect(x: 0, y: 0, width: 305, height: 39), message, file: file, line: line)
         return
     }
-    XCTAssertEqualWithAccuracy(argument1.origin.x, argument2.origin.x, accuracy: accuracy.origin.x, message, file: file, line: line)
-    XCTAssertEqualWithAccuracy(argument1.origin.y, argument2.origin.y, accuracy: accuracy.origin.y, message, file: file, line: line)
-    XCTAssertEqualWithAccuracy(argument1.size.width, argument2.size.width, accuracy: accuracy.size.width, message, file: file, line: line)
-    XCTAssertEqualWithAccuracy(argument1.size.height, argument2.size.height, accuracy: accuracy.size.height, message, file: file, line: line)
+    XCTAssertEqual(argument1.origin.x, argument2.origin.x, accuracy: accuracy.origin.x, message, file: file, line: line)
+    XCTAssertEqual(argument1.origin.y, argument2.origin.y, accuracy: accuracy.origin.y, message, file: file, line: line)
+    XCTAssertEqual(argument1.size.width, argument2.size.width, accuracy: accuracy.size.width, message, file: file, line: line)
+    XCTAssertEqual(argument1.size.height, argument2.size.height, accuracy: accuracy.size.height, message, file: file, line: line)
 }
 
-public func XCTAssertEqualWithAccuracy(_ expression1: CGSize?, _ expression2: CGSize?, accuracy: CGSize, _ message: @autoclosure () -> String = "", file: StaticString = #file, line: UInt = #line) {
+public func XCTAssertEqual(_ expression1: CGSize?, _ expression2: CGSize?, accuracy: CGSize, _ message: @autoclosure () -> String = "", file: StaticString = #file, line: UInt = #line) {
 
     guard let argument1 = expression1, let argument2 = expression2 else {
 //        XCTAssertEqual(expression1, CGRectMake(0, 0, 320, 54), message, file: file, line: line)
 //        XCTAssertEqual(expression2, CGRectMake(0, 0, 305, 39), message, file: file, line: line)
         return
     }
-    XCTAssertEqualWithAccuracy(argument1.width, argument2.width, accuracy: accuracy.width, message, file: file, line: line)
-    XCTAssertEqualWithAccuracy(argument1.height, argument2.height, accuracy: accuracy.height, message, file: file, line: line)
+    XCTAssertEqual(argument1.width, argument2.width, accuracy: accuracy.width, message, file: file, line: line)
+    XCTAssertEqual(argument1.height, argument2.height, accuracy: accuracy.height, message, file: file, line: line)
 }
 
 extension XCTest {
