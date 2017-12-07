@@ -422,7 +422,7 @@ This behavior allows you to hide bricks and sections.
 ### BrickAppearBehavior
 A behavior that defines the direction where bricks are appearing and disappearing from.
 
->  `BrickAppearBehavior ` is extendable, so you can create your own behavor
+>  `BrickAppearBehavior ` is extendable, so you can create your own behavior
 
 ### BrickLayoutZIndexBehavior
 A behavior that determines how the bricks are laid out on the z-Axis. This is very important when dealing with behaviors that allow intersections between bricks
@@ -453,7 +453,8 @@ BrickKit comes with a few behaviors built in:
 | MaxZIndexLayoutBehavior |  Allows a brick to be set to the maxZIndex, which means they will always be on top of any other brick.
 | SetZIndexLayoutBehavior |  Allows the layout to set the ZIndex of any brick to any value.
 
-> `BrickLayoutBehavior` is extendable, so are free to create your own behavors.
+> `BrickLayoutBehavior` is extendable, so are free to create your own behaviors.
+
 
 ## Requirements
 
