@@ -117,7 +117,7 @@ open class BaseBrickCell: UICollectionViewCell {
         brickBackgroundView?.frame = self.bounds
 
         if _brick != nil && frame.width == requestedSize.width {
-            self.layoutIfNeeded() // This layoutIfNeeded is added to make sure that the subviews are laid out correctly
+            self.contentView.layoutIfNeeded() // Must call layoutIfNeeded on contentView, which will layout its subviews.
             self.framesDidLayout()
         }
     }
