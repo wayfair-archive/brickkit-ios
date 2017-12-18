@@ -1,5 +1,26 @@
 # Change Log
 
+## [2.4.2](https://github.com/wayfair/brickkit-ios/tree/4.2.2) (2017-12-07)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/2.4.1...2.4.2)
+
+**Closed issues:**
+
+- Did you want to review the spelling of behavior ? [\#205](https://github.com/wayfair/brickkit-ios/issues/205)
+- Upgrade to swift 4 [\#198](https://github.com/wayfair/brickkit-ios/issues/198)
+
+**Merged pull requests:**
+
+- Stability, Layout, and Logging Enhancements; Added Support for Legacy Edge Insets Functionality [\#202](https://github.com/wayfair/brickkit-ios/pull/202) ([mamccarthy](https://github.com/mamccarthy))
+- Updated the UpdateFrameListener function to pass the GenericBrickCell. [\#200](https://github.com/wayfair/brickkit-ios/pull/200) ([ablokker](https://github.com/ablokker))
+- Migrated to Swift 4 [\#199](https://github.com/wayfair/brickkit-ios/pull/199) ([jay18001](https://github.com/jay18001))
+- Conform BrickSize to Equatable and apply some suggested build settings changes [\#197](https://github.com/wayfair/brickkit-ios/pull/197) ([klundberg](https://github.com/klundberg))
+- Attempt to fix a crash appearing in Crashlytics \(couldn’t reproduce c… [\#196](https://github.com/wayfair/brickkit-ios/pull/196) ([ablokker](https://github.com/ablokker))
+- Updates to ImageBrick. [\#195](https://github.com/wayfair/brickkit-ios/pull/195) ([ablokker](https://github.com/ablokker))
+- Background colors should default to .clear not .white. [\#193](https://github.com/wayfair/brickkit-ios/pull/193) ([willspurgeon](https://github.com/willspurgeon))
+- Updated height provider code to be a closure [\#191](https://github.com/wayfair/brickkit-ios/pull/191) ([vlozko](https://github.com/vlozko))
+- Added update edgeInsets logic [\#189](https://github.com/wayfair/brickkit-ios/pull/189) ([pcheung16](https://github.com/pcheung16))
+- Added prepareForReuse functions to Button and Label bricks [\#188](https://github.com/wayfair/brickkit-ios/pull/188) ([willspurgeon](https://github.com/willspurgeon))
+
 ## [2.4.1](https://github.com/wayfair/brickkit-ios/tree/2.4.1) (2017-09-18)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/2.4.0...2.4.1)
 
