@@ -12,10 +12,11 @@ import XCTest
 class CollectionBrickTests: XCTestCase {
     
     var brickView: BrickCollectionView!
+    var mockDelegate: MockCollectionBrickCellDelegate!
 
     override func setUp() {
         super.setUp()
-
+        mockDelegate = MockCollectionBrickCellDelegate()
         brickView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
     }
 
@@ -189,6 +190,20 @@ class CollectionBrickTests: XCTestCase {
 
         waitForExpectations(timeout: 3, handler: nil)
     }
+
+    func testThatUpdateContentCallsDelegate() {
+        let collectionSection = BrickSection(bricks: [
+            DummyBrick(height: .fixed(size: 200))
+            ])
+        let collectionBrick = CollectionBrick("Collection1", dataSource: CollectionBrickCellModel(section: collectionSection, configureHandler: { cell in
+            cell.brickCollectionView.registerBrickClass(DummyBrick.self)
+        }))
+        collectionBrick.delegate = mockDelegate
+        let section = BrickSection(bricks: [collectionBrick], edgeInsets: UIEdgeInsets(top: 300, left: 0, bottom: 0, right: 0))
+        brickView.setupSectionAndLayout(section)
+
+        XCTAssertTrue(mockDelegate.didCallDidSetSection)
+    }
 }
 
 
@@ -215,5 +230,12 @@ class CollectionViewRepeatDataSource: BrickRepeatCountDataSource {
         } else {
             return 1
         }
+    }
+}
+
+class MockCollectionBrickCellDelegate: CollectionBrickCellDelegate {
+    var didCallDidSetSection = false
+    func didSetSectionInCell(_ cell: CollectionBrickCell) {
+        didCallDidSetSection = true
     }
 }

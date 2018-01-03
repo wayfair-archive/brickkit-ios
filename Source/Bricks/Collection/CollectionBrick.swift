@@ -15,6 +15,7 @@ public typealias RegisterBricksCollectionBrickBlock = ((_ cell: CollectionBrickC
 
 open class CollectionBrick: Brick {
     weak var dataSource: CollectionBrickCellDataSource?
+    public weak var delegate: CollectionBrickCellDelegate?
     let scrollDirection: UICollectionViewScrollDirection
     var shouldCalculateFullHeight: Bool = true // This flag indicates that the collection brick is small enough to calculate its whole height directly
     var brickTypes: [Brick.Type]
@@ -49,6 +50,10 @@ public protocol CollectionBrickCellDataSource: class {
     func dataSourceForCollectionBrickCell(_ cell: CollectionBrickCell) -> BrickCollectionViewDataSource 
     func sectionForCollectionBrickCell(_ cell: CollectionBrickCell) -> BrickSection
     func currentPageForCollectionBrickCell(_ cell: CollectionBrickCell) -> Int?
+}
+
+public protocol CollectionBrickCellDelegate: class {
+    func didSetSectionInCell(_ cell: CollectionBrickCell)
 }
 
 public extension CollectionBrickCellDataSource {
@@ -201,6 +206,7 @@ open class CollectionBrickCell: BrickCell, Bricklike, AsynchronousResizableCell 
         
         if let section = brick.dataSource?.sectionForCollectionBrickCell(self) {
             brickCollectionView.setSection(section)
+            brick.delegate?.didSetSectionInCell(self)
         }
     }
 }
