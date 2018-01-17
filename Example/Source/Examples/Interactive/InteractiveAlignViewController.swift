@@ -80,7 +80,7 @@ class InteractiveAlignViewController: BrickViewController, HasTitle {
             }, completion: nil)
     }
 
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: IndexPath) {
+    func collectionView(collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         remove(indexPath: indexPath)
     }
 
