@@ -18,9 +18,9 @@ public protocol BrickLayout: class {
     var maxZIndex: Int { get }
     var scrollDirection: UICollectionViewScrollDirection { get set }
 
-    weak var dataSource: BrickLayoutDataSource? { get set }
-    weak var delegate: BrickLayoutDelegate? { get set }
-    weak var hideBehaviorDataSource: HideBehaviorDataSource? { get set }
+    var dataSource: BrickLayoutDataSource? { get set }
+    var delegate: BrickLayoutDelegate? { get set }
+    var hideBehaviorDataSource: HideBehaviorDataSource? { get set }
 
     var appearBehavior: BrickAppearBehavior? { get set }
 }

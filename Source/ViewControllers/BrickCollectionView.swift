@@ -130,20 +130,16 @@ open class BrickCollectionView: UICollectionView {
     }
 
     open func indexPathsForVisibleBricksWithIdentifier(_ identifier: String, index: Int? = nil) -> [IndexPath] {
-        let cells = self.visibleCells.filter { (cell) -> Bool in
+        return self.visibleCells.flatMap { cell in
             let brickCell = cell as! BaseBrickCell // It's ok to force unwrap because BrickKit only uses BaseBrickCell
             if brickCell._brick.identifier == identifier {
-                if let index = index {
-                    return brickCell.index == index
+                if let index = index, brickCell.index != index {
+                    return nil
                 }
-                return true
-            } else {
-                return false
+                self.indexPath(for: cell)
             }
+            return nil
         }
-        return cells.flatMap({ (cell) -> IndexPath? in
-            return self.indexPath(for: cell)
-        })
     }
 
     open func indexPathsForBricksWithIdentifier(_ identifier: String, index: Int? = nil) -> [IndexPath] {

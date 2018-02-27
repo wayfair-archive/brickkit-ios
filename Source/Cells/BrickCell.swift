@@ -11,7 +11,7 @@ import UIKit
 // Mark: - Resizeable cells
 
 public protocol AsynchronousResizableCell: class  {
-    weak var resizeDelegate: AsynchronousResizableDelegate? { get set }
+    var resizeDelegate: AsynchronousResizableDelegate? { get set }
 }
 
 public protocol AsynchronousResizableDelegate: class {
@@ -19,7 +19,7 @@ public protocol AsynchronousResizableDelegate: class {
 }
 
 public protocol ImageDownloaderCell {
-    weak var imageDownloader: ImageDownloader? { get set }
+    var imageDownloader: ImageDownloader? { get set }
 }
 
 public protocol BrickCellTapDelegate: UIGestureRecognizerDelegate {
