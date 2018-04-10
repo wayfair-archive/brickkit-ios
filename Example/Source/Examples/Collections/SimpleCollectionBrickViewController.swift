@@ -50,8 +50,7 @@ class SimpleCollectionBrickViewController: BrickApp.BaseBrickController, HasTitl
 }
 
 extension SimpleCollectionBrickViewController: CollectionBrickCellDataSource {
-
-    func sectionForCollectionBrickCell(cell: CollectionBrickCell) -> BrickSection {
+    func sectionForCollectionBrickCell(_ cell: CollectionBrickCell) -> BrickSection {
         let collectionSection = BrickSection(bricks: [
             ImageBrick(width: .ratio(ratio: 1/2), height: .ratio(ratio: 1), dataSource: ImageBrickModel(image: image, contentMode: .scaleAspectFit)),
             BrickSection(width: .ratio(ratio: 1/2), bricks: [
