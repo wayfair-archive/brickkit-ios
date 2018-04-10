@@ -1,11 +1,35 @@
 # Change Log
 
-## [2.4.2](https://github.com/wayfair/brickkit-ios/tree/4.2.2) (2017-12-07)
+## [2.5.0](https://github.com/wayfair/brickkit-ios/tree/2.5.0) (2018-04-10)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/2.4.3...2.5.0)
+
+**Closed issues:**
+
+- Push 2.4.2 to trunk to enable use of Swift 4.0 compatible BrickKit in podspec [\#207](https://github.com/wayfair/brickkit-ios/issues/207)
+
+**Merged pull requests:**
+
+- Xcode 9.3/Swift 4.1 upgrade [\#211](https://github.com/wayfair/brickkit-ios/pull/211) ([aaronsky](https://github.com/aaronsky))
+
+## [2.4.3](https://github.com/wayfair/brickkit-ios/tree/2.4.3) (2018-03-06)
+[Full Changelog](https://github.com/wayfair/brickkit-ios/compare/2.4.2...2.4.3)
+
+**Closed issues:**
+
+- Incorrect CollectionViewDelegate Method Syntax in Sample [\#209](https://github.com/wayfair/brickkit-ios/issues/209)
+- Did you want to review the spelling of behavior ? [\#205](https://github.com/wayfair/brickkit-ios/issues/205)
+
+**Merged pull requests:**
+
+- \#209: Fixed outdated didSelectItemAt signature in interactive align example [\#210](https://github.com/wayfair/brickkit-ios/pull/210) ([aaronsky](https://github.com/aaronsky))
+- CollectionBrickCellDelegate addition [\#206](https://github.com/wayfair/brickkit-ios/pull/206) ([wfsttam](https://github.com/wfsttam))
+- Call layoutIfNeeded on the cell’s contentView instead of just cell [\#204](https://github.com/wayfair/brickkit-ios/pull/204) ([ablokker](https://github.com/ablokker))
+
+## [2.4.2](https://github.com/wayfair/brickkit-ios/tree/2.4.2) (2017-12-07)
 [Full Changelog](https://github.com/wayfair/brickkit-ios/compare/2.4.1...2.4.2)
 
 **Closed issues:**
 
-- Did you want to review the spelling of behavior ? [\#205](https://github.com/wayfair/brickkit-ios/issues/205)
 - Upgrade to swift 4 [\#198](https://github.com/wayfair/brickkit-ios/issues/198)
 
 **Merged pull requests:**
