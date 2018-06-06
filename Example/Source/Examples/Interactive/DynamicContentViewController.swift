@@ -120,7 +120,7 @@ extension DynamicContentViewController: ImageBrickDataSource {
         return imageURLs?[imageBrickCell.index]
     }
 
-    func contentModeForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIViewContentMode {
+    func contentModeForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIView.ContentMode {
         return .scaleAspectFit
     }
 }

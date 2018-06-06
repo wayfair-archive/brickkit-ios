@@ -202,7 +202,7 @@ class LabelBrickTests: XCTestCase {
         
         let cell = setupLabelBrick("Hello World", configureCellBlock: { cell in
             XCTAssertNotNil(cell.button)
-            cell.button?.setTitle("Button", for: .normal)
+            cell.button?.setTitle("Button", for: UIControl.State.normal)
             cell.button?.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 14)
         })
         
@@ -229,7 +229,7 @@ class LabelBrickTests: XCTestCase {
         
         let cell = setupLabelBrick("Hello World", configureCellBlock: { cell in
             XCTAssertNotNil(cell.button)
-            cell.button?.setTitle("Button", for: UIControlState())
+            cell.button?.setTitle("Button", for: UIControl.State())
             cell.edgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
             cell.button?.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 14)
         })

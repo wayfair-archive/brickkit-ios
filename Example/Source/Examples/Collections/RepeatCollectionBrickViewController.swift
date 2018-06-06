@@ -81,7 +81,7 @@ extension RepeatCollectionBrickViewController: ImageBrickDataSource {
         return UIImage(named: "image\(imageBrickCell.collectionIndex)")
     }
 
-    func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIViewContentMode {
+    func contentModeForImageBrickCell(imageBrickCell: ImageBrickCell) -> UIView.ContentMode {
         return .scaleAspectFill
     }
 }

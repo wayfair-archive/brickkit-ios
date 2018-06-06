@@ -71,7 +71,7 @@ extension NavigationTransition: UIViewControllerAnimatedTransitioning {
             y: -masterVC.brickCollectionView.contentInset.top
         )
 
-        UIView.animate(withDuration: animationDuration / 2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [.curveEaseInOut], animations: {
+        UIView.animate(withDuration: animationDuration / 2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [UIView.AnimationOptions.curveEaseInOut], animations: {
 
             // Scroll to top
             masterVC.brickCollectionView.contentOffset = topContentOffset
@@ -109,7 +109,7 @@ extension NavigationTransition: UIViewControllerAnimatedTransitioning {
                     containerView.addSubview(masterVC.view)
                 }
 
-                UIView.animate(withDuration: animationDuration / 2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [.curveEaseInOut], animations: {
+                UIView.animate(withDuration: animationDuration / 2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [UIView.AnimationOptions.curveEaseInOut], animations: {
 
                     // Set back the content offset from before showing the detail
                     masterVC.brickCollectionView.contentOffset = self.masterContentOffset

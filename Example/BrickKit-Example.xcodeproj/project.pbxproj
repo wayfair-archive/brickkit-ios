@@ -839,7 +839,7 @@
 				TargetAttributes = {
 					4E3BD5C61DB008CD00541900 = {
 						CreatedOnToolsVersion = 8.0;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Manual;
 					};
 					4E3BD6D41DB00F9F00541900 = {
@@ -1259,7 +1259,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wafair.BrickKit-Example";
 				PRODUCT_NAME = BrickApp;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.1;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -1275,7 +1275,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.wafair.BrickKit-Example";
 				PRODUCT_NAME = BrickApp;
-				SWIFT_VERSION = 4.1;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

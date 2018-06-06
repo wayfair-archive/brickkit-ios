@@ -53,7 +53,7 @@ extension BlockHorizontalViewController: ImageBrickDataSource {
         return UIImage(named: "image\(cell.index)")
     }
 
-    func contentModeForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIViewContentMode {
+    func contentModeForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIView.ContentMode {
         return .scaleAspectFill
     }
 }

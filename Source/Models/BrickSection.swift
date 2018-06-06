@@ -41,7 +41,7 @@ open class BrickSection: Brick {
         }
     }
 
-    public init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 0)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, bricks: [Brick], inset: CGFloat = 0, edgeInsets: UIEdgeInsets = UIEdgeInsets.zero, alignRowHeights: Bool = false, alignment: BrickAlignment = BrickAlignment(horizontal: .left, vertical: .top)) {
+    public init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 0)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, bricks: [Brick], inset: CGFloat = 0, edgeInsets: UIEdgeInsets = UIEdgeInsets(), alignRowHeights: Bool = false, alignment: BrickAlignment = BrickAlignment(horizontal: .left, vertical: .top)) {
         self.bricks = bricks
         self.inset = inset
         self.edgeInsets = edgeInsets

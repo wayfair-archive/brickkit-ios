@@ -89,14 +89,14 @@ class MockTwitterViewController: BrickViewController, HasTitle {
 
     func setupTitleView() {
         titleView = UIView(frame: self.navigationController?.navigationBar.frame ?? .zero)
-        titleView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        titleView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
         titleView.clipsToBounds = true
 
         titleLabel = UILabel(frame: titleView.frame)
         titleLabel.text = "Wayfair"
         titleLabel.textAlignment = .center
         titleLabel.isHidden = true
-        titleLabel.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        titleLabel.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
 
         titleView.addSubview(titleLabel)
         self.navigationItem.titleView = titleView

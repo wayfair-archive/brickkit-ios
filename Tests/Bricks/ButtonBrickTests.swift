@@ -112,7 +112,7 @@ class ButtonBrickTests: XCTestCase {
 
         brickCollectionView.reloadBricksWithIdentifiers([ButtonBrickIdentifier], shouldReloadCell: false)
         cell = buttonCell
-        XCTAssertEqual(cell?.button.title(for: UIControlState()), "World Hello")
+        XCTAssertEqual(cell?.button.title(for: UIControl.State()), "World Hello")
 
         buttonBrick.title = "Hello World"
         brickCollectionView.reloadBricksWithIdentifiers([ButtonBrickIdentifier], shouldReloadCell: true)
@@ -227,7 +227,7 @@ class ButtonBrickTests: XCTestCase {
         let cell = setupSection(ButtonBrick(ButtonBrickIdentifier, dataSource: FixedButtonDataSource(), delegate: delegate))
         
         // Ideally cell?.button?.sendActionsForControlEvents(.TouchUpInside) is called, but this doesn't work in XCTests
-        let actions = cell?.button.actions(forTarget: cell, forControlEvent: .touchUpInside)
+        let actions = cell?.button.actions(forTarget: cell, forControlEvent: UIControl.Event.touchUpInside)
         XCTAssertEqual(actions?.count, 1)
         cell!.perform(Selector(actions!.first!), with: cell!.button)
         

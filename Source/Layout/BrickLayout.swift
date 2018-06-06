@@ -16,7 +16,7 @@ public protocol BrickLayout: class {
     var contentSize: CGSize { get }
     var zIndexBehavior: BrickLayoutZIndexBehavior { get set }
     var maxZIndex: Int { get }
-    var scrollDirection: UICollectionViewScrollDirection { get set }
+    var scrollDirection: UICollectionView.ScrollDirection { get set }
 
     var dataSource: BrickLayoutDataSource? { get set }
     var delegate: BrickLayoutDelegate? { get set }

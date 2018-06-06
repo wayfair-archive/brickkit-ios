@@ -201,7 +201,7 @@ class FixedBrickLayoutSectionDataSource: NSObject, BrickLayoutSectionDataSource 
         return []
     }
 
-    var scrollDirection: UICollectionViewScrollDirection = .vertical
+    var scrollDirection: UICollectionView.ScrollDirection = .vertical
 }
 
 class FixedBrickLayoutDataSource: NSObject, BrickLayoutDataSource {

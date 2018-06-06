@@ -17,7 +17,7 @@ protocol BrickLayoutSectionDelegate: class {
 protocol BrickLayoutSectionDataSource: class {
 
     /// Scroll Direction of the layout
-    var scrollDirection: UICollectionViewScrollDirection { get }
+    var scrollDirection: UICollectionView.ScrollDirection { get }
 
     /// The current frame of interest that we want to calculate attributes in
     var frameOfInterest: CGRect { get }

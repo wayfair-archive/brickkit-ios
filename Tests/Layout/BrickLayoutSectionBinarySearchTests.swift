@@ -30,7 +30,7 @@ class BrickLayoutSectionBinarySearchTests: XCTestCase {
         continueAfterFailure = false
     }
 
-    fileprivate func createSection(_ widthRatios: [CGFloat], heights: [CGFloat], edgeInsets: UIEdgeInsets, inset: CGFloat, sectionWidth: CGFloat, scrollDirection: UICollectionViewScrollDirection = .vertical, updatedAttributes: OnAttributesUpdatedHandler? = nil) -> BrickLayoutSection {
+    fileprivate func createSection(_ widthRatios: [CGFloat], heights: [CGFloat], edgeInsets: UIEdgeInsets, inset: CGFloat, sectionWidth: CGFloat, scrollDirection: UICollectionView.ScrollDirection = .vertical, updatedAttributes: OnAttributesUpdatedHandler? = nil) -> BrickLayoutSection {
         dataSource = FixedBrickLayoutSectionDataSource(widthRatios: widthRatios, heights: heights, edgeInsets: edgeInsets, inset: inset)
         dataSource.scrollDirection = scrollDirection
         let section = BrickLayoutSection(

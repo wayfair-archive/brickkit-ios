@@ -87,7 +87,7 @@ open class BaseBrickCell: UICollectionViewCell {
             }
             if let view = brickBackgroundView {
                 view.frame = self.bounds
-                view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+                view.autoresizingMask = [UIView.AutoresizingMask.flexibleHeight, UIView.AutoresizingMask.flexibleWidth]
                 self.contentView.insertSubview(view, at: 0)
             }
         }
@@ -178,7 +178,7 @@ open class BrickCell: BaseBrickCell {
     fileprivate var defaultRightConstraintConstant: CGFloat = 0
 
     open var defaultEdgeInsets: UIEdgeInsets {
-        return UIEdgeInsetsMake(defaultTopConstraintConstant, defaultLeftConstraintConstant, defaultBottomConstraintConstant, defaultRightConstraintConstant)
+        return UIEdgeInsets.init(top: defaultTopConstraintConstant, left: defaultLeftConstraintConstant, bottom: defaultBottomConstraintConstant, right: defaultRightConstraintConstant)
     }
 
     open var needsLegacyEdgeInsetFunctionality = false
