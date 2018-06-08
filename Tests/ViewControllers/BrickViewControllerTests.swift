@@ -332,26 +332,27 @@ class BrickViewControllerTests: XCTestCase {
 
         brickViewController.brickCollectionView.setupSectionAndLayout(section)
 
+        let firstResult = [CGRect(x: 0, y: 0, width: width, height: width * 10)]
+        let secondResult = firstResult
+        let thirdResult = [
+            CGRect(x: 0, y: 0, width: width, height: width * 4),
+            CGRect(x: 0, y: width * 4, width: width, height: width * 6)
+        ]
+        let fourthResult = [
+            CGRect(x: 0, y: 0, width: width, height: width * 2),
+            CGRect(x: 0, y: width * 2, width: width, height: width * 2)
+        ]
+        let fifthResult = [
+            CGRect(x: 0, y: width * 4, width: width, height: width * 2),
+            CGRect(x: 0, y: width * 6, width: width, height: width * 2),
+            CGRect(x: 0, y: width * 8, width: width, height: width * 2)
+        ]
         let expectedResult = [
-            0 : [
-                CGRect(x: 0, y: 0, width: width, height: width * 10)
-            ],
-            1 : [
-                CGRect(x: 0, y: 0, width: width, height: width * 10)
-            ],
-            2 : [
-                CGRect(x: 0, y: 0, width: width, height: width * 4),
-                CGRect(x: 0, y: width * 4, width: width, height: width * 6)
-            ],
-            3 : [
-                CGRect(x: 0, y: 0, width: width, height: width * 2),
-                CGRect(x: 0, y: width * 2, width: width, height: width * 2)
-            ],
-            4 : [
-                CGRect(x: 0, y: width * 4, width: width, height: width * 2),
-                CGRect(x: 0, y: width * 6, width: width, height: width * 2),
-                CGRect(x: 0, y: width * 8, width: width, height: width * 2)
-            ]
+            0: firstResult,
+            1: secondResult,
+            2: thirdResult,
+            3: fourthResult,
+            4: fifthResult
         ]
 
         let attributes = brickViewController.collectionViewLayout.layoutAttributesForElements(in: CGRect(origin: CGPoint.zero, size: brickViewController.collectionViewLayout.collectionViewContentSize))

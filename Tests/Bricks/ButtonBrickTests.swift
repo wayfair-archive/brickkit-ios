@@ -23,7 +23,7 @@ class ButtonBrickTests: XCTestCase {
         brickCollectionView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
     }
 
-    func setupButtonBrickWithModel(_ model: ButtonBrickCellModel) -> ButtonBrickCell? {
+    func setupButtonBrick(withModel model: ButtonBrickCellModel) -> ButtonBrickCell? {
         return setupSection(ButtonBrick(ButtonBrickIdentifier, dataSource: model))
     }
 
@@ -127,7 +127,7 @@ class ButtonBrickTests: XCTestCase {
         let model = ButtonBrickCellModel(title: "Hello World", configureButtonBlock: { (cell) in
             expectation.fulfill()
         })
-        _ = setupButtonBrickWithModel(model)
+        _ = setupButtonBrick(withModel: model)
 
         waitForExpectations(timeout: 5, handler: nil)
     }

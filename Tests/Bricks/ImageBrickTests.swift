@@ -186,7 +186,8 @@ class ImageBrickTests: XCTestCase {
             ImageBrick("Brick1", height: .fixed(size: 480), dataSource: FixedImageBrickDataSource(imageURLs: nil, images: ["Brick1": image])),
             ImageBrick("Brick2", height: .fixed(size: 480), dataSource: FixedImageBrickDataSource(imageURLs: nil, images: [:])),
             ])
-        section.repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick1": 5])
+        let repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick1": 5])
+        section.repeatCountDataSource = repeatCountDataSource
         brickView.setSection(section)
         brickView.layoutSubviews()
 
@@ -209,7 +210,8 @@ class ImageBrickTests: XCTestCase {
         brick.delegate = brickDelegate
 
         let section = BrickSection(bricks: [brick])
-        section.repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick1": 5])
+        let repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick1": 5])
+        section.repeatCountDataSource = repeatCountDataSource
         brickView.setSection(section)
         brickView.layoutSubviews()
 
@@ -248,7 +250,8 @@ class ImageBrickTests: XCTestCase {
         }
 
         let section = BrickSection(bricks: [brick])
-        section.repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick1": 5])
+        let repeatCountDataSource = FixedRepeatCountDataSource(repeatCountHash: ["Brick1": 5])
+        section.repeatCountDataSource = repeatCountDataSource
         brickView.setSection(section)
         brickView.layoutSubviews()
 

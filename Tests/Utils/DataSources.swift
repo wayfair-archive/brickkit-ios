@@ -39,7 +39,7 @@ class SectionsLayoutDataSource: NSObject, BrickLayoutDataSource {
     let insets: [CGFloat]
     let types: [[BrickLayoutType]]
 
-    init(widthRatios: [[CGFloat]] = [[1]], heights: [[CGFloat]] = [[0]], edgeInsets: [UIEdgeInsets] = [UIEdgeInsets.zero], insets: [CGFloat] = [0], types: [[BrickLayoutType]] = [[.brick]]) {
+    init(widthRatios: [[CGFloat]] = [[1]], heights: [[CGFloat]] = [[0]], edgeInsets: [UIEdgeInsets] = [UIEdgeInsets()], insets: [CGFloat] = [0], types: [[BrickLayoutType]] = [[.brick]]) {
         self.widthRatios = widthRatios
         self.heights = heights
         self.edgeInsets = edgeInsets
@@ -78,7 +78,7 @@ class SectionsLayoutDataSource: NSObject, BrickLayoutDataSource {
 
     func brickLayout(_ layout: BrickLayout, edgeInsetsFor section: Int) -> UIEdgeInsets {
         if edgeInsets.count <= section {
-            return edgeInsets.last ?? UIEdgeInsets.zero
+            return edgeInsets.last ?? UIEdgeInsets()
         } else {
             return edgeInsets[section]
         }
@@ -212,7 +212,7 @@ class FixedBrickLayoutDataSource: NSObject, BrickLayoutDataSource {
     let inset: CGFloat
     let type: BrickLayoutType
 
-    init(widthRatio: CGFloat = 1, height: CGFloat = 0, edgeInsets: UIEdgeInsets = UIEdgeInsets.zero, inset: CGFloat = 0, type: BrickLayoutType = .brick) {
+    init(widthRatio: CGFloat = 1, height: CGFloat = 0, edgeInsets: UIEdgeInsets = UIEdgeInsets(), inset: CGFloat = 0, type: BrickLayoutType = .brick) {
         self.widthRatio = widthRatio
         self.height = height
         self.edgeInsets = edgeInsets
