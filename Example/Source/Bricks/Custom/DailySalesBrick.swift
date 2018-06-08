@@ -38,7 +38,7 @@ class DailySalesBrickCell: BrickCell, Bricklike {
         }
         
         imageView.image = dataSource.image(cell: self)
-        nameButton.setTitle(dataSource.buttonTitle(cell: self), for: UIControl.State.normal)
+        nameButton.setTitle(dataSource.buttonTitle(cell: self), for: .normal)
     }
 }
 

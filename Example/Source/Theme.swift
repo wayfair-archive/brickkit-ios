@@ -25,14 +25,14 @@ class Theme {
         // Navigation
         UINavigationBar.appearance().barTintColor = .brickBackground
         UINavigationBar.appearance().titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: Theme.textColorForNavigationTitle,
-            NSAttributedString.Key.font: Theme.fontForNavigationTitle
+            .foregroundColor: Theme.textColorForNavigationTitle,
+            .font: Theme.fontForNavigationTitle
         ]
 
         // EdgeInsets
-        LabelBrickCell.appearance().edgeInsets = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
-        ButtonBrickCell.appearance().edgeInsets = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
-        SegmentHeaderBrickCell.appearance().edgeInsets = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
+        LabelBrickCell.appearance().edgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        ButtonBrickCell.appearance().edgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        SegmentHeaderBrickCell.appearance().edgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
 
     class var textColorForNavigationTitle: UIColor {
@@ -52,8 +52,8 @@ class Theme {
             navigationBar.barTintColor = .brickBackground
             navigationBar.tintColor = .brickPurple1
             navigationBar.titleTextAttributes = [
-                NSAttributedString.Key.foregroundColor: Theme.textColorForNavigationTitle,
-                NSAttributedString.Key.font: Theme.fontForNavigationTitle
+                .foregroundColor: Theme.textColorForNavigationTitle,
+                .font: Theme.fontForNavigationTitle
             ]
         #endif
     }
@@ -63,8 +63,8 @@ class Theme {
             navigationBar.barTintColor = .brickPurple3
             navigationBar.tintColor = .brickGray1
             navigationBar.titleTextAttributes = [
-                NSAttributedString.Key.foregroundColor: UIColor.brickGray1,
-                NSAttributedString.Key.font: Theme.fontForNavigationTitle
+                .foregroundColor: UIColor.brickGray1,
+                .font: Theme.fontForNavigationTitle
             ]
         #endif
     }

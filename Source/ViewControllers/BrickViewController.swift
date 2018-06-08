@@ -89,7 +89,7 @@ open class BrickViewController: UIViewController, UICollectionViewDelegate {
         autoreleasepool { // This would result in not releasing the BrickCollectionView even when its being set to nil
             let collectionView = BrickCollectionView(frame: self.view.bounds, collectionViewLayout: BrickFlowLayout())
             collectionView.backgroundColor = UIColor.clear
-            collectionView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+            collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
             self.view.addSubview(collectionView)
 
@@ -162,7 +162,7 @@ extension BrickViewController {
     public func addRefreshControl(_ refreshControl: UIRefreshControl, action:@escaping ((_ refreshControl: UIRefreshControl) -> Void)) {
         self.refreshControl = refreshControl
         self.refreshAction = action
-        self.refreshControl!.addTarget(self, action: #selector(refreshControlAction), for: UIControl.Event.valueChanged)
+        self.refreshControl!.addTarget(self, action: #selector(refreshControlAction), for: .valueChanged)
         self.brickCollectionView.addSubview(self.refreshControl!)
     }
     

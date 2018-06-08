@@ -88,7 +88,7 @@ open class SnapToPointLayoutBehavior: BrickLayoutBehavior {
 
     open override func resetRegisteredAttributes(_ collectionViewLayout: UICollectionViewLayout) {
         super.resetRegisteredAttributes(collectionViewLayout)
-        collectionViewLayout.collectionView?.decelerationRate = UIScrollView.DecelerationRate.fast
+        collectionViewLayout.collectionView?.decelerationRate = .fast
     }
 
     open override func layoutDoneCalculating(_ collectionViewLayout: UICollectionViewLayout) {

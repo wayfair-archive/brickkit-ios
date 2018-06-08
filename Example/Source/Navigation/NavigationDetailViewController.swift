@@ -53,7 +53,7 @@ class NavigationDetailViewController: BrickViewController {
     }
 
     fileprivate func configure(twoLabel: TwoLabelView, cell: GenericBrickCell) {
-        cell.edgeInsets = UIEdgeInsets.init(top: 10, left: 10, bottom: 10, right: 10)
+        cell.edgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         
         #if os(tvOS)
             twoLabel.label.font = UIFont.brickSemiBoldFont(size: 25)

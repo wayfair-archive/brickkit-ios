@@ -78,6 +78,6 @@ extension ButtonBrickCell {
 
     func configure() {
         button.titleLabel?.textAlignment = .center
-        button.setTitleColor(brick.backgroundColor.complemetaryColor, for: UIControl.State.normal)
+        button.setTitleColor(brick.backgroundColor.complemetaryColor, for: .normal)
     }
 }

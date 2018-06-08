@@ -227,7 +227,7 @@ class ButtonBrickTests: XCTestCase {
         let cell = setupSection(ButtonBrick(ButtonBrickIdentifier, dataSource: FixedButtonDataSource(), delegate: delegate))
         
         // Ideally cell?.button?.sendActionsForControlEvents(.TouchUpInside) is called, but this doesn't work in XCTests
-        let actions = cell?.button.actions(forTarget: cell, forControlEvent: UIControl.Event.touchUpInside)
+        let actions = cell?.button.actions(forTarget: cell, forControlEvent: .touchUpInside)
         XCTAssertEqual(actions?.count, 1)
         cell!.perform(Selector(actions!.first!), with: cell!.button)
         

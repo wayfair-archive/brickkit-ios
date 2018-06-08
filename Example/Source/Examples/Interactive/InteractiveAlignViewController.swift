@@ -75,7 +75,7 @@ class InteractiveAlignViewController: BrickViewController, HasTitle {
     }
 
     func updateCounts(fixedDeletedIndexPaths: [IndexPath]? = nil) {
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: UIView.AnimationOptions.curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
             self.brickCollectionView.invalidateRepeatCounts(reloadAllSections: false)
             }, completion: nil)
     }

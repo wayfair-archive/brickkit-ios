@@ -129,9 +129,9 @@ class InsertBrickViewController: BrickApp.BaseBrickController, HasTitle {
         view.selectedSegmentIndex = 0
         switch identifier {
         case AppearSegmentHeaderBrick:
-            view.addTarget(self, action: #selector(setAppearIndex), for: UIControl.Event.valueChanged)
+            view.addTarget(self, action: #selector(setAppearIndex), for: .valueChanged)
         case InsertSegmentHeaderBrick:
-            view.addTarget(self, action: #selector(setInsertIndex), for: UIControl.Event.valueChanged)
+            view.addTarget(self, action: #selector(setInsertIndex), for: .valueChanged)
         default: break
         }
     }

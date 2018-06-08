@@ -202,7 +202,7 @@ class LabelBrickTests: XCTestCase {
         
         let cell = setupLabelBrick("Hello World", configureCellBlock: { cell in
             XCTAssertNotNil(cell.button)
-            cell.button?.setTitle("Button", for: UIControl.State.normal)
+            cell.button?.setTitle("Button", for: .normal)
             cell.button?.titleLabel?.font = UIFont(name: "Avenir-Medium", size: 14)
         })
         

@@ -167,10 +167,10 @@ open class ButtonBrickCell: GenericBrickCell, Bricklike {
         self.backgroundColor = .clear
 
         self.button.isHidden = false
-        self.button.setImage(nil, for: UIControl.State.normal)
-        self.button.setTitle(nil, for: UIControl.State.normal)
-        self.button.setTitleColor(.black, for: UIControl.State.normal)
-        self.button.setBackgroundImage(nil, for: UIControl.State.normal)
+        self.button.setImage(nil, for: .normal)
+        self.button.setTitle(nil, for: .normal)
+        self.button.setTitleColor(.black, for: .normal)
+        self.button.setBackgroundImage(nil, for: .normal)
         self.button.titleLabel?.attributedText = nil
         self.button.titleLabel?.textAlignment = .natural
         self.button.titleLabel?.numberOfLines = 0
