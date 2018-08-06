@@ -76,7 +76,7 @@ open class BrickLayoutAttributes: UICollectionViewLayoutAttributes {
 
 extension BrickLayoutAttributes {
     open override var description: String {
-        return super.description + " originalFrame: \(originalFrame); identifier: \(identifier)"
+        return super.description + " originalFrame: \(String(describing: originalFrame)); identifier: \(String(describing: identifier))"
     }
 }
 

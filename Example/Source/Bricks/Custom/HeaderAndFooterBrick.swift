@@ -13,7 +13,8 @@ class HeaderAndFooterBrick: Brick {
     weak var dataSource: HeaderAndFooterBrickModel?
     
     init(_ identifier: String, width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, dataSource: @escaping ((HeaderAndFooterBrickCell) -> Void)) {
-        self.dataSource = HeaderAndFooterBrickModel(configureCell: dataSource)
+        let dataSource = HeaderAndFooterBrickModel(configureCell: dataSource)
+        self.dataSource = dataSource
         super.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView)
     }
 }
