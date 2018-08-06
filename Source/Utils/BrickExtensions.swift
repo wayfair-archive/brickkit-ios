@@ -8,14 +8,6 @@
 
 import Foundation
 
-#if swift(>=4.2)
-//TODO: Remove this, hack for Xcode 10
-import UIKit.UIGeometry
-extension UIEdgeInsets {
-    internal static let zero = UIEdgeInsets()
-}
-#endif
-
 extension Dictionary where Value : Equatable {
     func allKeysForValue(_ val : Value) -> [Key] {
         return self.filter { pair in pair.1 == val }.map { $0.0 }

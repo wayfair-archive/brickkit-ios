@@ -61,9 +61,9 @@ public struct BrickRangeDimension {
 internal func almostEqualRelative(first: CGFloat, second: CGFloat, maxRelDiff: CGFloat = CGFloat.ulpOfOne) -> Bool
 {
     // Calculate the difference.
-    let diff = fabs(first - second);
-    let a = fabs(first)
-    let b = fabs(second)
+    let diff = abs(first - second);
+    let a = abs(first)
+    let b = abs(second)
     // Find the largest
     let largest = (b > a) ? b : a
     

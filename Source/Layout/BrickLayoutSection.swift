@@ -624,7 +624,7 @@ internal class BrickLayoutSection {
         case .horizontal: shouldBeOnNextRow = false
         case .vertical:
             let leftOverSpace = (sectionWidth - edgeInsets.right) - (x + width - origin.x)
-            shouldBeOnNextRow = leftOverSpace < 0 && fabs(leftOverSpace) > PrecisionAccuracy
+            shouldBeOnNextRow = leftOverSpace < 0 && abs(leftOverSpace) > PrecisionAccuracy
         }
 
         var nextY: CGFloat = y

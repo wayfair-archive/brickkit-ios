@@ -112,7 +112,7 @@ class ButtonBrickTests: XCTestCase {
 
         brickCollectionView.reloadBricksWithIdentifiers([ButtonBrickIdentifier], shouldReloadCell: false)
         cell = buttonCell
-        XCTAssertEqual(cell?.button.title(for: UIControl.State()), "World Hello")
+        XCTAssertEqual(cell?.button.title(for: .normal), "World Hello")
 
         buttonBrick.title = "Hello World"
         brickCollectionView.reloadBricksWithIdentifiers([ButtonBrickIdentifier], shouldReloadCell: true)

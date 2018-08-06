@@ -15,7 +15,7 @@ class ActivityIndicatorOverrideSource: OverrideContentSource {
 
     func overrideContent(for brickCell: BrickCell) {
         if shouldOverride {
-            let indicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+            let indicator = UIActivityIndicatorView(style: .white)
             indicator.tag = 1
             indicator.backgroundColor = brickCell.contentView.backgroundColor
             indicator.translatesAutoresizingMaskIntoConstraints = false

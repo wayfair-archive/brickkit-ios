@@ -8,15 +8,6 @@
 
 import UIKit
 
-#if swift(>=4.2)
-//TODO: Remove this, hack for Xcode 10
-import UIKit.UIGeometry
-extension UIEdgeInsets {
-    internal static let zero = UIEdgeInsets()
-}
-#endif
-
-
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
