@@ -277,7 +277,8 @@ class ButtonBrickTests: XCTestCase {
         func configureButton(_ cell: ButtonBrickCell) {
             cell.backgroundColor = .green
             cell.accessoryView = UIView()
-            cell.rightImage = UIImageView()
+            let rightImage = UIImageView()
+            cell.rightImage = rightImage
             cell.rightImage?.image = UIImage()
             cell.backgroundView = UIView()
 

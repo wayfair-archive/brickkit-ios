@@ -28,7 +28,7 @@ open class Brick: CustomStringConvertible {
     // Mark: - Public members
 
     /// Identifier of the brick. Defaults to empty string
-    open let identifier: String
+    public let identifier: String
 
     /// Passes string to BrickCell's accessibilityIdentifier for UIAccessibility.  Defaults to the brick identifier
     open var accessibilityIdentifier: String

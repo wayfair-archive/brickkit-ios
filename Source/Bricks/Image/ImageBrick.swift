@@ -160,7 +160,7 @@ open class ImageBrickCell: GenericBrickCell, Bricklike, AsynchronousResizableCel
         super.updateContent()
 
         if !fromNib {
-            self.imageView = self.genericContentView as! UIImageView
+            self.imageView = (self.genericContentView as! UIImageView)
         }
 
         guard let dataSource = brick.dataSource else {

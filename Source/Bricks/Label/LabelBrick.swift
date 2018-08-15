@@ -182,7 +182,7 @@ open class LabelBrickCell: GenericBrickCell, Bricklike {
         super.updateContent()
 
         if !fromNib {
-            self.label = self.genericContentView as! UILabel
+            self.label = (self.genericContentView as! UILabel)
         }
         brick.dataSource?.configureLabelBrickCell(self)
     }

@@ -20,7 +20,7 @@ open class BrickCollectionView: UICollectionView {
     // MARK: - Public Properties
 
     /// Static reference to initialize all images that need to be downloaded
-    open static var imageDownloader: ImageDownloader = NSURLSessionImageDownloader()
+    public static var imageDownloader: ImageDownloader = NSURLSessionImageDownloader()
 
     /// Keep track of index paths that we may need to prefetch attributes for
     open var prefetchAttributeIndexPaths: [Int : [IndexPath]] = [:]
