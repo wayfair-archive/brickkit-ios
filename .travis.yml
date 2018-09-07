@@ -1,52 +1,39 @@
 language: swift
 
+osx_image: xcode10
+xcode_workspace: BrickKit.xcworkspace
+
 matrix:
    include:
       - 
-        osx_image: xcode10
-        xcode_workspace: BrickKit.xcworkspace
         xcode_sdk: iphonesimulator12.0
         xcode_destination: platform=iOS Simulator,OS=10.0,name=iPhone SE
         xcode_scheme: BrickKit
       - 
-        osx_image: xcode10
-        xcode_workspace: BrickKit.xcworkspace
         xcode_sdk: iphonesimulator12.0
         xcode_destination: platform=iOS Simulator,OS=10.0,name=iPhone SE
         xcode_scheme: BrickApp-iOS
       - 
-        osx_image: xcode10
-        xcode_workspace: BrickKit.xcworkspace
         xcode_sdk: iphonesimulator12.0
         xcode_destination: platform=iOS Simulator,OS=12.0,name=iPhone X
         xcode_scheme: BrickKit
       - 
-        osx_image: xcode10
-        xcode_workspace: BrickKit.xcworkspace
         xcode_sdk: iphonesimulator12.0
         xcode_destination: platform=iOS Simulator,OS=12.0,name=iPhone X
         xcode_scheme: BrickApp-iOS
       - 
-        osx_image: xcode10
-        xcode_workspace: BrickKit.xcworkspace
         xcode_sdk: appletvsimulator12.0
         xcode_destination: platform=tvOS Simulator,OS=10.0,name=Apple TV 1080p
         xcode_scheme: BrickKit-tvOS
       - 
-        osx_image: xcode10
-        xcode_workspace: BrickKit.xcworkspace
         xcode_sdk: appletvsimulator12.0
         xcode_destination: platform=tvOS Simulator,OS=10.0,name=Apple TV 1080p
         xcode_scheme: BrickApp-tvOS
       - 
-        osx_image: xcode10
-        xcode_workspace: BrickKit.xcworkspace
         xcode_sdk: appletvsimulator12.0
         xcode_destination: platform=tvOS Simulator,OS=12.0,name=Apple TV
         xcode_scheme: BrickKit-tvOS
       - 
-        osx_image: xcode10
-        xcode_workspace: BrickKit.xcworkspace
         xcode_sdk: iphonesimulator12.0
         xcode_destination: platform=tvOS Simulator,OS=12.0,name=Apple TV
         xcode_scheme: BrickApp-tvOS
