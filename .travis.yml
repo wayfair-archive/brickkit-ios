@@ -1,57 +1,55 @@
 language: swift
 
-.BASE: &BASE
-  osx_image: xcode10
-  xcode_workspace: BrickKit.xcworkspace
-
-.IOS: &IOS
-  xcode_sdk: iphonesimulator12.0
-
-.IOS_OLD_DESTINATION: &IOS_OLD_DESTINATION
-  xcode_destination: platform=iOS Simulator,OS=10.0,name=iPhone SE
-
-.IOS_NEW_DESTINATION: &IOS_NEW_DESTINATION
-  xcode_destination: platform=iOS Simulator,OS=12.0,name=iPhone X
-
-.TVOS: &TVOS
-  xcode_sdk: appletvsimulator12.0
-
-.TVOS_OLD_DESTINATION: &IOS_OLD_DESTINATION
-  xcode_destination: platform=tvOS Simulator,OS=10.0,name=iPhone SE
-
-.TVOS_NEW_DESTINATION: &IOS_NEW_DESTINATION
-  xcode_destination: platform=tvOS Simulator,OS=12.0,name=iPhone X
-
-.FRAMEWORK_IOS: &FRAMEWORK_IOS
-  xcode_scheme: BrickKit
-
-.FRAMEWORK_TVOS: &FRAMEWORK_TVOS
-  xcode_scheme: BrickKit-tvOS
-
-.EXAMPLE_IOS: &EXAMPLE_IOS
-  xcode_scheme: BrickApp-iOS
-
-.EXAMPLE_TVOS: &EXAMPLE_TVOS
-  xcode_scheme: BrickApp-tvOS
-
 matrix:
    include:
       - 
-        <<: [*BASE, *IOS, *IOS_OLD_DESTINATION, *FRAMEWORK_IOS]
+        osx_image: xcode10
+        xcode_workspace: BrickKit.xcworkspace
+        xcode_sdk: iphonesimulator12.0
+        xcode_destination: platform=iOS Simulator,OS=10.0,name=iPhone SE
+        xcode_scheme: BrickKit
       - 
-        <<: [*BASE, *IOS, *IOS_OLD_DESTINATION, *EXAMPLE_IOS]
+        osx_image: xcode10
+        xcode_workspace: BrickKit.xcworkspace
+        xcode_sdk: iphonesimulator12.0
+        xcode_destination: platform=iOS Simulator,OS=10.0,name=iPhone SE
+        xcode_scheme: BrickApp-iOS
       - 
-        <<: [*BASE, *IOS, *IOS_NEW_DESTINATION, *FRAMEWORK_IOS]
+        osx_image: xcode10
+        xcode_workspace: BrickKit.xcworkspace
+        xcode_sdk: iphonesimulator12.0
+        xcode_destination: platform=iOS Simulator,OS=12.0,name=iPhone X
+        xcode_scheme: BrickKit
       - 
-        <<: [*BASE, *IOS, *IOS_NEW_DESTINATION, *EXAMPLE_IOS]
+        osx_image: xcode10
+        xcode_workspace: BrickKit.xcworkspace
+        xcode_sdk: iphonesimulator12.0
+        xcode_destination: platform=iOS Simulator,OS=12.0,name=iPhone X
+        xcode_scheme: BrickApp-iOS
       - 
-        <<: [*BASE, *TVOS, *TVOS_OLD_DESTINATION, *FRAMEWORK_TVOS]
+        osx_image: xcode10
+        xcode_workspace: BrickKit.xcworkspace
+        xcode_sdk: appletvsimulator12.0
+        xcode_destination: platform=tvOS Simulator,OS=10.0,name=Apple TV 1080p
+        xcode_scheme: BrickKit-tvOS
       - 
-        <<: [*BASE, *TVOS, *TVOS_OLD_DESTINATION, *EXAMPLE_TVOS]
+        osx_image: xcode10
+        xcode_workspace: BrickKit.xcworkspace
+        xcode_sdk: appletvsimulator12.0
+        xcode_destination: platform=tvOS Simulator,OS=10.0,name=Apple TV 1080p
+        xcode_scheme: BrickApp-tvOS
       - 
-        <<: [*BASE, *TVOS, *TVOS_NEW_DESTINATION, *FRAMEWORK_TVOS]
+        osx_image: xcode10
+        xcode_workspace: BrickKit.xcworkspace
+        xcode_sdk: appletvsimulator12.0
+        xcode_destination: platform=tvOS Simulator,OS=12.0,name=Apple TV
+        xcode_scheme: BrickKit-tvOS
       - 
-        <<: [*BASE, *TVOS, *TVOS_NEW_DESTINATION, *EXAMPLE_TVOS]
+        osx_image: xcode10
+        xcode_workspace: BrickKit.xcworkspace
+        xcode_sdk: iphonesimulator12.0
+        xcode_destination: platform=tvOS Simulator,OS=12.0,name=Apple TV
+        xcode_scheme: BrickApp-tvOS
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -J 'BrickKit' -X xcodeplist
