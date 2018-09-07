@@ -1,40 +1,57 @@
-language: objective-c
-os: osx
-env:
-  global:
-  - WORKSPACE=BrickKit.xcworkspace
-  - IOS_FRAMEWORK_SCHEME="BrickKit"
-  - TVOS_FRAMEWORK_SCHEME="BrickKit-tvOS"
-  - IOS_SDK=iphonesimulator11.4
-  - TVOS_SDK=appletvsimulator11.4
-  - IOS_EXAMPLE_SCHEME="BrickApp-iOS"
-  - TVOS_EXAMPLE_SCHEME="BrickApp-tvOS"
+language: swift
+
+.BASE: &BASE
+  osx_image: xcode10
+  xcode_workspace: BrickKit.xcworkspace
+
+.IOS: &IOS
+  xcode_sdk: iphonesimulator12.0
+
+.IOS_OLD_DESTINATION: &IOS_OLD_DESTINATION
+  xcode_destination: platform=iOS Simulator,OS=10.0,name=iPhone SE
+
+.IOS_NEW_DESTINATION: &IOS_NEW_DESTINATION
+  xcode_destination: platform=iOS Simulator,OS=12.0,name=iPhone X
+
+.TVOS: &TVOS
+  xcode_sdk: appletvsimulator12.0
+
+.TVOS_OLD_DESTINATION: &IOS_OLD_DESTINATION
+  xcode_destination: platform=tvOS Simulator,OS=10.0,name=iPhone SE
+
+.TVOS_NEW_DESTINATION: &IOS_NEW_DESTINATION
+  xcode_destination: platform=tvOS Simulator,OS=12.0,name=iPhone X
+
+.FRAMEWORK_IOS: &FRAMEWORK_IOS
+  xcode_scheme: BrickKit
+
+.FRAMEWORK_TVOS: &FRAMEWORK_TVOS
+  xcode_scheme: BrickKit-tvOS
+
+.EXAMPLE_IOS: &EXAMPLE_IOS
+  xcode_scheme: BrickApp-iOS
+
+.EXAMPLE_TVOS: &EXAMPLE_TVOS
+  xcode_scheme: BrickApp-tvOS
 
 matrix:
-  include:
-    - osx_image: xcode9.4
-      env:
-        - DESTINATION="OS=10.0,name=iPhone SE"           SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"    EXAMPLE_SCHEME="$IOS_EXAMPLE_SCHEME"
-    - osx_image: xcode9.4
-      env:
-        - DESTINATION="OS=11.4,name=iPhone 7 Plus"     SCHEME="$IOS_FRAMEWORK_SCHEME"     SDK="$IOS_SDK"    EXAMPLE_SCHEME="$IOS_EXAMPLE_SCHEME"
-    - osx_image: xcode9.4
-      env:
-        - DESTINATION="OS=10.0,name=Apple TV 1080p"     SCHEME="$TVOS_FRAMEWORK_SCHEME"    SDK="$TVOS_SDK"   EXAMPLE_SCHEME="$TVOS_EXAMPLE_SCHEME"
-    - osx_image: xcode9.4
-      env:
-        - DESTINATION="OS=11.4,name=Apple TV"    SCHEME="$TVOS_FRAMEWORK_SCHEME"    SDK="$TVOS_SDK"   EXAMPLE_SCHEME="$TVOS_EXAMPLE_SCHEME"
-script:
-  - set -o pipefail
-  - xcodebuild -version
-  - xcodebuild -showsdks
-
-  # Build Framework in Debug and Run Tests if specified
-  - travis_retry xcodebuild -workspace "$WORKSPACE" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO ENABLE_TESTABILITY=YES test | xcpretty;
-
-  # Build Example in Debug
-  - travis_retry xcodebuild -workspace "$WORKSPACE" -scheme "$EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=NO build | xcpretty;
+   include:
+      - 
+        <<: [*BASE, *IOS, *IOS_OLD_DESTINATION, *FRAMEWORK_IOS]
+      - 
+        <<: [*BASE, *IOS, *IOS_OLD_DESTINATION, *EXAMPLE_IOS]
+      - 
+        <<: [*BASE, *IOS, *IOS_NEW_DESTINATION, *FRAMEWORK_IOS]
+      - 
+        <<: [*BASE, *IOS, *IOS_NEW_DESTINATION, *EXAMPLE_IOS]
+      - 
+        <<: [*BASE, *TVOS, *TVOS_OLD_DESTINATION, *FRAMEWORK_TVOS]
+      - 
+        <<: [*BASE, *TVOS, *TVOS_OLD_DESTINATION, *EXAMPLE_TVOS]
+      - 
+        <<: [*BASE, *TVOS, *TVOS_NEW_DESTINATION, *FRAMEWORK_TVOS]
+      - 
+        <<: [*BASE, *TVOS, *TVOS_NEW_DESTINATION, *EXAMPLE_TVOS]
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -J 'BrickKit' -X xcodeplist
- 
