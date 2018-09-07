@@ -130,7 +130,7 @@ open class ButtonBrickCellModel: ButtonBrickCellDataSource, ButtonBrickCellDeleg
     }
 
     open func configureButtonBrick(_ cell: ButtonBrickCell) {
-        cell.button.setTitle(title, for: .normal))
+        cell.button.setTitle(title, for: .normal)
         configureButtonBlock?(cell)
     }
 
