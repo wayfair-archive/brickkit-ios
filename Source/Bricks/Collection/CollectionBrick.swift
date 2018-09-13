@@ -16,17 +16,17 @@ public typealias RegisterBricksCollectionBrickBlock = ((_ cell: CollectionBrickC
 open class CollectionBrick: Brick {
     weak var dataSource: CollectionBrickCellDataSource?
     public weak var delegate: CollectionBrickCellDelegate?
-    let scrollDirection: UICollectionViewScrollDirection
+    let scrollDirection: UICollectionView.ScrollDirection
     var shouldCalculateFullHeight: Bool = true // This flag indicates that the collection brick is small enough to calculate its whole height directly
     var brickTypes: [Brick.Type]
     
     fileprivate var model: CollectionBrickCellModel?
     
-    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, scrollDirection: UICollectionViewScrollDirection = .vertical, dataSource: CollectionBrickCellDataSource, brickTypes: [Brick.Type] = []) {
+    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, scrollDirection: UICollectionView.ScrollDirection = .vertical, dataSource: CollectionBrickCellDataSource, brickTypes: [Brick.Type] = []) {
         self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor: backgroundColor, backgroundView: backgroundView, scrollDirection: scrollDirection, dataSource: dataSource, brickTypes: brickTypes)
     }
     
-    public init(_ identifier: String, size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, scrollDirection: UICollectionViewScrollDirection = .vertical, dataSource: CollectionBrickCellDataSource, brickTypes: [Brick.Type] = []) {
+    public init(_ identifier: String, size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, scrollDirection: UICollectionView.ScrollDirection = .vertical, dataSource: CollectionBrickCellDataSource, brickTypes: [Brick.Type] = []) {
         self.dataSource = dataSource
         self.scrollDirection = scrollDirection
         

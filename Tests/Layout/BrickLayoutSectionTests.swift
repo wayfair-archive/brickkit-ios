@@ -56,7 +56,7 @@ class BrickLayoutSectionTests: XCTestCase {
     }
 
     func testNoDataSource() {
-        let section = createSection([], heights: [], edgeInsets: UIEdgeInsets.zero, inset: 0, sectionWidth: 320)
+        let section = createSection([], heights: [], edgeInsets: .zero, inset: 0, sectionWidth: 320)
 
         section.dataSource = nil
         section.invalidateAttributes(nil)
@@ -309,7 +309,7 @@ class BrickLayoutSectionTests: XCTestCase {
 
     func testThatContinueCalculatingReturnsRightValue() {
         let totalNumber = 20
-        let section = createSection(Array<CGFloat>(repeating: 1, count: totalNumber), heights: Array<CGFloat>(repeating: 50, count: totalNumber), edgeInsets: UIEdgeInsets.zero, inset: 0, sectionWidth: 320, invalidate: false)
+        let section = createSection(Array<CGFloat>(repeating: 1, count: totalNumber), heights: Array<CGFloat>(repeating: 50, count: totalNumber), edgeInsets: .zero, inset: 0, sectionWidth: 320, invalidate: false)
         dataSource.frameOfInterest = CGRect(x: 0, y: 0, width: 320, height: 200)
 
         XCTAssertTrue(section.continueCalculatingCells())
@@ -324,7 +324,7 @@ class BrickLayoutSectionTests: XCTestCase {
 
     func testThatContinueCalculatingReturnsRightValueWithDownstreamIndexPaths() {
         let totalNumber = 20
-        let section = createSection(Array<CGFloat>(repeating: 1, count: totalNumber), heights: Array<CGFloat>(repeating: 50, count: totalNumber), edgeInsets: UIEdgeInsets.zero, inset: 0, sectionWidth: 320, invalidate: false)
+        let section = createSection(Array<CGFloat>(repeating: 1, count: totalNumber), heights: Array<CGFloat>(repeating: 50, count: totalNumber), edgeInsets: .zero, inset: 0, sectionWidth: 320, invalidate: false)
         dataSource.frameOfInterest = CGRect(x: 0, y: 0, width: 320, height: 200)
         dataSource.downStreamIndexPaths = [IndexPath(item: totalNumber-1, section: 0)]
 
@@ -335,7 +335,7 @@ class BrickLayoutSectionTests: XCTestCase {
 
     func testThatInvalidatingAnAttributeThatIsNotYetCalculatedDoesNotCrashApp() {
         let totalNumber = 20
-        let section = createSection(Array<CGFloat>(repeating: 1, count: totalNumber), heights: Array<CGFloat>(repeating: 50, count: totalNumber), edgeInsets: UIEdgeInsets.zero, inset: 0, sectionWidth: 320, invalidate: false)
+        let section = createSection(Array<CGFloat>(repeating: 1, count: totalNumber), heights: Array<CGFloat>(repeating: 50, count: totalNumber), edgeInsets: .zero, inset: 0, sectionWidth: 320, invalidate: false)
         dataSource.frameOfInterest = CGRect(x: 0, y: 0, width: 320, height: 200)
         dataSource.downStreamIndexPaths = [IndexPath(item: totalNumber-1, section: 0)]
 

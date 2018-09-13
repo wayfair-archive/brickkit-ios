@@ -71,7 +71,7 @@ open class BrickFlowLayout: UICollectionViewLayout, BrickLayout {
     open weak var delegate: BrickLayoutDelegate?
 
     /// Scroll Direction
-    open var scrollDirection: UICollectionViewScrollDirection = .vertical
+    open var scrollDirection: UICollectionView.ScrollDirection = .vertical
 
     /// ZIndexBehavior
     open var zIndexBehavior: BrickLayoutZIndexBehavior = .topDown

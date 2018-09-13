@@ -127,7 +127,7 @@ class CoverFlowLayoutBehaviorTests: XCTestCase {
         let newLayout = cell1.preferredLayoutAttributesFitting(layoutAttributes)
         let heightAfter = newLayout.frame.size.height
 
-        XCTAssertTrue(heightBefore == heightAfter)
+        XCTAssertEqual(heightBefore, heightAfter)
     }
 }
 

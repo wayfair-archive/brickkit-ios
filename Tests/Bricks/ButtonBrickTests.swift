@@ -23,7 +23,7 @@ class ButtonBrickTests: XCTestCase {
         brickCollectionView = BrickCollectionView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
     }
 
-    func setupButtonBrickWithModel(_ model: ButtonBrickCellModel) -> ButtonBrickCell? {
+    func setupButtonBrick(withModel model: ButtonBrickCellModel) -> ButtonBrickCell? {
         return setupSection(ButtonBrick(ButtonBrickIdentifier, dataSource: model))
     }
 
@@ -112,7 +112,7 @@ class ButtonBrickTests: XCTestCase {
 
         brickCollectionView.reloadBricksWithIdentifiers([ButtonBrickIdentifier], shouldReloadCell: false)
         cell = buttonCell
-        XCTAssertEqual(cell?.button.title(for: UIControlState()), "World Hello")
+        XCTAssertEqual(cell?.button.title(for: .normal), "World Hello")
 
         buttonBrick.title = "Hello World"
         brickCollectionView.reloadBricksWithIdentifiers([ButtonBrickIdentifier], shouldReloadCell: true)
@@ -127,7 +127,7 @@ class ButtonBrickTests: XCTestCase {
         let model = ButtonBrickCellModel(title: "Hello World", configureButtonBlock: { (cell) in
             expectation.fulfill()
         })
-        _ = setupButtonBrickWithModel(model)
+        _ = setupButtonBrick(withModel: model)
 
         waitForExpectations(timeout: 5, handler: nil)
     }
@@ -268,7 +268,7 @@ class ButtonBrickTests: XCTestCase {
             brickCollectionView.reloadData()
         }
 
-        XCTAssertTrue(cell?.gestureRecognizers?.count == 1)
+        XCTAssertEqual(cell?.gestureRecognizers?.count, 1)
     }
 
     func testButtonResetsBeforeReusing() {

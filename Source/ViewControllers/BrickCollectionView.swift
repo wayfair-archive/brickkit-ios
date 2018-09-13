@@ -264,6 +264,7 @@ open class BrickCollectionView: UICollectionView {
         super.reloadData()
     }
 
+    @nonobjc
     open override func performBatchUpdates(_ updates: (() -> Void)?, completion: ((Bool) -> Void)? = nil) {
         BrickLogger.logVerbose("Will perform batch updates.")
         super.performBatchUpdates(updates, completion: { completed in

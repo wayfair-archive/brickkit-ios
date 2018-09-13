@@ -30,9 +30,9 @@ class Theme {
         ]
 
         // EdgeInsets
-        LabelBrickCell.appearance().edgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
-        ButtonBrickCell.appearance().edgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
-        SegmentHeaderBrickCell.appearance().edgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
+        LabelBrickCell.appearance().edgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        ButtonBrickCell.appearance().edgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        SegmentHeaderBrickCell.appearance().edgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
 
     class var textColorForNavigationTitle: UIColor {

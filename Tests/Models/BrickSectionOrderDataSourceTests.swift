@@ -59,61 +59,61 @@ class BrickSectionStaggeredOrderDataSourceTests: BrickSectionOrderDataSourceTest
 
     func testThatIndex0ReturnsBrick0Index0() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[0])
+        XCTAssert(cell?._brick === section.bricks[0])
         XCTAssertEqual(cell?.index, 0)
     }
 
     func testThatIndex1ReturnsBrick1Index0() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 1, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[1])
+        XCTAssert(cell?._brick === section.bricks[1])
         XCTAssertEqual(cell?.index, 0)
     }
 
     func testThatIndex2ReturnsBrick0Index1() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 2, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[0])
+        XCTAssert(cell?._brick === section.bricks[0])
         XCTAssertEqual(cell?.index, 1)
     }
 
     func testThatIndex3ReturnsBrick1Index1() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 3, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[1])
+        XCTAssert(cell?._brick === section.bricks[1])
         XCTAssertEqual(cell?.index, 1)
     }
 
     func testThatIndex4ReturnsBrick0Index2() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 4, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[0])
+        XCTAssert(cell?._brick === section.bricks[0])
         XCTAssertEqual(cell?.index, 2)
     }
 
     func testThatIndex5ReturnsBrick1Index2() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 5, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[1])
+        XCTAssert(cell?._brick === section.bricks[1])
         XCTAssertEqual(cell?.index, 2)
     }
 
     func testThatIndex6ReturnsBrick0Index3() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 6, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[0])
+        XCTAssert(cell?._brick === section.bricks[0])
         XCTAssertEqual(cell?.index, 3)
     }
 
     func testThatIndex7ReturnsBrick1Index3() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 7, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[1])
+        XCTAssert(cell?._brick === section.bricks[1])
         XCTAssertEqual(cell?.index, 3)
     }
 
     func testThatIndex8ReturnsBrick0Index4() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 8, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[0])
+        XCTAssert(cell?._brick === section.bricks[0])
         XCTAssertEqual(cell?.index, 4)
     }
 
     func testThatIndex9ReturnsBrick1Index4() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 9, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[1])
+        XCTAssert(cell?._brick === section.bricks[1])
         XCTAssertEqual(cell?.index, 4)
     }
 
@@ -154,61 +154,61 @@ class BrickSectionAdvancedOrderDataSourceTests: BrickSectionOrderDataSourceTests
 
     func testThatIndex0ReturnsBrick0Index0() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[0])
+        XCTAssert(cell?._brick === section.bricks[0])
         XCTAssertEqual(cell?.index, 0)
     }
 
     func testThatIndex1ReturnsBrick0Index1() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 1, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[0])
+        XCTAssert(cell?._brick === section.bricks[0])
         XCTAssertEqual(cell?.index, 1)
     }
 
     func testThatIndex2ReturnsBrick0Index2() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 2, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[0])
+        XCTAssert(cell?._brick === section.bricks[0])
         XCTAssertEqual(cell?.index, 2)
     }
 
     func testThatIndex3ReturnsBrick1Index0() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 3, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[1])
+        XCTAssert(cell?._brick === section.bricks[1])
         XCTAssertEqual(cell?.index, 0)
     }
 
     func testThatIndex4ReturnsBrick1Index1() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 4, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[1])
+        XCTAssert(cell?._brick === section.bricks[1])
         XCTAssertEqual(cell?.index, 1)
     }
 
     func testThatIndex5ReturnsBrick0Index3() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 5, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[0])
+        XCTAssert(cell?._brick === section.bricks[0])
         XCTAssertEqual(cell?.index, 3)
     }
 
     func testThatIndex6ReturnsBrick1Index2() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 6, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[1])
+        XCTAssert(cell?._brick === section.bricks[1])
         XCTAssertEqual(cell?.index, 2)
     }
 
     func testThatIndex7ReturnsBrick1Index3() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 7, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[1])
+        XCTAssert(cell?._brick === section.bricks[1])
         XCTAssertEqual(cell?.index, 3)
     }
 
     func testThatIndex8ReturnsBrick0Index4() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 8, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[0])
+        XCTAssert(cell?._brick === section.bricks[0])
         XCTAssertEqual(cell?.index, 4)
     }
 
     func testThatIndex9ReturnsBrick1Index4() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 9, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[1])
+        XCTAssert(cell?._brick === section.bricks[1])
         XCTAssertEqual(cell?.index, 4)
     }
 
@@ -258,61 +258,61 @@ class BrickSectionNilOrderDataSourceTests: BrickSectionOrderDataSourceTests {
 
     func testThatIndex0ReturnsBrick0Index0() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 0, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[0])
+        XCTAssert(cell?._brick === section.bricks[0])
         XCTAssertEqual(cell?.index, 0)
     }
 
     func testThatIndex1ReturnsBrick0Index1() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 1, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[0])
+        XCTAssert(cell?._brick === section.bricks[0])
         XCTAssertEqual(cell?.index, 1)
     }
 
     func testThatIndex2ReturnsBrick0Index2() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 2, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[0])
+        XCTAssert(cell?._brick === section.bricks[0])
         XCTAssertEqual(cell?.index, 2)
     }
 
     func testThatIndex3ReturnsBrick0Index3() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 3, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[0])
+        XCTAssert(cell?._brick === section.bricks[0])
         XCTAssertEqual(cell?.index, 3)
     }
 
     func testThatIndex4ReturnsBrick0Index4() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 4, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[0])
+        XCTAssert(cell?._brick === section.bricks[0])
         XCTAssertEqual(cell?.index, 4)
     }
 
     func testThatIndex5ReturnsBrick1Index0() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 5, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[1])
+        XCTAssert(cell?._brick === section.bricks[1])
         XCTAssertEqual(cell?.index, 0)
     }
 
     func testThatIndex6ReturnsBrick1Index1() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 6, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[1])
+        XCTAssert(cell?._brick === section.bricks[1])
         XCTAssertEqual(cell?.index, 1)
     }
 
     func testThatIndex7ReturnsBrick1Index2() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 7, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[1])
+        XCTAssert(cell?._brick === section.bricks[1])
         XCTAssertEqual(cell?.index, 2)
     }
 
     func testThatIndex8ReturnsBrick1Index3() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 8, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[1])
+        XCTAssert(cell?._brick === section.bricks[1])
         XCTAssertEqual(cell?.index, 3)
     }
 
     func testThatIndex9ReturnsBrick1Index4() {
         let cell = brickCollectionView.cellForItem(at: IndexPath(item: 9, section: 1)) as? BrickCell
-        XCTAssertTrue(cell?._brick === section.bricks[1])
+        XCTAssert(cell?._brick === section.bricks[1])
         XCTAssertEqual(cell?.index, 4)
     }
 

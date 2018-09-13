@@ -178,7 +178,7 @@ open class BrickCell: BaseBrickCell {
     fileprivate var defaultRightConstraintConstant: CGFloat = 0
 
     open var defaultEdgeInsets: UIEdgeInsets {
-        return UIEdgeInsetsMake(defaultTopConstraintConstant, defaultLeftConstraintConstant, defaultBottomConstraintConstant, defaultRightConstraintConstant)
+        return UIEdgeInsets(top: defaultTopConstraintConstant, left: defaultLeftConstraintConstant, bottom: defaultBottomConstraintConstant, right: defaultRightConstraintConstant)
     }
 
     open var needsLegacyEdgeInsetFunctionality = false

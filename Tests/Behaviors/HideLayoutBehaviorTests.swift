@@ -33,11 +33,6 @@ class HideLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
         XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 100))
-
-        let indexPaths = attributes?.map { return $0.indexPath }
-        XCTAssertEqual(indexPaths?.count, 2)
-        XCTAssertEqual(indexPaths?[0], IndexPath(item: 0, section: 0))
-        XCTAssertEqual(indexPaths?[1], IndexPath(item: 0, section: 1))
     }
 
     func testHideAllRowsBehavior() {
@@ -121,11 +116,6 @@ class HideLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
         XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 100))
-
-        let indexPaths = attributes?.map { return $0.indexPath }
-        XCTAssertEqual(indexPaths?.count, 2)
-        XCTAssertEqual(indexPaths?[0], IndexPath(item: 0, section: 0))
-        XCTAssertEqual(indexPaths?[1], IndexPath(item: 0, section: 1))
     }
 
     func testHideOneRowBehaviorWithHiddenAfterLayout() {
@@ -152,11 +142,6 @@ class HideLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         XCTAssertNotNil(attributes)
         XCTAssertTrue(verifyAttributesToExpectedResult(attributes!, expectedResult: expectedResult))
         XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 100))
-
-        let indexPaths = attributes?.map { return $0.indexPath }
-        XCTAssertEqual(indexPaths?.count, 2)
-        XCTAssertEqual(indexPaths?[0], IndexPath(item: 0, section: 0))
-        XCTAssertEqual(indexPaths?[1], IndexPath(item: 0, section: 1))
     }
 
     func testHideAllRowsBehaviorWithHidden() {

@@ -50,7 +50,7 @@ open class CoverFlowLayoutBehavior: BrickLayoutBehavior {
                 cellCenter -= collectionView.contentOffset.x
             }
 
-            let distanceFromCenter = fabs(visibleRectCenter - cellCenter)
+            let distanceFromCenter = abs(visibleRectCenter - cellCenter)
             let baseScaleFactor = (visibleContentRect.width - distanceFromCenter) / visibleContentRect.width
             let finalScaleFactor = min(max(self.minimumScaleFactor, baseScaleFactor), MaximumScaleFactor)
 

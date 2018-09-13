@@ -30,12 +30,12 @@ open class ImageBrick: GenericBrick<UIImageView> {
         self.init(identifier, size: BrickSize(width: width, height: height), backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: dataSource)
     }
 
-    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, image: UIImage, contentMode: UIViewContentMode) {
+    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, image: UIImage, contentMode: UIView.ContentMode) {
         let model = ImageBrickModel(image: image, contentMode: contentMode)
         self.init(identifier, width: width, height: height, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
     }
 
-    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, imageUrl: URL, contentMode: UIViewContentMode) {
+    public convenience init(_ identifier: String = "", width: BrickDimension = .ratio(ratio: 1), height: BrickDimension = .auto(estimate: .fixed(size: 50)), backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, imageUrl: URL, contentMode: UIView.ContentMode) {
         let model = ImageURLBrickModel(url: imageUrl, contentMode: contentMode)
         self.init(identifier, width: width, height: height, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
     }
@@ -53,12 +53,12 @@ open class ImageBrick: GenericBrick<UIImageView> {
         }
     }
 
-    public convenience init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, image: UIImage, contentMode: UIViewContentMode) {
+    public convenience init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, image: UIImage, contentMode: UIView.ContentMode) {
         let model = ImageBrickModel(image: image, contentMode: contentMode)
         self.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
     }
 
-    public convenience init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, imageUrl: URL, contentMode: UIViewContentMode) {
+    public convenience init(_ identifier: String = "", size: BrickSize, backgroundColor: UIColor = UIColor.clear, backgroundView: UIView? = nil, imageUrl: URL, contentMode: UIView.ContentMode) {
         let model = ImageURLBrickModel(url: imageUrl, contentMode: contentMode)
         self.init(identifier, size: size, backgroundColor:backgroundColor, backgroundView:backgroundView, dataSource: model)
     }
@@ -70,7 +70,7 @@ open class ImageBrick: GenericBrick<UIImageView> {
 public protocol ImageBrickDataSource: class {
     func imageURLForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> URL?
     func imageForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIImage?
-    func contentModeForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIViewContentMode
+    func contentModeForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIView.ContentMode
 }
 
 extension ImageBrickDataSource {
@@ -83,7 +83,7 @@ extension ImageBrickDataSource {
         return nil
     }
 
-    public func contentModeForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIViewContentMode {
+    public func contentModeForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIView.ContentMode {
         return .scaleToFill
     }
     
@@ -99,9 +99,9 @@ public protocol ImageBrickDelegate: class {
 
 open class ImageBrickModel: ImageBrickDataSource {
     var image: UIImage?
-    var contentMode: UIViewContentMode
+    var contentMode: UIView.ContentMode
 
-    public init(image: UIImage, contentMode: UIViewContentMode) {
+    public init(image: UIImage, contentMode: UIView.ContentMode) {
         self.image = image
         self.contentMode = contentMode
     }
@@ -110,16 +110,16 @@ open class ImageBrickModel: ImageBrickDataSource {
         return image
     }
 
-    open func contentModeForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIViewContentMode {
+    open func contentModeForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIView.ContentMode {
         return contentMode
     }
 }
 
 open class ImageURLBrickModel: ImageBrickDataSource {
     var imageURL: URL
-    var contentMode: UIViewContentMode
+    var contentMode: UIView.ContentMode
     
-    public init(url: URL, contentMode: UIViewContentMode) {
+    public init(url: URL, contentMode: UIView.ContentMode) {
         self.contentMode = contentMode
         self.imageURL = url
     }
@@ -128,7 +128,7 @@ open class ImageURLBrickModel: ImageBrickDataSource {
         return imageURL
     }
     
-    open func contentModeForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIViewContentMode {
+    open func contentModeForImageBrickCell(_ imageBrickCell: ImageBrickCell) -> UIView.ContentMode {
         return contentMode
     }
 }

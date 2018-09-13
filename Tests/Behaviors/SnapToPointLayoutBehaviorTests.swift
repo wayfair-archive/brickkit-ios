@@ -373,8 +373,8 @@ class SnapToPointLayoutBehaviorTests: XCTestCase {
         let attributes = self.brickView.layout.layoutAttributesForElements(in: self.brickView.frame) as? [BrickLayoutAttributes]
         let filteredAttributes = behavior.filteredAttributes(layout: self.brickView.layout, frame: self.brickView.frame)
 
-        XCTAssert(attributes?.count == 1) // There is only one attribute. (The CollectionBrick)
-        XCTAssert(attributes?[0].indexPath == IndexPath(item: 0, section: 0)) // There is an item in section 0.
+        XCTAssertEqual(attributes?.count, 1) // There is only one attribute. (The CollectionBrick)
+        XCTAssertEqual(attributes?[0].indexPath, IndexPath(item: 0, section: 0)) // There is an item in section 0.
         XCTAssert(filteredAttributes.isEmpty) // The item in section 0 is filtered out.
     }
 

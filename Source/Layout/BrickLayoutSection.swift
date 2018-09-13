@@ -17,7 +17,7 @@ protocol BrickLayoutSectionDelegate: class {
 protocol BrickLayoutSectionDataSource: class {
 
     /// Scroll Direction of the layout
-    var scrollDirection: UICollectionViewScrollDirection { get }
+    var scrollDirection: UICollectionView.ScrollDirection { get }
 
     /// The current frame of interest that we want to calculate attributes in
     var frameOfInterest: CGRect { get }
@@ -624,7 +624,7 @@ internal class BrickLayoutSection {
         case .horizontal: shouldBeOnNextRow = false
         case .vertical:
             let leftOverSpace = (sectionWidth - edgeInsets.right) - (x + width - origin.x)
-            shouldBeOnNextRow = leftOverSpace < 0 && fabs(leftOverSpace) > PrecisionAccuracy
+            shouldBeOnNextRow = leftOverSpace < 0 && abs(leftOverSpace) > PrecisionAccuracy
         }
 
         var nextY: CGFloat = y

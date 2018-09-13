@@ -60,9 +60,9 @@ class CardLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         fourthAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 3, section: 0))
         XCTAssertEqual(fourthAttributes?.frame, CGRect(x: 0, y: 500, width: 320, height: 300))
 
-        XCTAssertTrue(firstAttributes.zIndex < secondAttributes.zIndex)
-        XCTAssertTrue(secondAttributes.zIndex < thirdAttributes.zIndex)
-        XCTAssertTrue(thirdAttributes.zIndex < fourthAttributes.zIndex)
+        XCTAssertLessThan(firstAttributes.zIndex, secondAttributes.zIndex)
+        XCTAssertLessThan(secondAttributes.zIndex, thirdAttributes.zIndex)
+        XCTAssertLessThan(thirdAttributes.zIndex, fourthAttributes.zIndex)
         XCTAssertEqual(layout.collectionViewContentSize, CGSize(width: 320, height: 1200))
 
         layout.collectionView?.contentOffset.y = 100
@@ -78,9 +78,9 @@ class CardLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         fourthAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 3, section: 0))
         XCTAssertEqual(fourthAttributes?.frame, CGRect(x: 0, y: 600, width: 320, height: 300))
 
-        XCTAssertTrue(firstAttributes.zIndex < secondAttributes.zIndex)
-        XCTAssertTrue(secondAttributes.zIndex < thirdAttributes.zIndex)
-        XCTAssertTrue(thirdAttributes.zIndex < fourthAttributes.zIndex)
+        XCTAssertLessThan(firstAttributes.zIndex, secondAttributes.zIndex)
+        XCTAssertLessThan(secondAttributes.zIndex, thirdAttributes.zIndex)
+        XCTAssertLessThan(thirdAttributes.zIndex, fourthAttributes.zIndex)
 
         layout.collectionView?.contentOffset.y = 250
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
@@ -94,9 +94,9 @@ class CardLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         fourthAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 3, section: 0))
         XCTAssertEqual(fourthAttributes?.frame, CGRect(x: 0, y: 700, width: 320, height: 300))
 
-        XCTAssertTrue(firstAttributes.zIndex < secondAttributes.zIndex)
-        XCTAssertTrue(secondAttributes.zIndex < thirdAttributes.zIndex)
-        XCTAssertTrue(thirdAttributes.zIndex < fourthAttributes.zIndex)
+        XCTAssertLessThan(firstAttributes.zIndex, secondAttributes.zIndex)
+        XCTAssertLessThan(secondAttributes.zIndex, thirdAttributes.zIndex)
+        XCTAssertLessThan(thirdAttributes.zIndex, fourthAttributes.zIndex)
 
         layout.collectionView?.contentOffset.y = 300
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
@@ -110,9 +110,9 @@ class CardLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         fourthAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 3, section: 0))
         XCTAssertEqual(fourthAttributes?.frame, CGRect(x: 0, y: 700, width: 320, height: 300))
 
-        XCTAssertTrue(firstAttributes.zIndex < secondAttributes.zIndex)
-        XCTAssertTrue(secondAttributes.zIndex < thirdAttributes.zIndex)
-        XCTAssertTrue(thirdAttributes.zIndex < fourthAttributes.zIndex)
+        XCTAssertLessThan(firstAttributes.zIndex, secondAttributes.zIndex)
+        XCTAssertLessThan(secondAttributes.zIndex, thirdAttributes.zIndex)
+        XCTAssertLessThan(thirdAttributes.zIndex, fourthAttributes.zIndex)
 
         layout.collectionView?.contentOffset.y = 400
         layout.invalidateLayout(with: BrickLayoutInvalidationContext(type: .scrolling))
@@ -126,9 +126,9 @@ class CardLayoutBehaviorTests: BrickFlowLayoutBaseTests {
         fourthAttributes = layout.layoutAttributesForItem(at: IndexPath(item: 3, section: 0))
         XCTAssertEqual(fourthAttributes?.frame, CGRect(x: 0, y: 800, width: 320, height: 300))
 
-        XCTAssertTrue(firstAttributes.zIndex < secondAttributes.zIndex)
-        XCTAssertTrue(secondAttributes.zIndex < thirdAttributes.zIndex)
-        XCTAssertTrue(thirdAttributes.zIndex < fourthAttributes.zIndex)
+        XCTAssertLessThan(firstAttributes.zIndex, secondAttributes.zIndex)
+        XCTAssertLessThan(secondAttributes.zIndex, thirdAttributes.zIndex)
+        XCTAssertLessThan(thirdAttributes.zIndex, fourthAttributes.zIndex)
     }
 
     func testScrollNegative() {
