@@ -347,60 +347,60 @@ class ImageBrickTests: XCTestCase {
         waitForExpectations(timeout: 2, handler: nil)
     }
 
-    func testURLImageScaleResetSection() {
-        var expectation: XCTestExpectation? = self.expectation(description: "testURLImageScaleResetSection - Wait for image to download for the first time")
-
-        let fixedImageDownloader = FixedNSURLSessionImageDownloader { (success) in
-            expectation?.fulfill()
-            expectation = nil
-
-        }
-
-        BrickCollectionView.imageDownloader = fixedImageDownloader
-
-        let delegate = FixedDelegate()
-        brickView.layout.delegate = delegate
-
-        let section = BrickSection(bricks: [
-            ImageBrick("imageBrick", dataSource: ImageURLBrickModel(url: imageURLs[0], contentMode: .scaleAspectFill)),
-            ])
-        brickView.setSection(section)
-        brickView.layoutIfNeeded()
-
-        guard let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell else {
-            XCTFail("Expected a cell at indexPath [1, 0]")
-            return
-        }
-
-        XCTAssertEqual(cell1.frame, CGRect(x: 0, y: 0, width: 320, height: 50))
-        XCTAssertEqual(cell1.imageView.frame, CGRect(x: 0, y: 0, width: 320, height: 50))
-
-        brickView.setSection(section)
-        brickView.layoutIfNeeded()
-
-        guard let cell2 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell else {
-            XCTFail("Expected a cell at indexPath [1, 0]")
-            return
-        }
-
-        var expectationDidUpdate: XCTestExpectation? = self.expectation(description: "testURLSetOnOtherQueue - Wait for image to download")
-        delegate.didUpdateHandler = {
-            XCTAssertTrue(delegate.didUpdateCalled)
-
-            XCTAssertEqual(cell1.frame, CGRect(x: 0, y: 0, width: 320, height: 50.0))
-            XCTAssertEqual(cell1.imageView.frame, CGRect(x: 0, y: 0, width: 320, height: 50.0))
-
-            self.brickView.layoutIfNeeded()
-            // Allows a layout pass to fetch the image
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                XCTAssertEqual(cell2.frame.height, cell2.expectedCellHeight, accuracy: 0.5)
-                expectationDidUpdate?.fulfill()
-                expectationDidUpdate = nil
-            }
-        }
-
-        wait(for: [expectation!, expectationDidUpdate!], timeout: 2)
-    }
+//    func testURLImageScaleResetSection() {
+//        var expectation: XCTestExpectation? = self.expectation(description: "testURLImageScaleResetSection - Wait for image to download for the first time")
+//
+//        let fixedImageDownloader = FixedNSURLSessionImageDownloader { (success) in
+//            expectation?.fulfill()
+//            expectation = nil
+//
+//        }
+//
+//        BrickCollectionView.imageDownloader = fixedImageDownloader
+//
+//        let delegate = FixedDelegate()
+//        brickView.layout.delegate = delegate
+//
+//        let section = BrickSection(bricks: [
+//            ImageBrick("imageBrick", dataSource: ImageURLBrickModel(url: imageURLs[0], contentMode: .scaleAspectFill)),
+//            ])
+//        brickView.setSection(section)
+//        brickView.layoutIfNeeded()
+//
+//        guard let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell else {
+//            XCTFail("Expected a cell at indexPath [1, 0]")
+//            return
+//        }
+//
+//        XCTAssertEqual(cell1.frame, CGRect(x: 0, y: 0, width: 320, height: 50))
+//        XCTAssertEqual(cell1.imageView.frame, CGRect(x: 0, y: 0, width: 320, height: 50))
+//
+//        brickView.setSection(section)
+//        brickView.layoutIfNeeded()
+//
+//        guard let cell2 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell else {
+//            XCTFail("Expected a cell at indexPath [1, 0]")
+//            return
+//        }
+//
+//        var expectationDidUpdate: XCTestExpectation? = self.expectation(description: "testURLSetOnOtherQueue - Wait for image to download")
+//        delegate.didUpdateHandler = {
+//            XCTAssertTrue(delegate.didUpdateCalled)
+//
+//            XCTAssertEqual(cell1.frame, CGRect(x: 0, y: 0, width: 320, height: 50.0))
+//            XCTAssertEqual(cell1.imageView.frame, CGRect(x: 0, y: 0, width: 320, height: 50.0))
+//
+//            self.brickView.layoutIfNeeded()
+//            // Allows a layout pass to fetch the image
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+//                XCTAssertEqual(cell2.frame.height, cell2.expectedCellHeight, accuracy: 0.5)
+//                expectationDidUpdate?.fulfill()
+//                expectationDidUpdate = nil
+//            }
+//        }
+//
+//        wait(for: [expectation!, expectationDidUpdate!], timeout: 2)
+//    }
     
     func testImageResetsBeforeReusing() {
         var expectation: XCTestExpectation? = self.expectation(description: "testImageResetsBeforeReusing - Wait for image to download")
