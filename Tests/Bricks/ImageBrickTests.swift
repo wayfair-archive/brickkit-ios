@@ -425,6 +425,7 @@ class ImageBrickTests: XCTestCase {
             XCTAssert(false, "Expected an ImageBrickCell")
             return
         }
+
         cell1.imageView.image = self.image
         cell1.layoutIfNeeded()
 
