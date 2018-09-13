@@ -83,7 +83,7 @@ class ImageBrickTests: XCTestCase {
         brickView.layoutSubviews()
 
         guard let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell else {
-            XCTAssert(false, "Expected an ImageBrickCell")
+            XCTFail("Expected an ImageBrickCell")
             return
         }
         cell1.layoutIfNeeded()
@@ -106,7 +106,7 @@ class ImageBrickTests: XCTestCase {
         brickView.layoutSubviews()
 
         guard let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell else {
-            XCTAssert(false, "Expected an ImageBrickCell")
+            XCTFail("Expected an ImageBrickCell")
             return
         }
         cell1.layoutIfNeeded()
@@ -131,7 +131,7 @@ class ImageBrickTests: XCTestCase {
         brickView.layoutSubviews()
 
         guard let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell else {
-            XCTAssert(false, "Expected an ImageBrickCell")
+            XCTFail("Expected an ImageBrickCell")
             return
         }
         cell1.layoutIfNeeded()
@@ -156,7 +156,7 @@ class ImageBrickTests: XCTestCase {
         brickView.layoutSubviews()
 
         guard let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell else {
-            XCTAssert(false, "Expected an ImageBrickCell")
+            XCTFail("Expected an ImageBrickCell")
             return
         }
         cell1.layoutIfNeeded()
@@ -192,7 +192,7 @@ class ImageBrickTests: XCTestCase {
         brickView.layoutSubviews()
 
         guard let cell = self.brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell else {
-            XCTAssert(false, "Expected an ImageBrickCell")
+            XCTFail("Expected an ImageBrickCell")
             return
         }
 
@@ -216,7 +216,7 @@ class ImageBrickTests: XCTestCase {
         brickView.layoutSubviews()
 
         guard let cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell else {
-            XCTAssert(false, "Expected an ImageBrickCell")
+            XCTFail("Expected an ImageBrickCell")
             return
         }
         cell.layoutIfNeeded()
@@ -282,7 +282,7 @@ class ImageBrickTests: XCTestCase {
         brickView.layoutSubviews()
 
         guard let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell else {
-            XCTAssertTrue(false, "Expected cell1 to not be nil")
+            XCTFail("Expected cell1 to not be nil")
             return
         }
 
@@ -368,7 +368,7 @@ class ImageBrickTests: XCTestCase {
         brickView.layoutIfNeeded()
 
         guard let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell else {
-            XCTAssertTrue(false, "Expected a cell at indexPath [1, 0]")
+            XCTFail("Expected a cell at indexPath [1, 0]")
             return
         }
 
@@ -379,7 +379,7 @@ class ImageBrickTests: XCTestCase {
         brickView.layoutIfNeeded()
 
         guard let cell2 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell else {
-            XCTAssertTrue(false, "Expected a cell at indexPath [1, 0]")
+            XCTFail("Expected a cell at indexPath [1, 0]")
             return
         }
 
@@ -422,7 +422,7 @@ class ImageBrickTests: XCTestCase {
         brickView.layoutSubviews()
 
         guard let cell1 = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell else {
-            XCTAssert(false, "Expected an ImageBrickCell")
+            XCTFail("Expected an ImageBrickCell")
             return
         }
 
@@ -431,9 +431,9 @@ class ImageBrickTests: XCTestCase {
 
         waitForExpectations(timeout: 10, handler: nil)
 
-        XCTAssertFalse(cell1.imageView.image == nil)
+        XCTAssertNotNil(cell1.imageView.image)
         cell1.prepareForReuse()
-        XCTAssertTrue(cell1.imageView.image == nil)
+        XCTAssertNil(cell1.imageView.image)
     }
 
     func testThatSetsImageNilWhenDataSourceReturnsNil() {
@@ -446,7 +446,7 @@ class ImageBrickTests: XCTestCase {
         brickView.layoutSubviews()
 
         guard let cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell else {
-            XCTAssert(false, "Expected an ImageBrickCell")
+            XCTFail("Expected an ImageBrickCell")
             return
         }
 
@@ -466,7 +466,7 @@ class ImageBrickTests: XCTestCase {
         brickView.layoutIfNeeded()
 
         guard let cell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? ImageBrickCell else {
-            XCTAssert(false, "Expected an ImageBrickCell")
+            XCTFail("Expected an ImageBrickCell")
             return
         }
 

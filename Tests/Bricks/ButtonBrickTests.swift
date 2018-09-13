@@ -268,7 +268,7 @@ class ButtonBrickTests: XCTestCase {
             brickCollectionView.reloadData()
         }
 
-        XCTAssertTrue(cell?.gestureRecognizers?.count == 1)
+        XCTAssertEqual(cell?.gestureRecognizers?.count, 1)
     }
 
     func testButtonResetsBeforeReusing() {

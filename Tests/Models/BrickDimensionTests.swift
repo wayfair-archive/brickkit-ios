@@ -218,10 +218,10 @@ class BrickDimensionTests: XCTestCase {
         let dimensionPair2: RangeDimensionPair = (dimension: .ratio(ratio: 0.25 * 2), minimumSize: (300.01 + 49.99))
         let dimensionPair3: RangeDimensionPair = (dimension: .ratio(ratio: 0.25 * 2), minimumSize: (300.01 + 49.98))
         let dimensionPair4: RangeDimensionPair = (dimension: .ratio(ratio: 1.5), minimumSize: CGFloat(350))
-        XCTAssertTrue(dimensionPair1 == dimensionPair2)
-        XCTAssertTrue(dimensionPair2 == dimensionPair1)
-        XCTAssertFalse(dimensionPair1 == dimensionPair3)
-        XCTAssertFalse(dimensionPair1 == dimensionPair4)
+        XCTAssert(dimensionPair1 == dimensionPair2)
+        XCTAssert(dimensionPair2 == dimensionPair1)
+        XCTAssert(dimensionPair1 != dimensionPair3)
+        XCTAssert(dimensionPair1 != dimensionPair4)
         XCTAssertFalse(almostEqualRelative(first: 350, second: 350.001)) // Needed for code coverage completeness.
         
     }

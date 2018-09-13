@@ -825,7 +825,7 @@ class BrickCollectionViewTests: XCTestCase {
 
         let indexPath = IndexPath(item: 2, section: 1)
 
-        XCTAssert(brickView.cellForItem(at: indexPath) == nil)
+        XCTAssertNil(brickView.cellForItem(at: indexPath))
 
         dataSource.data.insert("Brick 3", at: 2)
         brickView.insertItems(at: 2, for: "Test", itemCount: 1)

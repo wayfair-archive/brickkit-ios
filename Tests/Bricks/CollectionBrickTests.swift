@@ -175,7 +175,7 @@ class CollectionBrickTests: XCTestCase {
         var cell = self.brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? CollectionBrickCell
         XCTAssertNotNil(cell)
         XCTAssertNotNil(cell?.resizeDelegate)
-        XCTAssertTrue(cell?.resizeDelegate === brickView)
+        XCTAssert(cell?.resizeDelegate === brickView)
 
         cell?.resizeDelegate?.performResize(cell: cell!, completion: {
             expect.fulfill()
