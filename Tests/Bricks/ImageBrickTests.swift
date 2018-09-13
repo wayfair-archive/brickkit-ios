@@ -291,7 +291,7 @@ class ImageBrickTests: XCTestCase {
 
         self.brickView.layoutIfNeeded()
         // Allows a layout pass to fetch the image
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             XCTAssertEqual(cell1.frame.height, cell1.expectedCellHeight, accuracy: 0.5)
             expectation.fulfill()
         }
@@ -470,12 +470,12 @@ class ImageBrickTests: XCTestCase {
             return
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             XCTAssertNotNil(cell.imageView.image)
             let image = cell.imageView.image
             cell.updateContent()
             cell.layoutIfNeeded()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 XCTAssertEqual(image, cell.imageView.image)
                 expect.fulfill()
             }
