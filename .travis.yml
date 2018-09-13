@@ -16,7 +16,7 @@ matrix:
       - 
         xcode_sdk: iphonesimulator12.0
         xcode_destination: platform=iOS Simulator,OS=12.0,name=iPhone X
-        xcode_scheme: BrickApp-iOS
+        xcode_scheme: BrickKit
       - 
         xcode_sdk: iphonesimulator12.0
         xcode_destination: platform=iOS Simulator,OS=12.0,name=iPhone X
