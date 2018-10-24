@@ -12,6 +12,9 @@
 
 # BrickKit is a delightful layout library for iOS and tvOS.  It is written entirely in Swift!
 
+## Deprecated
+
+BrickKit is being phased out at Wayfair, and therefore we will not be maintaining it further.
 
 With BrickKit, you can create complex and responsive layouts in a simple way. It's easy to use and easy to extend. Create your own reusable bricks and behaviors.
 
