@@ -29,7 +29,7 @@ class MultiDimensionBrickViewController: BrickViewController, LabelBrickCellData
         self.brickCollectionView.registerBrickClass(LabelBrick.self)
 
         let width: BrickDimension =
-            .horizontalSizeClass(
+            BrickDimension.horizontalSizeClass(
                 regular: .orientation(
                     landscape: .ratio(ratio: 1/3),
                     portrait: .ratio(ratio: 1/2)

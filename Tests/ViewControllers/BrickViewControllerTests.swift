@@ -51,6 +51,22 @@ class BrickViewControllerTests: XCTestCase {
         }
     }
 
+    private var testBrickViewControllerNibName: String {
+        #if os(tvOS)
+        return "TestBrickViewController-tvOS"
+        #else
+        return "TestBrickViewController"
+        #endif
+    }
+
+    private var testBrickViewControllerStoryboard: UIStoryboard {
+        #if os(tvOS)
+        return UIStoryboard(name: "TestBrickViewController-tvOS", bundle: Bundle(for: type(of: self)))
+        #else
+        return UIStoryboard(name: "TestBrickViewController", bundle: Bundle(for: type(of: self)))
+        #endif
+    }
+
     var brickViewController: BrickViewController!
     var width:CGFloat!
 
@@ -64,7 +80,7 @@ class BrickViewControllerTests: XCTestCase {
     }
 
     func testDeinit() {
-        var viewController: BrickViewController? = TestBrickViewController(nibName: "TestBrickViewController", bundle: Bundle(for: type(of: self)))
+        var viewController: BrickViewController? = TestBrickViewController(nibName: testBrickViewControllerNibName, bundle: Bundle(for: type(of: self)))
 
         expectation(forNotification: NSNotification.Name(rawValue: "BrickViewController.deinit"), object: nil, handler: nil)
         viewController?.viewDidLoad()
@@ -74,7 +90,7 @@ class BrickViewControllerTests: XCTestCase {
     }
     
     func testDeinitLabelBrick() {
-        var viewController: TestBrickViewController? = TestBrickViewController(nibName: "TestBrickViewController", bundle: Bundle(for: type(of: self)))
+        var viewController: TestBrickViewController? = TestBrickViewController(nibName: testBrickViewControllerNibName, bundle: Bundle(for: type(of: self)))
         viewController?.labelTest = true
         
         expectation(forNotification: NSNotification.Name(rawValue: "BrickViewController.deinit"), object: nil, handler: nil)
@@ -85,21 +101,21 @@ class BrickViewControllerTests: XCTestCase {
     }
     
     func testFromStoryBoard() {
-        let viewController = UIStoryboard(name: "TestBrickViewController", bundle: Bundle(for: type(of: self))).instantiateInitialViewController() as? BrickViewController
+        let viewController = testBrickViewControllerStoryboard.instantiateInitialViewController() as? BrickViewController
         XCTAssertNotNil(viewController)
         viewController?.viewDidLoad()
         XCTAssertTrue(viewController?.collectionView is BrickCollectionView)
     }
 
     func testFromNib() {
-        let viewController = TestBrickViewController(nibName: "TestBrickViewController", bundle: Bundle(for: type(of: self)))
+        let viewController = TestBrickViewController(nibName: testBrickViewControllerNibName, bundle: Bundle(for: type(of: self)))
         XCTAssertNotNil(viewController)
         viewController.viewDidLoad()
         XCTAssertTrue(viewController.collectionView is BrickCollectionView)
     }
 
     func testRegistrationDataSource() {
-        let viewController = TestBrickViewController(nibName: "TestBrickViewController", bundle: Bundle(for: type(of: self)))
+        let viewController = TestBrickViewController(nibName: testBrickViewControllerNibName, bundle: Bundle(for: type(of: self)))
         viewController.viewDidLoad()
         XCTAssertTrue(viewController.brickRegistered)
     }

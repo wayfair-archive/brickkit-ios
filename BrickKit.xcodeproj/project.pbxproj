@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24E8F102223318EE00301ABB /* TestBrickViewController-tvOS.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24E8F101223318EE00301ABB /* TestBrickViewController-tvOS.storyboard */; };
+		24E8F10422331AA000301ABB /* TestBrickViewController-tvOS.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24E8F10322331AA000301ABB /* TestBrickViewController-tvOS.xib */; };
 		36E718501F71907400ADB252 /* banner0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 36E718481F71906200ADB252 /* banner0.jpg */; };
 		36E718511F71907400ADB252 /* banner1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 36E718491F71906200ADB252 /* banner1.jpg */; };
 		36E718521F71907400ADB252 /* square0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 36E7184A1F71906200ADB252 /* square0.jpg */; };
@@ -97,9 +99,7 @@
 		4E9A25671DABECFF00D7EA99 /* XCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC4E1DA4057900D8C87A /* XCTests.swift */; };
 		4E9A25681DABED0600D7EA99 /* BrickCollectionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC501DA4057900D8C87A /* BrickCollectionViewTests.swift */; };
 		4E9A25691DABED0600D7EA99 /* BrickViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC511DA4057900D8C87A /* BrickViewControllerTests.swift */; };
-		4E9A256A1DABED0600D7EA99 /* TestBrickViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93D9EC521DA4057900D8C87A /* TestBrickViewController.storyboard */; };
 		4E9A256B1DABED0600D7EA99 /* TestBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC531DA4057900D8C87A /* TestBrickViewController.swift */; };
-		4E9A256C1DABED0600D7EA99 /* TestBrickViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93D9EC541DA4057900D8C87A /* TestBrickViewController.xib */; };
 		4E9A257E1DAC0EAB00D7EA99 /* BrickKit.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25701DAC0EAB00D7EA99 /* BrickKit.xcassets */; };
 		4E9A25AC1DAC216A00D7EA99 /* BrickKit.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A259E1DAC216A00D7EA99 /* BrickKit.xcassets */; };
 		4E9A25B81DAC222D00D7EA99 /* ButtonBrickWithChevron.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E9A25B71DAC222D00D7EA99 /* ButtonBrickWithChevron.xib */; };
@@ -285,6 +285,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		24E8F101223318EE00301ABB /* TestBrickViewController-tvOS.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "TestBrickViewController-tvOS.storyboard"; sourceTree = "<group>"; };
+		24E8F10322331AA000301ABB /* TestBrickViewController-tvOS.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "TestBrickViewController-tvOS.xib"; sourceTree = "<group>"; };
 		36E718481F71906200ADB252 /* banner0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = banner0.jpg; path = Assets/banner0.jpg; sourceTree = "<group>"; };
 		36E718491F71906200ADB252 /* banner1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = banner1.jpg; path = Assets/banner1.jpg; sourceTree = "<group>"; };
 		36E7184A1F71906200ADB252 /* square0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = square0.jpg; path = Assets/square0.jpg; sourceTree = "<group>"; };
@@ -947,6 +949,8 @@
 				93D9EC531DA4057900D8C87A /* TestBrickViewController.swift */,
 				93D9EC541DA4057900D8C87A /* TestBrickViewController.xib */,
 				935D48D51DB806990091AA39 /* CustomBrickCollectionView.swift */,
+				24E8F101223318EE00301ABB /* TestBrickViewController-tvOS.storyboard */,
+				24E8F10322331AA000301ABB /* TestBrickViewController-tvOS.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1082,6 +1086,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 93D9EB891DA4051B00D8C87A;
@@ -1121,12 +1126,12 @@
 				36E718541F71907500ADB252 /* banner0.jpg in Resources */,
 				4E9A25FC1DAC312F00D7EA99 /* ImageDownloaderBrick.xib in Resources */,
 				36E718561F71907500ADB252 /* square0.jpg in Resources */,
+				24E8F102223318EE00301ABB /* TestBrickViewController-tvOS.storyboard in Resources */,
 				4E3BD8E41DB51A9700541900 /* DummyFocusableBrick.xib in Resources */,
-				4E9A256C1DABED0600D7EA99 /* TestBrickViewController.xib in Resources */,
-				4E9A256A1DABED0600D7EA99 /* TestBrickViewController.storyboard in Resources */,
 				4EDA07D21F2FA0E500BD1D97 /* DummyResizableBrick.xib in Resources */,
 				4E9A25FF1DAC312F00D7EA99 /* DummyBrick150.xib in Resources */,
 				4E9A25FD1DAC312F00D7EA99 /* AsynchronousResizableBrick.xib in Resources */,
+				24E8F10422331AA000301ABB /* TestBrickViewController-tvOS.xib in Resources */,
 				93C72DFD1F1D5EA20095D878 /* FrameInfoBrick.xib in Resources */,
 				36E718551F71907500ADB252 /* banner1.jpg in Resources */,
 				4E9A26011DAC312F00D7EA99 /* DummyBrick.xib in Resources */,
