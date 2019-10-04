@@ -92,7 +92,7 @@ open class SnapToPointLayoutBehavior: BrickLayoutBehavior {
     }
 
     open override func layoutDoneCalculating(_ collectionViewLayout: UICollectionViewLayout) {
-        resetCollectionViewContentInset(collectionViewLayout)
+//        resetCollectionViewContentInset(collectionViewLayout)
     }
 
     internal func filteredAttributes(layout collectionViewLayout: UICollectionViewLayout, frame: CGRect) -> [BrickLayoutAttributes] {

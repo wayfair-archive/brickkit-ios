@@ -392,7 +392,7 @@ extension BrickFlowLayout {
         guard let brickAttribute = originalAttributes as? BrickLayoutAttributes else {
             return false
         }
-        let shouldInvalidate = preferredAttributes.frame.height != brickAttribute.originalFrame.height
+        let shouldInvalidate = abs(preferredAttributes.frame.height - brickAttribute.originalFrame.height) > 0.5
         brickAttribute.isEstimateSize = false
 
         if shouldInvalidate {

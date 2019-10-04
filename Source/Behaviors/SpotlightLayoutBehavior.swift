@@ -57,7 +57,7 @@ open class SpotlightLayoutBehavior: BrickLayoutBehavior {
         var sectionInset: CGFloat = 0
 
         // removes extra space from the bottom
-        collectionView.contentInset.bottom = 0
+//        collectionView.contentInset.bottom = 0
 
         //Prevents crash, can't have last brick stretchy if only two bricks.
         if (lastBrickStretchy && scrollAttributes.count < 3) {
