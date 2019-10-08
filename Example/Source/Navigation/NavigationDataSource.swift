@@ -71,10 +71,7 @@ class NavigationDataSource {
             StackingFooterViewController.self
             ]),
         NavigationItem(title: "Scrolling", subTitle: "Examples of different scrolling behaviors", viewControllers: [
-            SpotlightScrollingViewController.self,
-            EmbeddedSpotlightSnapScrollingViewController.self,
             CardScrollingViewController.self,
-            CoverFlowScrollingViewController.self,
             ]),
         self.layoutNavigationItem,
         NavigationItem(title: "CollectionBrick", subTitle: "Examples of how to use CollectionBrick", viewControllers: [

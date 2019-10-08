@@ -83,8 +83,6 @@
 		4E3BD83F1DB1316400541900 /* BaseScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A01DB1316400541900 /* BaseScrollingViewController.swift */; };
 		4E3BD8401DB1316400541900 /* CardScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A11DB1316400541900 /* CardScrollingViewController.swift */; };
 		4E3BD8411DB1316400541900 /* CardScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A11DB1316400541900 /* CardScrollingViewController.swift */; };
-		4E3BD8421DB1316400541900 /* SpotlightScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A21DB1316400541900 /* SpotlightScrollingViewController.swift */; };
-		4E3BD8431DB1316400541900 /* SpotlightScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A21DB1316400541900 /* SpotlightScrollingViewController.swift */; };
 		4E3BD8441DB1316400541900 /* MultiDimensionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A41DB1316400541900 /* MultiDimensionBrickViewController.swift */; };
 		4E3BD8451DB1316400541900 /* MultiDimensionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A41DB1316400541900 /* MultiDimensionBrickViewController.swift */; };
 		4E3BD8461DB1316400541900 /* MultiSectionBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD7A51DB1316400541900 /* MultiSectionBrickViewController.swift */; };
@@ -149,10 +147,6 @@
 		4E3BD8D71DB1374800541900 /* ImageViewBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD8D51DB1374800541900 /* ImageViewBrickViewController.swift */; };
 		4E3BD8E71DB51E1200541900 /* BrickIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD8E61DB51E1200541900 /* BrickIdentifiers.swift */; };
 		4E3BD8E81DB51E1200541900 /* BrickIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD8E61DB51E1200541900 /* BrickIdentifiers.swift */; };
-		4E3BD8EC1DB521C200541900 /* CoverFlowViewScrollingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD8EB1DB521C200541900 /* CoverFlowViewScrollingController.swift */; };
-		4E3BD8ED1DB521C200541900 /* CoverFlowViewScrollingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3BD8EB1DB521C200541900 /* CoverFlowViewScrollingController.swift */; };
-		4E8E10F41DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8E10F31DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift */; };
-		4E8E10F51DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E8E10F31DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift */; };
 		4ED1200D1F2FCEB9009C7D61 /* RestrictedBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1200A1F2FCEB8009C7D61 /* RestrictedBrickViewController.swift */; };
 		4ED1200E1F2FCEB9009C7D61 /* RestrictedBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1200A1F2FCEB8009C7D61 /* RestrictedBrickViewController.swift */; };
 		664A10F61F3359D200DE258B /* PreviewingBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664A10F51F3359D200DE258B /* PreviewingBrickViewController.swift */; };
@@ -308,7 +302,6 @@
 		4E3BD79E1DB1316400541900 /* TestBrick.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestBrick.xib; sourceTree = "<group>"; };
 		4E3BD7A01DB1316400541900 /* BaseScrollingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseScrollingViewController.swift; sourceTree = "<group>"; };
 		4E3BD7A11DB1316400541900 /* CardScrollingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardScrollingViewController.swift; sourceTree = "<group>"; };
-		4E3BD7A21DB1316400541900 /* SpotlightScrollingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightScrollingViewController.swift; sourceTree = "<group>"; };
 		4E3BD7A41DB1316400541900 /* MultiDimensionBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiDimensionBrickViewController.swift; sourceTree = "<group>"; };
 		4E3BD7A51DB1316400541900 /* MultiSectionBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiSectionBrickViewController.swift; sourceTree = "<group>"; };
 		4E3BD7A61DB1316400541900 /* SimpleBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleBrickViewController.swift; sourceTree = "<group>"; };
@@ -352,8 +345,6 @@
 		4E3BD8D21DB1373C00541900 /* HorizontalCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionViewController.swift; sourceTree = "<group>"; };
 		4E3BD8D51DB1374800541900 /* ImageViewBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewBrickViewController.swift; sourceTree = "<group>"; };
 		4E3BD8E61DB51E1200541900 /* BrickIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickIdentifiers.swift; sourceTree = "<group>"; };
-		4E3BD8EB1DB521C200541900 /* CoverFlowViewScrollingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverFlowViewScrollingController.swift; sourceTree = "<group>"; };
-		4E8E10F31DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbeddedSpotlightSnapScrollingViewController.swift; sourceTree = "<group>"; };
 		4ED1200A1F2FCEB8009C7D61 /* RestrictedBrickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictedBrickViewController.swift; sourceTree = "<group>"; };
 		664A10F51F3359D200DE258B /* PreviewingBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewingBrickViewController.swift; sourceTree = "<group>"; };
 		93186B021DDE89610095C849 /* HugeRepeatBrickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HugeRepeatBrickViewController.swift; sourceTree = "<group>"; };
@@ -604,11 +595,8 @@
 		4E3BD79F1DB1316400541900 /* Scrolling */ = {
 			isa = PBXGroup;
 			children = (
-				4E3BD8EB1DB521C200541900 /* CoverFlowViewScrollingController.swift */,
 				4E3BD7A01DB1316400541900 /* BaseScrollingViewController.swift */,
 				4E3BD7A11DB1316400541900 /* CardScrollingViewController.swift */,
-				4E8E10F31DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift */,
-				4E3BD7A21DB1316400541900 /* SpotlightScrollingViewController.swift */,
 			);
 			path = Scrolling;
 			sourceTree = "<group>";
@@ -853,6 +841,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -986,7 +975,6 @@
 				4E3BD84A1DB1316400541900 /* SimpleRepeatBrickViewController.swift in Sources */,
 				4E3BD81C1DB1316400541900 /* BasicInteractiveViewController.swift in Sources */,
 				4E3BD82A1DB1316400541900 /* InvalidateHeightViewController.swift in Sources */,
-				4E3BD8421DB1316400541900 /* SpotlightScrollingViewController.swift in Sources */,
 				9327D0431DB94AB300D65BCB /* NiblessBrick.swift in Sources */,
 				4E3BD81A1DB1316400541900 /* AdvancedRepeatViewController.swift in Sources */,
 				4E3BD8681DB1316400541900 /* NavigationDataSource.swift in Sources */,
@@ -1001,7 +989,6 @@
 				9327D03E1DB94A9500D65BCB /* NibLessViewController.swift in Sources */,
 				4E3BD7FA1DB1316400541900 /* StepperBrick.swift in Sources */,
 				93D7E8691DFB52830031A6C2 /* InteractiveAlignViewController.swift in Sources */,
-				4E8E10F41DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift in Sources */,
 				4E3BD7BC1DB1316400541900 /* AppDelegate.swift in Sources */,
 				935D48901DB7CCC70091AA39 /* ImagesInCollectionBrickViewController.swift in Sources */,
 				93186B031DDE89610095C849 /* HugeRepeatBrickViewController.swift in Sources */,
@@ -1022,7 +1009,6 @@
 				93EAFE301DB57D680036331C /* NavigationViewController.swift in Sources */,
 				4E3BD8141DB1316400541900 /* HorizontalSnapToPointViewController.swift in Sources */,
 				4E3BD8181DB1316400541900 /* ImageURLBrickViewController.swift in Sources */,
-				4E3BD8EC1DB521C200541900 /* CoverFlowViewScrollingController.swift in Sources */,
 				4E3BD7FE1DB1316400541900 /* BaseBrickController.swift in Sources */,
 				4E3BD8D31DB1373C00541900 /* HorizontalCollectionViewController.swift in Sources */,
 				4E3BD8D61DB1374800541900 /* ImageViewBrickViewController.swift in Sources */,
@@ -1038,7 +1024,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E3BD8ED1DB521C200541900 /* CoverFlowViewScrollingController.swift in Sources */,
 				93AB641E1E67AA4800395CAA /* IsHiddenBrickViewController.swift in Sources */,
 				93D7E86A1DFB52830031A6C2 /* InteractiveAlignViewController.swift in Sources */,
 				4E3BD8011DB1316400541900 /* BaseRepeatBrickViewController.swift in Sources */,
@@ -1081,7 +1066,6 @@
 				4E3BD7C91DB1316400541900 /* HeaderAndFooterBrick.swift in Sources */,
 				4E3BD84B1DB1316400541900 /* SimpleRepeatBrickViewController.swift in Sources */,
 				4E3BD82B1DB1316400541900 /* InvalidateHeightViewController.swift in Sources */,
-				4E3BD8431DB1316400541900 /* SpotlightScrollingViewController.swift in Sources */,
 				93DE8B4A1DF744BB00324EC8 /* FillBrickViewController.swift in Sources */,
 				4E3BD81B1DB1316400541900 /* AdvancedRepeatViewController.swift in Sources */,
 				93EAFE311DB57D6B0036331C /* NavigationDetailViewController.swift in Sources */,
@@ -1104,7 +1088,6 @@
 				4E3BD8371DB1316400541900 /* SizeClassesBrickViewController.swift in Sources */,
 				4E3BD8151DB1316400541900 /* HorizontalSnapToPointViewController.swift in Sources */,
 				4E3BD8191DB1316400541900 /* ImageURLBrickViewController.swift in Sources */,
-				4E8E10F51DB569E100B5BD90 /* EmbeddedSpotlightSnapScrollingViewController.swift in Sources */,
 				4E3BD7FF1DB1316400541900 /* BaseBrickController.swift in Sources */,
 				4E3BD86D1DB1316400541900 /* ViewController.swift in Sources */,
 				4ED1200D1F2FCEB9009C7D61 /* RestrictedBrickViewController.swift in Sources */,
