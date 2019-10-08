@@ -675,7 +675,7 @@ class BrickCollectionViewTests: XCTestCase {
     }
     
     func testThatDescriptionIsCorrect() {
-        XCTAssertTrue(self.brickView.description.hasSuffix("CollectionBrick: false"))
+        XCTAssertTrue(self.brickView.description.contains("CollectionBrick: false"))
     }
 
     func testThatDescriptionIsCorrectWithCollectionBrick() {
@@ -684,7 +684,7 @@ class BrickCollectionViewTests: XCTestCase {
             ])
         brickView.setupSectionAndLayout(section)
         let collectionBrickCell = brickView.cellForItem(at: IndexPath(item: 0, section: 1)) as? CollectionBrickCell
-        XCTAssertEqual(collectionBrickCell?.brickCollectionView.description.hasSuffix("CollectionBrick: true"), true)
+        XCTAssertEqual(collectionBrickCell?.brickCollectionView.description.contains("CollectionBrick: true"), true)
     }
 
     func testThatGettingInvalidLayoutAttributesReturnRightValue() {
