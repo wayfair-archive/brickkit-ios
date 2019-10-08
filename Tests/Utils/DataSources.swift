@@ -253,24 +253,6 @@ class FixedBrickLayoutDataSource: NSObject, BrickLayoutDataSource {
     }
 }
 
-class FixedSpotlightLayoutBehaviorDataSource: SpotlightLayoutBehaviorDataSource {
-    let height: CGFloat?
-    let identifiers: [String]?
-
-    init(height: CGFloat?, identifiers: [String]? = nil) {
-        self.height = height
-        self.identifiers = identifiers
-    }
-
-    func spotlightLayoutBehavior(_ behavior: SpotlightLayoutBehavior, smallHeightForItemAtIndexPath indexPath: IndexPath, withIdentifier identifier: String, inCollectionViewLayout collectionViewLayout: UICollectionViewLayout) -> CGFloat? {
-        if let identifiers = identifiers {
-            return identifiers.contains(identifier) ? height : nil
-        } else {
-            return height
-        }
-    }
-}
-
 class FixedCardLayoutBehaviorDataSource: CardLayoutBehaviorDataSource {
     let height: CGFloat?
 

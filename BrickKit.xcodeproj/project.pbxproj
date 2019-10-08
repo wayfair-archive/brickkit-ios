@@ -27,14 +27,12 @@
 		4E9A251A1DABEB5200D7EA99 /* BrickKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 93D9EBBD1DA4057000D8C87A /* BrickKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4E9A251C1DABEB6000D7EA99 /* BrickLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBAF1DA4057000D8C87A /* BrickLayoutBehavior.swift */; };
 		4E9A251D1DABEB6000D7EA99 /* CardLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB01DA4057000D8C87A /* CardLayoutBehavior.swift */; };
-		4E9A251E1DABEB6000D7EA99 /* CoverFlowLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB11DA4057000D8C87A /* CoverFlowLayoutBehavior.swift */; };
 		4E9A25201DABEB6000D7EA99 /* MaxZIndexLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB41DA4057000D8C87A /* MaxZIndexLayoutBehavior.swift */; };
 		4E9A25211DABEB6000D7EA99 /* MinimumStickyLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB51DA4057000D8C87A /* MinimumStickyLayoutBehavior.swift */; };
 		4E9A25221DABEB6000D7EA99 /* OffsetLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB61DA4057000D8C87A /* OffsetLayoutBehavior.swift */; };
 		4E9A25231DABEB6000D7EA99 /* OnScrollDownStickyLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB71DA4057000D8C87A /* OnScrollDownStickyLayoutBehavior.swift */; };
 		4E9A25241DABEB6000D7EA99 /* SetZIndexLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB81DA4057000D8C87A /* SetZIndexLayoutBehavior.swift */; };
 		4E9A25251DABEB6000D7EA99 /* SnapToPointLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB91DA4057000D8C87A /* SnapToPointLayoutBehavior.swift */; };
-		4E9A25261DABEB6000D7EA99 /* SpotlightLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBBA1DA4057000D8C87A /* SpotlightLayoutBehavior.swift */; };
 		4E9A25271DABEB6000D7EA99 /* StickyFooterLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBBB1DA4057000D8C87A /* StickyFooterLayoutBehavior.swift */; };
 		4E9A25281DABEB6000D7EA99 /* StickyLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBBC1DA4057000D8C87A /* StickyLayoutBehavior.swift */; };
 		4E9A25291DABEB6500D7EA99 /* ButtonBrick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93739BB41DA454AB00DD4B81 /* ButtonBrick.swift */; };
@@ -69,7 +67,6 @@
 		4E9A25481DABECDF00D7EA99 /* OffsetLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC1F1DA4057900D8C87A /* OffsetLayoutBehaviorTests.swift */; };
 		4E9A25491DABECDF00D7EA99 /* OnScrollDownStickyLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC201DA4057900D8C87A /* OnScrollDownStickyLayoutBehaviorTests.swift */; };
 		4E9A254A1DABECDF00D7EA99 /* SnapToPointLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC211DA4057900D8C87A /* SnapToPointLayoutBehaviorTests.swift */; };
-		4E9A254B1DABECDF00D7EA99 /* SpotlightLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC221DA4057900D8C87A /* SpotlightLayoutBehaviorTests.swift */; };
 		4E9A254C1DABECDF00D7EA99 /* StickyFooterLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC231DA4057900D8C87A /* StickyFooterLayoutBehaviorTests.swift */; };
 		4E9A254D1DABECDF00D7EA99 /* StickyLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC241DA4057900D8C87A /* StickyLayoutBehaviorTests.swift */; };
 		4E9A254E1DABECE300D7EA99 /* CollectionBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E7F9861DA5A22B000BE1AE /* CollectionBrickTests.swift */; };
@@ -184,14 +181,12 @@
 		93D9EB9D1DA4051B00D8C87A /* BrickKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93D9EB931DA4051B00D8C87A /* BrickKit.framework */; };
 		93D9EBE81DA4057000D8C87A /* BrickLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBAF1DA4057000D8C87A /* BrickLayoutBehavior.swift */; };
 		93D9EBE91DA4057000D8C87A /* CardLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB01DA4057000D8C87A /* CardLayoutBehavior.swift */; };
-		93D9EBEA1DA4057000D8C87A /* CoverFlowLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB11DA4057000D8C87A /* CoverFlowLayoutBehavior.swift */; };
 		93D9EBED1DA4057000D8C87A /* MaxZIndexLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB41DA4057000D8C87A /* MaxZIndexLayoutBehavior.swift */; };
 		93D9EBEE1DA4057000D8C87A /* MinimumStickyLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB51DA4057000D8C87A /* MinimumStickyLayoutBehavior.swift */; };
 		93D9EBEF1DA4057000D8C87A /* OffsetLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB61DA4057000D8C87A /* OffsetLayoutBehavior.swift */; };
 		93D9EBF01DA4057000D8C87A /* OnScrollDownStickyLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB71DA4057000D8C87A /* OnScrollDownStickyLayoutBehavior.swift */; };
 		93D9EBF11DA4057000D8C87A /* SetZIndexLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB81DA4057000D8C87A /* SetZIndexLayoutBehavior.swift */; };
 		93D9EBF21DA4057000D8C87A /* SnapToPointLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBB91DA4057000D8C87A /* SnapToPointLayoutBehavior.swift */; };
-		93D9EBF31DA4057000D8C87A /* SpotlightLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBBA1DA4057000D8C87A /* SpotlightLayoutBehavior.swift */; };
 		93D9EBF41DA4057000D8C87A /* StickyFooterLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBBB1DA4057000D8C87A /* StickyFooterLayoutBehavior.swift */; };
 		93D9EBF51DA4057000D8C87A /* StickyLayoutBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EBBC1DA4057000D8C87A /* StickyLayoutBehavior.swift */; };
 		93D9EBF61DA4057000D8C87A /* BrickKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 93D9EBBD1DA4057000D8C87A /* BrickKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -220,7 +215,6 @@
 		93D9EC5A1DA4057900D8C87A /* OffsetLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC1F1DA4057900D8C87A /* OffsetLayoutBehaviorTests.swift */; };
 		93D9EC5B1DA4057900D8C87A /* OnScrollDownStickyLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC201DA4057900D8C87A /* OnScrollDownStickyLayoutBehaviorTests.swift */; };
 		93D9EC5C1DA4057900D8C87A /* SnapToPointLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC211DA4057900D8C87A /* SnapToPointLayoutBehaviorTests.swift */; };
-		93D9EC5D1DA4057900D8C87A /* SpotlightLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC221DA4057900D8C87A /* SpotlightLayoutBehaviorTests.swift */; };
 		93D9EC5E1DA4057900D8C87A /* StickyFooterLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC231DA4057900D8C87A /* StickyFooterLayoutBehaviorTests.swift */; };
 		93D9EC5F1DA4057900D8C87A /* StickyLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC241DA4057900D8C87A /* StickyLayoutBehaviorTests.swift */; };
 		93D9EC601DA4057900D8C87A /* BrickKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC251DA4057900D8C87A /* BrickKitTests.swift */; };
@@ -256,7 +250,6 @@
 		93D9EC861DA4057900D8C87A /* TestBrickViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93D9EC521DA4057900D8C87A /* TestBrickViewController.storyboard */; };
 		93D9EC871DA4057900D8C87A /* TestBrickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D9EC531DA4057900D8C87A /* TestBrickViewController.swift */; };
 		93D9EC881DA4057900D8C87A /* TestBrickViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93D9EC541DA4057900D8C87A /* TestBrickViewController.xib */; };
-		93E435EE1DB6CB51007C159B /* CoverFlowLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8FFEA1DAD3F4A00A913E9 /* CoverFlowLayoutBehaviorTests.swift */; };
 		93E7F9881DA5A230000BE1AE /* CollectionBrickTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E7F9861DA5A22B000BE1AE /* CollectionBrickTests.swift */; };
 		93EEFF971DC2B2E600FDFFFB /* BrickLayoutSectionBinarySearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EEFF961DC2B2E600FDFFFB /* BrickLayoutSectionBinarySearchTests.swift */; };
 		93EEFF981DC2B2E600FDFFFB /* BrickLayoutSectionBinarySearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93EEFF961DC2B2E600FDFFFB /* BrickLayoutSectionBinarySearchTests.swift */; };
@@ -264,7 +257,6 @@
 		93F2CFEB1DDB91D400D5F881 /* BrickZIndexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F2CFE91DDB91D400D5F881 /* BrickZIndexer.swift */; };
 		93F9B4D21DAD686E00927BE6 /* BrickAppearBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9B4D11DAD686E00927BE6 /* BrickAppearBehavior.swift */; };
 		93F9B4D41DAD690400927BE6 /* BrickAppearBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9B4D31DAD690400927BE6 /* BrickAppearBehaviorTests.swift */; };
-		B8B8FFEB1DAD3F4A00A913E9 /* CoverFlowLayoutBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B8FFEA1DAD3F4A00A913E9 /* CoverFlowLayoutBehaviorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -359,14 +351,12 @@
 		93D9EB9C1DA4051B00D8C87A /* BrickKitTests-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BrickKitTests-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93D9EBAF1DA4057000D8C87A /* BrickLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickLayoutBehavior.swift; sourceTree = "<group>"; };
 		93D9EBB01DA4057000D8C87A /* CardLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardLayoutBehavior.swift; sourceTree = "<group>"; };
-		93D9EBB11DA4057000D8C87A /* CoverFlowLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverFlowLayoutBehavior.swift; sourceTree = "<group>"; };
 		93D9EBB41DA4057000D8C87A /* MaxZIndexLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaxZIndexLayoutBehavior.swift; sourceTree = "<group>"; };
 		93D9EBB51DA4057000D8C87A /* MinimumStickyLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MinimumStickyLayoutBehavior.swift; sourceTree = "<group>"; };
 		93D9EBB61DA4057000D8C87A /* OffsetLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffsetLayoutBehavior.swift; sourceTree = "<group>"; };
 		93D9EBB71DA4057000D8C87A /* OnScrollDownStickyLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnScrollDownStickyLayoutBehavior.swift; sourceTree = "<group>"; };
 		93D9EBB81DA4057000D8C87A /* SetZIndexLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetZIndexLayoutBehavior.swift; sourceTree = "<group>"; };
 		93D9EBB91DA4057000D8C87A /* SnapToPointLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapToPointLayoutBehavior.swift; sourceTree = "<group>"; };
-		93D9EBBA1DA4057000D8C87A /* SpotlightLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightLayoutBehavior.swift; sourceTree = "<group>"; };
 		93D9EBBB1DA4057000D8C87A /* StickyFooterLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickyFooterLayoutBehavior.swift; sourceTree = "<group>"; };
 		93D9EBBC1DA4057000D8C87A /* StickyLayoutBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickyLayoutBehavior.swift; sourceTree = "<group>"; };
 		93D9EBBD1DA4057000D8C87A /* BrickKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrickKit.h; sourceTree = "<group>"; };
@@ -396,7 +386,6 @@
 		93D9EC1F1DA4057900D8C87A /* OffsetLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffsetLayoutBehaviorTests.swift; sourceTree = "<group>"; };
 		93D9EC201DA4057900D8C87A /* OnScrollDownStickyLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnScrollDownStickyLayoutBehaviorTests.swift; sourceTree = "<group>"; };
 		93D9EC211DA4057900D8C87A /* SnapToPointLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapToPointLayoutBehaviorTests.swift; sourceTree = "<group>"; };
-		93D9EC221DA4057900D8C87A /* SpotlightLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightLayoutBehaviorTests.swift; sourceTree = "<group>"; };
 		93D9EC231DA4057900D8C87A /* StickyFooterLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickyFooterLayoutBehaviorTests.swift; sourceTree = "<group>"; };
 		93D9EC241DA4057900D8C87A /* StickyLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickyLayoutBehaviorTests.swift; sourceTree = "<group>"; };
 		93D9EC251DA4057900D8C87A /* BrickKitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickKitTests.swift; sourceTree = "<group>"; };
@@ -438,7 +427,6 @@
 		93F2CFE91DDB91D400D5F881 /* BrickZIndexer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickZIndexer.swift; sourceTree = "<group>"; };
 		93F9B4D11DAD686E00927BE6 /* BrickAppearBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickAppearBehavior.swift; sourceTree = "<group>"; };
 		93F9B4D31DAD690400927BE6 /* BrickAppearBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrickAppearBehaviorTests.swift; sourceTree = "<group>"; };
-		B8B8FFEA1DAD3F4A00A913E9 /* CoverFlowLayoutBehaviorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverFlowLayoutBehaviorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -729,14 +717,12 @@
 			children = (
 				93D9EBAF1DA4057000D8C87A /* BrickLayoutBehavior.swift */,
 				93D9EBB01DA4057000D8C87A /* CardLayoutBehavior.swift */,
-				93D9EBB11DA4057000D8C87A /* CoverFlowLayoutBehavior.swift */,
 				93D9EBB41DA4057000D8C87A /* MaxZIndexLayoutBehavior.swift */,
 				93D9EBB51DA4057000D8C87A /* MinimumStickyLayoutBehavior.swift */,
 				93D9EBB61DA4057000D8C87A /* OffsetLayoutBehavior.swift */,
 				93D9EBB71DA4057000D8C87A /* OnScrollDownStickyLayoutBehavior.swift */,
 				93D9EBB81DA4057000D8C87A /* SetZIndexLayoutBehavior.swift */,
 				93D9EBB91DA4057000D8C87A /* SnapToPointLayoutBehavior.swift */,
-				93D9EBBA1DA4057000D8C87A /* SpotlightLayoutBehavior.swift */,
 				93D9EBBB1DA4057000D8C87A /* StickyFooterLayoutBehavior.swift */,
 				93D9EBBC1DA4057000D8C87A /* StickyLayoutBehavior.swift */,
 			);
@@ -843,10 +829,8 @@
 				93D9EC1F1DA4057900D8C87A /* OffsetLayoutBehaviorTests.swift */,
 				93D9EC201DA4057900D8C87A /* OnScrollDownStickyLayoutBehaviorTests.swift */,
 				93D9EC211DA4057900D8C87A /* SnapToPointLayoutBehaviorTests.swift */,
-				93D9EC221DA4057900D8C87A /* SpotlightLayoutBehaviorTests.swift */,
 				93D9EC231DA4057900D8C87A /* StickyFooterLayoutBehaviorTests.swift */,
 				93D9EC241DA4057900D8C87A /* StickyLayoutBehaviorTests.swift */,
-				B8B8FFEA1DAD3F4A00A913E9 /* CoverFlowLayoutBehaviorTests.swift */,
 			);
 			path = Behaviors;
 			sourceTree = "<group>";
@@ -1211,7 +1195,6 @@
 				4E9A25291DABEB6500D7EA99 /* ButtonBrick.swift in Sources */,
 				4E9A25371DABEB8D00D7EA99 /* Brick.swift in Sources */,
 				4E9A25321DABEB8800D7EA99 /* BrickLayoutInvalidationContext.swift in Sources */,
-				4E9A251E1DABEB6000D7EA99 /* CoverFlowLayoutBehavior.swift in Sources */,
 				9333538B1E368903003CEC85 /* GenericBrick.swift in Sources */,
 				4E9A252B1DABEB6F00D7EA99 /* ImageBrick.swift in Sources */,
 				4E9A253A1DABEB8D00D7EA99 /* CollectionInfo.swift in Sources */,
@@ -1222,7 +1205,6 @@
 				4E9A25361DABEB8D00D7EA99 /* BrickDimension.swift in Sources */,
 				932365701DF4FD4900BE5183 /* BrickAlignment.swift in Sources */,
 				4E9A25401DABEB9800D7EA99 /* BrickViewController.swift in Sources */,
-				4E9A25261DABEB6000D7EA99 /* SpotlightLayoutBehavior.swift in Sources */,
 				4E9A253D1DABEB9300D7EA99 /* FatalError.swift in Sources */,
 				4E9A25271DABEB6000D7EA99 /* StickyFooterLayoutBehavior.swift in Sources */,
 				931A52F11F0D579000AB0BDF /* BrickSection.swift in Sources */,
@@ -1254,7 +1236,6 @@
 				4E9A25E01DAC2AF400D7EA99 /* AsynchronousResizableBrick.swift in Sources */,
 				9317A9E21F0EE02E00AF2007 /* BrickSectionOrderDataSourceTests.swift in Sources */,
 				4E9A25561DABECF500D7EA99 /* BrickFlowLayoutEdgeInsetsTests.swift in Sources */,
-				93E435EE1DB6CB51007C159B /* CoverFlowLayoutBehaviorTests.swift in Sources */,
 				4E9A25E41DAC2AF400D7EA99 /* ImageDownloaderBrick.swift in Sources */,
 				4E9A25461DABECDF00D7EA99 /* MaxZIndexBehaviorTests.swift in Sources */,
 				4E9A25611DABECFF00D7EA99 /* Behaviors.swift in Sources */,
@@ -1263,7 +1244,6 @@
 				4E9A25E31DAC2AF400D7EA99 /* DummyBrickWithoutNib.swift in Sources */,
 				4E9A25E11DAC2AF400D7EA99 /* AsynchronousResizableCellTests.swift in Sources */,
 				4E9A25681DABED0600D7EA99 /* BrickCollectionViewTests.swift in Sources */,
-				4E9A254B1DABECDF00D7EA99 /* SpotlightLayoutBehaviorTests.swift in Sources */,
 				4E9A25571DABECF500D7EA99 /* BrickFlowLayoutSectionTests.swift in Sources */,
 				4E9A255F1DABECFB00D7EA99 /* BrickModelsTests.swift in Sources */,
 				4E9A255A1DABECF500D7EA99 /* BrickInvalidationContextTests.swift in Sources */,
@@ -1304,7 +1284,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93D9EBF31DA4057000D8C87A /* SpotlightLayoutBehavior.swift in Sources */,
 				93D9EC0F1DA4057000D8C87A /* Brick.swift in Sources */,
 				93D9EC111DA4057000D8C87A /* BrickSectionDataSource.swift in Sources */,
 				93739BB51DA454AB00DD4B81 /* CollectionBrick.swift in Sources */,
@@ -1332,7 +1311,6 @@
 				9333538A1E368903003CEC85 /* GenericBrick.swift in Sources */,
 				93D9EC081DA4057000D8C87A /* BrickFlowLayout.swift in Sources */,
 				93D9EC0B1DA4057000D8C87A /* BrickLayoutSection.swift in Sources */,
-				93D9EBEA1DA4057000D8C87A /* CoverFlowLayoutBehavior.swift in Sources */,
 				93D9EC101DA4057000D8C87A /* BrickProtocols.swift in Sources */,
 				93D9EC031DA4057000D8C87A /* BrickSectionCell.swift in Sources */,
 				93D9EC061DA4057000D8C87A /* ImageDownloader.swift in Sources */,
@@ -1367,7 +1345,6 @@
 				9303A6D51DA6E00100502803 /* ButtonBrickTests.swift in Sources */,
 				93D9EC821DA4057900D8C87A /* DataSources.swift in Sources */,
 				93D9EC7D1DA4057900D8C87A /* BrickSectionDataSourceTests.swift in Sources */,
-				93D9EC5D1DA4057900D8C87A /* SpotlightLayoutBehaviorTests.swift in Sources */,
 				9340B6B51F4DE8F4005C28F0 /* BrickLoggerTests.swift in Sources */,
 				9361309B1DB83CB7008FFFEF /* CustomBrickCollectionView.swift in Sources */,
 				93D9EC691DA4057900D8C87A /* DummyBrickWithoutNib.swift in Sources */,
@@ -1382,7 +1359,6 @@
 				93D9EC701DA4057900D8C87A /* AlignRowHeightTests.swift in Sources */,
 				93D9EC7E1DA4057900D8C87A /* Behaviors.swift in Sources */,
 				933FF95E1DC1207900E0B80E /* Swizzle.swift in Sources */,
-				B8B8FFEB1DAD3F4A00A913E9 /* CoverFlowLayoutBehaviorTests.swift in Sources */,
 				93D9EC731DA4057900D8C87A /* BrickFlowLayoutEdgeInsetsTests.swift in Sources */,
 				93D9EC581DA4057900D8C87A /* MaxZIndexBehaviorTests.swift in Sources */,
 				4EDA07CF1F2F9FD100BD1D97 /* DummyResizableBrick.swift in Sources */,
