@@ -92,7 +92,7 @@ open class SnapToPointLayoutBehavior: BrickLayoutBehavior {
     }
 
     open override func layoutDoneCalculating(_ collectionViewLayout: UICollectionViewLayout) {
-//        resetCollectionViewContentInset(collectionViewLayout)
+        resetCollectionViewContentInset(collectionViewLayout)
     }
 
     internal func filteredAttributes(layout collectionViewLayout: UICollectionViewLayout, frame: CGRect) -> [BrickLayoutAttributes] {
@@ -108,17 +108,17 @@ open class SnapToPointLayoutBehavior: BrickLayoutBehavior {
     }
 
     func resetCollectionViewContentInset(_ collectionViewLayout: UICollectionViewLayout) {
-        guard let frame = collectionViewLayout.collectionView?.frame else {
+        guard let collectionView = collectionViewLayout.collectionView else {
             return
         }
 
-        let filteredLayoutAttributes = filteredAttributes(layout: collectionViewLayout, frame: frame)
+        let filteredLayoutAttributes = filteredAttributes(layout: collectionViewLayout, frame: collectionView.frame)
 
         guard !filteredLayoutAttributes.isEmpty else {
             return
         }
 
-        originalTopContentInset = collectionViewLayout.collectionView!.contentInset.top
+        originalTopContentInset = collectionView.contentInset.top
 
         switch scrollDirection {
         case .horizontal(let scrollLocation):
@@ -127,12 +127,16 @@ open class SnapToPointLayoutBehavior: BrickLayoutBehavior {
             }! // We can safely unwrap, because we checked if attributes is empty or not
 
             // The location on the left is the anchor point of the view - the anchor point of the brick
-            let left = scrollLocation.offsetX(for: firstAttributes.frame.width, in: frame.size) - scrollLocation.anchorXComponent(for: firstAttributes.frame)
-            collectionViewLayout.collectionView?.contentInset.left = left
+            let left = scrollLocation.offsetX(for: firstAttributes.frame.width, in: collectionView.frame.size) - scrollLocation.anchorXComponent(for: firstAttributes.frame)
+            if collectionView.contentInset.left != left {
+                collectionView.contentInset.left = left
+            }
 
             // Right is the opposite
-            let right = (frame.size.width - firstAttributes.frame.width) - left
-            collectionViewLayout.collectionView?.contentInset.right = right
+            let right = (collectionView.frame.size.width - firstAttributes.frame.width) - left
+            if collectionView.contentInset.right != right {
+                collectionView.contentInset.right = right
+            }
 
         case .vertical(let scrollLocation):
             let firstAttributes = filteredLayoutAttributes.min {
@@ -140,12 +144,16 @@ open class SnapToPointLayoutBehavior: BrickLayoutBehavior {
             }! // We can safely unwrap, because we checked if attributes is empty or not
 
             // The location on the left is the anchor point of the view - the anchor point of the brick
-            let top = scrollLocation.offsetY(for: firstAttributes.frame.height, in: frame.size, topContentInset: originalTopContentInset) - scrollLocation.anchorYComponent(for: firstAttributes.frame)
+            let top = scrollLocation.offsetY(for: firstAttributes.frame.height, in: collectionView.frame.size, topContentInset: originalTopContentInset) - scrollLocation.anchorYComponent(for: firstAttributes.frame)
             // Right is the opposite
-            let bottom = (frame.size.height - firstAttributes.frame.height) - top + originalTopContentInset
+            let bottom = (collectionView.frame.size.height - firstAttributes.frame.height) - top + originalTopContentInset
 
-            collectionViewLayout.collectionView?.contentInset.top = top
-            collectionViewLayout.collectionView?.contentInset.bottom = bottom
+            if collectionView.contentInset.top != top {
+                collectionView.contentInset.top = top
+            }
+            if collectionView.contentInset.bottom != bottom {
+                collectionView.contentInset.bottom = bottom
+            }
         }
     }
 
